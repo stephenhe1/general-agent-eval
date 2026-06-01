@@ -1,0 +1,137 @@
+# syntax=docker/dockerfile:1.7
+
+FROM python:3.11.14-slim-bookworm
+
+ARG AGENT_UID=1000
+ARG AGENT_GID=1000
+ARG TARGETARCH
+ARG TEMURIN_17_VERSION=17.0.19.0.0+10-0
+ARG TEMURIN_8_VERSION=8.0.492.0.0+9-1
+ARG GRADLE_VERSION=8.10.2
+ARG GRADLE_SHA256=31c55713e40233a8303827ceb42ca48a47267a0ad4bab9177123121e71524c26
+ARG MAVEN_VERSION=3.9.9
+ARG MAVEN_SHA512=a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b
+ARG UV_VERSION=0.11.14
+ARG CLAUDE_CODE_VERSION=2.1.143
+# MongoDB 4.2 is the newest server the genome-nexus Mongo driver (Spring Boot 2.2 -> driver 3.11)
+# supports; the 4.2 binaries link OpenSSL 1.1, absent from bookworm, hence the libssl1.1 shim below.
+ARG MONGO_VERSION=4.2.25
+ARG MONGO_SHA256_AMD64=e3ee07f47462246018fabbe5ad223293bcc262310a5381c1d774c93e04a861b1
+ARG MONGO_SHA256_ARM64=4867d6bf1b6c4dff0612b1e06bd827e1a854b38d00256545b8f14c58b07d2c2b
+ARG LIBSSL11_DEB_VERSION=1.1.1w-0+deb11u5
+
+RUN case "${TARGETARCH}" in \
+        amd64|arm64) ;; \
+        *) echo "TARGETARCH must be provided by Docker BuildKit/buildx; got '${TARGETARCH}'" >&2; exit 1 ;; \
+    esac
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    DISABLE_AUTOUPDATER=1 \
+    NPM_CONFIG_PREFIX=/home/agent/.npm-global \
+    JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-${TARGETARCH} \
+    JAVA_8_HOME=/usr/lib/jvm/temurin-8-jdk-${TARGETARCH} \
+    JAVA_17_HOME=/usr/lib/jvm/temurin-17-jdk-${TARGETARCH} \
+    GRADLE_HOME=/opt/gradle \
+    M2_HOME=/opt/maven \
+    PATH=/usr/lib/jvm/temurin-17-jdk-${TARGETARCH}/bin:/opt/gradle/bin:/opt/maven/bin:/home/agent/.npm-global/bin:/home/agent/.local/bin:$PATH \
+    PYTHONPATH=/app/src \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_SYSTEM_PYTHON=1
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        bash \
+        bubblewrap \
+        ca-certificates \
+        curl \
+        git \
+        gnupg \
+        nodejs \
+        npm \
+        openssh-client \
+        ripgrep \
+        rsync \
+        tini \
+        unzip \
+    && curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public \
+        | gpg --dearmor -o /usr/share/keyrings/adoptium.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb bookworm main" \
+        > /etc/apt/sources.list.d/adoptium.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        "temurin-17-jdk=${TEMURIN_17_VERSION}" \
+        "temurin-8-jdk=${TEMURIN_8_VERSION}" \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN set -eux; \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors --connect-timeout 30 --max-time 600 "https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip; \
+    echo "${GRADLE_SHA256}  /tmp/gradle.zip" | sha256sum -c -; \
+    unzip -q /tmp/gradle.zip -d /opt; \
+    mv "/opt/gradle-${GRADLE_VERSION}" /opt/gradle; \
+    rm /tmp/gradle.zip; \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors --connect-timeout 30 --max-time 600 "https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" -o /tmp/maven.tar.gz; \
+    echo "${MAVEN_SHA512}  /tmp/maven.tar.gz" | sha512sum -c -; \
+    tar -xzf /tmp/maven.tar.gz -C /opt; \
+    mv "/opt/apache-maven-${MAVEN_VERSION}" /opt/maven; \
+    rm /tmp/maven.tar.gz
+
+# MongoDB server (mongod) only -- the lone out-of-process datastore in the service set
+# (genome-nexus). EMB runs it against an empty Mongo via Testcontainers; we cannot launch
+# sibling containers inside this locked-down runtime, so mongod runs as a background process
+# started by setup-service.sh's pre_run hook when service scripts are mounted.
+RUN set -eux; \
+    case "${TARGETARCH}" in \
+        amd64) mongo_arch=x86_64;  mongo_sha="${MONGO_SHA256_AMD64}"; deb_arch=amd64 ;; \
+        arm64) mongo_arch=aarch64; mongo_sha="${MONGO_SHA256_ARM64}"; deb_arch=arm64 ;; \
+        *) echo "unsupported TARGETARCH for mongod: ${TARGETARCH}" >&2; exit 1 ;; \
+    esac; \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors --connect-timeout 30 --max-time 120 \
+        "https://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_${LIBSSL11_DEB_VERSION}_${deb_arch}.deb" \
+        -o /tmp/libssl11.deb; \
+    dpkg-deb -x /tmp/libssl11.deb /tmp/libssl11; \
+    cp -a /tmp/libssl11/usr/lib/*/libssl.so.1.1 /tmp/libssl11/usr/lib/*/libcrypto.so.1.1 /usr/local/lib/; \
+    ldconfig; \
+    curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors --connect-timeout 30 --max-time 600 \
+        "https://fastdl.mongodb.org/linux/mongodb-linux-${mongo_arch}-ubuntu1804-${MONGO_VERSION}.tgz" \
+        -o /tmp/mongo.tgz; \
+    echo "${mongo_sha}  /tmp/mongo.tgz" | sha256sum -c -; \
+    tar -xzf /tmp/mongo.tgz -C /tmp; \
+    cp "/tmp/mongodb-linux-${mongo_arch}-ubuntu1804-${MONGO_VERSION}/bin/mongod" /usr/local/bin/mongod; \
+    chmod +x /usr/local/bin/mongod; \
+    rm -rf /tmp/mongo.tgz "/tmp/mongodb-linux-${mongo_arch}-ubuntu1804-${MONGO_VERSION}" /tmp/libssl11.deb /tmp/libssl11; \
+    mongod --version
+
+COPY pyproject.toml README.md /tmp/general-agent-eval/
+COPY src /tmp/general-agent-eval/src
+
+RUN python -m pip install --no-cache-dir "uv==${UV_VERSION}" \
+    && uv pip install --system --no-cache /tmp/general-agent-eval
+
+RUN set -eux; \
+    if getent group "${AGENT_GID}" >/dev/null; then \
+        agent_group="$(getent group "${AGENT_GID}" | cut -d: -f1)"; \
+    else \
+        groupadd --gid "${AGENT_GID}" agent; \
+        agent_group=agent; \
+    fi; \
+    useradd --uid "${AGENT_UID}" --gid "${agent_group}" --create-home --shell /bin/bash agent; \
+    mkdir -p /home/agent/.npm-global /workspace; \
+    chown -R agent:"${agent_group}" /home/agent /workspace
+
+USER agent
+WORKDIR /app
+
+RUN npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+
+USER root
+RUN ln -sf /home/agent/.npm-global/bin/claude /usr/local/bin/claude \
+    && ln -sf /opt/gradle/bin/gradle /usr/local/bin/gradle \
+    && ln -sf /opt/maven/bin/mvn /usr/local/bin/mvn
+
+USER agent
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["python", "--version"]
