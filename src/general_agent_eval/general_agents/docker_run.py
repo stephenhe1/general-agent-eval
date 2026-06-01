@@ -524,6 +524,7 @@ def build_agent_request(
         reset_git=False,
         agent_env=agent_env,
         prompt_vars=prompt_vars,
+        extra_args=tuple(args.extra_arg),
     )
 
 
@@ -763,6 +764,7 @@ def sanitized_manifest(
             "agent_env_keys": [
                 parse_key_value_key(value, option_name="--env") for value in args.env
             ],
+            "extra_args": list(args.extra_arg),
         },
         "host_env_passthrough": list(host_env_names),
     }
@@ -899,6 +901,16 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         metavar="KEY=VALUE",
         help="Additional Claude Code environment variable. Can be repeated.",
+    )
+    parser.add_argument(
+        "--extra-arg",
+        action="append",
+        default=[],
+        metavar="FLAG[=VALUE]",
+        help=(
+            "Extra passthrough argument forwarded verbatim to the selected agent. "
+            "Its meaning is agent-specific. Can be repeated."
+        ),
     )
     parser.add_argument(
         "--max-turns",

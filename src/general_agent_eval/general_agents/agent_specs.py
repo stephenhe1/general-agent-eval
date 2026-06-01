@@ -20,6 +20,7 @@ class AgentRunRequest:
     reset_git: bool = False
     agent_env: tuple[str, ...] = ()
     prompt_vars: tuple[str, ...] = ()
+    extra_args: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -64,6 +65,7 @@ def build_claude_code_command(request: AgentRunRequest) -> list[str]:
     _append_optional(command, "--max-budget-usd", request.max_budget_usd)
     _append_repeated(command, "--env", request.agent_env)
     _append_repeated(command, "--prompt-var", request.prompt_vars)
+    _append_repeated(command, "--extra-arg", request.extra_args)
     if request.reset_git:
         command.append("--reset-git")
     return command

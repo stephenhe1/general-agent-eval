@@ -69,6 +69,7 @@ def test_build_agent_request_does_not_forward_reset_git() -> None:
         max_budget_usd=None,
         reset_git=True,
         env=[],
+        extra_arg=[],
     )
 
     request = docker_run.build_agent_request(args)
@@ -100,6 +101,7 @@ def test_claude_code_command_forwards_oauth_token_env() -> None:
         max_budget_usd=None,
         reset_git=False,
         env=[],
+        extra_arg=[],
     )
 
     command = build_claude_code_command(docker_run.build_agent_request(args))

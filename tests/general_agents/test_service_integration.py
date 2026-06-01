@@ -68,6 +68,7 @@ def docker_args(**overrides: object) -> argparse.Namespace:
         service_scripts_dir=None,
         service_port=None,
         env=[],
+        extra_arg=[],
         model="sonnet",
         permission_mode="auto",
         system_prompt_config="append",

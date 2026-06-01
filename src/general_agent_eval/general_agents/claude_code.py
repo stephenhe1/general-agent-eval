@@ -85,6 +85,18 @@ def parse_prompt_vars(raw_values: list[str]) -> dict[str, str]:
     return parsed
 
 
+def parse_extra_args(raw_values: list[str]) -> dict[str, str | None]:
+    parsed: dict[str, str | None] = {}
+    for raw_value in raw_values:
+        flag, separator, value = raw_value.partition("=")
+        # SDK extra_args keys omit the leading --; a bare flag becomes a boolean.
+        flag = flag.strip().lstrip("-")
+        if not flag:
+            raise HarnessError("--extra-arg flag name cannot be empty")
+        parsed[flag] = value if separator else None
+    return parsed
+
+
 def parse_headers(raw_values: list[str]) -> list[str]:
     headers: list[str] = []
     for raw_value in raw_values:
@@ -219,6 +231,9 @@ def build_claude_options_kwargs(
         options_kwargs["max_turns"] = args.max_turns
     if args.max_budget_usd is not None:
         options_kwargs["max_budget_usd"] = args.max_budget_usd
+    extra_args = parse_extra_args(args.extra_arg)
+    if extra_args:
+        options_kwargs["extra_args"] = extra_args
     return options_kwargs
 
 
@@ -433,6 +448,17 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Extra variable injected into the chat/system prompt templates "
             "(e.g. service_base_url). Can be repeated."
+        ),
+    )
+    parser.add_argument(
+        "--extra-arg",
+        action="append",
+        default=[],
+        metavar="FLAG[=VALUE]",
+        help=(
+            "Extra Claude Code CLI flag passed through to "
+            "ClaudeAgentOptions.extra_args. Use FLAG=VALUE for valued flags or a "
+            "bare FLAG for boolean flags. Can be repeated."
         ),
     )
     parser.add_argument(
