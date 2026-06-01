@@ -46,6 +46,20 @@ AGENT_RESULT_SUMMARY_KEYS = (
     "num_turns",
     "total_cost_usd",
     "session_id",
+    # Error context copied straight from the agent's result message when present.
+    "stop_reason",
+    "api_error_status",
+    "errors",
+)
+
+# Qualifies total_cost_usd when a custom --base-url makes it a CLI estimate.
+COST_ESTIMATE_NOTE = (
+    "total_cost_usd is computed by the Claude Code CLI from token counts using "
+    "its built-in Anthropic model price table. A custom --base-url was used "
+    "(non-Anthropic gateway, e.g. OpenRouter), so for a non-Anthropic model the "
+    "CLI falls back to default Anthropic rates and this figure is an estimate "
+    "that may not match the gateway's actual billed cost. Check the provider's "
+    "dashboard/usage API for the real cost."
 )
 
 
@@ -648,7 +662,10 @@ def is_agent_result_message(message: object) -> bool:
 
 
 def collect_agent_result_summary(
-    output_dir: Path, output_jsonl_name: str | None
+    output_dir: Path,
+    output_jsonl_name: str | None,
+    *,
+    cost_is_estimate: bool = False,
 ) -> dict[str, Any] | None:
     if output_jsonl_name is None:
         return None
@@ -685,6 +702,9 @@ def collect_agent_result_summary(
     for key in AGENT_RESULT_SUMMARY_KEYS:
         if key in result_message:
             summary[key] = result_message[key]
+    if cost_is_estimate and "total_cost_usd" in summary:
+        summary["total_cost_usd_is_estimate"] = True
+        summary["total_cost_usd_note"] = COST_ESTIMATE_NOTE
     return summary
 
 
@@ -1001,7 +1021,9 @@ def main(argv: list[str] | None = None) -> int:
         )
         manifest["exit_code"] = exit_code
         manifest["agent_result"] = collect_agent_result_summary(
-            output_dir, agent_spec.output_jsonl_name
+            output_dir,
+            agent_spec.output_jsonl_name,
+            cost_is_estimate=args.base_url is not None,
         )
         manifest["artifacts"] = collect_git_artifacts(staged_input, output_dir)
         write_manifest(manifest_path, manifest)

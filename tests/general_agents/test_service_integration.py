@@ -405,6 +405,71 @@ def test_collect_agent_result_summary_handles_missing_jsonl(tmp_path: Path) -> N
     }
 
 
+def test_collect_agent_result_summary_captures_error_details(tmp_path: Path) -> None:
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "messages.jsonl").write_text(
+        json.dumps(
+            {
+                "subtype": "error_during_execution",
+                "is_error": True,
+                "num_turns": 48,
+                "total_cost_usd": 6.91902,
+                "stop_reason": "end_turn",
+                "api_error_status": None,
+                "errors": ["[ede_diagnostic] last_content_type=none"],
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    summary = docker_run.collect_agent_result_summary(output_dir, "messages.jsonl")
+
+    assert summary["subtype"] == "error_during_execution"
+    assert summary["is_error"] is True
+    assert summary["stop_reason"] == "end_turn"
+    assert summary["api_error_status"] is None
+    assert summary["errors"] == ["[ede_diagnostic] last_content_type=none"]
+    # No custom base URL passed -> cost is treated as authoritative, no note.
+    assert "total_cost_usd_is_estimate" not in summary
+    assert "total_cost_usd_note" not in summary
+
+
+def test_collect_agent_result_summary_flags_cost_estimate(tmp_path: Path) -> None:
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "messages.jsonl").write_text(
+        json.dumps({"subtype": "success", "total_cost_usd": 6.91902}) + "\n",
+        encoding="utf-8",
+    )
+
+    summary = docker_run.collect_agent_result_summary(
+        output_dir, "messages.jsonl", cost_is_estimate=True
+    )
+
+    assert summary["total_cost_usd"] == 6.91902
+    assert summary["total_cost_usd_is_estimate"] is True
+    assert summary["total_cost_usd_note"] == docker_run.COST_ESTIMATE_NOTE
+
+
+def test_collect_agent_result_summary_no_cost_note_without_cost(tmp_path: Path) -> None:
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "messages.jsonl").write_text(
+        json.dumps({"subtype": "success", "num_turns": 3}) + "\n",
+        encoding="utf-8",
+    )
+
+    summary = docker_run.collect_agent_result_summary(
+        output_dir, "messages.jsonl", cost_is_estimate=True
+    )
+
+    # The note rides on total_cost_usd; absent that field there is nothing to qualify.
+    assert "total_cost_usd_is_estimate" not in summary
+    assert "total_cost_usd_note" not in summary
+
+
 def test_load_service_manifest_rejects_invalid_shape(tmp_path: Path) -> None:
     path = tmp_path / "services.json"
     path.write_text("{}", encoding="utf-8")

@@ -221,3 +221,9 @@ __marimo__/
 # Evaluation run outputs
 /runs/*
 !/runs/.gitkeep
+
+# Agents
+CLAUDE.md
+AGENTS.md
+.claude/
+.codex/

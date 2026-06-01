@@ -281,6 +281,7 @@ async def run_claude(
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_jsonl = output_path.open("w", encoding="utf-8")
 
+    exit_code = 0
     try:
         try:
             async for message in query(
@@ -297,7 +298,9 @@ async def run_claude(
                 if type(message).__name__ == "ResultMessage" and getattr(
                     message, "is_error", False
                 ):
-                    return 1
+                    # Don't return mid-iteration: let the loop end naturally so the SDK
+                    # generator tears itself down instead of raising on a forced aclose().
+                    exit_code = 1
         except CLINotFoundError as exc:
             raise HarnessError(
                 "Claude Code CLI was not found. Install it and ensure `claude` "
@@ -314,7 +317,7 @@ async def run_claude(
         if output_jsonl is not None:
             output_jsonl.close()
 
-    return 0
+    return exit_code
 
 
 def positive_int(raw_value: str) -> int:
