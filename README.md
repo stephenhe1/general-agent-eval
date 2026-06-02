@@ -33,6 +33,12 @@ The runner denies `WebSearch` and `WebFetch`, sets the input directory as the
 agent working directory, defaults Claude Code to `bypassPermissions`, and
 renders the packaged prompt templates from `src/general_agent_eval/prompts/`.
 
+When `--base-url` is set (a custom/non-Anthropic gateway), the runner defaults
+`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1` so Claude Code stops sending
+`anthropic-beta` headers the gateway would reject. Pass
+`--env CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=0` to re-enable them for a
+beta-capable endpoint.
+
 ## Docker Runner
 
 Run an agent inside the shared Docker runtime against a disposable staged copy:

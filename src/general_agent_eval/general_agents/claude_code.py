@@ -176,6 +176,9 @@ def build_agent_env(args: argparse.Namespace) -> dict[str, str]:
     if args.base_url:
         env_values["ANTHROPIC_BASE_URL"] = args.base_url
         env_values.setdefault("ANTHROPIC_CUSTOM_MODEL_OPTION", args.model)
+        # Custom gateways reject Claude Code's experimental anthropic-beta headers;
+        # disable them by default (override with --env ..._BETAS=0 for beta-capable endpoints).
+        env_values.setdefault("CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS", "1")
 
     if args.api_key_env:
         if args.api_key_env not in os.environ:

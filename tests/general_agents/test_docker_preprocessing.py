@@ -133,6 +133,62 @@ def test_claude_code_env_maps_oauth_token_env(
     }
 
 
+def test_claude_code_env_base_url_disables_experimental_betas() -> None:
+    args = argparse.Namespace(
+        env=[],
+        base_url="http://localhost:4000",
+        model="sonnet",
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        api_key=None,
+        auth_token=None,
+        custom_header=[],
+    )
+
+    env = claude_code.build_agent_env(args)
+
+    assert env["ANTHROPIC_BASE_URL"] == "http://localhost:4000"
+    assert env["ANTHROPIC_CUSTOM_MODEL_OPTION"] == "sonnet"
+    assert env["CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"] == "1"
+
+
+def test_claude_code_env_base_url_betas_override_wins() -> None:
+    args = argparse.Namespace(
+        env=["CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=0"],
+        base_url="http://localhost:4000",
+        model="sonnet",
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        api_key=None,
+        auth_token=None,
+        custom_header=[],
+    )
+
+    env = claude_code.build_agent_env(args)
+
+    assert env["CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"] == "0"
+
+
+def test_claude_code_env_no_base_url_omits_experimental_betas() -> None:
+    args = argparse.Namespace(
+        env=[],
+        base_url=None,
+        model="sonnet",
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        api_key=None,
+        auth_token=None,
+        custom_header=[],
+    )
+
+    assert "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS" not in claude_code.build_agent_env(
+        args
+    )
+
+
 @pytest.mark.parametrize(
     "removed_arg",
     [
