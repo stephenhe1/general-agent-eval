@@ -79,6 +79,7 @@ def docker_args(**overrides: object) -> argparse.Namespace:
         max_turns=None,
         max_budget_usd=None,
         reset_git=False,
+        inject_rest_assured=False,
     )
     base.update(overrides)
     return argparse.Namespace(**base)
@@ -148,6 +149,34 @@ def test_templates_render_with_and_without_service() -> None:
     assert "already running" not in render("system_prompt.jinja2", svc)
 
 
+def test_chat_prompt_rest_assured_and_module_blocks() -> None:
+    def render(prompt_vars: dict[str, str]) -> str:
+        ctx = claude_code.build_template_context(
+            input_dir=Path("/tmp/x"), model="sonnet", prompt_vars=prompt_vars
+        )
+        return claude_code.render_template(
+            claude_code.PROMPTS_DIR / "chat_prompt.jinja2", ctx
+        )
+
+    base = {"service_base_url": "http://127.0.0.1:8888/"}
+    # No injection: neither block appears.
+    plain = render(base)
+    assert "REST Assured" not in plain
+    assert "multi-module" not in plain
+
+    # Single-module injection: the REST Assured line, but no multi-module detail.
+    single = render({**base, "rest_assured": "1"})
+    assert "Use REST Assured" in single
+    assert "multi-module" not in single
+    assert "{{" not in single
+
+    # Multi-module injection: both blocks, naming the target module.
+    multi = render({**base, "rest_assured": "1", "test_module": "web"})
+    assert "Use REST Assured" in multi
+    assert "multi-module" in multi
+    assert "web module" in multi
+
+
 # --- docker_run service resolution -------------------------------------------
 
 
@@ -184,6 +213,7 @@ def test_resolve_service_genome_nexus_urls(tmp_path: Path) -> None:
         "id": "genome-nexus",
         "port": 8888,
         "base_url": "http://127.0.0.1:8888/",
+        "rest_assured": None,
     }
 
 
@@ -231,6 +261,53 @@ def test_build_agent_request_no_service_has_empty_prompt_vars() -> None:
     request = docker_run.build_agent_request(docker_args(), None)
     assert request.prompt_vars == ()
     assert all(not e.startswith("SERVICE_BASE_URL=") for e in request.agent_env)
+
+
+def _service_with_rest_assured(service_id: str, base_url: str, target_pom: str) -> dict:
+    return {
+        "id": service_id,
+        "base_url": base_url,
+        "rest_assured": {
+            "target_pom": target_pom,
+            "group_id": "io.rest-assured",
+            "artifact_id": "rest-assured",
+            "version": None,
+            "scope": "test",
+        },
+    }
+
+
+def test_rest_assured_prompt_vars_multi_module() -> None:
+    service = _service_with_rest_assured(
+        "genome-nexus", "http://127.0.0.1:8888/", "web/pom.xml"
+    )
+    request = docker_run.build_agent_request(
+        docker_args(service="genome-nexus", inject_rest_assured=True), service
+    )
+    assert "rest_assured=1" in request.prompt_vars
+    assert "test_module=web" in request.prompt_vars
+
+
+def test_rest_assured_prompt_vars_single_module_omits_test_module() -> None:
+    service = _service_with_rest_assured(
+        "restcountries", "http://127.0.0.1:8080/rest", "pom.xml"
+    )
+    request = docker_run.build_agent_request(
+        docker_args(service="restcountries", inject_rest_assured=True), service
+    )
+    assert "rest_assured=1" in request.prompt_vars
+    assert all(not v.startswith("test_module=") for v in request.prompt_vars)
+
+
+def test_rest_assured_prompt_vars_absent_without_inject_flag() -> None:
+    service = _service_with_rest_assured(
+        "genome-nexus", "http://127.0.0.1:8888/", "web/pom.xml"
+    )
+    request = docker_run.build_agent_request(
+        docker_args(service="genome-nexus", inject_rest_assured=False), service
+    )
+    assert all(not v.startswith("rest_assured=") for v in request.prompt_vars)
+    assert all(not v.startswith("test_module=") for v in request.prompt_vars)
 
 
 def test_claude_code_command_emits_prompt_vars(tmp_path: Path) -> None:

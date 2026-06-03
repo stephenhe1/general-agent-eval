@@ -47,6 +47,8 @@ RESERVED_PROMPT_VARS = frozenset(
 SERVICE_CONTEXT_DEFAULTS = {
     "service_id": "",
     "service_base_url": "",
+    "rest_assured": "",
+    "test_module": "",
 }
 
 

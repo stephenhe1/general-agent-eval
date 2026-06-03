@@ -76,6 +76,23 @@ uv run general-agent-eval-docker-run \
 `--service-manifest` is omitted, the runner uses
 `--service-scripts-dir/services.json`.
 
+### Injecting RestAssured
+
+Add `--inject-rest-assured` (requires `--service`) to provision RestAssured as a
+test dependency before the agent runs, so generated HTTP tests can use it without
+the agent wiring up the build itself. The per-service coordinates, target POM
+(the module whose tests run), and version live in the service manifest's optional
+`rest_assured` block; omit the block to skip injection. The version is `null` for
+Spring Boot services (inherited from the Boot dependency-management BOM) and an
+explicit string otherwise. The POM edit runs after `--clear-tests` and lands in
+the testless baseline, so it stays out of the agent's `git_diff.patch`; the change
+is captured separately as `output/dependency_injection.patch`, which the recoverer
+replays onto the cloned original repo before the agent patch.
+
+With the flag set, the chat prompt also tells the agent to use RestAssured, and for
+a multi-module target it names the module to put the tests in (derived from the
+`rest_assured.target_pom` directory). Single-module projects see no module note.
+
 ## Recovering Agent Outputs
 
 A run's `input/` directory is the agent's live working directory and is

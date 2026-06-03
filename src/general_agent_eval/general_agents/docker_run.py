@@ -277,16 +277,68 @@ def initialize_synthetic_git_baseline(staged_input: Path) -> dict[str, str | Non
     }
 
 
+def _inject_rest_assured_step(
+    *,
+    staged_input: Path,
+    output_dir: Path,
+    service: dict[str, Any] | None,
+) -> dict[str, Any]:
+    rest_assured_config = service.get("rest_assured") if service else None
+    if rest_assured_config is None:
+        # e.g. features-service ships a legacy RestAssured and omits the manifest block.
+        print(
+            "[rest-assured] skipped: service has no rest_assured config in the manifest",
+            flush=True,
+        )
+        return {"enabled": True, "status": "skipped", "reason": "no rest_assured config"}
+
+    from general_agent_eval.preprocessing.rest_assured_injection import (
+        InjectionConfig,
+        RestAssuredInjectionError,
+        inject_rest_assured,
+    )
+
+    try:
+        config = InjectionConfig.from_dict(rest_assured_config)
+        result = inject_rest_assured(staged_input, config)
+    except RestAssuredInjectionError as exc:
+        raise DockerRunError(f"Failed to inject RestAssured: {exc}") from exc
+
+    injection_patch = None
+    if git_repo_root(staged_input) == staged_input:
+        injection_patch_path = output_dir / "dependency_injection.patch"
+        write_git_patch(
+            staged_input=staged_input,
+            output_path=injection_patch_path,
+            relative_paths=[config.target_pom],
+        )
+        injection_patch = str(injection_patch_path)
+
+    print(
+        f"[rest-assured] {result.status} pom={config.target_pom} "
+        f"version={'managed' if result.managed else result.version}",
+        flush=True,
+    )
+    return {
+        "enabled": True,
+        **result.to_dict(),
+        "dependency_injection_patch": injection_patch,
+    }
+
+
 def preprocess_staged_input(
     *,
     args: argparse.Namespace,
     staged_input: Path,
     output_dir: Path,
     reset_target: GitResetTarget | None = None,
+    service: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    inject_enabled = getattr(args, "inject_rest_assured", False)
     preprocessing: dict[str, Any] = {
         "reset_git": {"enabled": args.reset_git},
         "test_clearing": {"enabled": args.clear_tests},
+        "rest_assured_injection": {"enabled": inject_enabled},
     }
 
     if args.reset_git:
@@ -348,20 +400,34 @@ def preprocess_staged_input(
             )
             clearing_patch = str(clearing_patch_path)
 
-        git_baseline = initialize_synthetic_git_baseline(staged_input)
         preprocessing["test_clearing"] = {
             "enabled": True,
             "removed_count": len(clear_result.removed),
             "manifest_path": str(clearing_manifest_path),
             "test_clearing_patch": clearing_patch,
-            "git_history_sanitized": True,
-            "git_baseline": git_baseline,
         }
         print(
             "[test-clearing] "
             f"removed={len(clear_result.removed)} manifest={clearing_manifest_path}",
             flush=True,
         )
+
+    if inject_enabled:
+        preprocessing["rest_assured_injection"] = _inject_rest_assured_step(
+            staged_input=staged_input,
+            output_dir=output_dir,
+            service=service,
+        )
+
+    # Commit the testless baseline once, after clearing and injection, so both the
+    # cleared tree and the injected dependency land in the baseline and stay out of
+    # the agent's diff. Patches above were captured first, against the original git.
+    if args.clear_tests or inject_enabled:
+        git_baseline = initialize_synthetic_git_baseline(staged_input)
+        preprocessing["git_baseline"] = git_baseline
+        if args.clear_tests:
+            preprocessing["test_clearing"]["git_history_sanitized"] = True
+            preprocessing["test_clearing"]["git_baseline"] = git_baseline
 
     return preprocessing
 
@@ -489,6 +555,7 @@ def resolve_service(args: argparse.Namespace) -> dict[str, Any] | None:
         "id": args.service,
         "port": port,
         "base_url": url(svc.get("base_path", "/")),
+        "rest_assured": svc.get("rest_assured"),
     }
 
 
@@ -497,6 +564,19 @@ def service_prompt_vars(service: dict[str, Any]) -> tuple[str, ...]:
         f"service_id={service['id']}",
         f"service_base_url={service['base_url']}",
     )
+
+
+def rest_assured_prompt_vars(service: dict[str, Any]) -> tuple[str, ...]:
+    """Prompt vars exposed only when RestAssured was injected: a presence flag and,
+    for multi-module builds, the module directory whose tests carry the dependency."""
+    config = service.get("rest_assured")
+    if not config:
+        return ()
+    prompt_vars = ("rest_assured=1",)
+    target_pom = str(config.get("target_pom", "pom.xml"))
+    if "/" in target_pom:
+        prompt_vars = (*prompt_vars, f"test_module={target_pom.rsplit('/', 1)[0]}")
+    return prompt_vars
 
 
 def build_agent_request(
@@ -508,6 +588,8 @@ def build_agent_request(
         # Expose the base URL both to generated tests (env) and to the prompt templates.
         agent_env = (*agent_env, f"SERVICE_BASE_URL={service['base_url']}")
         prompt_vars = service_prompt_vars(service)
+        if getattr(args, "inject_rest_assured", False):
+            prompt_vars = (*prompt_vars, *rest_assured_prompt_vars(service))
     return AgentRunRequest(
         container_input_dir=CONTAINER_INPUT_DIR,
         container_output_dir=CONTAINER_OUTPUT_DIR,
@@ -761,6 +843,7 @@ def sanitized_manifest(
             "max_budget_usd": args.max_budget_usd,
             "reset_git": args.reset_git,
             "clear_tests": args.clear_tests,
+            "inject_rest_assured": args.inject_rest_assured,
             "agent_env_keys": [
                 parse_key_value_key(value, option_name="--env") for value in args.env
             ],
@@ -938,6 +1021,16 @@ def build_parser() -> argparse.ArgumentParser:
             "recommended for isolated test construction analysis."
         ),
     )
+    parser.add_argument(
+        "--inject-rest-assured",
+        action="store_true",
+        help=(
+            "Inject RestAssured as a test dependency before the agent runs, using "
+            "the matched service's rest_assured config from the manifest. Requires "
+            "--service. Runs after --clear-tests; the POM edit lands in the testless "
+            "baseline, so it stays out of the agent's diff."
+        ),
+    )
     return parser
 
 
@@ -965,6 +1058,11 @@ def main(argv: list[str] | None = None) -> int:
         service_scripts_dir = (
             resolve_service_scripts_dir(args) if service is not None else None
         )
+        if args.inject_rest_assured and service is None:
+            raise DockerRunError(
+                "--inject-rest-assured requires --service; the rest_assured config "
+                "is read from the service manifest"
+            )
         reset_target = None
         if args.reset_git:
             from general_agent_eval.preprocessing.git_reset import (
@@ -993,6 +1091,7 @@ def main(argv: list[str] | None = None) -> int:
             staged_input=staged_input,
             output_dir=output_dir,
             reset_target=reset_target,
+            service=service,
         )
         agent_spec = AGENT_SPECS[args.agent]
         agent_command = agent_spec.build_command(build_agent_request(args, service))

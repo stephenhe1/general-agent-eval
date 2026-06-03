@@ -79,14 +79,19 @@ def load_manifest(run_dir: Path) -> dict[str, Any]:
         raise RecoverError(f"manifest.json is invalid JSON: {manifest_path}") from exc
 
 
-def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None]:
+def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None, Path | None]:
     """Locate run artifacts relative to run_dir so a moved run dir still resolves."""
     output_dir = run_dir / "output"
     git_diff_patch = output_dir / "git_diff.patch"
     if not git_diff_patch.is_file():
         raise RecoverError(f"run dir is missing the agent patch: {git_diff_patch}")
     cleared_tests = output_dir / "cleared_tests.json"
-    return git_diff_patch, (cleared_tests if cleared_tests.is_file() else None)
+    injection_patch = output_dir / "dependency_injection.patch"
+    return (
+        git_diff_patch,
+        cleared_tests if cleared_tests.is_file() else None,
+        injection_patch if injection_patch.is_file() else None,
+    )
 
 
 def resolve_commit(manifest: dict[str, Any], override: str | None) -> dict[str, Any]:
@@ -103,6 +108,13 @@ def resolve_commit(manifest: dict[str, Any], override: str | None) -> dict[str, 
         return {
             "commit": git_baseline["original_head"],
             "source": "test_clearing.git_baseline.original_head",
+        }
+
+    top_baseline = preprocessing.get("git_baseline") or {}
+    if top_baseline.get("original_head"):
+        return {
+            "commit": top_baseline["original_head"],
+            "source": "git_baseline.original_head",
         }
 
     raise RecoverError(
@@ -232,6 +244,29 @@ def clone_and_checkout(repo_url: str, commit: str, dest: Path) -> None:
         )
 
 
+def apply_injection_patch(repo: Path, patch_path: Path | None) -> dict[str, Any]:
+    """Replay the dependency-injection patch (built against the baseline) onto the
+    clone before the agent patch, so the agent's RestAssured tests still compile.
+
+    The clone carries the original POM without the injected dependency; the patch
+    only touches build files and the agent patch only touches tests, so the two
+    apply without colliding in practice.
+    """
+    if patch_path is None:
+        return {"applied": False, "reason": "no dependency_injection.patch"}
+    if not patch_path.read_text(encoding="utf-8").strip():
+        return {"applied": False, "reason": "empty patch", "patch": str(patch_path)}
+    result = run_git(["apply", "--index", str(patch_path)], cwd=repo)
+    if result.returncode == 0:
+        return {"applied": True, "patch": str(patch_path)}
+    return {
+        "applied": False,
+        "reason": "apply failed",
+        "stderr": (result.stderr or result.stdout).strip(),
+        "patch": str(patch_path),
+    }
+
+
 def apply_patch(
     repo: Path, patch_path: Path, collisions: list[str]
 ) -> dict[str, Any]:
@@ -266,6 +301,7 @@ def build_recovery_manifest(
     touched: list[str],
     collisions: list[dict[str, Any]],
     apply_result: dict[str, Any],
+    injection_result: dict[str, Any],
     caveats: list[str],
 ) -> dict[str, Any]:
     non_test = sorted(p for p in touched if classify_path(p) != "test")
@@ -278,6 +314,7 @@ def build_recovery_manifest(
         "commit_source": commit_info["source"],
         "base_source": "github-clone",
         "collision_policy": "agent-wins",
+        "dependency_injection": injection_result,
         "apply_status": apply_result["status"],
         "rejected_files": apply_result["rejected_files"],
         "apply_error": apply_result["stderr"],
@@ -308,7 +345,7 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         raise RecoverError(f"--run-dir is not a directory: {run_dir}")
 
     manifest = load_manifest(run_dir)
-    git_diff_patch, cleared_tests_path = resolve_artifacts(run_dir)
+    git_diff_patch, cleared_tests_path, injection_patch_path = resolve_artifacts(run_dir)
     commit_info = resolve_commit(manifest, args.commit)
     caveats = collect_caveats(manifest)
 
@@ -321,6 +358,15 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
     repo_dir = output_parent / repo_name
 
     clone_and_checkout(args.repo_url, commit_info["commit"], repo_dir)
+
+    # Replay the injected build-file change first; the agent patch lands on top.
+    injection_result = apply_injection_patch(repo_dir, injection_patch_path)
+    if injection_patch_path is not None and not injection_result["applied"]:
+        caveats.append(
+            "dependency_injection.patch did not apply: the recovered repo lacks the "
+            "injected RestAssured dependency, so the agent's RestAssured tests may not "
+            "compile (see recovery_manifest.json dependency_injection)."
+        )
 
     summary = parse_apply_summary(
         run_git_checked(["apply", "--summary", str(git_diff_patch)], cwd=repo_dir)
@@ -351,6 +397,7 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         touched=touched,
         collisions=collisions,
         apply_result=apply_result,
+        injection_result=injection_result,
         caveats=caveats,
     )
     write_recovery_manifest(
@@ -410,6 +457,14 @@ def main(argv: list[str] | None = None) -> int:
         f"apply={manifest['apply_status']}",
         flush=True,
     )
+    injection = manifest["dependency_injection"]
+    if injection.get("applied") or injection.get("reason") != "no dependency_injection.patch":
+        print(
+            "[recover] "
+            f"dependency_injection applied={injection.get('applied')} "
+            f"{injection.get('reason', '')}".rstrip(),
+            flush=True,
+        )
     counts = manifest["counts"]
     print(
         "[recover] "

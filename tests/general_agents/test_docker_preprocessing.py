@@ -381,6 +381,94 @@ def test_clear_tests_sanitizes_history_and_preserves_patch_sequence(
     )
 
 
+POM_WITH_DEPS = """<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>demo</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+"""
+
+
+def init_repo_with_pom(repo: Path) -> None:
+    repo.mkdir()
+    write_file(repo / "pom.xml", POM_WITH_DEPS)
+    write_file(repo / "src/main/java/example/App.java", "class App {}\n")
+    write_file(repo / "src/test/java/example/AppTest.java", "class AppTest {}\n")
+    run(["git", "init"], cwd=repo)
+    configure_git(repo)
+    commit_all(repo, "initial")
+
+
+def test_inject_rest_assured_lands_in_baseline_not_agent_diff(tmp_path: Path) -> None:
+    staged = tmp_path / "staged"
+    output_dir = tmp_path / "output"
+    init_repo_with_pom(staged)
+    output_dir.mkdir()
+    service = {
+        "id": "demo",
+        "rest_assured": {
+            "target_pom": "pom.xml",
+            "group_id": "io.rest-assured",
+            "artifact_id": "rest-assured",
+            "version": "5.5.0",
+            "scope": "test",
+        },
+    }
+
+    preprocessing = docker_run.preprocess_staged_input(
+        args=argparse.Namespace(
+            reset_git=False, clear_tests=True, inject_rest_assured=True
+        ),
+        staged_input=staged,
+        output_dir=output_dir,
+        service=service,
+    )
+
+    injection = preprocessing["rest_assured_injection"]
+    assert injection["status"] == "injected"
+    assert injection["managed"] is False
+    # The dependency is committed into the testless baseline.
+    assert "io.rest-assured" in (staged / "pom.xml").read_text(encoding="utf-8")
+    patch = (output_dir / "dependency_injection.patch").read_text(encoding="utf-8")
+    assert "io.rest-assured" in patch and "pom.xml" in patch
+
+    # The agent adds a test; the resulting agent diff must not include the POM edit.
+    write_file(staged / "src/test/java/example/ApiIT.java", "class ApiIT {}\n")
+    docker_run.collect_git_artifacts(staged, output_dir)
+    diff = (output_dir / "git_diff.patch").read_text(encoding="utf-8")
+    assert "ApiIT.java" in diff
+    assert "pom.xml" not in diff
+
+
+def test_inject_rest_assured_skipped_when_service_lacks_config(tmp_path: Path) -> None:
+    staged = tmp_path / "staged"
+    output_dir = tmp_path / "output"
+    init_repo_with_pom(staged)
+    output_dir.mkdir()
+
+    preprocessing = docker_run.preprocess_staged_input(
+        args=argparse.Namespace(
+            reset_git=False, clear_tests=False, inject_rest_assured=True
+        ),
+        staged_input=staged,
+        output_dir=output_dir,
+        service={"id": "features-service"},  # no rest_assured block
+    )
+
+    injection = preprocessing["rest_assured_injection"]
+    assert injection["status"] == "skipped"
+    assert "rest-assured" not in (staged / "pom.xml").read_text(encoding="utf-8")
+    assert not (output_dir / "dependency_injection.patch").exists()
+
+
 def test_reset_git_uses_source_superproject_pin_after_staging(tmp_path: Path) -> None:
     if shutil.which("rsync") is None:
         pytest.skip("rsync is required by Docker staging")
