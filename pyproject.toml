@@ -27,6 +27,8 @@ dependencies = [
   "jsonschema-specifications==2025.9.1",
   "markupsafe==3.0.3",
   "mcp==1.27.1",
+  "openai-codex==0.1.0b2",
+  "openai-codex-cli-bin==0.132.0",
   "pycparser==3.0",
   "pydantic==2.13.4",
   "pydantic-core==2.46.4",
@@ -46,6 +48,7 @@ dependencies = [
 
 [project.scripts]
 general-agent-eval-claude-code = "general_agent_eval.general_agents.claude_code:main"
+general-agent-eval-codex = "general_agent_eval.general_agents.codex:main"
 general-agent-eval-docker-run = "general_agent_eval.general_agents.docker_run:main"
 general-agent-eval-recover = "general_agent_eval.recovery.recover_full_repo:main"
 

@@ -45,12 +45,20 @@ AGENT_RESULT_SUMMARY_KEYS = (
     "duration_api_ms",
     "num_turns",
     "total_cost_usd",
+    # Codex reports token usage and a status instead of a dollar cost.
+    "usage",
+    "status",
     "session_id",
     # Error context copied straight from the agent's result message when present.
     "stop_reason",
     "api_error_status",
     "errors",
 )
+
+# Docker default sandbox: the container (cap-drop ALL, no-new-privileges) is the
+# boundary, so the codex agent runs unrestricted inside it. The standalone codex
+# runner defaults lower (workspace_write) because it executes on the host.
+DEFAULT_SANDBOX = "full_access"
 
 # Qualifies total_cost_usd when a custom --base-url makes it a CLI estimate.
 COST_ESTIMATE_NOTE = (
@@ -489,6 +497,50 @@ def validate_agent_values(args: argparse.Namespace) -> None:
         parse_key_value_key(value, option_name="--env")
 
 
+def validate_agent_options(args: argparse.Namespace) -> None:
+    """Reject agent-specific options supplied for an agent that ignores them, so a
+    flag like --max-budget-usd is never accepted then silently dropped. The parser
+    leaves agent-specific options unset (None) until resolve_agent_defaults fills
+    them, so "is not None" means the user supplied it -- even at the default value."""
+    options_by_owner: dict[str, dict[str, bool]] = {
+        "claude-code": {
+            "--permission-mode": args.permission_mode is not None,
+            "--auth-token-env": args.auth_token_env is not None,
+            "--oauth-token-env": args.oauth_token_env is not None,
+            "--max-budget-usd": args.max_budget_usd is not None,
+            "--extra-arg": bool(args.extra_arg),
+        },
+        "codex": {
+            "--sandbox": getattr(args, "sandbox", None) is not None,
+        },
+    }
+    unsupported = sorted(
+        flag
+        for owner, flags in options_by_owner.items()
+        if owner != args.agent
+        for flag, supplied in flags.items()
+        if supplied
+    )
+    if unsupported:
+        raise DockerRunError(
+            f"--agent {args.agent} does not support these options (they apply to a "
+            f"different agent): {', '.join(unsupported)}"
+        )
+
+
+def resolve_agent_defaults(args: argparse.Namespace) -> None:
+    """Fill effective defaults for options the parser left unset. Runs after
+    validate_agent_options, which relies on unset (None) meaning "not supplied"."""
+    if args.model is None:
+        if args.agent == "codex":
+            raise DockerRunError("--model is required for the codex agent")
+        args.model = "sonnet"
+    if args.permission_mode is None:
+        args.permission_mode = DEFAULT_PERMISSION_MODE
+    if args.sandbox is None:
+        args.sandbox = DEFAULT_SANDBOX
+
+
 def load_service_manifest(manifest_path: Path) -> dict[str, Any]:
     resolved_path = manifest_path.expanduser().resolve()
     if not resolved_path.is_file():
@@ -607,6 +659,7 @@ def build_agent_request(
         agent_env=agent_env,
         prompt_vars=prompt_vars,
         extra_args=tuple(args.extra_arg),
+        sandbox=getattr(args, "sandbox", "full_access"),
     )
 
 
@@ -785,7 +838,9 @@ def collect_agent_result_summary(
     for key in AGENT_RESULT_SUMMARY_KEYS:
         if key in result_message:
             summary[key] = result_message[key]
-    if cost_is_estimate and "total_cost_usd" in summary:
+    # Guard on a non-null value so the Anthropic-pricing note is never attached to a
+    # Codex result, whose total_cost_usd is always null.
+    if cost_is_estimate and summary.get("total_cost_usd") is not None:
         summary["total_cost_usd_is_estimate"] = True
         summary["total_cost_usd_note"] = COST_ESTIMATE_NOTE
     return summary
@@ -834,6 +889,7 @@ def sanitized_manifest(
         "agent_options": {
             "model": args.model,
             "permission_mode": args.permission_mode,
+            "sandbox": getattr(args, "sandbox", None),
             "system_prompt_config": args.system_prompt_config,
             "base_url": args.base_url,
             "api_key_env": args.api_key_env,
@@ -940,16 +996,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--model",
-        default="sonnet",
-        help="Model value passed through to the selected agent.",
+        default=None,
+        help=(
+            "Model value passed through to the selected agent. Defaults to "
+            "'sonnet' for claude-code; required for the codex agent."
+        ),
+    )
+    parser.add_argument(
+        "--sandbox",
+        choices=("read_only", "workspace_write", "full_access"),
+        default=None,
+        help=(
+            "Codex sandbox mode (codex agent only). Defaults to full_access because "
+            "the Docker container is the security boundary; lower to workspace_write "
+            "or read_only for stricter runs. Rejected for claude-code."
+        ),
     )
     parser.add_argument(
         "--permission-mode",
         choices=PERMISSION_MODES,
-        default=DEFAULT_PERMISSION_MODE,
+        default=None,
         help=(
-            "Claude Code permission mode for the claude-code agent. Defaults "
-            "to bypassPermissions."
+            "Claude Code permission mode (claude-code agent only). Defaults to "
+            "bypassPermissions. Rejected for codex."
         ),
     )
     parser.add_argument(
@@ -957,33 +1026,47 @@ def build_parser() -> argparse.ArgumentParser:
         choices=("append", "replace", "none"),
         default="replace",
         help=(
-            "How the claude-code agent applies its rendered system template. "
-            "Defaults to replace (rendered template becomes the entire system "
-            "prompt; errors if it renders empty)."
+            "How the selected agent applies its rendered system template (both "
+            "agents). replace makes it the entire system prompt (errors if it "
+            "renders empty), append adds it as supplemental instructions, none "
+            "omits it. Defaults to replace."
         ),
     )
     parser.add_argument(
         "--base-url",
-        help="Custom Anthropic-compatible endpoint for the claude-code agent.",
+        help=(
+            "Custom OpenAI/Anthropic-compatible gateway endpoint for the selected "
+            "agent (claude-code sets ANTHROPIC_BASE_URL; codex registers a model "
+            "provider pointed at it)."
+        ),
     )
     parser.add_argument(
         "--api-key-env",
-        help="Host env var to pass into Docker and use as ANTHROPIC_API_KEY.",
+        help=(
+            "Host env var passed into Docker and used as the agent's API key "
+            "(ANTHROPIC_API_KEY for claude-code, OPENAI_API_KEY for codex)."
+        ),
     )
     parser.add_argument(
         "--auth-token-env",
-        help="Host env var to pass into Docker and use as ANTHROPIC_AUTH_TOKEN.",
+        help=(
+            "Host env var passed into Docker and used as ANTHROPIC_AUTH_TOKEN "
+            "(claude-code agent only)."
+        ),
     )
     parser.add_argument(
         "--oauth-token-env",
-        help="Host env var containing a Claude Code OAuth token.",
+        help="Host env var containing a Claude Code OAuth token (claude-code agent only).",
     )
     parser.add_argument(
         "--env",
         action="append",
         default=[],
         metavar="KEY=VALUE",
-        help="Additional Claude Code environment variable. Can be repeated.",
+        help=(
+            "Additional environment variable for the selected agent's process "
+            "(both agents). Can be repeated."
+        ),
     )
     parser.add_argument(
         "--extra-arg",
@@ -991,19 +1074,25 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         metavar="FLAG[=VALUE]",
         help=(
-            "Extra passthrough argument forwarded verbatim to the selected agent. "
-            "Its meaning is agent-specific. Can be repeated."
+            "Extra passthrough argument forwarded verbatim to the claude-code agent "
+            "(claude-code agent only). Can be repeated."
         ),
     )
     parser.add_argument(
         "--max-turns",
         type=positive_int,
-        help="Maximum agentic turns before the selected agent exits.",
+        help=(
+            "Maximum agentic turns before the agent exits. Enforced by claude-code; "
+            "codex runs a single turn per invocation."
+        ),
     )
     parser.add_argument(
         "--max-budget-usd",
         type=positive_float,
-        help="Maximum dollar budget before the selected agent exits.",
+        help=(
+            "Maximum dollar budget before the agent exits (claude-code agent only; "
+            "codex does not enforce a budget)."
+        ),
     )
     parser.add_argument(
         "--reset-git",
@@ -1039,6 +1128,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
+        validate_agent_options(args)
+        resolve_agent_defaults(args)
         input_dir = args.input_dir.expanduser().resolve()
         if not input_dir.exists():
             raise DockerRunError(f"--input-dir does not exist: {args.input_dir}")

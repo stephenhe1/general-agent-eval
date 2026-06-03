@@ -39,6 +39,37 @@ When `--base-url` is set (a custom/non-Anthropic gateway), the runner defaults
 `--env CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=0` to re-enable them for a
 beta-capable endpoint.
 
+## OpenAI Codex Runner
+
+Run OpenAI Codex directly against an input directory:
+
+```bash
+uv run general-agent-eval-codex \
+  --input-dir /path/to/project \
+  --model gpt-5-codex \
+  --api-key-env OPENAI_API_KEY
+```
+
+The runner wraps the official `openai-codex` Python SDK (its native binary ships
+bundled with the dependency, so no separate install is needed) and renders the
+same packaged prompt templates as the Claude Code runner. `--model` is required;
+there is no default.
+
+`--system-prompt-config` maps the rendered system template onto Codex:
+`replace` (default) uses it as `base_instructions` (a full replacement of Codex's
+built-in prompt), `append` adds it as `developer_instructions`, and `none` uses
+neither. `--sandbox` controls Codex's filesystem/network access. The standalone
+runner defaults to `workspace_write` because direct runs execute on the host; raise
+it to `full_access` or lower it to `read_only` as needed. (Under
+`general-agent-eval-docker-run` it instead defaults to `full_access`, since the
+container — `cap-drop ALL`, `no-new-privileges` — is the real security boundary.)
+Pass `--base-url` to point Codex at a custom OpenAI-compatible gateway
+(authenticated via `OPENAI_API_KEY`).
+
+Codex reports token usage and duration but **no dollar cost**, so the result
+record and `manifest.json` carry `total_cost_usd: null` plus a `usage` token
+breakdown — consult the provider's billing dashboard for actual spend.
+
 ## Docker Runner
 
 Run an agent inside the shared Docker runtime against a disposable staged copy:
@@ -53,10 +84,30 @@ uv run general-agent-eval-docker-run \
   --api-key-env ANTHROPIC_API_KEY
 ```
 
+Pass `--agent codex` to run OpenAI Codex instead. `--model` is required for it,
+and `--sandbox` (default `full_access`) selects the Codex sandbox mode:
+
+```bash
+uv run general-agent-eval-docker-run \
+  --agent codex \
+  --input-dir /path/to/project \
+  --reset-git \
+  --clear-tests \
+  --model gpt-5-codex \
+  --api-key-env OPENAI_API_KEY
+```
+
+Options that apply to a single agent are rejected (rather than silently dropped)
+when passed for the other agent: `--permission-mode`, `--auth-token-env`,
+`--oauth-token-env`, `--max-budget-usd`, and `--extra-arg` are claude-code only,
+while `--sandbox` is codex only. Shared options (`--model`,
+`--system-prompt-config`, `--base-url`, `--api-key-env`, `--env`) work for both.
+
 Runs are written under `runs/<timestamp>__<agent>__<project>` by default. Pass
 `--output-dir` to choose a different parent directory. After completion,
 `manifest.json` includes a compact `agent_result` summary with cost, duration,
-and turn count when the selected agent reports those fields.
+and turn count when the selected agent reports those fields (the codex agent
+reports duration and token `usage` but a null `total_cost_usd`).
 
 To run against a live service, pass the service manifest and scripts directory
 explicitly:

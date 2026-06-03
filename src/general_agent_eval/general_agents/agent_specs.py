@@ -21,6 +21,8 @@ class AgentRunRequest:
     agent_env: tuple[str, ...] = ()
     prompt_vars: tuple[str, ...] = ()
     extra_args: tuple[str, ...] = ()
+    # Codex sandbox mode; ignored by the claude-code agent.
+    sandbox: str = "full_access"
 
 
 @dataclass(frozen=True)
@@ -71,11 +73,43 @@ def build_claude_code_command(request: AgentRunRequest) -> list[str]:
     return command
 
 
+def build_codex_command(request: AgentRunRequest) -> list[str]:
+    command = [
+        "python",
+        "-m",
+        "general_agent_eval.general_agents.codex",
+        "--input-dir",
+        request.container_input_dir,
+        "--model",
+        request.model,
+        "--system-prompt-config",
+        request.system_prompt_config,
+        "--sandbox",
+        request.sandbox,
+        "--output-jsonl",
+        f"{request.container_output_dir}/messages.jsonl",
+    ]
+    _append_optional(command, "--base-url", request.base_url)
+    _append_optional(command, "--api-key-env", request.api_key_env)
+    _append_optional(command, "--max-turns", request.max_turns)
+    _append_repeated(command, "--env", request.agent_env)
+    _append_repeated(command, "--prompt-var", request.prompt_vars)
+    if request.reset_git:
+        command.append("--reset-git")
+    return command
+
+
 AGENT_SPECS: dict[str, AgentSpec] = {
     "claude-code": AgentSpec(
         name="claude-code",
         description="Run Claude Code through the experiment SDK harness.",
         output_jsonl_name="messages.jsonl",
         build_command=build_claude_code_command,
+    ),
+    "codex": AgentSpec(
+        name="codex",
+        description="Run OpenAI Codex through the experiment SDK harness.",
+        output_jsonl_name="messages.jsonl",
+        build_command=build_codex_command,
     ),
 }

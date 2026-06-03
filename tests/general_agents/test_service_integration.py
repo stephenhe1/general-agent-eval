@@ -88,6 +88,9 @@ def docker_args(**overrides: object) -> argparse.Namespace:
 def test_permission_mode_defaults_to_bypass_permissions() -> None:
     claude_args = claude_code.build_parser().parse_args(["--input-dir", "/tmp/p"])
     docker_args = docker_run.build_parser().parse_args(["--input-dir", "/tmp/p"])
+    # docker_run leaves it unset until resolution so explicit provision is detectable.
+    assert docker_args.permission_mode is None
+    docker_run.resolve_agent_defaults(docker_args)
 
     assert claude_args.permission_mode == "bypassPermissions"
     assert docker_args.permission_mode == "bypassPermissions"

@@ -107,6 +107,9 @@ RUN set -eux; \
 COPY pyproject.toml README.md /tmp/general-agent-eval/
 COPY src /tmp/general-agent-eval/src
 
+# Installs the project plus its deps. The codex agent's native binary ships inside
+# the openai-codex-cli-bin wheel (a core dep) and is resolved from site-packages by
+# the SDK, so no separate install or PATH symlink is needed for Codex.
 RUN python -m pip install --no-cache-dir "uv==${UV_VERSION}" \
     && uv pip install --system --no-cache /tmp/general-agent-eval
 
