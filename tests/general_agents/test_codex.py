@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from general_agent_eval.general_agents import codex, docker_run
+from general_agent_eval.general_agents import codex
 from general_agent_eval.general_agents.agent_specs import (
     AGENT_SPECS,
     AgentRunRequest,
@@ -16,6 +16,8 @@ from general_agent_eval.general_agents.codex import (
     build_parser,
     build_system_prompt,
 )
+from general_agent_eval.orchestration import cli, manifest
+from general_agent_eval.orchestration.errors import DockerRunError
 
 RENDERED = "You are a test generation agent.\n"
 
@@ -109,7 +111,7 @@ class _Usage:
         return {"total": {"input_tokens": 10, "output_tokens": 5}}
 
 
-def test_synthesize_result_record_success_is_detected_by_docker_run() -> None:
+def test_synthesize_result_record_success_is_detected_by_orchestration() -> None:
     record = codex.synthesize_result_record(
         _Turn("completed", 1234), _Usage(), final_response="done"
     )
@@ -119,8 +121,9 @@ def test_synthesize_result_record_success_is_detected_by_docker_run() -> None:
     assert record["status"] == "completed"
     assert record["usage"] == {"total": {"input_tokens": 10, "output_tokens": 5}}
     assert record["result"] == "done"
-    # Cross-module guarantee: docker_run must recognize this as the result message.
-    assert docker_run.is_agent_result_message(record) is True
+    # Cross-module guarantee: the orchestration summary must recognize this as the
+    # result message.
+    assert manifest.is_agent_result_message(record) is True
 
 
 def test_synthesize_result_record_failure_marks_error() -> None:
@@ -177,11 +180,11 @@ def test_build_codex_command_forwards_shared_flags_and_omits_claude_flags() -> N
     assert command[command.index("--sandbox") + 1] == "workspace_write"
 
 
-# --- docker_run wiring --------------------------------------------------------
+# --- orchestration wiring -----------------------------------------------------
 
 
-def test_docker_run_registers_codex_and_defaults_model_none() -> None:
-    args = docker_run.build_parser().parse_args(
+def test_docker_parser_registers_codex_and_defaults_model_none() -> None:
+    args = cli.build_parser().parse_args(
         ["--input-dir", "/tmp/p", "--agent", "codex"]
     )
     assert args.agent == "codex"
@@ -191,27 +194,27 @@ def test_docker_run_registers_codex_and_defaults_model_none() -> None:
 
 
 def test_resolve_agent_defaults_fills_codex_sandbox_full_access() -> None:
-    args = docker_run.build_parser().parse_args(
+    args = cli.build_parser().parse_args(
         ["--input-dir", "/tmp/p", "--agent", "codex", "--model", "m"]
     )
-    docker_run.resolve_agent_defaults(args)
+    cli.resolve_agent_defaults(args)
     # Under Docker the container is the boundary, so it defaults to full_access.
     assert args.sandbox == "full_access"
 
 
 def test_resolve_agent_defaults_requires_model_for_codex() -> None:
-    args = docker_run.build_parser().parse_args(
+    args = cli.build_parser().parse_args(
         ["--input-dir", "/tmp/p", "--agent", "codex"]
     )
-    with pytest.raises(docker_run.DockerRunError, match="--model is required"):
-        docker_run.resolve_agent_defaults(args)
+    with pytest.raises(DockerRunError, match="--model is required"):
+        cli.resolve_agent_defaults(args)
 
 
 # --- agent-specific option guards --------------------------------------------
 
 
 def _docker_args(*extra: str) -> object:
-    return docker_run.build_parser().parse_args(["--input-dir", "/tmp/p", *extra])
+    return cli.build_parser().parse_args(["--input-dir", "/tmp/p", *extra])
 
 
 @pytest.mark.parametrize(
@@ -226,22 +229,22 @@ def _docker_args(*extra: str) -> object:
 )
 def test_validate_rejects_claude_only_options_for_codex(extra: list[str]) -> None:
     args = _docker_args("--agent", "codex", "--model", "m", *extra)
-    with pytest.raises(docker_run.DockerRunError):
-        docker_run.validate_agent_options(args)
+    with pytest.raises(DockerRunError):
+        cli.validate_agent_options(args)
 
 
 def test_validate_rejects_sandbox_for_claude_code() -> None:
     args = _docker_args("--agent", "claude-code", "--sandbox", "read_only")
-    with pytest.raises(docker_run.DockerRunError):
-        docker_run.validate_agent_options(args)
+    with pytest.raises(DockerRunError):
+        cli.validate_agent_options(args)
 
 
 def test_validate_allows_supported_options_per_agent() -> None:
     codex = _docker_args("--agent", "codex", "--model", "m", "--sandbox", "read_only")
     claude = _docker_args("--max-budget-usd", "5", "--permission-mode", "plan")
     # Neither raises: each option is supported by the agent it was passed to.
-    docker_run.validate_agent_options(codex)
-    docker_run.validate_agent_options(claude)
+    cli.validate_agent_options(codex)
+    cli.validate_agent_options(claude)
 
 
 def test_validate_rejects_explicit_default_sandbox_for_claude_code() -> None:
@@ -249,8 +252,8 @@ def test_validate_rejects_explicit_default_sandbox_for_claude_code() -> None:
     # by presence (parser default is None), so the help's "Rejected for claude-code"
     # holds without the default-valued escape hatch.
     args = _docker_args("--agent", "claude-code", "--sandbox", "full_access")
-    with pytest.raises(docker_run.DockerRunError):
-        docker_run.validate_agent_options(args)
+    with pytest.raises(DockerRunError):
+        cli.validate_agent_options(args)
 
 
 def test_collect_summary_no_cost_note_for_null_codex_cost(tmp_path: Path) -> None:
@@ -260,7 +263,7 @@ def test_collect_summary_no_cost_note_for_null_codex_cost(tmp_path: Path) -> Non
         + "\n",
         encoding="utf-8",
     )
-    summary = docker_run.collect_agent_result_summary(
+    summary = manifest.collect_agent_result_summary(
         tmp_path, "messages.jsonl", cost_is_estimate=True
     )
     assert summary is not None

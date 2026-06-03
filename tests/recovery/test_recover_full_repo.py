@@ -9,7 +9,8 @@ from typing import Callable
 
 import pytest
 
-from general_agent_eval.general_agents import docker_run
+from general_agent_eval.orchestration.preprocess import preprocess_staged_input
+from general_agent_eval.orchestration.staging import collect_git_artifacts, stage_input
 from general_agent_eval.recovery import recover_full_repo
 
 
@@ -67,14 +68,14 @@ def make_run(
     run_dir.mkdir()
     output_dir.mkdir()
 
-    docker_run.stage_input(origin, staged)
-    preprocessing = docker_run.preprocess_staged_input(
+    stage_input(origin, staged)
+    preprocessing = preprocess_staged_input(
         args=argparse.Namespace(reset_git=False, clear_tests=True),
         staged_input=staged,
         output_dir=output_dir,
     )
     agent_edits(staged)
-    docker_run.collect_git_artifacts(staged, output_dir)
+    collect_git_artifacts(staged, output_dir)
 
     (run_dir / "manifest.json").write_text(
         json.dumps({"input_dir": str(origin), "preprocessing": preprocessing}),
@@ -246,8 +247,8 @@ def test_recover_replays_injected_dependency(tmp_path: Path) -> None:
     run_dir.mkdir()
     output_dir.mkdir()
 
-    docker_run.stage_input(origin, staged)
-    preprocessing = docker_run.preprocess_staged_input(
+    stage_input(origin, staged)
+    preprocessing = preprocess_staged_input(
         args=argparse.Namespace(
             reset_git=False, clear_tests=True, inject_rest_assured=True
         ),
@@ -262,7 +263,7 @@ def test_recover_replays_injected_dependency(tmp_path: Path) -> None:
         staged / "src/test/java/example/ApiIT.java",
         "import io.restassured.RestAssured; class ApiIT {}\n",
     )
-    docker_run.collect_git_artifacts(staged, output_dir)
+    collect_git_artifacts(staged, output_dir)
     (run_dir / "manifest.json").write_text(
         json.dumps({"input_dir": str(origin), "preprocessing": preprocessing}),
         encoding="utf-8",

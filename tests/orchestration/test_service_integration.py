@@ -7,8 +7,16 @@ from pathlib import Path
 
 import pytest
 
-from general_agent_eval.general_agents import claude_code, docker_run
+from general_agent_eval.general_agents import claude_code
 from general_agent_eval.general_agents.agent_specs import build_claude_code_command
+from general_agent_eval.orchestration import cli, docker, services
+from general_agent_eval.orchestration.errors import DockerRunError
+from general_agent_eval.orchestration.manifest import (
+    COST_ESTIMATE_NOTE,
+    collect_agent_result_summary,
+    sanitized_manifest,
+)
+from general_agent_eval.orchestration.run import build_agent_request
 
 
 def write_service_manifest(path: Path) -> Path:
@@ -87,10 +95,11 @@ def docker_args(**overrides: object) -> argparse.Namespace:
 
 def test_permission_mode_defaults_to_bypass_permissions() -> None:
     claude_args = claude_code.build_parser().parse_args(["--input-dir", "/tmp/p"])
-    docker_args = docker_run.build_parser().parse_args(["--input-dir", "/tmp/p"])
-    # docker_run leaves it unset until resolution so explicit provision is detectable.
+    docker_args = cli.build_parser().parse_args(["--input-dir", "/tmp/p"])
+    # The orchestration parser leaves it unset until resolution so explicit
+    # provision is detectable.
     assert docker_args.permission_mode is None
-    docker_run.resolve_agent_defaults(docker_args)
+    cli.resolve_agent_defaults(docker_args)
 
     assert claude_args.permission_mode == "bypassPermissions"
     assert docker_args.permission_mode == "bypassPermissions"
@@ -180,28 +189,28 @@ def test_chat_prompt_rest_assured_and_module_blocks() -> None:
     assert "web module" in multi
 
 
-# --- docker_run service resolution -------------------------------------------
+# --- orchestration service resolution ----------------------------------------
 
 
 def test_resolve_service_returns_none_without_service() -> None:
-    assert docker_run.resolve_service(docker_args()) is None
+    assert services.resolve_service(docker_args()) is None
 
 
 def test_resolve_service_port_requires_service() -> None:
-    with pytest.raises(docker_run.DockerRunError, match="requires --service"):
-        docker_run.resolve_service(docker_args(service_port=9000))
+    with pytest.raises(DockerRunError, match="requires --service"):
+        services.resolve_service(docker_args(service_port=9000))
 
 
 def test_resolve_service_requires_manifest_or_scripts_dir() -> None:
-    with pytest.raises(docker_run.DockerRunError, match="service-manifest"):
-        docker_run.resolve_service(docker_args(service="genome-nexus"))
+    with pytest.raises(DockerRunError, match="service-manifest"):
+        services.resolve_service(docker_args(service="genome-nexus"))
 
 
 def test_resolve_service_unknown_id(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
 
-    with pytest.raises(docker_run.DockerRunError, match="unknown --service"):
-        docker_run.resolve_service(
+    with pytest.raises(DockerRunError, match="unknown --service"):
+        services.resolve_service(
             docker_args(service="does-not-exist", service_manifest=manifest)
         )
 
@@ -209,7 +218,7 @@ def test_resolve_service_unknown_id(tmp_path: Path) -> None:
 def test_resolve_service_genome_nexus_urls(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
 
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="genome-nexus", service_manifest=manifest)
     )
     assert svc == {
@@ -224,7 +233,7 @@ def test_resolve_service_uses_scripts_dir_manifest_by_default(tmp_path: Path) ->
     scripts_dir = write_service_scripts(tmp_path / "scripts")
     write_service_manifest(scripts_dir / "services.json")
 
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="restcountries", service_scripts_dir=scripts_dir)
     )
     assert svc is not None
@@ -234,7 +243,7 @@ def test_resolve_service_uses_scripts_dir_manifest_by_default(tmp_path: Path) ->
 def test_resolve_service_port_override(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
 
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(
             service="genome-nexus", service_manifest=manifest, service_port=9999
         )
@@ -248,10 +257,10 @@ def test_build_agent_request_injects_service_env_and_prompt_vars(
     tmp_path: Path,
 ) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="genome-nexus", service_manifest=manifest)
     )
-    request = docker_run.build_agent_request(
+    request = build_agent_request(
         docker_args(service="genome-nexus", env=["FOO=bar"]), svc
     )
     assert "FOO=bar" in request.agent_env
@@ -261,7 +270,7 @@ def test_build_agent_request_injects_service_env_and_prompt_vars(
 
 
 def test_build_agent_request_no_service_has_empty_prompt_vars() -> None:
-    request = docker_run.build_agent_request(docker_args(), None)
+    request = build_agent_request(docker_args(), None)
     assert request.prompt_vars == ()
     assert all(not e.startswith("SERVICE_BASE_URL=") for e in request.agent_env)
 
@@ -284,7 +293,7 @@ def test_rest_assured_prompt_vars_multi_module() -> None:
     service = _service_with_rest_assured(
         "genome-nexus", "http://127.0.0.1:8888/", "web/pom.xml"
     )
-    request = docker_run.build_agent_request(
+    request = build_agent_request(
         docker_args(service="genome-nexus", inject_rest_assured=True), service
     )
     assert "rest_assured=1" in request.prompt_vars
@@ -295,7 +304,7 @@ def test_rest_assured_prompt_vars_single_module_omits_test_module() -> None:
     service = _service_with_rest_assured(
         "restcountries", "http://127.0.0.1:8080/rest", "pom.xml"
     )
-    request = docker_run.build_agent_request(
+    request = build_agent_request(
         docker_args(service="restcountries", inject_rest_assured=True), service
     )
     assert "rest_assured=1" in request.prompt_vars
@@ -306,7 +315,7 @@ def test_rest_assured_prompt_vars_absent_without_inject_flag() -> None:
     service = _service_with_rest_assured(
         "genome-nexus", "http://127.0.0.1:8888/", "web/pom.xml"
     )
-    request = docker_run.build_agent_request(
+    request = build_agent_request(
         docker_args(service="genome-nexus", inject_rest_assured=False), service
     )
     assert all(not v.startswith("rest_assured=") for v in request.prompt_vars)
@@ -315,11 +324,11 @@ def test_rest_assured_prompt_vars_absent_without_inject_flag() -> None:
 
 def test_claude_code_command_emits_prompt_vars(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="genome-nexus", service_manifest=manifest)
     )
     command = build_claude_code_command(
-        docker_run.build_agent_request(docker_args(service="genome-nexus"), svc)
+        build_agent_request(docker_args(service="genome-nexus"), svc)
     )
     assert command.count("--prompt-var") == 2
     idx = command.index("--prompt-var")
@@ -335,10 +344,10 @@ def _docker_command_args(**overrides: object) -> argparse.Namespace:
 def test_build_docker_command_wraps_with_service_shim(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
     scripts_dir = write_service_scripts(tmp_path / "scripts")
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="genome-nexus", service_manifest=manifest)
     )
-    command = docker_run.build_docker_command(
+    command = docker.build_docker_command(
         args=_docker_command_args(service="genome-nexus"),
         staged_input=Path("/tmp/in"),
         output_dir=Path("/tmp/out"),
@@ -347,12 +356,12 @@ def test_build_docker_command_wraps_with_service_shim(tmp_path: Path) -> None:
         service=svc,
         service_scripts_dir=scripts_dir,
     )
-    image_idx = command.index(docker_run.DEFAULT_IMAGE)
-    assert f"{scripts_dir}:{docker_run.CONTAINER_SERVICE_SCRIPTS_DIR}:ro" in command
+    image_idx = command.index(docker.DEFAULT_IMAGE)
+    assert f"{scripts_dir}:{docker.CONTAINER_SERVICE_SCRIPTS_DIR}:ro" in command
     assert command[image_idx + 1] == "bash"
     assert command[image_idx + 2].endswith("run-with-service.sh")
     assert command[image_idx + 3] == "genome-nexus"
-    assert "--repo" in command and docker_run.CONTAINER_INPUT_DIR in command
+    assert "--repo" in command and docker.CONTAINER_INPUT_DIR in command
     # the agent command follows the `--` separator
     sep = command.index("--", image_idx)
     assert command[sep + 1 :] == ["python", "-m", "agent"]
@@ -360,12 +369,12 @@ def test_build_docker_command_wraps_with_service_shim(tmp_path: Path) -> None:
 
 def test_build_docker_command_requires_service_scripts_dir(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="genome-nexus", service_manifest=manifest)
     )
 
-    with pytest.raises(docker_run.DockerRunError, match="service_scripts_dir"):
-        docker_run.build_docker_command(
+    with pytest.raises(DockerRunError, match="service_scripts_dir"):
+        docker.build_docker_command(
             args=_docker_command_args(service="genome-nexus"),
             staged_input=Path("/tmp/in"),
             output_dir=Path("/tmp/out"),
@@ -376,7 +385,7 @@ def test_build_docker_command_requires_service_scripts_dir(tmp_path: Path) -> No
 
 
 def test_build_docker_command_no_service_appends_agent_directly() -> None:
-    command = docker_run.build_docker_command(
+    command = docker.build_docker_command(
         args=_docker_command_args(),
         staged_input=Path("/tmp/in"),
         output_dir=Path("/tmp/out"),
@@ -384,13 +393,13 @@ def test_build_docker_command_no_service_appends_agent_directly() -> None:
         host_env_names=(),
         service=None,
     )
-    image_idx = command.index(docker_run.DEFAULT_IMAGE)
+    image_idx = command.index(docker.DEFAULT_IMAGE)
     assert command[image_idx + 1 :] == ["python", "-m", "agent"]
     assert "run-with-service.sh" not in " ".join(command)
 
 
 def test_docker_parser_accepts_service_options() -> None:
-    parser = docker_run.build_parser()
+    parser = cli.build_parser()
     args = parser.parse_args(
         [
             "--input-dir",
@@ -414,7 +423,7 @@ def test_docker_parser_accepts_service_options() -> None:
 def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
     manifest_path = write_service_manifest(tmp_path / "services.json")
     scripts_dir = write_service_scripts(tmp_path / "scripts")
-    svc = docker_run.resolve_service(
+    svc = services.resolve_service(
         docker_args(service="genome-nexus", service_manifest=manifest_path)
     )
     args = _docker_command_args(
@@ -424,7 +433,7 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
         service="genome-nexus",
         service_manifest=manifest_path,
     )
-    manifest = docker_run.sanitized_manifest(
+    manifest = sanitized_manifest(
         args=args,
         input_dir=Path("/tmp/in"),
         run_dir=Path("/tmp/run"),
@@ -464,7 +473,7 @@ def test_collect_agent_result_summary_reads_compact_result(tmp_path: Path) -> No
         encoding="utf-8",
     )
 
-    summary = docker_run.collect_agent_result_summary(output_dir, "messages.jsonl")
+    summary = collect_agent_result_summary(output_dir, "messages.jsonl")
 
     assert summary == {
         "source_jsonl": "messages.jsonl",
@@ -478,7 +487,7 @@ def test_collect_agent_result_summary_reads_compact_result(tmp_path: Path) -> No
 
 
 def test_collect_agent_result_summary_handles_missing_jsonl(tmp_path: Path) -> None:
-    assert docker_run.collect_agent_result_summary(
+    assert collect_agent_result_summary(
         tmp_path, "messages.jsonl"
     ) == {
         "source_jsonl": "messages.jsonl",
@@ -505,7 +514,7 @@ def test_collect_agent_result_summary_captures_error_details(tmp_path: Path) -> 
         encoding="utf-8",
     )
 
-    summary = docker_run.collect_agent_result_summary(output_dir, "messages.jsonl")
+    summary = collect_agent_result_summary(output_dir, "messages.jsonl")
 
     assert summary["subtype"] == "error_during_execution"
     assert summary["is_error"] is True
@@ -525,13 +534,13 @@ def test_collect_agent_result_summary_flags_cost_estimate(tmp_path: Path) -> Non
         encoding="utf-8",
     )
 
-    summary = docker_run.collect_agent_result_summary(
+    summary = collect_agent_result_summary(
         output_dir, "messages.jsonl", cost_is_estimate=True
     )
 
     assert summary["total_cost_usd"] == 6.91902
     assert summary["total_cost_usd_is_estimate"] is True
-    assert summary["total_cost_usd_note"] == docker_run.COST_ESTIMATE_NOTE
+    assert summary["total_cost_usd_note"] == COST_ESTIMATE_NOTE
 
 
 def test_collect_agent_result_summary_no_cost_note_without_cost(tmp_path: Path) -> None:
@@ -542,7 +551,7 @@ def test_collect_agent_result_summary_no_cost_note_without_cost(tmp_path: Path) 
         encoding="utf-8",
     )
 
-    summary = docker_run.collect_agent_result_summary(
+    summary = collect_agent_result_summary(
         output_dir, "messages.jsonl", cost_is_estimate=True
     )
 
@@ -555,8 +564,8 @@ def test_load_service_manifest_rejects_invalid_shape(tmp_path: Path) -> None:
     path = tmp_path / "services.json"
     path.write_text("{}", encoding="utf-8")
 
-    with pytest.raises(docker_run.DockerRunError, match="services"):
-        docker_run.load_service_manifest(path)
+    with pytest.raises(DockerRunError, match="services"):
+        services.load_service_manifest(path)
 
 
 def test_load_service_manifest_reads_services(tmp_path: Path) -> None:
@@ -566,12 +575,12 @@ def test_load_service_manifest_reads_services(tmp_path: Path) -> None:
         "features-service",
         "restcountries",
         "genome-nexus",
-    } <= set(docker_run.load_service_manifest(manifest))
+    } <= set(services.load_service_manifest(manifest))
 
 
 def test_agent_command_uses_packaged_module() -> None:
     command = build_claude_code_command(
-        docker_run.build_agent_request(docker_args(), None)
+        build_agent_request(docker_args(), None)
     )
     assert command[:3] == [
         "python",
@@ -581,8 +590,8 @@ def test_agent_command_uses_packaged_module() -> None:
 
 
 def test_service_scripts_dir_validation(tmp_path: Path) -> None:
-    with pytest.raises(docker_run.DockerRunError, match="service-scripts-dir"):
-        docker_run.resolve_service_scripts_dir(
+    with pytest.raises(DockerRunError, match="service-scripts-dir"):
+        services.resolve_service_scripts_dir(
             docker_args(service_scripts_dir=tmp_path / "missing")
         )
 
@@ -591,8 +600,8 @@ def test_setup_script_dir_requires_runner(tmp_path: Path) -> None:
     scripts_dir = tmp_path / "scripts"
     scripts_dir.mkdir()
 
-    with pytest.raises(docker_run.DockerRunError, match="run-with-service.sh"):
-        docker_run.resolve_service_scripts_dir(
+    with pytest.raises(DockerRunError, match="run-with-service.sh"):
+        services.resolve_service_scripts_dir(
             docker_args(service_scripts_dir=scripts_dir)
         )
 
@@ -601,8 +610,8 @@ def test_service_manifest_json_errors(tmp_path: Path) -> None:
     path = tmp_path / "services.json"
     path.write_text("{", encoding="utf-8")
 
-    with pytest.raises(docker_run.DockerRunError, match="invalid JSON"):
-        docker_run.load_service_manifest(path)
+    with pytest.raises(DockerRunError, match="invalid JSON"):
+        services.load_service_manifest(path)
 
 
 def test_service_scripts_shell_fixture_is_executable_shape(tmp_path: Path) -> None:

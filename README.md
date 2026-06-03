@@ -4,7 +4,9 @@ Harnesses for evaluating general coding agents against isolated repositories.
 
 ## Layout
 
-- `src/general_agent_eval/general_agents/`: Docker launcher and agent adapters.
+- `src/general_agent_eval/general_agents/`: agent adapters (claude-code, codex).
+- `src/general_agent_eval/orchestration/`: Docker run orchestrator — staging,
+  preprocessing pipeline, image build/run, and run manifests.
 - `src/general_agent_eval/preprocessing/`: input preprocessing utilities.
 - `src/general_agent_eval/recovery/`: rebuild agent outputs into the full repo.
 - `src/general_agent_eval/prompts/`: packaged Jinja prompt templates.

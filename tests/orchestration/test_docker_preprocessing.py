@@ -9,8 +9,10 @@ from pathlib import Path
 import pytest
 
 from general_agent_eval.general_agents import claude_code
-from general_agent_eval.general_agents import docker_run
 from general_agent_eval.general_agents.agent_specs import build_claude_code_command
+from general_agent_eval.orchestration import cli, docker, paths, preprocess, staging
+from general_agent_eval.orchestration.errors import DockerRunError
+from general_agent_eval.orchestration.run import build_agent_request
 from general_agent_eval.preprocessing.git_reset import resolve_reset_target
 
 
@@ -72,7 +74,7 @@ def test_build_agent_request_does_not_forward_reset_git() -> None:
         extra_arg=[],
     )
 
-    request = docker_run.build_agent_request(args)
+    request = build_agent_request(args)
 
     assert request.reset_git is False
     assert request.oauth_token_env == "CLAUDE_CODE_OAUTH_TOKEN"
@@ -85,7 +87,7 @@ def test_docker_passes_oauth_token_env_name_once() -> None:
         oauth_token_env="CLAUDE_CODE_OAUTH_TOKEN",
     )
 
-    assert docker_run.required_host_env_names(args) == ("CLAUDE_CODE_OAUTH_TOKEN",)
+    assert cli.required_host_env_names(args) == ("CLAUDE_CODE_OAUTH_TOKEN",)
 
 
 def test_claude_code_command_forwards_oauth_token_env() -> None:
@@ -104,7 +106,7 @@ def test_claude_code_command_forwards_oauth_token_env() -> None:
         extra_arg=[],
     )
 
-    command = build_claude_code_command(docker_run.build_agent_request(args))
+    command = build_claude_code_command(build_agent_request(args))
 
     assert "--system-prompt-config" in command
     assert "--system-mode" not in command
@@ -201,7 +203,7 @@ def test_claude_code_env_no_base_url_omits_experimental_betas() -> None:
     ],
 )
 def test_docker_parser_rejects_removed_forwarding_args(removed_arg: str) -> None:
-    parser = docker_run.build_parser()
+    parser = cli.build_parser()
 
     with pytest.raises(SystemExit):
         parser.parse_args(["--input-dir", "/tmp/project", removed_arg, "value"])
@@ -224,10 +226,10 @@ def test_build_image_requires_docker_buildx(
         assert command == ["docker", "buildx", "version"]
         return subprocess.CompletedProcess(command, 1, "", "unknown command")
 
-    monkeypatch.setattr(docker_run.subprocess, "run", fake_run)
+    monkeypatch.setattr(docker.subprocess, "run", fake_run)
 
-    with pytest.raises(docker_run.DockerRunError, match="Docker Buildx is required"):
-        docker_run.build_image()
+    with pytest.raises(DockerRunError, match="Docker Buildx is required"):
+        docker.build_image()
 
 
 def test_build_image_uses_buildx_load(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -240,16 +242,16 @@ def test_build_image_uses_buildx_load(monkeypatch: pytest.MonkeyPatch) -> None:
         commands.append(command)
         return subprocess.CompletedProcess(command, 0, "buildx version\n", "")
 
-    monkeypatch.setattr(docker_run.subprocess, "run", fake_run)
+    monkeypatch.setattr(docker.subprocess, "run", fake_run)
 
-    docker_run.build_image()
+    docker.build_image()
 
     assert commands[0] == ["docker", "buildx", "version"]
     assert commands[1][:4] == ["docker", "buildx", "build", "--load"]
     assert commands[1][commands[1].index("-f") + 1] == str(
-        docker_run.DEFAULT_DOCKERFILE
+        docker.DEFAULT_DOCKERFILE
     )
-    assert commands[1][commands[1].index("-t") + 1] == docker_run.DEFAULT_IMAGE
+    assert commands[1][commands[1].index("-t") + 1] == docker.DEFAULT_IMAGE
 
 
 def test_prepare_run_dir_creates_generated_child_under_output_root(
@@ -258,12 +260,12 @@ def test_prepare_run_dir_creates_generated_child_under_output_root(
     input_dir = tmp_path / "sample-project"
     output_root = tmp_path / "runs"
     input_dir.mkdir()
-    run_dir = output_root / docker_run.build_run_id(
+    run_dir = output_root / staging.build_run_id(
         input_dir=input_dir,
         agent_name="claude-code",
     )
 
-    docker_run.prepare_run_dir(run_dir, input_dir=input_dir)
+    staging.prepare_run_dir(run_dir, input_dir=input_dir)
 
     assert run_dir.parent == output_root
     assert run_dir.name.endswith("__claude-code__sample-project")
@@ -274,8 +276,8 @@ def test_default_output_root_is_project_runs(tmp_path: Path) -> None:
     input_dir = tmp_path / "sample-project"
     input_dir.mkdir()
 
-    assert docker_run.default_output_root(input_dir=input_dir) == (
-        docker_run.PROJECT_ROOT / "runs"
+    assert staging.default_output_root(input_dir=input_dir) == (
+        paths.PROJECT_ROOT / "runs"
     )
 
 
@@ -283,12 +285,12 @@ def test_run_id_uses_unique_field_delimiter(tmp_path: Path) -> None:
     input_dir = tmp_path / "sample_project"
     input_dir.mkdir()
 
-    run_id = docker_run.build_run_id(
+    run_id = staging.build_run_id(
         input_dir=input_dir,
         agent_name="claude-code",
     )
 
-    parts = run_id.split(docker_run.RUN_ID_DELIMITER)
+    parts = run_id.split(staging.RUN_ID_DELIMITER)
     assert len(parts) == 3
     assert parts[1] == "claude-code"
     assert parts[2] == "sample-project"
@@ -304,8 +306,8 @@ def test_prepare_run_dir_rejects_existing_run_dir_without_deleting(
     marker = run_dir / "marker.txt"
     marker.write_text("keep\n", encoding="utf-8")
 
-    with pytest.raises(docker_run.DockerRunError, match="already exists"):
-        docker_run.prepare_run_dir(run_dir, input_dir=input_dir)
+    with pytest.raises(DockerRunError, match="already exists"):
+        staging.prepare_run_dir(run_dir, input_dir=input_dir)
 
     assert marker.read_text(encoding="utf-8") == "keep\n"
 
@@ -318,14 +320,14 @@ def test_prepare_run_dir_rejects_output_root_inside_input_dir(
     run_dir = (
         input_dir
         / "runs"
-        / docker_run.build_run_id(
+        / staging.build_run_id(
             input_dir=input_dir,
             agent_name="claude-code",
         )
     )
 
-    with pytest.raises(docker_run.DockerRunError, match="must not be inside"):
-        docker_run.prepare_run_dir(run_dir, input_dir=input_dir)
+    with pytest.raises(DockerRunError, match="must not be inside"):
+        staging.prepare_run_dir(run_dir, input_dir=input_dir)
 
 
 def test_clear_tests_sanitizes_history_and_preserves_patch_sequence(
@@ -338,7 +340,7 @@ def test_clear_tests_sanitizes_history_and_preserves_patch_sequence(
     shutil.copytree(staged_repo, apply_repo)
     output_dir.mkdir()
 
-    preprocessing = docker_run.preprocess_staged_input(
+    preprocessing = preprocess.preprocess_staged_input(
         args=argparse.Namespace(reset_git=False, clear_tests=True),
         staged_input=staged_repo,
         output_dir=output_dir,
@@ -369,7 +371,7 @@ def test_clear_tests_sanitizes_history_and_preserves_patch_sequence(
         staged_repo / "src/test/java/example/AppTest.java",
         "class AppTest { void generated() {} }\n",
     )
-    docker_run.collect_git_artifacts(staged_repo, output_dir)
+    staging.collect_git_artifacts(staged_repo, output_dir)
     assert "class AppTest { void generated() {} }" in (
         output_dir / "git_diff.patch"
     ).read_text(encoding="utf-8")
@@ -423,7 +425,7 @@ def test_inject_rest_assured_lands_in_baseline_not_agent_diff(tmp_path: Path) ->
         },
     }
 
-    preprocessing = docker_run.preprocess_staged_input(
+    preprocessing = preprocess.preprocess_staged_input(
         args=argparse.Namespace(
             reset_git=False, clear_tests=True, inject_rest_assured=True
         ),
@@ -442,7 +444,7 @@ def test_inject_rest_assured_lands_in_baseline_not_agent_diff(tmp_path: Path) ->
 
     # The agent adds a test; the resulting agent diff must not include the POM edit.
     write_file(staged / "src/test/java/example/ApiIT.java", "class ApiIT {}\n")
-    docker_run.collect_git_artifacts(staged, output_dir)
+    staging.collect_git_artifacts(staged, output_dir)
     diff = (output_dir / "git_diff.patch").read_text(encoding="utf-8")
     assert "ApiIT.java" in diff
     assert "pom.xml" not in diff
@@ -454,7 +456,7 @@ def test_inject_rest_assured_skipped_when_service_lacks_config(tmp_path: Path) -
     init_repo_with_pom(staged)
     output_dir.mkdir()
 
-    preprocessing = docker_run.preprocess_staged_input(
+    preprocessing = preprocess.preprocess_staged_input(
         args=argparse.Namespace(
             reset_git=False, clear_tests=False, inject_rest_assured=True
         ),
@@ -509,11 +511,11 @@ def test_reset_git_uses_source_superproject_pin_after_staging(tmp_path: Path) ->
     staged_input = tmp_path / "staged"
     output_dir = tmp_path / "output"
     output_dir.mkdir()
-    docker_run.stage_input(submodule, staged_input)
+    staging.stage_input(submodule, staged_input)
 
     assert git_output(["rev-parse", "HEAD"], cwd=staged_input) == commit_b
 
-    preprocessing = docker_run.preprocess_staged_input(
+    preprocessing = preprocess.preprocess_staged_input(
         args=argparse.Namespace(reset_git=True, clear_tests=False),
         staged_input=staged_input,
         output_dir=output_dir,

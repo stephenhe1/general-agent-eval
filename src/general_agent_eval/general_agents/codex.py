@@ -128,7 +128,7 @@ def print_notification(notification: object) -> None:
 def synthesize_result_record(
     final_turn: object, token_usage: object, *, final_response: str | None
 ) -> dict[str, Any]:
-    """Trailing JSONL record docker_run detects (it keys on duration_ms)."""
+    """Trailing JSONL record the orchestration manifest detects (keys on duration_ms)."""
     status = getattr(final_turn, "status", None)
     status_str = getattr(status, "value", status)
     error = getattr(final_turn, "error", None)
