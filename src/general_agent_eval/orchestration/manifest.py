@@ -156,6 +156,7 @@ def sanitized_manifest(
         },
         "agent_options": {
             "model": args.model,
+            "small_model": getattr(args, "small_model", None),
             "permission_mode": args.permission_mode,
             "sandbox": getattr(args, "sandbox", None),
             "system_prompt_config": args.system_prompt_config,

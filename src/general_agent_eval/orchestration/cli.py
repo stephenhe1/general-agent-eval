@@ -81,6 +81,7 @@ def validate_agent_options(args: argparse.Namespace) -> None:
             "--auth-token-env": args.auth_token_env is not None,
             "--oauth-token-env": args.oauth_token_env is not None,
             "--max-budget-usd": args.max_budget_usd is not None,
+            "--small-model": args.small_model is not None,
             "--extra-arg": bool(args.extra_arg),
         },
         "codex": {
@@ -219,6 +220,17 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Model value passed through to the selected agent. Defaults to "
             "'sonnet' for claude-code; required for the codex agent."
+        ),
+    )
+    parser.add_argument(
+        "--small-model",
+        default=None,
+        help=(
+            "Override Claude Code's small/fast model via ANTHROPIC_SMALL_FAST_MODEL "
+            "(claude-code agent only). This model only handles auxiliary background "
+            "work (conversation titles, summaries, topic detection), never the main "
+            "loop or subagents, and defaults to Haiku 4.5 when unset. Rejected for "
+            "codex."
         ),
     )
     parser.add_argument(

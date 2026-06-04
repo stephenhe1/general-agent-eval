@@ -175,6 +175,11 @@ def build_system_prompt(
 def build_agent_env(args: argparse.Namespace) -> dict[str, str]:
     env_values = parse_env_values(args.env)
 
+    if args.small_model:
+        # Pin Claude Code's auxiliary small/fast model (defaults to Haiku 4.5); the
+        # dedicated flag wins over any --env of the same key.
+        env_values["ANTHROPIC_SMALL_FAST_MODEL"] = args.small_model
+
     if args.base_url:
         env_values["ANTHROPIC_BASE_URL"] = args.base_url
         env_values.setdefault("ANTHROPIC_CUSTOM_MODEL_OPTION", args.model)
@@ -390,6 +395,15 @@ def build_parser() -> argparse.ArgumentParser:
         "--model",
         default="sonnet",
         help="Claude Code model alias, Anthropic model ID, or gateway model ID.",
+    )
+    parser.add_argument(
+        "--small-model",
+        help=(
+            "Override Claude Code's small/fast model via ANTHROPIC_SMALL_FAST_MODEL. "
+            "This model only handles auxiliary background work (conversation titles, "
+            "summaries, topic detection), never the main agent loop or subagents, and "
+            "defaults to Haiku 4.5 when unset."
+        ),
     )
     parser.add_argument(
         "--permission-mode",

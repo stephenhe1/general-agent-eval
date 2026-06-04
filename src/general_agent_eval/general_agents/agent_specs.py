@@ -12,6 +12,8 @@ class AgentRunRequest:
     permission_mode: str
     system_prompt_config: str
     base_url: str | None = None
+    # Claude Code small/fast model override; ignored by the codex agent.
+    small_model: str | None = None
     api_key_env: str | None = None
     auth_token_env: str | None = None
     oauth_token_env: str | None = None
@@ -64,6 +66,7 @@ def build_claude_code_command(request: AgentRunRequest) -> list[str]:
     ]
     _append_optional(command, "--system-template", request.system_template)
     _append_optional(command, "--chat-template", request.chat_template)
+    _append_optional(command, "--small-model", request.small_model)
     _append_optional(command, "--base-url", request.base_url)
     _append_optional(command, "--api-key-env", request.api_key_env)
     _append_optional(command, "--auth-token-env", request.auth_token_env)

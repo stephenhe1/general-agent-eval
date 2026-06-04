@@ -224,6 +224,7 @@ def _docker_args(*extra: str) -> object:
         ["--permission-mode", "plan"],
         ["--auth-token-env", "ANTHROPIC_AUTH_TOKEN"],
         ["--oauth-token-env", "CLAUDE_CODE_OAUTH_TOKEN"],
+        ["--small-model", "haiku"],
         ["--extra-arg=--foo"],
     ],
 )

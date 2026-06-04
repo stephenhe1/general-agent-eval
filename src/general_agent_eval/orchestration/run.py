@@ -84,6 +84,7 @@ def build_agent_request(
         permission_mode=args.permission_mode,
         system_prompt_config=args.system_prompt_config,
         base_url=args.base_url,
+        small_model=getattr(args, "small_model", None),
         api_key_env=args.api_key_env,
         auth_token_env=args.auth_token_env,
         oauth_token_env=args.oauth_token_env,

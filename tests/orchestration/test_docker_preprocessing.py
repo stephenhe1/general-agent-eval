@@ -122,6 +122,7 @@ def test_claude_code_env_maps_oauth_token_env(
         env=[],
         base_url=None,
         model="sonnet",
+        small_model=None,
         api_key_env=None,
         auth_token_env=None,
         oauth_token_env="HOST_CLAUDE_OAUTH",
@@ -140,6 +141,7 @@ def test_claude_code_env_base_url_disables_experimental_betas() -> None:
         env=[],
         base_url="http://localhost:4000",
         model="sonnet",
+        small_model=None,
         api_key_env=None,
         auth_token_env=None,
         oauth_token_env=None,
@@ -160,6 +162,7 @@ def test_claude_code_env_base_url_betas_override_wins() -> None:
         env=["CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=0"],
         base_url="http://localhost:4000",
         model="sonnet",
+        small_model=None,
         api_key_env=None,
         auth_token_env=None,
         oauth_token_env=None,
@@ -178,6 +181,7 @@ def test_claude_code_env_no_base_url_omits_experimental_betas() -> None:
         env=[],
         base_url=None,
         model="sonnet",
+        small_model=None,
         api_key_env=None,
         auth_token_env=None,
         oauth_token_env=None,
@@ -189,6 +193,68 @@ def test_claude_code_env_no_base_url_omits_experimental_betas() -> None:
     assert "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS" not in claude_code.build_agent_env(
         args
     )
+
+
+def _small_model_args(**overrides: object) -> argparse.Namespace:
+    base: dict[str, object] = dict(
+        env=[],
+        base_url=None,
+        model="sonnet",
+        small_model=None,
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        api_key=None,
+        auth_token=None,
+        custom_header=[],
+    )
+    base.update(overrides)
+    return argparse.Namespace(**base)
+
+
+def test_claude_code_env_maps_small_model() -> None:
+    env = claude_code.build_agent_env(_small_model_args(small_model="haiku"))
+
+    assert env["ANTHROPIC_SMALL_FAST_MODEL"] == "haiku"
+
+
+def test_claude_code_env_no_small_model_omits_small_fast_model() -> None:
+    assert "ANTHROPIC_SMALL_FAST_MODEL" not in claude_code.build_agent_env(
+        _small_model_args()
+    )
+
+
+def test_claude_code_small_model_overrides_env() -> None:
+    # The dedicated flag wins over an --env of the same key.
+    env = claude_code.build_agent_env(
+        _small_model_args(
+            small_model="haiku", env=["ANTHROPIC_SMALL_FAST_MODEL=opus"]
+        )
+    )
+
+    assert env["ANTHROPIC_SMALL_FAST_MODEL"] == "haiku"
+
+
+def test_claude_code_command_forwards_small_model() -> None:
+    args = argparse.Namespace(
+        model="sonnet",
+        small_model="haiku",
+        permission_mode="auto",
+        system_prompt_config="append",
+        base_url=None,
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        max_turns=None,
+        max_budget_usd=None,
+        reset_git=False,
+        env=[],
+        extra_arg=[],
+    )
+
+    command = build_claude_code_command(build_agent_request(args))
+
+    assert command[command.index("--small-model") + 1] == "haiku"
 
 
 @pytest.mark.parametrize(

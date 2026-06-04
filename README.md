@@ -37,6 +37,12 @@ The runner denies `WebSearch` and `WebFetch`, sets the input directory as the
 agent working directory, defaults Claude Code to `bypassPermissions`, and
 renders the packaged prompt templates from `src/general_agent_eval/prompts/`.
 
+`--small-model` overrides Claude Code's small/fast model (mapped to
+`ANTHROPIC_SMALL_FAST_MODEL`). That model only handles auxiliary background work
+— conversation titles, summaries, topic detection — never the main agent loop or
+subagents, and defaults to Haiku 4.5 when unset. Set it (e.g. to `--model`'s
+value) to keep a run on a single model or to pin a gateway-specific model ID.
+
 When `--base-url` is set (a custom/non-Anthropic gateway), the runner defaults
 `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1` so Claude Code stops sending
 `anthropic-beta` headers the gateway would reject. Pass
@@ -103,8 +109,8 @@ uv run general-agent-eval-docker-run \
 
 Options that apply to a single agent are rejected (rather than silently dropped)
 when passed for the other agent: `--permission-mode`, `--auth-token-env`,
-`--oauth-token-env`, `--max-budget-usd`, and `--extra-arg` are claude-code only,
-while `--sandbox` is codex only. Shared options (`--model`,
+`--oauth-token-env`, `--max-budget-usd`, `--small-model`, and `--extra-arg` are
+claude-code only, while `--sandbox` is codex only. Shared options (`--model`,
 `--system-prompt-config`, `--system-template`, `--chat-template`,
 `--prompt-var`, `--base-url`, `--api-key-env`, `--env`) work for both.
 
