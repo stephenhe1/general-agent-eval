@@ -10,7 +10,7 @@ from typing import Any
 
 from general_agent_eval.general_agents.agent_specs import AGENT_SPECS
 from general_agent_eval.orchestration.cli import parse_key_value_key
-from general_agent_eval.orchestration.docker import DEFAULT_DOCKERFILE, DEFAULT_IMAGE
+from general_agent_eval.orchestration.docker import ImageConfig
 from general_agent_eval.orchestration.services import resolve_service_manifest_path
 
 AGENT_RESULT_SUMMARY_KEYS = (
@@ -111,6 +111,7 @@ def sanitized_manifest(
     staging_method: str,
     host_env_names: tuple[str, ...],
     preprocessing: dict[str, Any],
+    image_config: ImageConfig,
     service: dict[str, Any] | None = None,
     service_scripts_dir: Path | None = None,
 ) -> dict[str, Any]:
@@ -135,8 +136,10 @@ def sanitized_manifest(
         "staging_method": staging_method,
         "preprocessing": preprocessing,
         "docker": {
-            "image": DEFAULT_IMAGE,
-            "dockerfile": str(DEFAULT_DOCKERFILE),
+            "image": image_config.image,
+            # Null when a pre-built or pre-existing image ran: its Dockerfile is unknown.
+            "dockerfile": str(image_config.dockerfile) if image_config.build else None,
+            "image_built": image_config.build,
             "network": args.network,
             "memory": args.memory,
             "cpus": args.cpus,

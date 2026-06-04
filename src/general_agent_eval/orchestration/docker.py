@@ -24,6 +24,37 @@ CONTAINER_TEMPLATES_DIR = "/workspace/templates"
 
 
 @dataclass(frozen=True)
+class ImageConfig:
+    """Effective runtime image: what to run, and whether/what to build first."""
+
+    image: str
+    dockerfile: Path
+    build: bool
+
+
+def resolve_image_config(args: argparse.Namespace) -> ImageConfig:
+    """--dockerfile picks what to build, --image what to run (and the build tag).
+    --image alone names a pre-built image, so the build is skipped entirely."""
+    image = getattr(args, "image", None)
+    dockerfile = getattr(args, "dockerfile", None)
+    if dockerfile is not None:
+        if args.skip_build:
+            raise DockerRunError(
+                "--skip-build conflicts with --dockerfile; pass --image to run a "
+                "previously built image instead"
+            )
+        dockerfile = dockerfile.expanduser().resolve()
+        if not dockerfile.is_file():
+            raise DockerRunError(f"--dockerfile is not a file: {dockerfile}")
+    build = not args.skip_build and (dockerfile is not None or image is None)
+    return ImageConfig(
+        image=image or DEFAULT_IMAGE,
+        dockerfile=dockerfile or DEFAULT_DOCKERFILE,
+        build=build,
+    )
+
+
+@dataclass(frozen=True)
 class TemplateMount:
     """A custom prompt template bind-mounted read-only into the container."""
 
@@ -58,9 +89,11 @@ def resolve_template_mounts(args: argparse.Namespace) -> tuple[TemplateMount, ..
     return tuple(mounts)
 
 
-def build_image() -> None:
-    if not DEFAULT_DOCKERFILE.is_file():
-        raise DockerRunError(f"Default Dockerfile is not a file: {DEFAULT_DOCKERFILE}")
+def build_image(
+    *, dockerfile: Path = DEFAULT_DOCKERFILE, image: str = DEFAULT_IMAGE
+) -> None:
+    if not dockerfile.is_file():
+        raise DockerRunError(f"Dockerfile is not a file: {dockerfile}")
 
     buildx_check = subprocess.run(
         ["docker", "buildx", "version"],
@@ -79,20 +112,25 @@ def build_image() -> None:
 
     uid = getattr(os, "getuid", lambda: 1000)()
     gid = getattr(os, "getgid", lambda: 1000)()
+    # The packaged Dockerfile COPYs this project, so it builds from PROJECT_ROOT;
+    # a custom Dockerfile builds from its own directory, like `docker build <dir>`.
+    build_context = (
+        PROJECT_ROOT if dockerfile == DEFAULT_DOCKERFILE else dockerfile.parent
+    )
     command = [
         "docker",
         "buildx",
         "build",
         "--load",
         "-f",
-        str(DEFAULT_DOCKERFILE),
+        str(dockerfile),
         "-t",
-        DEFAULT_IMAGE,
+        image,
         "--build-arg",
         f"AGENT_UID={uid}",
         "--build-arg",
         f"AGENT_GID={gid}",
-        str(PROJECT_ROOT),
+        str(build_context),
     ]
     subprocess.run(command, check=True)
 
@@ -106,6 +144,7 @@ def build_docker_command(
     host_env_names: tuple[str, ...],
     service: dict[str, Any] | None = None,
     service_scripts_dir: Path | None = None,
+    image: str = DEFAULT_IMAGE,
     template_mounts: tuple[TemplateMount, ...] = (),
 ) -> list[str]:
     command = [
@@ -147,7 +186,7 @@ def build_docker_command(
             f"{staged_input}:{CONTAINER_INPUT_DIR}:rw",
             "-v",
             f"{output_dir}:{CONTAINER_OUTPUT_DIR}:rw",
-            DEFAULT_IMAGE,
+            image,
         ]
     )
     if service is not None:

@@ -425,7 +425,9 @@ def test_build_docker_command_no_service_appends_agent_directly() -> None:
     assert "run-with-service.sh" not in " ".join(command)
 
 
-def test_build_docker_command_mounts_templates(tmp_path: Path) -> None:
+def test_build_docker_command_mounts_templates_and_custom_image(
+    tmp_path: Path,
+) -> None:
     system = tmp_path / "system.jinja2"
     system.write_text("system prompt", encoding="utf-8")
     mounts = docker.resolve_template_mounts(
@@ -439,10 +441,13 @@ def test_build_docker_command_mounts_templates(tmp_path: Path) -> None:
         agent_command=["python", "-m", "agent"],
         host_env_names=(),
         service=None,
+        image="custom:1.0",
         template_mounts=mounts,
     )
 
     assert f"{tmp_path}:{docker.CONTAINER_TEMPLATES_DIR}/system:ro" in command
+    assert "custom:1.0" in command
+    assert docker.DEFAULT_IMAGE not in command
 
 
 def test_docker_parser_accepts_service_options() -> None:
@@ -489,16 +494,46 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
         staging_method="copytree",
         host_env_names=(),
         preprocessing={},
+        image_config=docker.ImageConfig(
+            image=docker.DEFAULT_IMAGE,
+            dockerfile=docker.DEFAULT_DOCKERFILE,
+            build=True,
+        ),
         service=svc,
         service_scripts_dir=scripts_dir,
     )
     assert manifest["service"] == svc
     assert manifest["service_manifest"] == str(manifest_path.resolve())
     assert manifest["service_scripts_dir"] == str(scripts_dir)
+    assert manifest["docker"]["image"] == docker.DEFAULT_IMAGE
+    assert manifest["docker"]["dockerfile"] == str(docker.DEFAULT_DOCKERFILE)
+    assert manifest["docker"]["image_built"] is True
     # No template/prompt-var overrides in this run.
     assert manifest["agent_options"]["system_template"] is None
     assert manifest["agent_options"]["chat_template"] is None
     assert manifest["agent_options"]["prompt_vars"] == []
+
+
+def test_sanitized_manifest_prebuilt_image_has_no_dockerfile(tmp_path: Path) -> None:
+    args = _docker_command_args(agent="claude-code", clear_tests=False, skip_build=False)
+    manifest = sanitized_manifest(
+        args=args,
+        input_dir=Path("/tmp/in"),
+        run_dir=Path("/tmp/run"),
+        staged_input=Path("/tmp/run/input"),
+        output_dir=Path("/tmp/run/output"),
+        staging_method="copytree",
+        host_env_names=(),
+        preprocessing={},
+        image_config=docker.ImageConfig(
+            image="custom:1.0",
+            dockerfile=docker.DEFAULT_DOCKERFILE,
+            build=False,
+        ),
+    )
+    assert manifest["docker"]["image"] == "custom:1.0"
+    assert manifest["docker"]["dockerfile"] is None
+    assert manifest["docker"]["image_built"] is False
 
 
 def test_collect_agent_result_summary_reads_compact_result(tmp_path: Path) -> None:

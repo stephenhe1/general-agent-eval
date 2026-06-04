@@ -175,6 +175,23 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run the existing image without building it first.",
     )
     parser.add_argument(
+        "--image",
+        help=(
+            "Docker image to run. With --dockerfile it is the tag for the built "
+            "image; alone it names a pre-built image and skips the build. "
+            "Defaults to the packaged image."
+        ),
+    )
+    parser.add_argument(
+        "--dockerfile",
+        type=Path,
+        help=(
+            "Custom Dockerfile to build the runtime image from (build context is "
+            "its directory). Defaults to the packaged Java-toolchain Dockerfile. "
+            "Conflicts with --skip-build."
+        ),
+    )
+    parser.add_argument(
         "--network",
         default="bridge",
         help="Docker network mode. Use none only for non-networked smoke runs.",

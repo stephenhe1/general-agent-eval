@@ -196,8 +196,6 @@ def test_claude_code_env_no_base_url_omits_experimental_betas() -> None:
     [
         "--custom-header",
         "--agent-arg",
-        "--image",
-        "--dockerfile",
         "--system-mode",
         "--var",
     ],
@@ -209,7 +207,7 @@ def test_docker_parser_rejects_removed_forwarding_args(removed_arg: str) -> None
         parser.parse_args(["--input-dir", "/tmp/project", removed_arg, "value"])
 
 
-def test_docker_parser_accepts_template_options() -> None:
+def test_docker_parser_accepts_template_and_image_options() -> None:
     parser = cli.build_parser()
     args = parser.parse_args(
         [
@@ -218,11 +216,15 @@ def test_docker_parser_accepts_template_options() -> None:
             "--chat-template", "/tmp/chat.jinja2",
             "--prompt-var", "task=summarize",
             "--prompt-var", "depth=full",
+            "--image", "custom:1.0",
+            "--dockerfile", "/tmp/Dockerfile.custom",
         ]
     )
     assert args.system_template == Path("/tmp/system.jinja2")
     assert args.chat_template == Path("/tmp/chat.jinja2")
     assert args.prompt_var == ["task=summarize", "depth=full"]
+    assert args.image == "custom:1.0"
+    assert args.dockerfile == Path("/tmp/Dockerfile.custom")
 
 
 def test_validate_agent_values_rejects_reserved_prompt_var() -> None:
@@ -282,6 +284,95 @@ def test_build_image_uses_buildx_load(monkeypatch: pytest.MonkeyPatch) -> None:
         docker.DEFAULT_DOCKERFILE
     )
     assert commands[1][commands[1].index("-t") + 1] == docker.DEFAULT_IMAGE
+
+
+def test_build_image_custom_dockerfile_uses_its_dir_as_context(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    dockerfile = tmp_path / "Dockerfile.custom"
+    dockerfile.write_text("FROM scratch\n", encoding="utf-8")
+    commands: list[list[str]] = []
+
+    def fake_run(
+        command: list[str],
+        **kwargs: object,
+    ) -> subprocess.CompletedProcess[str]:
+        commands.append(command)
+        return subprocess.CompletedProcess(command, 0, "buildx version\n", "")
+
+    monkeypatch.setattr(docker.subprocess, "run", fake_run)
+
+    docker.build_image(dockerfile=dockerfile, image="custom:1.0")
+
+    build = commands[1]
+    assert build[build.index("-f") + 1] == str(dockerfile)
+    assert build[build.index("-t") + 1] == "custom:1.0"
+    assert build[-1] == str(tmp_path)
+
+
+def image_args(**overrides: object) -> argparse.Namespace:
+    base: dict[str, object] = dict(image=None, dockerfile=None, skip_build=False)
+    base.update(overrides)
+    return argparse.Namespace(**base)
+
+
+def test_resolve_image_config_defaults_build_packaged_image() -> None:
+    assert docker.resolve_image_config(image_args()) == docker.ImageConfig(
+        image=docker.DEFAULT_IMAGE, dockerfile=docker.DEFAULT_DOCKERFILE, build=True
+    )
+
+
+def test_resolve_image_config_skip_build_keeps_default_image() -> None:
+    config = docker.resolve_image_config(image_args(skip_build=True))
+    assert config.image == docker.DEFAULT_IMAGE
+    assert config.build is False
+
+
+def test_resolve_image_config_image_alone_runs_prebuilt() -> None:
+    config = docker.resolve_image_config(image_args(image="custom:1.0"))
+    assert config.image == "custom:1.0"
+    assert config.build is False
+
+
+def test_resolve_image_config_dockerfile_builds_default_tag(tmp_path: Path) -> None:
+    dockerfile = tmp_path / "Dockerfile.custom"
+    dockerfile.write_text("FROM scratch\n", encoding="utf-8")
+
+    config = docker.resolve_image_config(image_args(dockerfile=dockerfile))
+
+    assert config == docker.ImageConfig(
+        image=docker.DEFAULT_IMAGE, dockerfile=dockerfile, build=True
+    )
+
+
+def test_resolve_image_config_dockerfile_with_image_builds_custom_tag(
+    tmp_path: Path,
+) -> None:
+    dockerfile = tmp_path / "Dockerfile.custom"
+    dockerfile.write_text("FROM scratch\n", encoding="utf-8")
+
+    config = docker.resolve_image_config(
+        image_args(dockerfile=dockerfile, image="custom:1.0")
+    )
+
+    assert config == docker.ImageConfig(
+        image="custom:1.0", dockerfile=dockerfile, build=True
+    )
+
+
+def test_resolve_image_config_rejects_skip_build_with_dockerfile(
+    tmp_path: Path,
+) -> None:
+    dockerfile = tmp_path / "Dockerfile.custom"
+    dockerfile.write_text("FROM scratch\n", encoding="utf-8")
+
+    with pytest.raises(DockerRunError, match="conflicts"):
+        docker.resolve_image_config(image_args(dockerfile=dockerfile, skip_build=True))
+
+
+def test_resolve_image_config_rejects_missing_dockerfile(tmp_path: Path) -> None:
+    with pytest.raises(DockerRunError, match="not a file"):
+        docker.resolve_image_config(image_args(dockerfile=tmp_path / "missing"))
 
 
 def template_args(**overrides: object) -> argparse.Namespace:

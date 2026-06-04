@@ -118,6 +118,29 @@ context (`input_dir`, `model`, ...) are rejected up front, as are keys the
 orchestrator derives from `--service` (`service_base_url`, ...), since
 overriding those would desync the prompt from the live service.
 
+### Custom runtime images
+
+By default every run builds the packaged Java-toolchain Dockerfile and runs the
+resulting `general-agent-eval-agent:latest`. Two flags override that:
+
+- `--dockerfile PATH` selects what to build. The build context is the
+  Dockerfile's own directory, and the image is tagged with `--image` (or the
+  default tag when omitted). Conflicts with `--skip-build`.
+- `--image NAME` selects what to run. Alone it names a pre-built image (e.g.
+  from a registry or an earlier `--dockerfile` build) and skips the build
+  entirely; with `--dockerfile` it is the tag for the fresh build.
+
+A custom image must satisfy the runtime contract the orchestrator assumes: a
+non-root user whose UID/GID match the host user (staged input and output are
+bind-mounted read-write), `bash` and `git` on PATH, the agent tooling for the
+selected agent (the `claude` CLI for claude-code; the codex binary ships inside
+the `openai-codex-cli-bin` wheel), and Python 3.11+ with this project's
+dependencies importable plus `PYTHONPATH=/app/src` — the repository itself is
+mounted read-only at `/app` and the agent entrypoint is
+`python -m general_agent_eval.general_agents.<agent>`. The
+`manifest.json` `docker` block records the effective image, whether it was
+built, and the Dockerfile used (null when a pre-built image ran).
+
 Runs are written under `runs/<timestamp>__<agent>__<project>` by default. Pass
 `--output-dir` to choose a different parent directory. After completion,
 `manifest.json` includes a compact `agent_result` summary with cost, duration,
