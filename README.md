@@ -103,7 +103,20 @@ Options that apply to a single agent are rejected (rather than silently dropped)
 when passed for the other agent: `--permission-mode`, `--auth-token-env`,
 `--oauth-token-env`, `--max-budget-usd`, and `--extra-arg` are claude-code only,
 while `--sandbox` is codex only. Shared options (`--model`,
-`--system-prompt-config`, `--base-url`, `--api-key-env`, `--env`) work for both.
+`--system-prompt-config`, `--system-template`, `--chat-template`,
+`--prompt-var`, `--base-url`, `--api-key-env`, `--env`) work for both.
+
+### Custom prompts
+
+The Docker runner forwards the same prompt controls as the standalone runners.
+`--system-template` and `--chat-template` take host paths to Jinja2 templates;
+each template's directory is bind-mounted read-only into the container, so
+`{% include %}` of sibling templates keeps resolving. `--prompt-var KEY=VALUE`
+(repeatable) injects extra template variables. Without these flags the packaged
+Java test-generation prompts are used, as before. Keys reserved by the template
+context (`input_dir`, `model`, ...) are rejected up front, as are keys the
+orchestrator derives from `--service` (`service_base_url`, ...), since
+overriding those would desync the prompt from the live service.
 
 Runs are written under `runs/<timestamp>__<agent>__<project>` by default. Pass
 `--output-dir` to choose a different parent directory. After completion,

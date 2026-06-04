@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import os
 import subprocess
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +20,42 @@ CONTAINER_APP_DIR = "/app"
 CONTAINER_INPUT_DIR = "/workspace/input"
 CONTAINER_OUTPUT_DIR = "/workspace/output"
 CONTAINER_SERVICE_SCRIPTS_DIR = "/workspace/service-scripts"
+CONTAINER_TEMPLATES_DIR = "/workspace/templates"
+
+
+@dataclass(frozen=True)
+class TemplateMount:
+    """A custom prompt template bind-mounted read-only into the container."""
+
+    role: str  # "system" or "chat"
+    host_path: Path
+    container_dir: str
+    container_path: str
+
+
+def resolve_template_mounts(args: argparse.Namespace) -> tuple[TemplateMount, ...]:
+    mounts: list[TemplateMount] = []
+    for role, raw_path in (
+        ("system", getattr(args, "system_template", None)),
+        ("chat", getattr(args, "chat_template", None)),
+    ):
+        if raw_path is None:
+            continue
+        host_path = raw_path.expanduser().resolve()
+        if not host_path.is_file():
+            raise DockerRunError(f"--{role}-template is not a file: {raw_path}")
+        # The parent directory is mounted (not just the file) so Jinja includes of
+        # sibling templates keep resolving inside the container.
+        container_dir = f"{CONTAINER_TEMPLATES_DIR}/{role}"
+        mounts.append(
+            TemplateMount(
+                role=role,
+                host_path=host_path,
+                container_dir=container_dir,
+                container_path=f"{container_dir}/{host_path.name}",
+            )
+        )
+    return tuple(mounts)
 
 
 def build_image() -> None:
@@ -69,6 +106,7 @@ def build_docker_command(
     host_env_names: tuple[str, ...],
     service: dict[str, Any] | None = None,
     service_scripts_dir: Path | None = None,
+    template_mounts: tuple[TemplateMount, ...] = (),
 ) -> list[str]:
     command = [
         "docker",
@@ -101,6 +139,8 @@ def build_docker_command(
                 f"{service_scripts_dir}:{CONTAINER_SERVICE_SCRIPTS_DIR}:ro",
             ]
         )
+    for mount in template_mounts:
+        command.extend(["-v", f"{mount.host_path.parent}:{mount.container_dir}:ro"])
     command.extend(
         [
             "-v",

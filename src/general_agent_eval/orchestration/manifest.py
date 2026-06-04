@@ -117,6 +117,8 @@ def sanitized_manifest(
     service_manifest = None
     if service is not None:
         service_manifest = str(resolve_service_manifest_path(args))
+    system_template = getattr(args, "system_template", None)
+    chat_template = getattr(args, "chat_template", None)
     return {
         "created_at": dt.datetime.now(dt.UTC).isoformat(),
         "service": service,
@@ -146,6 +148,10 @@ def sanitized_manifest(
             "permission_mode": args.permission_mode,
             "sandbox": getattr(args, "sandbox", None),
             "system_prompt_config": args.system_prompt_config,
+            # Host paths; null means the packaged template was used.
+            "system_template": str(system_template) if system_template else None,
+            "chat_template": str(chat_template) if chat_template else None,
+            "prompt_vars": list(getattr(args, "prompt_var", [])),
             "base_url": args.base_url,
             "api_key_env": args.api_key_env,
             "auth_token_env": args.auth_token_env,

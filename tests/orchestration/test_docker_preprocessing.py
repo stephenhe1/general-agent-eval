@@ -209,6 +209,36 @@ def test_docker_parser_rejects_removed_forwarding_args(removed_arg: str) -> None
         parser.parse_args(["--input-dir", "/tmp/project", removed_arg, "value"])
 
 
+def test_docker_parser_accepts_template_options() -> None:
+    parser = cli.build_parser()
+    args = parser.parse_args(
+        [
+            "--input-dir", "/tmp/project",
+            "--system-template", "/tmp/system.jinja2",
+            "--chat-template", "/tmp/chat.jinja2",
+            "--prompt-var", "task=summarize",
+            "--prompt-var", "depth=full",
+        ]
+    )
+    assert args.system_template == Path("/tmp/system.jinja2")
+    assert args.chat_template == Path("/tmp/chat.jinja2")
+    assert args.prompt_var == ["task=summarize", "depth=full"]
+
+
+def test_validate_agent_values_rejects_reserved_prompt_var() -> None:
+    args = argparse.Namespace(env=[], prompt_var=["model=opus"])
+
+    with pytest.raises(DockerRunError, match="reserved"):
+        cli.validate_agent_values(args)
+
+
+def test_validate_agent_values_rejects_malformed_prompt_var() -> None:
+    args = argparse.Namespace(env=[], prompt_var=["novalue"])
+
+    with pytest.raises(DockerRunError, match="KEY=VALUE"):
+        cli.validate_agent_values(args)
+
+
 def test_claude_code_parser_rejects_removed_var_arg() -> None:
     parser = claude_code.build_parser()
 
@@ -252,6 +282,77 @@ def test_build_image_uses_buildx_load(monkeypatch: pytest.MonkeyPatch) -> None:
         docker.DEFAULT_DOCKERFILE
     )
     assert commands[1][commands[1].index("-t") + 1] == docker.DEFAULT_IMAGE
+
+
+def template_args(**overrides: object) -> argparse.Namespace:
+    base: dict[str, object] = dict(system_template=None, chat_template=None)
+    base.update(overrides)
+    return argparse.Namespace(**base)
+
+
+def test_resolve_template_mounts_empty_without_overrides() -> None:
+    assert docker.resolve_template_mounts(template_args()) == ()
+
+
+def test_resolve_template_mounts_maps_container_paths(tmp_path: Path) -> None:
+    system = tmp_path / "sys" / "system.jinja2"
+    chat = tmp_path / "chat" / "chat.jinja2"
+    write_file(system, "system prompt")
+    write_file(chat, "chat prompt")
+
+    mounts = docker.resolve_template_mounts(
+        template_args(system_template=system, chat_template=chat)
+    )
+
+    assert [mount.role for mount in mounts] == ["system", "chat"]
+    assert mounts[0].host_path == system
+    assert mounts[0].container_path == (
+        f"{docker.CONTAINER_TEMPLATES_DIR}/system/system.jinja2"
+    )
+    assert mounts[1].container_dir == f"{docker.CONTAINER_TEMPLATES_DIR}/chat"
+
+
+def test_resolve_template_mounts_rejects_missing_template(tmp_path: Path) -> None:
+    with pytest.raises(DockerRunError, match="--system-template"):
+        docker.resolve_template_mounts(
+            template_args(system_template=tmp_path / "missing.jinja2")
+        )
+
+
+def test_build_agent_request_forwards_templates_and_prompt_vars(
+    tmp_path: Path,
+) -> None:
+    system = tmp_path / "system.jinja2"
+    system.write_text("system prompt", encoding="utf-8")
+    args = argparse.Namespace(
+        model="sonnet",
+        permission_mode="auto",
+        system_prompt_config="append",
+        base_url=None,
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        max_turns=None,
+        max_budget_usd=None,
+        reset_git=False,
+        env=[],
+        extra_arg=[],
+        prompt_var=["task=summarize"],
+        system_template=system,
+        chat_template=None,
+    )
+    mounts = docker.resolve_template_mounts(args)
+
+    request = build_agent_request(args, None, mounts)
+    command = build_claude_code_command(request)
+
+    assert request.system_template == (
+        f"{docker.CONTAINER_TEMPLATES_DIR}/system/system.jinja2"
+    )
+    assert request.chat_template is None
+    assert "task=summarize" in request.prompt_vars
+    assert command[command.index("--system-template") + 1] == request.system_template
+    assert "--chat-template" not in command
 
 
 def test_prepare_run_dir_creates_generated_child_under_output_root(

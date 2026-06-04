@@ -10,6 +10,7 @@ from general_agent_eval.general_agents.agent_specs import AGENT_SPECS
 from general_agent_eval.general_agents.claude_code import (
     DEFAULT_PERMISSION_MODE,
     PERMISSION_MODES,
+    RESERVED_PROMPT_VARS,
 )
 from general_agent_eval.orchestration.errors import DockerRunError
 from general_agent_eval.orchestration.staging import RUN_ID_DELIMITER
@@ -59,6 +60,14 @@ def validate_host_env(names: tuple[str, ...]) -> None:
 def validate_agent_values(args: argparse.Namespace) -> None:
     for value in args.env:
         parse_key_value_key(value, option_name="--env")
+    # Checked here as well as in the in-container runner so a bad key fails the
+    # run before staging and the image build.
+    for value in args.prompt_var:
+        key = parse_key_value_key(value, option_name="--prompt-var")
+        if key in RESERVED_PROMPT_VARS:
+            raise DockerRunError(
+                f"--prompt-var key '{key}' is reserved and cannot be overridden"
+            )
 
 
 def validate_agent_options(args: argparse.Namespace) -> None:
@@ -211,6 +220,35 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Claude Code permission mode (claude-code agent only). Defaults to "
             "bypassPermissions. Rejected for codex."
+        ),
+    )
+    parser.add_argument(
+        "--system-template",
+        type=Path,
+        help=(
+            "Custom Jinja2 system prompt template (both agents), mounted read-only "
+            "into the container. Its directory is mounted, so includes of sibling "
+            "templates resolve. Defaults to the packaged template."
+        ),
+    )
+    parser.add_argument(
+        "--chat-template",
+        type=Path,
+        help=(
+            "Custom Jinja2 user/chat prompt template (both agents), mounted "
+            "read-only into the container. Its directory is mounted, so includes "
+            "of sibling templates resolve. Defaults to the packaged template."
+        ),
+    )
+    parser.add_argument(
+        "--prompt-var",
+        action="append",
+        default=[],
+        metavar="KEY=VALUE",
+        help=(
+            "Extra variable injected into the prompt templates (both agents). "
+            "Reserved template keys and service-derived keys are rejected. "
+            "Can be repeated."
         ),
     )
     parser.add_argument(

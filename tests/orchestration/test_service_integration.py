@@ -322,6 +322,33 @@ def test_rest_assured_prompt_vars_absent_without_inject_flag() -> None:
     assert all(not v.startswith("test_module=") for v in request.prompt_vars)
 
 
+def test_user_prompt_vars_append_after_service_vars(tmp_path: Path) -> None:
+    manifest = write_service_manifest(tmp_path / "services.json")
+    svc = services.resolve_service(
+        docker_args(service="genome-nexus", service_manifest=manifest)
+    )
+    request = build_agent_request(
+        docker_args(service="genome-nexus", prompt_var=["task=summarize"]), svc
+    )
+    assert request.prompt_vars[-1] == "task=summarize"
+    assert "service_id=genome-nexus" in request.prompt_vars
+
+
+def test_prompt_vars_colliding_with_service_vars_are_rejected(tmp_path: Path) -> None:
+    manifest = write_service_manifest(tmp_path / "services.json")
+    svc = services.resolve_service(
+        docker_args(service="genome-nexus", service_manifest=manifest)
+    )
+    with pytest.raises(DockerRunError, match="service_base_url"):
+        build_agent_request(
+            docker_args(
+                service="genome-nexus",
+                prompt_var=["service_base_url=http://example.invalid/"],
+            ),
+            svc,
+        )
+
+
 def test_claude_code_command_emits_prompt_vars(tmp_path: Path) -> None:
     manifest = write_service_manifest(tmp_path / "services.json")
     svc = services.resolve_service(
@@ -398,6 +425,26 @@ def test_build_docker_command_no_service_appends_agent_directly() -> None:
     assert "run-with-service.sh" not in " ".join(command)
 
 
+def test_build_docker_command_mounts_templates(tmp_path: Path) -> None:
+    system = tmp_path / "system.jinja2"
+    system.write_text("system prompt", encoding="utf-8")
+    mounts = docker.resolve_template_mounts(
+        argparse.Namespace(system_template=system, chat_template=None)
+    )
+
+    command = docker.build_docker_command(
+        args=_docker_command_args(),
+        staged_input=Path("/tmp/in"),
+        output_dir=Path("/tmp/out"),
+        agent_command=["python", "-m", "agent"],
+        host_env_names=(),
+        service=None,
+        template_mounts=mounts,
+    )
+
+    assert f"{tmp_path}:{docker.CONTAINER_TEMPLATES_DIR}/system:ro" in command
+
+
 def test_docker_parser_accepts_service_options() -> None:
     parser = cli.build_parser()
     args = parser.parse_args(
@@ -448,6 +495,10 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
     assert manifest["service"] == svc
     assert manifest["service_manifest"] == str(manifest_path.resolve())
     assert manifest["service_scripts_dir"] == str(scripts_dir)
+    # No template/prompt-var overrides in this run.
+    assert manifest["agent_options"]["system_template"] is None
+    assert manifest["agent_options"]["chat_template"] is None
+    assert manifest["agent_options"]["prompt_vars"] == []
 
 
 def test_collect_agent_result_summary_reads_compact_result(tmp_path: Path) -> None:

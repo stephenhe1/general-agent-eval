@@ -23,8 +23,10 @@ from general_agent_eval.orchestration.docker import (
     CONTAINER_INPUT_DIR,
     CONTAINER_OUTPUT_DIR,
     DEFAULT_IMAGE,
+    TemplateMount,
     build_docker_command,
     build_image,
+    resolve_template_mounts,
     stream_command,
 )
 from general_agent_eval.orchestration.errors import DockerRunError
@@ -50,7 +52,9 @@ from general_agent_eval.orchestration.staging import (
 
 
 def build_agent_request(
-    args: argparse.Namespace, service: dict[str, Any] | None = None
+    args: argparse.Namespace,
+    service: dict[str, Any] | None = None,
+    template_mounts: tuple[TemplateMount, ...] = (),
 ) -> AgentRunRequest:
     agent_env = tuple(args.env)
     prompt_vars: tuple[str, ...] = ()
@@ -60,6 +64,19 @@ def build_agent_request(
         prompt_vars = service_prompt_vars(service)
         if getattr(args, "inject_rest_assured", False):
             prompt_vars = (*prompt_vars, *rest_assured_prompt_vars(service))
+    user_prompt_vars = tuple(getattr(args, "prompt_var", []))
+    service_keys = {var.split("=", 1)[0] for var in prompt_vars}
+    collisions = sorted(
+        {key for var in user_prompt_vars if (key := var.split("=", 1)[0]) in service_keys}
+    )
+    if collisions:
+        # The orchestrator owns service vars (it started the service), so a user
+        # override would silently desync the prompt from SERVICE_BASE_URL.
+        raise DockerRunError(
+            "--prompt-var keys collide with service-derived prompt vars: "
+            + ", ".join(collisions)
+        )
+    container_templates = {m.role: m.container_path for m in template_mounts}
     return AgentRunRequest(
         container_input_dir=CONTAINER_INPUT_DIR,
         container_output_dir=CONTAINER_OUTPUT_DIR,
@@ -75,8 +92,10 @@ def build_agent_request(
         # Docker preprocessing owns reset order so tests cannot be restored later.
         reset_git=False,
         agent_env=agent_env,
-        prompt_vars=prompt_vars,
+        prompt_vars=(*prompt_vars, *user_prompt_vars),
         extra_args=tuple(args.extra_arg),
+        system_template=container_templates.get("system"),
+        chat_template=container_templates.get("chat"),
         sandbox=getattr(args, "sandbox", "full_access"),
     )
 
@@ -112,6 +131,12 @@ def main(argv: list[str] | None = None) -> int:
                 "--inject-rest-assured requires --service; the rest_assured config "
                 "is read from the service manifest"
             )
+        # Resolved before any staging or build so bad template paths fail fast.
+        template_mounts = resolve_template_mounts(args)
+        agent_spec = AGENT_SPECS[args.agent]
+        agent_command = agent_spec.build_command(
+            build_agent_request(args, service, template_mounts)
+        )
         reset_target = None
         if args.reset_git:
             from general_agent_eval.preprocessing.git_reset import (
@@ -142,8 +167,6 @@ def main(argv: list[str] | None = None) -> int:
             reset_target=reset_target,
             service=service,
         )
-        agent_spec = AGENT_SPECS[args.agent]
-        agent_command = agent_spec.build_command(build_agent_request(args, service))
         manifest_path = run_dir / "manifest.json"
         manifest = sanitized_manifest(
             args=args,
@@ -167,6 +190,7 @@ def main(argv: list[str] | None = None) -> int:
             host_env_names=host_env_names,
             service=service,
             service_scripts_dir=service_scripts_dir,
+            template_mounts=template_mounts,
         )
         print(f"[docker-run] run_dir={run_dir}", flush=True)
         print(f"[docker-run] agent={args.agent} image={DEFAULT_IMAGE}", flush=True)
