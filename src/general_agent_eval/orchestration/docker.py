@@ -13,9 +13,28 @@ from general_agent_eval.orchestration.errors import DockerRunError
 from general_agent_eval.orchestration.paths import PROJECT_ROOT
 
 MODULE_DIR = Path(__file__).resolve().parent
+# Top-level docker/ in the source tree. Not bundled in the wheel: the base layer's
+# build context is the project source, so the default build needs a checkout anyway
+# (resolve_image_plan guards this). PROJECT_ROOT falls back to cwd for installed
+# wheels, where the guard fires rather than silently probing ./docker.
+DOCKER_DIR = PROJECT_ROOT / "docker"
 
-DEFAULT_DOCKERFILE = MODULE_DIR / "Dockerfile.agent-runtime"
-DEFAULT_IMAGE = "general-agent-eval-agent:latest"
+# Dockerfiles for the composable runtime stack. The default image is built as an
+# ordered chain (base -> agent -> workload [-> service overlay]); each layer
+# builds `FROM ${BASE_IMAGE}` on top of the previous layer's tag.
+BASE_DOCKERFILE = DOCKER_DIR / "Dockerfile.base"
+AGENT_DOCKERFILES = {
+    "claude-code": DOCKER_DIR / "Dockerfile.claude-code",
+    "codex": DOCKER_DIR / "Dockerfile.codex",
+}
+JAVA_DOCKERFILE = DOCKER_DIR / "Dockerfile.java"
+GENOME_NEXUS_DOCKERFILE = DOCKER_DIR / "Dockerfile.genome-nexus"
+
+IMAGE_PREFIX = "general-agent-eval"
+BASE_IMAGE = f"{IMAGE_PREFIX}-base:latest"
+# Tag used by the single-Dockerfile escape hatch (--dockerfile without --image).
+DEFAULT_IMAGE = f"{IMAGE_PREFIX}-agent:latest"
+
 CONTAINER_APP_DIR = "/app"
 CONTAINER_INPUT_DIR = "/workspace/input"
 CONTAINER_OUTPUT_DIR = "/workspace/output"
@@ -24,19 +43,118 @@ CONTAINER_TEMPLATES_DIR = "/workspace/templates"
 
 
 @dataclass(frozen=True)
-class ImageConfig:
-    """Effective runtime image: what to run, and whether/what to build first."""
+class BuildLayer:
+    """One image in the build chain: a Dockerfile, the tag it produces, and the
+    build context plus extra build args it needs (e.g. BASE_IMAGE)."""
+
+    name: str
+    dockerfile: Path
+    image: str
+    context: Path
+    build_args: tuple[tuple[str, str], ...] = ()
+
+
+@dataclass(frozen=True)
+class ImagePlan:
+    """The image to run plus the ordered layers to build first. `layers` is empty
+    when no build is needed (a pre-built image is run as-is)."""
 
     image: str
-    dockerfile: Path
-    build: bool
+    layers: tuple[BuildLayer, ...]
+
+    @property
+    def build(self) -> bool:
+        return bool(self.layers)
 
 
-def resolve_image_config(args: argparse.Namespace) -> ImageConfig:
-    """--dockerfile picks what to build, --image what to run (and the build tag).
-    --image alone names a pre-built image, so the build is skipped entirely."""
+def _stack_tag(*tokens: str) -> str:
+    return f"{IMAGE_PREFIX}-" + "-".join(tokens) + ":latest"
+
+
+def _build_uid_gid() -> tuple[str, str]:
+    uid = getattr(os, "getuid", lambda: 1000)()
+    gid = getattr(os, "getgid", lambda: 1000)()
+    return str(uid), str(gid)
+
+
+def _require_source_checkout() -> None:
+    """The layered build needs the docker/ Dockerfiles and the project source as the
+    base layer's build context, so it only works from a source checkout. An installed
+    wheel bundles neither (and PROJECT_ROOT then falls back to the caller's cwd), so
+    fail early and clearly instead of letting the build hunt for ./docker in cwd."""
+    if not BASE_DOCKERFILE.is_file():
+        raise DockerRunError(
+            f"runtime Dockerfiles not found at {DOCKER_DIR}. Building the default "
+            "image stack must run from a source checkout of this repository -- the "
+            "base layer's build context is the project source, so an installed wheel "
+            "cannot build it regardless. Run from a checkout, or pass --image to run "
+            "a pre-built image or --dockerfile to build a custom one."
+        )
+
+
+def layered_stack(
+    *, agent: str, service: dict[str, Any] | None
+) -> tuple[BuildLayer, ...]:
+    """The default runtime stack: base -> agent -> java, plus the genome-nexus
+    overlay when that service is selected. The Java workload is assumed for now;
+    when other target ecosystems are added, their workload layers slot in here."""
+    if agent not in AGENT_DOCKERFILES:
+        raise DockerRunError(f"no runtime layer is defined for agent '{agent}'")
+    uid, gid = _build_uid_gid()
+    base = BuildLayer(
+        name="base",
+        dockerfile=BASE_DOCKERFILE,
+        image=BASE_IMAGE,
+        # The base COPYs this project, so it builds from the repo root; the overlay
+        # layers only RUN, so they build from the tiny docker/ context.
+        context=PROJECT_ROOT,
+        build_args=(("AGENT_UID", uid), ("AGENT_GID", gid)),
+    )
+    agent_layer = BuildLayer(
+        name=agent,
+        dockerfile=AGENT_DOCKERFILES[agent],
+        image=_stack_tag(agent),
+        context=DOCKER_DIR,
+        build_args=(("BASE_IMAGE", base.image),),
+    )
+    java_layer = BuildLayer(
+        name="java",
+        dockerfile=JAVA_DOCKERFILE,
+        image=_stack_tag(agent, "java"),
+        context=DOCKER_DIR,
+        build_args=(("BASE_IMAGE", agent_layer.image),),
+    )
+    layers = [base, agent_layer, java_layer]
+    if service is not None and service.get("id") == "genome-nexus":
+        layers.append(
+            BuildLayer(
+                name="genome-nexus",
+                dockerfile=GENOME_NEXUS_DOCKERFILE,
+                image=_stack_tag(agent, "java", "genome-nexus"),
+                context=DOCKER_DIR,
+                build_args=(("BASE_IMAGE", java_layer.image),),
+            )
+        )
+    return tuple(layers)
+
+
+def resolve_image_plan(
+    args: argparse.Namespace,
+    *,
+    agent: str,
+    service: dict[str, Any] | None = None,
+) -> ImagePlan:
+    """Resolve what to run and what to build first.
+
+    Default: build the composable stack (base + agent + java [+ genome-nexus]),
+    and run its final layer. Escape hatches: `--image` alone names a pre-built
+    image and skips the build; `--dockerfile` builds a single custom Dockerfile
+    (its own directory is the build context), tagged with `--image` or the
+    default tag.
+    """
     image = getattr(args, "image", None)
     dockerfile = getattr(args, "dockerfile", None)
+
     if dockerfile is not None:
         if args.skip_build:
             raise DockerRunError(
@@ -46,12 +164,28 @@ def resolve_image_config(args: argparse.Namespace) -> ImageConfig:
         dockerfile = dockerfile.expanduser().resolve()
         if not dockerfile.is_file():
             raise DockerRunError(f"--dockerfile is not a file: {dockerfile}")
-    build = not args.skip_build and (dockerfile is not None or image is None)
-    return ImageConfig(
-        image=image or DEFAULT_IMAGE,
-        dockerfile=dockerfile or DEFAULT_DOCKERFILE,
-        build=build,
-    )
+        uid, gid = _build_uid_gid()
+        tag = image or DEFAULT_IMAGE
+        layer = BuildLayer(
+            name="custom",
+            dockerfile=dockerfile,
+            image=tag,
+            context=dockerfile.parent,
+            build_args=(("AGENT_UID", uid), ("AGENT_GID", gid)),
+        )
+        return ImagePlan(image=tag, layers=(layer,))
+
+    if image is not None:
+        # A pre-built image (registry, or an earlier build); skip the build entirely.
+        return ImagePlan(image=image, layers=())
+
+    stack = layered_stack(agent=agent, service=service)
+    final_image = stack[-1].image
+    if args.skip_build:
+        # Skipping the build only needs the tag, not the Dockerfiles.
+        return ImagePlan(image=final_image, layers=())
+    _require_source_checkout()
+    return ImagePlan(image=final_image, layers=stack)
 
 
 @dataclass(frozen=True)
@@ -89,12 +223,7 @@ def resolve_template_mounts(args: argparse.Namespace) -> tuple[TemplateMount, ..
     return tuple(mounts)
 
 
-def build_image(
-    *, dockerfile: Path = DEFAULT_DOCKERFILE, image: str = DEFAULT_IMAGE
-) -> None:
-    if not dockerfile.is_file():
-        raise DockerRunError(f"Dockerfile is not a file: {dockerfile}")
-
+def _require_buildx() -> None:
     buildx_check = subprocess.run(
         ["docker", "buildx", "version"],
         check=False,
@@ -110,29 +239,37 @@ def build_image(
             f"works. {detail}"
         )
 
-    uid = getattr(os, "getuid", lambda: 1000)()
-    gid = getattr(os, "getgid", lambda: 1000)()
-    # The packaged Dockerfile COPYs this project, so it builds from PROJECT_ROOT;
-    # a custom Dockerfile builds from its own directory, like `docker build <dir>`.
-    build_context = (
-        PROJECT_ROOT if dockerfile == DEFAULT_DOCKERFILE else dockerfile.parent
-    )
+
+def build_layer(layer: BuildLayer) -> None:
+    if not layer.dockerfile.is_file():
+        raise DockerRunError(f"Dockerfile is not a file: {layer.dockerfile}")
     command = [
         "docker",
         "buildx",
         "build",
         "--load",
         "-f",
-        str(dockerfile),
+        str(layer.dockerfile),
         "-t",
-        image,
-        "--build-arg",
-        f"AGENT_UID={uid}",
-        "--build-arg",
-        f"AGENT_GID={gid}",
-        str(build_context),
+        layer.image,
     ]
+    for name, value in layer.build_args:
+        command.extend(["--build-arg", f"{name}={value}"])
+    command.append(str(layer.context))
     subprocess.run(command, check=True)
+
+
+def build_image_plan(plan: ImagePlan) -> None:
+    """Build each layer in order so every `FROM ${BASE_IMAGE}` resolves the tag the
+    previous layer produced. No-op for a pre-built image (empty `layers`)."""
+    if not plan.layers:
+        return
+    _require_buildx()
+    for layer in plan.layers:
+        print(
+            f"[docker-run] building layer {layer.name} -> {layer.image}", flush=True
+        )
+        build_layer(layer)
 
 
 def build_docker_command(

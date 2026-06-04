@@ -485,6 +485,8 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
         service="genome-nexus",
         service_manifest=manifest_path,
     )
+    stack = docker.layered_stack(agent="claude-code", service=svc)
+    plan = docker.ImagePlan(image=stack[-1].image, layers=stack)
     manifest = sanitized_manifest(
         args=args,
         input_dir=Path("/tmp/in"),
@@ -494,20 +496,22 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
         staging_method="copytree",
         host_env_names=(),
         preprocessing={},
-        image_config=docker.ImageConfig(
-            image=docker.DEFAULT_IMAGE,
-            dockerfile=docker.DEFAULT_DOCKERFILE,
-            build=True,
-        ),
+        image_plan=plan,
         service=svc,
         service_scripts_dir=scripts_dir,
     )
     assert manifest["service"] == svc
     assert manifest["service_manifest"] == str(manifest_path.resolve())
     assert manifest["service_scripts_dir"] == str(scripts_dir)
-    assert manifest["docker"]["image"] == docker.DEFAULT_IMAGE
-    assert manifest["docker"]["dockerfile"] == str(docker.DEFAULT_DOCKERFILE)
+    assert manifest["docker"]["image"] == plan.image
     assert manifest["docker"]["image_built"] is True
+    assert [layer["name"] for layer in manifest["docker"]["layers"]] == [
+        "base",
+        "claude-code",
+        "java",
+        "genome-nexus",
+    ]
+    assert manifest["docker"]["layers"][0]["dockerfile"] == str(docker.BASE_DOCKERFILE)
     # No template/prompt-var overrides in this run.
     assert manifest["agent_options"]["system_template"] is None
     assert manifest["agent_options"]["chat_template"] is None
@@ -525,14 +529,10 @@ def test_sanitized_manifest_prebuilt_image_has_no_dockerfile(tmp_path: Path) -> 
         staging_method="copytree",
         host_env_names=(),
         preprocessing={},
-        image_config=docker.ImageConfig(
-            image="custom:1.0",
-            dockerfile=docker.DEFAULT_DOCKERFILE,
-            build=False,
-        ),
+        image_plan=docker.ImagePlan(image="custom:1.0", layers=()),
     )
     assert manifest["docker"]["image"] == "custom:1.0"
-    assert manifest["docker"]["dockerfile"] is None
+    assert manifest["docker"]["layers"] == []
     assert manifest["docker"]["image_built"] is False
 
 

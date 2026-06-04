@@ -24,8 +24,8 @@ from general_agent_eval.orchestration.docker import (
     CONTAINER_OUTPUT_DIR,
     TemplateMount,
     build_docker_command,
-    build_image,
-    resolve_image_config,
+    build_image_plan,
+    resolve_image_plan,
     resolve_template_mounts,
     stream_command,
 )
@@ -132,7 +132,7 @@ def main(argv: list[str] | None = None) -> int:
                 "is read from the service manifest"
             )
         # Resolved before any staging or build so bad paths/option combos fail fast.
-        image_config = resolve_image_config(args)
+        image_plan = resolve_image_plan(args, agent=args.agent, service=service)
         template_mounts = resolve_template_mounts(args)
         agent_spec = AGENT_SPECS[args.agent]
         agent_command = agent_spec.build_command(
@@ -157,8 +157,8 @@ def main(argv: list[str] | None = None) -> int:
         output_dir = run_dir / "output"
         output_dir.mkdir()
 
-        if image_config.build:
-            build_image(dockerfile=image_config.dockerfile, image=image_config.image)
+        if image_plan.build:
+            build_image_plan(image_plan)
 
         staging_method = stage_input(input_dir, staged_input)
         preprocessing = preprocess_staged_input(
@@ -180,7 +180,7 @@ def main(argv: list[str] | None = None) -> int:
             preprocessing=preprocessing,
             service=service,
             service_scripts_dir=service_scripts_dir,
-            image_config=image_config,
+            image_plan=image_plan,
         )
         write_manifest(manifest_path, manifest)
 
@@ -192,12 +192,12 @@ def main(argv: list[str] | None = None) -> int:
             host_env_names=host_env_names,
             service=service,
             service_scripts_dir=service_scripts_dir,
-            image=image_config.image,
+            image=image_plan.image,
             template_mounts=template_mounts,
         )
         print(f"[docker-run] run_dir={run_dir}", flush=True)
         print(
-            f"[docker-run] agent={args.agent} image={image_config.image}", flush=True
+            f"[docker-run] agent={args.agent} image={image_plan.image}", flush=True
         )
         if service is not None:
             print(

@@ -248,7 +248,13 @@ def test_claude_code_parser_rejects_removed_var_arg() -> None:
         parser.parse_args(["--input-dir", "/tmp/project", "--var", "task=value"])
 
 
-def test_build_image_requires_docker_buildx(
+def image_args(**overrides: object) -> argparse.Namespace:
+    base: dict[str, object] = dict(image=None, dockerfile=None, skip_build=False)
+    base.update(overrides)
+    return argparse.Namespace(**base)
+
+
+def test_build_image_plan_requires_docker_buildx(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     def fake_run(
@@ -260,11 +266,14 @@ def test_build_image_requires_docker_buildx(
 
     monkeypatch.setattr(docker.subprocess, "run", fake_run)
 
+    plan = docker.resolve_image_plan(image_args(), agent="claude-code")
     with pytest.raises(DockerRunError, match="Docker Buildx is required"):
-        docker.build_image()
+        docker.build_image_plan(plan)
 
 
-def test_build_image_uses_buildx_load(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_build_image_plan_builds_each_layer_in_order(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     commands: list[list[str]] = []
 
     def fake_run(
@@ -276,17 +285,30 @@ def test_build_image_uses_buildx_load(monkeypatch: pytest.MonkeyPatch) -> None:
 
     monkeypatch.setattr(docker.subprocess, "run", fake_run)
 
-    docker.build_image()
+    plan = docker.resolve_image_plan(image_args(), agent="claude-code")
+    docker.build_image_plan(plan)
 
     assert commands[0] == ["docker", "buildx", "version"]
-    assert commands[1][:4] == ["docker", "buildx", "build", "--load"]
-    assert commands[1][commands[1].index("-f") + 1] == str(
-        docker.DEFAULT_DOCKERFILE
+    # base -> claude-code -> java, each a `buildx build --load`.
+    base_build = commands[1]
+    assert base_build[:4] == ["docker", "buildx", "build", "--load"]
+    assert base_build[base_build.index("-f") + 1] == str(docker.BASE_DOCKERFILE)
+    assert base_build[base_build.index("-t") + 1] == docker.BASE_IMAGE
+    assert base_build[-1] == str(docker.PROJECT_ROOT)
+
+    agent_build = commands[2]
+    assert agent_build[agent_build.index("-f") + 1] == str(
+        docker.AGENT_DOCKERFILES["claude-code"]
     )
-    assert commands[1][commands[1].index("-t") + 1] == docker.DEFAULT_IMAGE
+    # Overlays build FROM the previous layer's tag.
+    assert f"BASE_IMAGE={docker.BASE_IMAGE}" in agent_build
+
+    java_build = commands[3]
+    assert java_build[java_build.index("-f") + 1] == str(docker.JAVA_DOCKERFILE)
+    assert f"BASE_IMAGE={plan.layers[1].image}" in java_build
 
 
-def test_build_image_custom_dockerfile_uses_its_dir_as_context(
+def test_build_image_plan_custom_dockerfile_uses_its_dir_as_context(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     dockerfile = tmp_path / "Dockerfile.custom"
@@ -302,77 +324,132 @@ def test_build_image_custom_dockerfile_uses_its_dir_as_context(
 
     monkeypatch.setattr(docker.subprocess, "run", fake_run)
 
-    docker.build_image(dockerfile=dockerfile, image="custom:1.0")
+    plan = docker.resolve_image_plan(
+        image_args(dockerfile=dockerfile, image="custom:1.0"), agent="claude-code"
+    )
+    docker.build_image_plan(plan)
 
     build = commands[1]
-    assert build[build.index("-f") + 1] == str(dockerfile)
+    assert build[build.index("-f") + 1] == str(dockerfile.resolve())
     assert build[build.index("-t") + 1] == "custom:1.0"
-    assert build[-1] == str(tmp_path)
+    assert build[-1] == str(dockerfile.resolve().parent)
 
 
-def image_args(**overrides: object) -> argparse.Namespace:
-    base: dict[str, object] = dict(image=None, dockerfile=None, skip_build=False)
-    base.update(overrides)
-    return argparse.Namespace(**base)
+def test_resolve_image_plan_default_builds_layered_stack() -> None:
+    plan = docker.resolve_image_plan(image_args(), agent="claude-code")
+
+    assert plan.build is True
+    assert [layer.name for layer in plan.layers] == ["base", "claude-code", "java"]
+    assert plan.layers[0].dockerfile == docker.BASE_DOCKERFILE
+    assert plan.layers[0].image == docker.BASE_IMAGE
+    # The run image is the final layer's tag.
+    assert plan.image == plan.layers[-1].image
+    assert plan.image == "general-agent-eval-claude-code-java:latest"
 
 
-def test_resolve_image_config_defaults_build_packaged_image() -> None:
-    assert docker.resolve_image_config(image_args()) == docker.ImageConfig(
-        image=docker.DEFAULT_IMAGE, dockerfile=docker.DEFAULT_DOCKERFILE, build=True
+def test_resolve_image_plan_adds_genome_nexus_overlay() -> None:
+    plan = docker.resolve_image_plan(
+        image_args(), agent="claude-code", service={"id": "genome-nexus"}
     )
 
-
-def test_resolve_image_config_skip_build_keeps_default_image() -> None:
-    config = docker.resolve_image_config(image_args(skip_build=True))
-    assert config.image == docker.DEFAULT_IMAGE
-    assert config.build is False
-
-
-def test_resolve_image_config_image_alone_runs_prebuilt() -> None:
-    config = docker.resolve_image_config(image_args(image="custom:1.0"))
-    assert config.image == "custom:1.0"
-    assert config.build is False
+    assert [layer.name for layer in plan.layers] == [
+        "base",
+        "claude-code",
+        "java",
+        "genome-nexus",
+    ]
+    assert plan.image == "general-agent-eval-claude-code-java-genome-nexus:latest"
 
 
-def test_resolve_image_config_dockerfile_builds_default_tag(tmp_path: Path) -> None:
+def test_resolve_image_plan_other_service_has_no_overlay() -> None:
+    plan = docker.resolve_image_plan(
+        image_args(), agent="codex", service={"id": "restcountries"}
+    )
+
+    assert [layer.name for layer in plan.layers] == ["base", "codex", "java"]
+
+
+def test_resolve_image_plan_skip_build_runs_stack_tip_without_building() -> None:
+    plan = docker.resolve_image_plan(image_args(skip_build=True), agent="claude-code")
+
+    assert plan.build is False
+    assert plan.layers == ()
+    # The image is the tag a full build would have produced.
+    built = docker.resolve_image_plan(image_args(), agent="claude-code")
+    assert plan.image == built.image
+
+
+def test_resolve_image_plan_image_alone_runs_prebuilt() -> None:
+    plan = docker.resolve_image_plan(image_args(image="custom:1.0"), agent="claude-code")
+
+    assert plan.image == "custom:1.0"
+    assert plan.build is False
+    assert plan.layers == ()
+
+
+def test_resolve_image_plan_dockerfile_builds_default_tag(tmp_path: Path) -> None:
     dockerfile = tmp_path / "Dockerfile.custom"
     dockerfile.write_text("FROM scratch\n", encoding="utf-8")
 
-    config = docker.resolve_image_config(image_args(dockerfile=dockerfile))
-
-    assert config == docker.ImageConfig(
-        image=docker.DEFAULT_IMAGE, dockerfile=dockerfile, build=True
+    plan = docker.resolve_image_plan(
+        image_args(dockerfile=dockerfile), agent="claude-code"
     )
 
+    assert plan.image == docker.DEFAULT_IMAGE
+    assert [layer.name for layer in plan.layers] == ["custom"]
+    assert plan.layers[0].dockerfile == dockerfile.resolve()
+    assert plan.layers[0].context == dockerfile.resolve().parent
 
-def test_resolve_image_config_dockerfile_with_image_builds_custom_tag(
+
+def test_resolve_image_plan_dockerfile_with_image_builds_custom_tag(
     tmp_path: Path,
 ) -> None:
     dockerfile = tmp_path / "Dockerfile.custom"
     dockerfile.write_text("FROM scratch\n", encoding="utf-8")
 
-    config = docker.resolve_image_config(
-        image_args(dockerfile=dockerfile, image="custom:1.0")
+    plan = docker.resolve_image_plan(
+        image_args(dockerfile=dockerfile, image="custom:1.0"), agent="claude-code"
     )
 
-    assert config == docker.ImageConfig(
-        image="custom:1.0", dockerfile=dockerfile, build=True
-    )
+    assert plan.image == "custom:1.0"
+    assert plan.layers[0].image == "custom:1.0"
+    assert plan.layers[0].name == "custom"
 
 
-def test_resolve_image_config_rejects_skip_build_with_dockerfile(
+def test_resolve_image_plan_rejects_skip_build_with_dockerfile(
     tmp_path: Path,
 ) -> None:
     dockerfile = tmp_path / "Dockerfile.custom"
     dockerfile.write_text("FROM scratch\n", encoding="utf-8")
 
     with pytest.raises(DockerRunError, match="conflicts"):
-        docker.resolve_image_config(image_args(dockerfile=dockerfile, skip_build=True))
+        docker.resolve_image_plan(
+            image_args(dockerfile=dockerfile, skip_build=True), agent="claude-code"
+        )
 
 
-def test_resolve_image_config_rejects_missing_dockerfile(tmp_path: Path) -> None:
+def test_resolve_image_plan_rejects_missing_dockerfile(tmp_path: Path) -> None:
     with pytest.raises(DockerRunError, match="not a file"):
-        docker.resolve_image_config(image_args(dockerfile=tmp_path / "missing"))
+        docker.resolve_image_plan(
+            image_args(dockerfile=tmp_path / "missing"), agent="claude-code"
+        )
+
+
+def test_resolve_image_plan_requires_source_checkout_for_build(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    # Simulate an installed wheel: PROJECT_ROOT has no docker/ Dockerfiles.
+    monkeypatch.setattr(
+        docker, "BASE_DOCKERFILE", tmp_path / "docker" / "Dockerfile.base"
+    )
+
+    with pytest.raises(DockerRunError, match="source checkout"):
+        docker.resolve_image_plan(image_args(), agent="claude-code")
+
+    # --skip-build only needs the final tag, so it must not require the Dockerfiles.
+    plan = docker.resolve_image_plan(image_args(skip_build=True), agent="claude-code")
+    assert plan.build is False
+    assert plan.image == "general-agent-eval-claude-code-java:latest"
 
 
 def template_args(**overrides: object) -> argparse.Namespace:

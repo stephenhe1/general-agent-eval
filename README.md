@@ -10,6 +10,8 @@ Harnesses for evaluating general coding agents against isolated repositories.
 - `src/general_agent_eval/preprocessing/`: input preprocessing utilities.
 - `src/general_agent_eval/recovery/`: rebuild agent outputs into the full repo.
 - `src/general_agent_eval/prompts/`: packaged Jinja prompt templates.
+- `docker/`: layered Dockerfiles for the runtime image stack (base + agent +
+  workload + service overlays).
 - `runs/`: default parent directory for generated run outputs.
 
 ## Environment
@@ -118,28 +120,46 @@ context (`input_dir`, `model`, ...) are rejected up front, as are keys the
 orchestrator derives from `--service` (`service_base_url`, ...), since
 overriding those would desync the prompt from the live service.
 
-### Custom runtime images
+### Runtime image stack
 
-By default every run builds the packaged Java-toolchain Dockerfile and runs the
-resulting `general-agent-eval-agent:latest`. Two flags override that:
+The runtime image is composed from layered Dockerfiles under `docker/`, each
+building `FROM ${BASE_IMAGE}` on top of the previous one, so a run only carries
+the toolchains it needs:
 
-- `--dockerfile PATH` selects what to build. The build context is the
-  Dockerfile's own directory, and the image is tagged with `--image` (or the
-  default tag when omitted). Conflicts with `--skip-build`.
-- `--image NAME` selects what to run. Alone it names a pre-built image (e.g.
-  from a registry or an earlier `--dockerfile` build) and skips the build
-  entirely; with `--dockerfile` it is the tag for the fresh build.
+- `Dockerfile.base` — Python, the harness package and its dependencies, the
+  non-root agent user, and general CLI tooling. Everything else builds on it.
+- `Dockerfile.claude-code` / `Dockerfile.codex` — the per-agent layer. claude-code
+  adds Node.js and the `claude` CLI; codex adds only `bubblewrap` (its binary
+  ships in the `openai-codex-cli-bin` wheel installed in the base).
+- `Dockerfile.java` — the default workload layer: the JDK/build toolchain
+  (Temurin 17 + 8, Gradle, Maven) for the Java evaluation targets.
+- `Dockerfile.genome-nexus` — a service overlay adding the MongoDB server, built
+  only when `--service genome-nexus` is selected.
 
-A custom image must satisfy the runtime contract the orchestrator assumes: a
-non-root user whose UID/GID match the host user (staged input and output are
-bind-mounted read-write), `bash` and `git` on PATH, the agent tooling for the
-selected agent (the `claude` CLI for claude-code; the codex binary ships inside
-the `openai-codex-cli-bin` wheel), and Python 3.11+ with this project's
-dependencies importable plus `PYTHONPATH=/app/src` — the repository itself is
-mounted read-only at `/app` and the agent entrypoint is
-`python -m general_agent_eval.general_agents.<agent>`. The
-`manifest.json` `docker` block records the effective image, whether it was
-built, and the Dockerfile used (null when a pre-built image ran).
+By default a run builds `base + <agent> + java` (plus `genome-nexus` for that
+service) in order and runs the final layer, tagged e.g.
+`general-agent-eval-claude-code-java:latest`. The base layer's build context is
+the project source (it `COPY`s `src`/`pyproject.toml`), so the default build runs
+from a source checkout; an installed wheel does not bundle `docker/` and the
+orchestrator says so rather than probing the caller's cwd. Two flags override this:
+
+- `--image NAME` names a pre-built image to run and skips the build entirely
+  (e.g. from a registry or an earlier build).
+- `--dockerfile PATH` builds a single custom Dockerfile instead of the composed
+  stack. The build context is the Dockerfile's own directory, and the image is
+  tagged with `--image` (or the default tag when omitted). Conflicts with
+  `--skip-build`.
+
+Any image — composed default or custom — must satisfy the runtime contract the
+orchestrator assumes: a non-root user whose UID/GID match the host user (staged
+input and output are bind-mounted read-write), `bash` and `git` on PATH, the
+agent tooling for the selected agent (the `claude` CLI for claude-code; the
+codex binary ships inside the `openai-codex-cli-bin` wheel), and Python 3.11+
+with this project's dependencies importable plus `PYTHONPATH=/app/src` — the
+repository itself is mounted read-only at `/app` and the agent entrypoint is
+`python -m general_agent_eval.general_agents.<agent>`. The `manifest.json`
+`docker` block records the effective image, whether it was built, and the
+ordered `layers` chain that produced it (empty when a pre-built image ran).
 
 Runs are written under `runs/<timestamp>__<agent>__<project>` by default. Pass
 `--output-dir` to choose a different parent directory. After completion,

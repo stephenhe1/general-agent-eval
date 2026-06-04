@@ -172,22 +172,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--skip-build",
         action="store_true",
-        help="Run the existing image without building it first.",
+        help="Run the existing default stack image without (re)building it first.",
     )
     parser.add_argument(
         "--image",
         help=(
             "Docker image to run. With --dockerfile it is the tag for the built "
-            "image; alone it names a pre-built image and skips the build. "
-            "Defaults to the packaged image."
+            "image; alone it names a pre-built image and skips the build. Without "
+            "either flag, the composed default stack image is built and run."
         ),
     )
     parser.add_argument(
         "--dockerfile",
         type=Path,
         help=(
-            "Custom Dockerfile to build the runtime image from (build context is "
-            "its directory). Defaults to the packaged Java-toolchain Dockerfile. "
+            "Custom single Dockerfile to build the runtime image from (build "
+            "context is its directory), bypassing the composed default stack "
+            "(docker/Dockerfile.base + agent + java [+ genome-nexus]). "
             "Conflicts with --skip-build."
         ),
     )

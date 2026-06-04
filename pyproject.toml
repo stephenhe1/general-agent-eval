@@ -64,6 +64,7 @@ packages = ["src/general_agent_eval"]
 include = [
   "/README.md",
   "/pyproject.toml",
+  "/docker",
   "/src",
   "/tests",
 ]
