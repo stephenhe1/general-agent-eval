@@ -61,12 +61,11 @@ def normalized_name(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", name.lower())
 
 
-def derive_repo_name(repo_url: str) -> str:
-    tail = repo_url.rstrip("/").rsplit("/", 1)[-1]
-    tail = tail.rsplit(":", 1)[-1]
-    if tail.endswith(".git"):
-        tail = tail[: -len(".git")]
-    return tail or "repo"
+def derive_repo_name(repo: Path) -> str:
+    name = repo.name
+    if name.endswith(".git"):
+        name = name[: -len(".git")]
+    return name or "repo"
 
 
 def load_manifest(run_dir: Path) -> dict[str, Any]:
@@ -229,18 +228,18 @@ def matches_cleared(path: str, cleared_paths: list[dict[str, str]]) -> bool:
     return False
 
 
-def clone_and_checkout(repo_url: str, commit: str, dest: Path) -> None:
+def clone_and_checkout(repo: Path, commit: str, dest: Path) -> None:
     if dest.exists():
         raise RecoverError(f"recovery target already exists: {dest}")
     dest.parent.mkdir(parents=True, exist_ok=True)
-    # A full (non-shallow) clone carries every reachable commit, so the recorded
-    # commit is present even if it is not the tip of any branch.
-    run_git_checked(["clone", "--no-checkout", repo_url, str(dest)])
+    # A full (non-shallow) clone of the local repo carries every reachable commit,
+    # so the recorded commit is present even if it is not the tip of any branch.
+    run_git_checked(["clone", "--no-checkout", str(repo), str(dest)])
     result = run_git(["checkout", "--force", commit], cwd=dest)
     if result.returncode != 0:
         detail = result.stderr.strip() or result.stdout.strip()
         raise RecoverError(
-            f"Failed to checkout commit {commit} in {repo_url}:\n{detail}"
+            f"Failed to checkout commit {commit} in {repo}:\n{detail}"
         )
 
 
@@ -293,7 +292,7 @@ def apply_patch(
 def build_recovery_manifest(
     *,
     run_dir: Path,
-    repo_url: str,
+    repo: Path,
     repo_dir: Path,
     commit_info: dict[str, Any],
     created: list[str],
@@ -308,11 +307,11 @@ def build_recovery_manifest(
     return {
         "created_at": dt.datetime.now(dt.UTC).isoformat(),
         "run_dir": str(run_dir),
-        "repo_url": repo_url,
+        "repo": str(repo),
         "repo_dir": str(repo_dir),
         "commit": commit_info["commit"],
         "commit_source": commit_info["source"],
-        "base_source": "github-clone",
+        "base_source": "local-clone",
         "collision_policy": "agent-wins",
         "dependency_injection": injection_result,
         "apply_status": apply_result["status"],
@@ -344,6 +343,10 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
     if not run_dir.is_dir():
         raise RecoverError(f"--run-dir is not a directory: {run_dir}")
 
+    repo = args.repo.expanduser().resolve()
+    if not repo.is_dir():
+        raise RecoverError(f"--repo is not a directory: {repo}")
+
     manifest = load_manifest(run_dir)
     git_diff_patch, cleared_tests_path, injection_patch_path = resolve_artifacts(run_dir)
     commit_info = resolve_commit(manifest, args.commit)
@@ -354,10 +357,10 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         if args.output_dir
         else run_dir / "recovered"
     )
-    repo_name = derive_repo_name(args.repo_url)
+    repo_name = derive_repo_name(repo)
     repo_dir = output_parent / repo_name
 
-    clone_and_checkout(args.repo_url, commit_info["commit"], repo_dir)
+    clone_and_checkout(repo, commit_info["commit"], repo_dir)
 
     # Replay the injected build-file change first; the agent patch lands on top.
     injection_result = apply_injection_patch(repo_dir, injection_patch_path)
@@ -389,7 +392,7 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
 
     recovery_manifest = build_recovery_manifest(
         run_dir=run_dir,
-        repo_url=args.repo_url,
+        repo=repo,
         repo_dir=repo_dir,
         commit_info=commit_info,
         created=summary["created"],
@@ -420,9 +423,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Completed run directory containing manifest.json and output/git_diff.patch.",
     )
     parser.add_argument(
-        "--repo-url",
+        "--repo",
         required=True,
-        help="Git URL of the original repository to clone and apply the patch onto.",
+        type=Path,
+        help=(
+            "Path to the original cloned repository (the same checkout passed to the "
+            "run's --input-dir). Its recorded commit is checked out into a fresh clone "
+            "and the agent patch is applied onto that full tree."
+        ),
     )
     parser.add_argument(
         "--commit",

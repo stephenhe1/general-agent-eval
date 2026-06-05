@@ -219,12 +219,13 @@ inside the complete project, re-base that patch onto the original repository:
 ```bash
 uv run general-agent-eval-recover \
   --run-dir runs/<timestamp>__claude-code__<project> \
-  --repo-url https://github.com/owner/project.git
+  --repo path/to/cloned/project
 ```
 
-The recoverer clones `--repo-url`, checks out the commit recorded in
-`manifest.json` (the `--reset-git` pinned commit, otherwise the cleared-tests
-baseline's `original_head`; override with `--commit`), and applies
+The recoverer clones `--repo` (the original local checkout you passed to the
+run's `--input-dir`), checks out the commit recorded in `manifest.json` (the
+`--reset-git` pinned commit, otherwise the cleared-tests baseline's
+`original_head`; override with `--commit`), and applies
 `git_diff.patch` onto that full tree. The agent's patch is taken against the
 testless baseline, so the only conflicts are paths the agent recreated that were
 cleared from the original; the agent's version wins those collisions. Results

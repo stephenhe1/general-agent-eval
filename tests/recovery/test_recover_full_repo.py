@@ -87,7 +87,7 @@ def make_run(
 def recover(tmp_path: Path, origin: Path, run_dir: Path) -> dict:
     args = argparse.Namespace(
         run_dir=run_dir,
-        repo_url=str(origin),
+        repo=origin,
         commit=None,
         output_dir=tmp_path / "recovered",
     )
@@ -155,8 +155,10 @@ def test_recover_rejects_missing_patch(tmp_path: Path) -> None:
     (run_dir / "output").mkdir(parents=True)
     (run_dir / "manifest.json").write_text("{}", encoding="utf-8")
 
+    repo = tmp_path / "repo"
+    repo.mkdir()
     args = argparse.Namespace(
-        run_dir=run_dir, repo_url="https://example.invalid/x.git", commit=None, output_dir=None
+        run_dir=run_dir, repo=repo, commit=None, output_dir=None
     )
     with pytest.raises(recover_full_repo.RecoverError, match="missing the agent patch"):
         recover_full_repo.recover(args)
