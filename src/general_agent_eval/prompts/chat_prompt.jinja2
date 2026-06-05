@@ -5,15 +5,15 @@ Identify the API surface exposed by the repository, including routes, request me
 A live instance of this service is already running and reachable at {{ service_base_url }}. Exercise the running API directly over HTTP. The service has already been built and started for you; do not build, start, stop, or reconfigure it.
 {% endif %}
 {%- if rest_assured %}
-Use REST Assured for the HTTP API tests; it is already available as a test dependency.
+You MUST use REST Assured for the HTTP API tests; it is already available as a test dependency.
 {% endif %}
 {%- if test_module %}
 This is a multi-module build: add your generated tests to the {{ test_module }} module, where REST Assured is configured.
 {% endif %}
-Generate as many meaningful tests as possible while preserving correctness and maintainability. Prefer substantive request/response assertions over superficial status-code-only checks whenever the repository provides enough behavior to assert.
+Prioritize correctness, broad coverage of meaningful behavior, and successful integration with the build system. Generate as many meaningful, non-redundant tests as possible while preserving correctness and maintainability. Cover happy paths, edge cases, exceptional behavior, and important endpoint interactions. Prefer substantive request/response assertions over superficial status-code-only checks whenever the repository provides enough behavior to assert.
 
-Do not modify production code under any circumstances. Only add or modify test files.
+Do NOT modify production code under any circumstances. Only add or modify test files.
 
-Do not leave behind non-compiling, failing, incomplete, or placeholder tests. After writing tests, run the most relevant validation commands available, such as targeted API tests, the full test suite, or build checks. If failures occur, iteratively diagnose and repair the tests. If a test cannot be made to compile and pass reliably, remove it rather than completing the task with a broken test.
+Do NOT leave behind non-compiling, failing, incomplete, or placeholder tests. After writing tests, run the most relevant validation commands available, such as targeted API tests, the full test suite, or build checks. If failures occur, iteratively diagnose and repair the tests. If a test cannot be made to compile and pass reliably, remove it rather than completing the task with a broken test.
 
 In the final response, concisely summarize the endpoints and behaviors tested, the test files added or modified, the validation commands run, and any assumptions or limitations.
