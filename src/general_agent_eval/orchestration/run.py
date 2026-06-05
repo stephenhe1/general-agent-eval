@@ -25,6 +25,7 @@ from general_agent_eval.orchestration.docker import (
     TemplateMount,
     build_docker_command,
     build_image_plan,
+    require_local_image,
     resolve_image_plan,
     resolve_template_mounts,
     stream_command,
@@ -135,6 +136,10 @@ def main(argv: list[str] | None = None) -> int:
             )
         # Resolved before any staging or build so bad paths/option combos fail fast.
         image_plan = resolve_image_plan(args, agent=args.agent, service=service)
+        if image_plan.requires_local_image:
+            # --skip-build: confirm the tag exists now, not after staging via a
+            # doomed docker run pull.
+            require_local_image(image_plan.image)
         template_mounts = resolve_template_mounts(args)
         agent_spec = AGENT_SPECS[args.agent]
         agent_command = agent_spec.build_command(

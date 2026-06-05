@@ -453,6 +453,8 @@ def test_resolve_image_plan_skip_build_runs_stack_tip_without_building() -> None
 
     assert plan.build is False
     assert plan.layers == ()
+    # The local-only stack tag must be checked before staging.
+    assert plan.requires_local_image is True
     # The image is the tag a full build would have produced.
     built = docker.resolve_image_plan(image_args(), agent="claude-code")
     assert plan.image == built.image
@@ -464,6 +466,82 @@ def test_resolve_image_plan_image_alone_runs_prebuilt() -> None:
     assert plan.image == "custom:1.0"
     assert plan.build is False
     assert plan.layers == ()
+    # A named --image may live in a registry, so Docker is allowed to pull it.
+    assert plan.requires_local_image is False
+
+
+def _docker_probe_stub(
+    *, inspect_rc: int, inspect_err: str = "", version_rc: int = 0, version_err: str = ""
+):
+    """Fake subprocess.run dispatching on the docker subcommand: `image inspect`
+    decides image presence, `version` stands in for daemon reachability."""
+
+    def fake_run(
+        command: list[str], **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        if command[:3] == ["docker", "image", "inspect"]:
+            return subprocess.CompletedProcess(command, inspect_rc, "", inspect_err)
+        if command[:2] == ["docker", "version"]:
+            return subprocess.CompletedProcess(command, version_rc, "", version_err)
+        raise AssertionError(f"unexpected command {command}")
+
+    return fake_run
+
+
+def test_require_local_image_passes_when_present(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(docker.subprocess, "run", _docker_probe_stub(inspect_rc=0))
+    docker.require_local_image("stack:latest")
+
+
+def test_require_local_image_raises_when_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # Image absent but daemon reachable: advise building / passing --image.
+    monkeypatch.setattr(
+        docker.subprocess,
+        "run",
+        _docker_probe_stub(inspect_rc=1, inspect_err="No such image", version_rc=0),
+    )
+    with pytest.raises(DockerRunError, match="not present locally") as excinfo:
+        docker.require_local_image("stack:latest")
+    # The daemon's own error is preserved for context.
+    assert "No such image" in str(excinfo.value)
+
+
+def test_require_local_image_raises_when_daemon_unreachable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # Both probes fail: report a daemon problem, not a missing image.
+    monkeypatch.setattr(
+        docker.subprocess,
+        "run",
+        _docker_probe_stub(
+            inspect_rc=1,
+            inspect_err="failed to connect to the docker API",
+            version_rc=1,
+            version_err="Cannot connect to the Docker daemon",
+        ),
+    )
+    with pytest.raises(DockerRunError, match="Cannot reach the Docker daemon") as excinfo:
+        docker.require_local_image("stack:latest")
+    message = str(excinfo.value)
+    assert "Cannot connect to the Docker daemon" in message
+    # Must not misdirect the user toward rebuilding when Docker is the problem.
+    assert "--skip-build" not in message
+    assert "not present locally" not in message
+
+
+def test_require_local_image_raises_when_docker_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def fake_run(command: list[str], **kwargs: object) -> None:
+        raise FileNotFoundError("docker")
+
+    monkeypatch.setattr(docker.subprocess, "run", fake_run)
+    with pytest.raises(DockerRunError, match="Docker CLI not found"):
+        docker.require_local_image("stack:latest")
 
 
 def test_resolve_image_plan_dockerfile_builds_default_tag(tmp_path: Path) -> None:

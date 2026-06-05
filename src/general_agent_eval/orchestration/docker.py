@@ -61,6 +61,12 @@ class ImagePlan:
 
     image: str
     layers: tuple[BuildLayer, ...]
+    # True only for --skip-build: we run the default stack tag without building it.
+    # That tag is local-only (never in a registry), so the caller must confirm it
+    # exists locally before staging -- otherwise docker run tries to pull it and
+    # fails late with a misleading "pull access denied". A pre-built --image is left
+    # False so Docker may still pull it.
+    requires_local_image: bool = False
 
     @property
     def build(self) -> bool:
@@ -182,8 +188,9 @@ def resolve_image_plan(
     stack = layered_stack(agent=agent, service=service)
     final_image = stack[-1].image
     if args.skip_build:
-        # Skipping the build only needs the tag, not the Dockerfiles.
-        return ImagePlan(image=final_image, layers=())
+        # Skipping the build only needs the tag, not the Dockerfiles -- but the tag
+        # must already exist locally (require_local_image enforces that pre-staging).
+        return ImagePlan(image=final_image, layers=(), requires_local_image=True)
     _require_source_checkout()
     return ImagePlan(image=final_image, layers=stack)
 
@@ -257,6 +264,54 @@ def build_layer(layer: BuildLayer) -> None:
         command.extend(["--build-arg", f"{name}={value}"])
     command.append(str(layer.context))
     subprocess.run(command, check=True)
+
+
+def require_local_image(image: str) -> None:
+    """Fail fast when --skip-build's image is not present locally. The default stack
+    tag lives in no registry, so letting `docker run` discover the gap would attempt
+    a doomed pull and surface a confusing "pull access denied" only after staging.
+    `docker image inspect` is a local-only probe (no network), but it exits nonzero
+    for *any* failure -- a missing image and an unreachable/denied daemon look the
+    same -- so on failure we probe the daemon (`docker version` exits nonzero only
+    when it is unreachable) to report the right cause instead of always blaming the
+    image."""
+    try:
+        result = subprocess.run(
+            ["docker", "image", "inspect", image],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except FileNotFoundError as exc:
+        raise DockerRunError(
+            "Docker CLI not found; install Docker to run the agent runtime."
+        ) from exc
+    if result.returncode == 0:
+        return
+    inspect_error = result.stderr.strip()
+    daemon = subprocess.run(
+        ["docker", "version"],
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if daemon.returncode != 0:
+        detail = daemon.stderr.strip() or inspect_error
+        raise DockerRunError(
+            f"Cannot reach the Docker daemon to check the runtime image '{image}'. "
+            "Start Docker and verify access, then retry."
+            + (f" {detail}" if detail else "")
+        )
+    message = (
+        f"--skip-build was given but the runtime image '{image}' is not present "
+        "locally. Build it first by running without --skip-build, or pass --image "
+        "to run a different pre-built image."
+    )
+    if inspect_error:
+        message += f" ({inspect_error})"
+    raise DockerRunError(message)
 
 
 def build_image_plan(plan: ImagePlan) -> None:
