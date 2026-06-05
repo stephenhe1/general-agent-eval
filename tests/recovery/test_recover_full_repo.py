@@ -112,23 +112,50 @@ def test_recover_merges_agent_tests_into_full_repo(tmp_path: Path) -> None:
     assert manifest["apply_status"] == "clean"
     assert manifest["commit"] == origin_head
     assert manifest["commit_source"] == "test_clearing.git_baseline.original_head"
+    assert manifest["test_clearing"]["applied"] is True
 
     # Full repository structure is preserved.
     assert (repo_dir / "pom.xml").exists()
     assert (repo_dir / "src/main/java/example/App.java").exists()
-    # An original test the agent never touched survives the recovery.
-    assert (repo_dir / "src/test/java/example/UntouchedTest.java").exists()
+    # A cleared test the agent never recreated stays deleted.
+    assert not (repo_dir / "src/test/java/example/UntouchedTest.java").exists()
     # The agent's brand-new test is merged in.
     assert (repo_dir / "src/test/java/example/GeneratedApiTest.java").exists()
-    # Agent wins the collision at the recreated path.
+    # The agent's version lands at the recreated path.
     assert "generated" in (
         repo_dir / "src/test/java/example/AppTest.java"
     ).read_text(encoding="utf-8")
 
-    collisions = {c["path"]: c for c in manifest["collisions"]}
-    assert "src/test/java/example/AppTest.java" in collisions
-    assert collisions["src/test/java/example/AppTest.java"]["expected_cleared"] is True
+    # The clearing replay deleted the originals, so nothing collides.
+    assert manifest["collisions"] == []
     assert manifest["counts"]["non_test_touched"] == 0
+
+
+def test_recover_falls_back_to_collisions_without_clearing_patch(tmp_path: Path) -> None:
+    def agent_edits(staged: Path) -> None:
+        write_file(
+            staged / "src/test/java/example/AppTest.java",
+            "class AppTest { void generated() {} }\n",
+        )
+
+    origin, run_dir, _ = make_run(tmp_path, agent_edits)
+    # Simulate an older run that never captured the clearing patch.
+    (run_dir / "output" / "test_clearing.patch").unlink()
+    manifest = recover(tmp_path, origin, run_dir)
+
+    repo_dir = Path(manifest["repo_dir"])
+    assert manifest["apply_status"] == "clean"
+    assert manifest["test_clearing"]["applied"] is False
+    assert any("test_clearing.patch was not replayed" in c for c in manifest["caveats"])
+
+    # Agent still wins the collision at the recreated path.
+    assert "generated" in (
+        repo_dir / "src/test/java/example/AppTest.java"
+    ).read_text(encoding="utf-8")
+    collisions = {c["path"]: c for c in manifest["collisions"]}
+    assert collisions["src/test/java/example/AppTest.java"]["expected_cleared"] is True
+    # Without the replay, cleared tests the agent never recreated resurface.
+    assert (repo_dir / "src/test/java/example/UntouchedTest.java").exists()
 
 
 def test_recover_flags_production_code_changes(tmp_path: Path) -> None:

@@ -178,13 +178,13 @@ def test_chat_prompt_rest_assured_and_module_blocks() -> None:
 
     # Single-module injection: the REST Assured line, but no multi-module detail.
     single = render({**base, "rest_assured": "1"})
-    assert "Use REST Assured" in single
+    assert "MUST use REST Assured" in single
     assert "multi-module" not in single
     assert "{{" not in single
 
     # Multi-module injection: both blocks, naming the target module.
     multi = render({**base, "rest_assured": "1", "test_module": "web"})
-    assert "Use REST Assured" in multi
+    assert "MUST use REST Assured" in multi
     assert "multi-module" in multi
     assert "web module" in multi
 

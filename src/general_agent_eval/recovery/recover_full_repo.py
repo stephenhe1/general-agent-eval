@@ -78,7 +78,7 @@ def load_manifest(run_dir: Path) -> dict[str, Any]:
         raise RecoverError(f"manifest.json is invalid JSON: {manifest_path}") from exc
 
 
-def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None, Path | None]:
+def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None, Path | None, Path | None]:
     """Locate run artifacts relative to run_dir so a moved run dir still resolves."""
     output_dir = run_dir / "output"
     git_diff_patch = output_dir / "git_diff.patch"
@@ -86,10 +86,12 @@ def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None, Path | None]:
         raise RecoverError(f"run dir is missing the agent patch: {git_diff_patch}")
     cleared_tests = output_dir / "cleared_tests.json"
     injection_patch = output_dir / "dependency_injection.patch"
+    clearing_patch = output_dir / "test_clearing.patch"
     return (
         git_diff_patch,
         cleared_tests if cleared_tests.is_file() else None,
         injection_patch if injection_patch.is_file() else None,
+        clearing_patch if clearing_patch.is_file() else None,
     )
 
 
@@ -243,16 +245,11 @@ def clone_and_checkout(repo: Path, commit: str, dest: Path) -> None:
         )
 
 
-def apply_injection_patch(repo: Path, patch_path: Path | None) -> dict[str, Any]:
-    """Replay the dependency-injection patch (built against the baseline) onto the
-    clone before the agent patch, so the agent's RestAssured tests still compile.
-
-    The clone carries the original POM without the injected dependency; the patch
-    only touches build files and the agent patch only touches tests, so the two
-    apply without colliding in practice.
-    """
+def replay_patch(repo: Path, patch_path: Path | None, name: str) -> dict[str, Any]:
+    """Replay a preprocessing patch (recorded against the original tree) onto the
+    clone before the agent patch, so the clone matches the run's baseline."""
     if patch_path is None:
-        return {"applied": False, "reason": "no dependency_injection.patch"}
+        return {"applied": False, "reason": f"no {name}"}
     if not patch_path.read_text(encoding="utf-8").strip():
         return {"applied": False, "reason": "empty patch", "patch": str(patch_path)}
     result = run_git(["apply", "--index", str(patch_path)], cwd=repo)
@@ -300,6 +297,7 @@ def build_recovery_manifest(
     touched: list[str],
     collisions: list[dict[str, Any]],
     apply_result: dict[str, Any],
+    clearing_result: dict[str, Any],
     injection_result: dict[str, Any],
     caveats: list[str],
 ) -> dict[str, Any]:
@@ -313,6 +311,7 @@ def build_recovery_manifest(
         "commit_source": commit_info["source"],
         "base_source": "local-clone",
         "collision_policy": "agent-wins",
+        "test_clearing": clearing_result,
         "dependency_injection": injection_result,
         "apply_status": apply_result["status"],
         "rejected_files": apply_result["rejected_files"],
@@ -348,7 +347,9 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         raise RecoverError(f"--repo is not a directory: {repo}")
 
     manifest = load_manifest(run_dir)
-    git_diff_patch, cleared_tests_path, injection_patch_path = resolve_artifacts(run_dir)
+    git_diff_patch, cleared_tests_path, injection_patch_path, clearing_patch_path = (
+        resolve_artifacts(run_dir)
+    )
     commit_info = resolve_commit(manifest, args.commit)
     caveats = collect_caveats(manifest)
 
@@ -362,8 +363,22 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
 
     clone_and_checkout(repo, commit_info["commit"], repo_dir)
 
-    # Replay the injected build-file change first; the agent patch lands on top.
-    injection_result = apply_injection_patch(repo_dir, injection_patch_path)
+    # Replay the recorded test deletions first so the clone matches the testless
+    # baseline the agent diffed against; otherwise original tests the agent never
+    # recreated (e.g. UI suites) silently survive into the recovery.
+    clearing_result = replay_patch(repo_dir, clearing_patch_path, "test_clearing.patch")
+    test_clearing = (manifest.get("preprocessing") or {}).get("test_clearing") or {}
+    if test_clearing.get("enabled") and not clearing_result["applied"]:
+        caveats.append(
+            f"test_clearing.patch was not replayed ({clearing_result['reason']}): "
+            "original test files the agent did not recreate may survive in the "
+            "recovered repo (see recovery_manifest.json test_clearing)."
+        )
+
+    # Replay the injected build-file change next; the agent patch lands on top.
+    injection_result = replay_patch(
+        repo_dir, injection_patch_path, "dependency_injection.patch"
+    )
     if injection_patch_path is not None and not injection_result["applied"]:
         caveats.append(
             "dependency_injection.patch did not apply: the recovered repo lacks the "
@@ -400,6 +415,7 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         touched=touched,
         collisions=collisions,
         apply_result=apply_result,
+        clearing_result=clearing_result,
         injection_result=injection_result,
         caveats=caveats,
     )
@@ -465,14 +481,15 @@ def main(argv: list[str] | None = None) -> int:
         f"apply={manifest['apply_status']}",
         flush=True,
     )
-    injection = manifest["dependency_injection"]
-    if injection.get("applied") or injection.get("reason") != "no dependency_injection.patch":
-        print(
-            "[recover] "
-            f"dependency_injection applied={injection.get('applied')} "
-            f"{injection.get('reason', '')}".rstrip(),
-            flush=True,
-        )
+    for replay_name in ("test_clearing", "dependency_injection"):
+        replay = manifest[replay_name]
+        if replay.get("applied") or replay.get("reason") != f"no {replay_name}.patch":
+            print(
+                "[recover] "
+                f"{replay_name} applied={replay.get('applied')} "
+                f"{replay.get('reason', '')}".rstrip(),
+                flush=True,
+            )
     counts = manifest["counts"]
     print(
         "[recover] "
