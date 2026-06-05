@@ -8,7 +8,9 @@ from pathlib import Path
 
 from general_agent_eval.general_agents.agent_specs import AGENT_SPECS
 from general_agent_eval.general_agents.claude_code import (
+    DEFAULT_EFFORT,
     DEFAULT_PERMISSION_MODE,
+    EFFORT_LEVELS,
     PERMISSION_MODES,
     RESERVED_PROMPT_VARS,
 )
@@ -82,6 +84,7 @@ def validate_agent_options(args: argparse.Namespace) -> None:
             "--oauth-token-env": args.oauth_token_env is not None,
             "--max-budget-usd": args.max_budget_usd is not None,
             "--small-model": args.small_model is not None,
+            "--effort": args.effort is not None,
             "--extra-arg": bool(args.extra_arg),
         },
         "codex": {
@@ -111,6 +114,8 @@ def resolve_agent_defaults(args: argparse.Namespace) -> None:
         args.model = "sonnet"
     if args.permission_mode is None:
         args.permission_mode = DEFAULT_PERMISSION_MODE
+    if args.effort is None:
+        args.effort = DEFAULT_EFFORT
     if args.sandbox is None:
         args.sandbox = DEFAULT_SANDBOX
 
@@ -250,6 +255,17 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Claude Code permission mode (claude-code agent only). Defaults to "
             "bypassPermissions. Rejected for codex."
+        ),
+    )
+    parser.add_argument(
+        "--effort",
+        choices=EFFORT_LEVELS,
+        default=None,
+        help=(
+            "Reasoning effort, forwarded natively to Claude Code as --effort to "
+            "guide adaptive thinking depth (claude-code agent only at the moment). "
+            "xhigh applies to Opus 4.7 only and falls back to high elsewhere. "
+            "Defaults to high. Rejected for codex."
         ),
     )
     parser.add_argument(

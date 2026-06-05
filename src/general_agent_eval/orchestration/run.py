@@ -82,6 +82,7 @@ def build_agent_request(
         container_output_dir=CONTAINER_OUTPUT_DIR,
         model=args.model,
         permission_mode=args.permission_mode,
+        effort=getattr(args, "effort", "high"),
         system_prompt_config=args.system_prompt_config,
         base_url=args.base_url,
         small_model=getattr(args, "small_model", None),

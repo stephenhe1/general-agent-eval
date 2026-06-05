@@ -158,6 +158,7 @@ def sanitized_manifest(
             "model": args.model,
             "small_model": getattr(args, "small_model", None),
             "permission_mode": args.permission_mode,
+            "effort": getattr(args, "effort", None),
             "sandbox": getattr(args, "sandbox", None),
             "system_prompt_config": args.system_prompt_config,
             # Host paths; null means the packaged template was used.

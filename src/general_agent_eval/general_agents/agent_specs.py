@@ -14,6 +14,8 @@ class AgentRunRequest:
     base_url: str | None = None
     # Claude Code small/fast model override; ignored by the codex agent.
     small_model: str | None = None
+    # Claude Code reasoning effort; ignored by the codex agent.
+    effort: str = "high"
     api_key_env: str | None = None
     auth_token_env: str | None = None
     oauth_token_env: str | None = None
@@ -59,6 +61,8 @@ def build_claude_code_command(request: AgentRunRequest) -> list[str]:
         request.model,
         "--permission-mode",
         request.permission_mode,
+        "--effort",
+        request.effort,
         "--system-prompt-config",
         request.system_prompt_config,
         "--output-jsonl",

@@ -257,6 +257,19 @@ def test_claude_code_command_forwards_small_model() -> None:
     assert command[command.index("--small-model") + 1] == "haiku"
 
 
+def test_claude_code_command_forwards_effort() -> None:
+    explicit = cli.build_parser().parse_args(["--input-dir", "/tmp/p", "--effort", "max"])
+    cli.resolve_agent_defaults(explicit)
+    command = build_claude_code_command(build_agent_request(explicit))
+    assert command[command.index("--effort") + 1] == "max"
+
+    # Unset --effort resolves to the high default and is still forwarded natively.
+    default = cli.build_parser().parse_args(["--input-dir", "/tmp/p"])
+    cli.resolve_agent_defaults(default)
+    command = build_claude_code_command(build_agent_request(default))
+    assert command[command.index("--effort") + 1] == "high"
+
+
 @pytest.mark.parametrize(
     "removed_arg",
     [

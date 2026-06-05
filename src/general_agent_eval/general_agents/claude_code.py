@@ -36,6 +36,10 @@ PERMISSION_MODES = (
     "bypassPermissions",
 )
 DEFAULT_PERMISSION_MODE = "bypassPermissions"
+# Reasoning effort levels accepted by ClaudeAgentOptions.effort (forwarded to the
+# CLI as --effort). xhigh is Opus 4.7 only and falls back to high elsewhere.
+EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
+DEFAULT_EFFORT = "high"
 DISALLOWED_TOOLS = ("WebSearch", "WebFetch")
 
 # Base context keys that --prompt-var must not clobber.
@@ -232,6 +236,7 @@ def build_claude_options_kwargs(
         "env": build_agent_env(args),
         "model": args.model,
         "permission_mode": args.permission_mode,
+        "effort": args.effort,
         "disallowed_tools": list(DISALLOWED_TOOLS),
         "setting_sources": [],
         "system_prompt": system_prompt,
@@ -412,6 +417,17 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Claude Code permission mode. Defaults to bypassPermissions so "
             "isolated evaluation runs do not pause for edit approval."
+        ),
+    )
+    parser.add_argument(
+        "--effort",
+        choices=EFFORT_LEVELS,
+        default=DEFAULT_EFFORT,
+        help=(
+            "Reasoning effort Claude Code spends per response, forwarded natively "
+            "to the harness as --effort to guide adaptive thinking depth. xhigh "
+            "applies to Opus 4.7 only and falls back to high elsewhere. Defaults "
+            "to high."
         ),
     )
     parser.add_argument(

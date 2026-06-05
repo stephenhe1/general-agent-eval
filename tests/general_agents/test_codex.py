@@ -177,6 +177,7 @@ def test_build_codex_command_forwards_shared_flags_and_omits_claude_flags() -> N
         assert flag in command
     assert "--permission-mode" not in command
     assert "--oauth-token-env" not in command
+    assert "--effort" not in command
     assert command[command.index("--sandbox") + 1] == "workspace_write"
 
 
@@ -202,6 +203,14 @@ def test_resolve_agent_defaults_fills_codex_sandbox_full_access() -> None:
     assert args.sandbox == "full_access"
 
 
+def test_resolve_agent_defaults_fills_claude_effort_high() -> None:
+    args = cli.build_parser().parse_args(["--input-dir", "/tmp/p"])
+    # Agent-specific options stay unset until resolve_agent_defaults fills them.
+    assert args.effort is None
+    cli.resolve_agent_defaults(args)
+    assert args.effort == "high"
+
+
 def test_resolve_agent_defaults_requires_model_for_codex() -> None:
     args = cli.build_parser().parse_args(
         ["--input-dir", "/tmp/p", "--agent", "codex"]
@@ -225,6 +234,7 @@ def _docker_args(*extra: str) -> object:
         ["--auth-token-env", "ANTHROPIC_AUTH_TOKEN"],
         ["--oauth-token-env", "CLAUDE_CODE_OAUTH_TOKEN"],
         ["--small-model", "haiku"],
+        ["--effort", "high"],
         ["--extra-arg=--foo"],
     ],
 )
@@ -242,7 +252,9 @@ def test_validate_rejects_sandbox_for_claude_code() -> None:
 
 def test_validate_allows_supported_options_per_agent() -> None:
     codex = _docker_args("--agent", "codex", "--model", "m", "--sandbox", "read_only")
-    claude = _docker_args("--max-budget-usd", "5", "--permission-mode", "plan")
+    claude = _docker_args(
+        "--max-budget-usd", "5", "--permission-mode", "plan", "--effort", "max"
+    )
     # Neither raises: each option is supported by the agent it was passed to.
     cli.validate_agent_options(codex)
     cli.validate_agent_options(claude)
