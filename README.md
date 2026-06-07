@@ -199,7 +199,9 @@ the agent wiring up the build itself. The per-service coordinates, target POM
 (the module whose tests run), and version live in the service manifest's optional
 `rest_assured` block; omit the block to skip injection. The version is `null` for
 Spring Boot services (inherited from the Boot dependency-management BOM) and an
-explicit string otherwise. The POM edit runs after `--clear-tests` and lands in
+explicit string otherwise. An optional `exclusions` list (`group_id`/`artifact_id`
+entries) strips transitive dependencies that would clash with the host project,
+e.g. under a maven-enforcer `dependencyConvergence` rule. The POM edit runs after `--clear-tests` and lands in
 the testless baseline, so it stays out of the agent's `git_diff.patch`; the change
 is captured separately as `output/dependency_injection.patch`, which the recoverer
 replays onto the cloned original repo before the agent patch.

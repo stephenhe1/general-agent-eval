@@ -23,12 +23,28 @@ _TAG_RE = re.compile(
 
 
 @dataclass(frozen=True)
+class Exclusion:
+    group_id: str
+    artifact_id: str
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Exclusion:
+        try:
+            return cls(group_id=str(data["group_id"]), artifact_id=str(data["artifact_id"]))
+        except (KeyError, TypeError) as exc:
+            raise RestAssuredInjectionError(
+                f"rest_assured exclusion entry is malformed: {data!r}"
+            ) from exc
+
+
+@dataclass(frozen=True)
 class InjectionConfig:
     target_pom: str
     group_id: str
     artifact_id: str
     version: str | None
     scope: str = "test"
+    exclusions: tuple[Exclusion, ...] = ()
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> InjectionConfig:
@@ -41,12 +57,16 @@ class InjectionConfig:
                 f"rest_assured config is missing required key: {exc}"
             ) from exc
         raw_version = data.get("version")
+        raw_exclusions = data.get("exclusions") or []
+        if not isinstance(raw_exclusions, list):
+            raise RestAssuredInjectionError("rest_assured exclusions must be a list")
         return cls(
             target_pom=target_pom,
             group_id=group_id,
             artifact_id=artifact_id,
             version=None if raw_version is None else str(raw_version),
             scope=str(data.get("scope", "test")),
+            exclusions=tuple(Exclusion.from_dict(entry) for entry in raw_exclusions),
         )
 
 
@@ -57,6 +77,7 @@ class InjectionResult:
     artifact_id: str
     version: str | None
     scope: str
+    exclusions: tuple[Exclusion, ...]
     status: str  # "injected" | "already_present"
     created_block: bool
 
@@ -73,6 +94,10 @@ class InjectionResult:
             "version": self.version,
             "managed": self.managed,
             "scope": self.scope,
+            "exclusions": [
+                {"group_id": exc.group_id, "artifact_id": exc.artifact_id}
+                for exc in self.exclusions
+            ],
             "status": self.status,
             "created_block": self.created_block,
         }
@@ -159,6 +184,16 @@ def _render_dependency(config: InjectionConfig, child_indent: str, unit: str) ->
     if config.version is not None:
         lines.append(f"{field_indent}<version>{config.version}</version>")
     lines.append(f"{field_indent}<scope>{config.scope}</scope>")
+    if config.exclusions:
+        lines.append(f"{field_indent}<exclusions>")
+        for exclusion in config.exclusions:
+            lines.append(f"{field_indent}{unit}<exclusion>")
+            lines.append(f"{field_indent}{unit}{unit}<groupId>{exclusion.group_id}</groupId>")
+            lines.append(
+                f"{field_indent}{unit}{unit}<artifactId>{exclusion.artifact_id}</artifactId>"
+            )
+            lines.append(f"{field_indent}{unit}</exclusion>")
+        lines.append(f"{field_indent}</exclusions>")
     lines.append(f"{child_indent}</dependency>")
     return "\n".join(lines) + "\n"
 
@@ -201,17 +236,12 @@ def _create_block(text: str, config: InjectionConfig) -> str:
             "POM has no project-level <dependencies> and no </project> close tag"
         )
     base_indent = _line_indent(text, close) + "    "
-    field_indent = base_indent + "    "
-    block_lines = [f"{base_indent}<dependencies>"]
-    block_lines.append(f"{field_indent}<dependency>")
-    block_lines.append(f"{field_indent}    <groupId>{config.group_id}</groupId>")
-    block_lines.append(f"{field_indent}    <artifactId>{config.artifact_id}</artifactId>")
-    if config.version is not None:
-        block_lines.append(f"{field_indent}    <version>{config.version}</version>")
-    block_lines.append(f"{field_indent}    <scope>{config.scope}</scope>")
-    block_lines.append(f"{field_indent}</dependency>")
-    block_lines.append(f"{base_indent}</dependencies>")
-    block = "\n".join(block_lines) + "\n"
+    unit = "    "
+    block = (
+        f"{base_indent}<dependencies>\n"
+        + _render_dependency(config, base_indent + unit, unit)
+        + f"{base_indent}</dependencies>\n"
+    )
 
     line_start = text.rfind("\n", 0, close) + 1
     return text[:line_start] + block + text[line_start:]
@@ -238,6 +268,7 @@ def inject_rest_assured(root: str | Path, config: InjectionConfig) -> InjectionR
             artifact_id=config.artifact_id,
             version=config.version,
             scope=config.scope,
+            exclusions=config.exclusions,
             status="already_present",
             created_block=False,
         )
@@ -260,6 +291,7 @@ def inject_rest_assured(root: str | Path, config: InjectionConfig) -> InjectionR
         artifact_id=config.artifact_id,
         version=config.version,
         scope=config.scope,
+        exclusions=config.exclusions,
         status="injected",
         created_block=created_block,
     )

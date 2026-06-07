@@ -246,3 +246,72 @@ def test_multi_module_target_pom(tmp_path: Path) -> None:
     assert result.status == "injected"
     assert "rest-assured" in (tmp_path / "web/pom.xml").read_text(encoding="utf-8")
     assert (tmp_path / "web/pom.xml").exists()
+
+
+def config_with_exclusions(**kwargs: object) -> InjectionConfig:
+    return InjectionConfig.from_dict(
+        {
+            "target_pom": "pom.xml",
+            "group_id": "io.rest-assured",
+            "artifact_id": "rest-assured",
+            "version": "4.5.1",
+            "scope": "test",
+            "exclusions": [
+                {"group_id": "org.apache.commons", "artifact_id": "commons-lang3"},
+                {"group_id": "commons-codec", "artifact_id": "commons-codec"},
+            ],
+            **kwargs,
+        }
+    )
+
+
+def test_injects_exclusions(tmp_path: Path) -> None:
+    write_pom(tmp_path, SINGLE_BLOCK)
+
+    result = inject_rest_assured(tmp_path, config_with_exclusions())
+
+    text = (tmp_path / "pom.xml").read_text(encoding="utf-8")
+    block = injected_dependency_block(text)
+    assert result.to_dict()["exclusions"] == [
+        {"group_id": "org.apache.commons", "artifact_id": "commons-lang3"},
+        {"group_id": "commons-codec", "artifact_id": "commons-codec"},
+    ]
+    assert block.count("<exclusion>") == 2
+    assert "<groupId>org.apache.commons</groupId>" in block
+    assert "<artifactId>commons-lang3</artifactId>" in block
+    assert "<groupId>commons-codec</groupId>" in block
+    # Exclusions nest inside the injected dependency, after its scope.
+    assert block.index("<scope>test</scope>") < block.index("<exclusions>")
+    assert block.rstrip().endswith("</dependency>")
+
+
+def test_injects_exclusions_into_created_block(tmp_path: Path) -> None:
+    pom = """<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <artifactId>demo</artifactId>
+</project>
+"""
+    write_pom(tmp_path, pom)
+
+    result = inject_rest_assured(tmp_path, config_with_exclusions())
+
+    text = (tmp_path / "pom.xml").read_text(encoding="utf-8")
+    assert result.created_block is True
+    assert text.count("<exclusion>") == 2
+    assert text.index("<exclusions>") < text.index("</dependencies>")
+
+
+def test_omits_exclusions_block_when_empty(tmp_path: Path) -> None:
+    write_pom(tmp_path, SINGLE_BLOCK)
+
+    inject_rest_assured(tmp_path, config())
+
+    text = (tmp_path / "pom.xml").read_text(encoding="utf-8")
+    assert "<exclusions>" not in text
+
+
+def test_malformed_exclusion_entry_raises(tmp_path: Path) -> None:
+    with pytest.raises(RestAssuredInjectionError, match="malformed"):
+        config_with_exclusions(exclusions=[{"group_id": "only-group"}])
+    with pytest.raises(RestAssuredInjectionError, match="must be a list"):
+        config_with_exclusions(exclusions="not-a-list")
