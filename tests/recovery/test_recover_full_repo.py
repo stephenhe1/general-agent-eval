@@ -10,7 +10,11 @@ from typing import Callable
 import pytest
 
 from general_agent_eval.orchestration.preprocess import preprocess_staged_input
-from general_agent_eval.orchestration.staging import collect_git_artifacts, stage_input
+from general_agent_eval.orchestration.staging import (
+    collect_git_artifacts,
+    stage_input,
+    write_git_patch,
+)
 from general_agent_eval.recovery import recover_full_repo
 
 
@@ -30,6 +34,11 @@ def run(command: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
 def write_file(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
+
+
+def write_bytes(path: Path, content: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(content)
 
 
 def configure_git(repo: Path) -> None:
@@ -94,6 +103,28 @@ def recover(tmp_path: Path, origin: Path, run_dir: Path) -> dict:
     return recover_full_repo.recover(args)
 
 
+def test_write_git_patch_preserves_crlf_bytes(tmp_path: Path) -> None:
+    origin = tmp_path / "origin"
+    origin.mkdir()
+    write_bytes(
+        origin / "src/test/java/example/CrLfTest.java", b"class CrLfTest {}\r\n"
+    )
+    run(["git", "init"], cwd=origin)
+    configure_git(origin)
+    run(["git", "add", "--all"], cwd=origin)
+    run(["git", "commit", "-m", "initial"], cwd=origin)
+
+    (origin / "src/test/java/example/CrLfTest.java").unlink()
+    patch_path = tmp_path / "test_clearing.patch"
+    write_git_patch(
+        staged_input=origin,
+        output_path=patch_path,
+        relative_paths=["src/test/java/example/CrLfTest.java"],
+    )
+
+    assert b"-class CrLfTest {}\r\n" in patch_path.read_bytes()
+
+
 def test_recover_merges_agent_tests_into_full_repo(tmp_path: Path) -> None:
     def agent_edits(staged: Path) -> None:
         write_file(
@@ -129,6 +160,61 @@ def test_recover_merges_agent_tests_into_full_repo(tmp_path: Path) -> None:
     # The clearing replay deleted the originals, so nothing collides.
     assert manifest["collisions"] == []
     assert manifest["counts"]["non_test_touched"] == 0
+
+
+def test_recover_falls_back_for_lf_normalized_crlf_clearing_patch(
+    tmp_path: Path,
+) -> None:
+    if shutil.which("rsync") is None:
+        pytest.skip("rsync is required by Docker staging")
+
+    origin = tmp_path / "origin"
+    origin.mkdir()
+    write_file(origin / "pom.xml", "<project></project>\n")
+    write_file(origin / "src/main/java/example/App.java", "class App {}\n")
+    write_bytes(
+        origin / "src/test/java/example/CrLfTest.java", b"class CrLfTest {}\r\n"
+    )
+    run(["git", "init"], cwd=origin)
+    configure_git(origin)
+    run(["git", "add", "--all"], cwd=origin)
+    run(["git", "commit", "-m", "initial"], cwd=origin)
+
+    run_dir = tmp_path / "run"
+    staged = run_dir / "input"
+    output_dir = run_dir / "output"
+    run_dir.mkdir()
+    output_dir.mkdir()
+
+    stage_input(origin, staged)
+    preprocessing = preprocess_staged_input(
+        args=argparse.Namespace(reset_git=False, clear_tests=True),
+        staged_input=staged,
+        output_dir=output_dir,
+    )
+    clearing_patch = output_dir / "test_clearing.patch"
+    clearing_patch.write_bytes(clearing_patch.read_bytes().replace(b"\r\n", b"\n"))
+
+    write_file(
+        staged / "src/test/java/example/GeneratedApiTest.java",
+        "class GeneratedApiTest {}\n",
+    )
+    collect_git_artifacts(staged, output_dir)
+    (run_dir / "manifest.json").write_text(
+        json.dumps({"input_dir": str(origin), "preprocessing": preprocessing}),
+        encoding="utf-8",
+    )
+
+    manifest = recover(tmp_path, origin, run_dir)
+    repo_dir = Path(manifest["repo_dir"])
+
+    assert manifest["test_clearing"]["applied"] is True
+    assert manifest["test_clearing"]["apply_mode"] == "ignore-whitespace"
+    assert not any(
+        "test_clearing.patch was not replayed" in c for c in manifest["caveats"]
+    )
+    assert not (repo_dir / "src/test/java/example/CrLfTest.java").exists()
+    assert (repo_dir / "src/test/java/example/GeneratedApiTest.java").exists()
 
 
 def test_recover_falls_back_to_collisions_without_clearing_patch(tmp_path: Path) -> None:

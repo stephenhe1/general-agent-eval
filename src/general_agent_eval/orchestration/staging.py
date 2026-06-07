@@ -134,7 +134,7 @@ def write_git_patch(
     relative_paths: list[str],
 ) -> None:
     if not relative_paths:
-        output_path.write_text("", encoding="utf-8")
+        output_path.write_bytes(b"")
         return
 
     result = subprocess.run(
@@ -150,12 +150,13 @@ def write_git_patch(
         check=False,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        text=True,
     )
     if result.returncode != 0:
-        detail = result.stderr.strip() or result.stdout.strip()
+        detail = (result.stderr or result.stdout).decode(
+            "utf-8", errors="replace"
+        ).strip()
         raise DockerRunError(f"Failed to write Git patch: {detail}")
-    output_path.write_text(result.stdout, encoding="utf-8")
+    output_path.write_bytes(result.stdout)
 
 
 def remove_git_metadata(root: Path) -> None:
@@ -224,6 +225,19 @@ def collect_git_artifacts(staged_input: Path, output_dir: Path) -> dict[str, str
             path.write_text(result.stderr or result.stdout, encoding="utf-8")
         artifacts[filename] = str(path)
 
+    def write_git_binary_artifact(filename: str, git_args: list[str]) -> None:
+        result = subprocess.run(
+            ["git", "-C", str(staged_input), *git_args],
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        path = output_dir / filename
+        path.write_bytes(
+            result.stdout if result.returncode == 0 else result.stderr or result.stdout
+        )
+        artifacts[filename] = str(path)
+
     write_git_artifact("git_status.txt", ["status", "--short"])
     write_git_artifact(
         "git_untracked.txt", ["ls-files", "--others", "--exclude-standard"]
@@ -235,5 +249,5 @@ def collect_git_artifacts(staged_input: Path, output_dir: Path) -> dict[str, str
         stderr=subprocess.PIPE,
         text=True,
     )
-    write_git_artifact("git_diff.patch", ["diff", "--binary"])
+    write_git_binary_artifact("git_diff.patch", ["diff", "--binary"])
     return artifacts

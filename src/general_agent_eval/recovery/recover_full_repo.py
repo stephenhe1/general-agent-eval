@@ -245,20 +245,40 @@ def clone_and_checkout(repo: Path, commit: str, dest: Path) -> None:
         )
 
 
-def replay_patch(repo: Path, patch_path: Path | None, name: str) -> dict[str, Any]:
+def replay_patch(
+    repo: Path,
+    patch_path: Path | None,
+    name: str,
+    *,
+    allow_whitespace_fallback: bool = False,
+) -> dict[str, Any]:
     """Replay a preprocessing patch (recorded against the original tree) onto the
     clone before the agent patch, so the clone matches the run's baseline."""
     if patch_path is None:
         return {"applied": False, "reason": f"no {name}"}
-    if not patch_path.read_text(encoding="utf-8").strip():
+    if patch_path.stat().st_size == 0:
         return {"applied": False, "reason": "empty patch", "patch": str(patch_path)}
-    result = run_git(["apply", "--index", str(patch_path)], cwd=repo)
-    if result.returncode == 0:
-        return {"applied": True, "patch": str(patch_path)}
+    strict = run_git(["apply", "--index", str(patch_path)], cwd=repo)
+    if strict.returncode == 0:
+        return {"applied": True, "apply_mode": "strict", "patch": str(patch_path)}
+    strict_stderr = (strict.stderr or strict.stdout).strip()
+    if allow_whitespace_fallback:
+        fallback = run_git(
+            ["apply", "--index", "--ignore-whitespace", str(patch_path)], cwd=repo
+        )
+        if fallback.returncode == 0:
+            return {
+                "applied": True,
+                "apply_mode": "ignore-whitespace",
+                "reason": "strict apply failed; applied with --ignore-whitespace",
+                "strict_stderr": strict_stderr,
+                "patch": str(patch_path),
+            }
     return {
         "applied": False,
         "reason": "apply failed",
-        "stderr": (result.stderr or result.stdout).strip(),
+        "apply_mode": "strict",
+        "stderr": strict_stderr,
         "patch": str(patch_path),
     }
 
@@ -366,7 +386,12 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
     # Replay the recorded test deletions first so the clone matches the testless
     # baseline the agent diffed against; otherwise original tests the agent never
     # recreated (e.g. UI suites) silently survive into the recovery.
-    clearing_result = replay_patch(repo_dir, clearing_patch_path, "test_clearing.patch")
+    clearing_result = replay_patch(
+        repo_dir,
+        clearing_patch_path,
+        "test_clearing.patch",
+        allow_whitespace_fallback=True,
+    )
     test_clearing = (manifest.get("preprocessing") or {}).get("test_clearing") or {}
     if test_clearing.get("enabled") and not clearing_result["applied"]:
         caveats.append(
