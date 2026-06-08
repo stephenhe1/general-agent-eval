@@ -18,7 +18,7 @@ from openai_codex.models import (
 # Reuse the agent-agnostic prompt/parse helpers; claude_agent_sdk (imported by
 # claude_code) is a core dependency, so this import is always satisfiable.
 from general_agent_eval.general_agents.claude_code import (
-    DEFAULT_CHAT_TEMPLATE,
+    DEFAULT_USER_TEMPLATE,
     DEFAULT_SYSTEM_TEMPLATE,
     HarnessError,
     build_template_context,
@@ -150,7 +150,7 @@ def synthesize_result_record(
 
 def run_codex(
     *,
-    chat_prompt: str,
+    user_prompt: str,
     system_prompt_kwargs: dict[str, str],
     args: argparse.Namespace,
     input_dir: Path,
@@ -180,7 +180,7 @@ def run_codex(
                 cwd=str(input_dir),
                 **system_prompt_kwargs,
             )
-            handle = thread.turn(chat_prompt)
+            handle = thread.turn(user_prompt)
             for notification in handle.stream():
                 print_notification(notification)
                 if output_jsonl is not None:
@@ -231,10 +231,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Jinja2 template for the system prompt.",
     )
     parser.add_argument(
-        "--chat-template",
+        "--user-template",
         type=Path,
-        default=DEFAULT_CHAT_TEMPLATE,
-        help="Jinja2 template for the user/chat prompt.",
+        default=DEFAULT_USER_TEMPLATE,
+        help="Jinja2 template for the user prompt.",
     )
     parser.add_argument(
         "--system-prompt-config",
@@ -285,7 +285,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         metavar="KEY=VALUE",
         help=(
-            "Extra variable injected into the chat/system prompt templates "
+            "Extra variable injected into the user/system prompt templates "
             "(e.g. service_base_url). Can be repeated."
         ),
     )
@@ -322,15 +322,15 @@ def prepare_run(args: argparse.Namespace) -> tuple[Path, str, dict[str, str]]:
         model=args.model,
         prompt_vars=parse_prompt_vars(args.prompt_var),
     )
-    rendered_chat_prompt = render_template(args.chat_template, context)
-    if not rendered_chat_prompt.strip():
-        raise HarnessError("Rendered chat prompt is empty")
+    rendered_user_prompt = render_template(args.user_template, context)
+    if not rendered_user_prompt.strip():
+        raise HarnessError("Rendered user prompt is empty")
 
     rendered_system_prompt = render_template(args.system_template, context)
     system_prompt_kwargs = build_system_prompt(
         args.system_prompt_config, rendered_system_prompt
     )
-    return input_dir, rendered_chat_prompt, system_prompt_kwargs
+    return input_dir, rendered_user_prompt, system_prompt_kwargs
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -338,7 +338,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        input_dir, chat_prompt, system_prompt_kwargs = prepare_run(args)
+        input_dir, user_prompt, system_prompt_kwargs = prepare_run(args)
         if args.reset_git:
             from general_agent_eval.preprocessing.git_reset import (
                 GitVcsError,
@@ -354,7 +354,7 @@ def main(argv: list[str] | None = None) -> int:
                 flush=True,
             )
         return run_codex(
-            chat_prompt=chat_prompt,
+            user_prompt=user_prompt,
             system_prompt_kwargs=system_prompt_kwargs,
             args=args,
             input_dir=input_dir,

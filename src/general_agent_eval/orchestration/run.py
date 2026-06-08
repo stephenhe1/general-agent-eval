@@ -98,7 +98,7 @@ def build_agent_request(
         prompt_vars=(*prompt_vars, *user_prompt_vars),
         extra_args=tuple(args.extra_arg),
         system_template=container_templates.get("system"),
-        chat_template=container_templates.get("chat"),
+        user_template=container_templates.get("user"),
         sandbox=getattr(args, "sandbox", "full_access"),
     )
 

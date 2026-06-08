@@ -278,10 +278,10 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
-        "--chat-template",
+        "--user-template",
         type=Path,
         help=(
-            "Custom Jinja2 user/chat prompt template (both agents), mounted "
+            "Custom Jinja2 user prompt template (both agents), mounted "
             "read-only into the container. Its directory is mounted, so includes "
             "of sibling templates resolve. Defaults to the packaged template."
         ),

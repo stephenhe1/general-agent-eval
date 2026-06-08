@@ -199,7 +199,7 @@ def resolve_image_plan(
 class TemplateMount:
     """A custom prompt template bind-mounted read-only into the container."""
 
-    role: str  # "system" or "chat"
+    role: str  # "system" or "user"
     host_path: Path
     container_dir: str
     container_path: str
@@ -209,7 +209,7 @@ def resolve_template_mounts(args: argparse.Namespace) -> tuple[TemplateMount, ..
     mounts: list[TemplateMount] = []
     for role, raw_path in (
         ("system", getattr(args, "system_template", None)),
-        ("chat", getattr(args, "chat_template", None)),
+        ("user", getattr(args, "user_template", None)),
     ):
         if raw_path is None:
             continue

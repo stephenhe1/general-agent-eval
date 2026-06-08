@@ -151,23 +151,23 @@ def test_templates_render_with_and_without_service() -> None:
         return claude_code.render_template(claude_code.PROMPTS_DIR / name, ctx)
 
     svc = {"service_base_url": "http://127.0.0.1:8888/"}
-    # The chat prompt carries the live-service block; the system prompt does not.
-    without = render("chat_prompt.jinja2", {})
+    # The user prompt carries the live-service block; the system prompt does not.
+    without = render("user_prompt.jinja2", {})
     assert "already running" not in without
-    with_service = render("chat_prompt.jinja2", svc)
+    with_service = render("user_prompt.jinja2", svc)
     assert "http://127.0.0.1:8888/" in with_service
     assert "already running" in with_service
 
     assert "already running" not in render("system_prompt.jinja2", svc)
 
 
-def test_chat_prompt_rest_assured_and_module_blocks() -> None:
+def test_user_prompt_rest_assured_and_module_blocks() -> None:
     def render(prompt_vars: dict[str, str]) -> str:
         ctx = claude_code.build_template_context(
             input_dir=Path("/tmp/x"), model="sonnet", prompt_vars=prompt_vars
         )
         return claude_code.render_template(
-            claude_code.PROMPTS_DIR / "chat_prompt.jinja2", ctx
+            claude_code.PROMPTS_DIR / "user_prompt.jinja2", ctx
         )
 
     base = {"service_base_url": "http://127.0.0.1:8888/"}
@@ -431,7 +431,7 @@ def test_build_docker_command_mounts_templates_and_custom_image(
     system = tmp_path / "system.jinja2"
     system.write_text("system prompt", encoding="utf-8")
     mounts = docker.resolve_template_mounts(
-        argparse.Namespace(system_template=system, chat_template=None)
+        argparse.Namespace(system_template=system, user_template=None)
     )
 
     command = docker.build_docker_command(
@@ -514,7 +514,7 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
     assert manifest["docker"]["layers"][0]["dockerfile"] == str(docker.BASE_DOCKERFILE)
     # No template/prompt-var overrides in this run.
     assert manifest["agent_options"]["system_template"] is None
-    assert manifest["agent_options"]["chat_template"] is None
+    assert manifest["agent_options"]["user_template"] is None
     assert manifest["agent_options"]["prompt_vars"] == []
 
 

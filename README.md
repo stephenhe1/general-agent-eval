@@ -111,13 +111,13 @@ Options that apply to a single agent are rejected (rather than silently dropped)
 when passed for the other agent: `--permission-mode`, `--auth-token-env`,
 `--oauth-token-env`, `--max-budget-usd`, `--small-model`, and `--extra-arg` are
 claude-code only, while `--sandbox` is codex only. Shared options (`--model`,
-`--system-prompt-config`, `--system-template`, `--chat-template`,
+`--system-prompt-config`, `--system-template`, `--user-template`,
 `--prompt-var`, `--base-url`, `--api-key-env`, `--env`) work for both.
 
 ### Custom prompts
 
 The Docker runner forwards the same prompt controls as the standalone runners.
-`--system-template` and `--chat-template` take host paths to Jinja2 templates;
+`--system-template` and `--user-template` take host paths to Jinja2 templates;
 each template's directory is bind-mounted read-only into the container, so
 `{% include %}` of sibling templates keeps resolving. `--prompt-var KEY=VALUE`
 (repeatable) injects extra template variables. Without these flags the packaged
@@ -206,7 +206,7 @@ the testless baseline, so it stays out of the agent's `git_diff.patch`; the chan
 is captured separately as `output/dependency_injection.patch`, which the recoverer
 replays onto the cloned original repo before the agent patch.
 
-With the flag set, the chat prompt also tells the agent to use RestAssured, and for
+With the flag set, the user prompt also tells the agent to use RestAssured, and for
 a multi-module target it names the module to put the tests in (derived from the
 `rest_assured.target_pom` directory). Single-module projects see no module note.
 

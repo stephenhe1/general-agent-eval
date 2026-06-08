@@ -292,7 +292,7 @@ def test_docker_parser_accepts_template_and_image_options() -> None:
         [
             "--input-dir", "/tmp/project",
             "--system-template", "/tmp/system.jinja2",
-            "--chat-template", "/tmp/chat.jinja2",
+            "--user-template", "/tmp/user.jinja2",
             "--prompt-var", "task=summarize",
             "--prompt-var", "depth=full",
             "--image", "custom:1.0",
@@ -300,7 +300,7 @@ def test_docker_parser_accepts_template_and_image_options() -> None:
         ]
     )
     assert args.system_template == Path("/tmp/system.jinja2")
-    assert args.chat_template == Path("/tmp/chat.jinja2")
+    assert args.user_template == Path("/tmp/user.jinja2")
     assert args.prompt_var == ["task=summarize", "depth=full"]
     assert args.image == "custom:1.0"
     assert args.dockerfile == Path("/tmp/Dockerfile.custom")
@@ -610,7 +610,7 @@ def test_resolve_image_plan_requires_source_checkout_for_build(
 
 
 def template_args(**overrides: object) -> argparse.Namespace:
-    base: dict[str, object] = dict(system_template=None, chat_template=None)
+    base: dict[str, object] = dict(system_template=None, user_template=None)
     base.update(overrides)
     return argparse.Namespace(**base)
 
@@ -621,20 +621,20 @@ def test_resolve_template_mounts_empty_without_overrides() -> None:
 
 def test_resolve_template_mounts_maps_container_paths(tmp_path: Path) -> None:
     system = tmp_path / "sys" / "system.jinja2"
-    chat = tmp_path / "chat" / "chat.jinja2"
+    user = tmp_path / "user" / "user.jinja2"
     write_file(system, "system prompt")
-    write_file(chat, "chat prompt")
+    write_file(user, "user prompt")
 
     mounts = docker.resolve_template_mounts(
-        template_args(system_template=system, chat_template=chat)
+        template_args(system_template=system, user_template=user)
     )
 
-    assert [mount.role for mount in mounts] == ["system", "chat"]
+    assert [mount.role for mount in mounts] == ["system", "user"]
     assert mounts[0].host_path == system
     assert mounts[0].container_path == (
         f"{docker.CONTAINER_TEMPLATES_DIR}/system/system.jinja2"
     )
-    assert mounts[1].container_dir == f"{docker.CONTAINER_TEMPLATES_DIR}/chat"
+    assert mounts[1].container_dir == f"{docker.CONTAINER_TEMPLATES_DIR}/user"
 
 
 def test_resolve_template_mounts_rejects_missing_template(tmp_path: Path) -> None:
@@ -664,7 +664,7 @@ def test_build_agent_request_forwards_templates_and_prompt_vars(
         extra_arg=[],
         prompt_var=["task=summarize"],
         system_template=system,
-        chat_template=None,
+        user_template=None,
     )
     mounts = docker.resolve_template_mounts(args)
 
@@ -674,10 +674,10 @@ def test_build_agent_request_forwards_templates_and_prompt_vars(
     assert request.system_template == (
         f"{docker.CONTAINER_TEMPLATES_DIR}/system/system.jinja2"
     )
-    assert request.chat_template is None
+    assert request.user_template is None
     assert "task=summarize" in request.prompt_vars
     assert command[command.index("--system-template") + 1] == request.system_template
-    assert "--chat-template" not in command
+    assert "--user-template" not in command
 
 
 def test_prepare_run_dir_creates_generated_child_under_output_root(

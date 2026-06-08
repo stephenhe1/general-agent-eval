@@ -26,7 +26,7 @@ PROJECT_ROOT = (
 PROMPTS_DIR = PACKAGE_DIR / "prompts"
 
 DEFAULT_SYSTEM_TEMPLATE = PROMPTS_DIR / "system_prompt.jinja2"
-DEFAULT_CHAT_TEMPLATE = PROMPTS_DIR / "chat_prompt.jinja2"
+DEFAULT_USER_TEMPLATE = PROMPTS_DIR / "user_prompt.jinja2"
 PERMISSION_MODES = (
     "default",
     "acceptEdits",
@@ -294,7 +294,7 @@ def print_message(message: object) -> None:
 
 async def run_claude(
     *,
-    chat_prompt: str,
+    user_prompt: str,
     system_prompt: object,
     args: argparse.Namespace,
     input_dir: Path,
@@ -315,7 +315,7 @@ async def run_claude(
     try:
         try:
             async for message in query(
-                prompt=chat_prompt,
+                prompt=user_prompt,
                 options=ClaudeAgentOptions(**options_kwargs),
             ):
                 print_message(message)
@@ -381,10 +381,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Jinja2 template for system prompt additions.",
     )
     parser.add_argument(
-        "--chat-template",
+        "--user-template",
         type=Path,
-        default=DEFAULT_CHAT_TEMPLATE,
-        help="Jinja2 template for the user/chat prompt.",
+        default=DEFAULT_USER_TEMPLATE,
+        help="Jinja2 template for the user prompt.",
     )
     parser.add_argument(
         "--system-prompt-config",
@@ -481,7 +481,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=[],
         metavar="KEY=VALUE",
         help=(
-            "Extra variable injected into the chat/system prompt templates "
+            "Extra variable injected into the user/system prompt templates "
             "(e.g. service_base_url). Can be repeated."
         ),
     )
@@ -534,16 +534,16 @@ def prepare_run(args: argparse.Namespace) -> tuple[Path, str, object]:
         model=args.model,
         prompt_vars=parse_prompt_vars(args.prompt_var),
     )
-    rendered_chat_prompt = render_template(args.chat_template, context)
-    if not rendered_chat_prompt.strip():
-        raise HarnessError("Rendered chat prompt is empty")
+    rendered_user_prompt = render_template(args.user_template, context)
+    if not rendered_user_prompt.strip():
+        raise HarnessError("Rendered user prompt is empty")
 
     rendered_system_prompt = render_template(args.system_template, context)
     system_prompt = build_system_prompt(
         args.system_prompt_config, rendered_system_prompt
     )
 
-    return input_dir, rendered_chat_prompt, system_prompt
+    return input_dir, rendered_user_prompt, system_prompt
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -551,7 +551,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        input_dir, chat_prompt, system_prompt = prepare_run(args)
+        input_dir, user_prompt, system_prompt = prepare_run(args)
         if args.reset_git:
             from general_agent_eval.preprocessing.git_reset import (
                 GitVcsError,
@@ -568,7 +568,7 @@ def main(argv: list[str] | None = None) -> int:
             )
         return asyncio.run(
             run_claude(
-                chat_prompt=chat_prompt,
+                user_prompt=user_prompt,
                 system_prompt=system_prompt,
                 args=args,
                 input_dir=input_dir,
