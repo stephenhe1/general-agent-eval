@@ -1,11 +1,11 @@
-Inspect the provided repository and generate HTTP API integration tests that thoroughly exercise the available endpoints.
+Inspect the provided repository and generate HTTP-based API tests that thoroughly exercise the available endpoints.
 
 Identify the API surface exposed by the repository, including routes, request methods, expected inputs, response formats, status codes, validation behavior, authentication or authorization requirements when applicable, and important interactions between endpoints. Use the repository's existing test framework and build system.
-{% if service_base_url %}
-A live instance of this service is already running and reachable at {{ service_base_url }}. Exercise the running API directly over HTTP. The service has already been built and started for you; do not build, start, stop, or reconfigure it.
-{% endif %}
 {%- if rest_assured %}
 You MUST use REST Assured for the HTTP API tests; it is already available as a test dependency.
+{% endif %}
+{% if service_base_url %}
+A live instance of this service is already running and reachable at {{ service_base_url }}. Exercise the running API directly over HTTP. The service has already been built and started for you; do not build, start, stop, or reconfigure it.
 {% endif %}
 {%- if test_module %}
 This is a multi-module build: add your generated tests to the {{ test_module }} module, where REST Assured is configured.
