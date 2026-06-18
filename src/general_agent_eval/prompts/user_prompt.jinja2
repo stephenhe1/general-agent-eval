@@ -14,7 +14,7 @@ No service instance has been set up or started for you. You may perform whatever
 {%- if test_module %}
 This is a multi-module build: add your generated tests to the {{ test_module }} module, where REST Assured is configured.
 {% endif %}
-Prioritize correctness, broad coverage of meaningful behavior, and successful integration with the build system. Generate as many meaningful, non-redundant tests as possible while preserving correctness and maintainability. Cover happy paths, edge cases, exceptional behavior, and important endpoint interactions. Prefer substantive request/response assertions over superficial status-code-only checks whenever the repository provides enough behavior to assert.
+Prioritize correctness, broad coverage of meaningful behavior, and successful integration with the build system. Generate as many meaningful, non-redundant tests as possible while preserving correctness and maintainability. Cover happy paths, edge cases, exceptional behavior, and important endpoint interactions. Validate responses to whatever extent you judge appropriate, based on the behavior the repository exposes.
 
 Do NOT modify production code under any circumstances. Only add or modify test files.
 
