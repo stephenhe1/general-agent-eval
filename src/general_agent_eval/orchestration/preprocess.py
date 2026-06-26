@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 
 from general_agent_eval.orchestration.errors import DockerRunError
 from general_agent_eval.orchestration.manifest import write_manifest
+from general_agent_eval.orchestration.manifest_paths import relativize_cleared_tests
 from general_agent_eval.orchestration.staging import (
     git_repo_root,
     initialize_synthetic_git_baseline,
@@ -129,7 +130,11 @@ def preprocess_staged_input(
             raise DockerRunError(f"Failed to clear Java tests: {exc}") from exc
 
         clearing_manifest_path = output_dir / "cleared_tests.json"
-        write_manifest(clearing_manifest_path, clear_result.to_dict())
+        # output_dir is <run_dir>/output, so its parent is the run dir we anchor to.
+        write_manifest(
+            clearing_manifest_path,
+            relativize_cleared_tests(clear_result.to_dict(), output_dir.parent),
+        )
 
         clearing_patch_path = output_dir / "test_clearing.patch"
         clearing_patch = None

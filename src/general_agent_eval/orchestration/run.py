@@ -36,6 +36,7 @@ from general_agent_eval.orchestration.manifest import (
     sanitized_manifest,
     write_manifest,
 )
+from general_agent_eval.orchestration.manifest_paths import relativize_manifest
 from general_agent_eval.orchestration.preprocess import preprocess_staged_input
 from general_agent_eval.orchestration.services import (
     resolve_service,
@@ -189,7 +190,9 @@ def main(argv: list[str] | None = None) -> int:
             service_scripts_dir=service_scripts_dir,
             image_plan=image_plan,
         )
-        write_manifest(manifest_path, manifest)
+        # Persist run-relative paths; keep `manifest` absolute in memory so the
+        # post-run rewrite (which appends artifacts) relativizes from a clean slate.
+        write_manifest(manifest_path, relativize_manifest(manifest, run_dir))
 
         docker_command = build_docker_command(
             args=args,
@@ -222,7 +225,7 @@ def main(argv: list[str] | None = None) -> int:
             cost_is_estimate=args.base_url is not None,
         )
         manifest["artifacts"] = collect_git_artifacts(staged_input, output_dir)
-        write_manifest(manifest_path, manifest)
+        write_manifest(manifest_path, relativize_manifest(manifest, run_dir))
         return exit_code
     except DockerRunError as exc:
         parser.exit(2, f"error: {exc}\n")
