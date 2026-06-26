@@ -139,12 +139,19 @@ the toolchains it needs:
   ships in the `openai-codex-cli-bin` wheel installed in the base).
 - `Dockerfile.java` — the default workload layer: the JDK/build toolchain
   (Temurin 17 + 8, Gradle, Maven) for the Java evaluation targets.
+- `Dockerfile.javascript` — the JavaScript workload layer: Node 20 LTS and the
+  OS-level browser dependencies Playwright needs. The Playwright browser binaries
+  are not pre-installed; `npx playwright install <browser>` runs inside the project
+  repo at agent-run time so the version matches the project's pinned dependency. OS
+  deps are pre-installed as root so the non-root agent user can run browsers without
+  `--with-deps`.
 - `Dockerfile.genome-nexus` — a service overlay adding the MongoDB server, built
   only when `--service genome-nexus` is selected.
 
 By default a run builds `base + <agent> + java` (plus `genome-nexus` for that
 service) in order and runs the final layer, tagged e.g.
-`general-agent-eval-claude-code-java:latest`. The base layer's build context is
+`general-agent-eval-claude-code-java:latest`. Pass `--workload javascript` to build
+and run `base + <agent> + javascript` instead (`general-agent-eval-claude-code-javascript:latest`). The base layer's build context is
 the project source (it `COPY`s `src`/`pyproject.toml`), so the default build runs
 from a source checkout; an installed wheel does not bundle `docker/` and the
 orchestrator says so rather than probing the caller's cwd. Two flags override this:
@@ -190,6 +197,36 @@ uv run general-agent-eval-docker-run \
 `--service-scripts-dir` must contain `run-with-service.sh`. If
 `--service-manifest` is omitted, the runner uses
 `--service-scripts-dir/services.json`.
+
+### JavaScript / Playwright UI test generation
+
+To generate Playwright E2E tests against a JavaScript frontend, use
+`--workload javascript`. This selects `Dockerfile.javascript` as the workload
+layer and switches the default prompts to the UI-focused Playwright templates. Pair
+it with `--service` and the in-repo service scripts to start the app inside the
+container before the agent runs:
+
+```bash
+uv run general-agent-eval-docker-run \
+  --workload javascript \
+  --agent claude-code \
+  --input-dir /path/to/js-frontend \
+  --service my-js-app \
+  --service-scripts-dir resources/scripts \
+  --clear-tests \
+  --model sonnet \
+  --auth-token-env ANTHROPIC_AUTH_TOKEN
+```
+
+`resources/scripts/` is the in-repo service scripts directory. It contains:
+- `run-with-service.sh` — a minimal service runner that parses `services.json`,
+  runs `npm ci` build steps, health-gates the dev server, exports
+  `SERVICE_BASE_URL` and `PLAYWRIGHT_BASE_URL`, then exec's the agent command.
+- `services.json` — service definitions. Add an entry per JS project with
+  `build`, `run`, `default_port`, `health_path`, and `health_timeout_seconds`.
+
+See `resources/scripts/services.json` for the `sample-js-app` example entry.
+`--inject-rest-assured` requires `--workload java` and is rejected otherwise.
 
 ### Injecting RestAssured
 

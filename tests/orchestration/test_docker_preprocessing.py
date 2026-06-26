@@ -956,3 +956,82 @@ def test_reset_git_uses_source_superproject_pin_after_staging(tmp_path: Path) ->
     assert preprocessing["reset_git"]["source_repo_root"] == str(submodule)
     assert preprocessing["reset_git"]["superproject_root"] == str(superproject)
     assert preprocessing["reset_git"]["superproject_relative_path"] == "vendor/module"
+
+
+# ---------------------------------------------------------------------------
+# JavaScript workload
+# ---------------------------------------------------------------------------
+
+def test_resolve_image_plan_javascript_workload_builds_js_stack() -> None:
+    plan = docker.resolve_image_plan(image_args(), agent="claude-code", workload="javascript")
+
+    assert [layer.name for layer in plan.layers] == ["base", "claude-code", "javascript"]
+    assert plan.image == "general-agent-eval-claude-code-javascript:latest"
+    assert plan.layers[-1].dockerfile == docker.JAVASCRIPT_DOCKERFILE
+
+
+def test_resolve_image_plan_javascript_workload_has_no_genome_nexus_overlay() -> None:
+    plan = docker.resolve_image_plan(
+        image_args(),
+        agent="claude-code",
+        workload="javascript",
+        service={"id": "genome-nexus"},
+    )
+
+    assert [layer.name for layer in plan.layers] == ["base", "claude-code", "javascript"]
+
+
+def test_claude_code_command_emits_workload_javascript() -> None:
+    args = argparse.Namespace(
+        model="sonnet",
+        permission_mode="auto",
+        system_prompt_config="append",
+        base_url=None,
+        api_key_env=None,
+        auth_token_env=None,
+        oauth_token_env=None,
+        max_turns=None,
+        max_budget_usd=None,
+        reset_git=False,
+        env=[],
+        extra_arg=[],
+        workload="javascript",
+    )
+    command = build_claude_code_command(build_agent_request(args))
+
+    assert "--workload" in command
+    assert command[command.index("--workload") + 1] == "javascript"
+
+
+def init_repo_js(repo: Path) -> None:
+    repo.mkdir()
+    write_file(repo / "src/App.tsx", "export default function App() {}\n")
+    write_file(repo / "cypress/e2e/login.cy.ts", "describe('login', () => {})\n")
+    write_file(repo / "package.json", '{"name":"app"}\n')
+    run(["git", "init"], cwd=repo)
+    configure_git(repo)
+    commit_all(repo, "initial")
+
+
+def test_clear_tests_javascript_removes_cypress_and_writes_manifest(
+    tmp_path: Path,
+) -> None:
+    staged_repo = tmp_path / "staged"
+    output_dir = tmp_path / "output"
+    init_repo_js(staged_repo)
+    output_dir.mkdir()
+
+    preprocessing = preprocess.preprocess_staged_input(
+        args=argparse.Namespace(reset_git=False, clear_tests=True, workload="javascript"),
+        staged_input=staged_repo,
+        output_dir=output_dir,
+    )
+
+    assert preprocessing["test_clearing"]["removed_count"] == 1
+    assert not (staged_repo / "cypress").exists()
+    assert (staged_repo / "src/App.tsx").exists()
+    clearing_manifest = json.loads(
+        (output_dir / "cleared_tests.json").read_text(encoding="utf-8")
+    )
+    assert clearing_manifest["removed_count"] == 1
+    assert clearing_manifest["preserved_suspicious_count"] == 0

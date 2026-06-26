@@ -100,6 +100,7 @@ def build_agent_request(
         system_template=container_templates.get("system"),
         user_template=container_templates.get("user"),
         sandbox=getattr(args, "sandbox", "full_access"),
+        workload=getattr(args, "workload", "java"),
     )
 
 
@@ -135,7 +136,7 @@ def main(argv: list[str] | None = None) -> int:
                 "is read from the service manifest"
             )
         # Resolved before any staging or build so bad paths/option combos fail fast.
-        image_plan = resolve_image_plan(args, agent=args.agent, service=service)
+        image_plan = resolve_image_plan(args, agent=args.agent, workload=args.workload, service=service)
         if image_plan.requires_local_image:
             # --skip-build: confirm the tag exists now, not after staging via a
             # doomed docker run pull.

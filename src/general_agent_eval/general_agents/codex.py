@@ -20,6 +20,8 @@ from openai_codex.models import (
 from general_agent_eval.general_agents.claude_code import (
     DEFAULT_USER_TEMPLATE,
     DEFAULT_SYSTEM_TEMPLATE,
+    DEFAULT_USER_TEMPLATE_JS_UI,
+    DEFAULT_SYSTEM_TEMPLATE_JS_UI,
     HarnessError,
     build_template_context,
     parse_env_values,
@@ -225,16 +227,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="Directory Codex should use as its working directory.",
     )
     parser.add_argument(
+        "--workload",
+        choices=("java", "javascript"),
+        default="java",
+        help=(
+            "Target workload ecosystem. Selects the default prompt templates "
+            "when --system-template / --user-template are not supplied. "
+            "Defaults to java."
+        ),
+    )
+    parser.add_argument(
         "--system-template",
         type=Path,
-        default=DEFAULT_SYSTEM_TEMPLATE,
-        help="Jinja2 template for the system prompt.",
+        default=None,
+        help=(
+            "Jinja2 template for the system prompt. Defaults to the packaged "
+            "Java or JavaScript template selected by --workload."
+        ),
     )
     parser.add_argument(
         "--user-template",
         type=Path,
-        default=DEFAULT_USER_TEMPLATE,
-        help="Jinja2 template for the user prompt.",
+        default=None,
+        help=(
+            "Jinja2 template for the user prompt. Defaults to the packaged "
+            "Java or JavaScript template selected by --workload."
+        ),
     )
     parser.add_argument(
         "--system-prompt-config",
@@ -317,16 +335,25 @@ def prepare_run(args: argparse.Namespace) -> tuple[Path, str, dict[str, str]]:
     if not input_dir.is_dir():
         raise HarnessError(f"--input-dir is not a directory: {args.input_dir}")
 
+    workload = getattr(args, "workload", "java")
+    is_js = workload == "javascript"
+    effective_system = args.system_template or (
+        DEFAULT_SYSTEM_TEMPLATE_JS_UI if is_js else DEFAULT_SYSTEM_TEMPLATE
+    )
+    effective_user = args.user_template or (
+        DEFAULT_USER_TEMPLATE_JS_UI if is_js else DEFAULT_USER_TEMPLATE
+    )
+
     context = build_template_context(
         input_dir=input_dir,
         model=args.model,
         prompt_vars=parse_prompt_vars(args.prompt_var),
     )
-    rendered_user_prompt = render_template(args.user_template, context)
+    rendered_user_prompt = render_template(effective_user, context)
     if not rendered_user_prompt.strip():
         raise HarnessError("Rendered user prompt is empty")
 
-    rendered_system_prompt = render_template(args.system_template, context)
+    rendered_system_prompt = render_template(effective_system, context)
     system_prompt_kwargs = build_system_prompt(
         args.system_prompt_config, rendered_system_prompt
     )

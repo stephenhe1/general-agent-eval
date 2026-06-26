@@ -25,11 +25,14 @@ class AgentRunRequest:
     agent_env: tuple[str, ...] = ()
     prompt_vars: tuple[str, ...] = ()
     extra_args: tuple[str, ...] = ()
-    # Container paths of custom prompt templates; None keeps the packaged defaults.
+    # Container paths of custom prompt templates; None lets the in-container
+    # agent select the packaged default for the chosen workload.
     system_template: str | None = None
     user_template: str | None = None
     # Codex sandbox mode; ignored by the claude-code agent.
     sandbox: str = "full_access"
+    # Target workload ecosystem; controls default prompt templates.
+    workload: str = "java"
 
 
 @dataclass(frozen=True)
@@ -77,6 +80,7 @@ def build_claude_code_command(request: AgentRunRequest) -> list[str]:
     _append_optional(command, "--oauth-token-env", request.oauth_token_env)
     _append_optional(command, "--max-turns", request.max_turns)
     _append_optional(command, "--max-budget-usd", request.max_budget_usd)
+    command.extend(["--workload", request.workload])
     _append_repeated(command, "--env", request.agent_env)
     _append_repeated(command, "--prompt-var", request.prompt_vars)
     _append_repeated(command, "--extra-arg", request.extra_args)
@@ -106,6 +110,7 @@ def build_codex_command(request: AgentRunRequest) -> list[str]:
     _append_optional(command, "--base-url", request.base_url)
     _append_optional(command, "--api-key-env", request.api_key_env)
     _append_optional(command, "--max-turns", request.max_turns)
+    command.extend(["--workload", request.workload])
     _append_repeated(command, "--env", request.agent_env)
     _append_repeated(command, "--prompt-var", request.prompt_vars)
     if request.reset_git:

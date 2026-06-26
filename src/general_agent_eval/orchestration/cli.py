@@ -70,6 +70,11 @@ def validate_agent_values(args: argparse.Namespace) -> None:
             raise DockerRunError(
                 f"--prompt-var key '{key}' is reserved and cannot be overridden"
             )
+    if getattr(args, "inject_rest_assured", False) and getattr(args, "workload", "java") != "java":
+        raise DockerRunError(
+            "--inject-rest-assured applies only to --workload java; it injects a "
+            "dependency into a Maven POM, which is not applicable to JavaScript projects"
+        )
 
 
 def validate_agent_options(args: argparse.Namespace) -> None:
@@ -392,8 +397,18 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Inject RestAssured as a test dependency before the agent runs, using "
             "the matched service's rest_assured config from the manifest. Requires "
-            "--service. Runs after --clear-tests; the POM edit lands in the testless "
-            "baseline, so it stays out of the agent's diff."
+            "--service and --workload java. Runs after --clear-tests; the POM edit "
+            "lands in the testless baseline, so it stays out of the agent's diff."
+        ),
+    )
+    parser.add_argument(
+        "--workload",
+        choices=("java", "javascript"),
+        default="java",
+        help=(
+            "Target workload ecosystem. Selects the Docker workload layer "
+            "(Dockerfile.java or Dockerfile.javascript) and the default prompt "
+            "templates. Defaults to java. Agent-agnostic."
         ),
     )
     return parser

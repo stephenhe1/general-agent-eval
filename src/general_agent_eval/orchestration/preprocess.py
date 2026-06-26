@@ -118,15 +118,17 @@ def preprocess_staged_input(
         )
 
     if args.clear_tests:
-        from general_agent_eval.preprocessing.java_test_clearing import (
-            TestClearingError,
-            clear_java_tests,
-        )
+        from general_agent_eval.preprocessing.java_test_clearing import TestClearingError
+
+        if getattr(args, "workload", "java") == "javascript":
+            from general_agent_eval.preprocessing.js_test_clearing import clear_js_tests as _clear_fn
+        else:
+            from general_agent_eval.preprocessing.java_test_clearing import clear_java_tests as _clear_fn  # type: ignore[assignment]
 
         try:
-            clear_result = clear_java_tests(staged_input)
+            clear_result = _clear_fn(staged_input)
         except TestClearingError as exc:
-            raise DockerRunError(f"Failed to clear Java tests: {exc}") from exc
+            raise DockerRunError(f"Failed to clear tests: {exc}") from exc
 
         clearing_manifest_path = output_dir / "cleared_tests.json"
         write_manifest(clearing_manifest_path, clear_result.to_dict())
