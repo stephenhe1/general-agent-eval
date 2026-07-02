@@ -368,7 +368,7 @@ def test_build_image_plan_builds_each_layer_in_order(
     docker.build_image_plan(plan)
 
     assert commands[0] == ["docker", "buildx", "version"]
-    # base -> claude-code -> java, each a `buildx build --load`.
+    # base -> claude-code -> javascript, each a `buildx build --load`.
     base_build = commands[1]
     assert base_build[:4] == ["docker", "buildx", "build", "--load"]
     assert base_build[base_build.index("-f") + 1] == str(docker.BASE_DOCKERFILE)
@@ -382,9 +382,9 @@ def test_build_image_plan_builds_each_layer_in_order(
     # Overlays build FROM the previous layer's tag.
     assert f"BASE_IMAGE={docker.BASE_IMAGE}" in agent_build
 
-    java_build = commands[3]
-    assert java_build[java_build.index("-f") + 1] == str(docker.JAVA_DOCKERFILE)
-    assert f"BASE_IMAGE={plan.layers[1].image}" in java_build
+    js_build = commands[3]
+    assert js_build[js_build.index("-f") + 1] == str(docker.JAVASCRIPT_DOCKERFILE)
+    assert f"BASE_IMAGE={plan.layers[1].image}" in js_build
 
 
 def test_build_image_plan_custom_dockerfile_uses_its_dir_as_context(
@@ -418,26 +418,12 @@ def test_resolve_image_plan_default_builds_layered_stack() -> None:
     plan = docker.resolve_image_plan(image_args(), agent="claude-code")
 
     assert plan.build is True
-    assert [layer.name for layer in plan.layers] == ["base", "claude-code", "java"]
+    assert [layer.name for layer in plan.layers] == ["base", "claude-code", "javascript"]
     assert plan.layers[0].dockerfile == docker.BASE_DOCKERFILE
     assert plan.layers[0].image == docker.BASE_IMAGE
     # The run image is the final layer's tag.
     assert plan.image == plan.layers[-1].image
-    assert plan.image == "general-agent-eval-claude-code-java:latest"
-
-
-def test_resolve_image_plan_adds_genome_nexus_overlay() -> None:
-    plan = docker.resolve_image_plan(
-        image_args(), agent="claude-code", service={"id": "genome-nexus"}
-    )
-
-    assert [layer.name for layer in plan.layers] == [
-        "base",
-        "claude-code",
-        "java",
-        "genome-nexus",
-    ]
-    assert plan.image == "general-agent-eval-claude-code-java-genome-nexus:latest"
+    assert plan.image == "general-agent-eval-claude-code-javascript:latest"
 
 
 def test_resolve_image_plan_other_service_has_no_overlay() -> None:
@@ -445,7 +431,7 @@ def test_resolve_image_plan_other_service_has_no_overlay() -> None:
         image_args(), agent="codex", service={"id": "restcountries"}
     )
 
-    assert [layer.name for layer in plan.layers] == ["base", "codex", "java"]
+    assert [layer.name for layer in plan.layers] == ["base", "codex", "javascript"]
 
 
 def test_resolve_image_plan_skip_build_runs_stack_tip_without_building() -> None:
@@ -606,7 +592,7 @@ def test_resolve_image_plan_requires_source_checkout_for_build(
     # --skip-build only needs the final tag, so it must not require the Dockerfiles.
     plan = docker.resolve_image_plan(image_args(skip_build=True), agent="claude-code")
     assert plan.build is False
-    assert plan.image == "general-agent-eval-claude-code-java:latest"
+    assert plan.image == "general-agent-eval-claude-code-javascript:latest"
 
 
 def template_args(**overrides: object) -> argparse.Namespace:
@@ -809,92 +795,6 @@ def test_clear_tests_sanitizes_history_and_preserves_patch_sequence(
     )
 
 
-POM_WITH_DEPS = """<?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>demo</artifactId>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-</project>
-"""
-
-
-def init_repo_with_pom(repo: Path) -> None:
-    repo.mkdir()
-    write_file(repo / "pom.xml", POM_WITH_DEPS)
-    write_file(repo / "src/main/java/example/App.java", "class App {}\n")
-    write_file(repo / "src/test/java/example/AppTest.java", "class AppTest {}\n")
-    run(["git", "init"], cwd=repo)
-    configure_git(repo)
-    commit_all(repo, "initial")
-
-
-def test_inject_rest_assured_lands_in_baseline_not_agent_diff(tmp_path: Path) -> None:
-    staged = tmp_path / "staged"
-    output_dir = tmp_path / "output"
-    init_repo_with_pom(staged)
-    output_dir.mkdir()
-    service = {
-        "id": "demo",
-        "rest_assured": {
-            "target_pom": "pom.xml",
-            "group_id": "io.rest-assured",
-            "artifact_id": "rest-assured",
-            "version": "5.5.0",
-            "scope": "test",
-        },
-    }
-
-    preprocessing = preprocess.preprocess_staged_input(
-        args=argparse.Namespace(
-            reset_git=False, clear_tests=True, inject_rest_assured=True
-        ),
-        staged_input=staged,
-        output_dir=output_dir,
-        service=service,
-    )
-
-    injection = preprocessing["rest_assured_injection"]
-    assert injection["status"] == "injected"
-    assert injection["managed"] is False
-    # The dependency is committed into the testless baseline.
-    assert "io.rest-assured" in (staged / "pom.xml").read_text(encoding="utf-8")
-    patch = (output_dir / "dependency_injection.patch").read_text(encoding="utf-8")
-    assert "io.rest-assured" in patch and "pom.xml" in patch
-
-    # The agent adds a test; the resulting agent diff must not include the POM edit.
-    write_file(staged / "src/test/java/example/ApiIT.java", "class ApiIT {}\n")
-    staging.collect_git_artifacts(staged, output_dir)
-    diff = (output_dir / "git_diff.patch").read_text(encoding="utf-8")
-    assert "ApiIT.java" in diff
-    assert "pom.xml" not in diff
-
-
-def test_inject_rest_assured_skipped_when_service_lacks_config(tmp_path: Path) -> None:
-    staged = tmp_path / "staged"
-    output_dir = tmp_path / "output"
-    init_repo_with_pom(staged)
-    output_dir.mkdir()
-
-    preprocessing = preprocess.preprocess_staged_input(
-        args=argparse.Namespace(
-            reset_git=False, clear_tests=False, inject_rest_assured=True
-        ),
-        staged_input=staged,
-        output_dir=output_dir,
-        service={"id": "features-service"},  # no rest_assured block
-    )
-
-    injection = preprocessing["rest_assured_injection"]
-    assert injection["status"] == "skipped"
-    assert "rest-assured" not in (staged / "pom.xml").read_text(encoding="utf-8")
-    assert not (output_dir / "dependency_injection.patch").exists()
 
 
 def test_reset_git_uses_source_superproject_pin_after_staging(tmp_path: Path) -> None:

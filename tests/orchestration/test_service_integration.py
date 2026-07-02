@@ -152,41 +152,14 @@ def test_templates_render_with_and_without_service() -> None:
 
     svc = {"service_base_url": "http://127.0.0.1:8888/"}
     # The user prompt carries the live-service block; the system prompt does not.
-    without = render("user_prompt.jinja2", {})
+    without = render("user_prompt_js_ui.jinja2", {})
     assert "already running" not in without
-    with_service = render("user_prompt.jinja2", svc)
+    assert "No running instance" in without
+    with_service = render("user_prompt_js_ui.jinja2", svc)
     assert "http://127.0.0.1:8888/" in with_service
     assert "already running" in with_service
 
-    assert "already running" not in render("system_prompt.jinja2", svc)
-
-
-def test_user_prompt_rest_assured_and_module_blocks() -> None:
-    def render(prompt_vars: dict[str, str]) -> str:
-        ctx = claude_code.build_template_context(
-            input_dir=Path("/tmp/x"), model="sonnet", prompt_vars=prompt_vars
-        )
-        return claude_code.render_template(
-            claude_code.PROMPTS_DIR / "user_prompt.jinja2", ctx
-        )
-
-    base = {"service_base_url": "http://127.0.0.1:8888/"}
-    # No injection: neither block appears.
-    plain = render(base)
-    assert "REST Assured" not in plain
-    assert "multi-module" not in plain
-
-    # Single-module injection: the REST Assured line, but no multi-module detail.
-    single = render({**base, "rest_assured": "1"})
-    assert "MUST use REST Assured" in single
-    assert "multi-module" not in single
-    assert "{{" not in single
-
-    # Multi-module injection: both blocks, naming the target module.
-    multi = render({**base, "rest_assured": "1", "test_module": "web"})
-    assert "MUST use REST Assured" in multi
-    assert "multi-module" in multi
-    assert "web module" in multi
+    assert "already running" not in render("system_prompt_js_ui.jinja2", svc)
 
 
 # --- orchestration service resolution ----------------------------------------
@@ -225,7 +198,6 @@ def test_resolve_service_genome_nexus_urls(tmp_path: Path) -> None:
         "id": "genome-nexus",
         "port": 8888,
         "base_url": "http://127.0.0.1:8888/",
-        "rest_assured": None,
     }
 
 
@@ -287,28 +259,6 @@ def _service_with_rest_assured(service_id: str, base_url: str, target_pom: str) 
             "scope": "test",
         },
     }
-
-
-def test_rest_assured_prompt_vars_multi_module() -> None:
-    service = _service_with_rest_assured(
-        "genome-nexus", "http://127.0.0.1:8888/", "web/pom.xml"
-    )
-    request = build_agent_request(
-        docker_args(service="genome-nexus", inject_rest_assured=True), service
-    )
-    assert "rest_assured=1" in request.prompt_vars
-    assert "test_module=web" in request.prompt_vars
-
-
-def test_rest_assured_prompt_vars_single_module_omits_test_module() -> None:
-    service = _service_with_rest_assured(
-        "restcountries", "http://127.0.0.1:8080/rest", "pom.xml"
-    )
-    request = build_agent_request(
-        docker_args(service="restcountries", inject_rest_assured=True), service
-    )
-    assert "rest_assured=1" in request.prompt_vars
-    assert all(not v.startswith("test_module=") for v in request.prompt_vars)
 
 
 def test_rest_assured_prompt_vars_absent_without_inject_flag() -> None:
@@ -508,8 +458,7 @@ def test_sanitized_manifest_records_service_paths(tmp_path: Path) -> None:
     assert [layer["name"] for layer in manifest["docker"]["layers"]] == [
         "base",
         "claude-code",
-        "java",
-        "genome-nexus",
+        "javascript",
     ]
     assert manifest["docker"]["layers"][0]["dockerfile"] == str(docker.BASE_DOCKERFILE)
     # No template/prompt-var overrides in this run.
