@@ -19,13 +19,15 @@ A live instance of this application is already running and reachable at {{ servi
 No running instance has been set up for you. Install dependencies and start the development server yourself before writing tests (e.g. `npm ci && npm run dev`, or build and serve with `npm run build && npx serve dist`).
 {%- endif %}
 
-Check the existing `playwright.config.ts` (or `playwright.config.js`) at the repository root. If it exists, use it as-is, updating `baseURL` to `{{ service_base_url or 'http://localhost:3000' }}` if not already set. If no config exists, create a minimal one. Write specs alongside the project's existing test structure — check where existing tests live (commonly `tests/`, `e2e/`, or a directory named in `playwright.config`) and follow that convention. Use `.spec.ts` or `.spec.js` extensions. When selecting elements prefer `page.getByRole()`, `page.getByLabel()`, `page.getByTestId()`, `page.getByText()`, and ARIA roles over brittle CSS class or positional selectors. Use `npm ci` and `npx playwright install chromium` (or the browser the project uses) as needed to provision Playwright if it is not already present.
+Check the existing `playwright.config.ts` (or `playwright.config.js`) at the repository root. If it exists, use it as-is, updating `baseURL` to `{{ service_base_url or 'http://localhost:3000' }}` if not already set. If no config exists, create a minimal one. Write all agent-generated specs inside a subdirectory named `rq6-agent/` — place it within the project's existing test directory if one exists (e.g. `tests/rq6-agent/`, `e2e/rq6-agent/`), or at the repository root as `rq6-agent/` if no test directory exists. Do NOT place test files outside the `rq6-agent/` subdirectory. Use `.spec.ts` or `.spec.js` extensions. When selecting elements prefer `page.getByRole()`, `page.getByLabel()`, `page.getByTestId()`, `page.getByText()`, and ARIA roles over brittle CSS class or positional selectors. Use `npm ci` and `npx playwright install chromium` (or the browser the project uses) as needed to provision Playwright if it is not already present.
 
 Validate all tests with `npx playwright test` in headless mode. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
 
 Prioritize correctness, broad flow coverage, and successful integration with the project's existing toolchain. Generate as many meaningful, non-redundant tests as possible while preserving correctness and maintainability. Cover happy paths, edge cases, form validation, navigation, error states, and important page interactions.
 
 Do NOT modify production code under any circumstances. Only add or modify test files, Playwright configuration, and the `UI_COVERAGE.md` tracking file described above (keep it in place; do not delete it).
+
+Do NOT restore, reuse, or copy any `.bak` files found in the repository. Those are backups of pre-existing tests and must be ignored entirely. Write all test files from scratch based on your own exploration of the running application.
 
 Do NOT leave behind failing, flaky, incomplete, or placeholder tests. After writing tests, run `npx playwright test`. If failures occur, diagnose and repair them. Remove any test that cannot be made to pass reliably.
 
