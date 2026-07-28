@@ -32,7 +32,7 @@ class AgentRunRequest:
     # Codex sandbox mode; ignored by the claude-code agent.
     sandbox: str = "full_access"
     # Target workload ecosystem; controls default prompt templates.
-    workload: str = "java"
+    workload: str = "javascript"
 
 
 @dataclass(frozen=True)

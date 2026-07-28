@@ -3,14 +3,49 @@ from __future__ import annotations
 import os
 import re
 import shutil
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
-from general_agent_eval.preprocessing.java_test_clearing import (
-    ClearedTestPath,
-    PreservedSuspiciousPath,
-    TestClearingError,
-    TestClearingResult,
-)
+
+@dataclass(frozen=True)
+class ClearedTestPath:
+    path: str
+    kind: str
+    rule: str
+
+
+@dataclass(frozen=True)
+class PreservedSuspiciousPath:
+    path: str
+    kind: str
+    rule: str
+
+
+@dataclass(frozen=True)
+class TestClearingResult:
+    root: Path
+    removed: tuple[ClearedTestPath, ...]
+    preserved_suspicious: tuple[PreservedSuspiciousPath, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "root": str(self.root),
+            "removed_count": len(self.removed),
+            "removed": [
+                {"path": item.path, "kind": item.kind, "rule": item.rule}
+                for item in self.removed
+            ],
+            "preserved_suspicious_count": len(self.preserved_suspicious),
+            "preserved_suspicious": [
+                {"path": item.path, "kind": item.kind, "rule": item.rule}
+                for item in self.preserved_suspicious
+            ],
+        }
+
+
+class ClearingError(RuntimeError):
+    pass
 
 
 # Directories whose contents must never be scanned or removed: package vendors,
@@ -75,9 +110,9 @@ def _remove_path(path: Path) -> None:
 def clear_js_tests(root: str | Path) -> TestClearingResult:
     resolved_root = Path(root).expanduser().resolve()
     if not resolved_root.exists():
-        raise TestClearingError(f"Root does not exist: {root}")
+        raise ClearingError(f"Root does not exist: {root}")
     if not resolved_root.is_dir():
-        raise TestClearingError(f"Root is not a directory: {root}")
+        raise ClearingError(f"Root is not a directory: {root}")
 
     removed: list[ClearedTestPath] = []
     paths_to_remove: list[Path] = []

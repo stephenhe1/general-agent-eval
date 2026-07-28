@@ -20,8 +20,6 @@ from openai_codex.models import (
 from general_agent_eval.general_agents.claude_code import (
     DEFAULT_USER_TEMPLATE,
     DEFAULT_SYSTEM_TEMPLATE,
-    DEFAULT_USER_TEMPLATE_JS_UI,
-    DEFAULT_SYSTEM_TEMPLATE_JS_UI,
     HarnessError,
     build_template_context,
     parse_env_values,
@@ -335,14 +333,8 @@ def prepare_run(args: argparse.Namespace) -> tuple[Path, str, dict[str, str]]:
     if not input_dir.is_dir():
         raise HarnessError(f"--input-dir is not a directory: {args.input_dir}")
 
-    workload = getattr(args, "workload", "java")
-    is_js = workload == "javascript"
-    effective_system = args.system_template or (
-        DEFAULT_SYSTEM_TEMPLATE_JS_UI if is_js else DEFAULT_SYSTEM_TEMPLATE
-    )
-    effective_user = args.user_template or (
-        DEFAULT_USER_TEMPLATE_JS_UI if is_js else DEFAULT_USER_TEMPLATE
-    )
+    effective_system = args.system_template or DEFAULT_SYSTEM_TEMPLATE
+    effective_user = args.user_template or DEFAULT_USER_TEMPLATE
 
     context = build_template_context(
         input_dir=input_dir,

@@ -76,7 +76,6 @@ def resolve_service(args: argparse.Namespace) -> dict[str, Any] | None:
         "id": args.service,
         "port": port,
         "base_url": url(svc.get("base_path", "/")),
-        "rest_assured": svc.get("rest_assured"),
     }
 
 
@@ -85,16 +84,3 @@ def service_prompt_vars(service: dict[str, Any]) -> tuple[str, ...]:
         f"service_id={service['id']}",
         f"service_base_url={service['base_url']}",
     )
-
-
-def rest_assured_prompt_vars(service: dict[str, Any]) -> tuple[str, ...]:
-    """Prompt vars exposed only when RestAssured was injected: a presence flag and,
-    for multi-module builds, the module directory whose tests carry the dependency."""
-    config = service.get("rest_assured")
-    if not config:
-        return ()
-    prompt_vars = ("rest_assured=1",)
-    target_pom = str(config.get("target_pom", "pom.xml"))
-    if "/" in target_pom:
-        prompt_vars = (*prompt_vars, f"test_module={target_pom.rsplit('/', 1)[0]}")
-    return prompt_vars

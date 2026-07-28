@@ -70,10 +70,13 @@ def validate_agent_values(args: argparse.Namespace) -> None:
             raise DockerRunError(
                 f"--prompt-var key '{key}' is reserved and cannot be overridden"
             )
-    if getattr(args, "inject_rest_assured", False) and getattr(args, "workload", "java") != "java":
+
+
+def validate_mode_options(args: argparse.Namespace) -> None:
+    if args.mode == "project-aware" and args.clear_tests:
         raise DockerRunError(
-            "--inject-rest-assured applies only to --workload java; it injects a "
-            "dependency into a Maven POM, which is not applicable to JavaScript projects"
+            "--mode project-aware and --clear-tests are mutually exclusive; "
+            "project-aware mode keeps existing tests visible to the agent"
         )
 
 
@@ -123,6 +126,10 @@ def resolve_agent_defaults(args: argparse.Namespace) -> None:
         args.effort = DEFAULT_EFFORT
     if args.sandbox is None:
         args.sandbox = DEFAULT_SANDBOX
+    if not hasattr(args, "workload") or args.workload is None:
+        args.workload = "javascript"
+    if not hasattr(args, "mode") or args.mode is None:
+        args.mode = "baseline"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -387,28 +394,39 @@ def build_parser() -> argparse.ArgumentParser:
         "--clear-tests",
         action="store_true",
         help=(
-            "Remove Java test directories/files before the agent runs; strongly "
+            "Remove existing JS test files before the agent runs; strongly "
             "recommended for isolated test construction analysis."
         ),
     )
     parser.add_argument(
-        "--inject-rest-assured",
-        action="store_true",
+        "--mode",
+        choices=("baseline", "project-aware", "discovery"),
+        default="baseline",
         help=(
-            "Inject RestAssured as a test dependency before the agent runs, using "
-            "the matched service's rest_assured config from the manifest. Requires "
-            "--service and --workload java. Runs after --clear-tests; the POM edit "
-            "lands in the testless baseline, so it stays out of the agent's diff."
+            "Evaluation mode. 'baseline' removes existing tests (requires "
+            "--clear-tests). 'project-aware' keeps all existing tests, "
+            "fixtures, and helpers visible so the agent can learn from them. "
+            "'discovery' explores the app and produces UI_COVERAGE.md without "
+            "writing any tests."
+        ),
+    )
+    parser.add_argument(
+        "--coverage-model",
+        choices=("flat", "graph"),
+        default="flat",
+        help=(
+            "Coverage tracker format. 'flat' produces a markdown checklist "
+            "(UI_COVERAGE.md); 'graph' produces a JSON page-transition graph "
+            "(UI_GRAPH.json) with typed nodes and navigation edges."
         ),
     )
     parser.add_argument(
         "--workload",
-        choices=("java", "javascript"),
-        default="java",
+        choices=("javascript",),
+        default="javascript",
         help=(
-            "Target workload ecosystem. Selects the Docker workload layer "
-            "(Dockerfile.java or Dockerfile.javascript) and the default prompt "
-            "templates. Defaults to java. Agent-agnostic."
+            "Target workload ecosystem. Selects Dockerfile.javascript and the "
+            "Playwright UI-test prompt templates. Defaults to javascript."
         ),
     )
     return parser

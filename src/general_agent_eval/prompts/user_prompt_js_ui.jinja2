@@ -1,4 +1,235 @@
+{%- set tracker_file = "UI_GRAPH.json" if coverage_model == "graph" else "UI_COVERAGE.md" -%}
+{%- if mode == "discovery" -%}
+Explore the provided repository and its running application to produce a complete inventory of every page, route, and significant user flow.
+
+Perform discovery in two phases, iterating until convergence:
+
+**Phase 1 — Static source scan:**
+- Read routing configuration (React Router, Next.js pages/app directory, Vue Router, etc.)
+- Scan navigation components, sidebars, menus, and breadcrumbs for linked routes
+- Identify authentication gates, role-based access, and conditional renders that indicate distinct UI states
+- Check for dynamic routes (parameterized paths like `/users/:id`, `/posts/[slug]`)
+{%- if service_base_url %}
+
+**Phase 2 — Live navigation:**
+A live instance of this application is already running and reachable at {{ service_base_url }}. Systematically navigate the app:
+- Visit every page found in Phase 1
+- Follow all links, buttons, and navigation elements to discover pages not visible in source
+- Note pages behind authentication (login first if credentials are available in seed data or docs)
+- Record modals, drawers, and multi-step flows as distinct entries
+- After each navigation pass, compare what you found against your current inventory — add any new discoveries
+- Repeat until a full pass produces no new pages (convergence)
+{%- else %}
+
+**Phase 2 — Live navigation:**
+No running instance has been set up for you. Install dependencies and start the development server yourself (e.g. `npm ci && npm run dev`). Then systematically navigate the app:
+- Visit every page found in Phase 1
+- Follow all links, buttons, and navigation elements to discover pages not visible in source
+- Note pages behind authentication (login first if credentials are available in seed data or docs)
+- Record modals, drawers, and multi-step flows as distinct entries
+- After each navigation pass, compare what you found against your current inventory — add any new discoveries
+- Repeat until a full pass produces no new pages (convergence)
+{%- endif %}
+{%- if coverage_model == "graph" %}
+
+Record all discoveries into a file at the repository root named `UI_GRAPH.json`. This file is your durable working memory and must remain accurate for the whole run. If your context is ever summarized, compacted, or truncated, re-read this file FIRST to recover the full inventory before continuing.
+
+Use this JSON structure:
+
+```json
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "<application name>",
+    "total_states": <total node count>,
+    "explored": <nodes with status explored>,
+    "skipped": <nodes with status skipped>
+  },
+  "nodes": [
+    {
+      "id": "<route or route#qualifier>",
+      "route": "<URL path or pattern>",
+      "label": "<what is observable in this state>",
+      "section": "<feature area grouping>",
+      "status": "discovered|explored|skipped",
+      "auth_required": true|false,
+      "layout": "<shared layout id if applicable>",
+      "actions": ["<available user actions in this state>"],
+      "notes": "<optional, < 80 chars>"
+    }
+  ],
+  "edges": [
+    {
+      "from": "<source state id>",
+      "to": "<target state id>",
+      "trigger": "<UI element: type, visible text or label, identifier>",
+      "guard": "<precondition, if not always available>"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      { "id": "zone:<name>", "label": "<description>", "node_ids": ["..."] }
+    ],
+    "layouts": [
+      { "id": "layout:<name>", "label": "<description>", "node_ids": ["..."] }
+    ]
+  }
+}
+```
+
+**What is a state (node)?**
+
+A node represents a distinct UI state — an observable configuration of the interface that determines what the user can see, interact with, and reach next. Multiple states can exist under the same URL route.
+
+Create a **new** node when at least one of the following differs from any existing node:
+- **Rendered interface** — meaningful visible components differ (e.g., a modal is now open, a tab panel has switched)
+- **Action availability** — an action appears, disappears, becomes enabled or disabled
+- **Reachability** — different subsequent states or workflows are reachable from here
+- **Behavior** — performing the same action produces a different effect or destination
+- **Interaction context** — focus, selection, authorization, or mode changes how the user can interact
+
+Do NOT create new nodes for: loading spinners, skeleton screens, animation frames, timestamps updating, randomized IDs, or minor content changes that do not alter available actions or reachable states.
+
+**Node ID format:**
+- Route-level states: use the route path as ID (e.g., `/login`, `/dashboard`, `/users/:id`)
+- Sub-states within a route: append `#qualifier` (e.g., `/settings#security-tab`, `/login#mfa-input`, `/projects#create-modal`)
+
+**Edge triggers:**
+
+Each edge describes the specific UI element that causes the transition. The `trigger` field should reference the most stable identifier available, in order of preference: `data-testid`, `aria-label`, visible text content, or element role + position. Examples:
+- `button "Sign in" [data-testid=login-submit]`
+- `link "Dashboard" in sidebar nav`
+- `tab "Security" [role=tab]`
+- `auto: redirect on 401` (for automatic/system-triggered transitions)
+
+Set `guard` only when the transition is conditionally available (requires auth, specific role, feature flag, or data state).
+
+**Rules:**
+- List the `actions` array on each node — these are the user-facing actions available in that state. This makes state identity auditable: two nodes should have different action sets.
+- Group protected states into `auth_zones`; group states sharing a shell/layout into `layouts`.
+- Update `metadata` counts after each modification.
+- Always update the file by reading the existing JSON, modifying in memory, and writing the full file back. Never surgically edit JSON with sed or awk.
+- After each write, validate: `python3 -c "import json; json.load(open('UI_GRAPH.json'))"`
+- Keep `label` and `notes` fields terse (< 80 characters).
+- The task is NOT complete while any node has status `"discovered"` — continue until every node is `"explored"` or `"skipped"`.
+{%- else %}
+
+Record all discoveries into a file at the repository root named `UI_COVERAGE.md`. This file is your durable working memory and must remain accurate for the whole run. If your context is ever summarized, compacted, or truncated, re-read this file FIRST to recover the full inventory before continuing. Use this format:
+
+```
+# UI Coverage (Discovery: <discovered>/<explored>)
+Legend: [ ] found but not yet explored  -  [x] explored and confirmed  -  [~] unreachable (reason)
+
+## <Section / Feature area>
+- [ ] <route or flow> - <short note: key interactions, auth required, states, etc.>
+```
+
+Keep entries terse (route + one-line note). When you explore a page and confirm it exists, mark it `[x]`. If a page is unreachable (broken link, requires external service, etc.), mark it `[~]` with a reason. The task is NOT complete while any entry remains `[ ]` — continue exploring until every discovered item is either `[x]` or `[~]`.
+{%- endif %}
+
+Do NOT modify production code under any circumstances. Do NOT write any test files. Do NOT install Playwright or any test framework. Your only output is the `{{ tracker_file }}` file.
+
+In the final response, summarize: total pages/flows discovered, how many confirmed vs unreachable, which sections of the app have the richest UI surface, and any areas that may need special handling (auth, external APIs, dynamic content).
+{%- else -%}
 Inspect the provided repository and generate Playwright E2E tests that thoroughly exercise the application's UI pages and user flows.
+{%- if mode == "project-aware" %}
+
+This repository contains existing tests, fixtures, page objects, helpers, and configuration. Before writing any tests, study the project's testing conventions:
+- Examine existing test files for naming patterns, assertion styles, and test structure.
+- Identify shared utilities: page objects, custom commands, test-data factories, authentication helpers, and API mocks.
+- Note locator strategies, wait patterns, and how the project handles async operations.
+- Understand the Playwright configuration (browsers, base URL, timeouts, retries).
+
+Reuse existing shared infrastructure (page objects, helpers, fixtures) in your generated tests rather than reinventing them. Follow the project's established conventions for file naming, directory structure, assertion style, and selector strategy.
+{%- endif %}
+{%- if coverage_model == "graph" %}
+
+Before writing any tests, perform a complete discovery pass: scan the repository's source files (components, routes, pages, navigation config) to enumerate every page, route, and significant UI state into a tracking file at the repository root named `UI_GRAPH.json`. This file is your durable working memory and must remain accurate for the whole run. If your context is ever summarized, compacted, or truncated, re-read this file FIRST to recover the full state list before doing anything else.
+
+Use this JSON structure:
+
+```json
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "<application name>",
+    "total_states": <total node count>,
+    "explored": <nodes explored but not yet tested>,
+    "tested": <nodes with passing tests>,
+    "skipped": <nodes intentionally skipped>
+  },
+  "nodes": [
+    {
+      "id": "<route or route#qualifier>",
+      "route": "<URL path or pattern>",
+      "label": "<what is observable in this state>",
+      "section": "<feature area grouping>",
+      "status": "discovered|explored|tested|skipped",
+      "auth_required": true|false,
+      "layout": "<shared layout id if applicable>",
+      "actions": ["<available user actions in this state>"],
+      "test_file": "<path to spec file covering this state>",
+      "notes": "<optional, < 80 chars>"
+    }
+  ],
+  "edges": [
+    {
+      "from": "<source state id>",
+      "to": "<target state id>",
+      "trigger": "<UI element: type, visible text or label, identifier>",
+      "guard": "<precondition, if not always available>"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      { "id": "zone:<name>", "label": "<description>", "node_ids": ["..."] }
+    ],
+    "layouts": [
+      { "id": "layout:<name>", "label": "<description>", "node_ids": ["..."] }
+    ]
+  }
+}
+```
+
+**What is a state (node)?**
+
+A node represents a distinct UI state — an observable configuration of the interface that determines what the user can see, interact with, and reach next. Multiple states can exist under the same URL route.
+
+Create a **new** node when at least one of the following differs from any existing node:
+- **Rendered interface** — meaningful visible components differ (e.g., a modal is now open, a tab panel has switched)
+- **Action availability** — an action appears, disappears, becomes enabled or disabled
+- **Reachability** — different subsequent states or workflows are reachable from here
+- **Behavior** — performing the same action produces a different effect or destination
+- **Interaction context** — focus, selection, authorization, or mode changes how the user can interact
+
+Do NOT create new nodes for: loading spinners, skeleton screens, animation frames, timestamps updating, randomized IDs, or minor content changes that do not alter available actions or reachable states.
+
+**Node ID format:**
+- Route-level states: use the route path as ID (e.g., `/login`, `/dashboard`, `/users/:id`)
+- Sub-states within a route: append `#qualifier` (e.g., `/settings#security-tab`, `/login#mfa-input`, `/projects#create-modal`)
+
+**Edge triggers:**
+
+Each edge describes the specific UI element that causes the transition. The `trigger` field should reference the most stable identifier available, in order of preference: `data-testid`, `aria-label`, visible text content, or element role + position. Examples:
+- `button "Sign in" [data-testid=login-submit]`
+- `link "Dashboard" in sidebar nav`
+- `tab "Security" [role=tab]`
+- `auto: redirect on 401` (for automatic/system-triggered transitions)
+
+Set `guard` only when the transition is conditionally available (requires auth, specific role, feature flag, or data state).
+
+**Rules:**
+- List the `actions` array on each node — these are the user-facing actions available in that state.
+- After a state's test compiles and passes, set its status to `"tested"` and record the spec file path in `test_file`.
+- If you deliberately skip a state, set status to `"skipped"` with a reason in `notes`.
+- Group protected states into `auth_zones`; group states sharing a shell/layout into `layouts`.
+- Update `metadata` counts after each modification.
+- Always update the file by reading the existing JSON, modifying in memory, and writing the full file back.
+- After each write, validate: `python3 -c "import json; json.load(open('UI_GRAPH.json'))"`
+- Keep `label` and `notes` fields terse (< 80 characters).
+- Prefer breadth first: get at least one passing test for every state across all sections before deepening coverage.
+- The task is NOT complete while any node remains `"discovered"` or `"explored"` — continue until every node is `"tested"` or `"skipped"`.
+{%- else %}
 
 Before writing any tests, perform a complete discovery pass: scan the repository's source files (components, routes, pages, navigation config) to enumerate every page, route, and significant user flow into a tracking file at the repository root named `UI_COVERAGE.md`. This file is your durable working memory and must remain accurate for the whole run. If your context is ever summarized, compacted, or truncated, re-read this file FIRST to recover the full page list before doing anything else. Use a terse, greppable checklist, one line per page or flow, grouped by section:
 
@@ -11,6 +242,7 @@ Legend: [ ] not yet tested  -  [x] test written and passing  -  [~] intentionall
 ```
 
 Keep entries terse (route + one-line note); do not record full interaction schemas here — gather that detail when you write each page's test. Then work through the inventory page by page. Prefer breadth first: get at least one passing test for every page across all sections before deepening coverage on any single page. After a page's test compiles and passes, mark it `[x]`; if you deliberately skip one, mark it `[~]` with a brief reason, and keep the `Progress` count current. The task is NOT complete while any page or flow remains `[ ]`: continue until every discovered item is either `[x]` or `[~]`. Do not stop after a single section or declare completion while untested items remain.
+{%- endif %}
 {%- if service_base_url %}
 
 A live instance of this application is already running and reachable at {{ service_base_url }}. Explore the running UI directly — navigate to pages, interact with forms and buttons, observe responses. The application has already been built and started for you; do not build, start, stop, or reconfigure it.
@@ -25,10 +257,13 @@ Validate all tests with `npx playwright test` in headless mode. If failures occu
 
 Prioritize correctness, broad flow coverage, and successful integration with the project's existing toolchain. Generate as many meaningful, non-redundant tests as possible while preserving correctness and maintainability. Cover happy paths, edge cases, form validation, navigation, error states, and important page interactions.
 
-Do NOT modify production code under any circumstances. Only add or modify test files, Playwright configuration, and the `UI_COVERAGE.md` tracking file described above (keep it in place; do not delete it).
+Do NOT modify production code under any circumstances. Only add or modify test files, Playwright configuration, and the `{{ tracker_file }}` tracking file described above (keep it in place; do not delete it).
+{%- if mode != "project-aware" %}
 
 Do NOT restore, reuse, or copy any `.bak` files found in the repository. Those are backups of pre-existing tests and must be ignored entirely. Write all test files from scratch based on your own exploration of the running application.
+{%- endif %}
 
 Do NOT leave behind failing, flaky, incomplete, or placeholder tests. After writing tests, run `npx playwright test`. If failures occur, diagnose and repair them. Remove any test that cannot be made to pass reliably.
 
 In the final response, concisely summarize the pages and flows tested, the spec files added or modified, the validation commands run, and any assumptions or limitations.
+{%- endif %}

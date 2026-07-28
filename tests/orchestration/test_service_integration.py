@@ -241,9 +241,9 @@ def test_build_agent_request_injects_service_env_and_prompt_vars(
     assert "service_base_url=http://127.0.0.1:8888/" in request.prompt_vars
 
 
-def test_build_agent_request_no_service_has_empty_prompt_vars() -> None:
+def test_build_agent_request_no_service_has_only_mode_prompt_var() -> None:
     request = build_agent_request(docker_args(), None)
-    assert request.prompt_vars == ()
+    assert request.prompt_vars == ("mode=baseline", "coverage_model=flat")
     assert all(not e.startswith("SERVICE_BASE_URL=") for e in request.agent_env)
 
 
@@ -307,9 +307,13 @@ def test_claude_code_command_emits_prompt_vars(tmp_path: Path) -> None:
     command = build_claude_code_command(
         build_agent_request(docker_args(service="genome-nexus"), svc)
     )
-    assert command.count("--prompt-var") == 2
-    idx = command.index("--prompt-var")
-    assert command[idx + 1] == "service_id=genome-nexus"
+    assert command.count("--prompt-var") == 4
+    prompt_var_values = [
+        command[i + 1] for i, token in enumerate(command) if token == "--prompt-var"
+    ]
+    assert "service_id=genome-nexus" in prompt_var_values
+    assert "mode=baseline" in prompt_var_values
+    assert "coverage_model=flat" in prompt_var_values
 
 
 def _docker_command_args(**overrides: object) -> argparse.Namespace:

@@ -1,4 +1,4 @@
-"""Preprocess the staged input: git reset, test clearing, dependency injection."""
+"""Preprocess the staged input: git reset and test clearing."""
 
 from __future__ import annotations
 
@@ -18,55 +18,6 @@ if TYPE_CHECKING:
     from general_agent_eval.preprocessing.git_reset import GitResetTarget
 
 
-def _inject_rest_assured_step(
-    *,
-    staged_input: Path,
-    output_dir: Path,
-    service: dict[str, Any] | None,
-) -> dict[str, Any]:
-    rest_assured_config = service.get("rest_assured") if service else None
-    if rest_assured_config is None:
-        # e.g. features-service ships a legacy RestAssured and omits the manifest block.
-        print(
-            "[rest-assured] skipped: service has no rest_assured config in the manifest",
-            flush=True,
-        )
-        return {"enabled": True, "status": "skipped", "reason": "no rest_assured config"}
-
-    from general_agent_eval.preprocessing.rest_assured_injection import (
-        InjectionConfig,
-        RestAssuredInjectionError,
-        inject_rest_assured,
-    )
-
-    try:
-        config = InjectionConfig.from_dict(rest_assured_config)
-        result = inject_rest_assured(staged_input, config)
-    except RestAssuredInjectionError as exc:
-        raise DockerRunError(f"Failed to inject RestAssured: {exc}") from exc
-
-    injection_patch = None
-    if git_repo_root(staged_input) == staged_input:
-        injection_patch_path = output_dir / "dependency_injection.patch"
-        write_git_patch(
-            staged_input=staged_input,
-            output_path=injection_patch_path,
-            relative_paths=[config.target_pom],
-        )
-        injection_patch = str(injection_patch_path)
-
-    print(
-        f"[rest-assured] {result.status} pom={config.target_pom} "
-        f"version={'managed' if result.managed else result.version}",
-        flush=True,
-    )
-    return {
-        "enabled": True,
-        **result.to_dict(),
-        "dependency_injection_patch": injection_patch,
-    }
-
-
 def preprocess_staged_input(
     *,
     args: argparse.Namespace,
@@ -75,11 +26,9 @@ def preprocess_staged_input(
     reset_target: GitResetTarget | None = None,
     service: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    inject_enabled = getattr(args, "inject_rest_assured", False)
     preprocessing: dict[str, Any] = {
         "reset_git": {"enabled": args.reset_git},
         "test_clearing": {"enabled": args.clear_tests},
-        "rest_assured_injection": {"enabled": inject_enabled},
     }
 
     if args.reset_git:
@@ -117,17 +66,17 @@ def preprocess_staged_input(
             flush=True,
         )
 
-    if args.clear_tests:
-        from general_agent_eval.preprocessing.java_test_clearing import TestClearingError
+    should_clear = args.clear_tests and getattr(args, "mode", "baseline") != "project-aware"
 
-        if getattr(args, "workload", "java") == "javascript":
-            from general_agent_eval.preprocessing.js_test_clearing import clear_js_tests as _clear_fn
-        else:
-            from general_agent_eval.preprocessing.java_test_clearing import clear_java_tests as _clear_fn  # type: ignore[assignment]
+    if should_clear:
+        from general_agent_eval.preprocessing.js_test_clearing import (
+            ClearingError,
+            clear_js_tests,
+        )
 
         try:
-            clear_result = _clear_fn(staged_input)
-        except TestClearingError as exc:
+            clear_result = clear_js_tests(staged_input)
+        except ClearingError as exc:
             raise DockerRunError(f"Failed to clear tests: {exc}") from exc
 
         clearing_manifest_path = output_dir / "cleared_tests.json"
@@ -155,21 +104,12 @@ def preprocess_staged_input(
             flush=True,
         )
 
-    if inject_enabled:
-        preprocessing["rest_assured_injection"] = _inject_rest_assured_step(
-            staged_input=staged_input,
-            output_dir=output_dir,
-            service=service,
-        )
-
-    # Commit the testless baseline once, after clearing and injection, so both the
-    # cleared tree and the injected dependency land in the baseline and stay out of
-    # the agent's diff. Patches above were captured first, against the original git.
-    if args.clear_tests or inject_enabled:
+    # Commit the testless baseline after clearing so the cleared tree lands in
+    # the baseline and stays out of the agent's diff.
+    if should_clear:
         git_baseline = initialize_synthetic_git_baseline(staged_input)
         preprocessing["git_baseline"] = git_baseline
-        if args.clear_tests:
-            preprocessing["test_clearing"]["git_history_sanitized"] = True
-            preprocessing["test_clearing"]["git_baseline"] = git_baseline
+        preprocessing["test_clearing"]["git_history_sanitized"] = True
+        preprocessing["test_clearing"]["git_baseline"] = git_baseline
 
     return preprocessing

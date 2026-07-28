@@ -5,9 +5,9 @@ from pathlib import Path
 import pytest
 
 from general_agent_eval.preprocessing.js_test_clearing import (
+    ClearingError,
     clear_js_tests,
 )
-from general_agent_eval.preprocessing.java_test_clearing import TestClearingError
 
 
 def write_file(path: Path, text: str = "x") -> None:
@@ -123,5 +123,5 @@ def test_clear_js_tests_empty_project_returns_empty_result(tmp_path: Path) -> No
 
 
 def test_clear_js_tests_rejects_missing_root(tmp_path: Path) -> None:
-    with pytest.raises(TestClearingError, match="Root does not exist"):
+    with pytest.raises(ClearingError, match="Root does not exist"):
         clear_js_tests(tmp_path / "missing")

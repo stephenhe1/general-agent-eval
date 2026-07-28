@@ -935,3 +935,47 @@ def test_clear_tests_javascript_removes_cypress_and_writes_manifest(
     )
     assert clearing_manifest["removed_count"] == 1
     assert clearing_manifest["preserved_suspicious_count"] == 0
+
+
+# ---------------------------------------------------------------------------
+# Mode validation
+# ---------------------------------------------------------------------------
+
+
+def test_mode_project_aware_and_clear_tests_raises() -> None:
+    args = argparse.Namespace(mode="project-aware", clear_tests=True)
+    with pytest.raises(DockerRunError, match="mutually exclusive"):
+        cli.validate_mode_options(args)
+
+
+def test_mode_baseline_and_clear_tests_passes() -> None:
+    args = argparse.Namespace(mode="baseline", clear_tests=True)
+    cli.validate_mode_options(args)  # should not raise
+
+
+def test_preprocess_project_aware_skips_clearing(tmp_path: Path) -> None:
+    staged_repo = tmp_path / "repo"
+    staged_repo.mkdir()
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    test_dir = staged_repo / "cypress"
+    test_dir.mkdir()
+    (test_dir / "e2e.spec.ts").write_text("test('x', () => {})")
+    (staged_repo / "src").mkdir()
+    (staged_repo / "src" / "App.tsx").write_text("export default App")
+    run(["git", "init"], cwd=staged_repo)
+    configure_git(staged_repo)
+    commit_all(staged_repo, "initial")
+
+    preprocessing = preprocess.preprocess_staged_input(
+        args=argparse.Namespace(
+            reset_git=False, clear_tests=True, mode="project-aware", workload="javascript"
+        ),
+        staged_input=staged_repo,
+        output_dir=output_dir,
+    )
+
+    # Test files should still exist — clearing was skipped.
+    assert (staged_repo / "cypress" / "e2e.spec.ts").exists()
+    assert preprocessing["test_clearing"]["enabled"] is True
+    assert "removed_count" not in preprocessing["test_clearing"]

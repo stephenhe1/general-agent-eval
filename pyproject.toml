@@ -49,6 +49,7 @@ dependencies = [
 [project.scripts]
 general-agent-eval-claude-code = "general_agent_eval.general_agents.claude_code:main"
 general-agent-eval-codex = "general_agent_eval.general_agents.codex:main"
+general-agent-eval-clear-tests = "general_agent_eval.preprocessing.cli:main"
 general-agent-eval-docker-run = "general_agent_eval.orchestration.run:main"
 general-agent-eval-recover = "general_agent_eval.recovery.recover_full_repo:main"
 

@@ -27,12 +27,9 @@ AGENT_DOCKERFILES = {
     "claude-code": DOCKER_DIR / "Dockerfile.claude-code",
     "codex": DOCKER_DIR / "Dockerfile.codex",
 }
-JAVA_DOCKERFILE = DOCKER_DIR / "Dockerfile.java"
 JAVASCRIPT_DOCKERFILE = DOCKER_DIR / "Dockerfile.javascript"
-GENOME_NEXUS_DOCKERFILE = DOCKER_DIR / "Dockerfile.genome-nexus"
 
 WORKLOAD_DOCKERFILES: dict[str, Path] = {
-    "java": JAVA_DOCKERFILE,
     "javascript": JAVASCRIPT_DOCKERFILE,
 }
 
@@ -105,10 +102,9 @@ def _require_source_checkout() -> None:
 
 
 def layered_stack(
-    *, agent: str, workload: str = "java", service: dict[str, Any] | None = None
+    *, agent: str, workload: str = "javascript", service: dict[str, Any] | None = None
 ) -> tuple[BuildLayer, ...]:
-    """The default runtime stack: base -> agent -> <workload>, plus the
-    genome-nexus overlay when that service is selected with the java workload."""
+    """The default runtime stack: base -> agent -> javascript."""
     if agent not in AGENT_DOCKERFILES:
         raise DockerRunError(f"no runtime layer is defined for agent '{agent}'")
     if workload not in WORKLOAD_DOCKERFILES:
@@ -140,25 +136,14 @@ def layered_stack(
         context=DOCKER_DIR,
         build_args=(("BASE_IMAGE", agent_layer.image),),
     )
-    layers = [base, agent_layer, workload_layer]
-    if workload == "java" and service is not None and service.get("id") == "genome-nexus":
-        layers.append(
-            BuildLayer(
-                name="genome-nexus",
-                dockerfile=GENOME_NEXUS_DOCKERFILE,
-                image=_stack_tag(agent, "java", "genome-nexus"),
-                context=DOCKER_DIR,
-                build_args=(("BASE_IMAGE", workload_layer.image),),
-            )
-        )
-    return tuple(layers)
+    return (base, agent_layer, workload_layer)
 
 
 def resolve_image_plan(
     args: argparse.Namespace,
     *,
     agent: str,
-    workload: str = "java",
+    workload: str = "javascript",
     service: dict[str, Any] | None = None,
 ) -> ImagePlan:
     """Resolve what to run and what to build first.

@@ -18,6 +18,7 @@ from general_agent_eval.orchestration.cli import (
     validate_agent_options,
     validate_agent_values,
     validate_host_env,
+    validate_mode_options,
 )
 from general_agent_eval.orchestration.docker import (
     CONTAINER_INPUT_DIR,
@@ -40,7 +41,6 @@ from general_agent_eval.orchestration.preprocess import preprocess_staged_input
 from general_agent_eval.orchestration.services import (
     resolve_service,
     resolve_service_scripts_dir,
-    rest_assured_prompt_vars,
     service_prompt_vars,
 )
 from general_agent_eval.orchestration.staging import (
@@ -63,9 +63,10 @@ def build_agent_request(
         # Expose the base URL both to generated tests (env) and to the prompt templates.
         agent_env = (*agent_env, f"SERVICE_BASE_URL={service['base_url']}")
         prompt_vars = service_prompt_vars(service)
-        if getattr(args, "inject_rest_assured", False):
-            prompt_vars = (*prompt_vars, *rest_assured_prompt_vars(service))
     user_prompt_vars = tuple(getattr(args, "prompt_var", []))
+    mode = getattr(args, "mode", "baseline")
+    coverage_model = getattr(args, "coverage_model", "flat")
+    mode_prompt_vars: tuple[str, ...] = (f"mode={mode}", f"coverage_model={coverage_model}")
     service_keys = {var.split("=", 1)[0] for var in prompt_vars}
     collisions = sorted(
         {key for var in user_prompt_vars if (key := var.split("=", 1)[0]) in service_keys}
@@ -95,7 +96,7 @@ def build_agent_request(
         # Docker preprocessing owns reset order so tests cannot be restored later.
         reset_git=False,
         agent_env=agent_env,
-        prompt_vars=(*prompt_vars, *user_prompt_vars),
+        prompt_vars=(*prompt_vars, *mode_prompt_vars, *user_prompt_vars),
         extra_args=tuple(args.extra_arg),
         system_template=container_templates.get("system"),
         user_template=container_templates.get("user"),
@@ -110,6 +111,7 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         validate_agent_options(args)
+        validate_mode_options(args)
         resolve_agent_defaults(args)
         input_dir = args.input_dir.expanduser().resolve()
         if not input_dir.exists():
@@ -130,11 +132,6 @@ def main(argv: list[str] | None = None) -> int:
         service_scripts_dir = (
             resolve_service_scripts_dir(args) if service is not None else None
         )
-        if args.inject_rest_assured and service is None:
-            raise DockerRunError(
-                "--inject-rest-assured requires --service; the rest_assured config "
-                "is read from the service manifest"
-            )
         # Resolved before any staging or build so bad paths/option combos fail fast.
         image_plan = resolve_image_plan(args, agent=args.agent, workload=args.workload, service=service)
         if image_plan.requires_local_image:
