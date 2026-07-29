@@ -189,6 +189,11 @@ def test_js_user_template_graph_discovery_includes_json_schema() -> None:
     assert '"actions"' in rendered
     assert "Rendered interface" in rendered
     assert "Action availability" in rendered
+    assert "auto-dismissing notifications" in rendered
+    assert "immediately redirect" in rendered
+    assert "Consistency rule" in rendered
+    assert "Schema enforcement" in rendered
+    assert "verified_live" in rendered
     assert "UI_COVERAGE.md" not in rendered
 
 
@@ -202,6 +207,10 @@ def test_js_user_template_graph_baseline_includes_test_file_field() -> None:
     assert '"tested"' in rendered
     assert '"trigger"' in rendered
     assert '"actions"' in rendered
+    assert "auto-dismissing notifications" in rendered
+    assert "immediately redirect" in rendered
+    assert "Consistency rule" in rendered
+    assert "Schema enforcement" in rendered
     assert "UI_COVERAGE.md" not in rendered
 
 

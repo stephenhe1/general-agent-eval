@@ -88,7 +88,9 @@ Create a **new** node when at least one of the following differs from any existi
 - **Behavior** — performing the same action produces a different effect or destination
 - **Interaction context** — focus, selection, authorization, or mode changes how the user can interact
 
-Do NOT create new nodes for: loading spinners, skeleton screens, animation frames, timestamps updating, randomized IDs, or minor content changes that do not alter available actions or reachable states.
+Do NOT create new nodes for: loading spinners, skeleton screens, animation frames, timestamps updating, randomized IDs, auto-dismissing notifications (toasts, snackbars, alerts that require no user action), or minor content changes that do not alter available actions or reachable states.
+
+Pages that immediately redirect with no user-visible UI or user-actionable content are NOT distinct states. Instead, model the redirect as an edge from the referring state directly to the target state (trigger: `auto: redirect` with the condition that causes it).
 
 **Node ID format:**
 - Route-level states: use the route path as ID (e.g., `/login`, `/dashboard`, `/users/:id`)
@@ -96,7 +98,7 @@ Do NOT create new nodes for: loading spinners, skeleton screens, animation frame
 
 **Edge triggers:**
 
-Each edge describes the specific UI element that causes the transition. The `trigger` field should reference the most stable identifier available, in order of preference: `data-testid`, `aria-label`, visible text content, or element role + position. Examples:
+Each edge describes the specific UI element that causes the transition. The `trigger` field should reference the most stable identifier available, in order of preference: `data-testid`, `aria-label`, visible text content, or element role + position. Never use generic descriptions like "click row" or "click button" — always include enough detail to locate the element. Fallback format when no test ID exists: `<element type> "<visible text>" [role=<role>]` or `<element type> nth(<index>) in <container>`. Examples:
 - `button "Sign in" [data-testid=login-submit]`
 - `link "Dashboard" in sidebar nav`
 - `tab "Security" [role=tab]`
@@ -105,11 +107,27 @@ Each edge describes the specific UI element that causes the transition. The `tri
 Set `guard` only when the transition is conditionally available (requires auth, specific role, feature flag, or data state).
 
 **Rules:**
-- List the `actions` array on each node — these are the user-facing actions available in that state. This makes state identity auditable: two nodes should have different action sets.
+- List the `actions` array on each node — these are the user-facing actions available in that state, with element identifiers. Format each action as: `<verb> <target> [<identifier>]` where identifier is the most stable locator: data-testid, aria-label, or visible text. Example: `"Submit login [data-testid=login-submit]"`, `"Click 'Dashboard' link in sidebar"`. Two nodes should have different action sets.
+- **Consistency rule:** If you model a UI pattern (e.g., a CRUD modal, a filter overlay) as a sub-state on one page, model the equivalent pattern on every other page where it appears. Do not selectively model some instances and skip others of the same type.
+- For every modal/overlay sub-state, add an edge back to the parent state (trigger: the dismiss/close action).
+- For shared persistent navigation (sidebar, top nav) that appears on multiple states: add edges from at least 3 representative states to the navigation targets. Do not model the full N×M cross-product, but ensure the graph shows that cross-section navigation exists.
 - Group protected states into `auth_zones`; group states sharing a shell/layout into `layouts`.
 - Update `metadata` counts after each modification.
 - Always update the file by reading the existing JSON, modifying in memory, and writing the full file back. Never surgically edit JSON with sed or awk.
 - After each write, validate: `python3 -c "import json; json.load(open('UI_GRAPH.json'))"`
+
+**Schema enforcement:**
+After your first write of UI_GRAPH.json, validate its structure:
+`python3 -c "import json; d=json.load(open('UI_GRAPH.json')); assert d.get('version')=='2.0'; assert 'nodes' in d and 'edges' in d; assert all('id' in n and 'actions' in n for n in d['nodes']); assert all('trigger' in e for e in d['edges']); print('Schema OK')"`
+If this fails, you MUST rewrite the file to match the schema above before continuing. Do not invent your own structure.
+
+**Live navigation verification:**
+After discovering states from source, you MUST open at least 5 pages in the running app using a headless tool (e.g., `npx playwright test --headed` with a quick script, or `curl` + DOM inspection) to verify that your source-derived states match reality. For each page visited, confirm:
+- The route loads without error
+- The actions you listed are actually present in the rendered DOM
+- Any auth gates redirect as expected
+Record which pages you verified in the metadata as `"verified_live": [<routes>]`.
+
 - Keep `label` and `notes` fields terse (< 80 characters).
 - The task is NOT complete while any node has status `"discovered"` — continue until every node is `"explored"` or `"skipped"`.
 {%- else %}
@@ -202,7 +220,9 @@ Create a **new** node when at least one of the following differs from any existi
 - **Behavior** — performing the same action produces a different effect or destination
 - **Interaction context** — focus, selection, authorization, or mode changes how the user can interact
 
-Do NOT create new nodes for: loading spinners, skeleton screens, animation frames, timestamps updating, randomized IDs, or minor content changes that do not alter available actions or reachable states.
+Do NOT create new nodes for: loading spinners, skeleton screens, animation frames, timestamps updating, randomized IDs, auto-dismissing notifications (toasts, snackbars, alerts that require no user action), or minor content changes that do not alter available actions or reachable states.
+
+Pages that immediately redirect with no user-visible UI or user-actionable content are NOT distinct states. Instead, model the redirect as an edge from the referring state directly to the target state (trigger: `auto: redirect` with the condition that causes it).
 
 **Node ID format:**
 - Route-level states: use the route path as ID (e.g., `/login`, `/dashboard`, `/users/:id`)
@@ -210,7 +230,7 @@ Do NOT create new nodes for: loading spinners, skeleton screens, animation frame
 
 **Edge triggers:**
 
-Each edge describes the specific UI element that causes the transition. The `trigger` field should reference the most stable identifier available, in order of preference: `data-testid`, `aria-label`, visible text content, or element role + position. Examples:
+Each edge describes the specific UI element that causes the transition. The `trigger` field should reference the most stable identifier available, in order of preference: `data-testid`, `aria-label`, visible text content, or element role + position. Never use generic descriptions like "click row" or "click button" — always include enough detail to locate the element. Fallback format when no test ID exists: `<element type> "<visible text>" [role=<role>]` or `<element type> nth(<index>) in <container>`. Examples:
 - `button "Sign in" [data-testid=login-submit]`
 - `link "Dashboard" in sidebar nav`
 - `tab "Security" [role=tab]`
@@ -219,13 +239,22 @@ Each edge describes the specific UI element that causes the transition. The `tri
 Set `guard` only when the transition is conditionally available (requires auth, specific role, feature flag, or data state).
 
 **Rules:**
-- List the `actions` array on each node — these are the user-facing actions available in that state.
+- List the `actions` array on each node — these are the user-facing actions available in that state, with element identifiers. Format each action as: `<verb> <target> [<identifier>]` where identifier is the most stable locator: data-testid, aria-label, or visible text. Example: `"Submit login [data-testid=login-submit]"`, `"Click 'Dashboard' link in sidebar"`. Two nodes should have different action sets.
+- **Consistency rule:** If you model a UI pattern (e.g., a CRUD modal, a filter overlay) as a sub-state on one page, model the equivalent pattern on every other page where it appears. Do not selectively model some instances and skip others of the same type.
+- For every modal/overlay sub-state, add an edge back to the parent state (trigger: the dismiss/close action).
+- For shared persistent navigation (sidebar, top nav) that appears on multiple states: add edges from at least 3 representative states to the navigation targets. Do not model the full N×M cross-product, but ensure the graph shows that cross-section navigation exists.
 - After a state's test compiles and passes, set its status to `"tested"` and record the spec file path in `test_file`.
 - If you deliberately skip a state, set status to `"skipped"` with a reason in `notes`.
 - Group protected states into `auth_zones`; group states sharing a shell/layout into `layouts`.
 - Update `metadata` counts after each modification.
 - Always update the file by reading the existing JSON, modifying in memory, and writing the full file back.
 - After each write, validate: `python3 -c "import json; json.load(open('UI_GRAPH.json'))"`
+
+**Schema enforcement:**
+After your first write of UI_GRAPH.json, validate its structure:
+`python3 -c "import json; d=json.load(open('UI_GRAPH.json')); assert d.get('version')=='2.0'; assert 'nodes' in d and 'edges' in d; assert all('id' in n and 'actions' in n for n in d['nodes']); assert all('trigger' in e for e in d['edges']); print('Schema OK')"`
+If this fails, you MUST rewrite the file to match the schema above before continuing. Do not invent your own structure.
+
 - Keep `label` and `notes` fields terse (< 80 characters).
 - Prefer breadth first: get at least one passing test for every state across all sections before deepening coverage.
 - The task is NOT complete while any node remains `"discovered"` or `"explored"` — continue until every node is `"tested"` or `"skipped"`.
