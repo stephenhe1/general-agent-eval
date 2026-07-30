@@ -1,0 +1,2121 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Umami Analytics",
+    "total_states": 81,
+    "explored": 81,
+    "skipped": 0,
+    "verified_live": [
+      "/login",
+      "/websites",
+      "/dashboard",
+      "/admin/users",
+      "/settings/profile",
+      "/settings/preferences",
+      "/settings/teams",
+      "/settings/websites",
+      "/admin/websites",
+      "/admin/teams",
+      "/console/test-websiteId",
+      "/boards/create",
+      "/boards",
+      "/links",
+      "/pixels",
+      "/teams",
+      "/logout",
+      "/sso",
+      "/share/test-slug"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Root redirect \u2014 sends to /websites or /teams/:id/websites",
+      "section": "root",
+      "status": "explored",
+      "auth_required": false,
+      "layout": null,
+      "actions": [],
+      "notes": "Auto-redirects; no visible UI. Reads LAST_TEAM_CONFIG from storage."
+    },
+    {
+      "id": "/login",
+      "route": "/login",
+      "label": "Login page with username/password form",
+      "section": "auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": null,
+      "actions": [
+        "Submit login form [data-testid=login-submit or button 'Sign in']",
+        "Enter username field",
+        "Enter password field"
+      ],
+      "notes": "Redirects to / if user already logged in."
+    },
+    {
+      "id": "/logout",
+      "route": "/logout",
+      "label": "Logout page \u2014 clears session and redirects",
+      "section": "auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": null,
+      "actions": [],
+      "notes": "Auto-redirect after clearing auth token; no user-visible UI."
+    },
+    {
+      "id": "/sso",
+      "route": "/sso",
+      "label": "SSO authentication handler \u2014 sets token and redirects",
+      "section": "auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": null,
+      "actions": [],
+      "notes": "Receives ?token=&url= query params; shows loading spinner only."
+    },
+    {
+      "id": "/share/[slug]",
+      "route": "/share/[slug]",
+      "label": "Public share page \u2014 website overview (default entry)",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Collapse/expand sidebar nav button",
+        "Select date range from share nav",
+        "Navigate to allowed share sub-pages via ShareNav"
+      ],
+      "notes": "Supports website, board, pixel, link shares. Layout adapts to entity type."
+    },
+    {
+      "id": "/share/[slug]/events",
+      "route": "/share/[slug]/events",
+      "label": "Shared website \u2014 Events sub-page",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Switch event tabs: chart/activity/properties",
+        "Apply date range filter"
+      ],
+      "notes": "Only available if share parameters.events === true."
+    },
+    {
+      "id": "/share/[slug]/sessions",
+      "route": "/share/[slug]/sessions",
+      "label": "Shared website \u2014 Sessions sub-page",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Switch session tabs: activity/properties",
+        "Apply date range filter"
+      ],
+      "notes": "Replays tab hidden in share context (showReplays=false)."
+    },
+    {
+      "id": "/share/[slug]/realtime",
+      "route": "/share/[slug]/realtime",
+      "label": "Shared website \u2014 Realtime sub-page",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "View live visitor activity"
+      ],
+      "notes": "Only available if share parameters.realtime === true."
+    },
+    {
+      "id": "/share/[slug]/performance",
+      "route": "/share/[slug]/performance",
+      "label": "Shared website \u2014 Performance report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range",
+        "Filter by URL"
+      ],
+      "notes": "Only if parameters.performance === true."
+    },
+    {
+      "id": "/share/[slug]/compare",
+      "route": "/share/[slug]/compare",
+      "label": "Shared website \u2014 Compare mode",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Toggle compare period"
+      ],
+      "notes": "Only if parameters.compare === true."
+    },
+    {
+      "id": "/share/[slug]/breakdown",
+      "route": "/share/[slug]/breakdown",
+      "label": "Shared website \u2014 Breakdown report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Select dimension to break down by"
+      ],
+      "notes": "Only if parameters.breakdown === true."
+    },
+    {
+      "id": "/share/[slug]/goals",
+      "route": "/share/[slug]/goals",
+      "label": "Shared website \u2014 Goals report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range filter"
+      ],
+      "notes": "Add-goal button hidden in share context."
+    },
+    {
+      "id": "/share/[slug]/funnels",
+      "route": "/share/[slug]/funnels",
+      "label": "Shared website \u2014 Funnels report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range filter"
+      ],
+      "notes": "Add-funnel button hidden in share context."
+    },
+    {
+      "id": "/share/[slug]/journeys",
+      "route": "/share/[slug]/journeys",
+      "label": "Shared website \u2014 Journeys report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Select start/end path",
+        "Apply date range"
+      ],
+      "notes": "Only if parameters.journeys === true."
+    },
+    {
+      "id": "/share/[slug]/retention",
+      "route": "/share/[slug]/retention",
+      "label": "Shared website \u2014 Retention report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range filter"
+      ],
+      "notes": "Only if parameters.retention === true."
+    },
+    {
+      "id": "/share/[slug]/utm",
+      "route": "/share/[slug]/utm",
+      "label": "Shared website \u2014 UTM report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range filter"
+      ],
+      "notes": "Only if parameters.utm === true."
+    },
+    {
+      "id": "/share/[slug]/revenue",
+      "route": "/share/[slug]/revenue",
+      "label": "Shared website \u2014 Revenue report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range filter",
+        "Filter by currency"
+      ],
+      "notes": "Only if parameters.revenue === true."
+    },
+    {
+      "id": "/share/[slug]/attribution",
+      "route": "/share/[slug]/attribution",
+      "label": "Shared website \u2014 Attribution report",
+      "section": "share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Apply date range filter",
+        "Select attribution model"
+      ],
+      "notes": "Only if parameters.attribution === true."
+    },
+    {
+      "id": "/dashboard",
+      "route": "/dashboard",
+      "label": "Personal dashboard \u2014 customisable widget board view",
+      "section": "dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Edit Dashboard' button in DashboardViewHeader",
+        "Click 'Share' button in DashboardViewHeader",
+        "Apply date range via BoardControls",
+        "Apply segment filter via BoardControls",
+        "Click website widget to navigate to website"
+      ],
+      "notes": "Not available in team context \u2014 redirects to /websites."
+    },
+    {
+      "id": "/dashboard/edit",
+      "route": "/dashboard/edit",
+      "label": "Personal dashboard \u2014 edit mode for widget layout",
+      "section": "dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Add widget via BoardEditBody component",
+        "Remove widget",
+        "Reorder widgets via drag-and-drop",
+        "Click 'Done' / save button in DashboardEditHeader",
+        "Click 'Cancel' in DashboardEditHeader"
+      ],
+      "notes": "Not available in team context. Uses same BoardEditBody as boards."
+    },
+    {
+      "id": "/boards",
+      "route": "/boards",
+      "label": "Boards list \u2014 create and manage analytics boards",
+      "section": "boards",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add board' button [BoardAddButton]",
+        "Click board row to navigate to board view",
+        "Click edit icon on board row [BoardEditButton]",
+        "Click delete icon on board row [BoardDeleteButton]",
+        "Click design icon on board row [BoardDesignButton]",
+        "Search/filter boards"
+      ],
+      "notes": "In team context: /teams/:id/boards. View-only members hide add/edit/delete."
+    },
+    {
+      "id": "/boards/[boardId]",
+      "route": "/boards/[boardId]",
+      "label": "Board view \u2014 read-only view of configured analytics board",
+      "section": "boards",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Apply date range via BoardControls",
+        "Apply segment filter via BoardControls",
+        "Click 'Share' button [BoardShareButton]",
+        "Click 'Edit' button in BoardViewHeader",
+        "Click 'Design' button in BoardViewHeader",
+        "Click on embedded chart to expand"
+      ],
+      "notes": "Team boards shown in team context."
+    },
+    {
+      "id": "/boards/[boardId]#share-dialog",
+      "route": "/boards/[boardId]",
+      "label": "Board share dialog \u2014 create/manage share links",
+      "section": "boards",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add' button to create new share [button 'Add']",
+        "Delete existing share link",
+        "Copy share link",
+        "Close dialog"
+      ],
+      "notes": "Opens as Modal over board view. Shows share URL and share list."
+    },
+    {
+      "id": "/boards/[boardId]/edit",
+      "route": "/boards/[boardId]/edit",
+      "label": "Board edit \u2014 modify board widget layout",
+      "section": "boards",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Add widget/component to board",
+        "Remove widget",
+        "Reorder via drag-and-drop",
+        "Click 'Save' in BoardEditHeader",
+        "Click 'Cancel' in BoardEditHeader"
+      ],
+      "notes": "Requires owner/manager role in team context."
+    },
+    {
+      "id": "/boards/[boardId]/design",
+      "route": "/boards/[boardId]/design",
+      "label": "Board design \u2014 configure visual appearance and component selection",
+      "section": "boards",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Select component from BoardComponentSelect",
+        "Configure layout rows/columns",
+        "Click 'Save' in BoardDesignHeader",
+        "Click 'Cancel' in BoardDesignHeader",
+        "Preview board with BoardEditBody"
+      ],
+      "notes": "BoardDesignPage wraps BoardProvider in editing mode."
+    },
+    {
+      "id": "/websites",
+      "route": "/websites",
+      "label": "Websites list \u2014 manage tracked websites",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add website' button [WebsiteAddButton] (hidden for view-only)",
+        "Click website name/row to go to website analytics",
+        "Search websites",
+        "Paginate through website list"
+      ],
+      "notes": "Team context: /teams/:id/websites. viewOnly role hides Add."
+    },
+    {
+      "id": "/websites/[websiteId]",
+      "route": "/websites/[websiteId]",
+      "label": "Website overview \u2014 stats, chart, and metrics panels",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range via WebsiteControls",
+        "Apply segment filter via WebsiteControls",
+        "Toggle bounce filter via WebsiteControls",
+        "Switch chart unit (day/week/month) via UnitFilter",
+        "Click 'More info' on metric panel to open ExpandedViewModal",
+        "Select tab in Pages panel (path/url/entry/exit)",
+        "Select tab in Sources panel (referrer/channel)",
+        "Select tab in Environment panel (browser/os/device)",
+        "Select tab in Location panel (country/region/city)",
+        "Click entry in metrics table to drill down",
+        "Click 'Share' in website menu",
+        "Navigate to sub-pages via WebsiteNav sidebar"
+      ],
+      "notes": "Overview tab; also accessible via overview path."
+    },
+    {
+      "id": "/websites/[websiteId]#expanded-view-modal",
+      "route": "/websites/[websiteId]",
+      "label": "Website \u2014 expanded view modal (full-screen dimension drill-down)",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Select dimension from WebsiteExpandedMenu (path, url, referrer, country, browser, etc.)",
+        "Sort and paginate expanded metrics table",
+        "Download data [export button if available]",
+        "Close modal [button X or click outside]"
+      ],
+      "notes": "Triggered by ?view=<dimension> query param. Full-screen modal."
+    },
+    {
+      "id": "/websites/[websiteId]/events",
+      "route": "/websites/[websiteId]/events",
+      "label": "Website events \u2014 chart tab showing events over time",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Apply segment filter",
+        "Switch to 'Activity' tab [tab 'Activity']",
+        "Switch to 'Properties' tab [tab 'Properties']",
+        "View EventsChart with top-50 events",
+        "View MetricsTable of event names"
+      ],
+      "notes": "Default sub-tab is 'chart'. Shows 4 metric cards at top."
+    },
+    {
+      "id": "/websites/[websiteId]/events#activity-tab",
+      "route": "/websites/[websiteId]/events",
+      "label": "Website events \u2014 activity tab with raw event data table",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Apply segment filter",
+        "Filter by event name",
+        "Paginate EventsDataTable",
+        "Click session in table to open SessionModal",
+        "Switch to 'Chart' tab",
+        "Switch to 'Properties' tab"
+      ],
+      "notes": "Tab remembered in localStorage key 'umami.events.tab'."
+    },
+    {
+      "id": "/websites/[websiteId]/events#properties-tab",
+      "route": "/websites/[websiteId]/events",
+      "label": "Website events \u2014 properties tab with pivot data",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Select event name to pivot",
+        "Select property to analyze",
+        "Switch chart type (array-series, date-series, numeric-series, etc.)",
+        "Switch to 'Chart' tab",
+        "Switch to 'Activity' tab"
+      ],
+      "notes": "EventProperties renders EventDataPivotTable."
+    },
+    {
+      "id": "/websites/[websiteId]/sessions",
+      "route": "/websites/[websiteId]/sessions",
+      "label": "Website sessions \u2014 activity tab with sessions list",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Apply segment filter",
+        "Paginate sessions table (SessionsDataTable)",
+        "Click session row to open SessionModal",
+        "Switch to 'Properties' tab [tab 'Properties']"
+      ],
+      "notes": "Default tab is 'activity'. Tab remembered in 'umami.sessions.tab'."
+    },
+    {
+      "id": "/websites/[websiteId]/sessions#properties-tab",
+      "route": "/websites/[websiteId]/sessions",
+      "label": "Website sessions \u2014 properties tab with session data pivot",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Select session property to pivot",
+        "Switch chart type",
+        "Switch to 'Activity' tab"
+      ],
+      "notes": "SessionProperties renders SessionDataPivotTable."
+    },
+    {
+      "id": "/websites/[websiteId]/sessions#session-modal",
+      "route": "/websites/[websiteId]/sessions",
+      "label": "Website sessions \u2014 session quick-view sheet modal",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "View session stats and info",
+        "Switch SessionProfile tabs: activity/properties/replays",
+        "Click replay item to open replay",
+        "Close modal [button X or click outside]"
+      ],
+      "notes": "Triggered via ?session=<sessionId> query param. Bottom-sheet modal."
+    },
+    {
+      "id": "/websites/[websiteId]/sessions/[sessionId]",
+      "route": "/websites/[websiteId]/sessions/[sessionId]",
+      "label": "Session profile page \u2014 full session detail view",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "View session stats (SessionStats)",
+        "View session info (IP, browser, OS, etc.)",
+        "Switch tabs: activity/properties/replays",
+        "Click replay in replays tab to navigate to replay",
+        "Copy session ID field"
+      ],
+      "notes": "Full page; also accessible as parallel route modal from sessions/replays."
+    },
+    {
+      "id": "/websites/[websiteId]/realtime",
+      "route": "/websites/[websiteId]/realtime",
+      "label": "Website realtime \u2014 live visitor activity dashboard",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "View live visitor count in RealtimeHeader",
+        "View RealtimeChart (per-minute traffic)",
+        "View RealtimeLog (live event stream)",
+        "View RealtimePaths (top paths)",
+        "View RealtimeReferrers",
+        "View RealtimeCountries + WorldMap"
+      ],
+      "notes": "Auto-refreshes every 5s. No date range controls."
+    },
+    {
+      "id": "/websites/[websiteId]/replays",
+      "route": "/websites/[websiteId]/replays",
+      "label": "Website replays \u2014 list of session recordings (active tab)",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter via WebsiteControls",
+        "Apply segment filter",
+        "Click 'Filter' button [ReplayFilterButton]",
+        "Click replay row to navigate to /replays/[replayId]",
+        "Click session link to open SessionModal",
+        "Switch to 'Saved' tab [tab 'Saved']",
+        "Open ReplayModal inline"
+      ],
+      "notes": "Cloud: requires Business plan. Tab remembered in 'umami.replays.tab'."
+    },
+    {
+      "id": "/websites/[websiteId]/replays#replay-modal",
+      "route": "/websites/[websiteId]/replays",
+      "label": "Website replays \u2014 replay quick-view bottom sheet (via ?replay=)",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Play/pause replay in ReplayPlayer",
+        "Scrub timeline",
+        "Save replay (bookmark icon popover)",
+        "View session info below player",
+        "Close modal [button X or click outside]"
+      ],
+      "notes": "ReplayModal bottom sheet triggered by ?replay=<replayId> param."
+    },
+    {
+      "id": "/websites/[websiteId]/replays#saved-tab",
+      "route": "/websites/[websiteId]/replays",
+      "label": "Website replays \u2014 saved replays tab",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "View saved replays list (SavedReplaysDataTable)",
+        "Click replay to navigate to /replays/[replayId]",
+        "Click 'Unsave' bookmark icon",
+        "Switch to 'Replays' tab [tab 'Replays']"
+      ],
+      "notes": "Saved replays include user-defined bookmark name."
+    },
+    {
+      "id": "/websites/[websiteId]/replays/[replayId]",
+      "route": "/websites/[websiteId]/replays/[replayId]",
+      "label": "Replay playback \u2014 full session recording player",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Play/pause replay (ReplayPlayer rrweb player)",
+        "Scrub timeline",
+        "Click 'Save' bookmark icon to open save-replay form",
+        "Click 'Unsave' bookmark (filled) to remove from saved",
+        "View SessionInfo below player",
+        "Close via onClose if opened as modal"
+      ],
+      "notes": "Also rendered inside ReplayModal (parallel route /@modal)."
+    },
+    {
+      "id": "/websites/[websiteId]/replays/[replayId]#save-form",
+      "route": "/websites/[websiteId]/replays/[replayId]",
+      "label": "Replay playback \u2014 save replay popover form",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Enter replay name/note in ReplaySaveForm",
+        "Click 'Save' to bookmark",
+        "Click 'Cancel' to dismiss popover"
+      ],
+      "notes": "Triggered by bookmark icon (Popover with Dialog)."
+    },
+    {
+      "id": "/websites/[websiteId]/compare",
+      "route": "/websites/[websiteId]/compare",
+      "label": "Website compare \u2014 period-over-period comparison view",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range via WebsiteControls (allowCompare=true)",
+        "Toggle compare mode (current vs previous period)",
+        "View WebsiteMetricsBar with change indicators",
+        "View CompareTables side-by-side"
+      ],
+      "notes": "Shows delta indicators on metric cards."
+    },
+    {
+      "id": "/websites/[websiteId]/performance",
+      "route": "/websites/[websiteId]/performance",
+      "label": "Website performance \u2014 Core Web Vitals and page speed",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Apply segment filter",
+        "Filter by page URL",
+        "View CWV metrics (LCP, FID, CLS, etc.)"
+      ],
+      "notes": "Part of (reports) route group."
+    },
+    {
+      "id": "/websites/[websiteId]/breakdown",
+      "route": "/websites/[websiteId]/breakdown",
+      "label": "Website breakdown \u2014 dimension analysis table",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Select dimension from FieldSelectForm",
+        "Apply date range filter",
+        "Apply segment filter",
+        "Sort breakdown table",
+        "Paginate results"
+      ],
+      "notes": "BreakdownPage with FieldSelectForm for dimension picker."
+    },
+    {
+      "id": "/websites/[websiteId]/goals",
+      "route": "/websites/[websiteId]/goals",
+      "label": "Website goals \u2014 conversion goal tracking",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Click 'Add goal' button [GoalAddButton] (hidden on share pages)",
+        "Click edit icon on goal [GoalEditForm]",
+        "Delete goal",
+        "Apply date range filter",
+        "View goal completion chart"
+      ],
+      "notes": "Goals are persistent configs stored per website."
+    },
+    {
+      "id": "/websites/[websiteId]/funnels",
+      "route": "/websites/[websiteId]/funnels",
+      "label": "Website funnels \u2014 multi-step conversion funnels",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Click 'Add funnel' button [FunnelAddButton] (hidden on share pages)",
+        "Edit funnel configuration [FunnelEditForm]",
+        "Delete funnel",
+        "Apply date range filter",
+        "View funnel drop-off chart"
+      ],
+      "notes": "Multiple funnels shown on one page."
+    },
+    {
+      "id": "/websites/[websiteId]/journeys",
+      "route": "/websites/[websiteId]/journeys",
+      "label": "Website journeys \u2014 user path flow analysis",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Select start path",
+        "Select end path",
+        "Apply date range filter",
+        "View Sankey/journey chart"
+      ],
+      "notes": "Journey visualization showing common paths between pages."
+    },
+    {
+      "id": "/websites/[websiteId]/retention",
+      "route": "/websites/[websiteId]/retention",
+      "label": "Website retention \u2014 cohort retention analysis",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Select cohort period (weekly/monthly)",
+        "View retention grid/heatmap"
+      ],
+      "notes": "Cohort retention matrix visualization."
+    },
+    {
+      "id": "/websites/[websiteId]/heatmaps",
+      "route": "/websites/[websiteId]/heatmaps",
+      "label": "Website heatmaps \u2014 click and scroll heatmap viewer",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Enter URL path in search field",
+        "Toggle between 'Clicks' and 'Scroll' mode [FilterButtons]",
+        "Apply date range filter",
+        "View heatmap overlay"
+      ],
+      "notes": "Cloud: requires Business plan. Requires replays feature."
+    },
+    {
+      "id": "/websites/[websiteId]/segments",
+      "route": "/websites/[websiteId]/segments",
+      "label": "Website segments \u2014 audience segment management",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Click 'Add segment' [SegmentAddButton]",
+        "Click edit icon on segment [SegmentEditButton]",
+        "Click delete icon [SegmentDeleteButton]",
+        "Search segments"
+      ],
+      "notes": "Date/segment filters hidden (allowFilter=false)."
+    },
+    {
+      "id": "/websites/[websiteId]/cohorts",
+      "route": "/websites/[websiteId]/cohorts",
+      "label": "Website cohorts \u2014 saved audience cohorts",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Click 'Add cohort' [CohortAddButton]",
+        "Click edit icon on cohort [CohortEditButton]",
+        "Click delete icon [CohortDeleteButton]",
+        "Search cohorts"
+      ],
+      "notes": "Date/segment filters hidden (allowDateFilter=false)."
+    },
+    {
+      "id": "/websites/[websiteId]/utm",
+      "route": "/websites/[websiteId]/utm",
+      "label": "Website UTM \u2014 UTM campaign parameter analysis",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Apply segment filter",
+        "View UTM source/medium/campaign breakdown tables"
+      ],
+      "notes": "UTMPage shows tables for each UTM parameter."
+    },
+    {
+      "id": "/websites/[websiteId]/revenue",
+      "route": "/websites/[websiteId]/revenue",
+      "label": "Website revenue \u2014 e-commerce revenue analytics",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Apply segment filter",
+        "Filter by currency",
+        "View RevenueChart",
+        "View RevenueMetricsBar",
+        "View RevenueMetricsTable",
+        "Paginate RevenueSessionsDataTable"
+      ],
+      "notes": "Tracks revenue events with currency support."
+    },
+    {
+      "id": "/websites/[websiteId]/attribution",
+      "route": "/websites/[websiteId]/attribution",
+      "label": "Website attribution \u2014 marketing channel attribution",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Apply date range filter",
+        "Select attribution model",
+        "View attribution breakdown table"
+      ],
+      "notes": "AttributionPage with multi-touch attribution models."
+    },
+    {
+      "id": "/websites/[websiteId]/settings",
+      "route": "/websites/[websiteId]/settings",
+      "label": "Website settings \u2014 edit, tracking code, sharing, data management",
+      "section": "websites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:website",
+      "actions": [
+        "Edit website name/domain [WebsiteEditForm]",
+        "Copy tracking code snippet [WebsiteTrackingCode]",
+        "Configure replay settings [WebsiteReplaySettings]",
+        "Create/delete share link [WebsiteShareForm]",
+        "Reset website data [WebsiteResetForm]",
+        "Delete website [WebsiteDeleteForm]",
+        "Transfer website to another user [WebsiteTransferForm]",
+        "Manage share links in SharesTable"
+      ],
+      "notes": "All in one page with multiple Panel sections."
+    },
+    {
+      "id": "/links",
+      "route": "/links",
+      "label": "Links list \u2014 manage tracked short/affiliate links",
+      "section": "links",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add link' button [LinkAddButton] (hidden for view-only)",
+        "Click link row to navigate to link analytics",
+        "Click edit icon [LinkEditButton]",
+        "Click delete icon [LinkDeleteButton]",
+        "Search links"
+      ],
+      "notes": "Team context: /teams/:id/links. viewOnly/teamViewOnly hides actions."
+    },
+    {
+      "id": "/links/[linkId]",
+      "route": "/links/[linkId]",
+      "label": "Link analytics \u2014 traffic and metrics for a tracked link",
+      "section": "links",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Apply date range via LinkControls",
+        "Apply segment filter",
+        "View LinkMetricsBar (visitors, visits, etc.)",
+        "View traffic chart (WebsiteChart)",
+        "View LinkPanels (sources, environment, location tabs)",
+        "Click 'More info' to open ExpandedViewModal",
+        "Click actions in LinkHeader (edit, share, delete)"
+      ],
+      "notes": "Excludes path/entry/exit/title/language/screen/event dimensions."
+    },
+    {
+      "id": "/links/[linkId]/edit",
+      "route": "/links/[linkId]/edit",
+      "label": "Link edit \u2014 edit link configuration",
+      "section": "links",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Edit link name/URL in LinkEditForm",
+        "Click 'Save'",
+        "Click 'Cancel'"
+      ],
+      "notes": "LinkEditPage wraps LinkEditForm."
+    },
+    {
+      "id": "/pixels",
+      "route": "/pixels",
+      "label": "Pixels list \u2014 manage tracking pixels",
+      "section": "pixels",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add pixel' [PixelAddButton] (hidden for view-only)",
+        "Click pixel row to navigate to pixel analytics",
+        "Click edit icon [PixelEditButton]",
+        "Click delete icon [PixelDeleteButton]",
+        "Search pixels"
+      ],
+      "notes": "Team context: /teams/:id/pixels. viewOnly/teamViewOnly hides actions."
+    },
+    {
+      "id": "/pixels/[pixelId]",
+      "route": "/pixels/[pixelId]",
+      "label": "Pixel analytics \u2014 traffic and metrics for a tracking pixel",
+      "section": "pixels",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Apply date range via PixelControls",
+        "Apply segment filter",
+        "View PixelMetricsBar",
+        "View traffic chart",
+        "View PixelPanels (sources, environment, location tabs)",
+        "Click 'More info' to open ExpandedViewModal",
+        "Click actions in PixelHeader (edit, share, delete)"
+      ],
+      "notes": "Same excluded dimensions as links."
+    },
+    {
+      "id": "/pixels/[pixelId]/edit",
+      "route": "/pixels/[pixelId]/edit",
+      "label": "Pixel edit \u2014 edit pixel configuration",
+      "section": "pixels",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Edit pixel name in PixelEditForm",
+        "Click 'Save'",
+        "Click 'Cancel'"
+      ],
+      "notes": "PixelEditPage wraps PixelEditForm."
+    },
+    {
+      "id": "/teams",
+      "route": "/teams",
+      "label": "Teams list \u2014 create, join, and manage teams",
+      "section": "teams",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create team' button [TeamsAddButton]",
+        "Click 'Join team' button [TeamsJoinButton]",
+        "Click team row to enter team context",
+        "Click 'Leave team' button [TeamLeaveButton] on team row"
+      ],
+      "notes": "TeamsPage with TeamsDataTable. Same data as /settings/teams."
+    },
+    {
+      "id": "/settings/preferences",
+      "route": "/settings/preferences",
+      "label": "Settings \u2014 application preferences",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Change theme (light/dark/system) [ThemeSetting]",
+        "Change language [LanguageSetting]",
+        "Change timezone [TimezoneSetting]",
+        "Change default date range [DateRangeSetting]",
+        "View current version [VersionSetting]"
+      ],
+      "notes": "Accessible via /settings redirect."
+    },
+    {
+      "id": "/settings/profile",
+      "route": "/settings/profile",
+      "label": "Settings \u2014 user profile management",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "View ProfileHeader (username/email display)",
+        "Edit profile info in ProfileSettings",
+        "Click 'Change password' [PasswordChangeButton]"
+      ],
+      "notes": "ProfilePage with ProfileSettings."
+    },
+    {
+      "id": "/settings/profile#change-password",
+      "route": "/settings/profile",
+      "label": "Settings \u2014 change password modal",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Enter current password",
+        "Enter new password",
+        "Confirm new password",
+        "Click 'Save' in PasswordEditForm",
+        "Click 'Cancel' or close modal"
+      ],
+      "notes": "Opens as Modal dialog from PasswordChangeButton."
+    },
+    {
+      "id": "/settings/teams",
+      "route": "/settings/teams",
+      "label": "Settings \u2014 teams management (same as /teams)",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Click 'Create team' [TeamsAddButton]",
+        "Click 'Join team' [TeamsJoinButton]",
+        "Click team row to navigate to team settings"
+      ],
+      "notes": "TeamsSettingsPage wraps TeamsDataTable."
+    },
+    {
+      "id": "/settings/teams/[teamId]",
+      "route": "/settings/teams/[teamId]",
+      "label": "Team settings \u2014 edit team, manage members",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Edit team name [TeamEditForm] (owner/manager only)",
+        "View/copy access code (owner/manager only)",
+        "Add member [TeamsMemberAddButton] (admin only in settings)",
+        "Edit member role [TeamMemberEditButton]",
+        "Remove member [TeamMemberRemoveButton]",
+        "Leave team [TeamLeaveButton] (non-owner only)",
+        "Delete team [TeamManage > TeamDeleteForm] (owner only)"
+      ],
+      "notes": "Role-based conditional rendering."
+    },
+    {
+      "id": "/settings/websites",
+      "route": "/settings/websites",
+      "label": "Settings \u2014 websites list for settings access",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Click website name to navigate to website settings",
+        "Search websites"
+      ],
+      "notes": "WebsitesSettingsPage with WebsitesDataTable."
+    },
+    {
+      "id": "/settings/websites/[websiteId]",
+      "route": "/settings/websites/[websiteId]",
+      "label": "Settings \u2014 individual website settings detail",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Edit website name/domain",
+        "Copy tracking code",
+        "Configure replay settings",
+        "Manage share links",
+        "Reset website data",
+        "Delete website",
+        "Transfer website"
+      ],
+      "notes": "WebsiteSettingsPage wrapping same WebsiteSettings as /websites/[id]/settings."
+    },
+    {
+      "id": "/admin/users",
+      "route": "/admin/users",
+      "label": "Admin \u2014 users list with CRUD actions",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Add user' [UserAddButton]",
+        "Click user row to navigate to user detail",
+        "Click delete icon on user [UserDeleteButton]",
+        "Search users",
+        "Paginate users list"
+      ],
+      "notes": "Admin only (user.isAdmin). Hidden in cloudMode."
+    },
+    {
+      "id": "/admin/users/[userId]",
+      "route": "/admin/users/[userId]",
+      "label": "Admin \u2014 user detail with details and websites tabs",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Switch to 'Details' tab (edit username, password, role)",
+        "Switch to 'Websites' tab (view user's websites)",
+        "Save user changes in UserEditForm",
+        "View user's associated websites in UserWebsites"
+      ],
+      "notes": "UserPage with UserSettings tabs."
+    },
+    {
+      "id": "/admin/websites",
+      "route": "/admin/websites",
+      "label": "Admin \u2014 websites list with admin controls",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click website row to navigate to admin website detail",
+        "Search websites",
+        "Paginate website list"
+      ],
+      "notes": "Admin only. AdminWebsitesPage."
+    },
+    {
+      "id": "/admin/websites/[websiteId]",
+      "route": "/admin/websites/[websiteId]",
+      "label": "Admin \u2014 website settings detail (edit, share, data)",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Edit website name/domain",
+        "Copy tracking code",
+        "Configure replay settings",
+        "Manage share links",
+        "Reset website data",
+        "Delete website",
+        "Transfer website"
+      ],
+      "notes": "AdminWebsitePage reuses WebsiteSettings component."
+    },
+    {
+      "id": "/admin/teams",
+      "route": "/admin/teams",
+      "label": "Admin \u2014 teams list",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click team row to navigate to admin team detail",
+        "Search teams",
+        "Paginate teams list"
+      ],
+      "notes": "AdminTeamsPage."
+    },
+    {
+      "id": "/admin/teams/[teamId]",
+      "route": "/admin/teams/[teamId]",
+      "label": "Admin \u2014 team settings and member management",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Edit team name",
+        "View/copy access code",
+        "Add member [TeamsMemberAddButton]",
+        "Edit member role [TeamMemberEditButton]",
+        "Remove member [TeamMemberRemoveButton]",
+        "Delete team [TeamManage > TeamDeleteForm]"
+      ],
+      "notes": "AdminTeamPage uses same TeamSettings component."
+    },
+    {
+      "id": "/console/[websiteId]",
+      "route": "/console/[websiteId]",
+      "label": "Test console \u2014 developer event testing tool",
+      "section": "dev",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click page links (page=1, page=2) to generate pageviews",
+        "Click 'Send event' button [id=send-event-button]",
+        "Click 'Send event with data' [id=send-event-data-button]",
+        "Click 'Generate revenue data' [id=generate-revenue-button]",
+        "Click 'Run script' (manual JS track calls) [id=manual-button]",
+        "Click 'Run identify' [id=manual-button]",
+        "Click 'Revenue script' [id=manual-button]",
+        "View live WebsiteChart and EventsChart"
+      ],
+      "notes": "Injects script.js + recorder.js for the website. Dev/debug tool."
+    },
+    {
+      "id": "/teams/[teamId]/websites",
+      "route": "/teams/[teamId]/websites",
+      "label": "Team context \u2014 websites list scoped to team",
+      "section": "teams",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add website' (hidden for teamViewOnly members)",
+        "Click website row to enter team website analytics",
+        "Search websites in team scope"
+      ],
+      "notes": "Rewritten to /websites; teamId extracted by useNavigation hook."
+    },
+    {
+      "id": "/teams/[teamId]/boards",
+      "route": "/teams/[teamId]/boards",
+      "label": "Team context \u2014 boards list scoped to team",
+      "section": "teams",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add board' (hidden for teamViewOnly members)",
+        "Click board row to view team board",
+        "Edit/delete board (hidden for teamViewOnly)"
+      ],
+      "notes": "Rewritten to /boards. Team-scoped board data."
+    },
+    {
+      "id": "/teams/[teamId]/links",
+      "route": "/teams/[teamId]/links",
+      "label": "Team context \u2014 links list scoped to team",
+      "section": "teams",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add link' (hidden for teamViewOnly)",
+        "Click link row",
+        "Edit/delete link (hidden for teamViewOnly)"
+      ],
+      "notes": "Rewritten to /links. Team-scoped link data."
+    },
+    {
+      "id": "/teams/[teamId]/pixels",
+      "route": "/teams/[teamId]/pixels",
+      "label": "Team context \u2014 pixels list scoped to team",
+      "section": "teams",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Add pixel' (hidden for teamViewOnly)",
+        "Click pixel row",
+        "Edit/delete pixel (hidden for teamViewOnly)"
+      ],
+      "notes": "Rewritten to /pixels. Team-scoped pixel data."
+    },
+    {
+      "id": "/teams/[teamId]/settings/preferences",
+      "route": "/teams/[teamId]/settings/preferences",
+      "label": "Team context \u2014 settings/preferences (same as personal preferences)",
+      "section": "teams",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings",
+      "actions": [
+        "Change theme, language, timezone, date range",
+        "Back to /teams/:id/websites via SettingsNav"
+      ],
+      "notes": "Rewritten to /settings/preferences. Identical UI."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/websites",
+      "trigger": "auto: redirect when no last team stored",
+      "guard": "user authenticated, no LAST_TEAM_CONFIG in localStorage"
+    },
+    {
+      "from": "/",
+      "to": "/teams/[teamId]/websites",
+      "trigger": "auto: redirect when last team stored",
+      "guard": "user authenticated, LAST_TEAM_CONFIG present in localStorage"
+    },
+    {
+      "from": "/login",
+      "to": "/",
+      "trigger": "button 'Sign in' [login-submit form submit]",
+      "guard": "valid credentials"
+    },
+    {
+      "from": "/websites",
+      "to": "/login",
+      "trigger": "auto: redirect on 401",
+      "guard": "unauthenticated"
+    },
+    {
+      "from": "/sso",
+      "to": "/",
+      "trigger": "auto: redirect after setClientAuthToken",
+      "guard": "?token and ?url params present and safe"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/logout",
+      "trigger": "button 'Logout' in UserButton [sidebar footer]",
+      "guard": null
+    },
+    {
+      "from": "/websites",
+      "to": "/logout",
+      "trigger": "button 'Logout' in UserButton [sidebar footer]",
+      "guard": null
+    },
+    {
+      "from": "/settings/preferences",
+      "to": "/logout",
+      "trigger": "button 'Logout' in UserButton [sidebar footer]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/edit",
+      "trigger": "button 'Edit' in DashboardViewHeader",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/edit",
+      "to": "/dashboard",
+      "trigger": "button 'Done' or 'Cancel' in DashboardEditHeader",
+      "guard": null
+    },
+    {
+      "from": "/websites",
+      "to": "/dashboard",
+      "trigger": "link 'Dashboard' in SideNav",
+      "guard": "not in team context (teamId absent from URL)"
+    },
+    {
+      "from": "/websites",
+      "to": "/boards",
+      "trigger": "link 'Boards' in SideNav",
+      "guard": null
+    },
+    {
+      "from": "/websites",
+      "to": "/links",
+      "trigger": "link 'Links' in SideNav",
+      "guard": null
+    },
+    {
+      "from": "/websites",
+      "to": "/pixels",
+      "trigger": "link 'Pixels' in SideNav",
+      "guard": null
+    },
+    {
+      "from": "/dashboard",
+      "to": "/websites",
+      "trigger": "link 'Websites' in SideNav",
+      "guard": null
+    },
+    {
+      "from": "/boards",
+      "to": "/websites",
+      "trigger": "link 'Websites' in SideNav",
+      "guard": null
+    },
+    {
+      "from": "/links",
+      "to": "/websites",
+      "trigger": "link 'Websites' in SideNav",
+      "guard": null
+    },
+    {
+      "from": "/websites",
+      "to": "/websites/[websiteId]",
+      "trigger": "click website name link in WebsitesDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/events",
+      "trigger": "tab 'Events' in WebsiteNav or WebsiteTabs",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/sessions",
+      "trigger": "tab 'Sessions' in WebsiteNav or WebsiteTabs",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/realtime",
+      "trigger": "tab 'Realtime' in WebsiteNav or WebsiteTabs",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/compare",
+      "trigger": "link 'Compare' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/performance",
+      "trigger": "link 'Performance' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/breakdown",
+      "trigger": "link 'Breakdown' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/funnels",
+      "trigger": "link 'Funnels' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/goals",
+      "trigger": "link 'Goals' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/journeys",
+      "trigger": "link 'Journeys' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/retention",
+      "trigger": "link 'Retention' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/replays",
+      "trigger": "link 'Replays' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/heatmaps",
+      "trigger": "link 'Heatmaps' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/segments",
+      "trigger": "link 'Segments' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/cohorts",
+      "trigger": "link 'Cohorts' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/utm",
+      "trigger": "link 'UTM' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/revenue",
+      "trigger": "link 'Revenue' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/attribution",
+      "trigger": "link 'Attribution' in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]/settings",
+      "trigger": "link 'Settings' icon or menu in website header area",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites/[websiteId]#expanded-view-modal",
+      "trigger": "click metric row 'Show more' or expand icon (adds ?view=<dimension>)",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]#expanded-view-modal",
+      "to": "/websites/[websiteId]",
+      "trigger": "button X to close modal or click outside",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/events",
+      "to": "/websites/[websiteId]/events#activity-tab",
+      "trigger": "tab 'Activity' [role=tab]",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/events",
+      "to": "/websites/[websiteId]/events#properties-tab",
+      "trigger": "tab 'Properties' [role=tab]",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/events#activity-tab",
+      "to": "/websites/[websiteId]/sessions#session-modal",
+      "trigger": "click session ID link in EventsDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/sessions",
+      "to": "/websites/[websiteId]/sessions#session-modal",
+      "trigger": "click session row in SessionsDataTable",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/sessions#session-modal",
+      "to": "/websites/[websiteId]/sessions",
+      "trigger": "button X to close sheet modal",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/sessions",
+      "to": "/websites/[websiteId]/sessions#properties-tab",
+      "trigger": "tab 'Properties' [role=tab]",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/sessions",
+      "to": "/websites/[websiteId]/sessions/[sessionId]",
+      "trigger": "link to full session detail (e.g., from session ID in modal or table)",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/replays",
+      "to": "/websites/[websiteId]/replays#saved-tab",
+      "trigger": "tab 'Saved' [role=tab]",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/replays",
+      "to": "/websites/[websiteId]/replays#replay-modal",
+      "trigger": "button Play icon in ReplaysTable row (adds ?replay=<replayId>)",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/replays#replay-modal",
+      "to": "/websites/[websiteId]/replays",
+      "trigger": "button X close or click outside ReplayModal bottom sheet",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/replays",
+      "to": "/websites/[websiteId]/replays/[replayId]",
+      "trigger": "click replay row in ReplaysDataTable",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/replays/[replayId]",
+      "to": "/websites/[websiteId]/replays/[replayId]#save-form",
+      "trigger": "button bookmark icon (outline) [Bookmark fill=none]",
+      "guard": "replay not yet saved"
+    },
+    {
+      "from": "/websites/[websiteId]/replays/[replayId]#save-form",
+      "to": "/websites/[websiteId]/replays/[replayId]",
+      "trigger": "button 'Save' in ReplaySaveForm or button 'Cancel'",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/replays/[replayId]",
+      "to": "/websites/[websiteId]/replays",
+      "trigger": "button X close [onClose handler]",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]",
+      "to": "/websites",
+      "trigger": "link 'Back' (ArrowLeft) in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/settings",
+      "to": "/websites",
+      "trigger": "link 'Back' (ArrowLeft) in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/websites/[websiteId]/events",
+      "to": "/websites",
+      "trigger": "link 'Back' (ArrowLeft) in WebsiteNav sidebar",
+      "guard": null
+    },
+    {
+      "from": "/boards",
+      "to": "/boards/[boardId]",
+      "trigger": "click board name link in BoardsDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/boards/[boardId]",
+      "to": "/boards/[boardId]#share-dialog",
+      "trigger": "button 'Share' [BoardShareButton]",
+      "guard": null
+    },
+    {
+      "from": "/boards/[boardId]#share-dialog",
+      "to": "/boards/[boardId]",
+      "trigger": "close Modal dialog",
+      "guard": null
+    },
+    {
+      "from": "/boards/[boardId]",
+      "to": "/boards/[boardId]/edit",
+      "trigger": "button 'Edit' in BoardViewHeader",
+      "guard": null
+    },
+    {
+      "from": "/boards/[boardId]",
+      "to": "/boards/[boardId]/design",
+      "trigger": "button 'Design' in BoardViewHeader",
+      "guard": null
+    },
+    {
+      "from": "/boards/[boardId]/edit",
+      "to": "/boards/[boardId]",
+      "trigger": "button 'Done' or 'Cancel' in BoardEditHeader",
+      "guard": null
+    },
+    {
+      "from": "/boards/[boardId]/design",
+      "to": "/boards/[boardId]",
+      "trigger": "button 'Done' or 'Cancel' in BoardDesignHeader",
+      "guard": null
+    },
+    {
+      "from": "/links",
+      "to": "/links/[linkId]",
+      "trigger": "click link name in LinksDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/links/[linkId]",
+      "to": "/links/[linkId]/edit",
+      "trigger": "button 'Edit' in LinkHeader actions",
+      "guard": null
+    },
+    {
+      "from": "/links/[linkId]/edit",
+      "to": "/links/[linkId]",
+      "trigger": "button 'Save' or 'Cancel' in LinkEditForm",
+      "guard": null
+    },
+    {
+      "from": "/pixels",
+      "to": "/pixels/[pixelId]",
+      "trigger": "click pixel name in PixelsDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/pixels/[pixelId]",
+      "to": "/pixels/[pixelId]/edit",
+      "trigger": "button 'Edit' in PixelHeader actions",
+      "guard": null
+    },
+    {
+      "from": "/pixels/[pixelId]/edit",
+      "to": "/pixels/[pixelId]",
+      "trigger": "button 'Save' or 'Cancel' in PixelEditForm",
+      "guard": null
+    },
+    {
+      "from": "/settings/teams",
+      "to": "/settings/teams/[teamId]",
+      "trigger": "click team name in TeamsDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/settings/teams/[teamId]",
+      "to": "/settings/teams",
+      "trigger": "link 'Back' or navigate in SettingsNav",
+      "guard": null
+    },
+    {
+      "from": "/settings/websites",
+      "to": "/settings/websites/[websiteId]",
+      "trigger": "click website name in WebsitesDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile#change-password",
+      "trigger": "button 'Change password' [PasswordChangeButton]",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile#change-password",
+      "to": "/settings/profile",
+      "trigger": "button 'Save' or close modal in PasswordEditForm",
+      "guard": null
+    },
+    {
+      "from": "/websites",
+      "to": "/settings/preferences",
+      "trigger": "UserButton menu -> Settings link",
+      "guard": null
+    },
+    {
+      "from": "/settings/preferences",
+      "to": "/settings/profile",
+      "trigger": "link 'Profile' in SettingsNav",
+      "guard": null
+    },
+    {
+      "from": "/settings/preferences",
+      "to": "/settings/teams",
+      "trigger": "link 'Teams' in SettingsNav",
+      "guard": null
+    },
+    {
+      "from": "/settings/preferences",
+      "to": "/websites",
+      "trigger": "link 'Back' (ArrowLeft) in SettingsNav",
+      "guard": null
+    },
+    {
+      "from": "/admin/users",
+      "to": "/admin/users/[userId]",
+      "trigger": "click user row in UsersDataTable",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/admin/websites",
+      "to": "/admin/websites/[websiteId]",
+      "trigger": "click website row in AdminWebsitesDataTable",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/admin/teams",
+      "to": "/admin/teams/[teamId]",
+      "trigger": "click team row in AdminTeamsDataTable",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/admin/users",
+      "to": "/admin/websites",
+      "trigger": "link 'Websites' in AdminNav",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/admin/users",
+      "to": "/admin/teams",
+      "trigger": "link 'Teams' in AdminNav",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/admin/users",
+      "to": "/websites",
+      "trigger": "link 'Back' (ArrowLeft) in AdminNav",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/websites",
+      "to": "/admin/users",
+      "trigger": "link 'Admin' in UserButton dropdown menu",
+      "guard": "user.isAdmin"
+    },
+    {
+      "from": "/teams",
+      "to": "/teams/[teamId]/websites",
+      "trigger": "click team name in TeamsDataTable row",
+      "guard": null
+    },
+    {
+      "from": "/teams/[teamId]/websites",
+      "to": "/teams/[teamId]/boards",
+      "trigger": "link 'Boards' in SideNav",
+      "guard": "teamId in URL"
+    },
+    {
+      "from": "/teams/[teamId]/websites",
+      "to": "/teams/[teamId]/links",
+      "trigger": "link 'Links' in SideNav",
+      "guard": "teamId in URL"
+    },
+    {
+      "from": "/teams/[teamId]/websites",
+      "to": "/teams/[teamId]/pixels",
+      "trigger": "link 'Pixels' in SideNav",
+      "guard": "teamId in URL"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/events",
+      "trigger": "link 'Events' in ShareNav sidebar",
+      "guard": "share.parameters.events === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/sessions",
+      "trigger": "link 'Sessions' in ShareNav sidebar",
+      "guard": "share.parameters.sessions === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/realtime",
+      "trigger": "link 'Realtime' in ShareNav sidebar",
+      "guard": "share.parameters.realtime === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/performance",
+      "trigger": "link 'Performance' in ShareNav sidebar",
+      "guard": "share.parameters.performance === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/funnels",
+      "trigger": "link 'Funnels' in ShareNav sidebar",
+      "guard": "share.parameters.funnels === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/goals",
+      "trigger": "link 'Goals' in ShareNav sidebar",
+      "guard": "share.parameters.goals === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/utm",
+      "trigger": "link 'UTM' in ShareNav sidebar",
+      "guard": "share.parameters.utm === true"
+    },
+    {
+      "from": "/share/[slug]",
+      "to": "/share/[slug]/revenue",
+      "trigger": "link 'Revenue' in ShareNav sidebar",
+      "guard": "share.parameters.revenue === true"
+    },
+    {
+      "from": "/login",
+      "to": "/sso",
+      "trigger": "auto: redirect when SSO configured and token absent",
+      "guard": "SSO mode enabled"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Public (unauthenticated) pages",
+        "node_ids": [
+          "/login",
+          "/logout",
+          "/sso",
+          "/share/[slug]",
+          "/share/[slug]/events",
+          "/share/[slug]/sessions",
+          "/share/[slug]/realtime",
+          "/share/[slug]/performance",
+          "/share/[slug]/compare",
+          "/share/[slug]/breakdown",
+          "/share/[slug]/goals",
+          "/share/[slug]/funnels",
+          "/share/[slug]/journeys",
+          "/share/[slug]/retention",
+          "/share/[slug]/utm",
+          "/share/[slug]/revenue",
+          "/share/[slug]/attribution"
+        ]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Authenticated user area",
+        "node_ids": [
+          "/dashboard",
+          "/dashboard/edit",
+          "/boards",
+          "/boards/[boardId]",
+          "/boards/[boardId]#share-dialog",
+          "/boards/[boardId]/edit",
+          "/boards/[boardId]/design",
+          "/websites",
+          "/websites/[websiteId]",
+          "/websites/[websiteId]#expanded-view-modal",
+          "/websites/[websiteId]/events",
+          "/websites/[websiteId]/events#activity-tab",
+          "/websites/[websiteId]/events#properties-tab",
+          "/websites/[websiteId]/sessions",
+          "/websites/[websiteId]/sessions#properties-tab",
+          "/websites/[websiteId]/sessions#session-modal",
+          "/websites/[websiteId]/sessions/[sessionId]",
+          "/websites/[websiteId]/realtime",
+          "/websites/[websiteId]/replays",
+          "/websites/[websiteId]/replays#replay-modal",
+          "/websites/[websiteId]/replays#saved-tab",
+          "/websites/[websiteId]/replays/[replayId]",
+          "/websites/[websiteId]/replays/[replayId]#save-form",
+          "/websites/[websiteId]/compare",
+          "/websites/[websiteId]/performance",
+          "/websites/[websiteId]/breakdown",
+          "/websites/[websiteId]/goals",
+          "/websites/[websiteId]/funnels",
+          "/websites/[websiteId]/journeys",
+          "/websites/[websiteId]/retention",
+          "/websites/[websiteId]/heatmaps",
+          "/websites/[websiteId]/segments",
+          "/websites/[websiteId]/cohorts",
+          "/websites/[websiteId]/utm",
+          "/websites/[websiteId]/revenue",
+          "/websites/[websiteId]/attribution",
+          "/websites/[websiteId]/settings",
+          "/links",
+          "/links/[linkId]",
+          "/links/[linkId]/edit",
+          "/pixels",
+          "/pixels/[pixelId]",
+          "/pixels/[pixelId]/edit",
+          "/teams",
+          "/settings/preferences",
+          "/settings/profile",
+          "/settings/profile#change-password",
+          "/settings/teams",
+          "/settings/teams/[teamId]",
+          "/settings/websites",
+          "/settings/websites/[websiteId]",
+          "/console/[websiteId]",
+          "/teams/[teamId]/websites",
+          "/teams/[teamId]/boards",
+          "/teams/[teamId]/links",
+          "/teams/[teamId]/pixels",
+          "/teams/[teamId]/settings/preferences"
+        ]
+      },
+      {
+        "id": "zone:admin",
+        "label": "Admin-only area (user.isAdmin required)",
+        "node_ids": [
+          "/admin/users",
+          "/admin/users/[userId]",
+          "/admin/websites",
+          "/admin/websites/[websiteId]",
+          "/admin/teams",
+          "/admin/teams/[teamId]"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:main",
+        "label": "Main app shell \u2014 SideNav + TopNav + MobileNav",
+        "node_ids": [
+          "/dashboard",
+          "/dashboard/edit",
+          "/boards",
+          "/boards/[boardId]",
+          "/boards/[boardId]/edit",
+          "/boards/[boardId]/design",
+          "/websites",
+          "/links",
+          "/links/[linkId]",
+          "/links/[linkId]/edit",
+          "/pixels",
+          "/pixels/[pixelId]",
+          "/pixels/[pixelId]/edit",
+          "/teams",
+          "/console/[websiteId]",
+          "/teams/[teamId]/websites",
+          "/teams/[teamId]/boards",
+          "/teams/[teamId]/links",
+          "/teams/[teamId]/pixels"
+        ]
+      },
+      {
+        "id": "layout:website",
+        "label": "Website shell \u2014 WebsiteNav sidebar with website-scoped navigation",
+        "node_ids": [
+          "/websites/[websiteId]",
+          "/websites/[websiteId]#expanded-view-modal",
+          "/websites/[websiteId]/events",
+          "/websites/[websiteId]/events#activity-tab",
+          "/websites/[websiteId]/events#properties-tab",
+          "/websites/[websiteId]/sessions",
+          "/websites/[websiteId]/sessions#properties-tab",
+          "/websites/[websiteId]/sessions#session-modal",
+          "/websites/[websiteId]/sessions/[sessionId]",
+          "/websites/[websiteId]/realtime",
+          "/websites/[websiteId]/replays",
+          "/websites/[websiteId]/replays#replay-modal",
+          "/websites/[websiteId]/replays#saved-tab",
+          "/websites/[websiteId]/replays/[replayId]",
+          "/websites/[websiteId]/replays/[replayId]#save-form",
+          "/websites/[websiteId]/compare",
+          "/websites/[websiteId]/performance",
+          "/websites/[websiteId]/breakdown",
+          "/websites/[websiteId]/goals",
+          "/websites/[websiteId]/funnels",
+          "/websites/[websiteId]/journeys",
+          "/websites/[websiteId]/retention",
+          "/websites/[websiteId]/heatmaps",
+          "/websites/[websiteId]/segments",
+          "/websites/[websiteId]/cohorts",
+          "/websites/[websiteId]/utm",
+          "/websites/[websiteId]/revenue",
+          "/websites/[websiteId]/attribution",
+          "/websites/[websiteId]/settings"
+        ]
+      },
+      {
+        "id": "layout:settings",
+        "label": "Settings shell \u2014 SettingsNav sidebar",
+        "node_ids": [
+          "/settings/preferences",
+          "/settings/profile",
+          "/settings/profile#change-password",
+          "/settings/teams",
+          "/settings/teams/[teamId]",
+          "/settings/websites",
+          "/settings/websites/[websiteId]",
+          "/teams/[teamId]/settings/preferences"
+        ]
+      },
+      {
+        "id": "layout:admin",
+        "label": "Admin shell \u2014 AdminNav sidebar",
+        "node_ids": [
+          "/admin/users",
+          "/admin/users/[userId]",
+          "/admin/websites",
+          "/admin/websites/[websiteId]",
+          "/admin/teams",
+          "/admin/teams/[teamId]"
+        ]
+      },
+      {
+        "id": "layout:share",
+        "label": "Share shell \u2014 ShareNav + ShareFooter (unauthenticated)",
+        "node_ids": [
+          "/share/[slug]",
+          "/share/[slug]/events",
+          "/share/[slug]/sessions",
+          "/share/[slug]/realtime",
+          "/share/[slug]/performance",
+          "/share/[slug]/compare",
+          "/share/[slug]/breakdown",
+          "/share/[slug]/goals",
+          "/share/[slug]/funnels",
+          "/share/[slug]/journeys",
+          "/share/[slug]/retention",
+          "/share/[slug]/utm",
+          "/share/[slug]/revenue",
+          "/share/[slug]/attribution"
+        ]
+      }
+    ]
+  }
+}
