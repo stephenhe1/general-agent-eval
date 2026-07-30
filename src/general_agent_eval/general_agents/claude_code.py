@@ -545,12 +545,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--mode",
-        choices=("baseline", "project-aware", "discovery"),
+        choices=("baseline", "project-aware", "discovery", "feature-extraction"),
         default="baseline",
         help=(
             "Evaluation mode injected into prompt templates. 'baseline' clears tests "
             "and writes from scratch. 'project-aware' keeps existing tests visible. "
-            "'discovery' only produces UI_COVERAGE.md without writing tests."
+            "'discovery' only produces UI_COVERAGE.md without writing tests. "
+            "'feature-extraction' reads an existing UI_GRAPH.json and extracts "
+            "features, scenarios, and interaction paths into UI_FEATURES.json."
         ),
     )
     parser.add_argument(

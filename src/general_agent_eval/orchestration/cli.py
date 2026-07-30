@@ -78,6 +78,11 @@ def validate_mode_options(args: argparse.Namespace) -> None:
             "--mode project-aware and --clear-tests are mutually exclusive; "
             "project-aware mode keeps existing tests visible to the agent"
         )
+    if args.mode == "feature-extraction" and getattr(args, "coverage_model", "flat") != "graph":
+        raise DockerRunError(
+            "--mode feature-extraction requires --coverage-model graph "
+            "(it reads the UI_GRAPH.json produced by a prior discovery run)"
+        )
 
 
 def validate_agent_options(args: argparse.Namespace) -> None:
@@ -400,14 +405,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--mode",
-        choices=("baseline", "project-aware", "discovery"),
+        choices=("baseline", "project-aware", "discovery", "feature-extraction"),
         default="baseline",
         help=(
             "Evaluation mode. 'baseline' removes existing tests (requires "
             "--clear-tests). 'project-aware' keeps all existing tests, "
             "fixtures, and helpers visible so the agent can learn from them. "
             "'discovery' explores the app and produces UI_COVERAGE.md without "
-            "writing any tests."
+            "writing any tests. 'feature-extraction' reads an existing "
+            "UI_GRAPH.json and extracts features, scenarios, and paths."
         ),
     )
     parser.add_argument(

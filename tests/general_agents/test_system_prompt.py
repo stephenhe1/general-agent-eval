@@ -226,3 +226,42 @@ def test_js_user_template_flat_discovery_uses_markdown_format() -> None:
 
 def test_coverage_model_is_reserved_prompt_var() -> None:
     assert "coverage_model" in claude_code.RESERVED_PROMPT_VARS
+
+
+# ---------------------------------------------------------------------------
+# Feature-extraction mode
+# ---------------------------------------------------------------------------
+
+def test_js_system_template_feature_extraction_mode() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_SYSTEM_TEMPLATE,
+        _js_context(None, mode="feature-extraction", coverage_model="graph"),
+    )
+    assert "feature-extraction agent" in rendered
+    assert "UI_FEATURES.json" in rendered
+    assert "Playwright" not in rendered
+    assert "run them with" not in rendered
+
+
+def test_js_user_template_feature_extraction_includes_schema() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_USER_TEMPLATE,
+        _js_context(None, mode="feature-extraction", coverage_model="graph"),
+    )
+    assert "UI_FEATURES.json" in rendered
+    assert '"features"' in rendered
+    assert '"scenarios"' in rendered
+    assert '"paths"' in rendered
+    assert "preconditions" in rendered
+    assert "expected_outcome" in rendered
+    assert "related_nodes" in rendered
+    assert "UI_COVERAGE.md" not in rendered
+    assert "generate Playwright" not in rendered
+
+
+def test_feature_extraction_mode_is_valid_cli_choice() -> None:
+    args = build_parser().parse_args(
+        ["--input-dir", ".", "--mode", "feature-extraction", "--coverage-model", "graph"]
+    )
+    assert args.mode == "feature-extraction"
+    assert args.coverage_model == "graph"

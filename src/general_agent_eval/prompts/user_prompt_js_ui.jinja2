@@ -1,4 +1,4 @@
-{%- set tracker_file = "UI_GRAPH.json" if coverage_model == "graph" else "UI_COVERAGE.md" -%}
+{%- set tracker_file = "UI_FEATURES.json" if mode == "feature-extraction" else ("UI_GRAPH.json" if coverage_model == "graph" else "UI_COVERAGE.md") -%}
 {%- if mode == "discovery" -%}
 Explore the provided repository and its running application to produce a complete inventory of every page, route, and significant user flow.
 
@@ -148,6 +148,86 @@ Keep entries terse (route + one-line note). When you explore a page and confirm 
 Do NOT modify production code under any circumstances. Do NOT write any test files. Do NOT install Playwright or any test framework. Your only output is the `{{ tracker_file }}` file.
 
 In the final response, summarize: total pages/flows discovered, how many confirmed vs unreachable, which sections of the app have the richest UI surface, and any areas that may need special handling (auth, external APIs, dynamic content).
+{%- elif mode == "feature-extraction" -%}
+Analyze the existing `UI_GRAPH.json` in this repository and extract a structured inventory of user-facing features, scenarios, and interaction paths. Write the result to `UI_FEATURES.json` at the repository root.
+
+Start by reading `UI_GRAPH.json` to understand the application's states (nodes), available actions, and transitions (edges). Then systematically derive:
+
+1. **Features** — abstract user-facing capabilities (e.g., "Sign in", "Create transaction", "Manage bank accounts")
+2. **Scenarios** — behaviorally distinct cases of a feature, defined by relevant preconditions, data conditions, and expected outcomes
+3. **Interaction paths** — graph-supported sequences of UI actions, effects, and transitions through which a scenario can be exercised
+
+Use this JSON structure for `UI_FEATURES.json`:
+
+```json
+{
+  "version": "1.0",
+  "metadata": {
+    "app_name": "<from graph metadata>",
+    "source_graph": "UI_GRAPH.json",
+    "total_features": <count>,
+    "total_scenarios": <count>,
+    "total_paths": <count>
+  },
+  "features": [
+    {
+      "id": "feat:<kebab-case-slug>",
+      "name": "<human-readable feature name>",
+      "description": "<what the user can accomplish>",
+      "section": "<feature area from graph nodes>",
+      "related_nodes": ["<node IDs involved in this feature>"],
+      "scenarios": [
+        {
+          "id": "scen:<kebab-case-slug>",
+          "name": "<scenario name>",
+          "preconditions": ["<required state, auth, data conditions>"],
+          "expected_outcome": "<observable result when scenario succeeds>",
+          "paths": [
+            {
+              "id": "path:<index>",
+              "steps": [
+                {
+                  "state": "<node id where this step starts>",
+                  "action": "<action from the node's actions array>",
+                  "transition": "<edge trigger leading to next state, or null for final step>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Feature identification rules:**
+- Group by `section` from the graph nodes — each section typically maps to one or more features.
+- A feature is an abstract capability, not a single page. Multiple nodes may participate in one feature (e.g., "Create transaction" spans the form page, confirmation, and success state).
+- Name features from the user's perspective: what they accomplish, not what page they visit.
+
+**Scenario derivation rules:**
+- A scenario is a behaviorally distinct case — different preconditions, data conditions, or expected outcomes define a new scenario.
+- Derive preconditions from: `auth_required` fields, `guard` conditions on edges, `auth_zones` membership, and node `notes`.
+- Different interaction paths to the same behavior do NOT automatically become different scenarios. Only create separate scenarios when the preconditions or expected outcome genuinely differ.
+- Include both happy-path and error/edge-case scenarios where the graph provides evidence (e.g., error sub-states like `/signin#error`).
+
+**Path extraction rules:**
+- Each path is a concrete sequence of steps through the graph: start at a node, perform an action, follow an edge to the next node.
+- The `action` in each step must come from the node's `actions` array.
+- The `transition` in each step must correspond to an edge's `trigger` field in the graph.
+- The final step's `transition` is `null` (no further navigation).
+- A scenario may have multiple paths (e.g., reaching a feature via sidebar nav vs. direct URL). Include all paths supported by the graph.
+- Paths represent only what the current graph supports — do NOT invent transitions not present in the graph. If a path seems incomplete because the graph lacks an edge, note it in the feature's description but do not fabricate steps.
+
+**Rules:**
+- Process the graph section by section until every node participates in at least one feature.
+- Update `metadata` counts after completing each section.
+- After each write, validate: `python3 -c "import json; json.load(open('UI_FEATURES.json'))"`
+- Keep `description` fields concise (< 120 characters).
+- Do NOT modify `UI_GRAPH.json`. Do NOT write any test files. Do NOT modify production code. Your only output is `UI_FEATURES.json`.
+
+In the final response, summarize: total features extracted, total scenarios, total interaction paths, which sections have the most complex feature coverage, and any graph gaps that limited path extraction (missing edges, disconnected nodes).
 {%- else -%}
 Inspect the provided repository and generate Playwright E2E tests that thoroughly exercise the application's UI pages and user flows.
 {%- if mode == "project-aware" %}
