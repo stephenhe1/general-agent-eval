@@ -83,6 +83,11 @@ def validate_mode_options(args: argparse.Namespace) -> None:
             "--mode feature-extraction requires --coverage-model graph "
             "(it reads the UI_GRAPH.json produced by a prior discovery run)"
         )
+    if args.mode == "graph-test-gen" and getattr(args, "coverage_model", "flat") != "graph":
+        raise DockerRunError(
+            "--mode graph-test-gen requires --coverage-model graph "
+            "(it reads the UI_GRAPH.json produced by a prior discovery run)"
+        )
 
 
 def validate_agent_options(args: argparse.Namespace) -> None:
@@ -405,7 +410,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--mode",
-        choices=("baseline", "project-aware", "discovery", "feature-extraction"),
+        choices=("baseline", "project-aware", "discovery", "feature-extraction", "graph-test-gen"),
         default="baseline",
         help=(
             "Evaluation mode. 'baseline' removes existing tests (requires "
@@ -413,7 +418,9 @@ def build_parser() -> argparse.ArgumentParser:
             "fixtures, and helpers visible so the agent can learn from them. "
             "'discovery' explores the app and produces UI_COVERAGE.md without "
             "writing any tests. 'feature-extraction' reads an existing "
-            "UI_GRAPH.json and extracts features, scenarios, and paths."
+            "UI_GRAPH.json and extracts features, scenarios, and paths. "
+            "'graph-test-gen' reads an existing UI_GRAPH.json and generates "
+            "Playwright tests guided by the state model."
         ),
     )
     parser.add_argument(

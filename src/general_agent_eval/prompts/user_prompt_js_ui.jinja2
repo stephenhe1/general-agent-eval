@@ -1,4 +1,4 @@
-{%- set tracker_file = "UI_FEATURES.json" if mode == "feature-extraction" else ("UI_GRAPH.json" if coverage_model == "graph" else "UI_COVERAGE.md") -%}
+{%- set tracker_file = "UI_FEATURES.json" if mode == "feature-extraction" else ("UI_GRAPH.json" if (coverage_model == "graph" or mode == "graph-test-gen") else "UI_COVERAGE.md") -%}
 {%- if mode == "discovery" -%}
 Explore the provided repository and its running application to produce a complete inventory of every page, route, and significant user flow.
 
@@ -228,6 +228,55 @@ Use this JSON structure for `UI_FEATURES.json`:
 - Do NOT modify `UI_GRAPH.json`. Do NOT write any test files. Do NOT modify production code. Your only output is `UI_FEATURES.json`.
 
 In the final response, summarize: total features extracted, total scenarios, total interaction paths, which sections have the most complex feature coverage, and any graph gaps that limited path extraction (missing edges, disconnected nodes).
+{%- elif mode == "graph-test-gen" -%}
+Read the existing `UI_GRAPH.json` at the repository root. This file contains the application's complete state model — nodes (UI states with available actions) and edges (transitions with element triggers). Use it as your test plan: you do NOT need to discover the app's UI surface yourself.
+
+**How to use the graph for test generation:**
+
+For each **node** (state):
+- Navigate to its `route`
+- Verify the state loads correctly (page renders, key elements present)
+- Exercise the actions listed in its `actions` array — interact with each element and verify expected behavior
+- If `auth_required` is true, ensure test setup includes authentication
+
+For each **edge** (transition):
+- Start at the `from` state
+- Perform the action described in `trigger` (using the element identifier provided)
+- Verify arrival at the `to` state
+- If `guard` is set, test both the guarded path (condition met) and optionally the rejection path (condition not met)
+
+**Test organization:**
+- Group spec files by `section` field from the graph nodes
+- Name files: `rq6-agent/<section-slug>.spec.ts`
+- Within each spec, organize tests by state → transitions from that state
+
+**Progress tracking:**
+- After a node's tests compile and pass, update `UI_GRAPH.json`: set `"status": "tested"` and `"test_file": "<path to spec>"`
+- If you deliberately skip a node, set `"status": "skipped"` with a reason in `notes`
+- Update `metadata.tested` and `metadata.skipped` counts after each modification
+- After each write, validate: `python3 -c "import json; json.load(open('UI_GRAPH.json'))"`
+
+**Rules:**
+- Prefer breadth first: get at least one passing test for every section before deepening coverage on any single section.
+- Use the element identifiers from `actions` and edge `trigger` fields as Playwright locators. Prefer `page.getByTestId()`, `page.getByRole()`, `page.getByLabel()`, `page.getByText()` over brittle CSS selectors.
+- If the graph lists an action or transition that doesn't work in the live app, note the discrepancy in the node's `notes` field but do not modify the graph's structure.
+- Do NOT re-discover the app. Do NOT add new nodes or edges. Only update `status`, `test_file`, and `notes` fields.
+- The task is NOT complete while any node remains `"explored"` or `"discovered"` — continue until every node is `"tested"` or `"skipped"`.
+{%- if service_base_url %}
+
+A live instance of this application is already running and reachable at {{ service_base_url }}. The application has already been built and started for you; do not build, start, stop, or reconfigure it.
+{%- else %}
+
+No running instance has been set up for you. Install dependencies and start the development server yourself before writing tests (e.g. `npm ci && npm run dev`, or build and serve with `npm run build && npx serve dist`).
+{%- endif %}
+
+Check the existing `playwright.config.ts` (or `playwright.config.js`) at the repository root. If it exists, use it as-is, updating `baseURL` to `{{ service_base_url or 'http://localhost:3000' }}` if not already set. If no config exists, create a minimal one. Write all agent-generated specs inside a subdirectory named `rq6-agent/` — place it within the project's existing test directory if one exists (e.g. `tests/rq6-agent/`, `e2e/rq6-agent/`), or at the repository root as `rq6-agent/` if no test directory exists. Do NOT place test files outside the `rq6-agent/` subdirectory. Use `.spec.ts` extensions.
+
+Validate all tests with `npx playwright test` in headless mode. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
+
+Do NOT modify production code under any circumstances. Do NOT leave behind failing, flaky, incomplete, or placeholder tests.
+
+In the final response, summarize: nodes tested vs skipped, spec files created, any graph inaccuracies discovered (actions/transitions that didn't match reality), and validation results.
 {%- else -%}
 Inspect the provided repository and generate Playwright E2E tests that thoroughly exercise the application's UI pages and user flows.
 {%- if mode == "project-aware" %}

@@ -265,3 +265,41 @@ def test_feature_extraction_mode_is_valid_cli_choice() -> None:
     )
     assert args.mode == "feature-extraction"
     assert args.coverage_model == "graph"
+
+
+# ---------------------------------------------------------------------------
+# Graph-test-gen mode
+# ---------------------------------------------------------------------------
+
+def test_js_system_template_graph_test_gen_mode() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_SYSTEM_TEMPLATE,
+        _js_context(None, mode="graph-test-gen", coverage_model="graph"),
+    )
+    assert "test generation agent" in rendered
+    assert "UI_GRAPH.json" in rendered
+    assert "npx playwright test" in rendered
+    assert "Do NOT modify production code" in rendered
+
+
+def test_js_user_template_graph_test_gen_reads_existing_graph() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_USER_TEMPLATE,
+        _js_context(None, mode="graph-test-gen", coverage_model="graph"),
+    )
+    assert "Read the existing `UI_GRAPH.json`" in rendered
+    assert '"tested"' in rendered
+    assert "rq6-agent/" in rendered
+    assert "trigger" in rendered
+    assert "actions" in rendered
+    assert "scan the repository" not in rendered
+    assert "UI_FEATURES.json" not in rendered
+    assert "UI_COVERAGE.md" not in rendered
+
+
+def test_graph_test_gen_mode_is_valid_cli_choice() -> None:
+    args = build_parser().parse_args(
+        ["--input-dir", ".", "--mode", "graph-test-gen", "--coverage-model", "graph"]
+    )
+    assert args.mode == "graph-test-gen"
+    assert args.coverage_model == "graph"
