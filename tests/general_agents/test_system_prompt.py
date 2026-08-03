@@ -289,7 +289,8 @@ def test_js_user_template_graph_test_gen_reads_existing_graph() -> None:
     )
     assert "Read the existing `UI_GRAPH.json`" in rendered
     assert '"tested"' in rendered
-    assert "rq6-agent/" in rendered
+    assert "rq6-graph-agent/" in rendered
+    assert "rq6-agent/" not in rendered
     assert "trigger" in rendered
     assert "actions" in rendered
     assert "scan the repository" not in rendered
