@@ -1,0 +1,974 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Motion Vue Playground",
+    "base_url": "http://localhost:5173",
+    "total_states": 42,
+    "explored": 42,
+    "skipped": 0,
+    "verified_live": [
+      "/",
+      "/animate-presence",
+      "/drag",
+      "/gestures",
+      "/scroll-reactive",
+      "/directive",
+      "/pop-layout",
+      "/transition-arc",
+      "/test",
+      "/not-found-test-404"
+    ],
+    "notes": "Vue 3 SPA using vue-router with glob-based auto-discovery of all views under src/views/**/*.vue. No authentication. No external API calls. Animation demo playground for the motion-v library."
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Home — grid of all route links",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Navigate to any demo route via router-link grid card"
+      ],
+      "notes": "Renders all non-root routes as clickable cards via router.getRoutes()"
+    },
+    {
+      "id": "/home",
+      "route": "/home",
+      "label": "Home.vue — empty page",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [],
+      "notes": "Home.vue is empty; renders blank content within router-view"
+    },
+    {
+      "id": "/:pathMatch(.*)*",
+      "route": "/:pathMatch(.*)*",
+      "label": "404 — Page Not Found",
+      "section": "Error",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Go Home' link [router-link to='/']"
+      ],
+      "notes": "Displays 404 message; matched by [..404].vue and wildcard route"
+    },
+    {
+      "id": "/animate-presence",
+      "route": "/animate-presence",
+      "label": "AnimatePresence Demo — item hidden",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Show' button [id=toggle] to reveal animated item"
+      ],
+      "notes": "Default state: animated item not yet shown"
+    },
+    {
+      "id": "/animate-presence#item-visible",
+      "route": "/animate-presence",
+      "label": "AnimatePresence Demo — item visible",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Hide' button [id=toggle] to exit-animate item",
+        "Click 'Remove' button inside card [class=text-red-500]"
+      ],
+      "notes": "Animated card visible; motion.div with exit animation on hide"
+    },
+    {
+      "id": "/animate-presence/group-animatepresence",
+      "route": "/animate-presence/group-animatepresence",
+      "label": "Group AnimatePresence — panel closed",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle open' button to open panel"
+      ],
+      "notes": "LayoutGroup with AnimatePresence; container collapses when closed"
+    },
+    {
+      "id": "/animate-presence/group-animatepresence#open",
+      "route": "/animate-presence/group-animatepresence",
+      "label": "Group AnimatePresence — panel open",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle open' button to close panel"
+      ],
+      "notes": "Text content revealed; layout-animated container expands"
+    },
+    {
+      "id": "/animate-presence/multi-motion",
+      "route": "/animate-presence/multi-motion",
+      "label": "Multiple Motion Components — items shown",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click toggle button [id=toggle] to hide all motion items"
+      ],
+      "notes": "Two motion.div items; tracks exitComplete via span [id=exit-status]"
+    },
+    {
+      "id": "/animate-presence/multi-motion#items-hidden",
+      "route": "/animate-presence/multi-motion",
+      "label": "Multiple Motion Components — items hidden, exit complete",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click toggle button [id=toggle] to show items"
+      ],
+      "notes": "onExitComplete fires; span [id=exit-status] shows 'exited'"
+    },
+    {
+      "id": "/animate-presence/nested-motion",
+      "route": "/animate-presence/nested-motion",
+      "label": "Nested Motion — items visible",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Hide' button [id=toggle] to exit-animate all nested items"
+      ],
+      "notes": "Parent + two children all animate independently with staggered entries"
+    },
+    {
+      "id": "/animate-presence/nested-motion#hidden",
+      "route": "/animate-presence/nested-motion",
+      "label": "Nested Motion — items hidden",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Show' button [id=toggle] to animate items in"
+      ],
+      "notes": "All nested motion components unmounted after exit animation"
+    },
+    {
+      "id": "/animate-presence/v-show-shared-layout",
+      "route": "/animate-presence/v-show-shared-layout",
+      "label": "v-show Shared Layout — large box shown",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Show Large' / 'Show Small' button [id=toggle] to toggle box size"
+      ],
+      "notes": "Tests v-show with shared layout animation; tracks animationStarted/Completed"
+    },
+    {
+      "id": "/animate-presence/variants",
+      "route": "/animate-presence/variants",
+      "label": "AnimatePresence Variants — list visible",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Hide' button to exit-animate list items via variants"
+      ],
+      "notes": "motion.ul with listVariants; items stagger with delay on open/close"
+    },
+    {
+      "id": "/animate-presence/variants#hidden",
+      "route": "/animate-presence/variants",
+      "label": "AnimatePresence Variants — list hidden",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Show' button to animate list in with staggered variants"
+      ],
+      "notes": "List unmounted; variant propagation from parent to children tested"
+    },
+    {
+      "id": "/directive",
+      "route": "/directive",
+      "label": "v-motion Directive — showcase",
+      "section": "Directive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Observe entry animations on page load (v-motion props-extraction and binding-value boxes)",
+        "Toggle visibility via reactive ref (isVisible) — button label 'Hide'/'Show'"
+      ],
+      "notes": "Three directive syntax demos: props-extraction, binding-value, event callbacks"
+    },
+    {
+      "id": "/directive/preset",
+      "route": "/directive/preset",
+      "label": "Preset Directives — v-fade-in, v-slide-up, v-scale-in",
+      "section": "Directive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Toggle visibility of preset-animated box [button in section]"
+      ],
+      "notes": "Globally registered preset directives: v-fade-in, v-slide-up, v-scale-in"
+    },
+    {
+      "id": "/drag",
+      "route": "/drag",
+      "label": "Drag Animations — draggable box in container",
+      "section": "Drag",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Drag box within constraint container [Motion component with drag prop]"
+      ],
+      "notes": "Box scale animates 1.1 on dragStart, back to 1 on dragEnd"
+    },
+    {
+      "id": "/drag#dragging",
+      "route": "/drag",
+      "label": "Drag Animations — box being dragged (scale 1.1)",
+      "section": "Drag",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Release drag to end drag interaction"
+      ],
+      "notes": "Box visually scales up during drag via :animate={scale}"
+    },
+    {
+      "id": "/drag/constraints-animation",
+      "route": "/drag/constraints-animation",
+      "label": "Drag Constraints Animation — multiple drag tests",
+      "section": "Drag",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Drag green box with dragSnapToOrigin [Test 2 container]",
+        "Observe drag-start/drag-end counters increment"
+      ],
+      "notes": "Multiple test scenarios: dragSnapToOrigin in Test 2; counters track events"
+    },
+    {
+      "id": "/drag/drag-scroll-while-drag",
+      "route": "/drag/drag-scroll-while-drag",
+      "label": "Scroll While Drag Test",
+      "section": "Drag",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Drag red box inside scrollable container",
+        "Scroll container while dragging"
+      ],
+      "notes": "Tests that box stays attached to cursor while scrolling during drag"
+    },
+    {
+      "id": "/drag/drag-snap-to-origin",
+      "route": "/drag/drag-snap-to-origin",
+      "label": "dragSnapToOrigin Test",
+      "section": "Drag",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Drag box anywhere and release — snaps back to origin",
+        "Click during snap-back to test interrupt behavior"
+      ],
+      "notes": "Tracks dragCount and snapBackCount via ref counters"
+    },
+    {
+      "id": "/dynamic-variant",
+      "route": "/dynamic-variant",
+      "label": "Dynamic Variant — visible state",
+      "section": "Variants",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle' button [data-testid=toggle-btn]",
+        "Observe motion.button animate to 'visible' or 'hidden' variant"
+      ],
+      "notes": "whileInView alternates between 'visible' (opacity 1) and 'hidden' (opacity 0.25)"
+    },
+    {
+      "id": "/dynamic-variant#hidden",
+      "route": "/dynamic-variant",
+      "label": "Dynamic Variant — hidden/dimmed state",
+      "section": "Variants",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle' button [data-testid=toggle-btn] to restore visible state"
+      ],
+      "notes": "motion.button [data-testid=motion-btn] dims to opacity 0.25 in hidden variant"
+    },
+    {
+      "id": "/gestures",
+      "route": "/gestures",
+      "label": "Gesture Animations — hover/tap demo",
+      "section": "Gestures",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Hover over animated box — scale 1.2, rotate 5deg, borderRadius 16px",
+        "Tap/click animated box — scale briefly 0.8 then back to 1"
+      ],
+      "notes": "onHoverStart/End and onTap handlers mutate scale/rotate/borderRadius refs"
+    },
+    {
+      "id": "/gestures/hover",
+      "route": "/gestures/hover",
+      "label": "Gesture Hover — navigation menu closed",
+      "section": "Gestures",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click hamburger toggle button [class=toggle-container] to open nav"
+      ],
+      "notes": "motion.nav animated sidebar with hamburger toggle; 5 color-coded list items"
+    },
+    {
+      "id": "/gestures/hover#nav-open",
+      "route": "/gestures/hover",
+      "label": "Gesture Hover — navigation menu open",
+      "section": "Gestures",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click close toggle button [class=toggle-container] to close nav",
+        "Hover over list items — scale 1.1",
+        "Press list items — scale 0.95"
+      ],
+      "notes": "Nav open; 5 list items stagger in; hamburger morphs to X via SVG path variants"
+    },
+    {
+      "id": "/layout/layout-mount",
+      "route": "/layout/layout-mount",
+      "label": "Layout Mount — container hidden",
+      "section": "Layout",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle' button [id=toggle] to show layout container"
+      ],
+      "notes": "Tests layout element mounting inside scaling container"
+    },
+    {
+      "id": "/layout/layout-mount#shown",
+      "route": "/layout/layout-mount",
+      "label": "Layout Mount — container visible with layout child",
+      "section": "Layout",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle' button [id=toggle] to hide container with exit animation"
+      ],
+      "notes": "Inner motion.div [id=layout-child] should NOT perform layout animation on mount"
+    },
+    {
+      "id": "/pop-layout",
+      "route": "/pop-layout",
+      "label": "Pop Layout — list with items (wait mode)",
+      "section": "Layout",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Add item' button [Motion as=button] to append animated item",
+        "Click any item card to remove it with exit animation",
+        "Check 'popLayout' checkbox to switch animation mode"
+      ],
+      "notes": "AnimatePresence mode='wait' by default; items in pink rounded cards"
+    },
+    {
+      "id": "/pop-layout#pop-mode",
+      "route": "/pop-layout",
+      "label": "Pop Layout — list with items (popLayout mode)",
+      "section": "Layout",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click any item card to remove with popLayout exit animation",
+        "Click 'Add item' button to append item",
+        "Uncheck 'popLayout' checkbox to restore wait mode"
+      ],
+      "notes": "AnimatePresence mode='popLayout'; remaining items animate position with layout"
+    },
+    {
+      "id": "/reorder/auto-scroll",
+      "route": "/reorder/auto-scroll",
+      "label": "Reorder Auto-Scroll — vertical and horizontal lists",
+      "section": "Reorder",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Drag vertical item [data-testid=<item-number>] to reorder",
+        "Drag vertical item to top/bottom edge to trigger auto-scroll",
+        "Drag horizontal item [data-testid=h-<item>] to reorder",
+        "Drag horizontal item to left/right edge to trigger auto-scroll"
+      ],
+      "notes": "Two lists: vertical (16 items, 300px container) and horizontal (15 items)"
+    },
+    {
+      "id": "/scroll-horizontal",
+      "route": "/scroll-horizontal",
+      "label": "Horizontal Scroll — useScroll with x axis",
+      "section": "Scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Scroll horizontally inside container [class=scroll-container-h]"
+      ],
+      "notes": "Displays scrollX and scrollXProgress MotionValues via RowValue component"
+    },
+    {
+      "id": "/scroll-presets",
+      "route": "/scroll-presets",
+      "label": "Scroll Presets — ScrollOffset.Enter preset",
+      "section": "Scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Scroll vertically inside container to move target in/out of view"
+      ],
+      "notes": "useScroll with offset=ScrollOffset.Enter; shows scrollYProgress in RowValue"
+    },
+    {
+      "id": "/scroll-reactive",
+      "route": "/scroll-reactive",
+      "label": "Scroll Reactive — y axis",
+      "section": "Scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Scroll inside container [class=scroll-container]",
+        "Click 'Toggle axis' button [class=toggle-axis] to switch to x axis"
+      ],
+      "notes": "Tracks scrollX/Y and progress; axis is reactive; container is 300x300px"
+    },
+    {
+      "id": "/scroll-reactive#axis-x",
+      "route": "/scroll-reactive",
+      "label": "Scroll Reactive — x axis",
+      "section": "Scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Scroll horizontally inside container",
+        "Click 'Toggle axis' button [class=toggle-axis] to switch back to y axis"
+      ],
+      "notes": "Current axis shown in span [class=current-axis]; useScroll recreated reactively"
+    },
+    {
+      "id": "/scroll-test",
+      "route": "/scroll-test",
+      "label": "Scroll Test — useScroll with Motion container and target",
+      "section": "Scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Scroll vertically inside Motion container [class=scroll-container]"
+      ],
+      "notes": "Motion used as scroll container ref; target is nested Motion; shows Y and progress"
+    },
+    {
+      "id": "/test",
+      "route": "/test",
+      "label": "Test — Mount/Unmount with v-motion directive",
+      "section": "Test",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Hide'/'Show' button to toggle AnimatePresence item"
+      ],
+      "notes": "v-motion directive with layoutId on nested Motion; tests spring transition"
+    },
+    {
+      "id": "/test#hidden",
+      "route": "/test",
+      "label": "Test — item unmounted after exit animation",
+      "section": "Test",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Show' button to mount and animate item in"
+      ],
+      "notes": "Exit: opacity 0, scale 0.5, rotate 10 spring animation"
+    },
+    {
+      "id": "/transition-arc",
+      "route": "/transition-arc",
+      "label": "Transition Arc — arc path animation demos",
+      "section": "Transitions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle' [data-testid=ping-btn] to ping-pong arc animation",
+        "Click rotate 'Toggle' [data-testid=rotate-btn] to arc with rotation",
+        "Click 'Next' [data-testid=axis-btn] to step through axis-change targets",
+        "Click layout arc button [data-testid=layout-btn] to swap shared element"
+      ],
+      "notes": "Four arc sections: ping-pong, keyframe+rotate, axis-continuity, layout-arc"
+    },
+    {
+      "id": "/transition-arc#pinged",
+      "route": "/transition-arc",
+      "label": "Transition Arc — ping-pong box at target position",
+      "section": "Transitions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Toggle' [data-testid=ping-btn] to arc back to origin"
+      ],
+      "notes": "Box at {x:260, y:120}; arc() path maintains stable screen-side"
+    },
+    {
+      "id": "/transition-arc#layout-swapped",
+      "route": "/transition-arc",
+      "label": "Transition Arc — layout element swapped to right",
+      "section": "Transitions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click layout arc button [data-testid=layout-btn] to swap back to left"
+      ],
+      "notes": "Shared-element layout animation travels arc path; rotate:true orients to path"
+    },
+    {
+      "id": "/animate-presence/v-show-shared-layout#animation-tracking",
+      "route": "/animate-presence/v-show-shared-layout",
+      "label": "v-show Shared Layout — tracking animation lifecycle",
+      "section": "AnimatePresence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click toggle to switch box size; observe animationStarted/animationCompleted states"
+      ],
+      "notes": "Emits onAnimationStart and onAnimationComplete; states shown in DOM"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/animate-presence",
+      "trigger": "router-link card 'animate-presence' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/animate-presence/group-animatepresence",
+      "trigger": "router-link card 'animate-presence-group-animatepresence' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/animate-presence/multi-motion",
+      "trigger": "router-link card 'animate-presence-multi-motion' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/animate-presence/nested-motion",
+      "trigger": "router-link card 'animate-presence-nested-motion' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/animate-presence/v-show-shared-layout",
+      "trigger": "router-link card 'animate-presence-v-show-shared-layout' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/animate-presence/variants",
+      "trigger": "router-link card 'animate-presence-variants' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/directive",
+      "trigger": "router-link card 'directive' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/directive/preset",
+      "trigger": "router-link card 'directive-preset' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/drag",
+      "trigger": "router-link card 'drag' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/drag/constraints-animation",
+      "trigger": "router-link card 'drag-constraints-animation' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/drag/drag-scroll-while-drag",
+      "trigger": "router-link card 'drag-drag-scroll-while-drag' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/drag/drag-snap-to-origin",
+      "trigger": "router-link card 'drag-drag-snap-to-origin' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/dynamic-variant",
+      "trigger": "router-link card 'dynamic-variant' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/gestures",
+      "trigger": "router-link card 'gestures' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/gestures/hover",
+      "trigger": "router-link card 'gestures-hover' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/layout/layout-mount",
+      "trigger": "router-link card 'layout-layout-mount' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/pop-layout",
+      "trigger": "router-link card 'pop-layout' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/reorder/auto-scroll",
+      "trigger": "router-link card 'reorder-auto-scroll' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/scroll-horizontal",
+      "trigger": "router-link card 'scroll-horizontal' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/scroll-presets",
+      "trigger": "router-link card 'scroll-presets' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/scroll-reactive",
+      "trigger": "router-link card 'scroll-reactive' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/scroll-test",
+      "trigger": "router-link card 'scroll-test' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/test",
+      "trigger": "router-link card 'test' in nav grid"
+    },
+    {
+      "from": "/",
+      "to": "/transition-arc",
+      "trigger": "router-link card 'transition-arc' in nav grid"
+    },
+    {
+      "from": "/animate-presence",
+      "to": "/animate-presence#item-visible",
+      "trigger": "button 'Show' [id=toggle]"
+    },
+    {
+      "from": "/animate-presence#item-visible",
+      "to": "/animate-presence",
+      "trigger": "button 'Hide' [id=toggle]"
+    },
+    {
+      "from": "/animate-presence/group-animatepresence",
+      "to": "/animate-presence/group-animatepresence#open",
+      "trigger": "button 'Toggle open' in motion.div"
+    },
+    {
+      "from": "/animate-presence/group-animatepresence#open",
+      "to": "/animate-presence/group-animatepresence",
+      "trigger": "button 'Toggle open' in motion.div"
+    },
+    {
+      "from": "/animate-presence/multi-motion",
+      "to": "/animate-presence/multi-motion#items-hidden",
+      "trigger": "button 'Hide' [id=toggle]"
+    },
+    {
+      "from": "/animate-presence/multi-motion#items-hidden",
+      "to": "/animate-presence/multi-motion",
+      "trigger": "button 'Show' [id=toggle]"
+    },
+    {
+      "from": "/animate-presence/nested-motion",
+      "to": "/animate-presence/nested-motion#hidden",
+      "trigger": "button 'Hide' [id=toggle]"
+    },
+    {
+      "from": "/animate-presence/nested-motion#hidden",
+      "to": "/animate-presence/nested-motion",
+      "trigger": "button 'Show' [id=toggle]"
+    },
+    {
+      "from": "/animate-presence/variants",
+      "to": "/animate-presence/variants#hidden",
+      "trigger": "button 'Hide'"
+    },
+    {
+      "from": "/animate-presence/variants#hidden",
+      "to": "/animate-presence/variants",
+      "trigger": "button 'Show'"
+    },
+    {
+      "from": "/dynamic-variant",
+      "to": "/dynamic-variant#hidden",
+      "trigger": "button 'Toggle' [data-testid=toggle-btn]"
+    },
+    {
+      "from": "/dynamic-variant#hidden",
+      "to": "/dynamic-variant",
+      "trigger": "button 'Toggle' [data-testid=toggle-btn]"
+    },
+    {
+      "from": "/gestures/hover",
+      "to": "/gestures/hover#nav-open",
+      "trigger": "button.toggle-container (hamburger SVG)"
+    },
+    {
+      "from": "/gestures/hover#nav-open",
+      "to": "/gestures/hover",
+      "trigger": "button.toggle-container (X SVG)"
+    },
+    {
+      "from": "/layout/layout-mount",
+      "to": "/layout/layout-mount#shown",
+      "trigger": "button 'Toggle' [id=toggle]"
+    },
+    {
+      "from": "/layout/layout-mount#shown",
+      "to": "/layout/layout-mount",
+      "trigger": "button 'Toggle' [id=toggle]"
+    },
+    {
+      "from": "/pop-layout",
+      "to": "/pop-layout#pop-mode",
+      "trigger": "checkbox 'popLayout' [type=checkbox, v-model=popLayout]"
+    },
+    {
+      "from": "/pop-layout#pop-mode",
+      "to": "/pop-layout",
+      "trigger": "checkbox 'popLayout' [type=checkbox, v-model=popLayout]"
+    },
+    {
+      "from": "/scroll-reactive",
+      "to": "/scroll-reactive#axis-x",
+      "trigger": "button 'Toggle axis' [class=toggle-axis]"
+    },
+    {
+      "from": "/scroll-reactive#axis-x",
+      "to": "/scroll-reactive",
+      "trigger": "button 'Toggle axis' [class=toggle-axis]"
+    },
+    {
+      "from": "/test",
+      "to": "/test#hidden",
+      "trigger": "button 'Hide'"
+    },
+    {
+      "from": "/test#hidden",
+      "to": "/test",
+      "trigger": "button 'Show'"
+    },
+    {
+      "from": "/transition-arc",
+      "to": "/transition-arc#pinged",
+      "trigger": "button 'Toggle' [data-testid=ping-btn]"
+    },
+    {
+      "from": "/transition-arc#pinged",
+      "to": "/transition-arc",
+      "trigger": "button 'Toggle' [data-testid=ping-btn]"
+    },
+    {
+      "from": "/transition-arc",
+      "to": "/transition-arc#layout-swapped",
+      "trigger": "button [data-testid=layout-btn]"
+    },
+    {
+      "from": "/transition-arc#layout-swapped",
+      "to": "/transition-arc",
+      "trigger": "button [data-testid=layout-btn]"
+    },
+    {
+      "from": "/drag",
+      "to": "/drag#dragging",
+      "trigger": "pointer-down on Motion draggable box [drag prop]"
+    },
+    {
+      "from": "/drag#dragging",
+      "to": "/drag",
+      "trigger": "pointer-up to release draggable box"
+    },
+    {
+      "from": "/:pathMatch(.*)*",
+      "to": "/",
+      "trigger": "router-link 'Go Home' [class=btn btn-primary]"
+    },
+    {
+      "from": "/animate-presence",
+      "to": "/",
+      "trigger": "browser back navigation"
+    },
+    {
+      "from": "/drag",
+      "to": "/",
+      "trigger": "browser back navigation"
+    },
+    {
+      "from": "/gestures",
+      "to": "/",
+      "trigger": "browser back navigation"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "No authentication required — all routes public",
+        "node_ids": [
+          "/",
+          "/home",
+          "/:pathMatch(.*)*",
+          "/animate-presence",
+          "/animate-presence#item-visible",
+          "/animate-presence/group-animatepresence",
+          "/animate-presence/group-animatepresence#open",
+          "/animate-presence/multi-motion",
+          "/animate-presence/multi-motion#items-hidden",
+          "/animate-presence/nested-motion",
+          "/animate-presence/nested-motion#hidden",
+          "/animate-presence/v-show-shared-layout",
+          "/animate-presence/v-show-shared-layout#animation-tracking",
+          "/animate-presence/variants",
+          "/animate-presence/variants#hidden",
+          "/directive",
+          "/directive/preset",
+          "/drag",
+          "/drag#dragging",
+          "/drag/constraints-animation",
+          "/drag/drag-scroll-while-drag",
+          "/drag/drag-snap-to-origin",
+          "/dynamic-variant",
+          "/dynamic-variant#hidden",
+          "/gestures",
+          "/gestures/hover",
+          "/gestures/hover#nav-open",
+          "/layout/layout-mount",
+          "/layout/layout-mount#shown",
+          "/pop-layout",
+          "/pop-layout#pop-mode",
+          "/reorder/auto-scroll",
+          "/scroll-horizontal",
+          "/scroll-presets",
+          "/scroll-reactive",
+          "/scroll-reactive#axis-x",
+          "/scroll-test",
+          "/test",
+          "/test#hidden",
+          "/transition-arc",
+          "/transition-arc#pinged",
+          "/transition-arc#layout-swapped"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:root",
+        "label": "Root router-view wrapped in global Motion transition",
+        "node_ids": [
+          "/",
+          "/home",
+          "/:pathMatch(.*)*",
+          "/animate-presence",
+          "/animate-presence#item-visible",
+          "/animate-presence/group-animatepresence",
+          "/animate-presence/group-animatepresence#open",
+          "/animate-presence/multi-motion",
+          "/animate-presence/multi-motion#items-hidden",
+          "/animate-presence/nested-motion",
+          "/animate-presence/nested-motion#hidden",
+          "/animate-presence/v-show-shared-layout",
+          "/animate-presence/v-show-shared-layout#animation-tracking",
+          "/animate-presence/variants",
+          "/animate-presence/variants#hidden",
+          "/directive",
+          "/directive/preset",
+          "/drag",
+          "/drag#dragging",
+          "/drag/constraints-animation",
+          "/drag/drag-scroll-while-drag",
+          "/drag/drag-snap-to-origin",
+          "/dynamic-variant",
+          "/dynamic-variant#hidden",
+          "/gestures",
+          "/gestures/hover",
+          "/gestures/hover#nav-open",
+          "/layout/layout-mount",
+          "/layout/layout-mount#shown",
+          "/pop-layout",
+          "/pop-layout#pop-mode",
+          "/reorder/auto-scroll",
+          "/scroll-horizontal",
+          "/scroll-presets",
+          "/scroll-reactive",
+          "/scroll-reactive#axis-x",
+          "/scroll-test",
+          "/test",
+          "/test#hidden",
+          "/transition-arc",
+          "/transition-arc#pinged",
+          "/transition-arc#layout-swapped"
+        ]
+      }
+    ]
+  }
+}

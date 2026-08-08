@@ -1,0 +1,2782 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Trilium Notes",
+    "base_url": "http://localhost:3010",
+    "total_states": 124,
+    "explored": 124,
+    "skipped": 0,
+    "verified_live": [
+      "/login",
+      "/login#wrong-password",
+      "/set-password",
+      "/",
+      "/bootstrap",
+      "/share/",
+      "/api/tree",
+      "/api/notes/_optionsMedia/metadata (API verify)",
+      "/api/notes/_optionsOther/metadata (API verify)",
+      "/api/notes/_optionsSpellcheck/metadata (API verify)",
+      "/api/notes/_optionsDesktop/metadata (API verify)"
+    ],
+    "discovery_notes": "Trilium Notes v0.103.0. SPA with jQuery widget system (Preact + legacy). Single main route '/' with all content rendered client-side via note tree + dialogs. Settings/options are special notes (_options*) rendered inside a modal. No client-side router — navigation is note-centric via froca cache. _optionsTotp was deleted; TOTP settings are embedded in _optionsPassword (SignInMethod component). New pages (v2 additions): _optionsMedia, _optionsOther, _optionsSpellcheck, _optionsDesktop, import#keep, import#files, backend-log note type, zen-mode layout state, call-to-action dialog, password-not-set dialog, incorrect-cpu-arch dialog, plus generic confirm/info/prompt utility dialogs."
+  },
+  "nodes": [
+    {
+      "id": "/login",
+      "route": "/login",
+      "label": "Login page — password form",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill password [#password]",
+        "Check 'Remember me' [#remember-me]",
+        "Submit login [button 'Login']"
+      ],
+      "notes": "Server-rendered EJS. Redirects to / on success."
+    },
+    {
+      "id": "/login#totp-enabled",
+      "route": "/login",
+      "label": "Login page — password + TOTP token required",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill password [#password]",
+        "Fill TOTP token [#totpToken]",
+        "Check 'Remember me' [#remember-me]",
+        "Submit login [button 'Login']"
+      ],
+      "notes": "Shown when TOTP is enabled on account. Includes #totpToken input."
+    },
+    {
+      "id": "/login#wrong-password",
+      "route": "/login",
+      "label": "Login page — wrong password error shown",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill password [#password]",
+        "Check 'Remember me' [#remember-me]",
+        "Submit login [button 'Login']"
+      ],
+      "notes": "Re-rendered server-side after failed auth attempt."
+    },
+    {
+      "id": "/login#sso-enabled",
+      "route": "/login",
+      "label": "Login page — SSO/OpenID button shown",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Click SSO login button [a.google-login-btn]"
+      ],
+      "notes": "Shown when OAuth/OpenID is configured; replaces password form."
+    },
+    {
+      "id": "/set-password",
+      "route": "/set-password",
+      "label": "Set password page — first-time password setup",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill password [#password1]",
+        "Fill confirm password [#password2]",
+        "Submit [button 'Set Password']"
+      ],
+      "notes": "Only accessible before any password is set. Redirects to /login on success."
+    },
+    {
+      "id": "/setup",
+      "route": "/setup",
+      "label": "Initial DB setup — multi-step wizard",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [
+        "Navigate setup steps (client-side state machine)",
+        "Select language [FormListItem locale options]",
+        "Continue [button 'Continue']"
+      ],
+      "notes": "Redirects to / if DB already initialized."
+    },
+    {
+      "id": "/setup#select-language",
+      "route": "/setup",
+      "label": "Setup — language selection step",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [
+        "Select locale from list [FormListItem]",
+        "Continue [button 'Continue']"
+      ],
+      "notes": "First step in setup wizard."
+    },
+    {
+      "id": "/setup#first-options",
+      "route": "/setup",
+      "label": "Setup — choose: new doc, sync from server, sync from desktop",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [
+        "Create new document [SetupOptionCard 'New Document']",
+        "Sync from server [SetupOptionCard 'Sync from Server']",
+        "Sync from desktop [SetupOptionCard 'Sync from Desktop']",
+        "Back [back button]"
+      ],
+      "notes": "Second step in setup wizard."
+    },
+    {
+      "id": "/setup#create-new-document-options",
+      "route": "/setup",
+      "label": "Setup — new document options: with demo data or empty",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [
+        "Create with demo data [SetupOptionCard 'With Demo Data']",
+        "Create empty document [SetupOptionCard 'Empty Document']",
+        "Back [back button]"
+      ],
+      "notes": "Sub-step for new document creation."
+    },
+    {
+      "id": "/setup#sync-from-server",
+      "route": "/setup",
+      "label": "Setup — sync from server: enter server host + password",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [
+        "Enter server host [FormTextBox server host]",
+        "Enter password [FormTextBox password]",
+        "Toggle proxy settings [advanced section]",
+        "Connect [button 'Connect']",
+        "Back [back button]"
+      ],
+      "notes": "Leads to syncFromServerInProgress on submit."
+    },
+    {
+      "id": "/setup#sync-from-desktop",
+      "route": "/setup",
+      "label": "Setup — sync from desktop: shows network addresses to connect",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [
+        "View network addresses [IP list display]",
+        "Back [back button]"
+      ],
+      "notes": "Desktop must be reachable on same LAN."
+    },
+    {
+      "id": "/setup#sync-in-progress",
+      "route": "/setup",
+      "label": "Setup — sync in progress: connecting/syncing/finalizing steps",
+      "section": "Setup",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:setup",
+      "actions": [],
+      "notes": "Auto-advances through connecting → syncing → finalizing."
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Main app — note tree + note editor (desktop layout)",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Navigate note tree [.tree-wrapper .fancytree-node]",
+        "Open new tab [button data-trigger-command=openNewTab]",
+        "Search notes [.quick-search-widget input]",
+        "Open launcher items [#launcher-container buttons]",
+        "Open settings [.launcher-button.bx-cog]",
+        "Open global menu [.global-menu-button]",
+        "Create new note [context menu Insert Child Note]",
+        "Edit note title [.note-title input]",
+        "Toggle left pane [.left-pane-toggle-button]",
+        "Toggle right pane [.right-pane-toggle-button]",
+        "Navigate back/forward [.tab-history-navigation-buttons]"
+      ],
+      "notes": "SPA — all note editing happens here. URL stays at /."
+    },
+    {
+      "id": "/#note-context-menu",
+      "route": "/",
+      "label": "Note tree context menu — right-click on note",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Insert Child Note [menu item]",
+        "Insert Note After [menu item]",
+        "Delete Note [menu item]",
+        "Clone Note To [menu item]",
+        "Move Note To [menu item]",
+        "Copy Note Link [menu item]",
+        "Set as Hoisted Note [menu item]",
+        "Edit Branch Prefix [menu item]",
+        "Sort Child Notes [menu item]",
+        "Export Note [menu item]",
+        "Import Into Note [menu item]"
+      ],
+      "notes": "Context menu opened by right-clicking or via '.fancytree-node' menu button."
+    },
+    {
+      "id": "/#note-actions-menu",
+      "route": "/",
+      "label": "Note actions dropdown — main note toolbar",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Open Revisions [button .bx-history]",
+        "Show Recent Changes [menu item]",
+        "Export [menu item]",
+        "Import [menu item]",
+        "Print Preview [menu item]",
+        "Show Note Map [menu item]",
+        "Copy Note Link [menu item]",
+        "Show Note Source [menu item]",
+        "Find & Replace [menu item]",
+        "Delete Note [menu item]",
+        "Convert to Attachment [menu item]"
+      ],
+      "notes": "Opened via '.note-actions' button in note title bar."
+    },
+    {
+      "id": "/#tab-bar",
+      "route": "/",
+      "label": "Tab bar — multiple notes open in tabs",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Click tab [.note-tab-wrapper]",
+        "Close tab [.tab-close-button]",
+        "Add new tab [button data-trigger-command=openNewTab]",
+        "Right-click tab for context menu"
+      ],
+      "notes": "Multi-tab support; each tab has independent note context."
+    },
+    {
+      "id": "/#split-pane",
+      "route": "/",
+      "label": "Split pane — two note panes side by side",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Create new pane [.create-pane-button]",
+        "Close pane [.close-pane-button]",
+        "Move pane left [.move-pane-button direction=left]",
+        "Move pane right [.move-pane-button direction=right]"
+      ],
+      "notes": "Triggered via Create Pane button or keyboard shortcut."
+    },
+    {
+      "id": "/#ribbon-basic-properties",
+      "route": "/",
+      "label": "Ribbon tab — Basic Properties (note type, protection, bookmark, share)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Change note type [Dropdown note-type-dropdown]",
+        "Toggle protected [FormToggle Protected]",
+        "Toggle bookmark [FormToggle Bookmark]",
+        "Toggle shared [FormToggle Shared]",
+        "Toggle template [FormToggle Template]",
+        "Set note language [FormSelect language]"
+      ],
+      "notes": "First ribbon tab; accessible from ribbon toolbar."
+    },
+    {
+      "id": "/#ribbon-owned-attributes",
+      "route": "/",
+      "label": "Ribbon tab — Owned Attributes (labels and relations)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Add label [+ Add label button]",
+        "Add relation [+ Add relation button]",
+        "Edit attribute [click attribute row]",
+        "Delete attribute [delete icon on row]"
+      ],
+      "notes": "Shows attributes owned directly by this note."
+    },
+    {
+      "id": "/#ribbon-inherited-attributes",
+      "route": "/",
+      "label": "Ribbon tab — Inherited Attributes (from parent hierarchy)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View inherited attribute list [read-only display]"
+      ],
+      "notes": "Read-only display of attributes propagated from ancestors."
+    },
+    {
+      "id": "/#ribbon-note-paths",
+      "route": "/",
+      "label": "Ribbon tab — Note Paths (clone locations)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View all note paths [list display]",
+        "Navigate to path [click path item]"
+      ],
+      "notes": "Shows all parent paths (Trilium supports cloned/multi-parent notes)."
+    },
+    {
+      "id": "/#ribbon-note-map",
+      "route": "/",
+      "label": "Ribbon tab — Note Map (visual relationship graph)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View link map [visual graph]",
+        "Navigate to related note [click node in graph]"
+      ],
+      "notes": "D3-based force graph showing relations/links to/from this note."
+    },
+    {
+      "id": "/#ribbon-similar-notes",
+      "route": "/",
+      "label": "Ribbon tab — Similar Notes (recommended related notes)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View similar notes list",
+        "Navigate to similar note [click title]"
+      ],
+      "notes": "Shows notes with similar content or title."
+    },
+    {
+      "id": "/#ribbon-note-info",
+      "route": "/",
+      "label": "Ribbon tab — Note Info (dates, word count, note ID)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Copy note ID [copy button]",
+        "View creation/modification dates"
+      ],
+      "notes": "Read-only metadata."
+    },
+    {
+      "id": "/#ribbon-search-definition",
+      "route": "/",
+      "label": "Ribbon tab — Search Definition (for search notes)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit search query [text input]",
+        "Set search options [checkboxes]",
+        "Run search [button]"
+      ],
+      "notes": "Only visible for notes of type=search."
+    },
+    {
+      "id": "/#ribbon-collection-properties",
+      "route": "/",
+      "label": "Ribbon tab — Collection Properties (for book/search notes)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Set view type (grid/list/table/calendar) [FormSelect]",
+        "Set cover note [relation picker]",
+        "Set sort order [sort options]"
+      ],
+      "notes": "Only visible for book/search notes."
+    },
+    {
+      "id": "/#ribbon-file-properties",
+      "route": "/",
+      "label": "Ribbon tab — File Properties (for file notes)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View file size, MIME type",
+        "Download file [button]",
+        "Open externally [button Electron-only]"
+      ],
+      "notes": "Only visible for file notes."
+    },
+    {
+      "id": "/#ribbon-image-properties",
+      "route": "/",
+      "label": "Ribbon tab — Image Properties (for image notes)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View image dimensions, MIME type",
+        "Download image [button]"
+      ],
+      "notes": "Only visible for image/SVG notes."
+    },
+    {
+      "id": "/#ribbon-script-executor",
+      "route": "/",
+      "label": "Ribbon tab — Script Executor (for code/SQL notes)",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Execute script/query [Run button]",
+        "View execution output"
+      ],
+      "notes": "Only visible for code notes with backend scripting enabled."
+    },
+    {
+      "id": "/#ribbon-formatting-toolbar",
+      "route": "/",
+      "label": "Ribbon toolbar — CKEditor text formatting",
+      "section": "Ribbon Tabs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Bold [B button]",
+        "Italic [I button]",
+        "Underline [U button]",
+        "Heading styles [dropdown]",
+        "Insert table [table button]",
+        "Insert link [link button]",
+        "More formatting options [overflow button]"
+      ],
+      "notes": "Visible for text notes only."
+    },
+    {
+      "id": "/#type-text",
+      "route": "/",
+      "label": "Note type — Rich text (CKEditor5 WYSIWYG)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit rich text [CKEditor5 contenteditable]",
+        "Insert inline image",
+        "Insert table",
+        "Add admonitions/callouts",
+        "Add footnotes",
+        "Add mermaid diagram inline",
+        "Add math formula",
+        "Add collapsible section"
+      ],
+      "notes": "Default note type. Powered by custom CKEditor5 bundle."
+    },
+    {
+      "id": "/#type-code",
+      "route": "/",
+      "label": "Note type — Code (CodeMirror editor)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit code [CodeMirror textarea]",
+        "Toggle vim mode [settings]",
+        "Execute code (if backend scripting enabled) [Run button]",
+        "Select syntax language [MIME type selector]"
+      ],
+      "notes": "CodeMirror with syntax highlighting for many languages."
+    },
+    {
+      "id": "/#type-book",
+      "route": "/",
+      "label": "Note type — Book/collection (child notes displayed inline)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse child notes in inline list",
+        "Change view type [grid/list/table/calendar]",
+        "Create new child note"
+      ],
+      "notes": "Shows children as a 'book'. View types: list, grid, table, calendar, presentation."
+    },
+    {
+      "id": "/#type-image",
+      "route": "/",
+      "label": "Note type — Image viewer",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View image",
+        "Download image [button]",
+        "Zoom/pan image"
+      ],
+      "notes": "Shows embedded image. SVG previews also handled here."
+    },
+    {
+      "id": "/#type-file",
+      "route": "/",
+      "label": "Note type — File viewer/download",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Download file [button]",
+        "Preview PDF inline [PDFjs viewer]",
+        "Play audio [audio player controls]",
+        "Play video [video player controls]",
+        "Open externally [Electron only]"
+      ],
+      "notes": "Generic file storage. PDF, audio, video have specialized previews."
+    },
+    {
+      "id": "/#type-mermaid",
+      "route": "/",
+      "label": "Note type — Mermaid diagram (edit & preview)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit Mermaid source [CodeMirror]",
+        "View rendered diagram [preview panel]",
+        "Export as SVG/PNG [menu item]"
+      ],
+      "notes": "Split view: code on left, live diagram preview on right."
+    },
+    {
+      "id": "/#type-canvas",
+      "route": "/",
+      "label": "Note type — Canvas (Excalidraw drawing board)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Draw shapes [Excalidraw toolbar]",
+        "Add text",
+        "Export as PNG/SVG [menu item]"
+      ],
+      "notes": "Powered by Excalidraw."
+    },
+    {
+      "id": "/#type-mind-map",
+      "route": "/",
+      "label": "Note type — Mind map (interactive tree diagram)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Add node",
+        "Delete node",
+        "Edit node text",
+        "Collapse/expand subtree",
+        "Export as PNG/SVG [menu item]"
+      ],
+      "notes": "Uses jsMind-style mind map renderer."
+    },
+    {
+      "id": "/#type-relation-map",
+      "route": "/",
+      "label": "Note type — Relation map (drag-and-drop note graph)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Drag notes to position",
+        "Connect notes with relations",
+        "Double-click to navigate to note",
+        "Delete relation [right-click]"
+      ],
+      "notes": "Custom D3-based drag-and-drop graph editor."
+    },
+    {
+      "id": "/#type-spreadsheet",
+      "route": "/",
+      "label": "Note type — Spreadsheet (in-browser table editor)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit cell value",
+        "Add row/column",
+        "Delete row/column",
+        "Apply formula",
+        "Export as XLSX [menu item]"
+      ],
+      "notes": "Uses Jspreadsheet/HandsOnTable."
+    },
+    {
+      "id": "/#type-render",
+      "route": "/",
+      "label": "Note type — Render (executes script to generate HTML output)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View rendered HTML output",
+        "Edit source note (script)"
+      ],
+      "notes": "Runs a script note and renders its output as HTML."
+    },
+    {
+      "id": "/#type-llm-chat",
+      "route": "/",
+      "label": "Note type — LLM Chat (AI conversation)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Send chat message [ChatInputBar]",
+        "View message history [ChatMessageList]",
+        "Expand tool call details [ToolCallCard]",
+        "Retry/regenerate message",
+        "Attach note to chat [useChatAttachments]"
+      ],
+      "notes": "Experimental feature. Requires LLM provider configured in settings."
+    },
+    {
+      "id": "/#type-doc",
+      "route": "/",
+      "label": "Note type — Doc (system documentation viewer)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse documentation sections",
+        "Follow internal doc links"
+      ],
+      "notes": "Used for built-in Help docs. Read-only."
+    },
+    {
+      "id": "/#type-search",
+      "route": "/",
+      "label": "Note type — Search (saved search / live query result)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit search query [Ribbon SearchDefinitionTab]",
+        "View search results [.search-result list]",
+        "Click result to navigate to note"
+      ],
+      "notes": "Persisted search note. Results update on open."
+    },
+    {
+      "id": "/#type-sql-console",
+      "route": "/",
+      "label": "Note type — SQL Console (run raw SQL on DB)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter SQL query [CodeMirror textarea]",
+        "Execute query [Run button or Ctrl+Enter]",
+        "View tabular results"
+      ],
+      "notes": "Only accessible when sqlConsoleEnabled=true in config."
+    },
+    {
+      "id": "/#type-web-view",
+      "route": "/",
+      "label": "Note type — Web View (embedded iframe for external URL)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse embedded web page [iframe]",
+        "Set URL [note attribute #webViewSrc]"
+      ],
+      "notes": "Electron-only by default due to sandboxing constraints."
+    },
+    {
+      "id": "/#type-protected-session",
+      "route": "/",
+      "label": "Note type — Protected (shows 'enter password' overlay)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter protection password [ProtectedSessionPassword dialog]"
+      ],
+      "notes": "Protected notes require separate decryption password."
+    },
+    {
+      "id": "/#right-panel-toc",
+      "route": "/",
+      "label": "Right panel — Table of Contents (for text notes)",
+      "section": "Right Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Click heading to scroll to section [toc link]",
+        "Toggle right pane visibility"
+      ],
+      "notes": "Auto-generated from h1-h6 headings in text notes."
+    },
+    {
+      "id": "/#right-panel-highlights",
+      "route": "/",
+      "label": "Right panel — Highlights List",
+      "section": "Right Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View highlighted passages [list]",
+        "Click highlight to scroll to it"
+      ],
+      "notes": "Shows highlighted text spans from current note."
+    },
+    {
+      "id": "/#right-panel-sidebar-chat",
+      "route": "/",
+      "label": "Right panel — Sidebar AI Chat (experimental)",
+      "section": "Right Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Send message [SidebarChat.ChatInputBar]",
+        "View chat history",
+        "Toggle sidebar chat [SidebarChatButton launcher]"
+      ],
+      "notes": "Experimental. Available in right panel/sidebar. Requires LLM setup."
+    },
+    {
+      "id": "/#dialog-options",
+      "route": "/",
+      "label": "Options dialog — settings modal (opened via cog launcher)",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Navigate settings sections via sidebar [.settings-navigation-item]",
+        "Close dialog [× button or Escape]",
+        "Maximize to full tab [expand-alt button]"
+      ],
+      "notes": "Large modal with sidebar nav; uses special notes (_options*) for content."
+    },
+    {
+      "id": "/#options-appearance",
+      "route": "/",
+      "label": "Settings — Appearance (themes, colors, fonts, zoom)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select theme [theme radio list]",
+        "Select base theme [dropdown]",
+        "Select color scheme [light/dark/system]",
+        "Set zoom level [Electron only]",
+        "Change font family [font selectors]",
+        "Toggle heading style"
+      ],
+      "notes": "Note ID: _optionsAppearance. Default settings section."
+    },
+    {
+      "id": "/#options-shortcuts",
+      "route": "/",
+      "label": "Settings — Shortcuts (keyboard shortcut bindings)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Search shortcuts [input]",
+        "Edit shortcut binding [click shortcut row]",
+        "Reset to default [button]"
+      ],
+      "notes": "Note ID: _optionsKeyboardShortcuts."
+    },
+    {
+      "id": "/#options-password",
+      "route": "/",
+      "label": "Settings — Password & MFA (change login password, TOTP, OAuth)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Change password [button → /#options-password#change-password-modal]",
+        "Reset password [button → confirm dialog]",
+        "Configure sign-in method (password/TOTP/OAuth) [FormSelect method dropdown]",
+        "Enable TOTP [Enroll button → /#options-password#totp-enroll-modal]",
+        "Disable TOTP [Disable button]",
+        "View/manage recovery codes [section]",
+        "Regenerate recovery codes [button]",
+        "Set protected session timeout [TimeSelector]"
+      ],
+      "notes": "Note ID: _optionsPassword. TOTP/MFA settings embedded here (server build only)."
+    },
+    {
+      "id": "/#options-password#totp-enroll-modal",
+      "route": "/",
+      "label": "TOTP enrollment modal — scan QR code and verify token",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Scan QR code [QR code display]",
+        "Enter TOTP token to verify [input]",
+        "Confirm enrollment [button]",
+        "Cancel [button]"
+      ],
+      "notes": "Portal modal within Password settings. Triggered by Enroll button."
+    },
+    {
+      "id": "/#options-sync",
+      "route": "/",
+      "label": "Settings — Sync (server sync configuration)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Set sync server host [input]",
+        "Set sync server timeout [input]",
+        "Set proxy [input]",
+        "Test sync connection [button]"
+      ],
+      "notes": "Note ID: _optionsSync."
+    },
+    {
+      "id": "/#options-etapi",
+      "route": "/",
+      "label": "Settings — ETAPI Tokens (API token management)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Create new API token [button]",
+        "View token list",
+        "Delete token [delete button per row]",
+        "Copy token value"
+      ],
+      "notes": "Note ID: _optionsEtapi."
+    },
+    {
+      "id": "/#options-backup",
+      "route": "/",
+      "label": "Settings — Backup (auto-backup config + download)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Toggle auto backup on/off",
+        "View existing backups list",
+        "Download backup file [link]",
+        "Create manual backup [button]"
+      ],
+      "notes": "Note ID: _optionsBackup."
+    },
+    {
+      "id": "/#options-text-notes",
+      "route": "/",
+      "label": "Settings — Text Notes (editor options for rich text)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Configure table of contents min/max level",
+        "Configure spellcheck language",
+        "Toggle various CKEditor features"
+      ],
+      "notes": "Note ID: _optionsTextNotes."
+    },
+    {
+      "id": "/#options-code-notes",
+      "route": "/",
+      "label": "Settings — Code Notes (CodeMirror editor options)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Toggle word wrap [checkbox]",
+        "Set tab width [select]",
+        "Set auto read-only threshold [input]",
+        "Toggle vim mode [checkbox]",
+        "Select syntax theme [select]"
+      ],
+      "notes": "Note ID: _optionsCodeNotes."
+    },
+    {
+      "id": "/#options-i18n",
+      "route": "/",
+      "label": "Settings — Localization (language selection)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select interface language [LocaleSelector]",
+        "Select content language [ContentLanguagesList]"
+      ],
+      "notes": "Note ID: _optionsLocalization."
+    },
+    {
+      "id": "/#options-llm",
+      "route": "/",
+      "label": "Settings — AI / LLM (providers, models, MCP config)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enable/disable AI [toggle]",
+        "Add LLM provider [button → AddProviderModal]",
+        "Delete provider [delete icon per row]",
+        "Enable MCP [toggle]",
+        "View MCP endpoint URL"
+      ],
+      "notes": "Note ID: _optionsLlm. Experimental."
+    },
+    {
+      "id": "/#options-llm#add-provider-modal",
+      "route": "/",
+      "label": "Add LLM provider modal — choose Anthropic/OpenAI/Google",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select provider type [FormSelect]",
+        "Enter API key [FormTextBox]",
+        "Enter base URL [FormTextBox optional]",
+        "Save [button]",
+        "Cancel [button]"
+      ],
+      "notes": "Portal modal. Providers: Anthropic, OpenAI, Google Gemini."
+    },
+    {
+      "id": "/#options-advanced",
+      "route": "/",
+      "label": "Settings — Advanced (DB ops, experimental features)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Check DB integrity [button]",
+        "Find and fix consistency issues [button]",
+        "Anonymize database [button]",
+        "Download anonymized DB [link]",
+        "Vacuum database [button]",
+        "Toggle experimental features [checkboxes]"
+      ],
+      "notes": "Note ID: _optionsAdvanced."
+    },
+    {
+      "id": "/#options-security",
+      "route": "/",
+      "label": "Settings — Security (backend scripting, SQL console)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enable backend scripting [toggle]",
+        "Enable SQL console [toggle]",
+        "Configure network access"
+      ],
+      "notes": "Note ID: _optionsSecurity."
+    },
+    {
+      "id": "/#dialog-jump-to-note",
+      "route": "/",
+      "label": "Jump To Note / Command Palette dialog",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Type to search notes/commands [input]",
+        "Select result [click or Enter]",
+        "Close [Escape]"
+      ],
+      "notes": "Triggered by jumpToNote event (Ctrl+J) or commandPalette (Ctrl+/)."
+    },
+    {
+      "id": "/#dialog-revisions",
+      "route": "/",
+      "label": "Note Revisions dialog — version history browser",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse revision list [select date]",
+        "Preview revision content",
+        "Restore revision [button]",
+        "Delete revision [button]",
+        "Close dialog [× or Escape]"
+      ],
+      "notes": "Triggered by showRevisions event."
+    },
+    {
+      "id": "/#dialog-recent-changes",
+      "route": "/",
+      "label": "Recent Changes dialog — last modified notes",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse recent note changes [list]",
+        "Navigate to changed note [click]",
+        "Close dialog [×]"
+      ],
+      "notes": "Triggered by showRecentChanges event."
+    },
+    {
+      "id": "/#dialog-export",
+      "route": "/",
+      "label": "Export dialog — export note/subtree to file",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select export format [radio: HTML/Markdown/ZIP/JSON]",
+        "Choose scope [single note / subtree]",
+        "Export [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showExportDialog event."
+    },
+    {
+      "id": "/#dialog-import",
+      "route": "/",
+      "label": "Import dialog — import notes from file",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select import source [tabs: Files/Evernote/Notion/OneNote/Keep/Anytype]",
+        "Select file [file input]",
+        "Import [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showImportDialog event."
+    },
+    {
+      "id": "/#dialog-import#evernote",
+      "route": "/",
+      "label": "Import dialog — Evernote import tab",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select ENEX file [file input]",
+        "Import [button]"
+      ],
+      "notes": "Evernote ENEX format import."
+    },
+    {
+      "id": "/#dialog-import#onenote",
+      "route": "/",
+      "label": "Import dialog — OneNote import tab",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Authenticate with Microsoft [OAuth button]",
+        "Select notebook [list]",
+        "Import [button]",
+        "Disconnect [button]"
+      ],
+      "notes": "OneNote OAuth flow. Uses /api/onenote-import/* endpoints."
+    },
+    {
+      "id": "/#dialog-import#notion",
+      "route": "/",
+      "label": "Import dialog — Notion import tab",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select Notion export zip [file input]",
+        "Import [button]"
+      ],
+      "notes": "Notion HTML export import."
+    },
+    {
+      "id": "/#dialog-import#anytype",
+      "route": "/",
+      "label": "Import dialog — Anytype import tab",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select Anytype export file [file input]",
+        "Import [button]"
+      ],
+      "notes": "Anytype format import."
+    },
+    {
+      "id": "/#dialog-delete-notes",
+      "route": "/",
+      "label": "Delete Notes dialog — confirm note deletion with impact summary",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View notes to be deleted [list]",
+        "View impact (relations, attachments) [summary]",
+        "Confirm delete [button 'Delete']",
+        "Cancel [button]"
+      ],
+      "notes": "Triggered by showDeleteNotesDialog event."
+    },
+    {
+      "id": "/#dialog-bulk-actions",
+      "route": "/",
+      "label": "Bulk Actions dialog — batch operations on multiple notes",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select action type [dropdown: Add/Remove Label, Execute Script, etc.]",
+        "Configure action parameters",
+        "Execute bulk action [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by openBulkActionsDialog event."
+    },
+    {
+      "id": "/#dialog-clone-to",
+      "route": "/",
+      "label": "Clone To dialog — clone note to another parent",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Search parent note [autocomplete input]",
+        "Select parent note [result item]",
+        "Clone [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by cloneNoteIdsTo event."
+    },
+    {
+      "id": "/#dialog-move-to",
+      "route": "/",
+      "label": "Move To dialog — move note to different parent",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Search parent note [autocomplete input]",
+        "Select parent note [result item]",
+        "Move [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by moveBranchIdsTo event."
+    },
+    {
+      "id": "/#dialog-print-preview",
+      "route": "/",
+      "label": "Print Preview dialog — paginated view for printing",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Preview print layout [iframe]",
+        "Print [browser print dialog]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showPrintPreview event."
+    },
+    {
+      "id": "/#dialog-protected-session",
+      "route": "/",
+      "label": "Protected Session Password dialog — unlock encrypted notes",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter protection password [input]",
+        "Submit [button]",
+        "Cancel [button]"
+      ],
+      "notes": "Triggered by showProtectedSessionPasswordDialog event."
+    },
+    {
+      "id": "/#dialog-add-link",
+      "route": "/",
+      "label": "Add Link dialog — insert note or URL link in text",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Search for note [autocomplete input]",
+        "Or enter external URL [input]",
+        "Set link title [input]",
+        "Insert link [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showAddLinkDialog event. Used in CKEditor toolbar."
+    },
+    {
+      "id": "/#dialog-include-note",
+      "route": "/",
+      "label": "Include Note dialog — embed another note's content inline",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Search note to include [autocomplete]",
+        "Select note [result item]",
+        "Include [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showIncludeNoteDialog event."
+    },
+    {
+      "id": "/#dialog-sort-child-notes",
+      "route": "/",
+      "label": "Sort Child Notes dialog — set child note ordering",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select sort field [select: title/date modified/etc]",
+        "Select sort direction [radio: asc/desc]",
+        "Apply sort [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by sortChildNotes event."
+    },
+    {
+      "id": "/#dialog-branch-prefix",
+      "route": "/",
+      "label": "Branch Prefix dialog — set note prefix in tree",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter prefix text [input]",
+        "Save [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by editBranchPrefix event."
+    },
+    {
+      "id": "/#dialog-about",
+      "route": "/",
+      "label": "About dialog — Trilium version and info",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View version info",
+        "View credits",
+        "Close [×]"
+      ],
+      "notes": "Triggered by openAboutDialog event."
+    },
+    {
+      "id": "/#dialog-help",
+      "route": "/",
+      "label": "Keyboard Shortcuts Cheatsheet dialog",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse shortcut categories [list]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showCheatsheet event."
+    },
+    {
+      "id": "/#dialog-markdown-import",
+      "route": "/",
+      "label": "Paste Markdown dialog — paste markdown text to convert",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Paste markdown content [textarea]",
+        "Import [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showPasteMarkdownDialog event."
+    },
+    {
+      "id": "/#dialog-upload-attachments",
+      "route": "/",
+      "label": "Upload Attachments dialog — attach files to note",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Drop files or click to select [file input area]",
+        "Upload [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showUploadAttachmentsDialog event."
+    },
+    {
+      "id": "/#dialog-ocr-text",
+      "route": "/",
+      "label": "OCR Text dialog — view/extract text from image via OCR",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View extracted OCR text [textarea]",
+        "Process note OCR [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showOcrTextDialog event."
+    },
+    {
+      "id": "/#dialog-note-type-chooser",
+      "route": "/",
+      "label": "Note Type Chooser dialog — select note type when creating",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select note type from list [type list items]",
+        "Confirm [button]",
+        "Cancel [button]"
+      ],
+      "notes": "Triggered by chooseNoteType event."
+    },
+    {
+      "id": "/#dialog-link-embed",
+      "route": "/",
+      "label": "Link Embed dialog — embed URL as rich link preview",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter URL [input]",
+        "Fetch metadata [button]",
+        "Insert embed [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered by showLinkEmbedDialog event."
+    },
+    {
+      "id": "/#dialog-popup-editor",
+      "route": "/",
+      "label": "Popup Editor — quick floating editor for linked notes",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View/edit note content inline [editor]",
+        "Open in full tab [button]",
+        "Close popup [× or click outside]"
+      ],
+      "notes": "Triggered by hovering/clicking note links. Always mounted (keepInDom)."
+    },
+    {
+      "id": "/#dialog-tree-popup-editor",
+      "route": "/",
+      "label": "Tree Popup Editor — note tree view in floating popup",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Browse note tree [fancytree widget]",
+        "Select note to navigate",
+        "Close popup [×]"
+      ],
+      "notes": "Triggered by openInTreePopup event."
+    },
+    {
+      "id": "/#mobile-layout",
+      "route": "/",
+      "label": "Main app — mobile layout (note tree + note detail)",
+      "section": "Mobile",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:mobile-main",
+      "actions": [
+        "Tap note in tree [.mobile-note-navigator]",
+        "Swipe to switch panels [sidebar/detail]",
+        "Open note detail [tap note item]",
+        "Toggle sidebar [toggle button]",
+        "Open mobile menu [bottom bar menu button]"
+      ],
+      "notes": "Served when trilium-device cookie=mobile or small viewport."
+    },
+    {
+      "id": "/#mobile-tab-switcher",
+      "route": "/",
+      "label": "Mobile tab switcher modal — select open tab",
+      "section": "Mobile",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:mobile-main",
+      "actions": [
+        "Select tab [.tab-card item]",
+        "Close switcher [×]"
+      ],
+      "notes": "Opened via .mobile-tab-switcher button in launcher."
+    },
+    {
+      "id": "/#mobile-detail-menu",
+      "route": "/",
+      "label": "Mobile detail menu — note actions (mobile)",
+      "section": "Mobile",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:mobile-main",
+      "actions": [
+        "Access note actions [menu items]",
+        "Close menu [×]"
+      ],
+      "notes": "Mobile variant of note actions dropdown."
+    },
+    {
+      "id": "/share/:shareId",
+      "route": "/share/:shareId",
+      "label": "Shared note public view — no authentication required",
+      "section": "Share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Read note content",
+        "Follow internal shared note links",
+        "Browse note tree (if shareHideSingleChildParent configured)",
+        "Prev/Next navigation (if prev_next template)"
+      ],
+      "notes": "Public URL. Uses share-theme package. Password-protected sharing supported."
+    },
+    {
+      "id": "/share/",
+      "route": "/share/",
+      "label": "Share index — lists publicly shared notes",
+      "section": "Share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "Browse shared notes list",
+        "Navigate to shared note"
+      ],
+      "notes": "Only shows notes with #share label."
+    },
+    {
+      "id": "/share/:noteId/view",
+      "route": "/share/api/notes/:noteId/view",
+      "label": "Shared note embedded view (API endpoint for iframes)",
+      "section": "Share",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:share",
+      "actions": [
+        "View embedded note content"
+      ],
+      "notes": "Used for embedding shared notes in other pages."
+    },
+    {
+      "id": "/api/database/anonymized/download",
+      "route": "/api/database/anonymized/download",
+      "label": "Download anonymized database (GET, authenticated)",
+      "section": "API / Admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": null,
+      "actions": [
+        "Download anonymized SQLite DB"
+      ],
+      "notes": "Direct download endpoint. Triggered from Advanced settings."
+    },
+    {
+      "id": "/#launcher-bookmarks",
+      "route": "/",
+      "label": "Launcher bar — Bookmark buttons (quick access to pinned notes)",
+      "section": "Launcher",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Click bookmark [.launcher-button bookmark]",
+        "Right-click bookmark for context menu"
+      ],
+      "notes": "Configured in _lbBookmarks note."
+    },
+    {
+      "id": "/#launcher-today-note",
+      "route": "/",
+      "label": "Launcher — Today's Journal Note button",
+      "section": "Launcher",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Click to open/create today's journal note [TodayLauncher]"
+      ],
+      "notes": "Creates date note if not exists."
+    },
+    {
+      "id": "/#launcher-calendar",
+      "route": "/",
+      "label": "Launcher — Calendar widget (date navigation)",
+      "section": "Launcher",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Click date to navigate to journal note [CalendarWidget]",
+        "Navigate month forward/back"
+      ],
+      "notes": "Calendar popup in launcher panel."
+    },
+    {
+      "id": "/#launcher-search",
+      "route": "/",
+      "label": "Launcher — Quick Search widget",
+      "section": "Launcher",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Type to search notes [input]",
+        "Select result [result item click]"
+      ],
+      "notes": "Inline note search in launcher."
+    },
+    {
+      "id": "/#launcher-protected-session",
+      "route": "/",
+      "label": "Launcher — Protected session status widget",
+      "section": "Launcher",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Start/extend protected session [button]",
+        "End protected session [button]"
+      ],
+      "notes": "Shows lock icon; opens ProtectedSessionPassword dialog."
+    },
+    {
+      "id": "/#launcher-sync-status",
+      "route": "/",
+      "label": "Launcher — Sync status indicator",
+      "section": "Launcher",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View sync status [SyncStatus widget]",
+        "Trigger manual sync [click]"
+      ],
+      "notes": "Shows syncing spinner or last sync time."
+    },
+    {
+      "id": "/#attribute-detail",
+      "route": "/",
+      "label": "Attribute detail editor — inline attribute editing",
+      "section": "Attributes",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit attribute name [input]",
+        "Edit attribute value [input]",
+        "Toggle inheritable [checkbox]",
+        "Delete attribute [button]",
+        "Save [blur or Enter]"
+      ],
+      "notes": "Inline editor opens on clicking attribute row in OwnedAttributesTab."
+    },
+    {
+      "id": "/#find-replace",
+      "route": "/",
+      "label": "Find & Replace widget — in-note search/replace bar",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter search term [input]",
+        "Next match [button or Enter]",
+        "Previous match [button]",
+        "Enter replace term [input]",
+        "Replace [button]",
+        "Replace All [button]",
+        "Close [×]"
+      ],
+      "notes": "Appears at bottom of note on Ctrl+F / Ctrl+H."
+    },
+    {
+      "id": "/#global-menu",
+      "route": "/",
+      "label": "Global Menu — top-level app menu",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Open Options/Settings [menu item → /#dialog-options]",
+        "Open Help documentation [menu item]",
+        "Open Keyboard Shortcuts cheatsheet [menu item → /#dialog-help]",
+        "Open About [menu item → /#dialog-about]",
+        "Logout [menu item → POST /logout]",
+        "Open New Window [menu item, Electron only]",
+        "Show Shared Notes Subtree [menu item → hoisted _share subtree]",
+        "Toggle Zen Mode [menu item → /#zen-mode]",
+        "Configure Launchbar [menu item → /#dialog-tree-popup-editor with _lbRoot]",
+        "Advanced → Show Hidden Subtree [menu item]",
+        "Advanced → Show Search History [menu item]",
+        "Advanced → Open Backend Log [menu item → /#type-backend-log]",
+        "Advanced → Open SQL Console [menu item → /#type-sql-console]"
+      ],
+      "notes": "GlobalMenu button in launcher bar. Advanced submenu items target special system notes."
+    },
+    {
+      "id": "/#options-password#change-password-modal",
+      "route": "/",
+      "label": "Change Password modal — enter old and new password",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter old password [FormTextBox type=password]",
+        "Enter new password [FormTextBox type=password]",
+        "Confirm new password [FormTextBox type=password]",
+        "Submit change [button \"Change Password\"]",
+        "Cancel [button \"Cancel\"]"
+      ],
+      "notes": "Portal modal opened from Password settings via \"Change Password\" button."
+    },
+    {
+      "id": "/#options-media",
+      "route": "/",
+      "label": "Settings — Media (image compression, OCR configuration)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Toggle download images automatically [toggle]",
+        "Toggle compress images [toggle]",
+        "Set image max width/height [FormTextBoxWithUnit]",
+        "Set JPEG quality [Slider]",
+        "Configure OCR language [text input]",
+        "Configure OCR settings"
+      ],
+      "notes": "Note ID: _optionsMedia. Controls image and OCR settings."
+    },
+    {
+      "id": "/#options-other",
+      "route": "/",
+      "label": "Settings — Other (search, erasure timeouts, revisions, share, network)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Configure search settings [SearchSettings section]",
+        "Set note erasure timeout [TimeSelector]",
+        "Set attachment erasure timeout [TimeSelector]",
+        "Configure revision settings [RevisionSettings section]",
+        "Configure HTML import allowed tags [HtmlImportTags section]",
+        "Configure share settings [ShareSettings section]",
+        "Configure network settings [NetworkSettings section]"
+      ],
+      "notes": "Note ID: _optionsOther. Miscellaneous app-wide settings."
+    },
+    {
+      "id": "/#options-spellcheck",
+      "route": "/",
+      "label": "Settings — Spellcheck (browser/electron spellcheck configuration)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Toggle spellcheck enabled [FormToggle]",
+        "Select spellcheck languages [CheckboxList] (electron)",
+        "View web spellcheck note (web build)"
+      ],
+      "notes": "Note ID: _optionsSpellcheck. Electron: full language selection; web: minimal."
+    },
+    {
+      "id": "/#options-desktop",
+      "route": "/",
+      "label": "Settings — Desktop (Electron-specific: tray, window, startup)",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Toggle start minimized to tray [toggle]",
+        "Toggle minimize to tray on close [toggle]",
+        "Configure startup behavior [options]",
+        "View placeholder message (web build)"
+      ],
+      "notes": "Note ID: _optionsDesktop. Electron-only features; web shows placeholder."
+    },
+    {
+      "id": "/#dialog-import#keep",
+      "route": "/",
+      "label": "Import dialog — Google Keep import panel",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Drop or select Google Keep export ZIP [FileDropZone]",
+        "Import [button]"
+      ],
+      "notes": "Google Keep takeout ZIP format. Uses format=keep on file-import endpoint."
+    },
+    {
+      "id": "/#dialog-import#files",
+      "route": "/",
+      "label": "Import dialog — local files panel (default)",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Select files to import [FileDropZone]",
+        "Toggle safe import [checkbox]",
+        "Toggle explode archives [checkbox]",
+        "Toggle shrink images [checkbox]",
+        "Toggle text-as-text [checkbox]",
+        "Toggle code-as-code [checkbox]",
+        "Toggle spreadsheet-as-spreadsheet [checkbox]",
+        "Toggle underscores-as-spaces [checkbox]",
+        "Toggle advanced options section [collapse]",
+        "Import [button]"
+      ],
+      "notes": "Default panel (selected when dialog opens). Supports HTML, ZIP, Markdown, images."
+    },
+    {
+      "id": "/#type-backend-log",
+      "route": "/",
+      "label": "Note type — Backend Log (live server log viewer)",
+      "section": "Note Types",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "View backend server log [read-only CodeMirror]",
+        "Refresh log [Refresh button]",
+        "Download log file [Download button]",
+        "Auto-scroll to end on load"
+      ],
+      "notes": "Special note _backendLog. Rendered with BackendLog widget. Opened via Global menu → Advanced → Backend Log."
+    },
+    {
+      "id": "/#zen-mode",
+      "route": "/",
+      "label": "Zen Mode — distraction-free full-screen note editing",
+      "section": "Main App",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Edit note in distraction-free mode",
+        "Exit Zen Mode [CloseZenModeButton or menu toggle]"
+      ],
+      "notes": "CSS class 'zen' on body hides launcher bar, tree pane, and ribbon. Toggle via Global menu or keyboard shortcut."
+    },
+    {
+      "id": "/#dialog-call-to-action",
+      "route": "/",
+      "label": "Call-to-Action dialog — new feature prompts shown on startup",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Dismiss [button 'Dismiss']",
+        "Take action [CTA-specific button, e.g. 'Learn more', 'Open help']",
+        "Navigate through multiple CTAs [auto-advances]"
+      ],
+      "notes": "Auto-shown after login when new feature CTAs are undismissed. Current CTAs: 'new_layout', 'background_effects'. Dismissed state persisted in options."
+    },
+    {
+      "id": "/#dialog-password-not-set",
+      "route": "/",
+      "label": "Password Not Set dialog — warns that no protection password is configured",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Go to Password Settings [button → /#options-password]",
+        "Close [× or click outside]"
+      ],
+      "notes": "Triggered by showPasswordNotSet event when user accesses protected note feature without a password."
+    },
+    {
+      "id": "/#dialog-incorrect-cpu-arch",
+      "route": "/",
+      "label": "Incorrect CPU Architecture dialog — warns about wrong binary arch (Electron only)",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Download correct version [button → GitHub releases]",
+        "Continue anyway [button, dismisses dialog]"
+      ],
+      "notes": "Electron-only. Triggered by showCpuArchWarning event. Shows different message for macOS vs Windows."
+    },
+    {
+      "id": "/#dialog-confirm",
+      "route": "/",
+      "label": "Confirm dialog — generic OK/Cancel confirmation prompt",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Confirm [OK button]",
+        "Cancel [Cancel button or Escape]",
+        "Optional: check 'Delete note' checkbox [isConfirmDeleteNoteBox variant]"
+      ],
+      "notes": "Programmatic utility. Used by dialog.confirm(). Triggered throughout the app for destructive actions."
+    },
+    {
+      "id": "/#dialog-info",
+      "route": "/",
+      "label": "Info dialog — generic informational message modal",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Close [OK button or ×]"
+      ],
+      "notes": "Programmatic utility. Used by dialog.info(). Shows read-only messages (e.g. password changed confirmation)."
+    },
+    {
+      "id": "/#dialog-prompt",
+      "route": "/",
+      "label": "Prompt dialog — generic single-input text prompt modal",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:desktop-main",
+      "actions": [
+        "Enter text [input]",
+        "Confirm [OK button]",
+        "Cancel [Cancel button or Escape]"
+      ],
+      "notes": "Programmatic utility. Used by dialog.prompt(). Used for renaming, label entry, etc."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/login",
+      "trigger": "auto: redirect on unauthenticated request (401)",
+      "guard": "User not authenticated"
+    },
+    {
+      "from": "/login",
+      "to": "/",
+      "trigger": "button 'Login' [form submit]",
+      "guard": "Correct password entered"
+    },
+    {
+      "from": "/login",
+      "to": "/login#wrong-password",
+      "trigger": "button 'Login' [form submit]",
+      "guard": "Wrong password entered"
+    },
+    {
+      "from": "/login",
+      "to": "/login#totp-enabled",
+      "trigger": "auto: server renders TOTP field",
+      "guard": "TOTP enabled on account"
+    },
+    {
+      "from": "/login",
+      "to": "/login#sso-enabled",
+      "trigger": "auto: server renders SSO button",
+      "guard": "OpenID/OAuth configured"
+    },
+    {
+      "from": "/set-password",
+      "to": "/login",
+      "trigger": "button 'Set Password' [form submit POST /set-password]",
+      "guard": "Passwords match and meet minimum length"
+    },
+    {
+      "from": "/setup#select-language",
+      "to": "/setup#first-options",
+      "trigger": "button 'Continue'",
+      "guard": null
+    },
+    {
+      "from": "/setup#first-options",
+      "to": "/setup#create-new-document-options",
+      "trigger": "SetupOptionCard 'New Document'",
+      "guard": null
+    },
+    {
+      "from": "/setup#first-options",
+      "to": "/setup#sync-from-server",
+      "trigger": "SetupOptionCard 'Sync from Server'",
+      "guard": null
+    },
+    {
+      "from": "/setup#first-options",
+      "to": "/setup#sync-from-desktop",
+      "trigger": "SetupOptionCard 'Sync from Desktop'",
+      "guard": "Not standalone build"
+    },
+    {
+      "from": "/setup#sync-from-server",
+      "to": "/setup#sync-in-progress",
+      "trigger": "button 'Connect' [form submit]",
+      "guard": null
+    },
+    {
+      "from": "/setup#sync-in-progress",
+      "to": "/",
+      "trigger": "auto: redirect after sync finalizes",
+      "guard": "Sync completed successfully"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-options",
+      "trigger": "button .launcher-button.bx-cog [Settings launcher]",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-jump-to-note",
+      "trigger": "keyboard Ctrl+J or Ctrl+/ [jumpToNote / commandPalette]",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#note-context-menu",
+      "trigger": "right-click .fancytree-node in note tree",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#note-actions-menu",
+      "trigger": "button .note-actions [note actions dropdown]",
+      "guard": null
+    },
+    {
+      "from": "/#note-actions-menu",
+      "to": "/#dialog-revisions",
+      "trigger": "button .bx-history [Note Revisions]",
+      "guard": "Note type not launcher/doc"
+    },
+    {
+      "from": "/#note-actions-menu",
+      "to": "/#dialog-export",
+      "trigger": "menu item 'Export'",
+      "guard": null
+    },
+    {
+      "from": "/#note-actions-menu",
+      "to": "/#dialog-import",
+      "trigger": "menu item 'Import'",
+      "guard": null
+    },
+    {
+      "from": "/#note-actions-menu",
+      "to": "/#dialog-print-preview",
+      "trigger": "menu item 'Print Preview'",
+      "guard": "Note type is text/code/spreadsheet or PDF"
+    },
+    {
+      "from": "/#note-actions-menu",
+      "to": "/#dialog-delete-notes",
+      "trigger": "menu item 'Delete Note'",
+      "guard": null
+    },
+    {
+      "from": "/#note-context-menu",
+      "to": "/#dialog-clone-to",
+      "trigger": "menu item 'Clone Note To'",
+      "guard": null
+    },
+    {
+      "from": "/#note-context-menu",
+      "to": "/#dialog-move-to",
+      "trigger": "menu item 'Move Note To'",
+      "guard": null
+    },
+    {
+      "from": "/#note-context-menu",
+      "to": "/#dialog-sort-child-notes",
+      "trigger": "menu item 'Sort Child Notes'",
+      "guard": null
+    },
+    {
+      "from": "/#note-context-menu",
+      "to": "/#dialog-branch-prefix",
+      "trigger": "menu item 'Edit Branch Prefix'",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-appearance",
+      "trigger": "link .settings-navigation-item[href$=_optionsAppearance] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-shortcuts",
+      "trigger": "link .settings-navigation-item[href$=_optionsKeyboardShortcuts] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-password",
+      "trigger": "link .settings-navigation-item[href$=_optionsPassword] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-sync",
+      "trigger": "link .settings-navigation-item[href$=_optionsSync] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-etapi",
+      "trigger": "link .settings-navigation-item[href$=_optionsEtapi] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-backup",
+      "trigger": "link .settings-navigation-item[href$=_optionsBackup] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-text-notes",
+      "trigger": "link .settings-navigation-item[href$=_optionsTextNotes] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-code-notes",
+      "trigger": "link .settings-navigation-item[href$=_optionsCodeNotes] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-i18n",
+      "trigger": "link .settings-navigation-item[href$=_optionsLocalization] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-llm",
+      "trigger": "link .settings-navigation-item[href$=_optionsLlm] in sidebar",
+      "guard": "LLM experimental feature enabled"
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-advanced",
+      "trigger": "link .settings-navigation-item[href$=_optionsAdvanced] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-security",
+      "trigger": "link .settings-navigation-item[href$=_optionsSecurity] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#options-llm",
+      "to": "/#options-llm#add-provider-modal",
+      "trigger": "button 'Add Provider'",
+      "guard": null
+    },
+    {
+      "from": "/#options-llm#add-provider-modal",
+      "to": "/#options-llm",
+      "trigger": "button 'Cancel' or 'Save' in Add Provider modal",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/",
+      "trigger": "button × [close modal] or Escape",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-about",
+      "trigger": "Global menu item 'About'",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-help",
+      "trigger": "Global menu item 'Keyboard Shortcuts' or keyboard shortcut",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-recent-changes",
+      "trigger": "Global menu item 'Recent Changes' or launcher button",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-bulk-actions",
+      "trigger": "menu item 'Bulk Actions' in note context menu (multi-select)",
+      "guard": "Multiple notes selected"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-add-link",
+      "trigger": "CKEditor toolbar 'Insert link' button",
+      "guard": "Text note in edit mode"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-include-note",
+      "trigger": "CKEditor toolbar 'Include note' button",
+      "guard": "Text note in edit mode"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-markdown-import",
+      "trigger": "menu item 'Paste Markdown'",
+      "guard": "Text note in edit mode"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-upload-attachments",
+      "trigger": "button 'Upload Attachments' in note actions",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-ocr-text",
+      "trigger": "menu item 'OCR Text' for image/file notes",
+      "guard": "Note is image or file type"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-protected-session",
+      "trigger": "auto: triggered on access to protected note",
+      "guard": "Note has #protected label"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-link-embed",
+      "trigger": "CKEditor toolbar 'Embed Link' button",
+      "guard": "Text note in edit mode"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-note-type-chooser",
+      "trigger": "keyboard shortcut or menu 'Insert Child Note' (type selection)",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#find-replace",
+      "trigger": "keyboard Ctrl+F or Ctrl+H",
+      "guard": "Note type is text/code/spreadsheet"
+    },
+    {
+      "from": "/#find-replace",
+      "to": "/",
+      "trigger": "button × in find-replace-widget or Escape",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#split-pane",
+      "trigger": "button .create-pane-button [Create Pane]",
+      "guard": null
+    },
+    {
+      "from": "/#split-pane",
+      "to": "/",
+      "trigger": "button .close-pane-button [Close Pane]",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-popup-editor",
+      "trigger": "hover or Ctrl+click on note link in text",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-popup-editor",
+      "to": "/",
+      "trigger": "button × or click outside popup",
+      "guard": null
+    },
+    {
+      "from": "/#global-menu",
+      "to": "/login",
+      "trigger": "menu item 'Logout' [POST /logout]",
+      "guard": null
+    },
+    {
+      "from": "/#ribbon-basic-properties",
+      "to": "/",
+      "trigger": "tab click on other ribbon tab or collapse ribbon",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-import",
+      "to": "/#dialog-import#evernote",
+      "trigger": "tab 'Evernote' in import dialog",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-import",
+      "to": "/#dialog-import#onenote",
+      "trigger": "tab 'OneNote' in import dialog",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-import",
+      "to": "/#dialog-import#notion",
+      "trigger": "tab 'Notion' in import dialog",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-import",
+      "to": "/#dialog-import#anytype",
+      "trigger": "tab 'Anytype' in import dialog",
+      "guard": null
+    },
+    {
+      "from": "/#launcher-today-note",
+      "to": "/",
+      "trigger": "click TodayLauncher button",
+      "guard": null
+    },
+    {
+      "from": "/#launcher-protected-session",
+      "to": "/#dialog-protected-session",
+      "trigger": "button 'Start Protected Session' [lock icon]",
+      "guard": "Session not active"
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-media",
+      "trigger": "link .settings-navigation-item[href$=_optionsMedia] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-other",
+      "trigger": "link .settings-navigation-item[href$=_optionsOther] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-spellcheck",
+      "trigger": "link .settings-navigation-item[href$=_optionsSpellcheck] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-options",
+      "to": "/#options-desktop",
+      "trigger": "link .settings-navigation-item[href$=_optionsDesktop] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-import",
+      "to": "/#dialog-import#files",
+      "trigger": "SelectableCard 'Files' in import provider picker (default selected)",
+      "guard": null
+    },
+    {
+      "from": "/#dialog-import",
+      "to": "/#dialog-import#keep",
+      "trigger": "SelectableCard 'Google Keep' in import provider picker",
+      "guard": null
+    },
+    {
+      "from": "/#options-password",
+      "to": "/#options-password#totp-enroll-modal",
+      "trigger": "button 'Enroll' in TOTP settings section",
+      "guard": "TOTP not yet enabled; server build only"
+    },
+    {
+      "from": "/#options-password#totp-enroll-modal",
+      "to": "/#options-password",
+      "trigger": "button 'Cancel' or × in TOTP enrollment modal",
+      "guard": null
+    },
+    {
+      "from": "/#options-password",
+      "to": "/#options-password#change-password-modal",
+      "trigger": "button 'Change Password' in password settings",
+      "guard": null
+    },
+    {
+      "from": "/#options-password#change-password-modal",
+      "to": "/#options-password",
+      "trigger": "button 'Cancel' or × in change-password modal",
+      "guard": null
+    },
+    {
+      "from": "/#global-menu",
+      "to": "/#type-backend-log",
+      "trigger": "menu item 'Advanced → Backend Log'",
+      "guard": null
+    },
+    {
+      "from": "/#global-menu",
+      "to": "/#zen-mode",
+      "trigger": "menu item 'Toggle Zen Mode'",
+      "guard": null
+    },
+    {
+      "from": "/#zen-mode",
+      "to": "/",
+      "trigger": "CloseZenModeButton or menu 'Toggle Zen Mode' again",
+      "guard": null
+    },
+    {
+      "from": "/#global-menu",
+      "to": "/#dialog-tree-popup-editor",
+      "trigger": "menu item 'Configure Launchbar'",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-call-to-action",
+      "trigger": "auto: shown on app startup when undismissed CTAs exist",
+      "guard": "At least one undismissed call-to-action defined"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-password-not-set",
+      "trigger": "event showPasswordNotSet (accessing protected notes without password set)",
+      "guard": "User has not set a protection password"
+    },
+    {
+      "from": "/#dialog-password-not-set",
+      "to": "/#options-password",
+      "trigger": "button 'Go to Password Options'",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-incorrect-cpu-arch",
+      "trigger": "event showCpuArchWarning on app startup",
+      "guard": "Running Electron with wrong CPU architecture binary"
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-confirm",
+      "trigger": "programmatic dialog.confirm() call (various destructive actions)",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-info",
+      "trigger": "programmatic dialog.info() call (various informational events)",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#dialog-prompt",
+      "trigger": "programmatic dialog.prompt() call (various rename/input events)",
+      "guard": null
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Public / unauthenticated pages",
+        "node_ids": [
+          "/login",
+          "/login#totp-enabled",
+          "/login#wrong-password",
+          "/login#sso-enabled",
+          "/set-password",
+          "/setup",
+          "/setup#select-language",
+          "/setup#first-options",
+          "/setup#create-new-document-options",
+          "/setup#sync-from-server",
+          "/setup#sync-from-desktop",
+          "/setup#sync-in-progress",
+          "/share/:shareId",
+          "/share/",
+          "/share/:noteId/view"
+        ]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Authenticated users — main app and settings",
+        "node_ids": [
+          "/",
+          "/#note-context-menu",
+          "/#note-actions-menu",
+          "/#tab-bar",
+          "/#split-pane",
+          "/#ribbon-basic-properties",
+          "/#ribbon-owned-attributes",
+          "/#ribbon-inherited-attributes",
+          "/#ribbon-note-paths",
+          "/#ribbon-note-map",
+          "/#ribbon-similar-notes",
+          "/#ribbon-note-info",
+          "/#ribbon-search-definition",
+          "/#ribbon-collection-properties",
+          "/#ribbon-file-properties",
+          "/#ribbon-image-properties",
+          "/#ribbon-script-executor",
+          "/#ribbon-formatting-toolbar",
+          "/#type-text",
+          "/#type-code",
+          "/#type-book",
+          "/#type-image",
+          "/#type-file",
+          "/#type-mermaid",
+          "/#type-canvas",
+          "/#type-mind-map",
+          "/#type-relation-map",
+          "/#type-spreadsheet",
+          "/#type-render",
+          "/#type-llm-chat",
+          "/#type-doc",
+          "/#type-search",
+          "/#type-sql-console",
+          "/#type-web-view",
+          "/#type-protected-session",
+          "/#right-panel-toc",
+          "/#right-panel-highlights",
+          "/#right-panel-sidebar-chat",
+          "/#dialog-options",
+          "/#options-appearance",
+          "/#options-shortcuts",
+          "/#options-password",
+          "/#options-password#change-password-modal",
+          "/#options-password#totp-enroll-modal",
+          "/#options-sync",
+          "/#options-etapi",
+          "/#options-backup",
+          "/#options-text-notes",
+          "/#options-code-notes",
+          "/#options-i18n",
+          "/#options-llm",
+          "/#options-llm#add-provider-modal",
+          "/#options-advanced",
+          "/#options-security",
+          "/#options-media",
+          "/#options-other",
+          "/#options-spellcheck",
+          "/#options-desktop",
+          "/#dialog-jump-to-note",
+          "/#dialog-revisions",
+          "/#dialog-recent-changes",
+          "/#dialog-export",
+          "/#dialog-import",
+          "/#dialog-import#evernote",
+          "/#dialog-import#onenote",
+          "/#dialog-import#notion",
+          "/#dialog-import#anytype",
+          "/#dialog-import#keep",
+          "/#dialog-import#files",
+          "/#dialog-delete-notes",
+          "/#dialog-bulk-actions",
+          "/#dialog-clone-to",
+          "/#dialog-move-to",
+          "/#dialog-print-preview",
+          "/#dialog-protected-session",
+          "/#dialog-add-link",
+          "/#dialog-include-note",
+          "/#dialog-sort-child-notes",
+          "/#dialog-branch-prefix",
+          "/#dialog-about",
+          "/#dialog-help",
+          "/#dialog-markdown-import",
+          "/#dialog-upload-attachments",
+          "/#dialog-ocr-text",
+          "/#dialog-note-type-chooser",
+          "/#dialog-link-embed",
+          "/#dialog-popup-editor",
+          "/#dialog-tree-popup-editor",
+          "/#mobile-layout",
+          "/#mobile-tab-switcher",
+          "/#mobile-detail-menu",
+          "/api/database/anonymized/download",
+          "/#launcher-bookmarks",
+          "/#launcher-today-note",
+          "/#launcher-calendar",
+          "/#launcher-search",
+          "/#launcher-protected-session",
+          "/#launcher-sync-status",
+          "/#attribute-detail",
+          "/#find-replace",
+          "/#global-menu",
+          "/#type-backend-log",
+          "/#zen-mode",
+          "/#dialog-call-to-action",
+          "/#dialog-password-not-set",
+          "/#dialog-incorrect-cpu-arch",
+          "/#dialog-confirm",
+          "/#dialog-info",
+          "/#dialog-prompt"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:auth",
+        "label": "Auth layout — centered form on minimal page (server-rendered EJS)",
+        "node_ids": [
+          "/login",
+          "/login#totp-enabled",
+          "/login#wrong-password",
+          "/login#sso-enabled",
+          "/set-password"
+        ]
+      },
+      {
+        "id": "layout:setup",
+        "label": "Setup wizard layout — client-rendered Preact slides",
+        "node_ids": [
+          "/setup",
+          "/setup#select-language",
+          "/setup#first-options",
+          "/setup#create-new-document-options",
+          "/setup#sync-from-server",
+          "/setup#sync-from-desktop",
+          "/setup#sync-in-progress"
+        ]
+      },
+      {
+        "id": "layout:desktop-main",
+        "label": "Desktop app layout — launcher + tree + note area + ribbon + right panel",
+        "node_ids": [
+          "/",
+          "/#note-context-menu",
+          "/#note-actions-menu",
+          "/#tab-bar",
+          "/#split-pane",
+          "/#ribbon-basic-properties",
+          "/#ribbon-owned-attributes",
+          "/#ribbon-inherited-attributes",
+          "/#ribbon-note-paths",
+          "/#ribbon-note-map",
+          "/#ribbon-similar-notes",
+          "/#ribbon-note-info",
+          "/#ribbon-search-definition",
+          "/#ribbon-collection-properties",
+          "/#ribbon-file-properties",
+          "/#ribbon-image-properties",
+          "/#ribbon-script-executor",
+          "/#ribbon-formatting-toolbar",
+          "/#type-text",
+          "/#type-code",
+          "/#type-book",
+          "/#type-image",
+          "/#type-file",
+          "/#type-mermaid",
+          "/#type-canvas",
+          "/#type-mind-map",
+          "/#type-relation-map",
+          "/#type-spreadsheet",
+          "/#type-render",
+          "/#type-llm-chat",
+          "/#type-doc",
+          "/#type-search",
+          "/#type-sql-console",
+          "/#type-web-view",
+          "/#type-protected-session",
+          "/#right-panel-toc",
+          "/#right-panel-highlights",
+          "/#right-panel-sidebar-chat",
+          "/#dialog-options",
+          "/#options-appearance",
+          "/#options-shortcuts",
+          "/#options-password",
+          "/#options-sync",
+          "/#options-etapi",
+          "/#options-backup",
+          "/#options-text-notes",
+          "/#options-code-notes",
+          "/#options-i18n",
+          "/#options-llm",
+          "/#options-llm#add-provider-modal",
+          "/#options-advanced",
+          "/#options-security",
+          "/#dialog-jump-to-note",
+          "/#dialog-revisions",
+          "/#dialog-recent-changes",
+          "/#dialog-export",
+          "/#dialog-import",
+          "/#dialog-import#evernote",
+          "/#dialog-import#onenote",
+          "/#dialog-import#notion",
+          "/#dialog-import#anytype",
+          "/#dialog-delete-notes",
+          "/#dialog-bulk-actions",
+          "/#dialog-clone-to",
+          "/#dialog-move-to",
+          "/#dialog-print-preview",
+          "/#dialog-protected-session",
+          "/#dialog-add-link",
+          "/#dialog-include-note",
+          "/#dialog-sort-child-notes",
+          "/#dialog-branch-prefix",
+          "/#dialog-about",
+          "/#dialog-help",
+          "/#dialog-markdown-import",
+          "/#dialog-upload-attachments",
+          "/#dialog-ocr-text",
+          "/#dialog-note-type-chooser",
+          "/#dialog-link-embed",
+          "/#dialog-popup-editor",
+          "/#dialog-tree-popup-editor",
+          "/#launcher-bookmarks",
+          "/#launcher-today-note",
+          "/#launcher-calendar",
+          "/#launcher-search",
+          "/#launcher-protected-session",
+          "/#launcher-sync-status",
+          "/#attribute-detail",
+          "/#find-replace",
+          "/#global-menu",
+          "/#options-password#change-password-modal",
+          "/#options-password#totp-enroll-modal",
+          "/#options-media",
+          "/#options-other",
+          "/#options-spellcheck",
+          "/#options-desktop",
+          "/#dialog-import#keep",
+          "/#dialog-import#files",
+          "/#type-backend-log",
+          "/#zen-mode",
+          "/#dialog-call-to-action",
+          "/#dialog-password-not-set",
+          "/#dialog-incorrect-cpu-arch",
+          "/#dialog-confirm",
+          "/#dialog-info",
+          "/#dialog-prompt"
+        ]
+      },
+      {
+        "id": "layout:mobile-main",
+        "label": "Mobile app layout — swipeable sidebar + detail panels",
+        "node_ids": [
+          "/#mobile-layout",
+          "/#mobile-tab-switcher",
+          "/#mobile-detail-menu"
+        ]
+      },
+      {
+        "id": "layout:share",
+        "label": "Share theme layout — public read-only note viewer",
+        "node_ids": [
+          "/share/:shareId",
+          "/share/",
+          "/share/:noteId/view"
+        ]
+      }
+    ]
+  }
+}

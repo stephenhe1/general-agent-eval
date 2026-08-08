@@ -1,0 +1,1660 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Altair GraphQL Client",
+    "base_url": "http://localhost:3022",
+    "framework": "Angular SPA (NgRx state management, no URL routing)",
+    "total_states": 59,
+    "explored": 59,
+    "skipped": 0,
+    "verified_live": [
+      "/",
+      "/#loading",
+      "/#query-editor",
+      "/#query-editor#variables-open",
+      "/#pre-request-tab",
+      "/#post-request-tab",
+      "/#authorization-tab",
+      "/#result-empty",
+      "/#result-headers",
+      "/#collections-panel",
+      "/#headers-dialog",
+      "/#settings-dialog",
+      "/#settings-dropdown",
+      "/#http-verb-dropdown"
+    ],
+    "live_verification_results": "10/10 checks passed. All core states verified against running app at localhost:3022.",
+    "notes": "Single-page app — all states live at route '/'. Sub-states use '#qualifier' IDs."
+  },
+  "nodes": [
+    {
+      "id": "/#loading",
+      "route": "/",
+      "label": "App loading screen with Altair logo and animated dots",
+      "section": "App Shell",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:none",
+      "actions": [],
+      "notes": "Shown while NgRx store bootstraps; replaced by main IDE once isReady=true"
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Main GraphQL IDE — URL box, query editor, result pane, side menu",
+      "section": "App Shell",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Set Headers' in side menu [aria-label='Set Headers']",
+        "Click 'Request Handlers' in side menu [aria-label='Request Handlers']",
+        "Click 'History' in side menu [aria-label='History']",
+        "Click 'Request Extensions' in side menu [aria-label='Request Extensions']",
+        "Click 'Prettify' in side submenu [aria-label='Prettify']",
+        "Click 'Compress Query' in side submenu [aria-label='Compress Query']",
+        "Click 'Clear' in side submenu [aria-label='Clear']",
+        "Click 'Copy as cURL' in side submenu [aria-label='Copy as cURL']",
+        "Click 'Convert to Named Query' in side submenu [aria-label='Convert to Named Query']",
+        "Click 'Refactor Query' in side submenu [aria-label='Refactor Query']",
+        "Click 'Collections' in side menu [aria-label='Collections']",
+        "Click 'Account' in side menu [aria-label='Account'] (when auth enabled)",
+        "Click 'Plugins' in side menu [aria-label='Plugins'] (when experimental enabled)",
+        "Click '+' tab to create new window [.window-switcher__item last]",
+        "Type URL in URL input [track-id=set_url]",
+        "Click HTTP method button [track-id=http_verb]",
+        "Click 'Send Request' button [track-id=set_request]",
+        "Click 'Docs' button [track-id=show_docs]",
+        "Click reload docs button [track-id=reload_docs]",
+        "Click 'Save to collection' button [track-id=save_to_collection]",
+        "Click 'Export window' button [track-id=export_window]",
+        "Click settings gear icon in header [.header__actions .header__menu-item:last-child]",
+        "Click environment selector in header [.header__menu-item nz-dropdown]",
+        "Right-click window tab for context menu",
+        "Drag window tabs to reorder [cdkDrag]",
+        "Drop file onto window [appFileDrop]"
+      ],
+      "notes": "Web app shows WHATWG disclaimer banner. Sidebar collapses plugin panels."
+    },
+    {
+      "id": "/#query-editor",
+      "route": "/",
+      "label": "Query editor pane — Query tab active, CodeMirror editor, variables collapsed",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Type GraphQL query in editor [.query-editor__input]",
+        "Click 'Variables' toggle to expand panel [track-id=toggle_variables]",
+        "Click 'Pre-Request' tab [nz-tab 'Pre-Request']",
+        "Click 'Post-Request' tab [nz-tab 'Post-Request']",
+        "Click 'Authorization' tab [nz-tab 'Authorization']",
+        "Press keyboard shortcut to send request",
+        "Press keyboard shortcut to prettify"
+      ],
+      "notes": "Default tab when a window is opened. CodeMirror with GQL schema hints."
+    },
+    {
+      "id": "/#query-editor#variables-open",
+      "route": "/",
+      "label": "Query editor — Query tab, variables/files panel expanded below editor",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Edit variables JSON [app-variables-editor]",
+        "Click 'Add Files' button [track-id=add_file_variable]",
+        "Click file variable item to set file [app-variable-file-item]",
+        "Delete a file variable",
+        "Drag resize handle to resize variables panel [mwlResizeHandle]",
+        "Click 'Variables' toggle to collapse panel [track-id=toggle_variables]"
+      ],
+      "notes": "Variables panel appears below editor when toggled; can include file uploads."
+    },
+    {
+      "id": "/#pre-request-tab",
+      "route": "/",
+      "label": "Query editor — Pre-Request tab: script editor with enable toggle",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Toggle pre-request script enable checkbox [nz-checkbox preRequestEnabled]",
+        "Edit pre-request script in CodeMirror [app-codemirror]",
+        "Click 'Learn more' link [aria-label='learn more']",
+        "Click 'Query' tab [nz-tab 'Query']",
+        "Click 'Post-Request' tab [nz-tab 'Post-Request']",
+        "Click 'Authorization' tab [nz-tab 'Authorization']"
+      ],
+      "notes": "Tab label has status dot when script is enabled. Uses sandboxed web worker."
+    },
+    {
+      "id": "/#post-request-tab",
+      "route": "/",
+      "label": "Query editor — Post-Request tab: post-request script editor",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Toggle post-request script enable checkbox",
+        "Edit post-request script in CodeMirror",
+        "Click 'Query' tab",
+        "Click 'Pre-Request' tab",
+        "Click 'Authorization' tab"
+      ],
+      "notes": "Mirror of pre-request tab for post-processing responses."
+    },
+    {
+      "id": "/#authorization-tab",
+      "route": "/",
+      "label": "Query editor — Authorization tab: auth type selector, no auth selected",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Select auth type from dropdown [nz-select type]",
+        "Click 'Query' tab",
+        "Click 'Pre-Request' tab",
+        "Click 'Post-Request' tab"
+      ],
+      "notes": "Auth types: none, api-key, basic, bearer, oauth2. Tab has status dot when enabled."
+    },
+    {
+      "id": "/#authorization-tab#api-key",
+      "route": "/",
+      "label": "Authorization tab — API Key form: key name and value inputs",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter API key header/param name",
+        "Enter API key value",
+        "Select 'Add to' position (Header or Query Param)",
+        "Switch auth type in dropdown"
+      ],
+      "notes": "Form appears after selecting 'API Key' from auth type dropdown."
+    },
+    {
+      "id": "/#authorization-tab#basic",
+      "route": "/",
+      "label": "Authorization tab — Basic Auth form: username and password inputs",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter username",
+        "Enter password",
+        "Switch auth type in dropdown"
+      ],
+      "notes": "Basic auth encodes credentials as Base64 in Authorization header."
+    },
+    {
+      "id": "/#authorization-tab#bearer",
+      "route": "/",
+      "label": "Authorization tab — Bearer Token form: token input",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter bearer token",
+        "Switch auth type in dropdown"
+      ],
+      "notes": "Sets Authorization: Bearer <token> header."
+    },
+    {
+      "id": "/#authorization-tab#oauth2",
+      "route": "/",
+      "label": "Authorization tab — OAuth2 form: grant type and client credentials",
+      "section": "Query Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Select OAuth2 grant type (Authorization Code, Auth Code + PKCE, Client Credentials)",
+        "Enter Client ID",
+        "Enter Client Secret",
+        "Enter Authorization URL",
+        "Enter Token URL",
+        "Enter Scope",
+        "Click 'Get Token' / authorize button",
+        "Switch auth type in dropdown"
+      ],
+      "notes": "Grant type changes visible fields. Triggers OAuth2 redirect flow."
+    },
+    {
+      "id": "/#result-empty",
+      "route": "/",
+      "label": "Result pane — empty state: placeholder art and 'no results' text",
+      "section": "Query Result",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Result' tab [nz-tab 'Result']",
+        "Click 'Response Headers' tab [nz-tab 'Response Headers']",
+        "Click 'Cancel' button if request is loading [btn--destructive cancelRequestChange]"
+      ],
+      "notes": "Shows tips component (contextual hints). Cancel appears during loading."
+    },
+    {
+      "id": "/#result-response",
+      "route": "/",
+      "label": "Result pane — with response: status code, time, JSON result in CodeMirror",
+      "section": "Query Result",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Clear' button [track-id=clear_result]",
+        "Click 'Download' button [track-id=download_result]",
+        "Click plugin UI actions on result if any [uiActionExecuteChange]",
+        "Click 'Result' tab",
+        "Click 'Response Headers' tab"
+      ],
+      "notes": "Multiple responses shown as list (for subscriptions). Each has its own download."
+    },
+    {
+      "id": "/#result-response#subscribed",
+      "route": "/",
+      "label": "Result pane — active subscription: streaming responses, subscription URL shown",
+      "section": "Query Result",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Toggle autoscroll [track-id=autoscroll]",
+        "Click 'Cancel' button to stop subscription",
+        "Download any individual response",
+        "Click 'Result' tab",
+        "Click 'Response Headers' tab",
+        "Click 'Script Logs' tab (if logs exist)"
+      ],
+      "notes": "Subscription URL shown. Autoscroll toggle visible when responses > 1."
+    },
+    {
+      "id": "/#result-script-logs",
+      "route": "/",
+      "label": "Result pane — Script Logs tab: timestamped log entries from request scripts",
+      "section": "Query Result",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Result' tab",
+        "Click 'Response Headers' tab"
+      ],
+      "notes": "Tab only visible when requestScriptLogs has entries."
+    },
+    {
+      "id": "/#result-headers",
+      "route": "/",
+      "label": "Result pane — Response Headers tab: name/value table of response headers",
+      "section": "Query Result",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Result' tab",
+        "Click 'Script Logs' tab (if available)",
+        "View response header values (read-only table)"
+      ],
+      "notes": "Note shown that more headers are visible in desktop/extension apps."
+    },
+    {
+      "id": "/#result-bottom-panel",
+      "route": "/",
+      "label": "Result pane — bottom panel open (plugin-provided panels below result)",
+      "section": "Query Result",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Toggle bottom panel tabs [bottomPanelActiveToggle]",
+        "Drag resize handle to resize bottom panel [mwlResizeHandle]",
+        "Close bottom panel"
+      ],
+      "notes": "Plugin-provided bottom panels appear when plugins add panel contributions."
+    },
+    {
+      "id": "/#docs-closed",
+      "route": "/",
+      "label": "Docs panel hidden — result pane takes full right-side width",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Docs' button to open docs [track-id=show_docs]",
+        "Click 'Reload Docs' to load schema and open docs [track-id=reload_docs]"
+      ],
+      "notes": "Default state. Docs button active=false."
+    },
+    {
+      "id": "/#docs-root",
+      "route": "/",
+      "label": "Docs panel open — root view: schema types overview, search input",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Search docs [input.input in doc-viewer-search-wrapper]",
+        "Click on a type to navigate to type view",
+        "Click on a field to navigate to field view",
+        "Open doc viewer options menu [icon more-horizontal in nav]",
+        "Click 'Close' (X) button [icon x in doc-viewer-navigation--right]",
+        "Click 'Add to editor' button on a field [DOCS_ADD_QUERY_TEXT]"
+      ],
+      "notes": "Shown when schema has been loaded. Autocomplete suggestions in search."
+    },
+    {
+      "id": "/#docs-type",
+      "route": "/",
+      "label": "Docs panel — type detail view: fields, arguments, description for a type",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click back arrow [icon arrow-left track-id=go_back_docs]",
+        "Click home icon [icon home]",
+        "Click breadcrumb link to navigate back",
+        "Click a field name to go to field view",
+        "Click a linked type to go to another type view",
+        "Click 'Add to editor' for a field",
+        "Search docs",
+        "Open doc viewer options menu",
+        "Click 'Close' (X) button"
+      ],
+      "notes": "Breadcrumbs show navigation path. Back button shows when history exists."
+    },
+    {
+      "id": "/#docs-field",
+      "route": "/",
+      "label": "Docs panel — field detail view: type, arguments, description for a field",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click back arrow",
+        "Click home icon",
+        "Click breadcrumb link",
+        "Click field type link",
+        "Click argument type link",
+        "Click 'Add to editor'",
+        "Search docs",
+        "Close docs panel"
+      ],
+      "notes": "Shows parent type, deprecation notices if any."
+    },
+    {
+      "id": "/#docs-directive",
+      "route": "/",
+      "label": "Docs panel — directive detail view: directive usage and arguments",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click back arrow",
+        "Click home icon",
+        "Click breadcrumb link",
+        "Click argument type link",
+        "Search docs",
+        "Close docs panel"
+      ],
+      "notes": "Reached by clicking a directive in docs root."
+    },
+    {
+      "id": "/#docs-search",
+      "route": "/",
+      "label": "Docs panel — search results view: filtered fields/types matching query",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click a search result to navigate to type/field view",
+        "Click back arrow",
+        "Filter search results by type (query/mutation/subscription/field)",
+        "Clear search",
+        "Close docs panel"
+      ],
+      "notes": "Search filters appear when view=search. Autocomplete dropdown on input."
+    },
+    {
+      "id": "/#docs-options-menu",
+      "route": "/",
+      "label": "Docs panel — options dropdown: Export SDL, Load Schema options",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Export SDL' [nz-menu-item exportSDL]",
+        "Click 'Load Schema...' [nz-menu-item loadSchemaChange]",
+        "Dismiss dropdown by clicking elsewhere"
+      ],
+      "notes": "Opened from more-horizontal icon in doc viewer navigation."
+    },
+    {
+      "id": "/#headers-dialog",
+      "route": "/",
+      "label": "Request Headers modal: key-value table to set HTTP headers for request",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Add a header row [addHeaderChange]",
+        "Edit header key [headerKeyChange]",
+        "Edit header value [headerValueChange]",
+        "Toggle header enabled checkbox [headerEnabledChange]",
+        "Remove a header row [removeHeaderChange]",
+        "Click 'Done' button [btn--primary toggleHeader]",
+        "Click X (close icon) on modal"
+      ],
+      "notes": "Modal opened from side menu 'Set Headers' item."
+    },
+    {
+      "id": "/#request-handler-dialog",
+      "route": "/",
+      "label": "Request Handler modal: transport type, connection params, subscription URL",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Select request handler from dropdown [nz-select requestHandlerId]",
+        "Edit handler additional params JSON [app-codemirror connectionParamsExtensions]",
+        "Edit subscription URL [app-x-input subscriptionUrl]",
+        "Toggle 'Use default request handler for subscriptions' [nz-switch]",
+        "Select subscription request handler [nz-select subscriptionRequestHandlerId]",
+        "Close dialog [toggleDialogChange]"
+      ],
+      "notes": "Opened from side menu 'Request Handlers'. Configures ws/http transport."
+    },
+    {
+      "id": "/#history-dialog",
+      "route": "/",
+      "label": "Request History modal: chronological list of past queries",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Click a history item to restore it [.history-item click]",
+        "Click 'Clear History' button [track-id=clear_history_items]",
+        "Click 'Done' button [track-id=close_history_dialog]",
+        "Close modal"
+      ],
+      "notes": "Opened from side menu 'History'. Shows query strings as list items."
+    },
+    {
+      "id": "/#request-extensions-dialog",
+      "route": "/",
+      "label": "Request Extensions modal: JSON editor for request extensions object",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit extensions JSON in CodeMirror [app-codemirror dataChange]",
+        "Close dialog [toggleDialogChange]"
+      ],
+      "notes": "Opened from side menu 'Request Extensions'. Sends data in extensions field."
+    },
+    {
+      "id": "/#settings-dialog",
+      "route": "/",
+      "label": "Settings modal — Form view: schema-driven settings form",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit settings fields via form [app-schema-form]",
+        "Expand 'Keyboard Shortcuts' section [nz-collapse-panel]",
+        "Click 'Toggle Advanced Mode' link to switch to JSON editor",
+        "Click 'Reset Application Data' link [track-id=reset_application_data]",
+        "Close settings [toggleDialogChange]"
+      ],
+      "notes": "Opened from header settings menu. Form mode is default."
+    },
+    {
+      "id": "/#settings-dialog#advanced",
+      "route": "/",
+      "label": "Settings modal — Advanced/JSON view: raw JSON settings editor",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit settings JSON in CodeMirror [app-codemirror settings-editor-textarea]",
+        "Click link to 'available settings options' (external docs)",
+        "Click 'Toggle Advanced Mode' link to switch back to form view",
+        "Close settings"
+      ],
+      "notes": "Advanced mode shows raw JSON; link to docs.altairgraphql.dev."
+    },
+    {
+      "id": "/#import-curl-dialog",
+      "route": "/",
+      "label": "Import from cURL modal: textarea for pasting curl command",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Paste/type cURL command in textarea [dialog-textarea]",
+        "Click 'Import' button [track-id=close_import_from_curl_dialog]",
+        "Close modal"
+      ],
+      "notes": "Opened from header settings dropdown. Parses curl into new window."
+    },
+    {
+      "id": "/#environment-manager",
+      "route": "/",
+      "label": "Environment Manager modal — base environment JSON editor",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit base environment JSON [app-codemirror environments-editor-textarea]",
+        "Click 'Add Sub Environment' button [addSubEnvironmentChange]",
+        "Click 'Import' button to import environment [importEnvironmentChange]",
+        "Click a sub-environment to select it",
+        "Click 'Save' button [track-id=save_environments]",
+        "Close modal"
+      ],
+      "notes": "Base environment always present. Left panel lists environments."
+    },
+    {
+      "id": "/#environment-manager#sub-env",
+      "route": "/",
+      "label": "Environment Manager modal — sub-environment selected: titled JSON editor",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit sub-environment title [environment-manager__editor-meta-input]",
+        "Edit sub-environment JSON",
+        "Click 'Export' button [icon file-down]",
+        "Click 'Delete' button (destructive) [icon trash-2]",
+        "Click 'Add Sub Environment'",
+        "Select another sub-environment or base env",
+        "Drag to reorder sub-environments [cdkDropList]",
+        "Click 'Save'"
+      ],
+      "notes": "Title/export/delete controls appear only for sub-environments."
+    },
+    {
+      "id": "/#plugin-manager",
+      "route": "/",
+      "label": "Plugin Manager modal — list of remote plugins (experimental feature)",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Click a plugin in list to select it [.plugin-manager__list-item click]",
+        "Click 'Find more plugins on npm' link [external link]",
+        "Click 'Create Plugin' link [btn left]",
+        "Click 'Save' to close [toggleDialogChange]"
+      ],
+      "notes": "Only visible when settings.enableExperimental=true. Empty selection = no details."
+    },
+    {
+      "id": "/#plugin-manager#selected",
+      "route": "/",
+      "label": "Plugin Manager modal — plugin selected: name, description, install/remove button",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Click 'Add Plugin' to install [icon plus-circle]",
+        "Click 'Remove Plugin' to uninstall [icon x-circle]",
+        "Click 'Restart App' if restart required",
+        "Deselect plugin by clicking another",
+        "Close modal"
+      ],
+      "notes": "Shows markdown description. Restart required after install/remove."
+    },
+    {
+      "id": "/#add-to-collection-dialog",
+      "route": "/",
+      "label": "Add to Collection modal: name input, collection selector dropdown",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Enter query name [data-test-id=collection-query-name]",
+        "Select existing collection from dropdown [nz-select collectionId]",
+        "Select 'Create New Collection' option",
+        "Click 'Save' button [saveChange emit]",
+        "Close modal"
+      ],
+      "notes": "Opened from URL box 'Save to collection' button."
+    },
+    {
+      "id": "/#add-to-collection-dialog#new-collection",
+      "route": "/",
+      "label": "Add to Collection modal — creating new collection: name + parent + workspace fields",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Enter query name",
+        "Enter new collection name [data-test-id=new-collection-name]",
+        "Select parent collection via tree-select [nz-tree-select]",
+        "Select workspace (if logged in and no parent) [nz-select workspace]",
+        "Click 'Save'",
+        "Close modal"
+      ],
+      "notes": "Workspace selector only shows when logged in and no parent collection set."
+    },
+    {
+      "id": "/#edit-collection-dialog",
+      "route": "/",
+      "label": "Edit Collection modal — Pre-Request tab: collection pre-request script",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit collection title [input collection title]",
+        "Toggle pre-request enable/disable",
+        "Edit pre-request script",
+        "Click 'Post-Request' tab",
+        "Click 'Environments' tab",
+        "Click 'Headers' tab",
+        "Click 'Save' button [track-id='']",
+        "Close modal"
+      ],
+      "notes": "Opened from collection item 'Edit' menu. Default tab is Pre-Request."
+    },
+    {
+      "id": "/#edit-collection-dialog#post-request",
+      "route": "/",
+      "label": "Edit Collection modal — Post-Request tab: collection post-request script",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Toggle post-request enable/disable",
+        "Edit post-request script",
+        "Navigate to other tabs",
+        "Click 'Save'"
+      ],
+      "notes": "Tab within edit-collection modal."
+    },
+    {
+      "id": "/#edit-collection-dialog#environments",
+      "route": "/",
+      "label": "Edit Collection modal — Environments tab: collection-scoped env variables JSON",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit environment variables JSON [app-codemirror environments-editor-textarea]",
+        "Navigate to other tabs",
+        "Click 'Save'"
+      ],
+      "notes": "Collection-level env vars override global environments."
+    },
+    {
+      "id": "/#edit-collection-dialog#headers",
+      "route": "/",
+      "label": "Edit Collection modal — Headers tab: collection-level HTTP headers",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Add/edit/remove collection headers [app-headers-editor]",
+        "Navigate to other tabs",
+        "Click 'Save'"
+      ],
+      "notes": "Collection headers applied to all queries in the collection."
+    },
+    {
+      "id": "/#account-dialog#logged-out",
+      "route": "/",
+      "label": "Account modal — not logged in: login prompt with Google and GitHub buttons",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:modal",
+      "actions": [
+        "Click 'Sign in with Google' [btn--bordered Google]",
+        "Click 'Sign in with GitHub' [btn--bordered GitHub]",
+        "Click 'Learn more' link (cloud docs)",
+        "Close modal [toggleDialogChange]"
+      ],
+      "notes": "Only visible when auth is enabled (serverReady && authEnabled)."
+    },
+    {
+      "id": "/#account-dialog#logged-in",
+      "route": "/",
+      "label": "Account modal — logged in: avatar, welcome, plan stats, billing link",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "Click 'Billing' link [link external-link]",
+        "Click 'Upgrade plan' button (if canUpgradePro) [btn--primary sparkles]",
+        "Click 'Buy Credits' button [btn--primary coins]",
+        "Click 'Logout' button [btn logoutChange]",
+        "Close modal"
+      ],
+      "notes": "Shows plan stats: query count, team count, credits. Buy Credits disabled for Pro."
+    },
+    {
+      "id": "/#teams-dialog",
+      "route": "/",
+      "label": "Teams modal — teams list: names, members/edit/delete actions per team",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "Click team 'Members' icon to view members [icon list]",
+        "Click team 'Edit' icon [icon edit]",
+        "Click team 'Delete' icon [icon trash-2]",
+        "Click 'Create Team' button [btn--full-width onCreateTeam]",
+        "Reload teams [reloadTeamChange]",
+        "Close modal"
+      ],
+      "notes": "Accessed from Account submenu when logged in."
+    },
+    {
+      "id": "/#teams-dialog#members",
+      "route": "/",
+      "label": "Teams modal — team members view: list of members for selected team",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "View team members list",
+        "Add a team member (if UI available)",
+        "Remove a team member",
+        "Go back to teams list"
+      ],
+      "notes": "Shown by clicking members icon on a team row."
+    },
+    {
+      "id": "/#teams-dialog#create-team",
+      "route": "/",
+      "label": "Teams modal — Create Team form: team name input with submit",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "Enter team name in form [formGroup teamForm]",
+        "Submit form [onSubmitTeamForm]",
+        "Cancel/close form [showTeamForm.set(false)]"
+      ],
+      "notes": "Shown as nested dialog when Create Team button clicked."
+    },
+    {
+      "id": "/#teams-dialog#edit-team",
+      "route": "/",
+      "label": "Teams modal — Edit Team form: team name pre-filled for update",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "Edit team name",
+        "Submit update [onSubmitTeamForm]",
+        "Cancel/close form"
+      ],
+      "notes": "Same form as create-team but with editTeamId set."
+    },
+    {
+      "id": "/#upgrade-dialog",
+      "route": "/",
+      "label": "Upgrade to Pro modal: pricing, features list, upgrade CTA button",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "Click 'Upgrade to Pro' button [btn--primary openUpgradeProUrl]",
+        "Close modal [toggleDialogChange]"
+      ],
+      "notes": "Shows price per user/interval from API. Only for users with canUpgradePro."
+    },
+    {
+      "id": "/#query-revision-dialog",
+      "route": "/",
+      "label": "Query Revisions modal: timestamped revision history with restore actions",
+      "section": "Dialogs",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:modal",
+      "actions": [
+        "Click 'Restore' on a revision [btn restoreRevision]",
+        "Close modal [toggleDialogChange]"
+      ],
+      "notes": "Opened from query item context menu in Collections panel."
+    },
+    {
+      "id": "/#collections-panel",
+      "route": "/",
+      "label": "Collections sidebar panel — open: list of collections with queries",
+      "section": "Collections",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Import' button [data-test-id=import-collection]",
+        "Click 'Sync' button (if logged in) [data-test-id=sync-collection]",
+        "Click 'Search' toggle button [data-test-id=search-collection]",
+        "Click sort dropdown button [.query-collections__actions--right button]",
+        "Select workspace filter [nz-select workspaceId]",
+        "Click a collection to expand/collapse it [query-collections__item-details]",
+        "Click a query to open it [query-collections__item-queries-item]",
+        "Click collection '...' menu [nz-dropdown collectionItemMenu]",
+        "Click query '...' menu [nz-dropdown collectionQueryItemMenu]",
+        "Click side menu 'Collections' to close panel [aria-label=Collections]"
+      ],
+      "notes": "Slides in from left side. Empty state shows prompt text."
+    },
+    {
+      "id": "/#collections-panel#search",
+      "route": "/",
+      "label": "Collections sidebar — search active: search input visible, filtered list",
+      "section": "Collections",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Type in search input to filter collections [input placeholder=Search]",
+        "Click Search toggle to close search",
+        "All other collections panel actions"
+      ],
+      "notes": "Search input toggled by search button; filters collectionTrees."
+    },
+    {
+      "id": "/#tab-context-menu",
+      "route": "/",
+      "label": "Window tab context menu: edit name, duplicate, close, reopen options",
+      "section": "Window Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Edit Window' to rename tab [icon edit editWindowNameInput]",
+        "Click 'Duplicate Window' [icon copy duplicateWindow]",
+        "Click 'Close Window' (if multiple windows) [icon x-square]",
+        "Click 'Close Windows to the Right' [icon circle]",
+        "Click 'Close Other Windows' [icon circle]",
+        "Click 'Reopen Closed Tab' (if any closed) [icon plus-square]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Right-click on any window tab. Close options conditional on count/closed list."
+    },
+    {
+      "id": "/#window-tab-rename",
+      "route": "/",
+      "label": "Window tab in rename mode: contenteditable tab title input",
+      "section": "Window Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Type new window name [contenteditable div]",
+        "Press Enter to save [keydown.enter saveWindowNameChange]",
+        "Click away (blur) to save [blur saveWindowNameChange]"
+      ],
+      "notes": "Triggered from context menu 'Edit Window' or double-click on tab."
+    },
+    {
+      "id": "/#environments-dropdown",
+      "route": "/",
+      "label": "Environments dropdown in header: list of sub-environments, 'Manage Environments'",
+      "section": "Header",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click a sub-environment to activate it [nz-menu-item environment.id]",
+        "Click 'No Environment' to deactivate [nz-menu-item undefined]",
+        "Click 'Environments...' to open Environment Manager [nz-menu-item toggleEnvironmentManager]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Sub-environments only shown if any exist. Always has 'Environments...' option."
+    },
+    {
+      "id": "/#settings-dropdown",
+      "route": "/",
+      "label": "Settings dropdown in header: import/export/settings/GitHub/bug links",
+      "section": "Header",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Import Window' [nz-menu-item importWindowChange]",
+        "Click 'Import Window From cURL' [nz-menu-item showImportCurlDialogChange]",
+        "Click 'Settings' [nz-menu-item showSettingsDialogChange]",
+        "Click 'Star on GitHub' [nz-menu-item external link]",
+        "Click 'Report Bug' [nz-menu-item external link GitHub issues]",
+        "Click 'Export Backup Data' [nz-menu-item exportBackupDataChange]",
+        "Click 'Import Backup Data' [nz-menu-item importBackupDataChange]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Opened from gear icon in header right area."
+    },
+    {
+      "id": "/#http-verb-dropdown",
+      "route": "/",
+      "label": "HTTP method dropdown in URL box: GET, POST, PUT, DELETE, etc.",
+      "section": "URL Box",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click a method to set it [nz-menu-item method setVerb]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Defaults to POST. Methods array includes standard HTTP verbs."
+    },
+    {
+      "id": "/#operations-dropdown",
+      "route": "/",
+      "label": "Operations dropdown (Send button): select which named operation to run",
+      "section": "URL Box",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click an operation name to select and run it [nz-menu-item operation]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Only appears when query has >1 named operations."
+    },
+    {
+      "id": "/#collection-item-menu",
+      "route": "/",
+      "label": "Collection item context menu: Sync, Edit, Delete, Export collection",
+      "section": "Collections",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Sync Collection' (if logged in, not already synced) [data-test-id=sync-collection]",
+        "Click 'Edit Collection' [data-test-id=edit-collection]",
+        "Click 'Delete Collection' [data-test-id=delete-collection]",
+        "Click 'Export Collection' [data-test-id=export-collection]",
+        "Select 'Sort Queries by...' submenu [nz-submenu]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Opened via '...' button on collection item."
+    },
+    {
+      "id": "/#collection-query-item-menu",
+      "route": "/",
+      "label": "Query item context menu: Copy Share URL, Share Public, Revisions, Delete",
+      "section": "Collections",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Copy Share URL' (if logged in, api storage) [data-test-id=copy-query-share-url]",
+        "Click 'Share Public URL' (if logged in, api storage) [data-test-id=share-public-query]",
+        "Click 'Show Revisions' (if logged in, api storage) [showQueryRevisionsDialog]",
+        "Click 'Delete Query' [data-test-id=delete-query]",
+        "Dismiss by clicking elsewhere"
+      ],
+      "notes": "Opened via '...' button on query item. Cloud features need auth+api storage."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/#loading",
+      "to": "/",
+      "trigger": "auto: app bootstrap complete (isReady=true)",
+      "guard": "NgRx store initialized"
+    },
+    {
+      "from": "/",
+      "to": "/#query-editor",
+      "trigger": "tab 'Query' [nz-tab index 0 in .main-view-tabs]",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#headers-dialog",
+      "trigger": "link 'Set Headers' [aria-label='Set Headers'] in side menu",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#request-handler-dialog",
+      "trigger": "link 'Request Handlers' [aria-label='Request Handlers'] in side menu",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#history-dialog",
+      "trigger": "link 'History' [aria-label='History'] in side menu",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#request-extensions-dialog",
+      "trigger": "link 'Request Extensions' [aria-label='Request Extensions'] in side menu",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#collections-panel",
+      "trigger": "link 'Collections' [aria-label='Collections'] in side menu",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#plugin-manager",
+      "trigger": "link 'Plugins' [aria-label='Plugins'] in side menu",
+      "guard": "settings.enableExperimental=true"
+    },
+    {
+      "from": "/",
+      "to": "/#account-dialog#logged-out",
+      "trigger": "submenu item 'Login' in Account side menu item",
+      "guard": "serverReady && authEnabled && !loggedIn"
+    },
+    {
+      "from": "/",
+      "to": "/#account-dialog#logged-in",
+      "trigger": "submenu item 'Profile' in Account side menu item",
+      "guard": "serverReady && authEnabled && loggedIn"
+    },
+    {
+      "from": "/",
+      "to": "/#teams-dialog",
+      "trigger": "submenu item 'Teams' in Account side menu item",
+      "guard": "serverReady && authEnabled && loggedIn"
+    },
+    {
+      "from": "/",
+      "to": "/#upgrade-dialog",
+      "trigger": "submenu item 'Upgrade to Pro' in Account side menu item",
+      "guard": "loggedIn && canUpgradePro"
+    },
+    {
+      "from": "/",
+      "to": "/#settings-dropdown",
+      "trigger": "icon 'settings' button [.header__menu-item:last-child] in header",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#environments-dropdown",
+      "trigger": "environment selector button [nz-dropdown environmentsMenu] in header",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#tab-context-menu",
+      "trigger": "right-click on window tab [contextmenu on app-window-switcher-item]",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#http-verb-dropdown",
+      "trigger": "button HTTP method [track-id=http_verb] in URL box",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#add-to-collection-dialog",
+      "trigger": "button 'Save to collection' [track-id=save_to_collection] in URL box",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#docs-root",
+      "trigger": "button 'Docs' [track-id=show_docs] in URL box",
+      "guard": "schema loaded"
+    },
+    {
+      "from": "/",
+      "to": "/#result-empty",
+      "trigger": "auto: default state when no query has been sent",
+      "guard": null
+    },
+    {
+      "from": "/#query-editor",
+      "to": "/#query-editor#variables-open",
+      "trigger": "click 'Variables' toggle [track-id=toggle_variables]",
+      "guard": null
+    },
+    {
+      "from": "/#query-editor#variables-open",
+      "to": "/#query-editor",
+      "trigger": "click 'Variables' toggle to collapse [track-id=toggle_variables]",
+      "guard": null
+    },
+    {
+      "from": "/#query-editor",
+      "to": "/#pre-request-tab",
+      "trigger": "tab 'Pre-Request' [nz-tab index 1]",
+      "guard": null
+    },
+    {
+      "from": "/#query-editor",
+      "to": "/#post-request-tab",
+      "trigger": "tab 'Post-Request' [nz-tab index 2]",
+      "guard": null
+    },
+    {
+      "from": "/#query-editor",
+      "to": "/#authorization-tab",
+      "trigger": "tab 'Authorization' [nz-tab index 3]",
+      "guard": null
+    },
+    {
+      "from": "/#authorization-tab",
+      "to": "/#authorization-tab#api-key",
+      "trigger": "select 'API Key' [nz-select type option api-key]",
+      "guard": null
+    },
+    {
+      "from": "/#authorization-tab",
+      "to": "/#authorization-tab#basic",
+      "trigger": "select 'Basic Auth' [nz-select type option basic]",
+      "guard": null
+    },
+    {
+      "from": "/#authorization-tab",
+      "to": "/#authorization-tab#bearer",
+      "trigger": "select 'Bearer Token' [nz-select type option bearer]",
+      "guard": null
+    },
+    {
+      "from": "/#authorization-tab",
+      "to": "/#authorization-tab#oauth2",
+      "trigger": "select 'OAuth2' [nz-select type option oauth2]",
+      "guard": null
+    },
+    {
+      "from": "/#result-empty",
+      "to": "/#result-response",
+      "trigger": "auto: query response received after sending request",
+      "guard": null
+    },
+    {
+      "from": "/#result-response",
+      "to": "/#result-headers",
+      "trigger": "tab 'Response Headers' [nz-tab index 2 in query-result__tabs]",
+      "guard": null
+    },
+    {
+      "from": "/#result-response",
+      "to": "/#result-script-logs",
+      "trigger": "tab 'Script Logs' [nz-tab index 1 in query-result__tabs]",
+      "guard": "requestScriptLogs.length > 0"
+    },
+    {
+      "from": "/#result-response",
+      "to": "/#result-response#subscribed",
+      "trigger": "auto: subscription started with multiple streaming results",
+      "guard": "query is a subscription type"
+    },
+    {
+      "from": "/#docs-closed",
+      "to": "/#docs-root",
+      "trigger": "button 'Docs' [track-id=show_docs]",
+      "guard": null
+    },
+    {
+      "from": "/#docs-root",
+      "to": "/#docs-type",
+      "trigger": "click type name in docs root or search result",
+      "guard": null
+    },
+    {
+      "from": "/#docs-root",
+      "to": "/#docs-search",
+      "trigger": "type in search input and press Enter [input in doc-viewer-search-wrapper]",
+      "guard": null
+    },
+    {
+      "from": "/#docs-type",
+      "to": "/#docs-field",
+      "trigger": "click a field name in type view",
+      "guard": null
+    },
+    {
+      "from": "/#docs-type",
+      "to": "/#docs-type",
+      "trigger": "click a linked type name in type view (navigates to that type)",
+      "guard": null
+    },
+    {
+      "from": "/#docs-field",
+      "to": "/#docs-type",
+      "trigger": "click back arrow [icon arrow-left track-id=go_back_docs]",
+      "guard": null
+    },
+    {
+      "from": "/#docs-root",
+      "to": "/#docs-closed",
+      "trigger": "button X close [icon x in doc-viewer-navigation--right]",
+      "guard": null
+    },
+    {
+      "from": "/#docs-root",
+      "to": "/#docs-options-menu",
+      "trigger": "button more-horizontal [icon more-horizontal in doc-viewer-navigation]",
+      "guard": null
+    },
+    {
+      "from": "/#docs-options-menu",
+      "to": "/#docs-root",
+      "trigger": "dismiss dropdown by clicking elsewhere",
+      "guard": null
+    },
+    {
+      "from": "/#headers-dialog",
+      "to": "/",
+      "trigger": "button 'Done' [btn--primary toggleHeader]",
+      "guard": null
+    },
+    {
+      "from": "/#request-handler-dialog",
+      "to": "/",
+      "trigger": "close dialog [toggleDialogChange emit false]",
+      "guard": null
+    },
+    {
+      "from": "/#history-dialog",
+      "to": "/",
+      "trigger": "button 'Done' [track-id=close_history_dialog]",
+      "guard": null
+    },
+    {
+      "from": "/#settings-dialog",
+      "to": "/#settings-dialog#advanced",
+      "trigger": "link 'Toggle Advanced Mode' [anchor click onToggleView]",
+      "guard": null
+    },
+    {
+      "from": "/#settings-dialog#advanced",
+      "to": "/#settings-dialog",
+      "trigger": "link 'Toggle Advanced Mode' [anchor click onToggleView]",
+      "guard": null
+    },
+    {
+      "from": "/#settings-dialog",
+      "to": "/",
+      "trigger": "close modal [toggleDialogChange emit false]",
+      "guard": null
+    },
+    {
+      "from": "/#settings-dropdown",
+      "to": "/#settings-dialog",
+      "trigger": "menu item 'Settings' [nz-menu-item showSettingsDialogChange]",
+      "guard": null
+    },
+    {
+      "from": "/#settings-dropdown",
+      "to": "/#import-curl-dialog",
+      "trigger": "menu item 'Import Window From cURL' [nz-menu-item showImportCurlDialogChange]",
+      "guard": null
+    },
+    {
+      "from": "/#settings-dropdown",
+      "to": "/",
+      "trigger": "dismiss dropdown by clicking elsewhere",
+      "guard": null
+    },
+    {
+      "from": "/#environment-manager",
+      "to": "/#environment-manager#sub-env",
+      "trigger": "click a sub-environment item in left list",
+      "guard": "at least one sub-environment exists"
+    },
+    {
+      "from": "/#environment-manager#sub-env",
+      "to": "/#environment-manager",
+      "trigger": "click 'Base Environment' item in left list",
+      "guard": null
+    },
+    {
+      "from": "/#environment-manager",
+      "to": "/",
+      "trigger": "button 'Save' [track-id=save_environments]",
+      "guard": null
+    },
+    {
+      "from": "/#environments-dropdown",
+      "to": "/#environment-manager",
+      "trigger": "menu item 'Environments...' [nz-menu-item toggleEnvironmentManagerChange]",
+      "guard": null
+    },
+    {
+      "from": "/#collections-panel",
+      "to": "/#collections-panel#search",
+      "trigger": "button 'Search' [data-test-id=search-collection]",
+      "guard": null
+    },
+    {
+      "from": "/#collections-panel#search",
+      "to": "/#collections-panel",
+      "trigger": "button 'Search' (toggle off) [data-test-id=search-collection]",
+      "guard": null
+    },
+    {
+      "from": "/#collections-panel",
+      "to": "/",
+      "trigger": "link 'Collections' [aria-label=Collections] in side menu (toggle off)",
+      "guard": null
+    },
+    {
+      "from": "/#collections-panel",
+      "to": "/#collection-item-menu",
+      "trigger": "button '...' [nz-dropdown collectionItemMenu] on collection item",
+      "guard": null
+    },
+    {
+      "from": "/#collection-item-menu",
+      "to": "/#edit-collection-dialog",
+      "trigger": "menu item 'Edit Collection' [data-test-id=edit-collection]",
+      "guard": null
+    },
+    {
+      "from": "/#collections-panel",
+      "to": "/#collection-query-item-menu",
+      "trigger": "button '...' [nz-dropdown collectionQueryItemMenu] on query item",
+      "guard": null
+    },
+    {
+      "from": "/#collection-query-item-menu",
+      "to": "/#query-revision-dialog",
+      "trigger": "menu item 'Show Revisions' [showQueryRevisionsDialog]",
+      "guard": "loggedIn && query.storageType='api'"
+    },
+    {
+      "from": "/#edit-collection-dialog",
+      "to": "/#edit-collection-dialog#post-request",
+      "trigger": "tab 'Post-Request' [nz-tab index 1 in edit-collection-dialog]",
+      "guard": null
+    },
+    {
+      "from": "/#edit-collection-dialog",
+      "to": "/#edit-collection-dialog#environments",
+      "trigger": "tab 'Environments' [nz-tab index 2 in edit-collection-dialog]",
+      "guard": null
+    },
+    {
+      "from": "/#edit-collection-dialog",
+      "to": "/#edit-collection-dialog#headers",
+      "trigger": "tab 'Headers' [nz-tab index 3 in edit-collection-dialog]",
+      "guard": null
+    },
+    {
+      "from": "/#edit-collection-dialog",
+      "to": "/",
+      "trigger": "button 'Save' [btn--primary updateCollection]",
+      "guard": null
+    },
+    {
+      "from": "/#add-to-collection-dialog",
+      "to": "/#add-to-collection-dialog#new-collection",
+      "trigger": "select 'Create New Collection' [nz-option nzValue='-1']",
+      "guard": null
+    },
+    {
+      "from": "/#add-to-collection-dialog",
+      "to": "/",
+      "trigger": "button 'Save' [saveChange emit]",
+      "guard": null
+    },
+    {
+      "from": "/#account-dialog#logged-out",
+      "to": "/#account-dialog#logged-in",
+      "trigger": "auto: login succeeds (OAuth redirect back to app)",
+      "guard": null
+    },
+    {
+      "from": "/#account-dialog#logged-in",
+      "to": "/#account-dialog#logged-out",
+      "trigger": "button 'Logout' [btn logoutChange]",
+      "guard": null
+    },
+    {
+      "from": "/#account-dialog#logged-in",
+      "to": "/#teams-dialog",
+      "trigger": "auto: navigate via Account submenu Teams option",
+      "guard": "loggedIn"
+    },
+    {
+      "from": "/#teams-dialog",
+      "to": "/#teams-dialog#members",
+      "trigger": "icon 'list' Members button on a team row",
+      "guard": null
+    },
+    {
+      "from": "/#teams-dialog",
+      "to": "/#teams-dialog#create-team",
+      "trigger": "button 'Create Team' [btn--full-width onCreateTeam]",
+      "guard": null
+    },
+    {
+      "from": "/#teams-dialog",
+      "to": "/#teams-dialog#edit-team",
+      "trigger": "icon 'edit' Edit button on a team row",
+      "guard": null
+    },
+    {
+      "from": "/#teams-dialog",
+      "to": "/",
+      "trigger": "close modal [toggleDialogChange]",
+      "guard": null
+    },
+    {
+      "from": "/#tab-context-menu",
+      "to": "/#window-tab-rename",
+      "trigger": "menu item 'Edit Window' [icon edit editWindowNameInput]",
+      "guard": null
+    },
+    {
+      "from": "/#window-tab-rename",
+      "to": "/",
+      "trigger": "press Enter or click away to save name [keydown.enter or blur]",
+      "guard": null
+    },
+    {
+      "from": "/#plugin-manager",
+      "to": "/#plugin-manager#selected",
+      "trigger": "click a plugin in left list [.plugin-manager__list-item click]",
+      "guard": null
+    },
+    {
+      "from": "/#plugin-manager#selected",
+      "to": "/#plugin-manager",
+      "trigger": "auto: plugin deselected (selectedPluginItem becomes null)",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#operations-dropdown",
+      "trigger": "button 'Send Request' with multiple operations [track-id=send_request nzDropdown]",
+      "guard": "query has >1 named operations"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Publicly accessible (no login required)",
+        "node_ids": [
+          "/#loading",
+          "/",
+          "/#query-editor",
+          "/#query-editor#variables-open",
+          "/#pre-request-tab",
+          "/#post-request-tab",
+          "/#authorization-tab",
+          "/#authorization-tab#api-key",
+          "/#authorization-tab#basic",
+          "/#authorization-tab#bearer",
+          "/#authorization-tab#oauth2",
+          "/#result-empty",
+          "/#result-response",
+          "/#result-response#subscribed",
+          "/#result-script-logs",
+          "/#result-headers",
+          "/#result-bottom-panel",
+          "/#docs-closed",
+          "/#docs-root",
+          "/#docs-type",
+          "/#docs-field",
+          "/#docs-directive",
+          "/#docs-search",
+          "/#docs-options-menu",
+          "/#headers-dialog",
+          "/#request-handler-dialog",
+          "/#history-dialog",
+          "/#request-extensions-dialog",
+          "/#settings-dialog",
+          "/#settings-dialog#advanced",
+          "/#import-curl-dialog",
+          "/#environment-manager",
+          "/#environment-manager#sub-env",
+          "/#plugin-manager",
+          "/#plugin-manager#selected",
+          "/#add-to-collection-dialog",
+          "/#add-to-collection-dialog#new-collection",
+          "/#edit-collection-dialog",
+          "/#edit-collection-dialog#post-request",
+          "/#edit-collection-dialog#environments",
+          "/#edit-collection-dialog#headers",
+          "/#account-dialog#logged-out",
+          "/#collections-panel",
+          "/#collections-panel#search",
+          "/#tab-context-menu",
+          "/#window-tab-rename",
+          "/#environments-dropdown",
+          "/#settings-dropdown",
+          "/#http-verb-dropdown",
+          "/#operations-dropdown",
+          "/#collection-item-menu",
+          "/#collection-query-item-menu"
+        ]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Requires Altair Cloud login (auth enabled + logged in)",
+        "node_ids": [
+          "/#account-dialog#logged-in",
+          "/#teams-dialog",
+          "/#teams-dialog#members",
+          "/#teams-dialog#create-team",
+          "/#teams-dialog#edit-team",
+          "/#upgrade-dialog",
+          "/#query-revision-dialog"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:main",
+        "label": "Main IDE shell: header tabs + side menu + content area",
+        "node_ids": [
+          "/",
+          "/#query-editor",
+          "/#query-editor#variables-open",
+          "/#pre-request-tab",
+          "/#post-request-tab",
+          "/#authorization-tab",
+          "/#authorization-tab#api-key",
+          "/#authorization-tab#basic",
+          "/#authorization-tab#bearer",
+          "/#authorization-tab#oauth2",
+          "/#result-empty",
+          "/#result-response",
+          "/#result-response#subscribed",
+          "/#result-script-logs",
+          "/#result-headers",
+          "/#result-bottom-panel",
+          "/#docs-closed",
+          "/#docs-root",
+          "/#docs-type",
+          "/#docs-field",
+          "/#docs-directive",
+          "/#docs-search",
+          "/#docs-options-menu",
+          "/#collections-panel",
+          "/#collections-panel#search",
+          "/#tab-context-menu",
+          "/#window-tab-rename",
+          "/#environments-dropdown",
+          "/#settings-dropdown",
+          "/#http-verb-dropdown",
+          "/#operations-dropdown",
+          "/#collection-item-menu",
+          "/#collection-query-item-menu"
+        ]
+      },
+      {
+        "id": "layout:modal",
+        "label": "Modal overlay dialogs rendered atop main IDE layout",
+        "node_ids": [
+          "/#headers-dialog",
+          "/#request-handler-dialog",
+          "/#history-dialog",
+          "/#request-extensions-dialog",
+          "/#settings-dialog",
+          "/#settings-dialog#advanced",
+          "/#import-curl-dialog",
+          "/#environment-manager",
+          "/#environment-manager#sub-env",
+          "/#plugin-manager",
+          "/#plugin-manager#selected",
+          "/#add-to-collection-dialog",
+          "/#add-to-collection-dialog#new-collection",
+          "/#edit-collection-dialog",
+          "/#edit-collection-dialog#post-request",
+          "/#edit-collection-dialog#environments",
+          "/#edit-collection-dialog#headers",
+          "/#account-dialog#logged-out",
+          "/#account-dialog#logged-in",
+          "/#teams-dialog",
+          "/#teams-dialog#members",
+          "/#teams-dialog#create-team",
+          "/#teams-dialog#edit-team",
+          "/#upgrade-dialog",
+          "/#query-revision-dialog"
+        ]
+      },
+      {
+        "id": "layout:none",
+        "label": "Full-screen states (no persistent chrome)",
+        "node_ids": ["/#loading"]
+      }
+    ]
+  }
+}

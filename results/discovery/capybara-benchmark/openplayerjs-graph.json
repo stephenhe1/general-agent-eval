@@ -1,0 +1,1201 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "OpenPlayerJS Examples",
+    "base_url": "http://localhost:4173",
+    "description": "Static HTML examples for the OpenPlayerJS media player library. Served via `serve .` from the repo root.",
+    "total_states": 42,
+    "explored": 42,
+    "skipped": 0,
+    "verified_live": [
+      "/examples/basic",
+      "/examples/ads",
+      "/examples/captions",
+      "/examples/core",
+      "/examples/live",
+      "/examples/live-show-current-time",
+      "/examples/multiplugin",
+      "/examples/source-fallback",
+      "/examples/src-switch",
+      "/examples/youtube"
+    ],
+    "notes": "No authentication. No SPA router. Each page is a standalone HTML file demonstrating a player feature. The `serve` static server strips .html from URLs (301 redirect). Sub-states model meaningful in-page UI changes within the shared OpenPlayerJS player shell."
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Repo root directory listing (served by `serve`)",
+      "section": "Index",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:directory-listing",
+      "actions": [
+        "Click 'examples/' folder link to navigate to /examples/",
+        "Click 'packages/' folder link to navigate to /packages/",
+        "Click any file link to view that file"
+      ],
+      "notes": "Auto-generated directory index. Not an app page, but the root of the served static site."
+    },
+    {
+      "id": "/examples/basic",
+      "route": "/examples/basic",
+      "label": "HLS + VAST skippable preroll player (paused/initial state)",
+      "section": "Examples / Basic",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start playback",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Click center overlay [.op-player__play] to start playback"
+      ],
+      "notes": "HLS source via hls.js. VAST skippable preroll via AdsPlugin. No captions button."
+    },
+    {
+      "id": "/examples/basic#playing",
+      "route": "/examples/basic",
+      "label": "HLS + VAST player in playing state",
+      "section": "Examples / Basic",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "Play button has class --pause. Center overlay hidden. Progress updates in real-time."
+    },
+    {
+      "id": "/examples/basic#settings-open",
+      "route": "/examples/basic",
+      "label": "Settings panel open on basic.html player",
+      "section": "Examples / Basic",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel (.op-menu) is visible. Lists 'Speed' item. No captions item (no track)."
+    },
+    {
+      "id": "/examples/basic#settings-speed",
+      "route": "/examples/basic",
+      "label": "Settings > Speed submenu open on basic.html",
+      "section": "Examples / Basic",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active. Back button (.op-submenu__back) visible. Speed rate options listed."
+    },
+    {
+      "id": "/examples/ads",
+      "route": "/examples/ads",
+      "label": "VMAP pre/mid/post-roll ads player (initial/paused state)",
+      "section": "Examples / Ads",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start playback (triggers VMAP ad break)",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Click center overlay [.op-player__play] to start playback"
+      ],
+      "notes": "VMAP source schedules pre/mid/post-roll breaks. MP4 source (BigBuckBunny). No captions."
+    },
+    {
+      "id": "/examples/ads#playing",
+      "route": "/examples/ads",
+      "label": "VMAP ads player in playing state",
+      "section": "Examples / Ads",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "Play button has --pause class. VMAP ad breaks fire at scheduled intervals."
+    },
+    {
+      "id": "/examples/ads#settings-open",
+      "route": "/examples/ads",
+      "label": "Settings panel open on ads.html player",
+      "section": "Examples / Ads",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel visible. Lists 'Speed'. No captions track in this example."
+    },
+    {
+      "id": "/examples/ads#settings-speed",
+      "route": "/examples/ads",
+      "label": "Settings > Speed submenu open on ads.html",
+      "section": "Examples / Ads",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active inside the settings panel."
+    },
+    {
+      "id": "/examples/captions",
+      "route": "/examples/captions",
+      "label": "VAST preroll + VTT subtitle tracks player (initial/paused, captions off)",
+      "section": "Examples / Captions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start playback",
+        "Click captions button [.op-controls__captions] to toggle subtitles on",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Click center overlay [.op-player__play] to start playback"
+      ],
+      "notes": "BigBuckBunny MP4. VAST inline XML preroll. <track kind=subtitles srclang=en label=English>."
+    },
+    {
+      "id": "/examples/captions#playing",
+      "route": "/examples/captions",
+      "label": "VAST + captions player in playing state",
+      "section": "Examples / Captions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause",
+        "Click captions button [.op-controls__captions] to toggle subtitles",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "Current time updates. Play button has --pause class. Center overlay hidden."
+    },
+    {
+      "id": "/examples/captions#captions-on",
+      "route": "/examples/captions",
+      "label": "VAST + captions player with captions/subtitles enabled",
+      "section": "Examples / Captions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click captions button [.op-controls__captions.op-controls__captions--on] to turn captions off",
+        "Click play button [.op-controls__playpause] to start/pause playback",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Click settings button [.op-controls__settings] to open settings panel"
+      ],
+      "notes": "Captions button has --on class. English subtitles rendered on video. Available in any play state."
+    },
+    {
+      "id": "/examples/captions#settings-open",
+      "route": "/examples/captions",
+      "label": "Settings panel open on captions.html player",
+      "section": "Examples / Captions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Click 'Captions'/'Subtitles' menu item [.op-controls__menu-item text~=Caption] to open captions submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows both Speed and Captions/Subtitles items (track is present)."
+    },
+    {
+      "id": "/examples/captions#settings-speed",
+      "route": "/examples/captions",
+      "label": "Settings > Speed submenu open on captions.html",
+      "section": "Examples / Captions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active. Back button (.op-submenu__back) visible."
+    },
+    {
+      "id": "/examples/captions#settings-captions",
+      "route": "/examples/captions",
+      "label": "Settings > Captions/Subtitles submenu open on captions.html",
+      "section": "Examples / Captions",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a caption track option to select/deselect subtitle language",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Captions submenu shows available subtitle tracks (English). Back button visible."
+    },
+    {
+      "id": "/examples/core",
+      "route": "/examples/core",
+      "label": "Bare Core API demo — native video controls only, no createUI()",
+      "section": "Examples / Core",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:raw-video",
+      "actions": [
+        "Use native browser video controls to play/pause [#player native controls]",
+        "Use native browser video controls to seek [#player seek bar]",
+        "Use native browser video controls for volume [#player volume]",
+        "Read registerPlugin() explanation text [p element]"
+      ],
+      "notes": "No .op-player wrapper, no .op-controls. Autoplay+muted. HLS via hls.js engine registered manually."
+    },
+    {
+      "id": "/examples/live",
+      "route": "/examples/live",
+      "label": "HLS live stream with captions player (initial/paused, captions off)",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start live stream",
+        "Click captions button [.op-controls__captions] to toggle English subtitles on",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "Live HLS stream (NHK World). <track kind=subtitles srclang=en>. No seek (live). window.__core exposed."
+    },
+    {
+      "id": "/examples/live#playing",
+      "route": "/examples/live",
+      "label": "HLS live stream in playing state",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause",
+        "Click captions button [.op-controls__captions] to toggle subtitles",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "Live stream actively buffering/playing. Progress bar shows live edge."
+    },
+    {
+      "id": "/examples/live#captions-on",
+      "route": "/examples/live",
+      "label": "HLS live stream with captions/subtitles enabled",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click captions button [.op-controls__captions.op-controls__captions--on] to turn captions off",
+        "Click play button [.op-controls__playpause] to play/pause stream",
+        "Click settings button [.op-controls__settings] to open settings panel"
+      ],
+      "notes": "Captions button has --on class. English subtitle track active. Available in any play state."
+    },
+    {
+      "id": "/examples/live#settings-open",
+      "route": "/examples/live",
+      "label": "Settings panel open on live.html player",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Click 'Captions'/'Subtitles' menu item [.op-controls__menu-item text~=Caption] to open captions submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows Speed and Captions items (live stream has subtitle track)."
+    },
+    {
+      "id": "/examples/live#settings-speed",
+      "route": "/examples/live",
+      "label": "Settings > Speed submenu open on live.html",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active. Back button visible."
+    },
+    {
+      "id": "/examples/live#settings-captions",
+      "route": "/examples/live",
+      "label": "Settings > Captions submenu open on live.html",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click caption track option to enable/disable subtitle language",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Captions submenu shows English subtitle track option."
+    },
+    {
+      "id": "/examples/live-show-current-time",
+      "route": "/examples/live-show-current-time",
+      "label": "HLS live stream with showLiveCurrentTime enabled (initial/paused)",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start live stream",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Read current time display [time.op-controls__current]"
+      ],
+      "notes": "showLiveCurrentTime:true shows live wall-clock time. No captions button. window.__core exposed."
+    },
+    {
+      "id": "/examples/live-show-current-time#playing",
+      "route": "/examples/live-show-current-time",
+      "label": "HLS live + current time display in playing state",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Read live current time [time.op-controls__current] (updates in real-time)"
+      ],
+      "notes": "Live wall-clock time visible and updating in the time display."
+    },
+    {
+      "id": "/examples/live-show-current-time#settings-open",
+      "route": "/examples/live-show-current-time",
+      "label": "Settings panel open on live-show-current-time.html",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows Speed only (no caption track on this page)."
+    },
+    {
+      "id": "/examples/live-show-current-time#settings-speed",
+      "route": "/examples/live-show-current-time",
+      "label": "Settings > Speed submenu open on live-show-current-time.html",
+      "section": "Examples / Live",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active."
+    },
+    {
+      "id": "/examples/multiplugin",
+      "route": "/examples/multiplugin",
+      "label": "Multi-plugin demo with chapter banner (initial/paused state)",
+      "section": "Examples / Multiplugin",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start playback",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Click center overlay [.op-player__play] to start playback"
+      ],
+      "notes": "HLS source. chaptersPlugin + chapterUiPlugin wired via EventBus. Chapter banner (.chapter-banner) present but hidden."
+    },
+    {
+      "id": "/examples/multiplugin#playing",
+      "route": "/examples/multiplugin",
+      "label": "Multi-plugin demo in playing state with live chapter banner",
+      "section": "Examples / Multiplugin",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek to different chapter",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Observe chapter banner [.chapter-banner] update as time crosses chapter boundaries"
+      ],
+      "notes": "Chapter banner displays current chapter title (Intro/Act 1/Act 2). Updates on timeupdate events."
+    },
+    {
+      "id": "/examples/multiplugin#settings-open",
+      "route": "/examples/multiplugin",
+      "label": "Settings panel open on multiplugin.html",
+      "section": "Examples / Multiplugin",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows Speed only (no caption track)."
+    },
+    {
+      "id": "/examples/multiplugin#settings-speed",
+      "route": "/examples/multiplugin",
+      "label": "Settings > Speed submenu open on multiplugin.html",
+      "section": "Examples / Multiplugin",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active."
+    },
+    {
+      "id": "/examples/source-fallback",
+      "route": "/examples/source-fallback",
+      "label": "Source fallback demo — initial state, first (broken) source loading",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-status",
+      "actions": [
+        "Observe #status text [#status] transition from 'Waiting…' to 'Fallback:…' automatically",
+        "Click play button [.op-controls__playpause] after fallback to play second source",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "Two sources: broken MP4 then good MP4 (flower.mp4). sourceFallback auto-triggers on error. Status div present."
+    },
+    {
+      "id": "/examples/source-fallback#fallback-triggered",
+      "route": "/examples/source-fallback",
+      "label": "Source fallback triggered — status shows fallback result",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-status",
+      "actions": [
+        "Click play button [.op-controls__playpause] to play the fallback (second) source",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Read status text [#status] showing 'Fallback: <failed> → <next>' or 'Error: all sources failed'"
+      ],
+      "notes": "Auto-triggered. Status shows 'Fallback: /broken-video… → https://…flower.mp4'. Player ready to play fallback src."
+    },
+    {
+      "id": "/examples/source-fallback#settings-open",
+      "route": "/examples/source-fallback",
+      "label": "Settings panel open on source-fallback.html",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-status",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows Speed only (no caption track)."
+    },
+    {
+      "id": "/examples/source-fallback#settings-speed",
+      "route": "/examples/source-fallback",
+      "label": "Settings > Speed submenu open on source-fallback.html",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-status",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active."
+    },
+    {
+      "id": "/examples/src-switch",
+      "route": "/examples/src-switch",
+      "label": "Source switching demo — SOURCE_A (initial HLS stream) loaded",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-source-controls",
+      "actions": [
+        "Click 'Switch source' button [#btn-switch data-testid=btn-switch] to load SOURCE_B",
+        "Click 'Restore source' button [#btn-restore data-testid=btn-restore] to reload SOURCE_A",
+        "Click play button [.op-controls__playpause] to start playback",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen"
+      ],
+      "notes": "SOURCE_A = mux.dev HLS test stream. window.__core exposed. External buttons outside player wrapper."
+    },
+    {
+      "id": "/examples/src-switch#source-b",
+      "route": "/examples/src-switch",
+      "label": "Source switching demo — SOURCE_B (alternate HLS stream) loaded",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-source-controls",
+      "actions": [
+        "Click 'Restore source' button [#btn-restore data-testid=btn-restore] to reload SOURCE_A",
+        "Click 'Switch source' button [#btn-switch data-testid=btn-switch] to reload SOURCE_B again",
+        "Click play button [.op-controls__playpause] to start playback",
+        "Drag progress bar [.op-controls__progress input[type=range]] to seek",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel"
+      ],
+      "notes": "core.src = SOURCE_B (longtailvideo adaptive). Player reloads. window.__core.src updated."
+    },
+    {
+      "id": "/examples/src-switch#settings-open",
+      "route": "/examples/src-switch",
+      "label": "Settings panel open on src-switch.html",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-source-controls",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows Speed only (no caption track)."
+    },
+    {
+      "id": "/examples/src-switch#settings-speed",
+      "route": "/examples/src-switch",
+      "label": "Settings > Speed submenu open on src-switch.html",
+      "section": "Examples / Source Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-with-source-controls",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active."
+    },
+    {
+      "id": "/examples/youtube",
+      "route": "/examples/youtube",
+      "label": "YouTube engine + VAST ads player (initial state, iframe injected)",
+      "section": "Examples / YouTube",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click play button [.op-controls__playpause] to start YouTube playback (triggers VAST ad)",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Interact with YouTube iframe [iframe[src*='youtube']] for YouTube-native controls"
+      ],
+      "notes": "YouTube video ID: dQw4w9WgXcQ. YouTubeMediaEngine injects <iframe>. VAST linear ad via AdsPlugin."
+    },
+    {
+      "id": "/examples/youtube#playing",
+      "route": "/examples/youtube",
+      "label": "YouTube + VAST ads player in playing state (iframe active)",
+      "section": "Examples / YouTube",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click pause button [.op-controls__playpause.op-controls__playpause--pause] to pause YouTube playback",
+        "Adjust volume [.op-controls__volume input[type=range]]",
+        "Click settings button [.op-controls__settings] to open settings panel",
+        "Click fullscreen button [.op-controls__fullscreen] to enter fullscreen",
+        "Interact with YouTube iframe [iframe[src*='youtube']] for native YouTube controls"
+      ],
+      "notes": "YouTube engine proxies play state via postMessage to iframe. Play button shows pause icon."
+    },
+    {
+      "id": "/examples/youtube#settings-open",
+      "route": "/examples/youtube",
+      "label": "Settings panel open on youtube.html player",
+      "section": "Examples / YouTube",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click settings button [.op-controls__settings] again to close panel",
+        "Click 'Speed' menu item [.op-controls__menu-item text=Speed] to open speed submenu",
+        "Press Escape key to close panel",
+        "Click outside panel to close"
+      ],
+      "notes": "Settings panel shows Speed. No captions item (no subtitle track for YouTube source)."
+    },
+    {
+      "id": "/examples/youtube#settings-speed",
+      "route": "/examples/youtube",
+      "label": "Settings > Speed submenu open on youtube.html",
+      "section": "Examples / YouTube",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:player-ui",
+      "actions": [
+        "Click back button [.op-submenu__back] to return to settings root",
+        "Click a speed option to set YouTube playback rate",
+        "Press Escape key to close panel entirely"
+      ],
+      "notes": "Speed submenu active. Rate change forwarded to YouTube iframe via postMessage."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/examples/basic",
+      "to": "/examples/basic#playing",
+      "trigger": "button .op-controls__playpause (play icon visible)"
+    },
+    {
+      "from": "/examples/basic#playing",
+      "to": "/examples/basic",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause (pause icon visible)"
+    },
+    {
+      "from": "/examples/basic",
+      "to": "/examples/basic#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/basic#playing",
+      "to": "/examples/basic#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/basic#settings-open",
+      "to": "/examples/basic",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/basic#settings-open",
+      "to": "/examples/basic",
+      "trigger": "mouse click outside .op-menu panel"
+    },
+    {
+      "from": "/examples/basic#settings-open",
+      "to": "/examples/basic",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/basic#settings-open",
+      "to": "/examples/basic#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/basic#settings-speed",
+      "to": "/examples/basic#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/ads",
+      "to": "/examples/ads#playing",
+      "trigger": "button .op-controls__playpause"
+    },
+    {
+      "from": "/examples/ads#playing",
+      "to": "/examples/ads",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause"
+    },
+    {
+      "from": "/examples/ads",
+      "to": "/examples/ads#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/ads#settings-open",
+      "to": "/examples/ads",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/ads#settings-open",
+      "to": "/examples/ads",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/ads#settings-open",
+      "to": "/examples/ads#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/ads#settings-speed",
+      "to": "/examples/ads#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/captions",
+      "to": "/examples/captions#playing",
+      "trigger": "button .op-controls__playpause"
+    },
+    {
+      "from": "/examples/captions#playing",
+      "to": "/examples/captions",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause"
+    },
+    {
+      "from": "/examples/captions",
+      "to": "/examples/captions#captions-on",
+      "trigger": "button .op-controls__captions"
+    },
+    {
+      "from": "/examples/captions#captions-on",
+      "to": "/examples/captions",
+      "trigger": "button .op-controls__captions.op-controls__captions--on (toggle off)"
+    },
+    {
+      "from": "/examples/captions",
+      "to": "/examples/captions#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/captions#playing",
+      "to": "/examples/captions#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/captions#settings-open",
+      "to": "/examples/captions",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/captions#settings-open",
+      "to": "/examples/captions",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/captions#settings-open",
+      "to": "/examples/captions",
+      "trigger": "mouse click outside .op-menu panel"
+    },
+    {
+      "from": "/examples/captions#settings-open",
+      "to": "/examples/captions#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/captions#settings-speed",
+      "to": "/examples/captions#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/captions#settings-open",
+      "to": "/examples/captions#settings-captions",
+      "trigger": "button .op-controls__menu-item text~='Caption' or text~='Subtitle'"
+    },
+    {
+      "from": "/examples/captions#settings-captions",
+      "to": "/examples/captions#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/live",
+      "to": "/examples/live#playing",
+      "trigger": "button .op-controls__playpause"
+    },
+    {
+      "from": "/examples/live#playing",
+      "to": "/examples/live",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause"
+    },
+    {
+      "from": "/examples/live",
+      "to": "/examples/live#captions-on",
+      "trigger": "button .op-controls__captions"
+    },
+    {
+      "from": "/examples/live#captions-on",
+      "to": "/examples/live",
+      "trigger": "button .op-controls__captions.op-controls__captions--on (toggle off)"
+    },
+    {
+      "from": "/examples/live",
+      "to": "/examples/live#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/live#playing",
+      "to": "/examples/live#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/live#settings-open",
+      "to": "/examples/live",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/live#settings-open",
+      "to": "/examples/live",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/live#settings-open",
+      "to": "/examples/live#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/live#settings-speed",
+      "to": "/examples/live#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/live#settings-open",
+      "to": "/examples/live#settings-captions",
+      "trigger": "button .op-controls__menu-item text~='Caption' or text~='Subtitle'"
+    },
+    {
+      "from": "/examples/live#settings-captions",
+      "to": "/examples/live#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/live-show-current-time",
+      "to": "/examples/live-show-current-time#playing",
+      "trigger": "button .op-controls__playpause"
+    },
+    {
+      "from": "/examples/live-show-current-time#playing",
+      "to": "/examples/live-show-current-time",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause"
+    },
+    {
+      "from": "/examples/live-show-current-time",
+      "to": "/examples/live-show-current-time#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/live-show-current-time#settings-open",
+      "to": "/examples/live-show-current-time",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/live-show-current-time#settings-open",
+      "to": "/examples/live-show-current-time",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/live-show-current-time#settings-open",
+      "to": "/examples/live-show-current-time#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/live-show-current-time#settings-speed",
+      "to": "/examples/live-show-current-time#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/multiplugin",
+      "to": "/examples/multiplugin#playing",
+      "trigger": "button .op-controls__playpause"
+    },
+    {
+      "from": "/examples/multiplugin#playing",
+      "to": "/examples/multiplugin",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause"
+    },
+    {
+      "from": "/examples/multiplugin",
+      "to": "/examples/multiplugin#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/multiplugin#settings-open",
+      "to": "/examples/multiplugin",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/multiplugin#settings-open",
+      "to": "/examples/multiplugin",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/multiplugin#settings-open",
+      "to": "/examples/multiplugin#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/multiplugin#settings-speed",
+      "to": "/examples/multiplugin#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/source-fallback",
+      "to": "/examples/source-fallback#fallback-triggered",
+      "trigger": "auto: source:fallback event fires when first (broken) source errors",
+      "guard": "fires automatically on page load when first source returns 404"
+    },
+    {
+      "from": "/examples/source-fallback#fallback-triggered",
+      "to": "/examples/source-fallback#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/source-fallback",
+      "to": "/examples/source-fallback#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/source-fallback#settings-open",
+      "to": "/examples/source-fallback",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/source-fallback#settings-open",
+      "to": "/examples/source-fallback",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/source-fallback#settings-open",
+      "to": "/examples/source-fallback#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/source-fallback#settings-speed",
+      "to": "/examples/source-fallback#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/src-switch",
+      "to": "/examples/src-switch#source-b",
+      "trigger": "button #btn-switch [data-testid=btn-switch] text='Switch source'"
+    },
+    {
+      "from": "/examples/src-switch#source-b",
+      "to": "/examples/src-switch",
+      "trigger": "button #btn-restore [data-testid=btn-restore] text='Restore source'"
+    },
+    {
+      "from": "/examples/src-switch",
+      "to": "/examples/src-switch#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/src-switch#source-b",
+      "to": "/examples/src-switch#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/src-switch#settings-open",
+      "to": "/examples/src-switch",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/src-switch#settings-open",
+      "to": "/examples/src-switch",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/src-switch#settings-open",
+      "to": "/examples/src-switch#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/src-switch#settings-speed",
+      "to": "/examples/src-switch#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/examples/youtube",
+      "to": "/examples/youtube#playing",
+      "trigger": "button .op-controls__playpause"
+    },
+    {
+      "from": "/examples/youtube#playing",
+      "to": "/examples/youtube",
+      "trigger": "button .op-controls__playpause.op-controls__playpause--pause"
+    },
+    {
+      "from": "/examples/youtube",
+      "to": "/examples/youtube#settings-open",
+      "trigger": "button .op-controls__settings"
+    },
+    {
+      "from": "/examples/youtube#settings-open",
+      "to": "/examples/youtube",
+      "trigger": "button .op-controls__settings (toggle off)"
+    },
+    {
+      "from": "/examples/youtube#settings-open",
+      "to": "/examples/youtube",
+      "trigger": "key Escape"
+    },
+    {
+      "from": "/examples/youtube#settings-open",
+      "to": "/examples/youtube#settings-speed",
+      "trigger": "button .op-controls__menu-item text='Speed'"
+    },
+    {
+      "from": "/examples/youtube#settings-speed",
+      "to": "/examples/youtube#settings-open",
+      "trigger": "button .op-submenu__back"
+    },
+    {
+      "from": "/",
+      "to": "/examples/basic",
+      "trigger": "link 'examples/' folder in directory listing, then navigate to basic.html"
+    },
+    {
+      "from": "/",
+      "to": "/examples/ads",
+      "trigger": "link 'examples/' folder in directory listing, then navigate to ads.html"
+    },
+    {
+      "from": "/",
+      "to": "/examples/captions",
+      "trigger": "link 'examples/' folder in directory listing, then navigate to captions.html"
+    },
+    {
+      "from": "/",
+      "to": "/examples/core",
+      "trigger": "link 'examples/' folder in directory listing, then navigate to core.html"
+    }
+  ],
+  "groups": {
+    "auth_zones": [],
+    "layouts": [
+      {
+        "id": "layout:player-ui",
+        "label": "Standard OpenPlayerJS player shell (createUI + buildControls)",
+        "description": "Pages that use createUI() and buildControls() to render the full .op-player wrapper with .op-controls bar. Includes: progress bar on top, play/time/volume on bottom-left, settings/fullscreen (and optionally captions) on bottom-right. Center overlay .op-player__play present.",
+        "node_ids": [
+          "/examples/basic",
+          "/examples/basic#playing",
+          "/examples/basic#settings-open",
+          "/examples/basic#settings-speed",
+          "/examples/ads",
+          "/examples/ads#playing",
+          "/examples/ads#settings-open",
+          "/examples/ads#settings-speed",
+          "/examples/captions",
+          "/examples/captions#playing",
+          "/examples/captions#captions-on",
+          "/examples/captions#settings-open",
+          "/examples/captions#settings-speed",
+          "/examples/captions#settings-captions",
+          "/examples/live",
+          "/examples/live#playing",
+          "/examples/live#captions-on",
+          "/examples/live#settings-open",
+          "/examples/live#settings-speed",
+          "/examples/live#settings-captions",
+          "/examples/live-show-current-time",
+          "/examples/live-show-current-time#playing",
+          "/examples/live-show-current-time#settings-open",
+          "/examples/live-show-current-time#settings-speed",
+          "/examples/multiplugin",
+          "/examples/multiplugin#playing",
+          "/examples/multiplugin#settings-open",
+          "/examples/multiplugin#settings-speed",
+          "/examples/youtube",
+          "/examples/youtube#settings-open",
+          "/examples/youtube#settings-speed"
+        ]
+      },
+      {
+        "id": "layout:raw-video",
+        "label": "Bare Core API — native browser video controls only",
+        "description": "core.html uses new Core() without createUI(). No .op-player wrapper. Uses native HTML5 <video> controls element.",
+        "node_ids": ["/examples/core"]
+      },
+      {
+        "id": "layout:player-with-status",
+        "label": "Player UI + status text indicator (#status div)",
+        "description": "source-fallback.html adds a #status <div> below the player that updates with fallback/error information.",
+        "node_ids": [
+          "/examples/source-fallback",
+          "/examples/source-fallback#fallback-triggered",
+          "/examples/source-fallback#settings-open",
+          "/examples/source-fallback#settings-speed"
+        ]
+      },
+      {
+        "id": "layout:player-with-source-controls",
+        "label": "Player UI + external source-switch buttons",
+        "description": "src-switch.html adds #controls div with 'Switch source' and 'Restore source' buttons outside the player wrapper.",
+        "node_ids": [
+          "/examples/src-switch",
+          "/examples/src-switch#source-b",
+          "/examples/src-switch#settings-open",
+          "/examples/src-switch#settings-speed"
+        ]
+      },
+      {
+        "id": "layout:directory-listing",
+        "label": "Static server auto-generated directory index",
+        "description": "The `serve` package serves the repo root as a file browser at /.",
+        "node_ids": ["/"]
+      }
+    ]
+  }
+}

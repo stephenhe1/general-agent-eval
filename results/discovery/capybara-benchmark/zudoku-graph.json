@@ -1,0 +1,2392 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Cosmo Cargo Inc. (Zudoku)",
+    "base_url": "http://localhost:4321",
+    "framework": "React Router v7 + Zudoku plugin-based SPA",
+    "auth_provider": "Clerk (pk_test_dG9sZXJhbnQtaG9ybmV0LTQ2...)",
+    "total_states": 105,
+    "explored": 105,
+    "skipped": 0,
+    "verified_live": [
+      "/",
+      "/documentation",
+      "/catalog",
+      "/signin",
+      "/signup",
+      "/signout",
+      "/api-shipments",
+      "/catalog/api-label",
+      "/catalog/api-webhooks",
+      "/only-members",
+      "/vip-lounge",
+      "/shipping-process",
+      "/tracking",
+      "/quantum-express",
+      "/ship-states",
+      "/global",
+      "/interstellar",
+      "/intergalactic",
+      "/cargo-handbook/hazardous",
+      "/cargo-handbook/cryo",
+      "/cargo-handbook/living",
+      "/cargo-handbook/anomalous",
+      "/fleet/warp-drives",
+      "/fleet/maintenance",
+      "/fleet/crew",
+      "/fleet/refueling",
+      "/billing/invoices",
+      "/billing/galactic-credits",
+      "/billing/refunds",
+      "/compliance/customs",
+      "/compliance/quarantine",
+      "/compliance/treaties",
+      "/support/contact",
+      "/support/faq",
+      "/support/escalations",
+      "/member-benefits",
+      "/premium-fleet-services",
+      "/api-shipments/shipment-management",
+      "/api-shipments/tracking-notifications",
+      "/api-shipments/rates-billing",
+      "/api-shipments/international-shipping",
+      "/api-shipments/documentation",
+      "/api-shipments/authentication",
+      "/api-shipments/schemas",
+      "/api-shipments/organization-management",
+      "/api-shipments/route-planning",
+      "/api-shipments/~endpoints",
+      "/api-shipments/~schemas",
+      "/catalog/api-label/labels",
+      "/catalog/api-label/stamps",
+      "/catalog/api-label/~endpoints",
+      "/catalog/api-label/~schemas",
+      "/catalog/api-label/latest",
+      "/catalog/api-label/latest/labels",
+      "/catalog/api-webhooks/webhooks",
+      "/catalog/api-webhooks/~schemas",
+      "/catalog/api-interplanetary",
+      "/catalog/api-interplanetary/interplanetary",
+      "/catalog/api-interplanetary/~schemas",
+      "/catalog/api-tracking",
+      "/catalog/api-tracking/~endpoints",
+      "/catalog/api-tracking/~schemas",
+      "/catalog/api-ai-cargo",
+      "/catalog/api-ai-cargo/ai-operations",
+      "/catalog/api-ai-cargo/quantum-transport",
+      "/catalog/api-ai-cargo/~schemas",
+      "/catalog/api-docs",
+      "/catalog/api-docs/documentation",
+      "/catalog/api-docs/~schemas",
+      "/catalog/api-cargo-containers",
+      "/catalog/api-cargo-containers/containers",
+      "/catalog/api-cargo-containers/booking",
+      "/catalog/api-cargo-containers/quotes",
+      "/catalog/api-cargo-containers/~schemas",
+      "/catalog/api-fleet-ops",
+      "/catalog/api-fleet-ops/fleet-command",
+      "/catalog/api-fleet-ops/navigation",
+      "/catalog/api-fleet-ops/~schemas",
+      "/catalog/api-fleet-ops/v1",
+      "/catalog/api-fleet-ops/v1/fleet-command",
+      "/catalog/api-fleet-ops/v1/cargo-bays",
+      "/catalog/api-fleet-ops/v1/~schemas",
+      "/catalog/api-fleet-ops/v2",
+      "/catalog/api-fleet-ops/v2/fleet-command",
+      "/catalog/api-fleet-ops/v2/navigation",
+      "/catalog/api-fleet-ops/v2/cargo-bays",
+      "/catalog/api-fleet-ops/v2/~schemas",
+      "/catalog/api-fleet-ops/v3",
+      "/catalog/api-fleet-ops/v3/fleet-command",
+      "/catalog/api-fleet-ops/v3/navigation",
+      "/catalog/api-fleet-ops/v3/~schemas",
+      "/400",
+      "/404",
+      "/500"
+    ],
+    "notes": "No credentials available for Clerk auth; protected routes verified as showing auth-gate UI. /status returns 404 (broken nav link). /settings/api-keys returns 404 (API keys plugin not configured). /documentation/test exists but renders no content. Label API v2/v1 version paths unresolvable (return ERR_ABORTED)."
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Home \u2014 landing page with hero, CTA buttons, footer",
+      "section": "Landing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click logo link [href=/]",
+        "Click 'Documentation' nav link [href=/documentation]",
+        "Click 'Shipments' nav link [href=/api-shipments]",
+        "Click 'API Catalog' nav link [href=/catalog]",
+        "Open Solutions dropdown button [text=Solutions]",
+        "Open Products dropdown button [text=Products]",
+        "Click 'Login' button [text=Login]",
+        "Open search modal button [text=Search\u2318K]",
+        "Click 'Sign up for a Cosmo Cargo account' link [href=/signup]",
+        "Click 'Read our documentation' link [href=/documentation]",
+        "Click 'Get started' link [href=/api-shipments]",
+        "Dismiss banner button (dismissible announcement banner)"
+      ],
+      "notes": "Custom Landingpage component. Banner: inter-galactic shipping announcement 3025."
+    },
+    {
+      "id": "/#search-modal",
+      "route": "/",
+      "label": "Global search dialog overlay (pagefind)",
+      "section": "Global UI",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Type in search input [placeholder=Search...]",
+        "Navigate results with \u2191\u2193 arrow keys",
+        "Select result with Enter",
+        "Close dialog with Escape or 'Close dialog' button",
+        "Click 'Build Search Index' button"
+      ],
+      "notes": "Accessible from any page via Search button. Pagefind-based."
+    },
+    {
+      "id": "/#solutions-dropdown",
+      "route": "/",
+      "label": "Solutions header nav dropdown (3 items)",
+      "section": "Global UI",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Shipment Tracking' \u2192 /documentation",
+        "Click 'Warp Logistics' \u2192 /api-shipments/shipment-management",
+        "Click 'API Catalog' \u2192 /catalog",
+        "Click outside / press Escape to close"
+      ],
+      "notes": "Header nav dropdown. Also has Products dropdown with nested groups."
+    },
+    {
+      "id": "/documentation",
+      "route": "/documentation",
+      "label": "Documentation index \u2014 overview with toc sections",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click sidebar links to doc pages",
+        "Click 'On this page' TOC links",
+        "Click 'Copy page' button",
+        "Click 'Access Premium Area' button [href=/only-members]",
+        "Open search modal",
+        "Toggle sidebar collapse",
+        "Click filter placeholder in sidebar"
+      ],
+      "notes": "Sidebar shows Documentation category with filter input. Premium Area section visible."
+    },
+    {
+      "id": "/documentation/test",
+      "route": "/documentation/test",
+      "label": "Documentation test page (empty MDX stub)",
+      "section": "Documentation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Navigate sidebar links"
+      ],
+      "notes": "Renders with no visible h1/content. Test fixture file."
+    },
+    {
+      "id": "/shipping-process",
+      "route": "/shipping-process",
+      "label": "Intergalactic Shipping Process documentation page",
+      "section": "Documentation > Space Operations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'Open in Playground' button",
+        "Click 'Contact Support' button",
+        "Navigate sidebar links",
+        "Click 'On this page' TOC"
+      ],
+      "notes": "Has Playground button that opens API playground modal."
+    },
+    {
+      "id": "/shipping-process#playground-modal",
+      "route": "/shipping-process",
+      "label": "API Playground dialog open on shipping-process page",
+      "section": "Documentation > Space Operations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Select server from dropdown",
+        "Select HTTP method",
+        "Fill Query Parameters",
+        "Fill Headers",
+        "Fill Body",
+        "Click 'Send' button",
+        "Click 'Login' or 'Sign Up' if unauthenticated (welcome prompt)",
+        "Click 'Don't show this again' checkbox",
+        "Click 'Skip' to dismiss welcome prompt",
+        "Click 'Close' button to dismiss modal"
+      ],
+      "notes": "PlaygroundDialog modal: POST cosmocargo.dev/shipments. Shows welcome prompt if not auth'd."
+    },
+    {
+      "id": "/tracking",
+      "route": "/tracking",
+      "label": "Real-Time Shipment Tracking documentation page",
+      "section": "Documentation > Space Operations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'Contact Tracking Support' button",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/quantum-express",
+      "route": "/quantum-express",
+      "label": "Quantum Express service documentation page",
+      "section": "Documentation > Space Operations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (How It Works, Service Tiers, Requirements, API Integration, Pricing)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/ship-states",
+      "route": "/ship-states",
+      "label": "Ship States Reference documentation page",
+      "section": "Documentation > Space Operations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/global",
+      "route": "/global",
+      "label": "Global Shipping guide page",
+      "section": "Documentation > Shipping Guides",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Features, Best Practices, Docs Requirements, Restricted Items, Tips, Support)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/interstellar",
+      "route": "/interstellar",
+      "label": "Interstellar Shipping guide page",
+      "section": "Documentation > Shipping Guides",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/intergalactic",
+      "route": "/intergalactic",
+      "label": "Intergalactic Shipping guide page",
+      "section": "Documentation > Shipping Guides",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/cargo-handbook/hazardous",
+      "route": "/cargo-handbook/hazardous",
+      "label": "Hazardous & Volatile Cargo handbook page",
+      "section": "Documentation > Cargo Handbook",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Hazard Classes, Routing Rules)",
+        "Navigate to other cargo-handbook pages in sidebar"
+      ],
+      "notes": "Sidebar shows 4 handbook pages as stacked group."
+    },
+    {
+      "id": "/cargo-handbook/cryo",
+      "route": "/cargo-handbook/cryo",
+      "label": "Cryogenic & Temperature-Controlled Freight handbook page",
+      "section": "Documentation > Cargo Handbook",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Temperature Tiers)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/cargo-handbook/living",
+      "route": "/cargo-handbook/living",
+      "label": "Living & Biological Cargo handbook page",
+      "section": "Documentation > Cargo Handbook",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Requirements)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/cargo-handbook/anomalous",
+      "route": "/cargo-handbook/anomalous",
+      "label": "Oversized & Anomalous Freight handbook page",
+      "section": "Documentation > Cargo Handbook",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Handling Categories)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/fleet/warp-drives",
+      "route": "/fleet/warp-drives",
+      "label": "Warp Drives fleet documentation page",
+      "section": "Documentation > Fleet Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Spin-up sequence, Cruise tuning)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/fleet/maintenance",
+      "route": "/fleet/maintenance",
+      "label": "Fleet Maintenance documentation page",
+      "section": "Documentation > Fleet Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Service intervals)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/fleet/crew",
+      "route": "/fleet/crew",
+      "label": "Crew Roster documentation page",
+      "section": "Documentation > Fleet Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Required posts)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/fleet/refueling",
+      "route": "/fleet/refueling",
+      "label": "Refueling documentation page",
+      "section": "Documentation > Fleet Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Depot network)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/billing/invoices",
+      "route": "/billing/invoices",
+      "label": "Invoices billing documentation page",
+      "section": "Documentation > Billing & Credits",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Reading an invoice)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/billing/galactic-credits",
+      "route": "/billing/galactic-credits",
+      "label": "Galactic Credits billing documentation page",
+      "section": "Documentation > Billing & Credits",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Topping up)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/billing/refunds",
+      "route": "/billing/refunds",
+      "label": "Refunds billing documentation page",
+      "section": "Documentation > Billing & Credits",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Eligibility)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/compliance/customs",
+      "route": "/compliance/customs",
+      "label": "Customs compliance documentation page",
+      "section": "Documentation > Compliance",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Manifest fields)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/compliance/quarantine",
+      "route": "/compliance/quarantine",
+      "label": "Quarantine compliance documentation page",
+      "section": "Documentation > Compliance",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Hold periods)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/compliance/treaties",
+      "route": "/compliance/treaties",
+      "label": "Treaties compliance documentation page",
+      "section": "Documentation > Compliance",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Key provisions)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/support/contact",
+      "route": "/support/contact",
+      "label": "Contact Support documentation page",
+      "section": "Documentation > Support",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Channels)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/support/faq",
+      "route": "/support/faq",
+      "label": "Frequently Asked Questions documentation page",
+      "section": "Documentation > Support",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (FAQ items)",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/support/escalations",
+      "route": "/support/escalations",
+      "label": "Escalations documentation page",
+      "section": "Documentation > Support",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (When to escalate)",
+        "Click 'Member Benefits' link [href=/member-benefits]",
+        "Navigate sidebar links"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/member-benefits",
+      "route": "/member-benefits",
+      "label": "Member Benefits premium documentation page",
+      "section": "Documentation > Premium Guides",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Membership Tiers, Exclusive Services, How to Upgrade)",
+        "Click 'Premium Fleet Services' link [href=/premium-fleet-services]",
+        "Navigate sidebar links"
+      ],
+      "notes": "Route not protected; hidden in sidebar nav unless authenticated (display:auth). Publicly accessible via URL."
+    },
+    {
+      "id": "/premium-fleet-services",
+      "route": "/premium-fleet-services",
+      "label": "Premium Fleet Services documentation page",
+      "section": "Documentation > Premium Guides",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "Click 'Copy page' button",
+        "Click 'On this page' TOC (Fleet Overview, Premium Services, Booking)",
+        "Click 'Member Benefits' link [href=/member-benefits]",
+        "Navigate sidebar links"
+      ],
+      "notes": "Route not protected; hidden in sidebar nav unless authenticated. Publicly accessible via URL."
+    },
+    {
+      "id": "/only-members",
+      "route": "/only-members",
+      "label": "Members Only \u2014 auth gate (unauthenticated state)",
+      "section": "Protected",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Sign in' button \u2192 /signin",
+        "Click 'Register' button \u2192 /signup"
+      ],
+      "notes": "Shows 'Sign in to continue' screen. Protected by RouteGuard: UNAUTHORIZED reasonCode."
+    },
+    {
+      "id": "/only-members#authenticated",
+      "route": "/only-members",
+      "label": "Members Only \u2014 MembersOnly component (authenticated)",
+      "section": "Protected",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "View members-only content",
+        "Navigate sidebar links",
+        "Click 'Copy page' button"
+      ],
+      "notes": "Renders <MembersOnly /> custom component. Visible only when isAuthenticated=true."
+    },
+    {
+      "id": "/vip-lounge",
+      "route": "/vip-lounge",
+      "label": "VIP Lounge \u2014 auth gate (unauthenticated state)",
+      "section": "Protected",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Sign in' button \u2192 /signin",
+        "Click 'Register' button \u2192 /signup"
+      ],
+      "notes": "Shows 'Sign in to continue'. Protected: UNAUTHORIZED if not auth'd."
+    },
+    {
+      "id": "/vip-lounge#forbidden",
+      "route": "/vip-lounge",
+      "label": "VIP Lounge \u2014 forbidden (auth'd but not @zuplo.com email)",
+      "section": "Protected",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "View forbidden message"
+      ],
+      "notes": "Shows FORBIDDEN state. Email must end with @zuplo.com. Renders RouteGuard FORBIDDEN UI."
+    },
+    {
+      "id": "/vip-lounge#authorized",
+      "route": "/vip-lounge",
+      "label": "VIP Lounge \u2014 VipLounge component (zuplo.com user)",
+      "section": "Protected",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:docs-sidebar",
+      "actions": [
+        "View VIP lounge content",
+        "Navigate sidebar links"
+      ],
+      "notes": "Renders <VipLounge /> component. Only @zuplo.com email addresses allowed."
+    },
+    {
+      "id": "/signin",
+      "route": "/signin",
+      "label": "Sign In \u2014 redirects to Clerk hosted sign-in page",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:none",
+      "actions": [
+        "Fill email/username field",
+        "Click 'Continue' button",
+        "Navigate back after auth \u2192 /documentation"
+      ],
+      "notes": "Immediately redirects to tolerant-hornet-46.accounts.dev/sign-in. Clerk hosted UI."
+    },
+    {
+      "id": "/signup",
+      "route": "/signup",
+      "label": "Sign Up \u2014 redirects to Clerk hosted sign-up page",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:none",
+      "actions": [
+        "Fill registration form",
+        "Click 'Continue' button",
+        "Navigate back after signup \u2192 /documentation"
+      ],
+      "notes": "Immediately redirects to tolerant-hornet-46.accounts.dev/sign-up. Clerk hosted UI."
+    },
+    {
+      "id": "/signout",
+      "route": "/signout",
+      "label": "Sign Out \u2014 clears session, renders main layout",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Navigate to any page via header links"
+      ],
+      "notes": "Clears auth state. Shows standard layout with Login button."
+    },
+    {
+      "id": "/catalog",
+      "route": "/catalog",
+      "label": "API Catalog listing \u2014 all APIs with category filters",
+      "section": "API Catalog",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'All' filter button",
+        "Click 'Core' filter button",
+        "Click 'Logistics' filter button",
+        "Click 'Printing' filter button",
+        "Click 'Platform' filter button",
+        "Click 'Integrations' filter button",
+        "Click API card link \u2192 /catalog/api-label",
+        "Click API card link \u2192 /catalog/api-webhooks",
+        "Click API card link \u2192 /catalog/api-interplanetary",
+        "Click API card link \u2192 /catalog/api-tracking",
+        "Click API card link \u2192 /catalog/api-ai-cargo",
+        "Click API card link \u2192 /catalog/api-docs",
+        "Click API card link \u2192 /catalog/api-cargo-containers",
+        "Click API card link \u2192 /catalog/api-fleet-ops",
+        "Open search modal"
+      ],
+      "notes": "Shows 8 API cards. Category filter buttons filter cards. No sidebar."
+    },
+    {
+      "id": "/api-shipments",
+      "route": "/api-shipments",
+      "label": "Shipment API info page (overview, auth, rate limits)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar link to any tag page",
+        "Click anchor links (Getting Started, Rate Limits, Idempotency, Versioning)",
+        "Toggle sidebar menu",
+        "Open search modal"
+      ],
+      "notes": "OpenAPI info page for shipments.json. Sidebar shows all operation tags."
+    },
+    {
+      "id": "/api-shipments/shipment-management",
+      "route": "/api-shipments/shipment-management",
+      "label": "Shipment Management \u2014 tag page with 8 operations",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on any operation to open inline test panel",
+        "Expand/collapse parameter sections (dateRange, addressFilter)",
+        "Select response code tab (200, default)",
+        "Select example from dropdown",
+        "Select language (cURL, JS, Python, Java, Go, C#, Kotlin, Object)",
+        "Select server from server dropdown",
+        "Click 'See Shipment API' sidebar link",
+        "Navigate to other tag pages via sidebar"
+      ],
+      "notes": "Contains: filter, create, track, cancel, hold, update-priority, get-service-levels, lost-claim, graphql operations."
+    },
+    {
+      "id": "/api-shipments/shipment-management#test-panel",
+      "route": "/api-shipments/shipment-management",
+      "label": "Shipment Management with inline API test panel open",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Toggle query parameter checkboxes",
+        "Fill in parameter Name/Value text inputs",
+        "Fill request body",
+        "Set authorization headers",
+        "Click 'Send' to execute request",
+        "View response in results panel",
+        "Close test panel"
+      ],
+      "notes": "Same pattern applies to all API operation tag pages. Test panel is inline, not a dialog."
+    },
+    {
+      "id": "/api-shipments/tracking-notifications",
+      "route": "/api-shipments/tracking-notifications",
+      "label": "Notifications \u2014 tag page (2 operations: get-events, setup-notifications)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on operations",
+        "Expand 'events' section",
+        "Select language/server",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/rates-billing",
+      "route": "/api-shipments/rates-billing",
+      "label": "Rates & Billing \u2014 tag page (2 operations: calculate-rates, add-insurance)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Expand insurance/fees/transitTime sections",
+        "Select example (Basic service level / Express with insurance)",
+        "Select response tab (200)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/international-shipping",
+      "route": "/api-shipments/international-shipping",
+      "label": "International Shipping \u2014 tag page (2 operations: customs-docs, import-duties)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Expand items/documents/paymentDetails sections",
+        "Select example (Commercial electronics / Personal gifts)",
+        "Select response tab",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/documentation",
+      "route": "/api-shipments/documentation",
+      "label": "Documentation \u2014 tag page (3 operations: get-label, commercial-invoice, legacy-invoice)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select content type (application/json, application/xml)",
+        "Select example (PDF Label, PNG Label, ZPL Label)",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/authentication",
+      "route": "/api-shipments/authentication",
+      "label": "Authentication \u2014 tag page (1 operation: issue-oauth-token)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select response tab (200, 400)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/schemas",
+      "route": "/api-shipments/schemas",
+      "label": "Schemas \u2014 tag page (3 operations: list-schemas, get-details, get-facility-capabilities)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Expand schemas/metadata/statuses/facilities sections",
+        "Select example (Active facilities / Empty)",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/organization-management",
+      "route": "/api-shipments/organization-management",
+      "label": "Organization Management \u2014 tag page (2 operations: list-orgs, create-org)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select response tab (201)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/route-planning",
+      "route": "/api-shipments/route-planning",
+      "label": "Route Planning \u2014 tag page (1 operation: get-estimated-delivery-time)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select response tab (200, 400, 404)",
+        "Select example (Domestic ground / Express)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/api-shipments/~endpoints",
+      "route": "/api-shipments/~endpoints",
+      "label": "Other Endpoints \u2014 untagged operations (health-check, get-api-version)",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on health-check",
+        "Click 'Test' button on get-api-version",
+        "Navigate sidebar"
+      ],
+      "notes": "~endpoints collects all operations not assigned to a tag."
+    },
+    {
+      "id": "/api-shipments/~schemas",
+      "route": "/api-shipments/~schemas",
+      "label": "Schemas reference \u2014 all component schemas for Shipment API",
+      "section": "Shipments API",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schema property sections (recipientAddress, senderAddress, packages, notes, etc.)",
+        "Navigate sidebar"
+      ],
+      "notes": "Displays Shipment, Address, Package, Dimensions and all other component schemas."
+    },
+    {
+      "id": "/catalog/api-label",
+      "route": "/catalog/api-label",
+      "label": "Labels & Stamps API info (defaults to latest/v3 version)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version from version picker (Latest 3.0.0)",
+        "Click sidebar links to Labels/Stamps/~endpoints/~schemas",
+        "Download openapi.json schema [href=/catalog/api-label/latest/openapi.json]",
+        "Navigate sidebar"
+      ],
+      "notes": "Multi-version API: latest(v3), v2, v1. Version selector in sidebar header."
+    },
+    {
+      "id": "/catalog/api-label/latest",
+      "route": "/catalog/api-label/latest",
+      "label": "Labels & Stamps API info (explicit 'latest' version path)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version from version picker",
+        "Click sidebar links to Labels/Stamps/~endpoints/~schemas",
+        "Download openapi.json schema"
+      ],
+      "notes": "Same content as /catalog/api-label but explicit version prefix in all sub-URLs."
+    },
+    {
+      "id": "/catalog/api-label/labels",
+      "route": "/catalog/api-label/labels",
+      "label": "Labels \u2014 tag page (4 operations: create, invalidate, get-tracking, get-label)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on operations",
+        "Select version (Latest 3.0.0)",
+        "Select response tab (201, 400, 404, 204, 200)",
+        "Click 'show 5 more' to expand truncated operations",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-label/stamps",
+      "route": "/catalog/api-label/stamps",
+      "label": "Stamps \u2014 tag page (2 operations: create-stamp, invalidate-stamp)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (Latest 3.0.0)",
+        "Select format (PDF, PNG)",
+        "Select response tab (201, 400, 404, 204)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-label/~endpoints",
+      "route": "/catalog/api-label/~endpoints",
+      "label": "Other Endpoints \u2014 Labels API (health-check)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-label/~schemas",
+      "route": "/catalog/api-label/~schemas",
+      "label": "Schemas \u2014 Labels API (Stamp, Label, Error)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version",
+        "Expand schema properties",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-label/latest/labels",
+      "route": "/catalog/api-label/latest/labels",
+      "label": "Labels operations (version-prefixed path: latest)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Same as /catalog/api-label/labels",
+        "Select version picker to switch versions"
+      ],
+      "notes": "Version-prefixed equivalent of /catalog/api-label/labels."
+    },
+    {
+      "id": "/catalog/api-label/latest/stamps",
+      "route": "/catalog/api-label/latest/stamps",
+      "label": "Stamps operations (version-prefixed path: latest)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Same as /catalog/api-label/stamps",
+        "Select version picker to switch versions"
+      ],
+      "notes": "Version-prefixed equivalent of /catalog/api-label/stamps."
+    },
+    {
+      "id": "/catalog/api-label/latest/~endpoints",
+      "route": "/catalog/api-label/latest/~endpoints",
+      "label": "Other endpoints (version-prefixed path: latest)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Navigate sidebar",
+        "Click 'Test' button"
+      ],
+      "notes": "Version-prefixed equivalent."
+    },
+    {
+      "id": "/catalog/api-label/latest/~schemas",
+      "route": "/catalog/api-label/latest/~schemas",
+      "label": "Schemas (version-prefixed path: latest)",
+      "section": "API Catalog > Labels",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Navigate sidebar"
+      ],
+      "notes": "Version-prefixed equivalent."
+    },
+    {
+      "id": "/catalog/api-webhooks",
+      "route": "/catalog/api-webhooks",
+      "label": "Webhook API info page",
+      "section": "API Catalog > Webhooks",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar link to Webhooks/~schemas",
+        "Download openapi.json schema",
+        "Navigate sidebar"
+      ],
+      "notes": "Custom code snippet generator; supports JS, Python, Java only."
+    },
+    {
+      "id": "/catalog/api-webhooks/webhooks",
+      "route": "/catalog/api-webhooks/webhooks",
+      "label": "Webhooks \u2014 tag page (2 operations: list, register)",
+      "section": "API Catalog > Webhooks",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select response tab (201, 400)",
+        "Select language (JavaScript, Python, Java)"
+      ],
+      "notes": "Custom code snippets via generateWebhookCodeSnippet(). Only 3 languages shown."
+    },
+    {
+      "id": "/catalog/api-webhooks/~schemas",
+      "route": "/catalog/api-webhooks/~schemas",
+      "label": "Schemas \u2014 Webhooks API (Webhook, Error)",
+      "section": "API Catalog > Webhooks",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schema properties",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-interplanetary",
+      "route": "/catalog/api-interplanetary",
+      "label": "Interplanetary Shipping API info page",
+      "section": "API Catalog > Interplanetary",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar link to Interplanetary/~schemas",
+        "Download openapi.json"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-interplanetary/interplanetary",
+      "route": "/catalog/api-interplanetary/interplanetary",
+      "label": "Interplanetary \u2014 tag page (6 operations)",
+      "section": "API Catalog > Interplanetary",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on operations",
+        "Expand cargo sections",
+        "Select response tab (201, 400, 200, 404)",
+        "Select route type (direct, multiHop)",
+        "Select language/server"
+      ],
+      "notes": "Operations: create-shipment, track, create-specialized, plan-route, get-quantum-manifest, list-fuel-stations."
+    },
+    {
+      "id": "/catalog/api-interplanetary/~schemas",
+      "route": "/catalog/api-interplanetary/~schemas",
+      "label": "Schemas \u2014 Interplanetary API",
+      "section": "API Catalog > Interplanetary",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Navigate sidebar"
+      ],
+      "notes": "Schemas: InterplanetaryShipment, Cargo, SafetyCheck, SpecializedCargo, ShippingRoute, QuantumManifest, etc."
+    },
+    {
+      "id": "/catalog/api-tracking",
+      "route": "/catalog/api-tracking",
+      "label": "Shipping Tracking API info page",
+      "section": "API Catalog > Tracking",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar link to ~endpoints/~schemas",
+        "Download openapi.json"
+      ],
+      "notes": "All operations are untagged (go to ~endpoints)."
+    },
+    {
+      "id": "/catalog/api-tracking/~endpoints",
+      "route": "/catalog/api-tracking/~endpoints",
+      "label": "Other Endpoints \u2014 Tracking API (get-shipping-tracking-status)",
+      "section": "API Catalog > Tracking",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Expand attributes section",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-tracking/~schemas",
+      "route": "/catalog/api-tracking/~schemas",
+      "label": "Schemas \u2014 Tracking API (ShippingTracking)",
+      "section": "API Catalog > Tracking",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand attributes section",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-ai-cargo",
+      "route": "/catalog/api-ai-cargo",
+      "label": "AI-Powered Cargo Management API info page",
+      "section": "API Catalog > AI Cargo",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar link to AI Operations/Quantum Transport/~schemas",
+        "Download openapi.json"
+      ],
+      "notes": "Features MCP integration section."
+    },
+    {
+      "id": "/catalog/api-ai-cargo/ai-operations",
+      "route": "/catalog/api-ai-cargo/ai-operations",
+      "label": "AI Operations \u2014 tag page (5 operations incl. MCP endpoint)",
+      "section": "API Catalog > AI Cargo",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Copy URL' button for MCP endpoint URL",
+        "Select MCP client tab (Claude, Codex, Cursor, VS Code, Generic)",
+        "Click 'Claude' / 'Codex' / 'Cursor' / 'VS Code' / 'Generic' tabs",
+        "Click 'Test' button on operations",
+        "Expand cargo/constraints sections",
+        "Select language/server"
+      ],
+      "notes": "Universal MCP endpoint shows client-specific integration tabs. Operations: MCP, optimize-routing, predict-issues, analyze-fleet, sample-audio."
+    },
+    {
+      "id": "/catalog/api-ai-cargo/quantum-transport",
+      "route": "/catalog/api-ai-cargo/quantum-transport",
+      "label": "Quantum Transport \u2014 tag page (1 operation: get-quantum-routes)",
+      "section": "API Catalog > AI Cargo",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Expand routes section",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-ai-cargo/~schemas",
+      "route": "/catalog/api-ai-cargo/~schemas",
+      "label": "Schemas \u2014 AI Cargo API (10+ schemas)",
+      "section": "API Catalog > AI Cargo",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas (cargo, constraints, recommendedRoute, etc.)",
+        "Navigate sidebar"
+      ],
+      "notes": "Schemas: CargoOptimizationRequest, CargoItem, OptimizationConstraints, OptimizationResult, SpaceRoute, etc."
+    },
+    {
+      "id": "/catalog/api-docs",
+      "route": "/catalog/api-docs",
+      "label": "Cosmo Cargo Documentation API info page",
+      "section": "API Catalog > Docs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar link to Documentation/~schemas",
+        "Download openapi.json"
+      ],
+      "notes": "MCP Integration section. Documentation API for searching/fetching docs."
+    },
+    {
+      "id": "/catalog/api-docs/documentation",
+      "route": "/catalog/api-docs/documentation",
+      "label": "Documentation operations \u2014 3 operations (MCP server, search, get-article)",
+      "section": "API Catalog > Docs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Copy URL' for MCP endpoint",
+        "Select MCP client tab (Claude, ChatGPT, Codex, Cursor, VS Code, Generic)",
+        "Click 'Test' button on operations",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": "MCP server endpoint supports 6 client integrations (more than api-ai-cargo)."
+    },
+    {
+      "id": "/catalog/api-docs/~schemas",
+      "route": "/catalog/api-docs/~schemas",
+      "label": "Schemas \u2014 Documentation API (DocsResponse, SearchResult, Article)",
+      "section": "API Catalog > Docs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-cargo-containers",
+      "route": "/catalog/api-cargo-containers",
+      "label": "Cargo Container Specifications API info page",
+      "section": "API Catalog > Cargo Containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click sidebar links to Containers/Booking/Quotes/~schemas",
+        "Download openapi.json"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-cargo-containers/containers",
+      "route": "/catalog/api-cargo-containers/containers",
+      "label": "Containers \u2014 tag page (3 operations: list, get-details, update-specs)",
+      "section": "API Catalog > Cargo Containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on operations",
+        "Expand containers/route/deliverySpeed/customer/payment/handlingRequirements sections",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-cargo-containers/booking",
+      "route": "/catalog/api-cargo-containers/booking",
+      "label": "Booking \u2014 tag page (3 operations: quote, book, update-specs)",
+      "section": "API Catalog > Cargo Containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button on operations",
+        "Expand container/route/deliverySpeed/handlingRequirements/insurance sections",
+        "Select response tab (200, 400, 201)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-cargo-containers/quotes",
+      "route": "/catalog/api-cargo-containers/quotes",
+      "label": "Quotes \u2014 tag page (1 operation: request-container-quote)",
+      "section": "API Catalog > Cargo Containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Expand container/route/deliverySpeed/handlingRequirements/insurance sections",
+        "Select response tab (200, 400)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-cargo-containers/~schemas",
+      "route": "/catalog/api-cargo-containers/~schemas",
+      "label": "Schemas \u2014 Cargo Containers API (15+ schemas)",
+      "section": "API Catalog > Cargo Containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Navigate sidebar"
+      ],
+      "notes": "Schemas: BaseContainer, StandardContainer, RefrigeratedContainer, PressurizedContainer, Booking, etc."
+    },
+    {
+      "id": "/catalog/api-fleet-ops",
+      "route": "/catalog/api-fleet-ops",
+      "label": "Fleet Operations API info (defaults to v3/Quantum version)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version (v3 Quantum / v2 Warp / v1 Sublight)",
+        "Click sidebar links to Fleet Command/Navigation/~schemas",
+        "Download openapi.json"
+      ],
+      "notes": "3 API versions: v3 (Quantum), v2 (Warp), v1 (Sublight). Version selector in sidebar."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/fleet-command",
+      "route": "/catalog/api-fleet-ops/fleet-command",
+      "label": "Fleet Command \u2014 v3 tag page (1 operation: list-all-vessels)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v3 Quantum)",
+        "Select language/server"
+      ],
+      "notes": "v3 only has list-vessels (no get-vessel-details). Accessed as default version."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/navigation",
+      "route": "/catalog/api-fleet-ops/navigation",
+      "label": "Navigation \u2014 v3 tag page (1 operation: list-warp-routes)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v3 Quantum)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/~schemas",
+      "route": "/catalog/api-fleet-ops/~schemas",
+      "label": "Schemas \u2014 Fleet Ops v3 (Vessel, Route, CargoBay, Error)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Select version",
+        "Navigate sidebar"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v1",
+      "route": "/catalog/api-fleet-ops/v1",
+      "label": "Fleet Operations API v1 (Sublight) info page",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version (v1 Sublight)",
+        "Click sidebar links to Fleet Command/Cargo Bays/~schemas"
+      ],
+      "notes": "v1 has: Fleet Command (list+get) and Cargo Bays. No Navigation tag."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v1/fleet-command",
+      "route": "/catalog/api-fleet-ops/v1/fleet-command",
+      "label": "Fleet Command v1 \u2014 2 operations (list-vessels, get-vessel-details)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v1 Sublight)",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v1/cargo-bays",
+      "route": "/catalog/api-fleet-ops/v1/cargo-bays",
+      "label": "Cargo Bays v1 \u2014 1 operation (list-cargo-bays)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v1 Sublight)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v1/~schemas",
+      "route": "/catalog/api-fleet-ops/v1/~schemas",
+      "label": "Schemas v1 \u2014 Fleet Ops (Vessel, Route, CargoBay, Error)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Select version"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v2",
+      "route": "/catalog/api-fleet-ops/v2",
+      "label": "Fleet Operations API v2 (Warp) info page",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version (v2 Warp)",
+        "Click sidebar links to Fleet Command/Navigation/Cargo Bays/~schemas"
+      ],
+      "notes": "v2 adds Navigation tag with 2 operations vs v1."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v2/fleet-command",
+      "route": "/catalog/api-fleet-ops/v2/fleet-command",
+      "label": "Fleet Command v2 \u2014 2 operations (list-vessels, get-vessel-details)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v2 Warp)",
+        "Select response tab (200, 404)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v2/navigation",
+      "route": "/catalog/api-fleet-ops/v2/navigation",
+      "label": "Navigation v2 \u2014 2 operations (list-warp-routes, calculate-warp-route)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v2 Warp)",
+        "Select language/server"
+      ],
+      "notes": "v2 adds calculate-warp-route operation vs v3 which only has list."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v2/cargo-bays",
+      "route": "/catalog/api-fleet-ops/v2/cargo-bays",
+      "label": "Cargo Bays v2 \u2014 2 operations (list, get-details)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v2 Warp)",
+        "Select language/server"
+      ],
+      "notes": "v2 adds get-cargo-bay-details vs v1."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v2/~schemas",
+      "route": "/catalog/api-fleet-ops/v2/~schemas",
+      "label": "Schemas v2 \u2014 Fleet Ops",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Select version"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v3",
+      "route": "/catalog/api-fleet-ops/v3",
+      "label": "Fleet Operations API v3 (Quantum) info page",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Select version (v3 Quantum)",
+        "Click sidebar links to Fleet Command/Navigation/~schemas"
+      ],
+      "notes": "v3 default. Same as /catalog/api-fleet-ops but with explicit version prefix in URLs."
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v3/fleet-command",
+      "route": "/catalog/api-fleet-ops/v3/fleet-command",
+      "label": "Fleet Command v3 \u2014 1 operation (list-all-vessels)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v3 Quantum)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v3/navigation",
+      "route": "/catalog/api-fleet-ops/v3/navigation",
+      "label": "Navigation v3 \u2014 1 operation (list-warp-routes)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Click 'Test' button",
+        "Select version (v3 Quantum)",
+        "Select language/server"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/catalog/api-fleet-ops/v3/~schemas",
+      "route": "/catalog/api-fleet-ops/v3/~schemas",
+      "label": "Schemas v3 (version-prefixed path)",
+      "section": "API Catalog > Fleet Ops",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:api-sidebar",
+      "actions": [
+        "Expand schemas",
+        "Navigate sidebar"
+      ],
+      "notes": "Same content as /catalog/api-fleet-ops/~schemas."
+    },
+    {
+      "id": "/400",
+      "route": "/400",
+      "label": "400 Bad Request error page",
+      "section": "Error Pages",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Navigate via header links",
+        "Click 'Documentation' link",
+        "Click 'Shipments' link"
+      ],
+      "notes": "Shows 'Bad Request' h1. Zudoku built-in error page."
+    },
+    {
+      "id": "/404",
+      "route": "/404",
+      "label": "404 Not Found \u2014 custom NotFound component 'Lost in Deep Space'",
+      "section": "Error Pages",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Navigate via header links",
+        "Click 'Documentation' link",
+        "Click 'Shipments' link"
+      ],
+      "notes": "Custom NotFound component configured in site.notFoundPage. Also triggered by any unknown route."
+    },
+    {
+      "id": "/500",
+      "route": "/500",
+      "label": "500 Internal Server Error page",
+      "section": "Error Pages",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Navigate via header links"
+      ],
+      "notes": "Shows 'Internal Server Error' h1. Zudoku built-in error page."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/documentation",
+      "trigger": "link 'Documentation' in header nav"
+    },
+    {
+      "from": "/",
+      "to": "/api-shipments",
+      "trigger": "link 'Shipments' in header nav"
+    },
+    {
+      "from": "/",
+      "to": "/catalog",
+      "trigger": "link 'API Catalog' in header nav"
+    },
+    {
+      "from": "/",
+      "to": "/#solutions-dropdown",
+      "trigger": "button 'Solutions' in header nav"
+    },
+    {
+      "from": "/",
+      "to": "/#search-modal",
+      "trigger": "button 'Search\u2318K' in header nav"
+    },
+    {
+      "from": "/",
+      "to": "/signup",
+      "trigger": "link 'Sign up for a Cosmo Cargo account' [href=/signup]"
+    },
+    {
+      "from": "/",
+      "to": "/documentation",
+      "trigger": "link 'Read our documentation' in hero section"
+    },
+    {
+      "from": "/",
+      "to": "/api-shipments",
+      "trigger": "link 'Get started' in hero section"
+    },
+    {
+      "from": "/",
+      "to": "/signin",
+      "trigger": "button 'Login' in header nav"
+    },
+    {
+      "from": "/#solutions-dropdown",
+      "to": "/documentation",
+      "trigger": "link 'Shipment Tracking' in Solutions dropdown"
+    },
+    {
+      "from": "/#solutions-dropdown",
+      "to": "/api-shipments/shipment-management",
+      "trigger": "link 'Warp Logistics' in Solutions dropdown"
+    },
+    {
+      "from": "/#solutions-dropdown",
+      "to": "/catalog",
+      "trigger": "link 'API Catalog' in Solutions dropdown"
+    },
+    {
+      "from": "/#solutions-dropdown",
+      "to": "/",
+      "trigger": "click outside dropdown or Escape key"
+    },
+    {
+      "from": "/#search-modal",
+      "to": "/",
+      "trigger": "Escape key or 'Close dialog' button in search modal"
+    },
+    {
+      "from": "/documentation",
+      "to": "/shipping-process",
+      "trigger": "sidebar link 'Intergalactic Shipping Process'"
+    },
+    {
+      "from": "/documentation",
+      "to": "/tracking",
+      "trigger": "sidebar link 'Tracking'"
+    },
+    {
+      "from": "/documentation",
+      "to": "/quantum-express",
+      "trigger": "sidebar link 'Quantum Express'"
+    },
+    {
+      "from": "/documentation",
+      "to": "/ship-states",
+      "trigger": "sidebar link 'Ship States'"
+    },
+    {
+      "from": "/documentation",
+      "to": "/global",
+      "trigger": "sidebar link 'Global' in Shipping Guides"
+    },
+    {
+      "from": "/documentation",
+      "to": "/cargo-handbook/hazardous",
+      "trigger": "sidebar link 'Hazardous' in Cargo Handbook"
+    },
+    {
+      "from": "/documentation",
+      "to": "/fleet/warp-drives",
+      "trigger": "sidebar link 'Warp Drives' in Fleet Management"
+    },
+    {
+      "from": "/documentation",
+      "to": "/billing/invoices",
+      "trigger": "sidebar link 'Invoices' in Billing & Credits"
+    },
+    {
+      "from": "/documentation",
+      "to": "/compliance/customs",
+      "trigger": "sidebar link 'Customs' in Compliance"
+    },
+    {
+      "from": "/documentation",
+      "to": "/support/contact",
+      "trigger": "sidebar link 'Contact' in Support"
+    },
+    {
+      "from": "/documentation",
+      "to": "/only-members",
+      "trigger": "button 'Access Premium Area' in page content"
+    },
+    {
+      "from": "/documentation",
+      "to": "/api-shipments",
+      "trigger": "sidebar link 'See Shipment API' [icon=arrow-right]"
+    },
+    {
+      "from": "/shipping-process",
+      "to": "/shipping-process#playground-modal",
+      "trigger": "button 'Open in Playground'"
+    },
+    {
+      "from": "/shipping-process#playground-modal",
+      "to": "/shipping-process",
+      "trigger": "button 'Close' in playground dialog"
+    },
+    {
+      "from": "/shipping-process#playground-modal",
+      "to": "/signin",
+      "trigger": "button 'Login' in playground welcome prompt",
+      "guard": "user not authenticated"
+    },
+    {
+      "from": "/shipping-process#playground-modal",
+      "to": "/signup",
+      "trigger": "button 'Sign Up' in playground welcome prompt",
+      "guard": "user not authenticated"
+    },
+    {
+      "from": "/support/escalations",
+      "to": "/member-benefits",
+      "trigger": "link 'Member Benefits' in page content"
+    },
+    {
+      "from": "/member-benefits",
+      "to": "/premium-fleet-services",
+      "trigger": "link 'Premium Fleet Services' in page content"
+    },
+    {
+      "from": "/api-shipments/shipment-management",
+      "to": "/api-shipments/shipment-management#test-panel",
+      "trigger": "button 'Test' on any operation"
+    },
+    {
+      "from": "/api-shipments/shipment-management#test-panel",
+      "to": "/api-shipments/shipment-management",
+      "trigger": "close test panel"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-label",
+      "trigger": "API card link 'Labels & Stamps API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-webhooks",
+      "trigger": "API card link 'Webhook API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-interplanetary",
+      "trigger": "API card link 'Interplanetary Shipping API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-tracking",
+      "trigger": "API card link 'Shipping Tracking API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-ai-cargo",
+      "trigger": "API card link 'AI-Powered Cargo Management API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-docs",
+      "trigger": "API card link 'Cosmo Cargo Documentation API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-cargo-containers",
+      "trigger": "API card link 'Cargo Container Specifications API'"
+    },
+    {
+      "from": "/catalog",
+      "to": "/catalog/api-fleet-ops",
+      "trigger": "API card link 'Fleet Operations API'"
+    },
+    {
+      "from": "/catalog/api-label",
+      "to": "/catalog/api-label/labels",
+      "trigger": "sidebar link 'Labels'"
+    },
+    {
+      "from": "/catalog/api-label",
+      "to": "/catalog/api-label/stamps",
+      "trigger": "sidebar link 'Stamps'"
+    },
+    {
+      "from": "/catalog/api-label",
+      "to": "/catalog/api-label/~endpoints",
+      "trigger": "sidebar link '~endpoints'"
+    },
+    {
+      "from": "/catalog/api-label",
+      "to": "/catalog/api-label/~schemas",
+      "trigger": "sidebar link '~schemas'"
+    },
+    {
+      "from": "/catalog/api-label",
+      "to": "/catalog/api-label/latest",
+      "trigger": "version selector 'Latest (3.0.0)'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops",
+      "to": "/catalog/api-fleet-ops/v1",
+      "trigger": "version selector 'v1 (Sublight)'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops",
+      "to": "/catalog/api-fleet-ops/v2",
+      "trigger": "version selector 'v2 (Warp)'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops",
+      "to": "/catalog/api-fleet-ops/v3",
+      "trigger": "version selector 'v3 (Quantum)'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v1",
+      "to": "/catalog/api-fleet-ops/v1/fleet-command",
+      "trigger": "sidebar link 'Fleet Command'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v1",
+      "to": "/catalog/api-fleet-ops/v1/cargo-bays",
+      "trigger": "sidebar link 'Cargo Bays'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v2",
+      "to": "/catalog/api-fleet-ops/v2/fleet-command",
+      "trigger": "sidebar link 'Fleet Command'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v2",
+      "to": "/catalog/api-fleet-ops/v2/navigation",
+      "trigger": "sidebar link 'Navigation'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v2",
+      "to": "/catalog/api-fleet-ops/v2/cargo-bays",
+      "trigger": "sidebar link 'Cargo Bays'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v3",
+      "to": "/catalog/api-fleet-ops/v3/fleet-command",
+      "trigger": "sidebar link 'Fleet Command'"
+    },
+    {
+      "from": "/catalog/api-fleet-ops/v3",
+      "to": "/catalog/api-fleet-ops/v3/navigation",
+      "trigger": "sidebar link 'Navigation'"
+    },
+    {
+      "from": "/only-members",
+      "to": "/signin",
+      "trigger": "button 'Sign in' in auth gate"
+    },
+    {
+      "from": "/only-members",
+      "to": "/signup",
+      "trigger": "button 'Register' in auth gate"
+    },
+    {
+      "from": "/only-members",
+      "to": "/only-members#authenticated",
+      "trigger": "auto: redirect after sign-in",
+      "guard": "user authenticated"
+    },
+    {
+      "from": "/vip-lounge",
+      "to": "/signin",
+      "trigger": "button 'Sign in' in auth gate"
+    },
+    {
+      "from": "/vip-lounge",
+      "to": "/signup",
+      "trigger": "button 'Register' in auth gate"
+    },
+    {
+      "from": "/vip-lounge",
+      "to": "/vip-lounge#authorized",
+      "trigger": "auto: redirect after sign-in",
+      "guard": "user authenticated AND email ends with @zuplo.com"
+    },
+    {
+      "from": "/vip-lounge",
+      "to": "/vip-lounge#forbidden",
+      "trigger": "auto: show FORBIDDEN state",
+      "guard": "user authenticated BUT email does not end with @zuplo.com"
+    },
+    {
+      "from": "/signin",
+      "to": "/documentation",
+      "trigger": "auto: redirect after successful sign-in (redirectToAfterSignIn)"
+    },
+    {
+      "from": "/signup",
+      "to": "/documentation",
+      "trigger": "auto: redirect after successful sign-up (redirectToAfterSignUp)"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/shipment-management",
+      "trigger": "sidebar link 'Shipment Management'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/tracking-notifications",
+      "trigger": "sidebar link 'Tracking Notifications'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/rates-billing",
+      "trigger": "sidebar link 'Rates & Billing'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/international-shipping",
+      "trigger": "sidebar link 'International Shipping'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/documentation",
+      "trigger": "sidebar link 'Documentation'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/authentication",
+      "trigger": "sidebar link 'Authentication'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/schemas",
+      "trigger": "sidebar link 'Schemas'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/organization-management",
+      "trigger": "sidebar link 'Organization Management'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/route-planning",
+      "trigger": "sidebar link 'Route Planning'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/~endpoints",
+      "trigger": "sidebar link '~endpoints'"
+    },
+    {
+      "from": "/api-shipments",
+      "to": "/api-shipments/~schemas",
+      "trigger": "sidebar link '~schemas'"
+    },
+    {
+      "from": "/404",
+      "to": "/",
+      "trigger": "auto: all unknown routes render custom NotFound"
+    },
+    {
+      "from": "/catalog/api-ai-cargo/ai-operations",
+      "to": "/catalog/api-ai-cargo/ai-operations",
+      "trigger": "select MCP client tab (Claude/Codex/Cursor/VS Code/Generic) \u2014 same page, different code snippet"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Publicly accessible routes",
+        "node_ids": [
+          "/",
+          "/#search-modal",
+          "/#solutions-dropdown",
+          "/documentation",
+          "/documentation/test",
+          "/shipping-process",
+          "/shipping-process#playground-modal",
+          "/tracking",
+          "/quantum-express",
+          "/ship-states",
+          "/global",
+          "/interstellar",
+          "/intergalactic",
+          "/cargo-handbook/hazardous",
+          "/cargo-handbook/cryo",
+          "/cargo-handbook/living",
+          "/cargo-handbook/anomalous",
+          "/fleet/warp-drives",
+          "/fleet/maintenance",
+          "/fleet/crew",
+          "/fleet/refueling",
+          "/billing/invoices",
+          "/billing/galactic-credits",
+          "/billing/refunds",
+          "/compliance/customs",
+          "/compliance/quarantine",
+          "/compliance/treaties",
+          "/support/contact",
+          "/support/faq",
+          "/support/escalations",
+          "/member-benefits",
+          "/premium-fleet-services",
+          "/signin",
+          "/signup",
+          "/signout",
+          "/catalog",
+          "/api-shipments",
+          "/api-shipments/shipment-management",
+          "/api-shipments/shipment-management#test-panel",
+          "/api-shipments/tracking-notifications",
+          "/api-shipments/rates-billing",
+          "/api-shipments/international-shipping",
+          "/api-shipments/documentation",
+          "/api-shipments/authentication",
+          "/api-shipments/schemas",
+          "/api-shipments/organization-management",
+          "/api-shipments/route-planning",
+          "/api-shipments/~endpoints",
+          "/api-shipments/~schemas",
+          "/catalog/api-label",
+          "/catalog/api-label/latest",
+          "/catalog/api-label/labels",
+          "/catalog/api-label/stamps",
+          "/catalog/api-label/~endpoints",
+          "/catalog/api-label/~schemas",
+          "/catalog/api-label/latest/labels",
+          "/catalog/api-label/latest/stamps",
+          "/catalog/api-label/latest/~endpoints",
+          "/catalog/api-label/latest/~schemas",
+          "/catalog/api-webhooks",
+          "/catalog/api-webhooks/webhooks",
+          "/catalog/api-webhooks/~schemas",
+          "/catalog/api-interplanetary",
+          "/catalog/api-interplanetary/interplanetary",
+          "/catalog/api-interplanetary/~schemas",
+          "/catalog/api-tracking",
+          "/catalog/api-tracking/~endpoints",
+          "/catalog/api-tracking/~schemas",
+          "/catalog/api-ai-cargo",
+          "/catalog/api-ai-cargo/ai-operations",
+          "/catalog/api-ai-cargo/quantum-transport",
+          "/catalog/api-ai-cargo/~schemas",
+          "/catalog/api-docs",
+          "/catalog/api-docs/documentation",
+          "/catalog/api-docs/~schemas",
+          "/catalog/api-cargo-containers",
+          "/catalog/api-cargo-containers/containers",
+          "/catalog/api-cargo-containers/booking",
+          "/catalog/api-cargo-containers/quotes",
+          "/catalog/api-cargo-containers/~schemas",
+          "/catalog/api-fleet-ops",
+          "/catalog/api-fleet-ops/fleet-command",
+          "/catalog/api-fleet-ops/navigation",
+          "/catalog/api-fleet-ops/~schemas",
+          "/catalog/api-fleet-ops/v1",
+          "/catalog/api-fleet-ops/v1/fleet-command",
+          "/catalog/api-fleet-ops/v1/cargo-bays",
+          "/catalog/api-fleet-ops/v1/~schemas",
+          "/catalog/api-fleet-ops/v2",
+          "/catalog/api-fleet-ops/v2/fleet-command",
+          "/catalog/api-fleet-ops/v2/navigation",
+          "/catalog/api-fleet-ops/v2/cargo-bays",
+          "/catalog/api-fleet-ops/v2/~schemas",
+          "/catalog/api-fleet-ops/v3",
+          "/catalog/api-fleet-ops/v3/fleet-command",
+          "/catalog/api-fleet-ops/v3/navigation",
+          "/catalog/api-fleet-ops/v3/~schemas",
+          "/400",
+          "/404",
+          "/500"
+        ]
+      },
+      {
+        "id": "zone:auth-required",
+        "label": "Routes requiring authentication (RouteGuard protected)",
+        "node_ids": [
+          "/only-members",
+          "/only-members#authenticated",
+          "/vip-lounge",
+          "/vip-lounge#authorized",
+          "/vip-lounge#forbidden"
+        ]
+      },
+      {
+        "id": "zone:auth-hidden",
+        "label": "Routes hidden from nav when unauthenticated but URL-accessible",
+        "node_ids": [
+          "/member-benefits",
+          "/premium-fleet-services"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:main",
+        "label": "Main layout: header (logo, nav, search, auth), content, footer",
+        "node_ids": [
+          "/",
+          "/#search-modal",
+          "/#solutions-dropdown",
+          "/signout",
+          "/only-members",
+          "/vip-lounge",
+          "/catalog",
+          "/400",
+          "/404",
+          "/500"
+        ]
+      },
+      {
+        "id": "layout:docs-sidebar",
+        "label": "Docs layout: header + left sidebar (collapsible) + content + footer",
+        "node_ids": [
+          "/documentation",
+          "/documentation/test",
+          "/shipping-process",
+          "/shipping-process#playground-modal",
+          "/tracking",
+          "/quantum-express",
+          "/ship-states",
+          "/global",
+          "/interstellar",
+          "/intergalactic",
+          "/cargo-handbook/hazardous",
+          "/cargo-handbook/cryo",
+          "/cargo-handbook/living",
+          "/cargo-handbook/anomalous",
+          "/fleet/warp-drives",
+          "/fleet/maintenance",
+          "/fleet/crew",
+          "/fleet/refueling",
+          "/billing/invoices",
+          "/billing/galactic-credits",
+          "/billing/refunds",
+          "/compliance/customs",
+          "/compliance/quarantine",
+          "/compliance/treaties",
+          "/support/contact",
+          "/support/faq",
+          "/support/escalations",
+          "/member-benefits",
+          "/premium-fleet-services",
+          "/only-members#authenticated",
+          "/vip-lounge#authorized"
+        ]
+      },
+      {
+        "id": "layout:api-sidebar",
+        "label": "API layout: header + left sidebar (API tags) + content panel",
+        "node_ids": [
+          "/api-shipments",
+          "/api-shipments/shipment-management",
+          "/api-shipments/shipment-management#test-panel",
+          "/api-shipments/tracking-notifications",
+          "/api-shipments/rates-billing",
+          "/api-shipments/international-shipping",
+          "/api-shipments/documentation",
+          "/api-shipments/authentication",
+          "/api-shipments/schemas",
+          "/api-shipments/organization-management",
+          "/api-shipments/route-planning",
+          "/api-shipments/~endpoints",
+          "/api-shipments/~schemas",
+          "/catalog/api-label",
+          "/catalog/api-label/latest",
+          "/catalog/api-label/labels",
+          "/catalog/api-label/stamps",
+          "/catalog/api-label/~endpoints",
+          "/catalog/api-label/~schemas",
+          "/catalog/api-label/latest/labels",
+          "/catalog/api-label/latest/stamps",
+          "/catalog/api-label/latest/~endpoints",
+          "/catalog/api-label/latest/~schemas",
+          "/catalog/api-webhooks",
+          "/catalog/api-webhooks/webhooks",
+          "/catalog/api-webhooks/~schemas",
+          "/catalog/api-interplanetary",
+          "/catalog/api-interplanetary/interplanetary",
+          "/catalog/api-interplanetary/~schemas",
+          "/catalog/api-tracking",
+          "/catalog/api-tracking/~endpoints",
+          "/catalog/api-tracking/~schemas",
+          "/catalog/api-ai-cargo",
+          "/catalog/api-ai-cargo/ai-operations",
+          "/catalog/api-ai-cargo/quantum-transport",
+          "/catalog/api-ai-cargo/~schemas",
+          "/catalog/api-docs",
+          "/catalog/api-docs/documentation",
+          "/catalog/api-docs/~schemas",
+          "/catalog/api-cargo-containers",
+          "/catalog/api-cargo-containers/containers",
+          "/catalog/api-cargo-containers/booking",
+          "/catalog/api-cargo-containers/quotes",
+          "/catalog/api-cargo-containers/~schemas",
+          "/catalog/api-fleet-ops",
+          "/catalog/api-fleet-ops/fleet-command",
+          "/catalog/api-fleet-ops/navigation",
+          "/catalog/api-fleet-ops/~schemas",
+          "/catalog/api-fleet-ops/v1",
+          "/catalog/api-fleet-ops/v1/fleet-command",
+          "/catalog/api-fleet-ops/v1/cargo-bays",
+          "/catalog/api-fleet-ops/v1/~schemas",
+          "/catalog/api-fleet-ops/v2",
+          "/catalog/api-fleet-ops/v2/fleet-command",
+          "/catalog/api-fleet-ops/v2/navigation",
+          "/catalog/api-fleet-ops/v2/cargo-bays",
+          "/catalog/api-fleet-ops/v2/~schemas",
+          "/catalog/api-fleet-ops/v3",
+          "/catalog/api-fleet-ops/v3/fleet-command",
+          "/catalog/api-fleet-ops/v3/navigation",
+          "/catalog/api-fleet-ops/v3/~schemas"
+        ]
+      },
+      {
+        "id": "layout:none",
+        "label": "No Zudoku layout \u2014 external Clerk hosted pages",
+        "node_ids": [
+          "/signin",
+          "/signup"
+        ]
+      }
+    ]
+  }
+}

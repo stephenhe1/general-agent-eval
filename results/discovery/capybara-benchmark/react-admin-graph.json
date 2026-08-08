@@ -1,0 +1,1394 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Atomic CRM",
+    "base_url": "http://localhost:3016",
+    "framework": "React + react-admin + Vite",
+    "total_states": 46,
+    "explored": 45,
+    "skipped": 1,
+    "verified_live": [
+      "/",
+      "/login",
+      "/sign-up",
+      "/contacts",
+      "/companies",
+      "/deals",
+      "/settings",
+      "/sales"
+    ],
+    "notes": "Single-page app. Auth via localStorage. Demo credentials: janedoe@atomic.dev / demo (admin). Non-admin role blocks /sales resource. /reset-password link exists in login but no route component is defined - resolves to react-admin 404."
+  },
+  "nodes": [
+    {
+      "id": "/login",
+      "route": "/login",
+      "label": "Login page with email/password form",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-shell",
+      "actions": [
+        "Fill email field [label=Email]",
+        "Fill password field [label=Password]",
+        "Submit login form [type=submit]",
+        "Click 'Forgot your password?' link [to=/reset-password]"
+      ],
+      "notes": "Redirects to /sign-up if app not yet initialized"
+    },
+    {
+      "id": "/sign-up",
+      "route": "/sign-up",
+      "label": "Initial account setup form (first user only)",
+      "section": "Auth",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-shell",
+      "actions": [
+        "Fill first name field [label=First name]",
+        "Fill last name field [label=Last name]",
+        "Fill email field [label=Email]",
+        "Fill password field [label=Password]",
+        "Submit 'Create account' button [type=submit]"
+      ],
+      "notes": "Only shown when isInitialized=false. Redirects to /login if already initialized."
+    },
+    {
+      "id": "/reset-password",
+      "route": "/reset-password",
+      "label": "Reset password (no route component registered)",
+      "section": "Auth",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": "layout:no-shell",
+      "actions": [],
+      "notes": "Link from login form but no component in CRM.tsx; shows react-admin 404"
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Dashboard — full view with activity, contacts, tasks, deals chart",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'Dashboard' nav tab [aria-label=Navigation Tabs]",
+        "Click 'Contacts' nav tab [aria-label=Navigation Tabs]",
+        "Click 'Companies' nav tab [aria-label=Navigation Tabs]",
+        "Click 'Deals' nav tab [aria-label=Navigation Tabs]",
+        "Open user menu [aria-label=UserMenu]",
+        "Click hot contact link in HotContacts widget",
+        "Click activity log item link",
+        "Click 'Add task' icon button in TasksList [aria-label=Create task]"
+      ],
+      "notes": "Shown when contacts AND contactNotes exist. Renders deals chart if deals exist."
+    },
+    {
+      "id": "/#dashboard-stepper-step1",
+      "route": "/",
+      "label": "Dashboard onboarding stepper — step 1 (no contacts yet)",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'New Contact' button [variant=contained]",
+        "Click 'Import' button [startIcon=UploadIcon]",
+        "Open contact import dialog"
+      ],
+      "notes": "Shown when totalContact === 0. Linear progress shows 1/3."
+    },
+    {
+      "id": "/#dashboard-stepper-step2",
+      "route": "/",
+      "label": "Dashboard onboarding stepper — step 2 (no notes yet)",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'New Contact' button [variant=contained]",
+        "Click 'Import' button [startIcon=UploadIcon]",
+        "Click 'Add note' button [variant=contained] (goes to first contact show)"
+      ],
+      "notes": "Shown when contacts exist but totalContactNotes === 0. Progress shows 2/3."
+    },
+    {
+      "id": "/#add-task-dialog",
+      "route": "/",
+      "label": "Add Task dialog (from Dashboard Tasks panel)",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill task description [label=Description]",
+        "Select contact [label=Contact] (autocomplete)",
+        "Fill due date [label=due_date]",
+        "Select task type [label=type]",
+        "Click Save button [label=Save]",
+        "Close dialog [aria-label=Close]"
+      ],
+      "notes": "Dialog spawned by 'Add task' icon in TasksList. selectContact=true so contact picker shown."
+    },
+    {
+      "id": "/contacts",
+      "route": "/contacts",
+      "label": "Contact list with sidebar filters and bulk actions",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Search contacts [placeholder='Search name, company, etc.']",
+        "Filter by Last activity (Today/This week/Before this week/Before this month/Before last month)",
+        "Filter by Status (note statuses)",
+        "Filter by Tags",
+        "Filter by Tasks (with pending tasks)",
+        "Filter by Account manager (Me)",
+        "Click Sort button [label=Sort]",
+        "Click Import button [label=Import]",
+        "Click Export button [label=Export]",
+        "Click 'New Contact' button [label='New Contact']",
+        "Click contact row [navigates to /contacts/:id/show]",
+        "Toggle contact checkbox for bulk selection",
+        "Click 'Bulk Export' [BulkExportButton]",
+        "Click 'Bulk Delete' [BulkDeleteButton]",
+        "Change pagination rows per page [10/25/50/100]",
+        "Navigate to next/prev page"
+      ],
+      "notes": "Shows ContactEmpty state when no data and no filters."
+    },
+    {
+      "id": "/contacts#empty",
+      "route": "/contacts",
+      "label": "Contact list empty state",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'New Contact' button",
+        "Click 'Import' button"
+      ],
+      "notes": "Rendered when data is empty and no active filters."
+    },
+    {
+      "id": "/contacts#import-dialog",
+      "route": "/contacts",
+      "label": "Contact Import dialog — file upload and CSV import",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Download CSV sample file [label='Download CSV sample']",
+        "Upload CSV file [FileInput source=csv]",
+        "Click Import button [label=Import]",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "States: idle → running → complete | error. Stop import link visible during running."
+    },
+    {
+      "id": "/contacts/create",
+      "route": "/contacts/create",
+      "label": "Create new contact form",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill first_name [label=first_name]",
+        "Fill last_name [label=last_name]",
+        "Fill title [label=title]",
+        "Fill company (ReferenceInput) [label=company_id]",
+        "Fill email [label=email]",
+        "Fill linkedin_url [label=linkedin_url]",
+        "Fill phone_1_number / phone_1_type",
+        "Fill phone_2_number / phone_2_type",
+        "Select gender",
+        "Fill background",
+        "Select sales_id (account manager)",
+        "Click Save button [Toolbar SaveButton]"
+      ],
+      "notes": "Redirects to contact show on save. sales_id defaults to current user."
+    },
+    {
+      "id": "/contacts/:id",
+      "route": "/contacts/:id",
+      "label": "Edit contact form with aside panel",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit contact fields (first_name, last_name, title, company, email, phone, gender, background)",
+        "Click Save button [Toolbar SaveButton]",
+        "Click 'Show Contact' button in aside [ShowButton]",
+        "Click 'Delete' button in aside [DeleteButton]",
+        "Manage tags in aside [TagsListEdit]",
+        "Add task in aside [AddTask chip]",
+        "Click existing task to edit [TaskEdit dialog]"
+      ],
+      "notes": "Aside has tags, tasks, delete. Redirects to show on save."
+    },
+    {
+      "id": "/contacts/:id#task-create-dialog",
+      "route": "/contacts/:id",
+      "label": "Add Task dialog within Contact Edit aside",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill task description [label=Description]",
+        "Fill due date",
+        "Select task type",
+        "Click Save button",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "Triggered by 'Add task' chip in ContactAside. selectContact=false."
+    },
+    {
+      "id": "/contacts/:id#task-edit-dialog",
+      "route": "/contacts/:id",
+      "label": "Edit Task dialog within Contact Edit aside",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit task description [label=Description]",
+        "Edit due date",
+        "Edit task type",
+        "Click Save button [label=Save]",
+        "Click Delete button [label=Delete]",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "Opened by clicking a task in TasksIterator. Supports undoable delete."
+    },
+    {
+      "id": "/contacts/:id#tag-create-dialog",
+      "route": "/contacts/:id",
+      "label": "Create Tag dialog within Contact Edit",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill tag name [label='Tag name']",
+        "Select tag color (round color buttons)",
+        "Click Save button [type=submit]",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "Opened from TagsListEdit 'Create new tag' menu item."
+    },
+    {
+      "id": "/contacts/:id#tag-edit-dialog",
+      "route": "/contacts/:id",
+      "label": "Edit Tag dialog within Contact Edit",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit tag name [label='Tag name']",
+        "Select tag color",
+        "Click Save button [type=submit]",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "Opened by clicking edit on a TagChip in the aside."
+    },
+    {
+      "id": "/contacts/:id/show",
+      "route": "/contacts/:id/show",
+      "label": "Contact detail view with notes and aside",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'Edit Contact' button [EditButton in aside]",
+        "Click 'Delete' button [DeleteButton in aside]",
+        "Write and add a note [NoteCreate SaveButton label='Add this note']",
+        "Hover note to reveal edit/delete icons",
+        "Click edit note icon [Tooltip='Edit note']",
+        "Click delete note icon [Tooltip='Delete note']",
+        "Add/remove tags in aside [TagsListEdit]",
+        "Add task in aside [AddTask chip]",
+        "Click existing task to edit",
+        "Click company name link [ReferenceField link=show]",
+        "View contact info (email, phone, LinkedIn, gender)"
+      ],
+      "notes": "Notes editable inline. Aside shows tasks, tags, personal/background info."
+    },
+    {
+      "id": "/contacts/:id/show#note-editing",
+      "route": "/contacts/:id/show",
+      "label": "Contact show — note in inline edit mode",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit note text [NoteInputs]",
+        "Click 'Update Note' button [type=submit]",
+        "Click Cancel button"
+      ],
+      "notes": "Edit mode toggled per-note by clicking edit icon on hover."
+    },
+    {
+      "id": "/contacts/:id/show#task-create-dialog",
+      "route": "/contacts/:id/show",
+      "label": "Add Task dialog within Contact Show aside",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill task description",
+        "Fill due date",
+        "Select task type",
+        "Click Save",
+        "Close dialog"
+      ],
+      "notes": "Same as contact edit's add task dialog but on show page."
+    },
+    {
+      "id": "/contacts/:id/show#tag-create-dialog",
+      "route": "/contacts/:id/show",
+      "label": "Create Tag dialog within Contact Show",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill tag name",
+        "Select color",
+        "Save",
+        "Close"
+      ],
+      "notes": "Same pattern as in contact edit."
+    },
+    {
+      "id": "/contacts/:id/show#tag-edit-dialog",
+      "route": "/contacts/:id/show",
+      "label": "Edit Tag dialog within Contact Show",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit tag name",
+        "Select color",
+        "Save",
+        "Close"
+      ],
+      "notes": "Same pattern as in contact edit."
+    },
+    {
+      "id": "/contacts/:id/show#task-edit-dialog",
+      "route": "/contacts/:id/show",
+      "label": "Edit Task dialog within Contact Show aside",
+      "section": "Contacts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit description",
+        "Edit due date",
+        "Edit type",
+        "Save",
+        "Delete",
+        "Close"
+      ],
+      "notes": "Same TaskEdit dialog pattern as in contact edit."
+    },
+    {
+      "id": "/companies",
+      "route": "/companies",
+      "label": "Company list — grid/card view with sidebar filters",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Search companies [CompanyListFilter]",
+        "Filter by sector",
+        "Filter by size",
+        "Click Sort button",
+        "Click Export button",
+        "Click 'New Company' button [label='New Company']",
+        "Click company card [navigates to /companies/:id/show]",
+        "Navigate pagination"
+      ],
+      "notes": "Shows CompanyEmpty when empty and no filters."
+    },
+    {
+      "id": "/companies#empty",
+      "route": "/companies",
+      "label": "Company list empty state",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'New Company' button"
+      ],
+      "notes": "Shown when no companies exist and no active filter."
+    },
+    {
+      "id": "/companies/create",
+      "route": "/companies/create",
+      "label": "Create new company form",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill company name",
+        "Fill website",
+        "Fill phone_number",
+        "Fill linkedin_url",
+        "Fill address, city, zipcode, stateAbbr, country",
+        "Fill sector",
+        "Select size",
+        "Fill revenue",
+        "Fill description",
+        "Fill context_links",
+        "Select sales_id",
+        "Upload logo image [ImageEditorField]",
+        "Click Save [Toolbar]"
+      ],
+      "notes": "Website prepended with https:// if missing. Redirects to show on save."
+    },
+    {
+      "id": "/companies/:id",
+      "route": "/companies/:id",
+      "label": "Edit company form with aside panel",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit company fields",
+        "Click Save [Toolbar]",
+        "Click 'Show Company' in aside [ShowButton]",
+        "Click 'Delete' — not visible in source (aside link=show shows ShowButton)"
+      ],
+      "notes": "CompanyAside with link='show' shows ShowButton, not EditButton."
+    },
+    {
+      "id": "/companies/:id/show",
+      "route": "/companies/:id/show",
+      "label": "Company detail view — Activity tab (default)",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'Edit Company' button [EditButton in aside]",
+        "Click Activity tab [TabbedShowLayout.Tab label=Activity]",
+        "Click Contacts tab",
+        "Click Deals tab (if deals exist)",
+        "View company info in aside (website, phone, LinkedIn, address)"
+      ],
+      "notes": "Default tab. ActivityLog shows company-scoped activity feed."
+    },
+    {
+      "id": "/companies/:id/show#contacts-tab",
+      "route": "/companies/:id/show",
+      "label": "Company show — Contacts tab",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'Add contact' button [PersonAddIcon]",
+        "Click Sort button [SortButton fields=last_name,first_name,last_seen]",
+        "Click contact list item [navigates to /contacts/:id/show]",
+        "Click 'Edit Company' button in aside"
+      ],
+      "notes": "Shows related contacts for this company. Tab label shows count."
+    },
+    {
+      "id": "/companies/:id/show#deals-tab",
+      "route": "/companies/:id/show",
+      "label": "Company show — Deals tab (conditionally shown)",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click deal list item [navigates to /deals/:id/show]",
+        "Click 'Edit Company' button in aside"
+      ],
+      "notes": "Only visible when nb_deals > 0. Tab label shows count."
+    },
+    {
+      "id": "/deals",
+      "route": "/deals",
+      "label": "Deals Kanban board with pipeline columns",
+      "section": "Deals",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Search deals [SearchInput source=q alwaysOn]",
+        "Filter by company [ReferenceInput source=company_id]",
+        "Filter by category [SelectInput source=category]",
+        "Toggle 'Only mine' filter [OnlyMineInput source=sales_id]",
+        "Click Filter button [FilterButton]",
+        "Click Export button",
+        "Click 'New Deal' button [label='New Deal']",
+        "Drag deal card to reorder/change stage [DragDropContext]",
+        "Click deal card [navigates to /deals/:id/show dialog]",
+        "Click 'View archived deals' button [text='View archived deals']"
+      ],
+      "notes": "Kanban board with configurable stages. Shows DealEmpty when empty."
+    },
+    {
+      "id": "/deals#empty",
+      "route": "/deals",
+      "label": "Deals empty state",
+      "section": "Deals",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'New Deal' button"
+      ],
+      "notes": "Shown when no active deals and no filters."
+    },
+    {
+      "id": "/deals/create",
+      "route": "/deals/create",
+      "label": "Create Deal dialog (modal over Deals Kanban)",
+      "section": "Deals",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill deal name",
+        "Select company [ReferenceInput]",
+        "Select stage",
+        "Fill amount",
+        "Select category",
+        "Fill expected_closing_date",
+        "Fill description",
+        "Select contacts [MultiReferenceInput contact_ids]",
+        "Click Save [SaveButton]",
+        "Close dialog [DialogCloseButton] → /deals"
+      ],
+      "notes": "Dialog rendered via matchPath in DealList. URL changes to /deals/create."
+    },
+    {
+      "id": "/deals/:id",
+      "route": "/deals/:id",
+      "label": "Edit Deal dialog (modal over Deals Kanban)",
+      "section": "Deals",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit deal fields",
+        "Click Save [SaveButton]",
+        "Click Delete [DeleteButton mutationMode=undoable]",
+        "Click 'Back to deal' link [navigates to /deals/:id/show]",
+        "Close dialog [DialogCloseButton] → /deals"
+      ],
+      "notes": "Rendered via matchPath. URL = /deals/:id (no /show suffix)."
+    },
+    {
+      "id": "/deals/:id/show",
+      "route": "/deals/:id/show",
+      "label": "Deal detail dialog (modal over Deals Kanban)",
+      "section": "Deals",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'Archive' button [ArchiveButton] (for active deals)",
+        "Click 'Edit' button [EditButton → /deals/:id]",
+        "Click 'Send back to the board' button (for archived deals)",
+        "Click 'Delete' button (for archived deals)",
+        "Click company avatar/link [navigates to /companies/:id/show]",
+        "View contacts list [ReferenceArrayField contact_ids]",
+        "Write and submit notes [NoteCreate]",
+        "Edit/delete notes inline",
+        "Close dialog [DialogCloseButton] → /deals"
+      ],
+      "notes": "Shows archived banner if deal is archived. Notes section for deal notes."
+    },
+    {
+      "id": "/deals#archived-dialog",
+      "route": "/deals",
+      "label": "Archived Deals dialog",
+      "section": "Deals",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click an archived deal card [DealCardContent → opens /deals/:id/show]",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "Opened by 'View archived deals' button. Shows deals grouped by archive date."
+    },
+    {
+      "id": "/sales",
+      "route": "/sales",
+      "label": "Users/Sales list (admin only)",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Search users [SearchInput source=q]",
+        "Click Export button",
+        "Click 'New user' button [label='New user']",
+        "Click user row [navigates to /sales/:id edit]"
+      ],
+      "notes": "Admin-only. Accessible via UserMenu > Users. Shows Admin/Disabled chips."
+    },
+    {
+      "id": "/sales/create",
+      "route": "/sales/create",
+      "label": "Create new user (sales person) form",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill first_name, last_name, email",
+        "Toggle administrator checkbox",
+        "Toggle disabled checkbox",
+        "Upload avatar [ImageEditorField]",
+        "Submit form [SimpleForm]"
+      ],
+      "notes": "Admin only. On success shows notification about password email."
+    },
+    {
+      "id": "/sales/:id",
+      "route": "/sales/:id",
+      "label": "Edit user (sales person) form",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit first_name, last_name, email",
+        "Toggle administrator",
+        "Toggle disabled",
+        "Upload/change avatar [ImageEditorField]",
+        "Click Save [SaveButton]"
+      ],
+      "notes": "Admin only. rowClick='edit' from sales list navigates here."
+    },
+    {
+      "id": "/settings",
+      "route": "/settings",
+      "label": "User settings/profile page — view mode",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click avatar to open image editor [ImageEditorField]",
+        "Click 'Change password' button [variant=outlined]",
+        "Click 'Edit' button [startIcon=EditIcon] → switches to edit mode"
+      ],
+      "notes": "View mode shows read-only profile. Change password sends reset email."
+    },
+    {
+      "id": "/settings#edit-mode",
+      "route": "/settings",
+      "label": "User settings/profile page — edit mode",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit first_name [TextInput]",
+        "Edit last_name [TextInput]",
+        "Edit email [TextInput]",
+        "Click Save [type=submit] (enabled only when isDirty)",
+        "Click 'Show' button [startIcon=VisibilityIcon] → back to view mode",
+        "Click avatar to open image editor"
+      ],
+      "notes": "Toggled by Edit/Show button. Save disabled until form is dirty."
+    },
+    {
+      "id": "/settings#avatar-edit-dialog",
+      "route": "/settings",
+      "label": "Avatar image editor dialog",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Drop image file or click to select [dropzone]",
+        "Crop image [Cropper component]",
+        "Click 'Update Image' [variant=contained]",
+        "Click 'Delete' [variant=text color=error]",
+        "Close dialog [DialogCloseButton]"
+      ],
+      "notes": "ImageEditorDialog with circular crop mask for avatar type."
+    },
+    {
+      "id": "/companies/create#avatar-edit-dialog",
+      "route": "/companies/create",
+      "label": "Company logo image editor dialog within create form",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Drop/select image file",
+        "Crop image",
+        "Click 'Update Image'",
+        "Click 'Delete'",
+        "Close dialog"
+      ],
+      "notes": "Same ImageEditorDialog as avatar but type='image' for company logo."
+    },
+    {
+      "id": "/companies/:id#avatar-edit-dialog",
+      "route": "/companies/:id",
+      "label": "Company logo image editor dialog within edit form",
+      "section": "Companies",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Drop/select image file",
+        "Crop image",
+        "Click 'Update Image'",
+        "Click 'Delete'",
+        "Close dialog"
+      ],
+      "notes": "CompanyInputs includes ImageEditorField for company logo."
+    },
+    {
+      "id": "/sales/create#avatar-edit-dialog",
+      "route": "/sales/create",
+      "label": "User avatar image editor dialog within create form",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Drop/select image",
+        "Crop",
+        "Update Image",
+        "Delete",
+        "Close"
+      ],
+      "notes": "SalesInputs includes avatar ImageEditorField."
+    },
+    {
+      "id": "/sales/:id#avatar-edit-dialog",
+      "route": "/sales/:id",
+      "label": "User avatar image editor dialog within edit form",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Drop/select image",
+        "Crop",
+        "Update Image",
+        "Delete",
+        "Close"
+      ],
+      "notes": "Same ImageEditorDialog pattern."
+    },
+    {
+      "id": "usermenu#open",
+      "route": "*",
+      "label": "User menu dropdown (visible from any authenticated page)",
+      "section": "Layout",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click 'My info' menu item [SettingsIcon → /settings]",
+        "Click 'Users' menu item [PeopleIcon → /sales] (admin only)",
+        "Click 'Logout' [Logout component]"
+      ],
+      "notes": "Triggered by UserMenu in Header. Users item gated by CanAccess sales.list."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/login",
+      "to": "/",
+      "trigger": "button 'SIGN IN' [type=submit] with valid credentials",
+      "guard": "isInitialized=true and credentials valid"
+    },
+    {
+      "from": "/login",
+      "to": "/sign-up",
+      "trigger": "auto: redirect when isInitialized=false"
+    },
+    {
+      "from": "/login",
+      "to": "/reset-password",
+      "trigger": "link 'Forgot your password?' [variant=caption]"
+    },
+    {
+      "from": "/sign-up",
+      "to": "/login",
+      "trigger": "auto: redirect when isInitialized=true"
+    },
+    {
+      "from": "/sign-up",
+      "to": "/contacts",
+      "trigger": "button 'Create account' [type=submit]",
+      "guard": "form valid and mutation success"
+    },
+    {
+      "from": "/",
+      "to": "/contacts",
+      "trigger": "tab 'Contacts' [aria-label=Navigation Tabs]"
+    },
+    {
+      "from": "/",
+      "to": "/companies",
+      "trigger": "tab 'Companies' [aria-label=Navigation Tabs]"
+    },
+    {
+      "from": "/",
+      "to": "/deals",
+      "trigger": "tab 'Deals' [aria-label=Navigation Tabs]"
+    },
+    {
+      "from": "/",
+      "to": "/#add-task-dialog",
+      "trigger": "icon button 'Create task' [aria-label=Create task] in TasksList"
+    },
+    {
+      "from": "/#add-task-dialog",
+      "to": "/",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/#add-task-dialog",
+      "to": "/",
+      "trigger": "button Save [SaveButton] on success"
+    },
+    {
+      "from": "/#dashboard-stepper-step1",
+      "to": "/contacts/create",
+      "trigger": "button 'New Contact' [variant=contained]"
+    },
+    {
+      "from": "/#dashboard-stepper-step1",
+      "to": "/contacts#import-dialog",
+      "trigger": "button 'Import' [startIcon=UploadIcon]"
+    },
+    {
+      "from": "/#dashboard-stepper-step2",
+      "to": "/contacts/:id/show",
+      "trigger": "button 'Add note' [variant=contained]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/contacts/create",
+      "trigger": "button 'New Contact' [variant=contained]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/contacts/:id/show",
+      "trigger": "ListItemButton contact row [component=Link to=/contacts/:id/show]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/contacts#import-dialog",
+      "trigger": "button 'Import' [startIcon=UploadIcon]"
+    },
+    {
+      "from": "/contacts#import-dialog",
+      "to": "/contacts",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id/show",
+      "to": "/contacts/:id",
+      "trigger": "button 'Edit Contact' [EditButton] in aside"
+    },
+    {
+      "from": "/contacts/:id/show",
+      "to": "/contacts/:id/show#note-editing",
+      "trigger": "icon button [Tooltip='Edit note'] on hover"
+    },
+    {
+      "from": "/contacts/:id/show#note-editing",
+      "to": "/contacts/:id/show",
+      "trigger": "button 'Cancel'"
+    },
+    {
+      "from": "/contacts/:id/show#note-editing",
+      "to": "/contacts/:id/show",
+      "trigger": "button 'Update Note' [type=submit] on success"
+    },
+    {
+      "from": "/contacts/:id/show",
+      "to": "/contacts/:id/show#task-create-dialog",
+      "trigger": "chip 'Add task' [AddTask display=chip]"
+    },
+    {
+      "from": "/contacts/:id/show#task-create-dialog",
+      "to": "/contacts/:id/show",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id/show",
+      "to": "/contacts/:id/show#task-edit-dialog",
+      "trigger": "click task item in TasksIterator"
+    },
+    {
+      "from": "/contacts/:id/show#task-edit-dialog",
+      "to": "/contacts/:id/show",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id/show",
+      "to": "/contacts/:id/show#tag-create-dialog",
+      "trigger": "chip 'Create new tag' in TagsListEdit menu"
+    },
+    {
+      "from": "/contacts/:id/show#tag-create-dialog",
+      "to": "/contacts/:id/show",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id/show",
+      "to": "/contacts/:id/show#tag-edit-dialog",
+      "trigger": "edit icon on TagChip"
+    },
+    {
+      "from": "/contacts/:id/show#tag-edit-dialog",
+      "to": "/contacts/:id/show",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id",
+      "to": "/contacts/:id/show",
+      "trigger": "button 'Show Contact' [ShowButton] in aside"
+    },
+    {
+      "from": "/contacts/:id",
+      "to": "/contacts/:id/show",
+      "trigger": "button 'Save' [SaveButton] on success"
+    },
+    {
+      "from": "/contacts/:id",
+      "to": "/contacts/:id#task-create-dialog",
+      "trigger": "chip 'Add task' [AddTask]"
+    },
+    {
+      "from": "/contacts/:id#task-create-dialog",
+      "to": "/contacts/:id",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id",
+      "to": "/contacts/:id#task-edit-dialog",
+      "trigger": "click task item in TasksIterator"
+    },
+    {
+      "from": "/contacts/:id#task-edit-dialog",
+      "to": "/contacts/:id",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id",
+      "to": "/contacts/:id#tag-create-dialog",
+      "trigger": "chip 'Create new tag' in TagsListEdit"
+    },
+    {
+      "from": "/contacts/:id#tag-create-dialog",
+      "to": "/contacts/:id",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/:id",
+      "to": "/contacts/:id#tag-edit-dialog",
+      "trigger": "edit icon on TagChip"
+    },
+    {
+      "from": "/contacts/:id#tag-edit-dialog",
+      "to": "/contacts/:id",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/contacts/create",
+      "to": "/contacts/:id/show",
+      "trigger": "auto: redirect on save success [redirect=show]"
+    },
+    {
+      "from": "/companies",
+      "to": "/companies/create",
+      "trigger": "button 'New Company' [variant=contained]"
+    },
+    {
+      "from": "/companies",
+      "to": "/companies/:id/show",
+      "trigger": "click company card [ImageList item]"
+    },
+    {
+      "from": "/companies/create",
+      "to": "/companies/:id/show",
+      "trigger": "auto: redirect on save success [redirect=show]"
+    },
+    {
+      "from": "/companies/create",
+      "to": "/companies/create#avatar-edit-dialog",
+      "trigger": "click company logo avatar/image [ImageEditorField]"
+    },
+    {
+      "from": "/companies/create#avatar-edit-dialog",
+      "to": "/companies/create",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/companies/:id/show",
+      "to": "/companies/:id",
+      "trigger": "button 'Edit Company' [EditButton] in aside"
+    },
+    {
+      "from": "/companies/:id/show",
+      "to": "/companies/:id/show#contacts-tab",
+      "trigger": "tab '[N] Contacts' [TabbedShowLayout.Tab path=contacts]"
+    },
+    {
+      "from": "/companies/:id/show#contacts-tab",
+      "to": "/companies/:id/show",
+      "trigger": "tab 'Activity' [TabbedShowLayout.Tab label=Activity]"
+    },
+    {
+      "from": "/companies/:id/show#contacts-tab",
+      "to": "/contacts/:id/show",
+      "trigger": "click contact list item [ListItemButton to=/contacts/:id/show]"
+    },
+    {
+      "from": "/companies/:id/show#contacts-tab",
+      "to": "/contacts/create",
+      "trigger": "button 'Add contact' [PersonAddIcon]"
+    },
+    {
+      "from": "/companies/:id/show",
+      "to": "/companies/:id/show#deals-tab",
+      "trigger": "tab '[N] Deals' [TabbedShowLayout.Tab path=deals]",
+      "guard": "nb_deals > 0"
+    },
+    {
+      "from": "/companies/:id/show#deals-tab",
+      "to": "/deals/:id/show",
+      "trigger": "click deal list item [ListItemButton to=/deals/:id/show]"
+    },
+    {
+      "from": "/companies/:id",
+      "to": "/companies/:id/show",
+      "trigger": "auto: redirect on save success [redirect=show]"
+    },
+    {
+      "from": "/companies/:id",
+      "to": "/companies/:id",
+      "trigger": "button 'Show Company' [ShowButton] in aside"
+    },
+    {
+      "from": "/companies/:id",
+      "to": "/companies/:id#avatar-edit-dialog",
+      "trigger": "click company logo [ImageEditorField]"
+    },
+    {
+      "from": "/companies/:id#avatar-edit-dialog",
+      "to": "/companies/:id",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/deals",
+      "to": "/deals/create",
+      "trigger": "button 'New Deal' [variant=contained]"
+    },
+    {
+      "from": "/deals/create",
+      "to": "/deals",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/deals/create",
+      "to": "/deals",
+      "trigger": "button 'Save' [SaveButton] on success"
+    },
+    {
+      "from": "/deals",
+      "to": "/deals/:id/show",
+      "trigger": "click deal card [DealCard component]"
+    },
+    {
+      "from": "/deals/:id/show",
+      "to": "/deals",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/deals/:id/show",
+      "to": "/deals/:id",
+      "trigger": "button 'Edit' [EditButton scrollToTop=false]"
+    },
+    {
+      "from": "/deals/:id",
+      "to": "/deals",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/deals/:id",
+      "to": "/deals/:id/show",
+      "trigger": "link 'Back to deal' [size=small]"
+    },
+    {
+      "from": "/deals/:id",
+      "to": "/deals/:id/show",
+      "trigger": "button 'Save' [SaveButton] on success"
+    },
+    {
+      "from": "/deals",
+      "to": "/deals#archived-dialog",
+      "trigger": "button 'View archived deals' [variant=text]",
+      "guard": "archived deals exist (total > 0)"
+    },
+    {
+      "from": "/deals#archived-dialog",
+      "to": "/deals",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/deals#archived-dialog",
+      "to": "/deals/:id/show",
+      "trigger": "click deal card in archived list [DealCardContent]"
+    },
+    {
+      "from": "/deals/:id/show",
+      "to": "/companies/:id/show",
+      "trigger": "click company avatar/link [ReferenceField link=show]"
+    },
+    {
+      "from": "/sales",
+      "to": "/sales/create",
+      "trigger": "button 'New user' [variant=contained]"
+    },
+    {
+      "from": "/sales",
+      "to": "/sales/:id",
+      "trigger": "click user row [DataTable rowClick=edit]"
+    },
+    {
+      "from": "/sales/create",
+      "to": "/sales",
+      "trigger": "auto: redirect on success"
+    },
+    {
+      "from": "/sales/create",
+      "to": "/sales/create#avatar-edit-dialog",
+      "trigger": "click avatar [ImageEditorField]"
+    },
+    {
+      "from": "/sales/create#avatar-edit-dialog",
+      "to": "/sales/create",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/sales/:id",
+      "to": "/sales",
+      "trigger": "auto: redirect on success"
+    },
+    {
+      "from": "/sales/:id",
+      "to": "/sales/:id#avatar-edit-dialog",
+      "trigger": "click avatar [ImageEditorField]"
+    },
+    {
+      "from": "/sales/:id#avatar-edit-dialog",
+      "to": "/sales/:id",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#edit-mode",
+      "trigger": "button 'Edit' [startIcon=EditIcon]"
+    },
+    {
+      "from": "/settings#edit-mode",
+      "to": "/settings",
+      "trigger": "button 'Show' [startIcon=VisibilityIcon]"
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#avatar-edit-dialog",
+      "trigger": "click avatar [ImageEditorField]"
+    },
+    {
+      "from": "/settings#edit-mode",
+      "to": "/settings#avatar-edit-dialog",
+      "trigger": "click avatar [ImageEditorField]"
+    },
+    {
+      "from": "/settings#avatar-edit-dialog",
+      "to": "/settings",
+      "trigger": "DialogCloseButton close"
+    },
+    {
+      "from": "/",
+      "to": "usermenu#open",
+      "trigger": "UserMenu avatar button in header"
+    },
+    {
+      "from": "/contacts",
+      "to": "usermenu#open",
+      "trigger": "UserMenu avatar button in header"
+    },
+    {
+      "from": "/deals",
+      "to": "usermenu#open",
+      "trigger": "UserMenu avatar button in header"
+    },
+    {
+      "from": "usermenu#open",
+      "to": "/settings",
+      "trigger": "menu item 'My info' [SettingsIcon]"
+    },
+    {
+      "from": "usermenu#open",
+      "to": "/sales",
+      "trigger": "menu item 'Users' [PeopleIcon]",
+      "guard": "user is administrator"
+    },
+    {
+      "from": "usermenu#open",
+      "to": "/login",
+      "trigger": "menu item 'Logout' [Logout component]"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Unauthenticated pages (no auth required)",
+        "node_ids": ["/login", "/sign-up", "/reset-password"]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Authenticated pages (all users)",
+        "node_ids": [
+          "/",
+          "/#dashboard-stepper-step1",
+          "/#dashboard-stepper-step2",
+          "/#add-task-dialog",
+          "/contacts",
+          "/contacts#empty",
+          "/contacts#import-dialog",
+          "/contacts/create",
+          "/contacts/:id",
+          "/contacts/:id#task-create-dialog",
+          "/contacts/:id#task-edit-dialog",
+          "/contacts/:id#tag-create-dialog",
+          "/contacts/:id#tag-edit-dialog",
+          "/contacts/:id/show",
+          "/contacts/:id/show#note-editing",
+          "/contacts/:id/show#task-create-dialog",
+          "/contacts/:id/show#task-edit-dialog",
+          "/contacts/:id/show#tag-create-dialog",
+          "/contacts/:id/show#tag-edit-dialog",
+          "/companies",
+          "/companies#empty",
+          "/companies/create",
+          "/companies/create#avatar-edit-dialog",
+          "/companies/:id",
+          "/companies/:id#avatar-edit-dialog",
+          "/companies/:id/show",
+          "/companies/:id/show#contacts-tab",
+          "/companies/:id/show#deals-tab",
+          "/deals",
+          "/deals#empty",
+          "/deals/create",
+          "/deals/:id",
+          "/deals/:id/show",
+          "/deals#archived-dialog",
+          "/settings",
+          "/settings#edit-mode",
+          "/settings#avatar-edit-dialog",
+          "usermenu#open"
+        ]
+      },
+      {
+        "id": "zone:admin-only",
+        "label": "Admin-only pages (administrator role required)",
+        "node_ids": [
+          "/sales",
+          "/sales/create",
+          "/sales/create#avatar-edit-dialog",
+          "/sales/:id",
+          "/sales/:id#avatar-edit-dialog"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:no-shell",
+        "label": "No app shell — standalone login/signup pages",
+        "node_ids": ["/login", "/sign-up", "/reset-password"]
+      },
+      {
+        "id": "layout:app-shell",
+        "label": "App shell with Header nav (Dashboard/Contacts/Companies/Deals tabs + UserMenu)",
+        "node_ids": [
+          "/",
+          "/#dashboard-stepper-step1",
+          "/#dashboard-stepper-step2",
+          "/#add-task-dialog",
+          "/contacts",
+          "/contacts#empty",
+          "/contacts#import-dialog",
+          "/contacts/create",
+          "/contacts/:id",
+          "/contacts/:id#task-create-dialog",
+          "/contacts/:id#task-edit-dialog",
+          "/contacts/:id#tag-create-dialog",
+          "/contacts/:id#tag-edit-dialog",
+          "/contacts/:id/show",
+          "/contacts/:id/show#note-editing",
+          "/contacts/:id/show#task-create-dialog",
+          "/contacts/:id/show#task-edit-dialog",
+          "/contacts/:id/show#tag-create-dialog",
+          "/contacts/:id/show#tag-edit-dialog",
+          "/companies",
+          "/companies#empty",
+          "/companies/create",
+          "/companies/create#avatar-edit-dialog",
+          "/companies/:id",
+          "/companies/:id#avatar-edit-dialog",
+          "/companies/:id/show",
+          "/companies/:id/show#contacts-tab",
+          "/companies/:id/show#deals-tab",
+          "/deals",
+          "/deals#empty",
+          "/deals/create",
+          "/deals/:id",
+          "/deals/:id/show",
+          "/deals#archived-dialog",
+          "/sales",
+          "/sales/create",
+          "/sales/create#avatar-edit-dialog",
+          "/sales/:id",
+          "/sales/:id#avatar-edit-dialog",
+          "/settings",
+          "/settings#edit-mode",
+          "/settings#avatar-edit-dialog",
+          "usermenu#open"
+        ]
+      }
+    ]
+  }
+}

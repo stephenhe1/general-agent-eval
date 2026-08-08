@@ -1,0 +1,1455 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Hemmelig",
+    "base_url": "http://localhost:4000",
+    "total_states": 49,
+    "explored": 49,
+    "skipped": 0,
+    "verified_live": ["/", "/login", "/register", "/setup", "/terms", "/privacy", "/dashboard", "/dashboard/account", "/dashboard/analytics", "/dashboard/users", "/dashboard/invites", "/dashboard/instance", "/dashboard/secret-requests", "/dashboard/secret-requests/create"]
+  },
+  "nodes": [
+    {
+      "id": "/setup",
+      "route": "/setup",
+      "label": "Initial admin account setup form",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standalone",
+      "actions": [
+        "Fill name field [input name='name']",
+        "Fill username field [input name='username']",
+        "Fill email field [input type='email']",
+        "Fill password field [input type='password']",
+        "Fill confirm password field",
+        "Submit setup form button 'Create Admin Account'"
+      ],
+      "notes": "Only accessible when no users exist; redirects to / otherwise"
+    },
+    {
+      "id": "/login",
+      "route": "/login",
+      "label": "Login form with username/password and social logins",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill username field",
+        "Fill password field",
+        "Toggle password visibility button",
+        "Submit login button 'Sign In'",
+        "Click 'Sign Up' link to /register",
+        "Click 'Back to Hemmelig' link to /",
+        "Click social login buttons (GitHub, Google, Microsoft, Discord, GitLab, Apple, Twitter)"
+      ],
+      "notes": "Social login buttons shown only if OAuth providers configured in instance"
+    },
+    {
+      "id": "/register",
+      "route": "/register",
+      "label": "Registration form with username, email, password",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill username field",
+        "Fill email field",
+        "Fill password field",
+        "Fill confirm password field",
+        "Fill invite code field (conditional on requireInviteCode setting)",
+        "Toggle password visibility",
+        "Submit registration button 'Sign Up'",
+        "Click 'Sign In' link to /login",
+        "Click social login buttons"
+      ],
+      "notes": "Redirects to /login if allowRegistration is false; invite code field shown conditionally"
+    },
+    {
+      "id": "/verify-2fa",
+      "route": "/verify-2fa",
+      "label": "2FA TOTP code entry (6-digit input, one box per digit)",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Enter 6-digit code (6 individual input boxes)",
+        "Paste 6-digit code",
+        "Submit verification button 'Verify'",
+        "Click 'Back to Login' link to /login"
+      ],
+      "notes": "Reached after successful login when 2FA is enabled on account"
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Home page with secret creation form",
+      "section": "Secret Creation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Type secret content in rich text editor",
+        "Fill title field",
+        "Attach files via FileUpload",
+        "Configure security settings (expiration, views, password, IP range, burnable)",
+        "Click 'Create Secret' button",
+        "Click 'Home' link in header",
+        "Click 'Sign In' link in header (unauthenticated)",
+        "Click 'Sign Up' link in header (unauthenticated)",
+        "Click 'Dashboard' link in header (authenticated)",
+        "Toggle language picker",
+        "Toggle theme (light/dark)"
+      ],
+      "notes": "requireRegisteredUser setting redirects unauthenticated users to /login"
+    },
+    {
+      "id": "/#secret-created",
+      "route": "/",
+      "label": "Secret creation success: shows URL, QR code, copy/burn controls",
+      "section": "Secret Creation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Copy secret URL to clipboard",
+        "Copy decryption key to clipboard",
+        "Show/hide password (if password-protected)",
+        "Burn secret button (delete immediately)",
+        "Create another secret (reset form)"
+      ],
+      "notes": "Shown after successful POST /api/secrets; SecretSettings component"
+    },
+    {
+      "id": "/secret/:id#locked",
+      "route": "/secret/:id",
+      "label": "Secret pre-reveal: blurred preview with unlock button",
+      "section": "Secret Viewing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Enter decryption key manually (if no key in URL hash)",
+        "Enter password (if password-protected)",
+        "Click 'Unlock Secret' button",
+        "Click 'Home' link in header"
+      ],
+      "notes": "Decryption key can be in URL hash #decryptionKey=... or entered manually"
+    },
+    {
+      "id": "/secret/:id#revealed",
+      "route": "/secret/:id",
+      "label": "Secret revealed: shows decrypted content with copy/delete",
+      "section": "Secret Viewing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Copy secret content to clipboard",
+        "Download attached file(s)",
+        "Click 'Delete Secret' button to open delete modal",
+        "Create another secret link (navigates to /)"
+      ],
+      "notes": "Views counter decrements on reveal; isBurnable deletes after one view"
+    },
+    {
+      "id": "/secret/:id#delete-modal",
+      "route": "/secret/:id",
+      "label": "Delete secret confirmation modal",
+      "section": "Secret Viewing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Confirm delete button",
+        "Cancel button (closes modal)"
+      ],
+      "notes": "Deletes secret and navigates to / on confirm"
+    },
+    {
+      "id": "/secret/:id#error",
+      "route": "/secret/:id",
+      "label": "SecretNotFoundPage: error boundary when secret not found",
+      "section": "Secret Viewing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Go Home' button to /"
+      ],
+      "notes": "Shown when loader throws 404 or network error"
+    },
+    {
+      "id": "/request/:id",
+      "route": "/request/:id",
+      "label": "Secret request form: fill in a requested secret",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Type secret in rich text editor",
+        "Fill optional title field",
+        "Click 'Submit Secret' button",
+        "View error state if token invalid/expired"
+      ],
+      "notes": "Accessed via creator link; requires ?token= query param"
+    },
+    {
+      "id": "/request/:id#submitted",
+      "route": "/request/:id",
+      "label": "Secret request submitted: shows secret link and copy button",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Copy secret link to clipboard",
+        "Copy decryption key to clipboard",
+        "Navigate home link"
+      ],
+      "notes": "Shown after successful secret submission to a secret request"
+    },
+    {
+      "id": "/terms",
+      "route": "/terms",
+      "label": "Terms of Service page",
+      "section": "Legal",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Navigate via header links",
+        "Navigate via footer links"
+      ],
+      "notes": "Static content page"
+    },
+    {
+      "id": "/privacy",
+      "route": "/privacy",
+      "label": "Privacy Policy page",
+      "section": "Legal",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Navigate via header links",
+        "Navigate via footer links"
+      ],
+      "notes": "Static content page"
+    },
+    {
+      "id": "/404",
+      "route": "*",
+      "label": "404 Not Found page",
+      "section": "Error",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Go Home' button to /",
+        "Click 'Create Secret' button to /"
+      ],
+      "notes": "Catch-all route under RootLayout"
+    },
+    {
+      "id": "/dashboard",
+      "route": "/dashboard",
+      "label": "Dashboard: secrets list with stats and delete action",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Create Secret' link to /",
+        "Click 'Delete Secret' trash icon button (opens delete modal)",
+        "Navigate sidebar: Secrets, Secret Requests, Account, Analytics (admin), Users (admin), Invites (admin, conditional), Instance (admin)",
+        "Click user card in sidebar to /dashboard/account",
+        "Click Sign Out button",
+        "Open mobile menu hamburger button"
+      ],
+      "notes": "Index route of /dashboard; shows secrets list table/cards"
+    },
+    {
+      "id": "/dashboard#delete-secret-modal",
+      "route": "/dashboard",
+      "label": "Delete secret confirmation modal",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Confirm delete button 'Delete'",
+        "Cancel button (closes modal)"
+      ],
+      "notes": "Opened from secrets table trash icon; deletes and refreshes list"
+    },
+    {
+      "id": "/dashboard/account",
+      "route": "/dashboard/account",
+      "label": "Account settings with Profile/Security/Developer/Danger tabs",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Profile' tab",
+        "Click 'Security' tab",
+        "Click 'Developer' tab",
+        "Click 'Danger Zone' tab"
+      ],
+      "notes": "Default active tab is Profile"
+    },
+    {
+      "id": "/dashboard/account#profile-tab",
+      "route": "/dashboard/account",
+      "label": "Account Profile tab: edit username and email",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Edit username field",
+        "Edit email field",
+        "Click 'Save Changes' button"
+      ],
+      "notes": "Shows error if username taken (409)"
+    },
+    {
+      "id": "/dashboard/account#security-tab",
+      "route": "/dashboard/account",
+      "label": "Account Security tab: change password and 2FA management",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Fill current password field",
+        "Fill new password field",
+        "Fill confirm new password field",
+        "Toggle password visibility",
+        "Click 'Change Password' button",
+        "Click 'Setup 2FA' button (if 2FA disabled)",
+        "Click 'Disable 2FA' button (if 2FA enabled, opens disable modal)"
+      ],
+      "notes": "2FA section shows status enabled/disabled and appropriate action button"
+    },
+    {
+      "id": "/dashboard/account#security-tab#2fa-setup-password",
+      "route": "/dashboard/account",
+      "label": "2FA setup step 1: enter current password to initiate",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Fill current password field",
+        "Click 'Continue' button",
+        "Click 'Cancel' button (hides setup panel)"
+      ],
+      "notes": "Inline panel, not a modal; first step of 3-step 2FA setup"
+    },
+    {
+      "id": "/dashboard/account#security-tab#2fa-setup-qr",
+      "route": "/dashboard/account",
+      "label": "2FA setup step 2: scan QR code with authenticator app",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "View QR code SVG",
+        "View TOTP URI text for manual entry",
+        "Click 'Continue' button to step 3"
+      ],
+      "notes": "Shows QR code and manual TOTP URI; no cancel from this step"
+    },
+    {
+      "id": "/dashboard/account#security-tab#2fa-setup-verify",
+      "route": "/dashboard/account",
+      "label": "2FA setup step 3: enter TOTP code to verify and enable",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Enter 6-digit TOTP code",
+        "Click 'Verify & Enable' button",
+        "Click 'Back' button (returns to QR step)"
+      ],
+      "notes": "On success, 2FA is enabled and backup codes modal opens"
+    },
+    {
+      "id": "/dashboard/account#security-tab#disable-2fa-modal",
+      "route": "/dashboard/account",
+      "label": "Disable 2FA modal: confirm with current password",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Enter current password",
+        "Click 'Disable' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "Modal component; disables 2FA on confirm"
+    },
+    {
+      "id": "/dashboard/account#security-tab#backup-codes-modal",
+      "route": "/dashboard/account",
+      "label": "2FA backup codes modal: shows 10 one-time recovery codes",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "View backup codes grid",
+        "Click 'I Saved These Codes' confirm button (closes modal)"
+      ],
+      "notes": "Opened after successfully enabling 2FA; codes shown once only"
+    },
+    {
+      "id": "/dashboard/account#developer-tab",
+      "route": "/dashboard/account",
+      "label": "Developer tab: manage API keys with create/delete",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Create API Key' button (opens create modal)",
+        "Click delete trash icon on existing key",
+        "Click copy icon to copy newly-created key",
+        "Click 'Dismiss' to hide new key banner",
+        "Click 'API Docs' link to /api/docs (external)"
+      ],
+      "notes": "Lists existing API keys with prefix, created date, last used, expiry"
+    },
+    {
+      "id": "/dashboard/account#developer-tab#create-key-modal",
+      "route": "/dashboard/account",
+      "label": "Create API key modal: name and optional expiration",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Fill key name field",
+        "Select expiration from dropdown (never, 30d, 90d, 1yr)",
+        "Click 'Create' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "On success, new key shown in yellow banner (one-time visible)"
+    },
+    {
+      "id": "/dashboard/account#danger-tab",
+      "route": "/dashboard/account",
+      "label": "Danger Zone tab: delete account button with warnings",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Delete Account' button (opens delete modal)"
+      ],
+      "notes": "Red-bordered card with bullet warnings; irreversible action"
+    },
+    {
+      "id": "/dashboard/account#danger-tab#delete-account-modal",
+      "route": "/dashboard/account",
+      "label": "Delete account confirmation modal",
+      "section": "Account",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Delete Account' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "On confirm, account deleted and user redirected to /login"
+    },
+    {
+      "id": "/dashboard/analytics",
+      "route": "/dashboard/analytics",
+      "label": "Analytics: secret stats, daily charts, visitor data (admin)",
+      "section": "Analytics",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Select time range: 7d / 14d / 30d buttons",
+        "View stats cards: total secrets, views, avg views, active/expired",
+        "View daily stats sparkline charts",
+        "View secret type breakdown: password-protected, IP-restricted, burnable",
+        "View expiration distribution",
+        "View visitor stats daily chart",
+        "View secret requests stats"
+      ],
+      "notes": "Admin-only (403 returned for non-admin); time range selector triggers API refetch"
+    },
+    {
+      "id": "/dashboard/users",
+      "route": "/dashboard/users",
+      "label": "User management: list, search, add, edit, delete users",
+      "section": "User Management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Search users by username/email in search input",
+        "Click 'Add User' button (opens AddUserModal)",
+        "Click edit icon on user row (opens EditUserModal)",
+        "Click delete trash icon on user row (opens delete modal)",
+        "Navigate pagination prev/next page buttons"
+      ],
+      "notes": "Admin-only; supports pagination and search with ?page, ?pageSize, ?search params"
+    },
+    {
+      "id": "/dashboard/users#add-user-modal",
+      "route": "/dashboard/users",
+      "label": "Add user modal: create new user account",
+      "section": "User Management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Fill username field",
+        "Fill email field",
+        "Fill password field",
+        "Select role (user/admin)",
+        "Click 'Add User' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "Admin-only action; AddUserModal component"
+    },
+    {
+      "id": "/dashboard/users#edit-user-modal",
+      "route": "/dashboard/users",
+      "label": "Edit user modal: update role and banned status",
+      "section": "User Management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Change role dropdown (user/admin)",
+        "Toggle banned status checkbox/toggle",
+        "Click 'Save' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "Cannot edit own account (edit button disabled for current user)"
+    },
+    {
+      "id": "/dashboard/users#delete-user-modal",
+      "route": "/dashboard/users",
+      "label": "Delete user confirmation modal",
+      "section": "User Management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Delete' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "Cannot delete own account (delete button disabled for current user)"
+    },
+    {
+      "id": "/dashboard/instance",
+      "route": "/dashboard/instance",
+      "label": "Instance settings with 5 tabs (admin only)",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'General' tab",
+        "Click 'Security' tab",
+        "Click 'Organization' tab",
+        "Click 'Webhook' tab",
+        "Click 'Metrics' tab"
+      ],
+      "notes": "Admin-only (403 for non-admin); managed mode banner shown if managed=true"
+    },
+    {
+      "id": "/dashboard/instance#general-tab",
+      "route": "/dashboard/instance",
+      "label": "Instance General tab: name, description, logo, expiration, size",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Edit instance name field",
+        "Edit instance description field",
+        "Upload logo image file",
+        "Remove logo button",
+        "Select default expiration dropdown",
+        "Edit max secret size field",
+        "Toggle allow file uploads switch",
+        "Click 'Save General Settings' button"
+      ],
+      "notes": "Settings disabled in managed mode; logo max 512KB"
+    },
+    {
+      "id": "/dashboard/instance#security-tab",
+      "route": "/dashboard/instance",
+      "label": "Instance Security tab: auth and rate limiting settings",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Toggle allow registration switch",
+        "Toggle require email verification switch",
+        "Toggle require registered user switch",
+        "Toggle disable email/password signup switch",
+        "Toggle allow password protection switch",
+        "Toggle allow IP restriction switch",
+        "Edit max password attempts field",
+        "Edit session timeout field",
+        "Toggle enable rate limiting switch",
+        "Edit rate limit requests field",
+        "Edit rate limit window field",
+        "Click 'Save Security Settings' button"
+      ],
+      "notes": "Settings disabled in managed mode"
+    },
+    {
+      "id": "/dashboard/instance#organization-tab",
+      "route": "/dashboard/instance",
+      "label": "Instance Organization tab: invite codes, email domains",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Toggle require invite code switch",
+        "Edit allowed email domains textarea",
+        "Edit important message field",
+        "Click 'Save Organization Settings' button"
+      ],
+      "notes": "Invite code requirement controls sidebar visibility of Invites menu item"
+    },
+    {
+      "id": "/dashboard/instance#webhook-tab",
+      "route": "/dashboard/instance",
+      "label": "Instance Webhook tab: configure webhook URL, events",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Toggle webhook enabled switch",
+        "Edit webhook URL field",
+        "Edit webhook secret field",
+        "Toggle webhook on view switch",
+        "Toggle webhook on burn switch",
+        "Click 'Save Webhook Settings' button"
+      ],
+      "notes": "Webhook notifies external URL on secret view/burn events"
+    },
+    {
+      "id": "/dashboard/instance#metrics-tab",
+      "route": "/dashboard/instance",
+      "label": "Instance Metrics tab: Prometheus metrics config",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Toggle metrics enabled switch",
+        "Edit metrics secret field",
+        "Click 'Save Metrics Settings' button"
+      ],
+      "notes": "Exposes /metrics endpoint for Prometheus scraping"
+    },
+    {
+      "id": "/dashboard/instance#logo-error-modal",
+      "route": "/dashboard/instance",
+      "label": "Logo upload error modal (invalid type or too large)",
+      "section": "Instance",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click OK/close button to dismiss"
+      ],
+      "notes": "Triggered when logo exceeds 512KB or has invalid type"
+    },
+    {
+      "id": "/dashboard/invites",
+      "route": "/dashboard/invites",
+      "label": "Invite codes management: list, create, delete (admin)",
+      "section": "Invites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Create Invite' button (opens create modal)",
+        "Click copy icon to copy invite code",
+        "Click delete trash icon (opens delete modal)"
+      ],
+      "notes": "Admin-only; only shown in sidebar if requireInviteCode is enabled"
+    },
+    {
+      "id": "/dashboard/invites#create-invite-modal",
+      "route": "/dashboard/invites",
+      "label": "Create invite code modal: set max uses and expiry",
+      "section": "Invites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Edit max uses field",
+        "Edit expires in days field",
+        "Click 'Create' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "On success, new invite added to list with toast notification"
+    },
+    {
+      "id": "/dashboard/invites#delete-invite-modal",
+      "route": "/dashboard/invites",
+      "label": "Delete invite confirmation modal",
+      "section": "Invites",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Deactivate' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "Deactivates invite code; uses Modal component"
+    },
+    {
+      "id": "/dashboard/secret-requests",
+      "route": "/dashboard/secret-requests",
+      "label": "Secret requests list: view, copy, cancel requests",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'New Request' button to /dashboard/secret-requests/create",
+        "Click view/link icon on request (opens view modal with creator link)",
+        "Click cancel trash icon on pending request (opens cancel modal)",
+        "Copy creator link to clipboard"
+      ],
+      "notes": "Shows requests with status: pending, fulfilled, expired, cancelled"
+    },
+    {
+      "id": "/dashboard/secret-requests#view-request-modal",
+      "route": "/dashboard/secret-requests",
+      "label": "View secret request modal: shows creator link and status",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Copy creator link button",
+        "View fulfilled secret link (if status=fulfilled)",
+        "Click close button (closes modal)"
+      ],
+      "notes": "Fetches creator link from API on open; shows external link for fulfilled requests"
+    },
+    {
+      "id": "/dashboard/secret-requests#cancel-request-modal",
+      "route": "/dashboard/secret-requests",
+      "label": "Cancel secret request confirmation modal",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Click 'Cancel Request' confirm button",
+        "Click cancel button (closes modal)"
+      ],
+      "notes": "Sets request status to cancelled on confirm"
+    },
+    {
+      "id": "/dashboard/secret-requests/create",
+      "route": "/dashboard/secret-requests/create",
+      "label": "Create secret request form: title, expiry, views, webhook",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Fill title field (required)",
+        "Fill description field (optional)",
+        "Set max views number input",
+        "Select secret expiration dropdown",
+        "Select request validity duration dropdown",
+        "Fill allowed IP field (optional)",
+        "Toggle prevent burn switch",
+        "Fill webhook URL field (optional)",
+        "Submit 'Create Request' form",
+        "Click 'Back to Secret Requests' link"
+      ],
+      "notes": "On success shows creator link and optional webhook secret"
+    },
+    {
+      "id": "/dashboard/secret-requests/create#created",
+      "route": "/dashboard/secret-requests/create",
+      "label": "Request created success: shows creator link to share",
+      "section": "Secret Requests",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:dashboard",
+      "actions": [
+        "Copy creator link to clipboard",
+        "Copy webhook secret to clipboard (if webhook configured)",
+        "Click 'Back to Secret Requests' link"
+      ],
+      "notes": "Inline success state (not a separate route); createdRequest state set"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/setup",
+      "to": "/login",
+      "trigger": "button 'Create Admin Account' [form submit]",
+      "guard": "Setup successful"
+    },
+    {
+      "from": "/login",
+      "to": "/dashboard",
+      "trigger": "button 'Sign In' [form submit]",
+      "guard": "Credentials valid and 2FA not enabled"
+    },
+    {
+      "from": "/login",
+      "to": "/verify-2fa",
+      "trigger": "button 'Sign In' [form submit]",
+      "guard": "Credentials valid and twoFactorRedirect=true"
+    },
+    {
+      "from": "/login",
+      "to": "/register",
+      "trigger": "link 'Sign Up'",
+      "guard": null
+    },
+    {
+      "from": "/login",
+      "to": "/",
+      "trigger": "link 'Back to Hemmelig'",
+      "guard": null
+    },
+    {
+      "from": "/verify-2fa",
+      "to": "/dashboard",
+      "trigger": "button 'Verify' [form submit]",
+      "guard": "TOTP code is valid"
+    },
+    {
+      "from": "/verify-2fa",
+      "to": "/login",
+      "trigger": "link 'Back to Login'",
+      "guard": null
+    },
+    {
+      "from": "/register",
+      "to": "/login",
+      "trigger": "link 'Sign In'",
+      "guard": null
+    },
+    {
+      "from": "/register",
+      "to": "/login",
+      "trigger": "auto: redirect",
+      "guard": "allowRegistration setting is false"
+    },
+    {
+      "from": "/",
+      "to": "/#secret-created",
+      "trigger": "button 'Create Secret' [CreateButton]",
+      "guard": "Form is valid (secret non-empty) and API success"
+    },
+    {
+      "from": "/#secret-created",
+      "to": "/",
+      "trigger": "button 'Create Another Secret' or Logo/Home link",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/login",
+      "trigger": "link 'Sign In' in header",
+      "guard": "User not authenticated"
+    },
+    {
+      "from": "/",
+      "to": "/register",
+      "trigger": "link 'Sign Up' in header",
+      "guard": "User not authenticated"
+    },
+    {
+      "from": "/",
+      "to": "/dashboard",
+      "trigger": "link 'Dashboard' in header",
+      "guard": "User authenticated"
+    },
+    {
+      "from": "/secret/:id#locked",
+      "to": "/secret/:id#revealed",
+      "trigger": "button 'Unlock Secret'",
+      "guard": "Correct key/password provided"
+    },
+    {
+      "from": "/secret/:id#revealed",
+      "to": "/secret/:id#delete-modal",
+      "trigger": "button 'Delete Secret' [Trash2 icon]",
+      "guard": null
+    },
+    {
+      "from": "/secret/:id#delete-modal",
+      "to": "/",
+      "trigger": "button 'Confirm' in delete modal",
+      "guard": null
+    },
+    {
+      "from": "/secret/:id#delete-modal",
+      "to": "/secret/:id#revealed",
+      "trigger": "button 'Cancel' in delete modal",
+      "guard": null
+    },
+    {
+      "from": "/secret/:id#locked",
+      "to": "/secret/:id#error",
+      "trigger": "auto: redirect on loader 404/error",
+      "guard": "Secret not found or expired"
+    },
+    {
+      "from": "/request/:id",
+      "to": "/request/:id#submitted",
+      "trigger": "button 'Submit Secret' [Send icon]",
+      "guard": "Secret content non-empty and API success"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard#delete-secret-modal",
+      "trigger": "button trash icon in secrets table/card",
+      "guard": null
+    },
+    {
+      "from": "/dashboard#delete-secret-modal",
+      "to": "/dashboard",
+      "trigger": "button 'Delete' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard#delete-secret-modal",
+      "to": "/dashboard",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/account",
+      "trigger": "link 'Account' in sidebar nav",
+      "guard": null
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/analytics",
+      "trigger": "link 'Analytics' in sidebar nav",
+      "guard": "user.isAdmin === true"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/users",
+      "trigger": "link 'Users' in sidebar nav",
+      "guard": "user.isAdmin === true"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/secret-requests",
+      "trigger": "link 'Secret Requests' in sidebar nav",
+      "guard": null
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/invites",
+      "trigger": "link 'Invites' in sidebar nav",
+      "guard": "user.isAdmin && settings.requireInviteCode"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/dashboard/instance",
+      "trigger": "link 'Instance' in sidebar nav",
+      "guard": "user.isAdmin === true"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/login",
+      "trigger": "auto: redirect",
+      "guard": "No session (dashboardLoader returns redirect)"
+    },
+    {
+      "from": "/dashboard",
+      "to": "/",
+      "trigger": "link 'Create Secret' button [Plus icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account",
+      "to": "/dashboard/account#profile-tab",
+      "trigger": "tab button 'Profile' [User icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account",
+      "to": "/dashboard/account#security-tab",
+      "trigger": "tab button 'Security' [Shield icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account",
+      "to": "/dashboard/account#developer-tab",
+      "trigger": "tab button 'Developer' [Code icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account",
+      "to": "/dashboard/account#danger-tab",
+      "trigger": "tab button 'Danger Zone' [AlertTriangle icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#security-tab",
+      "to": "/dashboard/account#security-tab#2fa-setup-password",
+      "trigger": "button 'Setup Two-Factor Auth' [Smartphone icon]",
+      "guard": "2FA not currently enabled"
+    },
+    {
+      "from": "/dashboard/account#security-tab#2fa-setup-password",
+      "to": "/dashboard/account#security-tab#2fa-setup-qr",
+      "trigger": "button 'Continue'",
+      "guard": "Password field non-empty and API success"
+    },
+    {
+      "from": "/dashboard/account#security-tab#2fa-setup-qr",
+      "to": "/dashboard/account#security-tab#2fa-setup-verify",
+      "trigger": "button 'Continue'",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#security-tab#2fa-setup-verify",
+      "to": "/dashboard/account#security-tab#backup-codes-modal",
+      "trigger": "button 'Verify & Enable'",
+      "guard": "TOTP code valid"
+    },
+    {
+      "from": "/dashboard/account#security-tab#backup-codes-modal",
+      "to": "/dashboard/account#security-tab",
+      "trigger": "button 'I Saved These Codes' [confirm]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#security-tab#2fa-setup-password",
+      "to": "/dashboard/account#security-tab",
+      "trigger": "button 'Cancel'",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#security-tab",
+      "to": "/dashboard/account#security-tab#disable-2fa-modal",
+      "trigger": "button 'Disable 2FA' [Shield icon]",
+      "guard": "2FA currently enabled"
+    },
+    {
+      "from": "/dashboard/account#security-tab#disable-2fa-modal",
+      "to": "/dashboard/account#security-tab",
+      "trigger": "button 'Disable' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#security-tab#disable-2fa-modal",
+      "to": "/dashboard/account#security-tab",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#developer-tab",
+      "to": "/dashboard/account#developer-tab#create-key-modal",
+      "trigger": "button 'Create API Key' [Plus icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#developer-tab#create-key-modal",
+      "to": "/dashboard/account#developer-tab",
+      "trigger": "button 'Create' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#developer-tab#create-key-modal",
+      "to": "/dashboard/account#developer-tab",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#danger-tab",
+      "to": "/dashboard/account#danger-tab#delete-account-modal",
+      "trigger": "button 'Delete Account' [Trash2 icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account#danger-tab#delete-account-modal",
+      "to": "/login",
+      "trigger": "button 'Delete Account' confirm in modal",
+      "guard": "API returns 200"
+    },
+    {
+      "from": "/dashboard/account#danger-tab#delete-account-modal",
+      "to": "/dashboard/account#danger-tab",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users",
+      "to": "/dashboard/users#add-user-modal",
+      "trigger": "button 'Add User' [UserPlus icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users#add-user-modal",
+      "to": "/dashboard/users",
+      "trigger": "button 'Add User' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users#add-user-modal",
+      "to": "/dashboard/users",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users",
+      "to": "/dashboard/users#edit-user-modal",
+      "trigger": "button edit [Edit icon] on user row",
+      "guard": "Row user.id !== current user id"
+    },
+    {
+      "from": "/dashboard/users#edit-user-modal",
+      "to": "/dashboard/users",
+      "trigger": "button 'Save' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users#edit-user-modal",
+      "to": "/dashboard/users",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users",
+      "to": "/dashboard/users#delete-user-modal",
+      "trigger": "button delete [Trash2 icon] on user row",
+      "guard": "Row user.id !== current user id"
+    },
+    {
+      "from": "/dashboard/users#delete-user-modal",
+      "to": "/dashboard/users",
+      "trigger": "button 'Delete' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/users#delete-user-modal",
+      "to": "/dashboard/users",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance",
+      "to": "/dashboard/instance#general-tab",
+      "trigger": "tab button 'General' [Settings icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance",
+      "to": "/dashboard/instance#security-tab",
+      "trigger": "tab button 'Security' [Shield icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance",
+      "to": "/dashboard/instance#organization-tab",
+      "trigger": "tab button 'Organization' [Building2 icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance",
+      "to": "/dashboard/instance#webhook-tab",
+      "trigger": "tab button 'Webhook' [Webhook icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance",
+      "to": "/dashboard/instance#metrics-tab",
+      "trigger": "tab button 'Metrics' [Activity icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance#general-tab",
+      "to": "/dashboard/instance#logo-error-modal",
+      "trigger": "auto: file input change [logo upload]",
+      "guard": "File type invalid or size > 512KB"
+    },
+    {
+      "from": "/dashboard/instance#logo-error-modal",
+      "to": "/dashboard/instance#general-tab",
+      "trigger": "button 'OK' in error modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/invites",
+      "to": "/dashboard/invites#create-invite-modal",
+      "trigger": "button 'Create Invite' [Plus icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/invites#create-invite-modal",
+      "to": "/dashboard/invites",
+      "trigger": "button 'Create' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/invites#create-invite-modal",
+      "to": "/dashboard/invites",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/invites",
+      "to": "/dashboard/invites#delete-invite-modal",
+      "trigger": "button delete [Trash2 icon] on invite row",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/invites#delete-invite-modal",
+      "to": "/dashboard/invites",
+      "trigger": "button 'Deactivate' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/invites#delete-invite-modal",
+      "to": "/dashboard/invites",
+      "trigger": "button 'Cancel' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests",
+      "to": "/dashboard/secret-requests/create",
+      "trigger": "button 'New Request' [Plus icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests",
+      "to": "/dashboard/secret-requests#view-request-modal",
+      "trigger": "button view link icon [Link2/ExternalLink] on request row",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests#view-request-modal",
+      "to": "/dashboard/secret-requests",
+      "trigger": "button 'Close' in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests",
+      "to": "/dashboard/secret-requests#cancel-request-modal",
+      "trigger": "button cancel [Trash2 icon] on pending request row",
+      "guard": "request.status === 'pending'"
+    },
+    {
+      "from": "/dashboard/secret-requests#cancel-request-modal",
+      "to": "/dashboard/secret-requests",
+      "trigger": "button 'Cancel Request' confirm in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests#cancel-request-modal",
+      "to": "/dashboard/secret-requests",
+      "trigger": "button 'Cancel' (dismiss) in modal",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests/create",
+      "to": "/dashboard/secret-requests/create#created",
+      "trigger": "button 'Create Request' [form submit]",
+      "guard": "API success"
+    },
+    {
+      "from": "/dashboard/secret-requests/create",
+      "to": "/dashboard/secret-requests",
+      "trigger": "link 'Back to Secret Requests' [ArrowLeft icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/secret-requests/create#created",
+      "to": "/dashboard/secret-requests",
+      "trigger": "link 'Back to Secret Requests' [ArrowLeft icon]",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/account",
+      "to": "/dashboard",
+      "trigger": "link 'Secrets' in sidebar nav",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/analytics",
+      "to": "/dashboard",
+      "trigger": "link 'Secrets' in sidebar nav",
+      "guard": null
+    },
+    {
+      "from": "/dashboard/instance",
+      "to": "/dashboard",
+      "trigger": "link 'Secrets' in sidebar nav",
+      "guard": null
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Publicly accessible (no auth required)",
+        "node_ids": [
+          "/setup",
+          "/login",
+          "/register",
+          "/verify-2fa",
+          "/",
+          "/#secret-created",
+          "/secret/:id#locked",
+          "/secret/:id#revealed",
+          "/secret/:id#delete-modal",
+          "/secret/:id#error",
+          "/request/:id",
+          "/request/:id#submitted",
+          "/terms",
+          "/privacy",
+          "/404"
+        ]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Requires authenticated user session",
+        "node_ids": [
+          "/dashboard",
+          "/dashboard#delete-secret-modal",
+          "/dashboard/account",
+          "/dashboard/account#profile-tab",
+          "/dashboard/account#security-tab",
+          "/dashboard/account#security-tab#2fa-setup-password",
+          "/dashboard/account#security-tab#2fa-setup-qr",
+          "/dashboard/account#security-tab#2fa-setup-verify",
+          "/dashboard/account#security-tab#disable-2fa-modal",
+          "/dashboard/account#security-tab#backup-codes-modal",
+          "/dashboard/account#developer-tab",
+          "/dashboard/account#developer-tab#create-key-modal",
+          "/dashboard/account#danger-tab",
+          "/dashboard/account#danger-tab#delete-account-modal",
+          "/dashboard/secret-requests",
+          "/dashboard/secret-requests#view-request-modal",
+          "/dashboard/secret-requests#cancel-request-modal",
+          "/dashboard/secret-requests/create",
+          "/dashboard/secret-requests/create#created"
+        ]
+      },
+      {
+        "id": "zone:admin",
+        "label": "Requires admin role (403 for regular users)",
+        "node_ids": [
+          "/dashboard/analytics",
+          "/dashboard/users",
+          "/dashboard/users#add-user-modal",
+          "/dashboard/users#edit-user-modal",
+          "/dashboard/users#delete-user-modal",
+          "/dashboard/instance",
+          "/dashboard/instance#general-tab",
+          "/dashboard/instance#security-tab",
+          "/dashboard/instance#organization-tab",
+          "/dashboard/instance#webhook-tab",
+          "/dashboard/instance#metrics-tab",
+          "/dashboard/instance#logo-error-modal",
+          "/dashboard/invites",
+          "/dashboard/invites#create-invite-modal",
+          "/dashboard/invites#delete-invite-modal"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:standalone",
+        "label": "No shared layout (full-screen centered card)",
+        "node_ids": ["/setup"]
+      },
+      {
+        "id": "layout:auth",
+        "label": "AuthPageLayout: centered card with back link, no main nav",
+        "node_ids": ["/login", "/register", "/verify-2fa"]
+      },
+      {
+        "id": "layout:root",
+        "label": "RootLayout: top Header (with nav links) and Footer",
+        "node_ids": [
+          "/",
+          "/#secret-created",
+          "/secret/:id#locked",
+          "/secret/:id#revealed",
+          "/secret/:id#delete-modal",
+          "/secret/:id#error",
+          "/request/:id",
+          "/request/:id#submitted",
+          "/terms",
+          "/privacy",
+          "/404"
+        ]
+      },
+      {
+        "id": "layout:dashboard",
+        "label": "DashboardLayout: sidebar nav + mobile hamburger menu",
+        "node_ids": [
+          "/dashboard",
+          "/dashboard#delete-secret-modal",
+          "/dashboard/account",
+          "/dashboard/account#profile-tab",
+          "/dashboard/account#security-tab",
+          "/dashboard/account#security-tab#2fa-setup-password",
+          "/dashboard/account#security-tab#2fa-setup-qr",
+          "/dashboard/account#security-tab#2fa-setup-verify",
+          "/dashboard/account#security-tab#disable-2fa-modal",
+          "/dashboard/account#security-tab#backup-codes-modal",
+          "/dashboard/account#developer-tab",
+          "/dashboard/account#developer-tab#create-key-modal",
+          "/dashboard/account#danger-tab",
+          "/dashboard/account#danger-tab#delete-account-modal",
+          "/dashboard/analytics",
+          "/dashboard/users",
+          "/dashboard/users#add-user-modal",
+          "/dashboard/users#edit-user-modal",
+          "/dashboard/users#delete-user-modal",
+          "/dashboard/instance",
+          "/dashboard/instance#general-tab",
+          "/dashboard/instance#security-tab",
+          "/dashboard/instance#organization-tab",
+          "/dashboard/instance#webhook-tab",
+          "/dashboard/instance#metrics-tab",
+          "/dashboard/instance#logo-error-modal",
+          "/dashboard/invites",
+          "/dashboard/invites#create-invite-modal",
+          "/dashboard/invites#delete-invite-modal",
+          "/dashboard/secret-requests",
+          "/dashboard/secret-requests#view-request-modal",
+          "/dashboard/secret-requests#cancel-request-modal",
+          "/dashboard/secret-requests/create",
+          "/dashboard/secret-requests/create#created"
+        ]
+      }
+    ]
+  }
+}
