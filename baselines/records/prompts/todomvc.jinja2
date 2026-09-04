@@ -1,0 +1,37 @@
+A TodoMVC instance is running at http://127.0.0.1:5180. It is already built, seeded and
+started — do not build, start, stop or reconfigure it.
+
+This repository has Playwright's test agents installed as subagents: `playwright-test-planner`,
+`playwright-test-generator` and `playwright-test-healer`. Use them, via the Task tool, to
+produce a Playwright end-to-end suite for this application. Do not write the tests yourself.
+
+Work in three stages.
+
+**1. Plan.** Delegate to `playwright-test-planner`. Instruct it to explore the running
+application broadly and produce a test plan covering the application's significant pages and
+user journeys — not one narrow feature. `tests/seed.spec.ts` signs in and leaves the browser on
+a logged-in page; the planner should use it to set up. Plans belong in `specs/`.
+
+If the surface is large, run the planner more than once for different areas and keep every
+plan, so coverage is not limited to whatever the first pass happened to notice.
+
+**2. Generate.** For each plan in `specs/`, delegate to `playwright-test-generator` to turn it
+into runnable specs under `tests/`. Every generated test must verify the meaningful behavioural
+postcondition of the flow it exercises: when a flow creates, updates or deletes data, assert the
+resulting values, counts, list membership, ordering or content — not merely that a page loaded
+or an element became visible.
+
+**3. Heal.** Run `npx playwright test` and delegate failures to `playwright-test-healer` until
+the suite is green. Do not leave failing tests behind.
+
+Constraints:
+
+- Do not modify `tests/seed.spec.ts`.
+- Do not modify application code; this instance is a black box.
+- Prefer role-, label- and text-based locators over brittle CSS or positional selectors.
+- Tests will later run at 1280x720, serially, with no retries — avoid depending on parallelism,
+  on retries, or on state left behind by another test.
+- If the healer cannot make a test pass, it may skip it, but say so in your summary.
+
+Finish by summarising: the plans written, the spec files generated, how many tests the suite
+contains, anything skipped, and any part of the application you could not cover.

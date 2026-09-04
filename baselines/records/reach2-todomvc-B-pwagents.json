@@ -1,0 +1,17 @@
+{
+ "subject": "todomvc",
+ "arm": "B-pwagents",
+ "suite_filter": "",
+ "tests_considered": 36,
+ "reach": 6,
+ "items": 6,
+ "per_item": {
+  "T1 create a todo": 32,
+  "T2 edit a todo's text": 1,
+  "T3 toggle one todo": 12,
+  "T4 delete a todo": 2,
+  "T5 toggle all todos": 3,
+  "T6 clear completed": 1
+ },
+ "witness": "committing action, ordered, negative paths excluded"
+}

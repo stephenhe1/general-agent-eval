@@ -1,0 +1,17 @@
+{
+ "subject": "todomvc",
+ "arm": "A1-repo",
+ "suite_filter": "",
+ "tests_considered": 38,
+ "reach": 6,
+ "items": 6,
+ "per_item": {
+  "T1 create a todo": 33,
+  "T2 edit a todo's text": 2,
+  "T3 toggle one todo": 13,
+  "T4 delete a todo": 3,
+  "T5 toggle all todos": 2,
+  "T6 clear completed": 2
+ },
+ "witness": "committing action, ordered, negative paths excluded"
+}

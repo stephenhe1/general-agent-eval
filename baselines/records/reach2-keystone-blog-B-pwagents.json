@@ -1,0 +1,21 @@
+{
+ "subject": "keystone-blog",
+ "arm": "B-pwagents",
+ "suite_filter": "tests-rq6-agent",
+ "tests_considered": 43,
+ "reach": 9,
+ "items": 10,
+ "per_item": {
+  "KS-01 create an Author": 6,
+  "KS-02 edit an Author": 1,
+  "KS-03 verify/unverify": 0,
+  "KS-04 delete an Author": 6,
+  "KS-05 create a Post": 9,
+  "KS-06 edit a Post": 2,
+  "KS-07 publish/unpublish": 1,
+  "KS-09 assign an Author": 4,
+  "KS-10 set a Post's Tags": 1,
+  "KS-12 delete a Post": 9
+ },
+ "witness": "accepted mutation, ordered after the driving action"
+}
