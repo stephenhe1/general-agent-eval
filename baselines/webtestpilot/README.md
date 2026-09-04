@@ -71,6 +71,144 @@ at all, is:
 author's exact literals or a URL the suite never visited. That is why `caught / 175` is not
 reported as an oracle-strength measure, and why the active-fault view exists.
 
+## Prerequisites
+
+**The implementation is not on this branch.** `baselines/webtestpilot/` holds the *records*; the
+evaluator (`src/general_agent_eval/webtestpilot/`), its tests and `tools/` are not committed here,
+and `general-agent-eval-wtp` is absent from this branch's `pyproject.toml` `[project.scripts]`.
+Every command below therefore needs a checkout that carries the evaluator. Verify with:
+
+```bash
+general-agent-eval-wtp --help          # must list: {audit,generate,evaluate,pilot}
+```
+
+| Requirement | Detail |
+|---|---|
+| Python | >= 3.11 (`requires-python`); verified on 3.11.15 |
+| Container runtime | Docker **or** Podman. Podman is selected per-invocation with `--container-cli podman`, which the harness forwards to WebTestPilot's `start_app.sh` as `CONTAINER_CLI`. |
+| WebTestPilot checkout | Passed as `--wtp-root`; the harness calls its `webapps/start_app.sh` and its official `baselines.bug_injector.prepare_bug_script`, never a reimplementation. |
+| `ANTHROPIC_API_KEY` | Needed for **generation only**. Container isolation fails fast without it. Evaluation of an already-frozen suite needs no key. |
+| Apple Silicon | PrestaShop needs its app image rebuilt for arm64; `mysql:5.7` has no arm64 build and runs emulated. See the WebTestPilot-side commit `webapps/prestashop: pin app image to linux/arm64`. |
+
+Applications and ports (from `webtestpilot/apps.py`):
+`bookstack` 8081 · `indico` 8080 · `invoiceninja` 8082 · `prestashop` 8083 · `selftest` 8099.
+
+## Running the evaluation
+
+Five stages. Generation is the only one that costs API budget; everything after it is compute.
+
+### 1. Start the subject application
+
+```bash
+cd <wtp-root>
+CONTAINER_CLI=podman READY_TIMEOUT_SECONDS=900 bash webapps/start_app.sh bookstack
+```
+
+`READY_TIMEOUT_SECONDS` defaults to 60. PrestaShop and Indico need far longer; a too-short value
+aborts an evaluation mid-run. The harness exports this itself from `--ready-timeout`.
+
+### 2. Generate a suite (costs budget)
+
+```bash
+general-agent-eval-wtp \
+  --wtp-root <wtp-root> --app bookstack --container-cli podman \
+  --isolation container --generator claude-code-baseline \
+  --results-root results/wtp_headtohead/claude-code-baseline \
+  --model sonnet --effort high --max-budget-usd 14 --ready-timeout 600 \
+  generate
+```
+
+`--generator playwright-agents` selects the other baseline. `--isolation container` runs the agent
+in a sanitized workspace that cannot reach the benchmark's specs, faults or ground truth; the run
+aborts if its own pre-generation leakage audit fails.
+
+Generation ends by **freezing** the suite: specs are copied to
+`<run>/generation/frozen/` and hashed into `frozen_manifest.json`. Freezing is not a separate
+command. Every later stage re-verifies those hashes and refuses to run if a spec changed.
+
+**Budget is a real failure mode.** `playwright-agents / prestashop` stopped on a `--max-budget-usd
+12` cap at `total_cost_usd 12.05` with its healer barely started, leaving 52 of 99 tests broken on
+the clean app. Allow ~25–30 USD for that combination.
+
+### 3. Evaluate injected faults
+
+```bash
+general-agent-eval-wtp \
+  --wtp-root <wtp-root> --app bookstack --container-cli podman \
+  --results-root results/wtp_headtohead/claude-code-baseline \
+  --ready-timeout 600 \
+  evaluate
+```
+
+Per run: re-verify the frozen hashes, re-instrument, run the suite `--clean-reps` times (default 3)
+with an application reset before each to build the clean profile, then inject each fault in turn
+with a reset before every one. Only tests that passed in *all* clean repetitions can produce a
+verdict. Add `--bug <name>` (repeatable) to restrict the fault set, and `--reuse-clean-profile` to
+skip re-deriving the profile — that is guarded by a suite hash and refuses a mismatched suite.
+
+### 4. Relaxed-trigger experiment (supplemental)
+
+```bash
+python tools/build_relaxed_variants.py \
+    --causes results/wtp_headtohead/activation_causes.csv \
+    --out    results/wtp_relaxed/prepared
+
+general-agent-eval-wtp \
+  --wtp-root <wtp-root> --app bookstack --container-cli podman \
+  --results-root results/wtp_relaxed/claude-code-baseline \
+  --variant-dir results/wtp_relaxed/prepared \
+  --reuse-clean-profile --ready-timeout 600 \
+  --bug count_recently_created_books --bug delete_book \
+  evaluate
+```
+
+`--variant-dir` replaces a fault's trigger with its relaxed variant where
+`<dir>/<app>/<bug>.js` exists, and silently falls back to the original otherwise. The suite is
+untouched. Stage a **copy** of the run directory under a separate results root first, or the
+primary campaign's verdicts are overwritten.
+
+### 5. Reports and audits
+
+```bash
+python tools/report_fired_only.py                     # -> export/08_active_faults.csv  (headline)
+python tools/report_relaxed.py                        # -> relaxed_summary.csv, relaxed_by_run.csv
+python tools/audit_activation_causes.py               # -> activation_causes.csv  (why faults never armed)
+python tools/audit_b_provenance.py results/wtp_headtohead/playwright-agents \
+    > results/wtp_headtohead/b_provenance_audit.csv   # positional arg, prints CSV to stdout
+python tools/audit_oracle_capability.py               # -> oracle_capability.csv
+python tools/export_wtp_results.py                    # -> export/*.csv + webtestpilot_results.xlsx
+python tools/consolidate_wtp_results.py --results-root results/wtp_headtohead/claude-code-baseline
+```
+
+Order matters: `audit_activation_causes.py` feeds `build_relaxed_variants.py`, and
+`export_wtp_results.py` reads the audit CSVs, so run the audits before the export.
+`consolidate_wtp_results.py` rebuilds per-app summaries from `bugs/*/verdict.json` — needed because
+a shared `--results-root` lets a later app overwrite `summary.json`. The workbook needs `openpyxl`;
+without it the exporter still writes every CSV.
+
+## Vocabulary
+
+These five words are not interchangeable, and conflating the first two is what makes naive rates
+wrong.
+
+| Term | Meaning |
+|---|---|
+| **generated** | A test exists in the frozen suite. Says nothing about whether it can detect anything. |
+| **activated** (armed) | The fault's `isConditionMet()` returned true, recorded via a `sessionStorage` sentinel. Every fault is conditional; if the suite never puts the app in the required state the injected script sits inert. |
+| **mutation_applied** | A page fingerprint taken either side of the mutation actually changed, so a defect was demonstrably on screen. Activation alone does **not** imply this: the benchmark sets its sentinel after calling the mutation without checking whether it did anything, so a fault can arm and change nothing. |
+| **caught** | An activated fault made a *clean-stable* test fail via a real `expect` rejection. |
+| **oracle_miss** | The fault armed and every clean-stable test still passed — the interesting failure, and the only one that indicts the assertions. |
+
+Full verdict vocabulary in `webtestpilot/classify.py`: `caught`, `oracle_miss`, `not_activated`,
+`armed_no_effect`, `incidental_failure`, `environment_error`. A timeout, locator error or uncaught
+exception is `incidental_failure`, never `caught`. Every `caught` verdict is emitted with its
+evidence and flagged `review_required` — the classifier narrows what a human reviews, it does not
+replace review.
+
+**Check `run_validity.csv` before quoting any run.** 4 of 8 runs carry a caveat and 3 of those are
+harness-side, not properties of the tool under test: contradictory prompts, a generator subagent
+that never ran, and the budget truncation above.
+
 ## Where to find things
 
 | What | Path |
