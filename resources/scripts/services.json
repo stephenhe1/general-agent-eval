@@ -1,111 +1,231 @@
 {
-  "schema_version": 1,
-  "description": "Registry of JavaScript frontend services for Playwright E2E evaluation. Consumed by resources/scripts/run-with-service.sh. Each entry declares how to build and start a local dev/preview server so the agent can explore the running UI and generate Playwright tests.",
-  "placeholders": {
-    "${PORT}": "HTTP port the server is launched on (default_port unless overridden via --service-port)."
+ "schema_version": 1,
+ "description": "Registry of JavaScript frontend services for Playwright E2E evaluation. Consumed by resources/scripts/run-with-service.sh. Each entry declares how to build and start a local dev/preview server so the agent can explore the running UI and generate Playwright tests.",
+ "placeholders": {
+  "${PORT}": "HTTP port the server is launched on (default_port unless overridden via --service-port)."
+ },
+ "services": {
+  "sample-js-app": {
+   "description": "Sample JavaScript frontend (Vite dev server) for Playwright E2E testing. Replace this entry with your actual project.",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "rest_style": null,
+   "build": [
+    "npm ci"
+   ],
+   "run": "npm run dev -- --port ${PORT} --host 127.0.0.1",
+   "artifact_glob": null,
+   "default_port": 5173,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 120,
+   "external_dependencies": [],
+   "env": {},
+   "notes": "Vite dev server example. Adjust 'run' for other bundlers: Next.js uses 'npm run dev -- -p ${PORT}', Create React App uses 'PORT=${PORT} npm start'."
   },
-  "services": {
-    "sample-js-app": {
-      "description": "Sample JavaScript frontend (Vite dev server) for Playwright E2E testing. Replace this entry with your actual project.",
-      "repo_subdir": ".",
-      "build_system": "npm",
-      "rest_style": null,
-      "build": [
-        "npm ci"
-      ],
-      "run": "npm run dev -- --port ${PORT} --host 127.0.0.1",
-      "artifact_glob": null,
-      "default_port": 5173,
-      "base_path": "/",
-      "health_path": "/",
-      "health_timeout_seconds": 120,
-      "external_dependencies": [],
-      "env": {},
-      "notes": "Vite dev server example. Adjust 'run' for other bundlers: Next.js uses 'npm run dev -- -p ${PORT}', Create React App uses 'PORT=${PORT} npm start'."
-    },
-
-    "swup": {
-      "description": "swup page-transition library — static test fixture pages served at /.",
-      "repo_subdir": ".",
-      "build_system": "npm",
-      "build": [
-        "npm ci",
-        "npm run test:e2e:instrument"
-      ],
-      "run": "npx --yes serve -n -S -L -p ${PORT} --config ./tests/config/serve.json",
-      "default_port": 8274,
-      "base_path": "/",
-      "health_path": "/",
-      "health_timeout_seconds": 60,
-      "env": {},
-      "notes": "Serves from tests/fixtures/ (serve.json sets public: tests/fixtures). The instrument step copies dist/ -> tests/fixtures/dist/ so the HTML pages can load Swup. Do NOT use --clear-tests with this project: the tests/ directory contains both test specs (tests/functional/) AND the app-serving config (tests/config/serve.json) and fixture pages (tests/fixtures/), so clearing tests/ would break the server startup. The existing Playwright config is at tests/config/playwright.config.ts; testDir is tests/functional/."
-    },
-
-    "openplayerjs": {
-      "description": "OpenPlayerJS HTML5 media player — example HTML pages at /examples/.",
-      "repo_subdir": ".",
-      "build_system": "pnpm",
-      "build": [
-        "node -e \"const fs=require('fs'),cp=require('child_process');const p=JSON.parse(fs.readFileSync('package.json','utf8'));delete p.engines;p.packageManager='pnpm@'+cp.execSync('pnpm --version').toString().trim();fs.writeFileSync('package.json',JSON.stringify(p,null,2),'utf8')\"",
-        "node -e \"const fs=require('fs');let w=fs.readFileSync('pnpm-workspace.yaml','utf8');w=w.replace('engineStrict: true','engineStrict: false').replace('unrs-resolver: set this to true or false','unrs-resolver: true');fs.writeFileSync('pnpm-workspace.yaml',w,'utf8')\"",
-        "CI=true pnpm install --no-frozen-lockfile"
-      ],
-      "run": "npx --yes serve -l ${PORT} .",
-      "default_port": 4173,
-      "base_path": "/",
-      "health_path": "/examples/basic.html",
-      "health_timeout_seconds": 300,
-      "env": {},
-      "notes": "Serves from the repo root so importmap paths (./packages/*/dist/) in example HTML pages resolve correctly. Build patches package.json (removes strict engines field) and pnpm-workspace.yaml (sets engineStrict:false, approves unrs-resolver) before installing. The dist/ package artifacts are already staged from the host build, so 'pnpm run build' is skipped to save time. The existing Playwright config is playwright.config.ts; testDir is e2e/."
-    },
-
-    "gridstack": {
-      "description": "gridstack.js drag-and-drop grid layout — interactive demo pages at /demo/.",
-      "repo_subdir": ".",
-      "build_system": "yarn",
-      "build": [
-        "corepack enable yarn",
-        "yarn install --frozen-lockfile"
-      ],
-      "run": "npx --yes serve -l ${PORT} .",
-      "default_port": 8080,
-      "base_path": "/",
-      "health_path": "/demo/",
-      "health_timeout_seconds": 60,
-      "env": {},
-      "notes": "default_port 8080 matches the playwright.config.ts baseURL (http://localhost:8080). Serves from the repo root so demo/ pages can resolve ../dist/gridstack-all.js. The dist/ artifacts are already staged from the host build; rebuild steps (grunt/webpack) are skipped. The existing Playwright config is playwright.config.ts; testDir is e2e/."
-    },
-
-    "motion-vue": {
-      "description": "motion-vue Vue animation library — Vite playground at /.",
-      "repo_subdir": ".",
-      "build_system": "pnpm",
-      "build": [
-        "pnpm install --frozen-lockfile"
-      ],
-      "run": "pnpm --filter @motion-vue/playground-vite dev --port ${PORT} --host 127.0.0.1",
-      "default_port": 5173,
-      "base_path": "/",
-      "health_path": "/",
-      "health_timeout_seconds": 120,
-      "env": {},
-      "notes": "Starts the Vite dev server for the @motion-vue/playground-vite package. Health probe may need a few seconds while Vite compiles on first request. The existing Playwright config is playwright.config.ts; testDir is tests/."
-    },
-
-    "zudoku": {
-      "description": "Zudoku API documentation framework — cosmo-cargo example at /.",
-      "repo_subdir": ".",
-      "build_system": "pnpm",
-      "build": [
-        "pnpm install --frozen-lockfile"
-      ],
-      "run": "npx --yes serve -l ${PORT} examples/cosmo-cargo/dist",
-      "default_port": 4321,
-      "base_path": "/",
-      "health_path": "/",
-      "health_timeout_seconds": 60,
-      "env": {},
-      "notes": "Serves the pre-built cosmo-cargo static site (examples/cosmo-cargo/dist/ is already staged from the host build). default_port 4321 matches the playwright.config.ts default (process.env.PORT || 4321); PORT is exported by run-with-service.sh so the playwright config picks up the correct baseURL. The existing Playwright config is playwright.config.ts; testDir is e2e/."
-    }
+  "swup": {
+   "description": "swup page-transition library \u2014 static test fixture pages served at /.",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "build": [
+    "npm ci",
+    "npm run test:e2e:instrument"
+   ],
+   "run": "npx --yes serve -n -S -L -p ${PORT} --config ./tests/config/serve.json",
+   "default_port": 8274,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 60,
+   "env": {},
+   "notes": "Serves from tests/fixtures/ (serve.json sets public: tests/fixtures). The instrument step copies dist/ -> tests/fixtures/dist/ so the HTML pages can load Swup. Do NOT use --clear-tests with this project: the tests/ directory contains both test specs (tests/functional/) AND the app-serving config (tests/config/serve.json) and fixture pages (tests/fixtures/), so clearing tests/ would break the server startup. The existing Playwright config is at tests/config/playwright.config.ts; testDir is tests/functional/."
+  },
+  "openplayerjs": {
+   "description": "OpenPlayerJS HTML5 media player \u2014 example HTML pages at /examples/.",
+   "repo_subdir": ".",
+   "build_system": "pnpm",
+   "build": [
+    "node -e \"const fs=require('fs'),cp=require('child_process');const p=JSON.parse(fs.readFileSync('package.json','utf8'));delete p.engines;p.packageManager='pnpm@'+cp.execSync('pnpm --version').toString().trim();fs.writeFileSync('package.json',JSON.stringify(p,null,2),'utf8')\"",
+    "node -e \"const fs=require('fs');let w=fs.readFileSync('pnpm-workspace.yaml','utf8');w=w.replace('engineStrict: true','engineStrict: false').replace('unrs-resolver: set this to true or false','unrs-resolver: true');fs.writeFileSync('pnpm-workspace.yaml',w,'utf8')\"",
+    "CI=true pnpm install --no-frozen-lockfile"
+   ],
+   "run": "npx --yes serve -l ${PORT} .",
+   "default_port": 4173,
+   "base_path": "/",
+   "health_path": "/examples/basic.html",
+   "health_timeout_seconds": 300,
+   "env": {},
+   "notes": "Serves from the repo root so importmap paths (./packages/*/dist/) in example HTML pages resolve correctly. Build patches package.json (removes strict engines field) and pnpm-workspace.yaml (sets engineStrict:false, approves unrs-resolver) before installing. The dist/ package artifacts are already staged from the host build, so 'pnpm run build' is skipped to save time. The existing Playwright config is playwright.config.ts; testDir is e2e/."
+  },
+  "gridstack": {
+   "description": "gridstack.js drag-and-drop grid layout \u2014 interactive demo pages at /demo/.",
+   "repo_subdir": ".",
+   "build_system": "yarn",
+   "build": [
+    "corepack enable yarn",
+    "yarn install --frozen-lockfile"
+   ],
+   "run": "npx --yes serve -l ${PORT} .",
+   "default_port": 8080,
+   "base_path": "/",
+   "health_path": "/demo/",
+   "health_timeout_seconds": 60,
+   "env": {},
+   "notes": "default_port 8080 matches the playwright.config.ts baseURL (http://localhost:8080). Serves from the repo root so demo/ pages can resolve ../dist/gridstack-all.js. The dist/ artifacts are already staged from the host build; rebuild steps (grunt/webpack) are skipped. The existing Playwright config is playwright.config.ts; testDir is e2e/."
+  },
+  "motion-vue": {
+   "description": "motion-vue Vue animation library \u2014 Vite playground at /.",
+   "repo_subdir": ".",
+   "build_system": "pnpm",
+   "build": [
+    "pnpm install --frozen-lockfile"
+   ],
+   "run": "pnpm --filter @motion-vue/playground-vite dev --port ${PORT} --host 127.0.0.1",
+   "default_port": 5173,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 120,
+   "env": {},
+   "notes": "Starts the Vite dev server for the @motion-vue/playground-vite package. Health probe may need a few seconds while Vite compiles on first request. The existing Playwright config is playwright.config.ts; testDir is tests/."
+  },
+  "zudoku": {
+   "description": "Zudoku API documentation framework \u2014 cosmo-cargo example at /.",
+   "repo_subdir": ".",
+   "build_system": "pnpm",
+   "build": [
+    "pnpm install --frozen-lockfile"
+   ],
+   "run": "npx --yes serve -l ${PORT} examples/cosmo-cargo/dist",
+   "default_port": 4321,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 60,
+   "env": {},
+   "notes": "Serves the pre-built cosmo-cargo static site (examples/cosmo-cargo/dist/ is already staged from the host build). default_port 4321 matches the playwright.config.ts default (process.env.PORT || 4321); PORT is exported by run-with-service.sh so the playwright config picks up the correct baseURL. The existing Playwright config is playwright.config.ts; testDir is e2e/."
+  },
+  "actual": {
+   "description": "Actual Budget \u2014 personal finance PWA running in browser-only mode (IndexedDB backend, no sync-server).",
+   "repo_subdir": "packages/desktop-client",
+   "build_system": "yarn",
+   "build": [],
+   "run": "npx vite --mode=browser --port ${PORT} --host 127.0.0.1",
+   "default_port": 5006,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 60,
+   "env": {},
+   "notes": "Dependencies and loot-core/plugins-service pre-built on host. Vite dev server in browser mode uses IndexedDB backend (no sync-server needed). PORT is injected by run-with-service.sh. The Vite config reads kcab.worker hash from loot-core/lib-dist/browser/."
+  },
+  "todomvc": {
+   "description": "TodoMVC \u2014 classic todo app built with Vite + React.",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "build": [],
+   "run": "npx vite --port ${PORT} --host 127.0.0.1",
+   "default_port": 5180,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 30,
+   "env": {},
+   "notes": "Dependencies pre-installed on host. Simple Vite dev server, no backend required."
+  },
+  "maputnik": {
+   "description": "Maputnik \u2014 open-source visual editor for MapLibre/Mapbox GL styles.",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "build": [],
+   "run": "npx vite --port ${PORT} --host 127.0.0.1",
+   "default_port": 5181,
+   "base_path": "/maputnik/",
+   "health_path": "/maputnik/",
+   "health_timeout_seconds": 30,
+   "env": {},
+   "notes": "Dependencies pre-installed on host. Vite dev server with base path /maputnik/. Rich UI with map canvas, layer editor, modals."
+  },
+  "cypress-realworld-app": {
+   "description": "Cypress Real World App \u2014 full-stack finance app with auth (Express + lowdb backend, Vite frontend).",
+   "repo_subdir": ".",
+   "build_system": "yarn",
+   "build": [],
+   "run": "yarn start:react -- --port ${PORT} --host 127.0.0.1",
+   "default_port": 5182,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 30,
+   "env": {},
+   "notes": "Dependencies pre-installed on host. Frontend-only mode (no API backend); app renders login/signup UI without backend. For full-stack mode, start backend separately with 'yarn start:api'."
+  },
+  "jean": {
+   "description": "Jean \u2014 lightweight React app built with Vite.",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "build": [],
+   "run": "npx vite --port ${PORT} --host 127.0.0.1",
+   "default_port": 5183,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 30,
+   "env": {},
+   "notes": "Dependencies pre-installed on host. Simple Vite dev server, no backend required."
+  },
+  "hemmelig": {
+   "description": "Hemmelig.app \u2014 secret sharing, FULL STACK (Vite + Hono API mounted as middleware, Prisma/SQLite).",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "build": [],
+   "run": "npx vite --port ${PORT} --host 127.0.0.1",
+   "default_port": 5185,
+   "base_path": "/",
+   "health_path": "/api/healthz",
+   "health_timeout_seconds": 60,
+   "env": {
+    "DATABASE_URL": "file:./database/hemmelig.db",
+    "NODE_ENV": "development"
+   },
+   "notes": "Dependencies pre-installed. NOT frontend-only: vite.config mounts the Hono API through @hono/vite-dev-server (entry server.ts, everything not under /api excluded), so `npx vite` serves the frontend AND the backend. Two things were missing before, which together produced a result recorded as PHYSICAL_EFFECT_DID_NOT_OCCUR: DATABASE_URL is read from the ENVIRONMENT by the generated Prisma client at runtime (prisma.config.ts only supplies it to the CLI), and the instance is STATE-GATED -- a fresh database serves /setup 'Create Admin Account' and nothing else, so the secret surface is unreachable and no write can happen. Deterministic reset restores a baseline containing only the admin account via tools/hemmelig_reset.sh in the explorer repo; the repo's seed:demo is avoided because it inserts 216 secrets and 2733 analytics rows and uses Math.random(). health_path is /api/healthz so readiness proves the API half is up, not just the SPA shell. Persistence verified end to end: POST /api/secrets -> 201 with the secrets table going 0 -> 1."
+  },
+  "bangle-io": {
+   "description": "Bangle.io \u2014 browser-local note application (IndexedDB + File System Access API).",
+   "repo_subdir": "packages/tooling/browser-entry",
+   "build_system": "pnpm",
+   "build": [],
+   "run": "npx vite --configLoader runner --port ${PORT} --host 127.0.0.1",
+   "default_port": 5173,
+   "base_path": "/ws#route=ws-home&wsName=ugx-baseline",
+   "health_path": "/",
+   "health_timeout_seconds": 90,
+   "env": {},
+   "notes": "Dependencies pre-installed on host (pnpm workspace). Run from the browser-entry workspace package so Vite receives --host/--port directly: the `pnpm -r --filter ... -- --host` form does not pass them through, and Vite then binds IPv6 localhost only while the readiness gate polls 127.0.0.1. Persists to IndexedDB databases 'bangle-io-db', 'baby-idb-db-3', 'baby-idb-meta-3' plus a localStorage sync key; no backend. Deterministic reset means clearing those databases between runs. The app is STATE-GATED: with an empty database it renders only 'No workspace selected / Create a workspace to get started', so a prerequisite workspace is supplied through app.client_state_baseline (captured by tools/bangle_seed_state.py driving the app's own creation flow). base_path carries the app's hash route so the browser lands ON that workspace; the router is hash-based (/ws#route=ws-home&wsName=<name>), NOT the /ws/<name> path the ROUTES constants suggest. health_path stays / because the dev server serves the SPA shell at the root."
+  },
+  "epic-stack": {
+   "description": "Epic Stack \u2014 full-stack React Router app (Prisma + SQLite, real server-side persistence).",
+   "repo_subdir": ".",
+   "build_system": "npm",
+   "build": [
+    "npm run build"
+   ],
+   "run": "node index.ts",
+   "default_port": 3000,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 120,
+   "env": {
+    "NODE_ENV": "production",
+    "MOCKS": "true"
+   },
+   "notes": "Dependencies pre-installed; `npm run build` + `prisma migrate deploy` + `prisma generate --sql` already run on host (the repo's own `setup` script also runs `playwright install`, which is not needed here). Persistence is Prisma -> SQLite at prisma/data.db; there is no external database service. MOCKS=true installs MSW handlers for FOUR EXTERNAL hosts only -- api.github.com/github.com (OAuth), api.pwnedpasswords.com, api.resend.com (email) and the Tigris S3 endpoint -- so the Prisma/SQLite path under measurement is untouched. The one persistence-relevant substitution is object storage for user/note images: the Tigris mock WRITES uploads to tests/fixtures/uploaded/ rather than suppressing them, so image persistence is relocated to the local filesystem, not lost. Deterministic reset restores a pristine seeded snapshot via tools/epic_stack_reset.sh in the explorer repo; the seed itself uses faker and is NOT reproducible, which is why a snapshot is restored instead of re-seeding. Authenticated surface: seeded admin user kody / kodylovesyou. The repo's own scripts wrap node in `cross-env`, which is a local devDependency and is NOT on PATH for the service shell (`cross-env: command not found`), so the environment is set through this entry's env block and the command is plain `node index.ts`; the server reads PORT from the environment (server/index.ts). Runs in PRODUCTION mode with a build performed as part of service start, which is AFTER witness instrumentation is applied -- so the probes are compiled into the bundle. This is also what makes witness verification work at all here: in dev mode the Vite middleware serves a CLIENT transform at each source path with server-only code stripped, so a server-side probe is reported MISSING and the run is refused; in production those source paths are not served, the verification falls back to the install-time attestation (service down when patched), and the probes are genuinely present."
+  },
+  "keystone-blog": {
+   "description": "Keystone 6 usecase-blog example \u2014 GraphQL API + Admin UI over Prisma/SQLite.",
+   "repo_subdir": ".",
+   "build_system": "pnpm",
+   "build": [],
+   "run": "env PORT=${PORT} npx keystone dev",
+   "default_port": 3200,
+   "base_path": "/",
+   "health_path": "/",
+   "health_timeout_seconds": 180,
+   "env": {},
+   "notes": "Standalone example inside the Keystone monorepo; dependencies are installed at the repo root and the example resolves its Prisma client through the monorepo's `myprisma` alias (keystone.ts sets prismaClientPath). Shape under measurement: Admin UI -> GraphQL mutation -> Prisma -> SQLite at examples/usecase-blog/keystone-example.db. Three lists: Author, Post, Tag. No authentication (the auth examples are separate), so the whole surface is reachable without a session. `keystone dev` migrates on boot and rebuilds the Admin UI, so the first start is slow -- hence the long health timeout. Deterministic reset restores a pristine seeded snapshot via tools/keystone_blog_reset.sh in the explorer repo; seed-data.ts is itself reproducible (fixed authors/posts from examples/example-data.ts), so the snapshot is for speed and stability rather than to paper over randomness. `keystone dev` IGNORES a --port flag and reads PORT from the environment, which run-with-service.sh exports, so the port is passed as an explicit env assignment in the run command (PORT is substituted into the run string, not exported into its environment). Left in dev mode deliberately: there is nothing to instrument in this subject (the code that commits lives in @keystone-6/core under node_modules, not in application-owned source), so no witness spec is installed and the production-build ordering that epic-stack needs does not apply. repo_subdir is \".\" because the probe config points repo.input_dir directly at the example directory; naming the example again here would double the path."
   }
+ }
 }
