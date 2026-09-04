@@ -1,0 +1,20 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/bookstack/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/bookstack/generation/workspace/rq6-agent",
+  "file_count": 12,
+  "spec_count": 11,
+  "files": {
+    "admin.spec.ts": "64319d9e9b09350545f7efc8e49ee24d9d58f3eaeb21dd41f3c345b187725572",
+    "auth.spec.ts": "cc10568703e47f42a59f6b8ace0c39597f29f76be4565a736967005d1679d83c",
+    "books.spec.ts": "713e87266704b271620e4ba26b56e666c4fa97bc5f61ab1b5f7e90e1aaabc79d",
+    "chapters.spec.ts": "85b98912cb441a1cee425a0748ccb836ebb645a55ea3c86bad5fdbe3f3723071",
+    "favourites.spec.ts": "7b8ee987f83726f445b04c470470ef3d3c12af2b17d509a1a6945cf51a13c22f",
+    "helpers.ts": "4c9fe8ff60525eb20d77bfc94e0d25a9ce0402f23b79d602a396a55089196313",
+    "home.spec.ts": "9f2702ca1d207058525956668a32625df003603ddc396f9177f82b61a6a01a21",
+    "my-account.spec.ts": "db1bcef2e43fbe9564f93c6ece6052307e7d67c031be1e93d027df022ac10dc9",
+    "pages.spec.ts": "2cf8d021661dd3e0fa1dd6c2224dd0052fb201e7d2ab85223ed293c8fc483e1d",
+    "search.spec.ts": "ce1d5fdf62a6dce47f190b7189b560410b8a63d5c839016d563cf4578f1c7e16",
+    "shelves.spec.ts": "4514f7e406d49c826dd4b21653c4e56346451f0246d219fa5f64a7682687f163",
+    "tags.spec.ts": "0d78c001d4e72d5b6a1e680cf13f41dec0303d251cdc6028ee4e05e8812e6c56"
+  }
+}

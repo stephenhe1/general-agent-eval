@@ -1,0 +1,70 @@
+{
+  "app": "bookstack",
+  "bug_name": "recent_activity_all",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/recent_activity_all.js",
+  "verdict": "caught",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 1,
+  "behavior_aligned_failure_count": 1,
+  "detecting_test_file": "dashboard.spec.ts",
+  "detecting_test_name": "activity feed shows the recorded time for each book activity",
+  "alignment_confidence": "high",
+  "failure_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.activity-list-item').filter({ hasText: 'Book1' })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 5\u001b[39m\n\n\u001b[32m- 2 minutes ago\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+       Book1\u001b[39m\n\u001b[31m+       created book\u001b[39m\n\u001b[31m+       1 year ago\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.activity-list-item').filter({ hasText: 'Book1' })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"activity-list-item\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m      Book1\u001b[22m\n\u001b[2m      created book\u001b[22m\n\u001b[2m      1 year ago\u001b[22m\n\u001b[2m    \"\u001b[22m\n",
+  "nl_expectation": "The 'Recent Activity' list is in chronological order",
+  "alignment_tokens": [
+    "1 year ago",
+    "Recent Activity"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): unstable.spec.ts::intentionally clean-failing probe"
+  ],
+  "evidence": [
+    {
+      "test_key": "dashboard.spec.ts::activity feed shows the recorded time for each book activity",
+      "file": "dashboard.spec.ts",
+      "title": "activity feed shows the recorded time for each book activity",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "high",
+      "matched_literals": [
+        "1 year ago"
+      ],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.activity-list-item').filter({ hasText: 'Book1' })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 5\u001b[39m\n\n\u001b[32m- 2 minutes ago\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+       Book1\u001b[39m\n\u001b[31m+       created book\u001b[39m\n\u001b[31m+       1 year ago\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.activity-list-item').filter({ hasText: 'Book1' })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"activity-list-item\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m      Book1\u001b[22m\n\u001b[2m      created book\u001b[22m\n\u001b[2m      1 year ago\u001b[22m\n\u001b[2m    \"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.activity-list-item').filter({ hasText: 'Book1' })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 5\u001b[39m\n\n\u001b[32m- 2 minutes ago\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+       Book1\u001b[39m\n\u001b[31m+       created book\u001b[39m\n\u001b[31m+       1 year ago\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.activity-list-item').filter({ hasText: 'Book1' })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"activity-list-item\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m      Book1\u001b[22m\n\u001b[2m      created book\u001b[22m\n\u001b[2m      1 year ago\u001b[22m\n\u001b[2m    \"\u001b[22m\n\n    at /private/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/generation/workspace/__wtp_eval/dashboard.spec.ts:8:28",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all/artifacts/dashboard-Dashboard-activi-7c34a-time-for-each-book-activity-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all/artifacts/dashboard-Dashboard-activi-7c34a-time-for-each-book-activity-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all/artifacts/dashboard-Dashboard-activi-7c34a-time-for-each-book-activity-chromium/trace.zip"
+      ]
+    }
+  ],
+  "excluded_failures": [
+    {
+      "test_key": "unstable.spec.ts::intentionally clean-failing probe",
+      "file": "unstable.spec.ts",
+      "title": "intentionally clean-failing probe",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Nonexistent Section' })\nExpected: visible\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Nonexistent Section' })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Nonexistent Section' })\nExpected: visible\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Nonexistent Section' })\u001b[22m\n\n    at /private/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/generation/workspace/__wtp_eval/unstable.spec.ts:7:76",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all/artifacts/unstable-intentionally-clean-failing-probe-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all/artifacts/unstable-intentionally-clean-failing-probe-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all/artifacts/unstable-intentionally-clean-failing-probe-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/recent_activity_all"
+}

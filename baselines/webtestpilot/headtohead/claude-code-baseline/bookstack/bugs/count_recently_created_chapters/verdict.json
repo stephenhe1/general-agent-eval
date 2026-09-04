@@ -1,0 +1,30 @@
+{
+  "app": "bookstack",
+  "bug_name": "count_recently_created_chapters",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/count_recently_created_chapters.js",
+  "verdict": "oracle_miss",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "There exists a 'Recently Created Chapters' section that is consistent with 'Created Content' counts",
+  "alignment_tokens": [
+    "New chapter added!",
+    "M0 0h24v24H0z",
+    "0 0 24 24",
+    "Recently Created Pages"
+  ],
+  "notes": [
+    "fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/bookstack/bugs/count_recently_created_chapters"
+}

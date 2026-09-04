@@ -1,0 +1,40 @@
+app,bug,tier,removed_from_condition,removed_from_mutation,n_removed,original_sha256,variant_sha256,baselines_affected
+bookstack,comment,tier1,I like this template,,1,34577de5bcad08d5,29fe35f151112edf,"A,B"
+bookstack,count_recently_created_books,tier1,Recently Created Pages,,1,8f061afea5aa74f0,3465d6f6793f0c87,B
+bookstack,count_recently_created_chapters,tier1,Recently Created Pages,,1,8df37f43e4e1683b,4b5f237027e4ecfe,B
+bookstack,count_recently_created_shelves,tier1,Recently Created Pages,,1,c80eb51356a601ce,270cf42b183cf7a3,B
+bookstack,delete_book,tier1,Books,,1,4ee370b888f0bb9a,ebeb947dc237b7f9,"A,B"
+bookstack,recent_activity_all,tier1,Recent Activity,,1,ff7e454525d22265,094ae4556bef268e,B
+bookstack,settings,tier2,Sorting,Create Sort Rule,2,a19e0c79ce8ae9c4,2e7a59331ea89cfb,"A,B"
+indico,clone_event,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+indico,create_announcement,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+indico,create_conference,tier2,January 2025 | New Conference,January 2025,3,cecc442708d7584f,1feee336a7a8cdd0,"A,B"
+indico,create_lecture,tier2,January 2025 | New Lecture,January 2025,3,bbf443104425eabc,1feee336a7a8cdd0,"A,B"
+indico,create_meeting,tier2,January 2025 | New Meeting,January 2025,3,248764b7161aea9d,1feee336a7a8cdd0,"A,B"
+indico,create_news,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+indico,edit_conference,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+indico,favourite_conference,tier2,January 2025,January 2025,2,53b057a9127bd394,10406cfcba41e502,"A,B"
+indico,favourite_lecture,tier2,January 2025,January 2025,2,53b057a9127bd394,10406cfcba41e502,"A,B"
+indico,favourite_meeting,tier2,January 2025,January 2025,2,53b057a9127bd394,10406cfcba41e502,"A,B"
+indico,fill_out_survey,tier1,The survey has been submitted,,1,cdfb00c6ff00cc8f,6d13f18898accc69,"A,B"
+indico,view_conference_details,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+indico,view_conference_timetable,tier1,Session 2 | Session 2,,2,d942f0c4e19e6ae3,df75fddda42a805c,"A,B"
+indico,view_lecture_details,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+indico,view_meeting_details,tier2,January 2025,January 2025,2,a7108a987a836e36,b26bd67d2ccaa3d6,"A,B"
+invoiceninja,create_invoice,tier2,Draft | Subtotal | $ 200.00,$ 200.00 | Subtotal,5,5e6d0377f6d81e9b,eb8a242e4fc493df,A
+invoiceninja,create_product,tier1,Active,,1,765ed6d6d6d3f99c,1c4499813e2df89a,A
+invoiceninja,view_invoice_details,tier2,Edit Invoice | Subtotal,Subtotal,3,e57c5ae52f46de48,f171d1d85f3dedba,A
+invoiceninja,view_quote_details,tier2,Edit Quote | Subtotal,Subtotal,3,6e6fa0b18a5e2044,5c95b3ce0de513ec,A
+prestashop,buyer_sort_products_by_name_a_to_z,tier2,,Hummingbird printed t-shirt,1,39ca5c8ca2c00417,a9afb19cb15354b8,"A,B"
+prestashop,buyer_sort_products_by_name_z_to_a,tier2,,Hummingbird printed t-shirt,1,6504ec4d179c7f8f,b40cc342c8cef108,"A,B"
+prestashop,buyer_sort_products_by_price_high_to_low,tier2,,Hummingbird cushion,1,baff4d95ae522abf,6bd4e4a2a926053b,"A,B"
+prestashop,buyer_sort_products_by_price_low_to_high,tier2,,Hummingbird cushion,1,2ef3a2c4bacaf3f2,d92d9c06e09f6030,"A,B"
+prestashop,seller_backorder_order,tier1,On backorder (not paid),,1,7e1f2880030954e6,a3bf274b194fad94,"A,B"
+prestashop,seller_cancel_order,tier1,Canceled,,1,aa9514fd5df78bf1,a3bf274b194fad94,"A,B"
+prestashop,seller_delete_product,tier1,Products (18),,1,9d7c12fce7545481,83e06b343845dda9,"A,B"
+prestashop,seller_deliver_order,tier1,Delivered,,1,9371e9d58c845360,bd44c30b94d9c639,"A,B"
+prestashop,seller_refund_order,tier1,Refunded,,1,18db394e66b38cf1,a3bf274b194fad94,"A,B"
+prestashop,seller_ship_order,tier1,Shipped,,1,2c4314ee4a8c2a58,bd44c30b94d9c639,"A,B"
+prestashop,seller_view_carts,tier1,Shopping Carts,,1,24e55e9c71af353e,dec3cbb598eb6ec0,"A,B"
+prestashop,seller_view_catalog_product_details,tier1,Products,,1,b7811facd02ca4dd,679b35ce0401ebf0,A
+prestashop,seller_view_shop_design,tier1,Image Settings,,1,9cedfffccdfd0c17,82babea77c01862e,"A,B"

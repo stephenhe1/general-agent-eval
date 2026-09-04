@@ -1,0 +1,190 @@
+/**
+ * Introduction:
+ * -------------
+ * This script monitors the page for two types of events:
+ *   1. Initial page load (DOMContentLoaded or already-loaded document)
+ *   2. DOM mutations (subtree changes, attributes, or child list changes)
+ * 
+ * When either event occurs, it evaluates a user-defined condition via the 
+ * `isConditionMet` function. If the condition returns true, the `onConditionMet`
+ * function is executed exactly once. After triggering, the sentinel cleans up 
+ * its internal MutationObserver.
+ * 
+ * Usage:
+ * ------
+ * - Inject this template via Playwright.
+ * - Replace {{IS_CONDITION_MET}} -> Body of the condition-checking function.
+ * - Replace {{ON_CONDITION_MET}} -> Body of the callback to execute when condition is met.
+ */
+
+(() => {
+  // Prevents duplicate observers if the script is injected multiple times
+  const NAMESPACE = "__BUG_INJECTOR__";
+  const STORAGE_KEY = "__BUG_INJECTOR_TRIGGERED__";
+
+  // Prevent duplicate observers or repeated triggers
+  if (window[NAMESPACE] || sessionStorage.getItem(STORAGE_KEY)) return;
+
+  // Evaluates whether the desired condition has been satisfied.
+  // Replace with your custom code
+  const isConditionMet = () => {
+    const el = document.querySelector("h1.page-title");
+    const tbody = document.querySelector("#table-cart tbody");
+    return el !== null && el.offsetParent !== null && el.textContent.trim() != null && tbody;
+};
+
+  // Called exactly once when the condition is satisfied.
+  // Replace with your custom code
+  const __wtpOriginalOnConditionMet = () => {
+    // Select the tbody of the table
+    const tbody = document.querySelector("#table-cart tbody");
+
+    // Create a new row
+    const newRow = document.createElement("tr");
+
+    // Optionally, add a class for styling
+    newRow.className = "odd"; // or "even" depending on your table style
+
+    // Insert table cells
+    newRow.innerHTML = `
+        <td class="row-selector text-center">
+            <input type="checkbox" name="cartBox[]" value="0" class="noborder">
+        </td>
+        <td class="pointer column-id_cart fixed-width-xs text-center">0</td>
+        <td class="pointer column-status text-center">0</td>
+        <td class="pointer column-customer">T. LEE</td>
+        <td class="pointer column-total text-right"><span class="badge badge-success">€14.34</span></td>
+        <td class="pointer column-carrier text-left">My Carrier</td>
+        <td class="pointer column-date_add fixed-width-lg text-left">01/21/2026 10:06:34/td>
+        <td class="pointer column-id_guest fixed-width-xs text-center">Yes</td>
+        <td class="text-right">
+            <div class="btn-group pull-right">
+                <a href="#" class="btn btn-default" title="View">
+                    <i class="icon-search-plus"></i> View
+                </a>
+            </div>
+        </td>
+    `;
+
+    // Append the new row to the tbody
+    tbody.appendChild(newRow);
+};
+
+const onConditionMet = () => {
+  const __wtpSignature = () => {
+    const html = document.documentElement.outerHTML;
+    let hash = 5381;
+    for (let i = 0; i < html.length; i++) {
+      hash = ((hash << 5) + hash + html.charCodeAt(i)) | 0;
+    }
+    return html.length + ":" + hash;
+  };
+  let before = "";
+  try { before = __wtpSignature(); } catch (e) { before = "err"; }
+  let result;
+  try {
+    result = __wtpOriginalOnConditionMet();
+  } finally {
+    let after = "";
+    try { after = __wtpSignature(); } catch (e) { after = "err2"; }
+    try {
+      sessionStorage.setItem(
+        "__WTP_MUTATION_APPLIED__",
+        String(before !== "err" && after !== "err2" && before !== after)
+      );
+    } catch (e) { /* storage unavailable; absence reads as unknown */ }
+  }
+  return result;
+};
+
+
+  // Internal State
+  // -----------------------------------------------------------------------------
+  // Tracks whether the initial page load event has been handled
+  let pageLoaded = false;
+
+  // Tracks whether the condition has been satisfied and action has been executed
+  let conditionMet = false;
+
+  // Prevents concurrent condition checks when a series of DOM mutation events happen
+  let checkScheduled = false;
+
+  // MutationObserver for DOM mutation events
+  let mutationObserver = null;
+
+  // Handles detection events by checking condition and triggering onConditionMet() once
+  function handleDetection() {
+    if (conditionMet) return;
+
+    if (isConditionMet()) {
+      conditionMet = true;
+      onConditionMet();
+      cleanup();
+    }
+
+    if (mutationObserver) {
+      mutationObserver.takeRecords();
+    }
+  }
+
+  // Cleanup after triggering onConditionMet()
+  function cleanup() {
+    sessionStorage.setItem(STORAGE_KEY, "true");
+
+    if (mutationObserver) {
+      mutationObserver.disconnect();
+      mutationObserver = null;
+    }
+  }
+
+  // Detector #1: Page Load
+  // -----------------------------------------------------------------------------
+  function handlePageLoad() {
+    if (pageLoaded) return;
+    pageLoaded = true;
+    handleDetection();
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    handlePageLoad();
+  } else {
+    document.addEventListener("DOMContentLoaded", handlePageLoad, { once: true });
+  }
+
+  // Detector #2: Coalesced DOM Mutations
+  // -----------------------------------------------------------------------------
+  function handleObserver() {
+    mutationObserver = new MutationObserver(() => {
+      if (conditionMet) {
+        cleanup();
+        return;
+      }
+
+      // Coalesce multiple mutations into one check per animation frame
+      if (checkScheduled) return;
+
+      checkScheduled = true;
+      handleDetection();
+
+      // Allow next burst of mutations to trigger check
+      requestAnimationFrame(() => {
+        checkScheduled = false;
+      });
+    });
+
+    mutationObserver.observe(document.documentElement, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["class", "style", "hidden", "aria-expanded", "aria-hidden"]
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", handleObserver, { once: true });
+  } else {
+    handleObserver();
+  }
+
+  window[NAMESPACE] = { mutationObserver, conditionMet };
+})();

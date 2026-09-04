@@ -1,0 +1,27 @@
+{
+  "app": "bookstack",
+  "bug_name": "comment",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/comment.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes",
+  "alignment_tokens": [
+    "I like this template"
+  ],
+  "notes": [
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/bookstack/bugs/comment"
+}

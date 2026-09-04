@@ -1,0 +1,23 @@
+{
+  "repetitions": 3,
+  "total_tests": 7,
+  "clean_stable": 6,
+  "clean_failing": 1,
+  "clean_flaky": 0,
+  "clean_stability_rate": 0.8571,
+  "suite_failure_counts_per_run": [
+    1,
+    1,
+    1
+  ],
+  "infrastructure_errors": [],
+  "status_by_test": {
+    "book-detail.spec.ts::book detail page shows the book title": "stable",
+    "books.spec.ts::book grid keeps its descriptions across repeat visits": "stable",
+    "books.spec.ts::creating a book adds exactly one card with the submitted data": "stable",
+    "comments.spec.ts::adding a comment appends exactly one comment and preserves the thread shape": "stable",
+    "dashboard.spec.ts::activity feed shows the recorded time for each book activity": "stable",
+    "dashboard.spec.ts::dashboard shows the recent activity section": "stable",
+    "unstable.spec.ts::intentionally clean-failing probe": "failing"
+  }
+}

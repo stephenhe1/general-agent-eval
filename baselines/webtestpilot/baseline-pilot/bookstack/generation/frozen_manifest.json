@@ -1,0 +1,18 @@
+{
+  "root": "results/webtestpilot_baseline/bookstack/generation/frozen",
+  "source": "results/webtestpilot_baseline/bookstack/generation/workspace/rq6-agent",
+  "file_count": 10,
+  "spec_count": 9,
+  "files": {
+    "admin.spec.ts": "84f47ea76749674d1bad33460b5280c4139e8e4fb28c74d508c9b64668e6a270",
+    "auth.spec.ts": "5970750b2ffadabf3aa78ec0caa7f58446c8c7b3e5041a71fe764f150ce2afcd",
+    "books.spec.ts": "5b491ff945b9e68e9fd92dc4ddf2a9caa5a8767e21eeb4db5ba12fe252b996aa",
+    "chapters.spec.ts": "7639edbfef250ec058b678d95327b5472f9da33aadf514d4999d77a4e3efd34c",
+    "favourites.spec.ts": "61b941962498292819a35f38fe639188395b5eeab3e576719f3b89f7df227ff9",
+    "helpers.ts": "2b59bd8e07c19033e4452a4fa619e3fe03f2387855493a89825610635840d101",
+    "my-account.spec.ts": "ef90aae75be9ac836e46a2623d0b1d50842f556f55fa0bf2dc545c66334a3c8f",
+    "pages.spec.ts": "942aff845eaa4ba8b499ee130f2c43770fba6efd3e96e1ac440b8e4dd0f9ce3a",
+    "search.spec.ts": "8d37a4702d23bd062e0c7ceef01c552667cd3195362ae2cf299ddcc84794f75e",
+    "shelves.spec.ts": "e1d89c13c265f3356a3e237fa9014964d59844d12e798f09bf9827dc9a25cbc9"
+  }
+}

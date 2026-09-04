@@ -1,0 +1,30 @@
+{
+  "app": "indico",
+  "bug_name": "search_events",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/indico/bugs/search_events.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "All entries in the search results contain \u201ctest\u201d in the event title (case-insensitive).",
+  "alignment_tokens": [
+    "Last top-level event header title updated!",
+    "No top-level search result items found.",
+    "Header link not found in last item.",
+    "Web Automation 101"
+  ],
+  "notes": [
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/indico/bugs/search_events"
+}

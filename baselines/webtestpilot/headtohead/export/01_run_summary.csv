@@ -1,0 +1,8 @@
+baseline,app,tests_generated,clean_stable_tests,clean_flaky_tests,A_clean_stability_rate,bugs_evaluated,bugs_activated,B_activation_rate,bugs_caught,C_conditional_detection_rate,D_end_to_end_detection_rate,incidental_failures,oracle_miss,not_activated,environment_error,E_incidental_failure_rate,generation_cost_usd,provenance_verdict,specs_stamped,validity,validity_cause,validity_owner,na_value_difference,na_coverage_gap,na_navigation_depth,na_unexplained,na_indeterminate
+A (Claude Code baseline),bookstack,69,69,0,1.0,27,15,0.5556,0,0.0,0.0,0,15,12,0,0.0,5.50,n/a (single-agent),,valid,,,3,2,7,0,0
+A (Claude Code baseline),indico,92,92,0,1.0,25,4,0.16,0,0.0,0.0,0,4,21,0,0.0,2.88,n/a (single-agent),,valid,,,18,3,0,0,0
+A (Claude Code baseline),invoiceninja,71,67,0,0.9437,25,0,0.0,0,,0.0,0,0,25,0,0.0,11.76,n/a (single-agent),,partially_valid,agent_retreated_to_api,tool,4,3,10,7,1
+A (Claude Code baseline),prestashop,90,86,0,0.9556,23,4,0.1739,1,0.25,0.0435,0,3,19,0,0.0,5.03,n/a (single-agent),,valid_with_note,four_broken_tests,tool,16,1,2,0,0
+B (Playwright test agents),bookstack,36,36,0,1.0,27,16,0.5926,0,0.0,0.0,0,16,11,0,0.0,10.11,hybrid-partial,30/36,partially_valid,contradictory_prompts,harness,7,2,2,0,0
+B (Playwright test agents),indico,34,33,0,0.9706,25,4,0.16,0,0.0,0.0,0,4,21,0,0.0,8.33,review,9/9,valid,,,15,4,2,0,0
+B (Playwright test agents),prestashop,99,47,0,0.4747,23,6,0.2609,0,0.0,0.0,1,5,17,0,0.0435,12.05,hybrid-partial,0/20,budget_truncated,budget_cap_reached,harness,15,1,0,0,1

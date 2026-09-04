@@ -1,0 +1,31 @@
+{
+  "app": "bookstack",
+  "bug_name": "delete_book",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/delete_book.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The books list before deletion equals the books list after deletion plus exactly the deleted book (title, description).",
+  "alignment_tokens": [
+    "Book",
+    "999",
+    "h2",
+    "h1.list-heading",
+    "Books"
+  ],
+  "notes": [
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/bookstack/bugs/delete_book"
+}

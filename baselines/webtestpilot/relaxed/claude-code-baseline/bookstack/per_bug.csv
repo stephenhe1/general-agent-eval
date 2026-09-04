@@ -1,0 +1,28 @@
+bug_name,verdict,activated,candidate_failures,aligned_failures,detecting_test,notes
+comment,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+count_recently_created_books,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+count_recently_created_chapters,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+count_recently_created_pages,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+count_recently_created_shelves,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+create_book,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+create_page,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+create_sort_rule,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+delete_book,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+favourite_book,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+favourite_chapter,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+favourite_page,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+favourite_page_template,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+recent_activity_all,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+recent_activity_chapter,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+recent_activity_page,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+recent_activity_page_template,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+recent_activity_shelf,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+recently_viewed_book,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+recently_viewed_chapter,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+recently_viewed_page,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+recently_viewed_page_template,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+recently_viewed_shelf,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+search,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+settings,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)
+unfavourite_shelf,oracle_miss,True,0,0,,fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it
+update_book,not_activated,False,0,0,,fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)

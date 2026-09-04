@@ -1,0 +1,18 @@
+{
+  "app": "indico",
+  "num_bugs": 25,
+  "num_activated": 4,
+  "num_caught": 0,
+  "num_oracle_miss": 4,
+  "num_not_activated": 21,
+  "num_incidental_failure": 0,
+  "num_environment_error": 0,
+  "bug_activation_rate": 0.16,
+  "conditional_fault_detection_rate": 0.0,
+  "end_to_end_fault_detection_rate": 0.0,
+  "total_generated_tests": 92,
+  "clean_stable_tests": 92,
+  "clean_flaky_tests": 0,
+  "clean_stability_rate": 1.0,
+  "rebuilt_from": "bugs/*/verdict.json"
+}

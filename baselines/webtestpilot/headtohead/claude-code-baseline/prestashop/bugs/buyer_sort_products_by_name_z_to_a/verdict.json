@@ -1,0 +1,109 @@
+{
+  "app": "prestashop",
+  "bug_name": "buyer_sort_products_by_name_z_to_a",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/prestashop/bugs/buyer_sort_products_by_name_z_to_a.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The products are correctly sorted by 'Name, Z to A', and must be extracted using a left-to-right zig-zag grid traversal (no need to get image)",
+  "alignment_tokens": [
+    "Hummingbird printed t-shirt",
+    "Zeus Printed T-Shirt"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): backoffice-extended.spec.ts::BO Catalog \u2013 Discounts (Cart Rules) page loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-extended.spec.ts::BO Customer Service page loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-extended.spec.ts::BO Shipping \u2013 Carriers page loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-extended.spec.ts::BO Stats page loads",
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [
+    {
+      "test_key": "backoffice-extended.spec.ts::BO Catalog \u2013 Discounts (Cart Rules) page loads",
+      "file": "backoffice-extended.spec.ts",
+      "title": "BO Catalog \u2013 Discounts (Cart Rules) page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Cart Rule|Discount|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Cart Rule|Discount|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/generation/workspace/__wtp_eval/backoffice-extended.spec.ts:165:17",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Cat-39ecd-ounts-Cart-Rules-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Cat-39ecd-ounts-Cart-Rules-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Cat-39ecd-ounts-Cart-Rules-page-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-extended.spec.ts::BO Customer Service page loads",
+      "file": "backoffice-extended.spec.ts",
+      "title": "BO Customer Service page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Customer Service|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Customer Service|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/generation/workspace/__wtp_eval/backoffice-extended.spec.ts:116:17",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Customer-Service-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Customer-Service-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Customer-Service-page-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-extended.spec.ts::BO Shipping \u2013 Carriers page loads",
+      "file": "backoffice-extended.spec.ts",
+      "title": "BO Shipping \u2013 Carriers page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Carrier|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Carrier|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/generation/workspace/__wtp_eval/backoffice-extended.spec.ts:175:17",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Shipping-\u2013-Carriers-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Shipping-\u2013-Carriers-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Shipping-\u2013-Carriers-page-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-extended.spec.ts::BO Stats page loads",
+      "file": "backoffice-extended.spec.ts",
+      "title": "BO Stats page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Stats|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/Stats|PrestaShop/i\u001b[39m\nReceived string:  \u001b[31m\"Invalid security token\"\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/generation/workspace/__wtp_eval/backoffice-extended.spec.ts:127:17",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Stats-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Stats-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a/artifacts/backoffice-extended-BO-Stats-page-loads-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/bugs/buyer_sort_products_by_name_z_to_a"
+}

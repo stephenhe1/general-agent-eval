@@ -1,0 +1,18 @@
+{
+  "app": "invoiceninja",
+  "num_bugs": 25,
+  "num_activated": 0,
+  "num_caught": 0,
+  "num_oracle_miss": 0,
+  "num_not_activated": 25,
+  "num_incidental_failure": 0,
+  "num_environment_error": 0,
+  "bug_activation_rate": 0.0,
+  "conditional_fault_detection_rate": null,
+  "end_to_end_fault_detection_rate": 0.0,
+  "total_generated_tests": 71,
+  "clean_stable_tests": 67,
+  "clean_flaky_tests": 0,
+  "clean_stability_rate": 0.9437,
+  "rebuilt_from": "bugs/*/verdict.json"
+}

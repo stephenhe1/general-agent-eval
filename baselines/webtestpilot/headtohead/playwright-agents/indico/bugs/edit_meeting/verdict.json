@@ -1,0 +1,54 @@
+{
+  "app": "indico",
+  "bug_name": "edit_meeting",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/indico/bugs/edit_meeting.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "All events are preserved and unchanged except for the title change of one event from 'PhD Research Group Monthly Meeting' to 'Updated Meeting 1'",
+  "alignment_tokens": [
+    "Header for January 2025 not found.",
+    "No events found in the list.",
+    "Middle event removed!",
+    "January 2025",
+    "h4"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): category-management.spec.ts::View Home Category",
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [
+    {
+      "test_key": "category-management.spec.ts::View Home Category",
+      "file": "category-management.spec.ts",
+      "title": "View Home Category",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [
+        "visible"
+      ],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Main categories' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Main categories' })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Main categories' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Main categories' })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/generation/workspace/__wtp_eval/category-management.spec.ts:25:74",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/bugs/edit_meeting/artifacts/category-management-Category-Management-View-Home-Category-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/bugs/edit_meeting/artifacts/category-management-Category-Management-View-Home-Category-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/bugs/edit_meeting/artifacts/category-management-Category-Management-View-Home-Category-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/bugs/edit_meeting"
+}

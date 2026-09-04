@@ -1,0 +1,49 @@
+{
+  "app": "bookstack",
+  "bug_name": "settings",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/settings.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "Page with title 'Sorting' and 'Create Sort Rule' button appear",
+  "alignment_tokens": [
+    "Create Sort Rule",
+    "Sorting"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): favourites.spec.ts::toggling favourite on a book adds it to favourites list",
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [
+    {
+      "test_key": "favourites.spec.ts::toggling favourite on a book adds it to favourites list",
+      "file": "favourites.spec.ts",
+      "title": "toggling favourite on a book adds it to favourites list",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Book1')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Book1')\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Book1')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Book1')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/generation/workspace/__wtp_eval/favourites.spec.ts:38:43",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/settings/artifacts/favourites-Favourites-togg-ec549--adds-it-to-favourites-list-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/settings/artifacts/favourites-Favourites-togg-ec549--adds-it-to-favourites-list-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/settings/artifacts/favourites-Favourites-togg-ec549--adds-it-to-favourites-list-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/settings"
+}

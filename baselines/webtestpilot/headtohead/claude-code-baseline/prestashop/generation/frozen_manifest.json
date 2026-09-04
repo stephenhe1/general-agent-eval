@@ -1,0 +1,14 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/prestashop/generation/workspace/rq6-agent",
+  "file_count": 6,
+  "spec_count": 6,
+  "files": {
+    "backoffice-extended.spec.ts": "5dcf8943b3a7701d724f99c97d1a77cfa6d17a667f342f8cb93842e96512fa58",
+    "backoffice.spec.ts": "45b6bc27c52ca002d337f401cab5e69ea33b7c9bc2e424756464e86c5a75c7b9",
+    "buyer-account.spec.ts": "6a5d27f3602597657bb0426e5e66dde3fae75fa5fd05e774b442b4444bf0108c",
+    "cart-checkout.spec.ts": "eb7507feff9f51c49cb971dcad4fa49214395ad619177598f4e3c0426d4211c6",
+    "registration-contact.spec.ts": "4a55a4f804d22401b85622bb5381d21d9563bc493ac56631daf0f52feba3595c",
+    "storefront-public.spec.ts": "e05b6141bf1151bfdbf87e3e90eea30a0d89d87c578f3a0c35f0927cc62e581c"
+  }
+}

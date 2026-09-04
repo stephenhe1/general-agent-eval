@@ -1,0 +1,29 @@
+{
+  "app": "bookstack",
+  "bug_name": "recent_activity_all",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/recent_activity_all.js",
+  "verdict": "armed_no_effect",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "mutation_applied": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The 'Recent Activity' list is in chronological order",
+  "alignment_tokens": [
+    "1 year ago",
+    "Recent Activity"
+  ],
+  "notes": [
+    "fault activated but its mutation left the DOM unchanged (mutation probe reported no change): the injected code found no target, so no defect was present for the suite to detect. Not attributable to oracle strength."
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/claude-code-baseline/bookstack/bugs/recent_activity_all"
+}

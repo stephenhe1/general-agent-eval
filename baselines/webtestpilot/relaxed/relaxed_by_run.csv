@@ -1,0 +1,7 @@
+baseline,app,variants_run,real_defects,caught,detection_rate_on_real_defects,oracle_miss,armed_no_effect,not_activated
+A,bookstack,7,4,0,0.0%,4,2,1
+A,indico,15,13,0,0.0%,13,1,1
+A,prestashop,13,2,0,0.0%,2,0,11
+B,bookstack,7,1,0,0.0%,1,1,5
+B,indico,15,4,0,0.0%,4,0,11
+B,prestashop,13,7,1,14.3%,6,0,6

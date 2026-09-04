@@ -1,0 +1,13 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/generation/workspace/rq6-agent",
+  "file_count": 5,
+  "spec_count": 5,
+  "files": {
+    "book-detail.spec.ts": "9604672894e4da446b771650eba74c8d2a716cc870db93f2cf8ce9fa9699a4f7",
+    "books.spec.ts": "cfe5eb5864f041c1146749a350672fd3845aceb69a783e8ecfce3f8599a5a93b",
+    "comments.spec.ts": "94d4f46085066ccaa2b7bc09c893865325f4baff0517a3b8c67b06b22f2dd9ab",
+    "dashboard.spec.ts": "6b2bca029f7482bd9bacfcf1e70ec4adf2da2ebcdf69edd208639aead48c6428",
+    "unstable.spec.ts": "67cfa42c5fb115b5b551e579ede98879d646beab7cfa7778957b71f710f639c4"
+  }
+}

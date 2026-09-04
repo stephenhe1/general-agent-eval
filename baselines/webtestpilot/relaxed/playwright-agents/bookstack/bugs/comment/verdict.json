@@ -1,0 +1,28 @@
+{
+  "app": "bookstack",
+  "bug_name": "comment",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/comment.js",
+  "verdict": "armed_no_effect",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "mutation_applied": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The current comments tree is equal to the initially observed comments tree with the addition of exactly one new comment, and no other structural or content changes",
+  "alignment_tokens": [
+    "I like this template"
+  ],
+  "notes": [
+    "fault activated but its mutation left the DOM unchanged (mutation probe reported no change): the injected code found no target, so no defect was present for the suite to detect. Not attributable to oracle strength."
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/bookstack/bugs/comment"
+}

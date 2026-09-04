@@ -1,0 +1,80 @@
+{
+  "app": "bookstack",
+  "bug_name": "create_book",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/create_book.js",
+  "verdict": "caught",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 1,
+  "behavior_aligned_failure_count": 1,
+  "detecting_test_file": "books.spec.ts",
+  "detecting_test_name": "book grid keeps its descriptions across repeat visits",
+  "alignment_confidence": "high",
+  "failure_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.grid-card').filter({ hasText: 'New Book' })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 6\u001b[39m\n\n\u001b[32m- \u001b[7mOriginal\u001b[27m Description\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+       New Book\u001b[39m\n\u001b[31m+ \u001b[7m      Bad\u001b[27m Description\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.grid-card').filter({ hasText: 'New Book' })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"grid-card\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m      New Book\u001b[22m\n\u001b[2m      Bad Description\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \"\u001b[22m\n",
+  "nl_expectation": "Books list (title, description) before and after is consistent with user activities",
+  "alignment_tokens": [
+    "Bad Description",
+    "New Books",
+    "New Book",
+    "h5"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): unstable.spec.ts::intentionally clean-failing probe"
+  ],
+  "evidence": [
+    {
+      "test_key": "books.spec.ts::book grid keeps its descriptions across repeat visits",
+      "file": "books.spec.ts",
+      "title": "book grid keeps its descriptions across repeat visits",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "high",
+      "matched_literals": [
+        "Bad Description",
+        "New Book"
+      ],
+      "matched_expectation_words": [
+        "book",
+        "book'",
+        "description"
+      ],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.grid-card').filter({ hasText: 'New Book' })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 6\u001b[39m\n\n\u001b[32m- \u001b[7mOriginal\u001b[27m Description\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+       New Book\u001b[39m\n\u001b[31m+ \u001b[7m      Bad\u001b[27m Description\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.grid-card').filter({ hasText: 'New Book' })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"grid-card\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m      New Book\u001b[22m\n\u001b[2m      Bad Description\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.grid-card').filter({ hasText: 'New Book' })\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 6\u001b[39m\n\n\u001b[32m- \u001b[7mOriginal\u001b[27m Description\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+       New Book\u001b[39m\n\u001b[31m+ \u001b[7m      Bad\u001b[27m Description\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.grid-card').filter({ hasText: 'New Book' })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"grid-card\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m      New Book\u001b[22m\n\u001b[2m      Bad Description\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \"\u001b[22m\n\n    at /private/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/generation/workspace/__wtp_eval/books.spec.ts:13:71",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book/artifacts/books-Books-book-grid-keep-a05ce-ptions-across-repeat-visits-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book/artifacts/books-Books-book-grid-keep-a05ce-ptions-across-repeat-visits-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book/artifacts/books-Books-book-grid-keep-a05ce-ptions-across-repeat-visits-chromium/trace.zip"
+      ]
+    }
+  ],
+  "excluded_failures": [
+    {
+      "test_key": "unstable.spec.ts::intentionally clean-failing probe",
+      "file": "unstable.spec.ts",
+      "title": "intentionally clean-failing probe",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [
+        "name",
+        "visible"
+      ],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Nonexistent Section' })\nExpected: visible\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Nonexistent Section' })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Nonexistent Section' })\nExpected: visible\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Nonexistent Section' })\u001b[22m\n\n    at /private/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/generation/workspace/__wtp_eval/unstable.spec.ts:7:76",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book/artifacts/unstable-intentionally-clean-failing-probe-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book/artifacts/unstable-intentionally-clean-failing-probe-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book/artifacts/unstable-intentionally-clean-failing-probe-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_selftest/selftest/bugs/create_book"
+}

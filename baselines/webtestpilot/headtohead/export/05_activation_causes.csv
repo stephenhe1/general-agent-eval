@@ -1,0 +1,176 @@
+baseline,app,bug_name,verdict,cause,required_paths,paths_found_in_suite,required_values,n_required_values,uses_visit_state
+A,bookstack,comment,not_activated,value_difference,,,I like this template,1,False
+A,bookstack,count_recently_created_books,oracle_miss,,,,Recently Created Pages,1,False
+A,bookstack,count_recently_created_chapters,oracle_miss,,,,Recently Created Pages,1,False
+A,bookstack,count_recently_created_pages,oracle_miss,,,,Search Results,1,False
+A,bookstack,count_recently_created_shelves,oracle_miss,,,,Recently Created Pages,1,False
+A,bookstack,create_book,not_activated,navigation_depth,/books,/books,,0,True
+A,bookstack,create_page,not_activated,coverage_gap,/books/book/page/new-page,,,0,False
+A,bookstack,create_sort_rule,not_activated,coverage_gap,/settings/sorting,,,0,True
+A,bookstack,delete_book,not_activated,value_difference,,,Books,1,True
+A,bookstack,favourite_book,oracle_miss,,,,My Favourites,1,False
+A,bookstack,favourite_chapter,oracle_miss,,,,My Favourites,1,False
+A,bookstack,favourite_page,oracle_miss,,,,My Favourites,1,False
+A,bookstack,favourite_page_template,oracle_miss,,,,My Favourites,1,False
+A,bookstack,recent_activity_all,oracle_miss,,,,Recent Activity,1,False
+A,bookstack,recent_activity_chapter,oracle_miss,,,,Recent Activity | Details,2,False
+A,bookstack,recent_activity_page,oracle_miss,,,,Recent Activity | Details,2,False
+A,bookstack,recent_activity_page_template,oracle_miss,,,,Details,1,False
+A,bookstack,recent_activity_shelf,oracle_miss,,,,Recent Activity | Details,2,False
+A,bookstack,recently_viewed_book,not_activated,navigation_depth,,,,0,True
+A,bookstack,recently_viewed_chapter,not_activated,navigation_depth,,,,0,True
+A,bookstack,recently_viewed_page,not_activated,navigation_depth,,,,0,True
+A,bookstack,recently_viewed_page_template,not_activated,navigation_depth,,,,0,True
+A,bookstack,recently_viewed_shelf,not_activated,navigation_depth,,,,0,True
+A,bookstack,search,oracle_miss,,,,Book2,1,False
+A,bookstack,settings,not_activated,value_difference,,,Sorting,1,False
+A,bookstack,unfavourite_shelf,oracle_miss,,,,My Favourites,1,False
+A,bookstack,update_book,not_activated,navigation_depth,/books,/books,,0,True
+A,indico,administration,not_activated,coverage_gap,/admin/unlisted-events,,,0,False
+A,indico,clone_event,not_activated,value_difference,,,January 2025,1,True
+A,indico,create_announcement,not_activated,value_difference,,,January 2025,1,True
+A,indico,create_conference,not_activated,value_difference,,,January 2025 | New Conference,2,False
+A,indico,create_lecture,not_activated,value_difference,,,January 2025 | New Lecture,2,False
+A,indico,create_meeting,not_activated,value_difference,,,January 2025 | New Meeting,2,False
+A,indico,create_news,not_activated,value_difference,,,January 2025,1,True
+A,indico,delete_conference,not_activated,value_difference,,,flashed-messages | success-message-box,2,False
+A,indico,delete_lecture,not_activated,value_difference,,,flashed-messages | success-message-box,2,False
+A,indico,delete_meeting,not_activated,value_difference,,,flashed-messages | success-message-box,2,False
+A,indico,edit_conference,not_activated,value_difference,,,January 2025,1,True
+A,indico,edit_lecture,oracle_miss,,,,,0,True
+A,indico,edit_meeting,oracle_miss,,,,,0,True
+A,indico,favourite_conference,not_activated,value_difference,,,January 2025,1,True
+A,indico,favourite_lecture,not_activated,value_difference,,,January 2025,1,True
+A,indico,favourite_meeting,not_activated,value_difference,,,January 2025,1,True
+A,indico,fill_out_survey,not_activated,value_difference,,,The survey has been submitted,1,False
+A,indico,profile_settings,not_activated,coverage_gap,/user/favorites,,,0,False
+A,indico,register_conference,oracle_miss,,,,,0,False
+A,indico,room_booking,oracle_miss,,/rooms/book,/rooms/book,,0,False
+A,indico,search_events,not_activated,coverage_gap,/search/?q=test,,,0,False
+A,indico,view_conference_details,not_activated,value_difference,,,January 2025,1,True
+A,indico,view_conference_timetable,not_activated,value_difference,,,"🔍 Checking for 'Session 2' li element... | Session 2 | ❌ 'Session 2' li not found | ✅ Found 'Session 2' li: | ❌ Checkbox not found inside 'Session 2' li | Checkbox found, checked: | ❌ Timetable container not found | ℹ️ Existing Session 2 blocks count: | 🔑 Condition met?",9,False
+A,indico,view_lecture_details,not_activated,value_difference,,,January 2025,1,True
+A,indico,view_meeting_details,not_activated,value_difference,,,January 2025,1,True
+A,invoiceninja,approve_quote,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,convert_quote_to_invoice,not_activated,unexplained,/invoices,/invoices,,0,False
+A,invoiceninja,create_invoice,not_activated,value_difference,,,Draft | Subtotal | $ 200.00,3,False
+A,invoiceninja,create_product,not_activated,value_difference,,,Active,1,False
+A,invoiceninja,delete_expired_quote,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,delete_payment,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,disable_invoices_module,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,disable_quotes_module,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,enter_payment,not_activated,indeterminate,,,,0,False
+A,invoiceninja,expired_quotes,not_activated,unexplained,/quotes,/quotes,,0,False
+A,invoiceninja,localization,not_activated,coverage_gap,/settings/localization,,,0,False
+A,invoiceninja,mark_invoice_as_paid,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,mark_past_due_invoice_as_paid,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,past_due_invoices,not_activated,unexplained,/invoices,/invoices,,0,False
+A,invoiceninja,recent_payments,not_activated,unexplained,/payments,/payments,,0,False
+A,invoiceninja,recent_transactions_expenses,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,recent_transactions_payments,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,settings,not_activated,coverage_gap,/settings/backup_restore,,,0,False
+A,invoiceninja,stop_recurring_invoice,not_activated,navigation_depth,/dashboard,/dashboard,,0,True
+A,invoiceninja,upcoming_invoices,not_activated,unexplained,/invoices,/invoices,,0,False
+A,invoiceninja,upcoming_quotes,not_activated,unexplained,/quotes,/quotes,,0,False
+A,invoiceninja,upcoming_recurring_invoices,not_activated,unexplained,/recurring_invoices,/recurring_invoices,,0,False
+A,invoiceninja,view_invoice_details,not_activated,value_difference,,,Edit Invoice | Subtotal,2,False
+A,invoiceninja,view_products,not_activated,coverage_gap,/products,,,0,False
+A,invoiceninja,view_quote_details,not_activated,value_difference,,,Edit Quote | Subtotal,2,False
+A,prestashop,buyer_add_product_to_cart,caught,,/cart,,,0,False
+A,prestashop,buyer_add_product_to_wishlist,not_activated,coverage_gap,/module/blockwishlist/view,,id_wishlist=1,1,True
+A,prestashop,buyer_contact_us,oracle_miss,,,,,0,False
+A,prestashop,buyer_edit_quantity_in_cart,not_activated,value_difference,,,3 items,1,False
+A,prestashop,buyer_remove_product_from_cart,not_activated,value_difference,,,3 items,1,False
+A,prestashop,buyer_remove_product_from_wishlist,not_activated,value_difference,,,(3),1,False
+A,prestashop,buyer_search_product,oracle_miss,,/search,,,0,False
+A,prestashop,buyer_sort_products_by_name_a_to_z,not_activated,value_difference,,,?order=product.name.asc,1,False
+A,prestashop,buyer_sort_products_by_name_z_to_a,not_activated,value_difference,,,?order=product.name.desc,1,False
+A,prestashop,buyer_sort_products_by_price_high_to_low,not_activated,value_difference,,,?order=product.price.desc,1,False
+A,prestashop,buyer_sort_products_by_price_low_to_high,not_activated,value_difference,,,?order=product.price.asc,1,False
+A,prestashop,buyer_view_new_product_details,not_activated,navigation_depth,,,,0,True
+A,prestashop,buyer_view_popular_product_details,not_activated,navigation_depth,,,,0,True
+A,prestashop,buyer_view_store_information,oracle_miss,,/contact-us,,,0,False
+A,prestashop,seller_backorder_order,not_activated,value_difference,,,On backorder (not paid),1,False
+A,prestashop,seller_cancel_order,not_activated,value_difference,,,Canceled,1,False
+A,prestashop,seller_delete_product,not_activated,value_difference,,,Products (18),1,False
+A,prestashop,seller_deliver_order,not_activated,value_difference,,,Delivered,1,False
+A,prestashop,seller_refund_order,not_activated,value_difference,,,Refunded,1,False
+A,prestashop,seller_ship_order,not_activated,value_difference,,,Shipped,1,False
+A,prestashop,seller_view_carts,not_activated,value_difference,,,Shopping Carts,1,False
+A,prestashop,seller_view_catalog_product_details,not_activated,value_difference,,,Products,1,True
+A,prestashop,seller_view_shop_design,not_activated,value_difference,,,Image Settings,1,False
+B,bookstack,comment,not_activated,value_difference,,,I like this template,1,False
+B,bookstack,count_recently_created_books,not_activated,value_difference,,,Recently Created Pages,1,False
+B,bookstack,count_recently_created_chapters,not_activated,value_difference,,,Recently Created Pages,1,False
+B,bookstack,count_recently_created_pages,oracle_miss,,,,Search Results,1,False
+B,bookstack,count_recently_created_shelves,not_activated,value_difference,,,Recently Created Pages,1,False
+B,bookstack,create_book,not_activated,navigation_depth,/books,/books,,0,True
+B,bookstack,create_page,not_activated,coverage_gap,/books/book/page/new-page,,,0,False
+B,bookstack,create_sort_rule,not_activated,coverage_gap,/settings/sorting,,,0,True
+B,bookstack,delete_book,not_activated,value_difference,,,Books,1,True
+B,bookstack,favourite_book,oracle_miss,,,,My Favourites,1,False
+B,bookstack,favourite_chapter,oracle_miss,,,,My Favourites,1,False
+B,bookstack,favourite_page,oracle_miss,,,,My Favourites,1,False
+B,bookstack,favourite_page_template,oracle_miss,,,,My Favourites,1,False
+B,bookstack,recent_activity_all,not_activated,value_difference,,,Recent Activity,1,False
+B,bookstack,recent_activity_chapter,oracle_miss,,,,Recent Activity | Details,2,False
+B,bookstack,recent_activity_page,oracle_miss,,,,Recent Activity | Details,2,False
+B,bookstack,recent_activity_page_template,oracle_miss,,,,Details,1,False
+B,bookstack,recent_activity_shelf,oracle_miss,,,,Recent Activity | Details,2,False
+B,bookstack,recently_viewed_book,oracle_miss,,,,,0,True
+B,bookstack,recently_viewed_chapter,oracle_miss,,,,,0,True
+B,bookstack,recently_viewed_page,oracle_miss,,,,,0,True
+B,bookstack,recently_viewed_page_template,oracle_miss,,,,,0,True
+B,bookstack,recently_viewed_shelf,oracle_miss,,,,,0,True
+B,bookstack,search,oracle_miss,,,,Book2,1,False
+B,bookstack,settings,not_activated,value_difference,,,Sorting,1,False
+B,bookstack,unfavourite_shelf,oracle_miss,,,,My Favourites,1,False
+B,bookstack,update_book,not_activated,navigation_depth,/books,/books,,0,True
+B,indico,administration,not_activated,coverage_gap,/admin/unlisted-events,,,0,False
+B,indico,clone_event,not_activated,value_difference,,,January 2025,1,True
+B,indico,create_announcement,not_activated,value_difference,,,January 2025,1,True
+B,indico,create_conference,not_activated,value_difference,,,January 2025 | New Conference,2,False
+B,indico,create_lecture,not_activated,value_difference,,,January 2025 | New Lecture,2,False
+B,indico,create_meeting,not_activated,value_difference,,,January 2025 | New Meeting,2,False
+B,indico,create_news,not_activated,value_difference,,,January 2025,1,True
+B,indico,delete_conference,oracle_miss,,,,flashed-messages | success-message-box,2,False
+B,indico,delete_lecture,oracle_miss,,,,flashed-messages | success-message-box,2,False
+B,indico,delete_meeting,oracle_miss,,,,flashed-messages | success-message-box,2,False
+B,indico,edit_conference,not_activated,value_difference,,,January 2025,1,True
+B,indico,edit_lecture,not_activated,navigation_depth,,,,0,True
+B,indico,edit_meeting,not_activated,navigation_depth,,,,0,True
+B,indico,favourite_conference,not_activated,value_difference,,,January 2025,1,True
+B,indico,favourite_lecture,not_activated,value_difference,,,January 2025,1,True
+B,indico,favourite_meeting,not_activated,value_difference,,,January 2025,1,True
+B,indico,fill_out_survey,not_activated,value_difference,,,The survey has been submitted,1,False
+B,indico,profile_settings,not_activated,coverage_gap,/user/favorites,,,0,False
+B,indico,register_conference,oracle_miss,,,,,0,False
+B,indico,room_booking,not_activated,coverage_gap,/rooms/book,,,0,False
+B,indico,search_events,not_activated,coverage_gap,/search/?q=test,,,0,False
+B,indico,view_conference_details,not_activated,value_difference,,,January 2025,1,True
+B,indico,view_conference_timetable,not_activated,value_difference,,,"🔍 Checking for 'Session 2' li element... | Session 2 | ❌ 'Session 2' li not found | ✅ Found 'Session 2' li: | ❌ Checkbox not found inside 'Session 2' li | Checkbox found, checked: | ❌ Timetable container not found | ℹ️ Existing Session 2 blocks count: | 🔑 Condition met?",9,False
+B,indico,view_lecture_details,not_activated,value_difference,,,January 2025,1,True
+B,indico,view_meeting_details,not_activated,value_difference,,,January 2025,1,True
+B,prestashop,buyer_add_product_to_cart,incidental_failure,,/cart,/cart,,0,False
+B,prestashop,buyer_add_product_to_wishlist,not_activated,coverage_gap,/module/blockwishlist/view,,id_wishlist=1,1,True
+B,prestashop,buyer_contact_us,not_activated,indeterminate,,,,0,False
+B,prestashop,buyer_edit_quantity_in_cart,not_activated,value_difference,,,3 items,1,False
+B,prestashop,buyer_remove_product_from_cart,not_activated,value_difference,,,3 items,1,False
+B,prestashop,buyer_remove_product_from_wishlist,not_activated,value_difference,,,(3),1,False
+B,prestashop,buyer_search_product,oracle_miss,,/search,/search,,0,False
+B,prestashop,buyer_sort_products_by_name_a_to_z,not_activated,value_difference,,,?order=product.name.asc,1,False
+B,prestashop,buyer_sort_products_by_name_z_to_a,not_activated,value_difference,,,?order=product.name.desc,1,False
+B,prestashop,buyer_sort_products_by_price_high_to_low,not_activated,value_difference,,,?order=product.price.desc,1,False
+B,prestashop,buyer_sort_products_by_price_low_to_high,not_activated,value_difference,,,?order=product.price.asc,1,False
+B,prestashop,buyer_view_new_product_details,oracle_miss,,,,,0,True
+B,prestashop,buyer_view_popular_product_details,oracle_miss,,,,,0,True
+B,prestashop,buyer_view_store_information,oracle_miss,,/contact-us,/contact-us,,0,False
+B,prestashop,seller_backorder_order,not_activated,value_difference,,,On backorder (not paid),1,False
+B,prestashop,seller_cancel_order,not_activated,value_difference,,,Canceled,1,False
+B,prestashop,seller_delete_product,not_activated,value_difference,,,Products (18),1,False
+B,prestashop,seller_deliver_order,not_activated,value_difference,,,Delivered,1,False
+B,prestashop,seller_refund_order,not_activated,value_difference,,,Refunded,1,False
+B,prestashop,seller_ship_order,not_activated,value_difference,,,Shipped,1,False
+B,prestashop,seller_view_carts,not_activated,value_difference,,,Shopping Carts,1,False
+B,prestashop,seller_view_catalog_product_details,oracle_miss,,,,Products,1,True
+B,prestashop,seller_view_shop_design,not_activated,value_difference,,,Image Settings,1,False

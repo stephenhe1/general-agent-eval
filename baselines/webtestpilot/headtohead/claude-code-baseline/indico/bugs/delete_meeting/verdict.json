@@ -1,0 +1,29 @@
+{
+  "app": "indico",
+  "bug_name": "delete_meeting",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/indico/bugs/delete_meeting.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "After deleting an event, the remaining event titles should match the initial \u201cAll Events\u201d list with the deleted event removed; for comparison, each title must be normalized by removing an optional organizer prefix followed by a comma and quotation marks if present (i.e., titles may be in the form Organizer, \"Event\" or just Event), then truncating the resulting title to the first 30 characters.",
+  "alignment_tokens": [
+    "Event management table not found.",
+    "No rows found in the table.",
+    "Last event row removed!"
+  ],
+  "notes": [
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/indico/bugs/delete_meeting"
+}

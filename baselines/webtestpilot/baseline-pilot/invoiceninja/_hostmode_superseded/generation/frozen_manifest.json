@@ -1,0 +1,27 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/invoiceninja/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/invoiceninja/generation/workspace/rq6-agent",
+  "file_count": 19,
+  "spec_count": 18,
+  "files": {
+    "auth.spec.ts": "ebed204af9e713516ef3bcbf3b42eb9fbc0484816487acb228997b04e297ec72",
+    "clients.spec.ts": "1b9630e941bd4f02e1aa5ef2bfcc31852ea8f7a182b09125c6f3b651c19e6dab",
+    "credits.spec.ts": "f4d4d1ae5ca4f87555495938879cbc75fefacd0133f1cb151be56b8d7fc75b3d",
+    "dashboard.spec.ts": "8f028716a84d25244e6859dcbd5f504aadb731efb0ef76679b2a0a4dde5b818c",
+    "expenses.spec.ts": "21acd97969479f1488bb061ebbc0be8a9cc3ef9834903dfdbcdbb4322d317d4a",
+    "helpers.ts": "0b1f6995e56eda57040a7ca62b8d01e458492bcc3ae8ecc5fe10da94863ee054",
+    "invoices.spec.ts": "89c8b99aed0ce6be012a1990c644b3c8db7ff110a8fefddaa5a620166e99d8a8",
+    "navigation.spec.ts": "f09a7a7f9200255c3f93d6c48cd96922bd5594711a0a262cb61a86bd5ce7bfc9",
+    "payments.spec.ts": "649c4d3f966e84571ee16fda3723728fc41ba1a43ffe9dddef9b853ecce5e7ae",
+    "products.spec.ts": "67a578c37d4c560c332ce2ce66bc4cd4ace8e696fcbf9a193f061368fe0ea9d0",
+    "projects.spec.ts": "b23ca84014237dcf20343e198dba320886b36db3f1f9c02a5b8faeeaa48a587a",
+    "purchase_orders.spec.ts": "02ad491bcf8d5339cb9478086a8a2014645ee6b0c35e8e6c9df7309888cdae90",
+    "quotes.spec.ts": "c6af0f86c69161b8d004b0b8e3ceb5185e4d248561d0f3fa25bdde93320aa940",
+    "recurring.spec.ts": "ce30d4cca484f6ab0229a9f2d6207be2f4dd979724bfbebd044d8661cd82bd56",
+    "reports.spec.ts": "baf9cf5e296fdb8062acd723713bafee77beb8ac51f8d21d510feb6bb4eed890",
+    "settings.spec.ts": "2abcb7815241a628bc3d5c9cb97efabbc9abc43cb5095c4eda789a2704e3c79a",
+    "tasks.spec.ts": "bb8831a153572824308d494f950d9718b48ed9ce8f1f99311a6f800a2c2230f0",
+    "transactions.spec.ts": "49e6c5f05d0d8da766ebdcaaf52801afa41c9a26b562e3f5e19a5c8f51af92e9",
+    "vendors.spec.ts": "d2f4d85259877ab4f5a602cd9617694c2c5f7e3a0e2988b94483440fad373332"
+  }
+}

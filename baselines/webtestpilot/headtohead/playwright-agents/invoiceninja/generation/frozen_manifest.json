@@ -1,0 +1,18 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/invoiceninja/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/invoiceninja/generation/workspace/tests",
+  "file_count": 10,
+  "spec_count": 9,
+  "files": {
+    "auth.spec.ts": "e5af3fcd3917273459aea8681733719211c7fc28dd0c6f2eb473c87e8ac14b76",
+    "clients.spec.ts": "503df5c3e56af36f1df46809911f4c6e234fc8b8d4bc7f6dc2b488b6577aaf34",
+    "dashboard.spec.ts": "2208f03c8875db026096eb3b6e34dd18872d52e371713c889805581acb2b85a2",
+    "expenses.spec.ts": "fbb7b471dec69e5df8b22a998525a7607ea1be38eac6f50266e6a8abbbc12529",
+    "fixtures.ts": "34190a817dc13c1f58b1c79bbe1d7be37fbbfddc5c350b9c12226fdf500db946",
+    "invoices.spec.ts": "af85fa3b56c25f1765aae00ab82ca23e4f69f6855a168ade9198e93b88d843df",
+    "payments.spec.ts": "379bc749076c54f5449d88c5b477d1214196aa07c6efc30b7cd0e54e38d69ba4",
+    "products.spec.ts": "be3e36b0ad25bd5dd17a4d65072dbeff10a5cf79afae1b17b5a393160126c584",
+    "quotes.spec.ts": "9fc001b85c8c2fc8d9ebc5778e78aacd0c7151f3b0d41937f636a5e25904416e",
+    "settings.spec.ts": "581fcc821b9eacadd6999ad2d6bccb50e88883c09f5aabfe4ce138e0c0f3a572"
+  }
+}
