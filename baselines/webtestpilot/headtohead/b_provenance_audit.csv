@@ -1,0 +1,5 @@
+app,specs,stamped,stamp_rate,planner_tasks,generator_tasks,spec_source,verdict
+bookstack,36,30,0.83,2,6,frozen,hybrid-partial
+indico,9,9,1.00,0,0,frozen,review
+invoiceninja,9,0,0.00,0,0,frozen,invalid-no-delegation
+prestashop,20,0,0.00,2,2,frozen,hybrid-partial

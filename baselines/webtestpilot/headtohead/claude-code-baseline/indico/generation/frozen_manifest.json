@@ -1,0 +1,21 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/indico/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/indico/generation/workspace/rq6-agent",
+  "file_count": 13,
+  "spec_count": 13,
+  "files": {
+    "admin-state-changes.spec.ts": "1110b9f8e048192c47f432fb5104826cfb2004b653df9608486e2b586c73f199",
+    "admin.spec.ts": "32246abc4ae66dc38452e815631176d3d37f4171d33f8f3d05cae37d0ef09bb7",
+    "auth.spec.ts": "af0b81662bee1aab6475ad7206d3b7aaa560ae322116da39ca4544637db75eb8",
+    "category-management.spec.ts": "779c5fd4a852e86ffad8f6cdaf6deaf6475ac25d6b3c7a785599ee38e7502eb6",
+    "conference-management.spec.ts": "bdccd0615779312d9fa8dc7d2e1ab02f1c2f4d55f7522385db7f5163dd48ecc6",
+    "event-creation.spec.ts": "a3fcaf7bb845990a3037ecba21f266b017840def8225dea9064bbe2b771d1ec3",
+    "event-display.spec.ts": "37d98c1e2922bec65b636b18ce26ef2131c9ba02bf710097c967a5b39569552f",
+    "event-management.spec.ts": "a69ddb723bcbc440a07375066b26db31b234eac25b9981d31b793764696f4dd2",
+    "event-state-changes.spec.ts": "fd0bd2711e4a027cf162b3aef2be106586ff1fd04eade6c4b8fcd9e76681d0f9",
+    "home-category.spec.ts": "f6e544e56800bd8fa8d3c5f02273a0d4aa160404486e656d013f12c015c79f13",
+    "room-booking.spec.ts": "1a12639486b18ba262b9ab80f5e76f5e76b1badb170d65e1811d852d0c5b094b",
+    "survey.spec.ts": "e6d82c5c92b9b5d971ead8c60d5b75f026d9a5e29b67c9f82e6a7faf86465483",
+    "user-profile.spec.ts": "f49b776e23a696bb0b55631f2b1952b4e40cdf72ff67c5bb5fb6fe45e93aa181"
+  }
+}

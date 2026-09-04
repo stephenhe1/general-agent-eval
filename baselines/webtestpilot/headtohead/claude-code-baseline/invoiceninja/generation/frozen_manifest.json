@@ -1,0 +1,16 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/invoiceninja/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/invoiceninja/generation/workspace/rq6-agent",
+  "file_count": 8,
+  "spec_count": 8,
+  "files": {
+    "admin-api-clients.spec.ts": "6ded72a7638bfb623c22745780358d7b223addc978740f375ff92c86252dbdf8",
+    "admin-api-invoices.spec.ts": "1d06a4a590224d9c39a5a1a5b0574a38771be141755cbd2fb9030941929023a9",
+    "admin-api-misc.spec.ts": "0a93a99595a0d3655df1a1d76675ced1ecc71686b14a17fcd485a2470a8ac252",
+    "admin-api-payments.spec.ts": "8a543ad37a68bb385965c2b7762f6972694e400135a798607c964cfb20a83321",
+    "admin-api-products.spec.ts": "5e91f21f4d1cf4e4bc50083b0373c6042993e7aa5de0522f19a90c8211b2461a",
+    "admin-api-quotes.spec.ts": "fec86ff1abfd849caf9de747ce2c2523e88143e7fc30ef8ae06da685cceddc32",
+    "auth.spec.ts": "6f754d5df3ab973c2ea2527ea430bde152a74d3b200ee42499272f3860c0bd2a",
+    "client-portal.spec.ts": "abc22a9abaebda63c19c31421ac49b0c84cc49c5dbf2ab95584e6044c8f113f6"
+  }
+}

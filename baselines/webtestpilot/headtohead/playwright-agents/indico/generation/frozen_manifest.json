@@ -1,0 +1,17 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/indico/generation/workspace/tests",
+  "file_count": 9,
+  "spec_count": 9,
+  "files": {
+    "admin.spec.ts": "6138fb5672f9dc55e0e09ed08f4d36d7382a0c4e9eef5552de67db3b1171c624",
+    "auth.spec.ts": "e7e757dc1025f9febb2a9d30f2a0bb2734c81061c39819e28f8d7777905851f2",
+    "category-management.spec.ts": "d324bc0ca20478241ad293e4b522b86134b253d96ae1979a64e451f5926412c0",
+    "conference-registrations.spec.ts": "4762a20009f6b4467d8403d96f5dc381e38dcc5e7c05f1789d2fc25b0f71350f",
+    "event-browsing.spec.ts": "51512d28fc955ceec63865b958375aa2b91add620479047511b09fdf648446bb",
+    "event-creation.spec.ts": "37731a006612136d9181bace34c004a88ae676d7a5b87a453054b3b912c90f37",
+    "event-management.spec.ts": "ebe30ffaa3de6b0184f5eabbf72b4aeeeb8253108e8b41b05a2494aff3994962",
+    "meeting-timetable.spec.ts": "cd106c340e6cddb1ae2e732b2d04bad77a5311873e0f2a4e6ec5868441f5a635",
+    "user-profile.spec.ts": "4d490a121feb9b9c666f1b1eae541666e6945e1d3f7ff0efb17f635270089ef2"
+  }
+}

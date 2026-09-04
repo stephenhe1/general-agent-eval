@@ -1,0 +1,69 @@
+{
+  "app": "bookstack",
+  "bug_name": "create_sort_rule",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/create_sort_rule.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 1,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "Sort rules list before and after is consistent with user's newly created sort rule",
+  "alignment_tokens": [
+    "New Sort Rule"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): favourites.spec.ts::toggling favourite on a book adds it to favourites list",
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)",
+    "1 clean-stable test(s) failed anyway, unrelated to the fault"
+  ],
+  "evidence": [
+    {
+      "test_key": "admin.spec.ts::create new user via API - user appears in list",
+      "file": "admin.spec.ts",
+      "title": "create new user via API - user appears in list",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: apiRequestContext.post: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - \u2192 POST http://localhost:8081/api/users\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - Content-Type: application/json\u001b[22m\n\u001b[2m    - content-length: 113\u001b[22m\n\u001b[2m    - cookie: XSRF-TOKEN=eyJpdiI6InhmZEhJZnJFTjZsM3RoWE9pVTR0VlE9PSIsInZhbHVlIjoiY3o5NTdSMldlcHVhYWo0cVJvb0xkdU91clBPYWQwWTVETzUvYnpOOVNUMHd2NjNrQjh3bUZNVXJLOW9DTURJU0lqbFFWQVV4U0REUnorQVEzbWJVYkg2WEJ6OVl2dnhPaVhHQVZHMU5HRmRzczJUTDY2elpXYisxNGprVFNlZlMiLCJtYWMiOiJkYmRkYmRjYjNlMmJiMjhjZDgwN2VhYmRlMDI4YWJiZTE4MWY2NWUwODc3ODIwY2EzMWIxOWVhNjE0ODE2ZmNkIiwidGFnIjoiIn0%3D; bookstack_session=eyJpdiI6IisxcUVMVFpyaHBVR29HaEEvSkxUTGc9PSIsInZhbHVlIjoiTUtWNStxMFZVamxYMDdwR3Znd3IxREF0SmNFUzhyMW1DSkFudzExOWJVMHhidGFuaUhUYjEvVUc0N1VuT3p4eFh3ZWRkc2VFVjFuQlpEdXNZKzIxbkl3bjgrR1QyQ1FzWk5QMWxDZzF4WGlkUTZCVTBsTFdoRXVMM2p1Z0NnVy8iLCJtYWMiOiIwMzI2Nzg5YmFjOGJkOWFkODVlOGQ1NTk2ZjViOTA1MmE2NzI2NThjNDNjYzZlM2YwMTQyY2EyMzA2MDhmM2Y3IiwidGFnIjoiIn0%3D\u001b[22m\n",
+      "error_stack": "TimeoutError: apiRequestContext.post: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - \u2192 POST http://localhost:8081/api/users\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - Content-Type: application/json\u001b[22m\n\u001b[2m    - content-length: 113\u001b[22m\n\u001b[2m    - cookie: XSRF-TOKEN=eyJpdiI6InhmZEhJZnJFTjZsM3RoWE9pVTR0VlE9PSIsInZhbHVlIjoiY3o5NTdSMldlcHVhYWo0cVJvb0xkdU91clBPYWQwWTVETzUvYnpOOVNUMHd2NjNrQjh3bUZNVXJLOW9DTURJU0lqbFFWQVV4U0REUnorQVEzbWJVYkg2WEJ6OVl2dnhPaVhHQVZHMU5HRmRzczJUTDY2elpXYisxNGprVFNlZlMiLCJtYWMiOiJkYmRkYmRjYjNlMmJiMjhjZDgwN2VhYmRlMDI4YWJiZTE4MWY2NWUwODc3ODIwY2EzMWIxOWVhNjE0ODE2ZmNkIiwidGFnIjoiIn0%3D; bookstack_session=eyJpdiI6IisxcUVMVFpyaHBVR29HaEEvSkxUTGc9PSIsInZhbHVlIjoiTUtWNStxMFZVamxYMDdwR3Znd3IxREF0SmNFUzhyMW1DSkFudzExOWJVMHhidGFuaUhUYjEvVUc0N1VuT3p4eFh3ZWRkc2VFVjFuQlpEdXNZKzIxbkl3bjgrR1QyQ1FzWk5QMWxDZzF4WGlkUTZCVTBsTFdoRXVMM2p1Z0NnVy8iLCJtYWMiOiIwMzI2Nzg5YmFjOGJkOWFkODVlOGQ1NTk2ZjViOTA1MmE2NzI2NThjNDNjYzZlM2YwMTQyY2EyMzA2MDhmM2Y3IiwidGFnIjoiIn0%3D\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/generation/workspace/__wtp_eval/admin.spec.ts:99:41",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule/artifacts/admin-Admin---Users-create-35541--API---user-appears-in-list-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule/artifacts/admin-Admin---Users-create-35541--API---user-appears-in-list-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule/artifacts/admin-Admin---Users-create-35541--API---user-appears-in-list-chromium/trace.zip"
+      ]
+    }
+  ],
+  "excluded_failures": [
+    {
+      "test_key": "favourites.spec.ts::toggling favourite on a book adds it to favourites list",
+      "file": "favourites.spec.ts",
+      "title": "toggling favourite on a book adds it to favourites list",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Book1')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Book1')\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Book1')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Book1')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/generation/workspace/__wtp_eval/favourites.spec.ts:38:43",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule/artifacts/favourites-Favourites-togg-ec549--adds-it-to-favourites-list-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule/artifacts/favourites-Favourites-togg-ec549--adds-it-to-favourites-list-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule/artifacts/favourites-Favourites-togg-ec549--adds-it-to-favourites-list-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/webtestpilot_baseline/bookstack/bugs/create_sort_rule"
+}

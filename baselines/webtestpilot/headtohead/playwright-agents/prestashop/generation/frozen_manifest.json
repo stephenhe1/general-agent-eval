@@ -1,0 +1,28 @@
+{
+  "root": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/prestashop/generation/frozen",
+  "source": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/prestashop/generation/workspace/tests",
+  "file_count": 20,
+  "spec_count": 20,
+  "files": {
+    "backoffice-auth.spec.ts": "9f5fd386803c20cdf082931bd8bcd050556e8e50b486f47ba60f39cf704625aa",
+    "backoffice-catalog.spec.ts": "d0a45934130b2f1587b15c00f6bcf0ca3ec50ef3f6af9c7c8f7ffb30f25ff981",
+    "backoffice-customers.spec.ts": "878daef2e34c5aef6199fb91c7199e2498a3e08c1d0aaf4d0ead7b6bd953a4e7",
+    "backoffice-orders.spec.ts": "f35ef1fb6e5583c0718221811ab8fb5cab47dc5390d76eb5bd4f6683e4ad5089",
+    "backoffice-products.spec.ts": "4fd6e42cf20f2931022a6f4194a8e745ae7ce2398a6efe1d7a0dd784376bf015",
+    "backoffice-promotions.spec.ts": "fcc40126a0973d2721af5f39929a6c57ed293f1bdaa3956b224f05ef5ab61409",
+    "backoffice-settings.spec.ts": "8d74880923c8f5523b52d2781bccb21693c4c9e9b3a9897f6ed97e410f82c299",
+    "storefront-account.spec.ts": "88fe7ecf25a98834d8764699f41328763eaa5b83745fc6891bd881e632493f44",
+    "storefront-auth.spec.ts": "1ebdbdb9af1562dd02914c8170bbdac316a86de1d322599e72fa992726c0a8ad",
+    "storefront-brands.spec.ts": "7187c9b15f85731c54b3a642d4cdcf30d9ae77b3c64a736e94f92742768f2bb2",
+    "storefront-cart.spec.ts": "e1c9cffbb45201a9137a8f25f545e9d1b3e2fb1e688bfaf5fd2c3299f63ce30a",
+    "storefront-category.spec.ts": "fff7ac2b2bae5f686303429cf55ce913d4ac0a48eb43935bba6465dd3b908dfd",
+    "storefront-checkout.spec.ts": "f4aee6162f160cb4672164afc5a1643aaefd1d45587644df0a31c449961bec22",
+    "storefront-cms.spec.ts": "b52e15d85daa34e3769dbe619adcacdd6dac7d34a89033b01db15cd92c779920",
+    "storefront-contact.spec.ts": "93f40ea562f2477cd5d222d1e08b616c9ae79d381e0dfa19d9dc597fdce46479",
+    "storefront-currency.spec.ts": "c5f99f0acd51958e22c8d80bda1e588d2630ebf51e9fbab69cafd8d517d71146",
+    "storefront-homepage.spec.ts": "a295e9bfdbed20bcbc32e4adfa6a65fba79c7a5da88ce600d36ee1a7e6c32453",
+    "storefront-navigation.spec.ts": "2e8798eb3a278aa89090a13ef2aa1d87e6c286d1edc20f84c48259909ff569cd",
+    "storefront-product.spec.ts": "49c6d8e019063f7bdb8c095c1665b7a362f11d987460dce50df532d4c0ce37c5",
+    "storefront-search.spec.ts": "57c66ac1806ad5a8215762144e7c82d0a4d54e9a3553bdee8594cc1ed14007dd"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "app": "indico",
+  "bug_name": "view_meeting_details",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/indico/bugs/view_meeting_details.js",
+  "verdict": "oracle_miss",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "mutation_applied": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The event titles (normalized and without newlines) in 'All Events' (past, present, and future) are currently exactly the same as they were initially",
+  "alignment_tokens": [
+    "Header for January 2025 not found.",
+    "No events found in the list.",
+    "Middle event removed!",
+    "January 2025",
+    "h4"
+  ],
+  "notes": [
+    "fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/claude-code-baseline/indico/bugs/view_meeting_details"
+}

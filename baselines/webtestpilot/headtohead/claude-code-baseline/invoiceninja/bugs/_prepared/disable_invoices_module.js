@@ -1,0 +1,166 @@
+/**
+ * Introduction:
+ * -------------
+ * This script monitors the page for two types of events:
+ *   1. Initial page load (DOMContentLoaded or already-loaded document)
+ *   2. DOM mutations (subtree changes, attributes, or child list changes)
+ * 
+ * When either event occurs, it evaluates a user-defined condition via the 
+ * `isConditionMet` function. If the condition returns true, the `onConditionMet`
+ * function is executed exactly once. After triggering, the sentinel cleans up 
+ * its internal MutationObserver.
+ * 
+ * Usage:
+ * ------
+ * - Inject this template via Playwright.
+ * - Replace {{IS_CONDITION_MET}} -> Body of the condition-checking function.
+ * - Replace {{ON_CONDITION_MET}} -> Body of the callback to execute when condition is met.
+ */
+
+(() => {
+  // Prevents duplicate observers if the script is injected multiple times
+  const NAMESPACE = "__BUG_INJECTOR__";
+  const STORAGE_KEY = "__BUG_INJECTOR_TRIGGERED__";
+
+  // Prevent duplicate observers or repeated triggers
+  if (window[NAMESPACE] || sessionStorage.getItem(STORAGE_KEY)) return;
+
+  // Evaluates whether the desired condition has been satisfied.
+  // Replace with your custom code
+  const isConditionMet = () => {
+    const PREV_KEY = "__prev_condition__";
+    const COUNT_KEY = "__condition_visit_count__";
+
+    // Check path and panels existence
+    const pathOk = window.location.pathname === "/dashboard";
+    const panelsExist = !!document.querySelector(
+        "html > body > div > div > div:nth-child(2) > div:nth-child(3) > main > div > div:nth-child(3)"
+    );
+
+    const condition = pathOk && panelsExist;
+    const prevCondition = sessionStorage.getItem(PREV_KEY) === "true";
+
+    // Persist current condition for next call
+    sessionStorage.setItem(PREV_KEY, String(condition));
+
+    // Only trigger on false → true transition
+    if (!prevCondition && condition) {
+        const count = Number(sessionStorage.getItem(COUNT_KEY) || 0) + 1;
+        sessionStorage.setItem(COUNT_KEY, count);
+        return count >= 2;
+    }
+
+    return false;
+};
+
+  // Called exactly once when the condition is satisfied.
+  // Replace with your custom code
+  const onConditionMet = () => {
+    const panels = document.querySelector("html > body > div > div > div:nth-child(2) > div:nth-child(3) > main > div > div:nth-child(3)");
+    
+    const upcomingInvoicesPanel = document.createElement("div");
+    upcomingInvoicesPanel.className = "col-span-12 xl:col-span-6";
+    upcomingInvoicesPanel.innerHTML = `<div class="border rounded-md overflow-visible h-96 relative shadow-sm" style="background-color: rgb(255, 255, 255); color: rgb(42, 48, 61); border-color: rgb(209, 213, 219);"><form class=""><div class="border-b px-3 sm:px-4 py-3 sm:py-4" style="border-color: rgb(209, 213, 219);"><div class="flex items-center justify-between"><div><h3 class="leading-6 font-medium text-lg"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 18 18" style="width: 1.4rem; height: 1.4rem;"><path d="M2.25 4.75C2.25 3.64543 3.14543 2.75 4.25 2.75H13.75C14.8546 2.75 15.75 3.64543 15.75 4.75V6.25H2.25V4.75Z" fill="#66B2FF" fill-opacity="0.3" data-color="color-2" data-stroke="none"></path> <path d="M5.75 2.75V0.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path> <path d="M12.25 2.75V0.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M2.25 6.25H15.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M13.75 11.75L16.25 14.25L13.75 16.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M15.75 10.215V4.75C15.75 3.646 14.855 2.75 13.75 2.75H4.25C3.145 2.75 2.25 3.646 2.25 4.75V13.25C2.25 14.354 3.145 15.25 4.25 15.25H8.961" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16.25 14.25H11.25" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg><span>Upcoming Invoices</span></div></h3></div></div></div><div class="py-0"><div class="px-4 pt-4"><div data-cy="dataTable"><div class="flex flex-col"><div class="align-middle inline-block min-w-full"><div class="overflow-hidden border rounded border-b border-t border-b-0 border-t-0 border-l-0 border-r-0" style="background-color: rgb(255, 255, 255); color: rgb(42, 48, 61); border-color: rgb(247, 247, 247);"><div class="overflow-auto min-w-full rounded pr-4 pr-0" style="height: auto;"><table class="min-w-full table-fixed"><thead style="background-color: transparent; border-bottom: 1px solid rgb(209, 213, 219);"><tr><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Number</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Client</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Due Date</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Balance</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th></tr></thead><tbody style="border: 0px;"><tr class="border-b border-gray-200" style="border-color: rgb(209, 213, 219);"><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><a class="text-sm hover:underline undefined" href="/invoices/Wpmbk5ezJn/edit" style="color: rgb(17, 125, 192);">123456_sent</a></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><a class="text-sm hover:underline undefined" href="/clients/VolejRejNm" style="color: rgb(17, 125, 192);">company_name</a></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><span class="text-xs px-2 py-1 rounded bg-blue-400 text-white font-mono">$ 120,000.00</span></td></tr></tbody></table></div></div></div></div></div></div></div></form></div>`;
+    panels.insertBefore(upcomingInvoicesPanel, panels.children[2]);
+
+    const pastDueInvoicesPanel = document.createElement("div");
+    pastDueInvoicesPanel.className = "col-span-12 xl:col-span-6";
+    pastDueInvoicesPanel.innerHTML = `<div class="border rounded-md overflow-visible h-96 relative shadow-sm" style="background-color: rgb(255, 255, 255); color: rgb(42, 48, 61); border-color: rgb(209, 213, 219);"><form class=""><div class="border-b px-3 sm:px-4 py-3 sm:py-4" style="border-color: rgb(209, 213, 219);"><div class="flex items-center justify-between"><div><h3 class="leading-6 font-medium text-lg"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 18 18" style="width: 1.4rem; height: 1.4rem;"><path d="M2.25 4.75C2.25 3.64543 3.14543 2.75 4.25 2.75H13.75C14.8546 2.75 15.75 3.64543 15.75 4.75V6.25H2.25V4.75Z" fill="#F5B041" fill-opacity="0.3" data-color="color-2" data-stroke="none"></path><path d="M5.75 2.75V0.75" stroke="#F5B041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M12.25 2.75V0.75" stroke="#F5B041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M2.25 6.25H15.75" stroke="#F5B041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M12.25 14V11.25" stroke="#E74C3C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M12.25 17C12.6642 17 13 16.6642 13 16.25C13 15.8358 12.6642 15.5 12.25 15.5C11.8358 15.5 11.5 15.8358 11.5 16.25C11.5 16.6642 11.8358 17 12.25 17Z" fill="#E74C3C" data-stroke="none"></path><path d="M14.479 15.108C15.222 14.816 15.75 14.097 15.75 13.25V4.75C15.75 3.646 14.855 2.75 13.75 2.75H4.25C3.145 2.75 2.25 3.646 2.25 4.75V13.25C2.25 14.354 3.145 15.25 4.25 15.25H9.962" stroke="#F5B041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg><span>Past Due Invoices</span></div></h3></div></div></div><div class="py-0"><div class="px-4 pt-4"><div data-cy="dataTable"><div class="flex flex-col"><div class="align-middle inline-block min-w-full"><div class="overflow-hidden border rounded border-b border-t border-b-0 border-t-0 border-l-0 border-r-0" style="background-color: rgb(255, 255, 255); color: rgb(42, 48, 61); border-color: rgb(247, 247, 247);"><div class="overflow-auto min-w-full rounded pr-4 pr-0" style="height: auto;"><table class="min-w-full table-fixed"><thead style="background-color: transparent; border-bottom: 1px solid rgb(209, 213, 219);"><tr><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Number</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Client</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Due Date</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Balance</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th></tr></thead><tbody style="border: 0px;"><tr class="border-b border-gray-200" style="border-color: rgb(209, 213, 219);"><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><a class="text-sm hover:underline undefined" href="/invoices/wMvbmOeYAl/edit" style="color: rgb(17, 125, 192);">123456_past_due</a></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><a class="text-sm hover:underline undefined" href="/clients/VolejRejNm" style="color: rgb(17, 125, 192);">company_name</a></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);">01/Feb/1970</td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><span class="text-xs px-2 py-1 rounded bg-red-600 text-white font-mono">$ 60,000.00</span></td></tr></tbody></table></div></div></div></div></div></div></div></form></div>`;
+    panels.insertBefore(pastDueInvoicesPanel, panels.children[3]);
+
+    const recurringInvoicesPanel = document.createElement("div");
+    recurringInvoicesPanel.className = "col-span-12 xl:col-span-6";
+    recurringInvoicesPanel.innerHTML = `<div class="border rounded-md overflow-visible h-96 relative shadow-sm" style="background-color: rgb(255, 255, 255); color: rgb(42, 48, 61); border-color: rgb(209, 213, 219);"><form class=""><div class="border-b px-3 sm:px-4 py-3 sm:py-4" style="border-color: rgb(209, 213, 219);"><div class="flex items-center justify-between"><div><h3 class="leading-6 font-medium text-lg"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 18 18" style="width: 1.4rem; height: 1.4rem;"><path d="M2.25 4.75C2.25 3.64543 3.14543 2.75 4.25 2.75H13.75C14.8546 2.75 15.75 3.64543 15.75 4.75V6.25H2.25V4.75Z" fill="#66B2FF" fill-opacity="0.3" data-color="color-2" data-stroke="none"></path> <path d="M5.75 2.75V0.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path> <path d="M12.25 2.75V0.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M2.25 6.25H15.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M13.75 11.75L16.25 14.25L13.75 16.75" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M15.75 10.215V4.75C15.75 3.646 14.855 2.75 13.75 2.75H4.25C3.145 2.75 2.25 3.646 2.25 4.75V13.25C2.25 14.354 3.145 15.25 4.25 15.25H8.961" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16.25 14.25H11.25" stroke="#66B2FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg><span>Upcoming Recurring Invoices</span></div></h3></div></div></div><div class="py-0"><div class="px-4 pt-4"><div data-cy="dataTable"><div class="flex flex-col"><div class="align-middle inline-block min-w-full"><div class="overflow-hidden border rounded border-b border-t border-b-0 border-t-0 border-l-0 border-r-0" style="background-color: rgb(255, 255, 255); color: rgb(42, 48, 61); border-color: rgb(247, 247, 247);"><div class="overflow-auto min-w-full rounded pr-4 pr-0" style="height: auto;"><table class="min-w-full table-fixed"><thead style="background-color: transparent; border-bottom: 1px solid rgb(209, 213, 219);"><tr><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Number</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Client</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Next Send Date</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th><th class="px-2 lg:px-2.5 xl:px-4 text-left font-medium tracking-wider whitespace-nowrap first:pl-2 py-3 border-r-0 text-sm border-r relative py-2 text-sm" style="color: rgb(255, 255, 255); border-color: rgb(247, 247, 247);"><div class="flex items-center space-x-1 text-gray-500 select-none" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><div class="flex items-center space-x-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer" style="width: auto;"><span class="overflow-hidden whitespace-nowrap text-ellipsis"><div class="flex items-center space-x-3"><span>Amount</span></div></span><div class="flex items-center bg-opacity-25"></div></div></div><span class="column-resizer block absolute inset-y-0 right-0 m-0 w-1 h-full p-0 cursor-col-resize border border-transparent hover:bg-white hover:transition duration-50"></span></th></tr></thead><tbody style="border: 0px;"><tr class="border-b border-gray-200" style="border-color: rgb(209, 213, 219);"><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><a class="text-sm hover:underline undefined" href="/recurring_invoices/VolejRejNm/edit" style="color: rgb(17, 125, 192);">123456</a></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><a class="text-sm hover:underline undefined" href="/clients/VolejRejNm" style="color: rgb(17, 125, 192);">company_name</a></td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words cursor-pointer first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);">01/Jan/9999 06:00:00 AM</td><td class="px-2 lg:px-2.5 xl:px-4 py-2 text-sm break-words first:pl-2 py-3 overflow-hidden whitespace-nowrap text-ellipsis" style="color: rgb(42, 48, 61);"><span class="text-xs px-2 py-1 rounded bg-blue-400 text-white font-mono">$ 670,000.00</span></td></tr></tbody></table></div></div></div></div></div></div></div></form></div>`;
+    panels.appendChild(recurringInvoicesPanel);
+};
+
+  // Internal State
+  // -----------------------------------------------------------------------------
+  // Tracks whether the initial page load event has been handled
+  let pageLoaded = false;
+
+  // Tracks whether the condition has been satisfied and action has been executed
+  let conditionMet = false;
+
+  // Prevents concurrent condition checks when a series of DOM mutation events happen
+  let checkScheduled = false;
+
+  // MutationObserver for DOM mutation events
+  let mutationObserver = null;
+
+  // Handles detection events by checking condition and triggering onConditionMet() once
+  function handleDetection() {
+    if (conditionMet) return;
+
+    if (isConditionMet()) {
+      conditionMet = true;
+      onConditionMet();
+      cleanup();
+    }
+
+    if (mutationObserver) {
+      mutationObserver.takeRecords();
+    }
+  }
+
+  // Cleanup after triggering onConditionMet()
+  function cleanup() {
+    sessionStorage.setItem(STORAGE_KEY, "true");
+
+    if (mutationObserver) {
+      mutationObserver.disconnect();
+      mutationObserver = null;
+    }
+  }
+
+  // Detector #1: Page Load
+  // -----------------------------------------------------------------------------
+  function handlePageLoad() {
+    if (pageLoaded) return;
+    pageLoaded = true;
+    handleDetection();
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    handlePageLoad();
+  } else {
+    document.addEventListener("DOMContentLoaded", handlePageLoad, { once: true });
+  }
+
+  // Detector #2: Coalesced DOM Mutations
+  // -----------------------------------------------------------------------------
+  function handleObserver() {
+    mutationObserver = new MutationObserver(() => {
+      if (conditionMet) {
+        cleanup();
+        return;
+      }
+
+      // Coalesce multiple mutations into one check per animation frame
+      if (checkScheduled) return;
+
+      checkScheduled = true;
+      handleDetection();
+
+      // Allow next burst of mutations to trigger check
+      requestAnimationFrame(() => {
+        checkScheduled = false;
+      });
+    });
+
+    mutationObserver.observe(document.documentElement, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["class", "style", "hidden", "aria-expanded", "aria-hidden"]
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", handleObserver, { once: true });
+  } else {
+    handleObserver();
+  }
+
+  window[NAMESPACE] = { mutationObserver, conditionMet };
+})();

@@ -1,0 +1,30 @@
+{
+  "app": "bookstack",
+  "bug_name": "recent_activity_page_template",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/recent_activity_page_template.js",
+  "verdict": "oracle_miss",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The (created user, timestamp data) for 'Page Template' in 'Details' is consistent with the previous dashboard's 'Recent Activity' (user, timestamp) data",
+  "alignment_tokens": [
+    "N hours ago",
+    "N hour ago",
+    "2 days ago",
+    "Details"
+  ],
+  "notes": [
+    "fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/bookstack/bugs/recent_activity_page_template"
+}

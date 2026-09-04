@@ -1,0 +1,34 @@
+{
+  "app": "bookstack",
+  "bug_name": "count_recently_created_shelves",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/count_recently_created_shelves.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "mutation_applied": null,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "There exists a 'Recently Created Shelves' section that is consistent with 'Created Content' counts",
+  "alignment_tokens": [
+    "M1.088 2.566h17.42v17.42H1.088z",
+    "M2.902 1.477h17.42v17.42H2.903z",
+    "M4 20.058h15.892V22H4z",
+    "New shelf added!",
+    "M0 0h24v24H0z",
+    "0 0 24 24",
+    "Recently Created Pages"
+  ],
+  "notes": [
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/bookstack/bugs/count_recently_created_shelves"
+}

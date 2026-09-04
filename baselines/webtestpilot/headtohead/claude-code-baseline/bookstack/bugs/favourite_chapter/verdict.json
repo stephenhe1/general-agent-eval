@@ -1,0 +1,31 @@
+{
+  "app": "bookstack",
+  "bug_name": "favourite_chapter",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/favourite_chapter.js",
+  "verdict": "oracle_miss",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The favourites list is equal to the previous list with exactly one newly favourited item, 'Chapter 1', added",
+  "alignment_tokens": [
+    "Shelf item not found",
+    "Shelf item removed",
+    "Shelf",
+    "h1.list-heading",
+    "My Favourites"
+  ],
+  "notes": [
+    "fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/bookstack/bugs/favourite_chapter"
+}

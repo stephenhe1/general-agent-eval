@@ -1,0 +1,8 @@
+app,test_file,test_name,clean_status,clean_pass_count,clean_repetitions,bugs_failed_under,bugs_aligned_under
+selftest,book-detail.spec.ts,book detail page shows the book title,stable,3,3,,
+selftest,books.spec.ts,book grid keeps its descriptions across repeat visits,stable,3,3,create_book,create_book
+selftest,books.spec.ts,creating a book adds exactly one card with the submitted data,stable,3,3,,
+selftest,comments.spec.ts,adding a comment appends exactly one comment and preserves the thread shape,stable,3,3,,
+selftest,dashboard.spec.ts,activity feed shows the recorded time for each book activity,stable,3,3,recent_activity_all,recent_activity_all
+selftest,dashboard.spec.ts,dashboard shows the recent activity section,stable,3,3,,
+selftest,unstable.spec.ts,intentionally clean-failing probe,failing,0,3,,

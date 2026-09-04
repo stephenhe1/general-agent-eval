@@ -1,0 +1,30 @@
+{
+  "app": "indico",
+  "bug_name": "room_booking",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/indico/bugs/room_booking.js",
+  "verdict": "oracle_miss",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "A page with title 'Room Booking' is shown",
+  "alignment_tokens": [
+    "\ud83d\udd0d Looking for Room Booking header...",
+    "\u274c Room Booking link not found",
+    "\u2705 Room Booking header removed",
+    "h1"
+  ],
+  "notes": [
+    "fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/claude-code-baseline/indico/bugs/room_booking"
+}

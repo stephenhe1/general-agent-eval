@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "generated_at": "20260818T182513Z",
+    "target_app": "selftest",
+    "bug_source_app": "bookstack",
+    "is_selftest_target": true,
+    "model": "sonnet",
+    "clean_repetitions": 3,
+    "bugs_evaluated": 4,
+    "viewport": "1280x720",
+    "run_dir": "/tmp/scale/wtp-pilot-run",
+    "wtp_root": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot",
+    "isolation": "host",
+    "suite_provenance": "reused-workspace",
+    "frozen_suite_verified": true
+  },
+  "overall": {
+    "num_bugs": 4,
+    "num_activated": 3,
+    "num_caught": 2,
+    "num_oracle_miss": 1,
+    "num_not_activated": 1,
+    "num_incidental_failure": 0,
+    "num_environment_error": 0,
+    "bug_activation_rate": 0.75,
+    "conditional_fault_detection_rate": 0.6667,
+    "end_to_end_fault_detection_rate": 0.5,
+    "incidental_failure_rate": 0.0,
+    "clean_stability_rate": 0.8571,
+    "total_generated_tests": 7,
+    "clean_stable_tests": 6,
+    "review_required_count": 0
+  },
+  "per_app": {
+    "selftest": {
+      "num_bugs": 4,
+      "num_activated": 3,
+      "num_caught": 2,
+      "num_oracle_miss": 1,
+      "num_not_activated": 1,
+      "num_incidental_failure": 0,
+      "num_environment_error": 0,
+      "bug_activation_rate": 0.75,
+      "conditional_fault_detection_rate": 0.6667,
+      "end_to_end_fault_detection_rate": 0.5,
+      "incidental_failure_rate": 0.0,
+      "clean_stability_rate": 0.8571,
+      "total_generated_tests": 7,
+      "clean_stable_tests": 6,
+      "clean_failing_tests": 1,
+      "clean_flaky_tests": 0,
+      "review_required_count": 0,
+      "clean_profile": {
+        "repetitions": 3,
+        "total_tests": 7,
+        "clean_stable": 6,
+        "clean_failing": 1,
+        "clean_flaky": 0,
+        "clean_stability_rate": 0.8571,
+        "suite_failure_counts_per_run": [
+          1,
+          1,
+          1
+        ],
+        "infrastructure_errors": [],
+        "status_by_test": {
+          "book-detail.spec.ts::book detail page shows the book title": "stable",
+          "books.spec.ts::book grid keeps its descriptions across repeat visits": "stable",
+          "books.spec.ts::creating a book adds exactly one card with the submitted data": "stable",
+          "comments.spec.ts::adding a comment appends exactly one comment and preserves the thread shape": "stable",
+          "dashboard.spec.ts::activity feed shows the recorded time for each book activity": "stable",
+          "dashboard.spec.ts::dashboard shows the recent activity section": "stable",
+          "unstable.spec.ts::intentionally clean-failing probe": "failing"
+        }
+      },
+      "generation": {
+        "isolation_mode": "host",
+        "suite_provenance": "reused-workspace",
+        "exit_code": 0,
+        "frozen_spec_count": 5,
+        "workspace_leakage_audit": {
+          "guarantee": "host",
+          "clean": true,
+          "scanned_files": 7,
+          "finding_count": 0,
+          "findings": []
+        },
+        "transcript_leakage_audit": {
+          "guarantee": "host-transcript-audit",
+          "clean": false,
+          "scanned_files": 0,
+          "finding_count": 1,
+          "findings": [
+            {
+              "path": "/tmp/scale/wtp-pilot-run/generation/messages.jsonl",
+              "kind": "missing_transcript",
+              "detail": "no transcript to audit"
+            }
+          ]
+        },
+        "notes": [
+          "reused existing workspace from /tmp/scale/wtp-probe-workspace"
+        ]
+      }
+    }
+  }
+}

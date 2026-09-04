@@ -1,0 +1,64 @@
+section,metric,value,note
+SCOPE,,,
+SCOPE,runs exported,7,
+SCOPE,applications,4,
+SCOPE,bug-evaluations,175,one row per fault per run
+SCOPE,distinct faults covered - A,100,complete benchmark
+SCOPE,distinct faults covered - B,75,
+BASELINE A,,,
+BASELINE A,tests generated,322,
+BASELINE A,clean-stable tests,314,
+BASELINE A,flaky tests,0,0 = fully deterministic
+BASELINE A,environment errors,0,
+BASELINE A,faults evaluated,100,
+BASELINE A,faults armed,23,
+BASELINE A,B activation rate,23.0%,armed / evaluated
+BASELINE A,faults caught,1,
+BASELINE A,C conditional detection,4.3%,caught / armed
+BASELINE A,D end-to-end detection,1.0%,caught / evaluated
+BASELINE A,oracle_miss,22,armed but undetected
+BASELINE A,not_activated,77,never armed
+BASELINE A,generation cost USD,25.17,SDK total_cost_usd
+BASELINE B,,,
+BASELINE B,tests generated,169,
+BASELINE B,clean-stable tests,116,
+BASELINE B,flaky tests,0,0 = fully deterministic
+BASELINE B,environment errors,0,
+BASELINE B,faults evaluated,75,
+BASELINE B,faults armed,26,
+BASELINE B,B activation rate,34.7%,armed / evaluated
+BASELINE B,faults caught,0,
+BASELINE B,C conditional detection,0.0%,caught / armed
+BASELINE B,D end-to-end detection,0.0%,caught / evaluated
+BASELINE B,oracle_miss,25,armed but undetected
+BASELINE B,not_activated,49,never armed
+BASELINE B,generation cost USD,30.49,SDK total_cost_usd
+WHY FAULTS NEVER ARMED,,,
+WHY FAULTS NEVER ARMED,value_difference,78 (62%),"scenario exercised, different data used - BENCHMARK coupling"
+WHY FAULTS NEVER ARMED,coverage_gap,16 (13%),no navigation call targets the required path - TOOL
+WHY FAULTS NEVER ARMED,navigation_depth,23 (18%),sessionStorage visit counter; reachable in one test - TOOL
+WHY FAULTS NEVER ARMED,unexplained,7 (6%),"path navigated, no content/state requirement found - manual read"
+WHY FAULTS NEVER ARMED,indeterminate,2 (2%),no condition body extractable - manual read
+WHY FAULTS NEVER ARMED,total not_activated,126,
+WHY FAULTS NEVER ARMED,-> attributable to BENCHMARK,78 (62%),literal/value coupling
+WHY FAULTS NEVER ARMED,-> attributable to TOOL,39 (31%),"never navigated there, or no repeat-visit flow"
+WHY FAULTS NEVER ARMED,-> unresolved,9 (7%),needs manual reading
+WHY FAULTS NEVER ARMED,B' upper bound if values matched - BASELINE A,64.0%,"(23+41)/100 - UPPER BOUND, not an observed rate"
+WHY FAULTS NEVER ARMED,B' upper bound if values matched - BASELINE B,84.0%,"(26+37)/75 - UPPER BOUND, not an observed rate"
+SUITE PROVENANCE (B only),,,
+SUITE PROVENANCE (B only),bookstack,hybrid-partial,"30/36 specs stamped, 6 generator delegations"
+SUITE PROVENANCE (B only),indico,review,"9/9 specs stamped, 0 generator delegations"
+SUITE PROVENANCE (B only),invoiceninja,invalid-no-delegation,"0/9 specs stamped, 0 generator delegations"
+SUITE PROVENANCE (B only),prestashop,hybrid-partial,"0/20 specs stamped, 2 generator delegations"
+RUN VALIDITY,,,
+RUN VALIDITY,A / bookstack,valid,
+RUN VALIDITY,A / indico,valid,
+RUN VALIDITY,A / invoiceninja,partially_valid,agent_retreated_to_api [tool]
+RUN VALIDITY,A / prestashop,valid_with_note,four_broken_tests [tool]
+RUN VALIDITY,B / bookstack,partially_valid,contradictory_prompts [harness]
+RUN VALIDITY,B / indico,valid,
+RUN VALIDITY,B / invoiceninja,invalid,generator_never_ran [harness]
+RUN VALIDITY,B / prestashop,budget_truncated,budget_cap_reached [harness]
+RUN VALIDITY,runs needing caveat or re-run,4 of 8,A/invoiceninja; B/bookstack; B/invoiceninja; B/prestashop
+HEADLINE,,,
+HEADLINE,"armed faults caught, all runs",1 / 49,faults hitting the entity the test acts on are detected; faults hitting a neighbouring entity are not

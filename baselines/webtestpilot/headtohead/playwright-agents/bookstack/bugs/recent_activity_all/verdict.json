@@ -1,0 +1,28 @@
+{
+  "app": "bookstack",
+  "bug_name": "recent_activity_all",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/bookstack/bugs/recent_activity_all.js",
+  "verdict": "not_activated",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": false,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": true,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "The 'Recent Activity' list is in chronological order",
+  "alignment_tokens": [
+    "1 year ago",
+    "Recent Activity"
+  ],
+  "notes": [
+    "fault never satisfied its injection condition; the generated suite did not exercise the triggering scenario (counts as not detected end-to-end)"
+  ],
+  "evidence": [],
+  "excluded_failures": [],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_headtohead/playwright-agents/bookstack/bugs/recent_activity_all"
+}

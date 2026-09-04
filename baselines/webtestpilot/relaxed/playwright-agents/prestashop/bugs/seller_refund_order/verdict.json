@@ -1,0 +1,1076 @@
+{
+  "app": "prestashop",
+  "bug_name": "seller_refund_order",
+  "bug_path": "/Users/stephenhe/Projects/WebTestPilot/WebTestPilot/benchmark/prestashop/bugs/seller_refund_order.js",
+  "verdict": "oracle_miss",
+  "verdict_source": "auto",
+  "review_required": false,
+  "activated": true,
+  "mutation_applied": true,
+  "clean_suite_valid": true,
+  "buggy_suite_passed": false,
+  "candidate_failure_count": 0,
+  "behavior_aligned_failure_count": 0,
+  "detecting_test_file": "",
+  "detecting_test_name": "",
+  "alignment_confidence": "",
+  "failure_message": "",
+  "nl_expectation": "All status records on the page align with the update",
+  "alignment_tokens": [
+    "Order status changed to Paid and Delivered",
+    "Paid and Delivered",
+    "Refunded"
+  ],
+  "notes": [
+    "failure in non-clean-stable test excluded (failing): backoffice-auth.spec.ts::BO-DASH-01 \u2014 Dashboard renders key widgets",
+    "failure in non-clean-stable test excluded (failing): backoffice-catalog.spec.ts::BO-BRAND-01 \u2014 Brands list shows seed data",
+    "failure in non-clean-stable test excluded (failing): backoffice-catalog.spec.ts::BO-BRAND-02 \u2014 Create a new brand",
+    "failure in non-clean-stable test excluded (failing): backoffice-catalog.spec.ts::BO-CAT-02 \u2014 Create a new category",
+    "failure in non-clean-stable test excluded (failing): backoffice-catalog.spec.ts::BO-CAT-03 \u2014 Edit Accessories category description",
+    "failure in non-clean-stable test excluded (failing): backoffice-catalog.spec.ts::BO-CAT-04 \u2014 Delete a throwaway category",
+    "failure in non-clean-stable test excluded (failing): backoffice-catalog.spec.ts::BO-STOCK-02 \u2014 Edit product quantity for Customizable mug",
+    "failure in non-clean-stable test excluded (failing): backoffice-customers.spec.ts::BO-CUST-01 \u2014 Customers list shows seed accounts",
+    "failure in non-clean-stable test excluded (failing): backoffice-customers.spec.ts::BO-CUST-02 \u2014 View customer profile for John DOE",
+    "failure in non-clean-stable test excluded (failing): backoffice-customers.spec.ts::BO-CUST-03 \u2014 Create a new customer",
+    "failure in non-clean-stable test excluded (failing): backoffice-customers.spec.ts::BO-CUST-04 \u2014 Edit customer last name for Auto Customer",
+    "failure in non-clean-stable test excluded (failing): backoffice-customers.spec.ts::BO-CUST-06 \u2014 Add a private note to customer profile",
+    "failure in non-clean-stable test excluded (failing): backoffice-orders.spec.ts::BO-ORD-02 \u2014 View order detail for order #5",
+    "failure in non-clean-stable test excluded (failing): backoffice-orders.spec.ts::BO-ORD-03 \u2014 Change order status to Payment accepted",
+    "failure in non-clean-stable test excluded (failing): backoffice-orders.spec.ts::BO-ORD-04 \u2014 Add a private note to an order",
+    "failure in non-clean-stable test excluded (failing): backoffice-orders.spec.ts::BO-ORD-07 \u2014 Create a manual order for John DOE",
+    "failure in non-clean-stable test excluded (failing): backoffice-products.spec.ts::BO-PROD-03 \u2014 Edit product #19 name",
+    "failure in non-clean-stable test excluded (failing): backoffice-products.spec.ts::BO-PROD-04 \u2014 Toggle product status off for Customizable mug",
+    "failure in non-clean-stable test excluded (failing): backoffice-products.spec.ts::BO-PROD-05 \u2014 Create a new simple product",
+    "failure in non-clean-stable test excluded (failing): backoffice-products.spec.ts::BO-PROD-06 \u2014 Product edit form tabs are all accessible for product #19",
+    "failure in non-clean-stable test excluded (failing): backoffice-promotions.spec.ts::BO-PROMO-01 \u2014 Cart rules list is empty by default",
+    "failure in non-clean-stable test excluded (failing): backoffice-promotions.spec.ts::BO-PROMO-02 \u2014 Create a percentage discount cart rule SUMMER10",
+    "failure in non-clean-stable test excluded (failing): backoffice-promotions.spec.ts::BO-PROMO-03 \u2014 Create a fixed-amount discount cart rule FIXED5",
+    "failure in non-clean-stable test excluded (failing): backoffice-promotions.spec.ts::BO-PROMO-04 \u2014 Disable a cart rule",
+    "failure in non-clean-stable test excluded (failing): backoffice-promotions.spec.ts::BO-PROMO-05 \u2014 Delete a cart rule",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-CS-01 \u2014 Customer service threads list loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-CS-02 \u2014 Order messages list loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-NAV-01 \u2014 Sidebar sections expand correctly",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-NAV-02 \u2014 Quick Access \"New product\" navigates correctly",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-SETTINGS-01 \u2014 General preferences page loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-SETTINGS-03 \u2014 Product settings page loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-SETTINGS-04 \u2014 Customer settings page loads",
+    "failure in non-clean-stable test excluded (failing): backoffice-settings.spec.ts::BO-SETTINGS-05 \u2014 Save a settings change and verify persistence",
+    "failure in non-clean-stable test excluded (failing): storefront-account.spec.ts::TC-30 my account dashboard shows links for orders, addresses, and personal info",
+    "failure in non-clean-stable test excluded (failing): storefront-account.spec.ts::TC-31 order history page shows table or no-orders message",
+    "failure in non-clean-stable test excluded (failing): storefront-account.spec.ts::TC-32 order detail page shows product names and order status",
+    "failure in non-clean-stable test excluded (failing): storefront-account.spec.ts::TC-35 updating first name shows success message",
+    "failure in non-clean-stable test excluded (failing): storefront-auth.spec.ts::TC-41 registration with new email creates account and shows customer name in header",
+    "failure in non-clean-stable test excluded (failing): storefront-auth.spec.ts::TC-42 registering with an existing email shows inline error",
+    "failure in non-clean-stable test excluded (failing): storefront-auth.spec.ts::TC-43 password recovery with unknown email shows confirmation message",
+    "failure in non-clean-stable test excluded (failing): storefront-brands.spec.ts::TC-45 brands listing page shows at least two brands with product counts",
+    "failure in non-clean-stable test excluded (failing): storefront-cart.spec.ts::TC-21 cart page shows item, quantity 1, price, total and checkout button",
+    "failure in non-clean-stable test excluded (failing): storefront-cart.spec.ts::TC-22 changing cart quantity from 1 to 2 doubles the line item subtotal",
+    "failure in non-clean-stable test excluded (failing): storefront-category.spec.ts::TC-04 clicking Men sub-category navigates to men category",
+    "failure in non-clean-stable test excluded (failing): storefront-category.spec.ts::TC-05 Black colour filter narrows product list",
+    "failure in non-clean-stable test excluded (failing): storefront-category.spec.ts::TC-06 removing Black colour filter restores full product list",
+    "failure in non-clean-stable test excluded (failing): storefront-category.spec.ts::TC-07 sort by price low to high reorders products by ascending price",
+    "failure in non-clean-stable test excluded (failing): storefront-checkout.spec.ts::TC-26 full checkout flow for logged-in user reaches order confirmation",
+    "failure in non-clean-stable test excluded (failing): storefront-checkout.spec.ts::TC-28 checkout address step pre-populates for logged-in customer",
+    "failure in non-clean-stable test excluded (failing): storefront-product.spec.ts::TC-09 hummingbird t-shirt product detail shows variants, price and description",
+    "failure in non-clean-stable test excluded (failing): storefront-product.spec.ts::TC-15 prices drop page shows discounted products with original and reduced prices",
+    "failure in non-clean-stable test excluded (failing): storefront-search.spec.ts::TC-19 search results sorted by name A to Z reorders products alphabetically",
+    "fault activated but no clean-stable generated test failed: the suite exercised the buggy behaviour and accepted it"
+  ],
+  "evidence": [],
+  "excluded_failures": [
+    {
+      "test_key": "backoffice-auth.spec.ts::BO-DASH-01 \u2014 Dashboard renders key widgets",
+      "file": "backoffice-auth.spec.ts",
+      "title": "BO-DASH-01 \u2014 Dashboard renders key widgets",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#dash_best_sellers')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#dash_best_sellers')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"tab-pane\" id=\"dash_best_sellers\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#dash_best_sellers')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#dash_best_sellers')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"tab-pane\" id=\"dash_best_sellers\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-auth.spec.ts:82:31",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-auth-BO-DASH-\u2014--a66d4-shboard-renders-key-widgets-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-auth-BO-DASH-\u2014--a66d4-shboard-renders-key-widgets-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-auth-BO-DASH-\u2014--a66d4-shboard-renders-key-widgets-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-catalog.spec.ts::BO-BRAND-01 \u2014 Brands list shows seed data",
+      "file": "backoffice-catalog.spec.ts",
+      "title": "BO-BRAND-01 \u2014 Brands list shows seed data",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('table tbody')\nExpected substring: \u001b[32m\"Graphic Corner\"\u001b[39m\nError: strict mode violation: locator('table tbody') resolved to 2 elements:\n    1) <tbody>\u2026</tbody> aka getByText('Graphic Corner -- 9 Off On zoom_in edit Edit delete Delete 1 Studio Design 1 9')\n    2) <tbody>\u2026</tbody> aka getByRole('rowgroup').filter({ hasText: '4 Studio Design manufacturer' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('table tbody')\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('table tbody')\nExpected substring: \u001b[32m\"Graphic Corner\"\u001b[39m\nError: strict mode violation: locator('table tbody') resolved to 2 elements:\n    1) <tbody>\u2026</tbody> aka getByText('Graphic Corner -- 9 Off On zoom_in edit Edit delete Delete 1 Studio Design 1 9')\n    2) <tbody>\u2026</tbody> aka getByRole('rowgroup').filter({ hasText: '4 Studio Design manufacturer' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('table tbody')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-catalog.spec.ts:145:25",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-BRAN-27cfb-Brands-list-shows-seed-data-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-BRAN-27cfb-Brands-list-shows-seed-data-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-BRAN-27cfb-Brands-list-shows-seed-data-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-catalog.spec.ts::BO-BRAND-02 \u2014 Create a new brand",
+      "file": "backoffice-catalog.spec.ts",
+      "title": "BO-BRAND-02 \u2014 Create a new brand",
+      "status": "failed",
+      "failure_kind": "unknown",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: /Add new brand/i }) resolved to 2 elements:\n    1) <a title=\"Add new brand\" class=\"btn btn-primary pointer\" id=\"page-header-desc-configuration-add_manufacturer\" href=\"/webtestpilot/index.php/sell/catalog/brands/new?_token=Pn8YunEu3N1LtL1uCyRKW8qn5T2vl5VdarD9vpetsAU\">\u2026</a> aka getByRole('link', { name: 'add_circle_outline Add new brand', exact: true })\n    2) <a title=\"Add new brand address\" class=\"btn btn-primary pointer\" id=\"page-header-desc-configuration-add_manufacturer_address\" href=\"/webtestpilot/index.php/sell/catalog/brands/addresses/new?_token=Pn8YunEu3N1LtL1uCyRKW8qn5T2vl5VdarD9vpetsAU\">\u2026</a> aka getByRole('link', { name: 'add_circle_outline Add new brand address' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Add new brand/i })\u001b[22m\n",
+      "error_stack": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: /Add new brand/i }) resolved to 2 elements:\n    1) <a title=\"Add new brand\" class=\"btn btn-primary pointer\" id=\"page-header-desc-configuration-add_manufacturer\" href=\"/webtestpilot/index.php/sell/catalog/brands/new?_token=Pn8YunEu3N1LtL1uCyRKW8qn5T2vl5VdarD9vpetsAU\">\u2026</a> aka getByRole('link', { name: 'add_circle_outline Add new brand', exact: true })\n    2) <a title=\"Add new brand address\" class=\"btn btn-primary pointer\" id=\"page-header-desc-configuration-add_manufacturer_address\" href=\"/webtestpilot/index.php/sell/catalog/brands/addresses/new?_token=Pn8YunEu3N1LtL1uCyRKW8qn5T2vl5VdarD9vpetsAU\">\u2026</a> aka getByRole('link', { name: 'add_circle_outline Add new brand address' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Add new brand/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-catalog.spec.ts:157:62",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-BRAN-145d7-AND-02-\u2014-Create-a-new-brand-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-BRAN-145d7-AND-02-\u2014-Create-a-new-brand-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-BRAN-145d7-AND-02-\u2014-Create-a-new-brand-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-catalog.spec.ts::BO-CAT-02 \u2014 Create a new category",
+      "file": "backoffice-catalog.spec.ts",
+      "title": "BO-CAT-02 \u2014 Create a new category",
+      "status": "failed",
+      "failure_kind": "unknown",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: locator.selectOption: options[0].label: expected string, got object",
+      "error_stack": "Error: locator.selectOption: options[0].label: expected string, got object\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-catalog.spec.ts:53:24",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--291fe--02-\u2014-Create-a-new-category-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--291fe--02-\u2014-Create-a-new-category-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--291fe--02-\u2014-Create-a-new-category-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-catalog.spec.ts::BO-CAT-03 \u2014 Edit Accessories category description",
+      "file": "backoffice-catalog.spec.ts",
+      "title": "BO-CAT-03 \u2014 Edit Accessories category description",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr').filter({ hasText: 'Accessories' }).getByRole('link', { name: /Edit/i })\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr').filter({ hasText: 'Accessories' }).getByRole('link', { name: /Edit/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-catalog.spec.ts:73:63",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--f1ae3-sories-category-description-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--f1ae3-sories-category-description-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--f1ae3-sories-category-description-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-catalog.spec.ts::BO-CAT-04 \u2014 Delete a throwaway category",
+      "file": "backoffice-catalog.spec.ts",
+      "title": "BO-CAT-04 \u2014 Delete a throwaway category",
+      "status": "failed",
+      "failure_kind": "unknown",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: locator.selectOption: options[0].label: expected string, got object",
+      "error_stack": "Error: locator.selectOption: options[0].label: expected string, got object\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-catalog.spec.ts:106:24",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--dda18-Delete-a-throwaway-category-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--dda18-Delete-a-throwaway-category-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-CAT--dda18-Delete-a-throwaway-category-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-catalog.spec.ts::BO-STOCK-02 \u2014 Edit product quantity for Customizable mug",
+      "file": "backoffice-catalog.spec.ts",
+      "title": "BO-STOCK-02 \u2014 Edit product quantity for Customizable mug",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr').filter({ hasText: 'Customizable mug' }).first().locator('input[type=\"number\"], input.edit-quantity')\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr').filter({ hasText: 'Customizable mug' }).first().locator('input[type=\"number\"], input.edit-quantity')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-catalog.spec.ts:209:22",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-STOC-5262a-antity-for-Customizable-mug-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-STOC-5262a-antity-for-Customizable-mug-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-catalog-BO-STOC-5262a-antity-for-Customizable-mug-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-customers.spec.ts::BO-CUST-01 \u2014 Customers list shows seed accounts",
+      "file": "backoffice-customers.spec.ts",
+      "title": "BO-CUST-01 \u2014 Customers list shows seed accounts",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('table thead')\nExpected substring: \u001b[32m\"First name\"\u001b[39m\nError: strict mode violation: locator('table thead') resolved to 2 elements:\n    1) <thead class=\"thead-default\">\u2026</thead> aka getByRole('rowgroup').filter({ hasText: 'ID Social title First name' })\n    2) <thead>\u2026</thead> aka locator('thead').filter({ hasText: 'Select all' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('table thead')\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('table thead')\nExpected substring: \u001b[32m\"First name\"\u001b[39m\nError: strict mode violation: locator('table thead') resolved to 2 elements:\n    1) <thead class=\"thead-default\">\u2026</thead> aka getByRole('rowgroup').filter({ hasText: 'ID Social title First name' })\n    2) <thead>\u2026</thead> aka locator('thead').filter({ hasText: 'Select all' })\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('table thead')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-customers.spec.ts:33:25",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-55eaf-rs-list-shows-seed-accounts-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-55eaf-rs-list-shows-seed-accounts-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-55eaf-rs-list-shows-seed-accounts-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-customers.spec.ts::BO-CUST-02 \u2014 View customer profile for John DOE",
+      "file": "backoffice-customers.spec.ts",
+      "title": "BO-CUST-02 \u2014 View customer profile for John DOE",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/sell\\/customers\\/2\\/view/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:8083/webtestpilot/index.php/security/compromised?uri=http%253A%252F%252Flocalhost%253A8083%252Fwebtestpilot%252Findex.php%252Fsell%252Fcustomers%252F2%252Fview&_token=afQ3jZv2_D-dNoQ-HmPX8o6YrhWOc7G1-dF1-YrxW40\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html>\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:8083/webtestpilot/index.php/security/compromised?uri=http%253A%252F%252Flocalhost%253A8083%252Fwebtestpilot%252Findex.php%252Fsell%252Fcustomers%252F2%252Fview&_token=afQ3jZv2_D-dNoQ-HmPX8o6YrhWOc7G1-dF1-YrxW40\"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/sell\\/customers\\/2\\/view/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:8083/webtestpilot/index.php/security/compromised?uri=http%253A%252F%252Flocalhost%253A8083%252Fwebtestpilot%252Findex.php%252Fsell%252Fcustomers%252F2%252Fview&_token=afQ3jZv2_D-dNoQ-HmPX8o6YrhWOc7G1-dF1-YrxW40\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html>\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:8083/webtestpilot/index.php/security/compromised?uri=http%253A%252F%252Flocalhost%253A8083%252Fwebtestpilot%252Findex.php%252Fsell%252Fcustomers%252F2%252Fview&_token=afQ3jZv2_D-dNoQ-HmPX8o6YrhWOc7G1-dF1-YrxW40\"\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-customers.spec.ts:51:24",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-5642e-stomer-profile-for-John-DOE-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-5642e-stomer-profile-for-John-DOE-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-5642e-stomer-profile-for-John-DOE-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-customers.spec.ts::BO-CUST-03 \u2014 Create a new customer",
+      "file": "backoffice-customers.spec.ts",
+      "title": "BO-CUST-03 \u2014 Create a new customer",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"customer[id_gender]\"][value=\"1\"]')\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"customer[id_gender]\"][value=\"1\"]')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-customers.spec.ts:74:72",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-06549--03-\u2014-Create-a-new-customer-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-06549--03-\u2014-Create-a-new-customer-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-06549--03-\u2014-Create-a-new-customer-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-customers.spec.ts::BO-CUST-04 \u2014 Edit customer last name for Auto Customer",
+      "file": "backoffice-customers.spec.ts",
+      "title": "BO-CUST-04 \u2014 Edit customer last name for Auto Customer",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.clear: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel(/Last name/i)\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.clear: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel(/Last name/i)\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-customers.spec.ts:108:25",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-43e4b-last-name-for-Auto-Customer-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-43e4b-last-name-for-Auto-Customer-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-43e4b-last-name-for-Auto-Customer-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-customers.spec.ts::BO-CUST-06 \u2014 Add a private note to customer profile",
+      "file": "backoffice-customers.spec.ts",
+      "title": "BO-CUST-06 \u2014 Add a private note to customer profile",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('textarea[name=\"private_note\"]').or(locator('textarea').first())\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('textarea[name=\"private_note\"]').or(locator('textarea').first())\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-customers.spec.ts:139:20",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-ec1af-te-note-to-customer-profile-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-ec1af-te-note-to-customer-profile-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-customers-BO-CU-ec1af-te-note-to-customer-profile-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-orders.spec.ts::BO-ORD-02 \u2014 View order detail for order #5",
+      "file": "backoffice-orders.spec.ts",
+      "title": "BO-ORD-02 \u2014 View order detail for order #5",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr').first().getByRole('link').filter({ hasText: /view/i }).first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr').first().getByRole('link').filter({ hasText: /view/i }).first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-orders.spec.ts:66:75",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-ff37c-ew-order-detail-for-order-5-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-ff37c-ew-order-detail-for-order-5-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-ff37c-ew-order-detail-for-order-5-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-orders.spec.ts::BO-ORD-03 \u2014 Change order status to Payment accepted",
+      "file": "backoffice-orders.spec.ts",
+      "title": "BO-ORD-03 \u2014 Change order status to Payment accepted",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.alert-success').first()\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-success').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div id=\"ajax_confirmation\" class=\"alert alert-success\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.alert-success').first()\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-success').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div id=\"ajax_confirmation\" class=\"alert alert-success\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-orders.spec.ts:112:58",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-32453--status-to-Payment-accepted-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-32453--status-to-Payment-accepted-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-32453--status-to-Payment-accepted-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-orders.spec.ts::BO-ORD-04 \u2014 Add a private note to an order",
+      "file": "backoffice-orders.spec.ts",
+      "title": "BO-ORD-04 \u2014 Add a private note to an order",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.alert-success').first()\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-success').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div id=\"ajax_confirmation\" class=\"alert alert-success\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.alert-success').first()\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-success').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div id=\"ajax_confirmation\" class=\"alert alert-success\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-orders.spec.ts:136:58",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-73eb0--a-private-note-to-an-order-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-73eb0--a-private-note-to-an-order-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-73eb0--a-private-note-to-an-order-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-orders.spec.ts::BO-ORD-07 \u2014 Create a manual order for John DOE",
+      "file": "backoffice-orders.spec.ts",
+      "title": "BO-ORD-07 \u2014 Create a manual order for John DOE",
+      "status": "failed",
+      "failure_kind": "unknown",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: locator.selectOption: options[0].label: expected string, got object",
+      "error_stack": "Error: locator.selectOption: options[0].label: expected string, got object\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-orders.spec.ts:188:43",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-30531-a-manual-order-for-John-DOE-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-30531-a-manual-order-for-John-DOE-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-orders-BO-ORD-\u2014-30531-a-manual-order-for-John-DOE-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-products.spec.ts::BO-PROD-03 \u2014 Edit product #19 name",
+      "file": "backoffice-products.spec.ts",
+      "title": "BO-PROD-03 \u2014 Edit product #19 name",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.getAttribute: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr a[href*=\"/products-v2/19/edit\"]').first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.getAttribute: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr a[href*=\"/products-v2/19/edit\"]').first()\u001b[22m\n\n    at goToProductEdit (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-products.spec.ts:39:31)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-products.spec.ts:95:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-32fd5-D-03-\u2014-Edit-product-19-name-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-32fd5-D-03-\u2014-Edit-product-19-name-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-32fd5-D-03-\u2014-Edit-product-19-name-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-products.spec.ts::BO-PROD-04 \u2014 Toggle product status off for Customizable mug",
+      "file": "backoffice-products.spec.ts",
+      "title": "BO-PROD-04 \u2014 Toggle product status off for Customizable mug",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('table tbody tr').filter({ hasText: 'Customizable mug' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('table tbody tr').filter({ hasText: 'Customizable mug' })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('table tbody tr').filter({ hasText: 'Customizable mug' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('table tbody tr').filter({ hasText: 'Customizable mug' })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-products.spec.ts:126:26",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-30e09-us-off-for-Customizable-mug-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-30e09-us-off-for-Customizable-mug-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-30e09-us-off-for-Customizable-mug-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-products.spec.ts::BO-PROD-05 \u2014 Create a new simple product",
+      "file": "backoffice-products.spec.ts",
+      "title": "BO-PROD-05 \u2014 Create a new simple product",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.clear: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"product[header][name][1]\"]')\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.clear: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"product[header][name][1]\"]')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-products.spec.ts:160:21",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-7c42e-Create-a-new-simple-product-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-7c42e-Create-a-new-simple-product-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-7c42e-Create-a-new-simple-product-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-products.spec.ts::BO-PROD-06 \u2014 Product edit form tabs are all accessible for product #19",
+      "file": "backoffice-products.spec.ts",
+      "title": "BO-PROD-06 \u2014 Product edit form tabs are all accessible for product #19",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.getAttribute: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr a[href*=\"/products-v2/19/edit\"]').first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.getAttribute: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('table tbody tr a[href*=\"/products-v2/19/edit\"]').first()\u001b[22m\n\n    at goToProductEdit (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-products.spec.ts:39:31)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-products.spec.ts:197:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-37388-l-accessible-for-product-19-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-37388-l-accessible-for-product-19-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-products-BO-PRO-37388-l-accessible-for-product-19-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-promotions.spec.ts::BO-PROMO-01 \u2014 Cart rules list is empty by default",
+      "file": "backoffice-promotions.spec.ts",
+      "title": "BO-PROMO-01 \u2014 Cart rules list is empty by default",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n\n    at goToCartRules (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:17:78)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:27:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-a3d0f-es-list-is-empty-by-default-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-a3d0f-es-list-is-empty-by-default-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-a3d0f-es-list-is-empty-by-default-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-promotions.spec.ts::BO-PROMO-02 \u2014 Create a percentage discount cart rule SUMMER10",
+      "file": "backoffice-promotions.spec.ts",
+      "title": "BO-PROMO-02 \u2014 Create a percentage discount cart rule SUMMER10",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n\n    at goToCartRules (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:17:78)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:40:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-cf145-discount-cart-rule-SUMMER10-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-cf145-discount-cart-rule-SUMMER10-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-cf145-discount-cart-rule-SUMMER10-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-promotions.spec.ts::BO-PROMO-03 \u2014 Create a fixed-amount discount cart rule FIXED5",
+      "file": "backoffice-promotions.spec.ts",
+      "title": "BO-PROMO-03 \u2014 Create a fixed-amount discount cart rule FIXED5",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n\n    at goToCartRules (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:17:78)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:98:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-57882-t-discount-cart-rule-FIXED5-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-57882-t-discount-cart-rule-FIXED5-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-57882-t-discount-cart-rule-FIXED5-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-promotions.spec.ts::BO-PROMO-04 \u2014 Disable a cart rule",
+      "file": "backoffice-promotions.spec.ts",
+      "title": "BO-PROMO-04 \u2014 Disable a cart rule",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n\n    at goToCartRules (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:17:78)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:129:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-2032f-MO-04-\u2014-Disable-a-cart-rule-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-2032f-MO-04-\u2014-Disable-a-cart-rule-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-2032f-MO-04-\u2014-Disable-a-cart-rule-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-promotions.spec.ts::BO-PROMO-05 \u2014 Delete a cart rule",
+      "file": "backoffice-promotions.spec.ts",
+      "title": "BO-PROMO-05 \u2014 Delete a cart rule",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Cart Rules/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Cart Rules/i, level: 1 })\u001b[22m\n\n    at goToCartRules (/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:17:78)\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-promotions.spec.ts:145:5",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-77f76-OMO-05-\u2014-Delete-a-cart-rule-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-77f76-OMO-05-\u2014-Delete-a-cart-rule-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-promotions-BO-P-77f76-OMO-05-\u2014-Delete-a-cart-rule-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-CS-01 \u2014 Customer service threads list loads",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-CS-01 \u2014 Customer service threads list loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { level: 1 }).filter({ hasText: /Customer/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 }).filter({ hasText: /Customer/i })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { level: 1 }).filter({ hasText: /Customer/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { level: 1 }).filter({ hasText: /Customer/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:133:7",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-CS--09937--service-threads-list-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-CS--09937--service-threads-list-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-CS--09937--service-threads-list-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-CS-02 \u2014 Order messages list loads",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-CS-02 \u2014 Order messages list loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [
+        "order"
+      ],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1, .page-title')\nExpected: visible\nError: strict mode violation: locator('h1, .page-title') resolved to 2 elements:\n    1) <h1 class=\"title\">\u21b5            Order Messages          </h1> aka getByRole('heading', { name: 'Order Messages', exact: true })\n    2) <h1>Oh no!</h1> aka getByText('Oh no!')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1, .page-title')\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('h1, .page-title')\nExpected: visible\nError: strict mode violation: locator('h1, .page-title') resolved to 2 elements:\n    1) <h1 class=\"title\">\u21b5            Order Messages          </h1> aka getByRole('heading', { name: 'Order Messages', exact: true })\n    2) <h1>Oh no!</h1> aka getByText('Oh no!')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1, .page-title')\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:146:51",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-CS--4697a-\u2014-Order-messages-list-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-CS--4697a-\u2014-Order-messages-list-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-CS--4697a-\u2014-Order-messages-list-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-NAV-01 \u2014 Sidebar sections expand correctly",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-NAV-01 \u2014 Sidebar sections expand correctly",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-sidebar').getByRole('link', { name: /^Orders$/i }).first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-sidebar').getByRole('link', { name: /^Orders$/i }).first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:199:68",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-NAV-47cf1-r-sections-expand-correctly-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-NAV-47cf1-r-sections-expand-correctly-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-NAV-47cf1-r-sections-expand-correctly-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-NAV-02 \u2014 Quick Access \"New product\" navigates correctly",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-NAV-02 \u2014 Quick Access \"New product\" navigates correctly",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Quick Access/i })\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Quick Access/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:217:61",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-NAV-b3c4c-product-navigates-correctly-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-NAV-b3c4c-product-navigates-correctly-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-NAV-b3c4c-product-navigates-correctly-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-SETTINGS-01 \u2014 General preferences page loads",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-SETTINGS-01 \u2014 General preferences page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Increase security').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Increase security').first()\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Increase security').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Increase security').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:30:35",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-5ba0f-eral-preferences-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-5ba0f-eral-preferences-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-5ba0f-eral-preferences-page-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-SETTINGS-03 \u2014 Product settings page loads",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-SETTINGS-03 \u2014 Product settings page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Product Settings/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Product Settings/i, level: 1 })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Product Settings/i, level: 1 })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Product Settings/i, level: 1 })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:54:86",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-f11ee-Product-settings-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-f11ee-Product-settings-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-f11ee-Product-settings-page-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-SETTINGS-04 \u2014 Customer settings page loads",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-SETTINGS-04 \u2014 Customer settings page loads",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Redisplay cart at login').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Redisplay cart at login').first()\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Redisplay cart at login').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Redisplay cart at login').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:69:69",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-f7268-ustomer-settings-page-loads-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-f7268-ustomer-settings-page-loads-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-f7268-ustomer-settings-page-loads-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "backoffice-settings.spec.ts::BO-SETTINGS-05 \u2014 Save a settings change and verify persistence",
+      "file": "backoffice-settings.spec.ts",
+      "title": "BO-SETTINGS-05 \u2014 Save a settings change and verify persistence",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"PS_USE_HTMLPURIFIER\"][value=\"1\"]').or(locator('input[id=\"PS_TOKEN_ENABLE_on\"]')).first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"PS_USE_HTMLPURIFIER\"][value=\"1\"]').or(locator('input[id=\"PS_TOKEN_ENABLE_on\"]')).first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/backoffice-settings.spec.ts:91:30",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-b8161-ange-and-verify-persistence-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-b8161-ange-and-verify-persistence-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/backoffice-settings-BO-SET-b8161-ange-and-verify-persistence-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-account.spec.ts::TC-30 my account dashboard shows links for orders, addresses, and personal info",
+      "file": "storefront-account.spec.ts",
+      "title": "TC-30 my account dashboard shows links for orders, addresses, and personal info",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [
+        "order",
+        "orders"
+      ],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: /Order history|Orders/i })\nExpected: visible\nError: strict mode violation: getByRole('link', { name: /Order history|Orders/i }) resolved to 2 elements:\n    1) <a id=\"history-link\" href=\"http://localhost:8083/order-history\" class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12\">\u2026</a> aka getByRole('link', { name: '\ue916 Order history and details' })\n    2) <a title=\"Orders\" rel=\"nofollow\" href=\"http://localhost:8083/order-history\">Orders</a> aka getByRole('link', { name: 'Orders' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Order history|Orders/i })\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: /Order history|Orders/i })\nExpected: visible\nError: strict mode violation: getByRole('link', { name: /Order history|Orders/i }) resolved to 2 elements:\n    1) <a id=\"history-link\" href=\"http://localhost:8083/order-history\" class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12\">\u2026</a> aka getByRole('link', { name: '\ue916 Order history and details' })\n    2) <a title=\"Orders\" rel=\"nofollow\" href=\"http://localhost:8083/order-history\">Orders</a> aka getByRole('link', { name: 'Orders' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Order history|Orders/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-account.spec.ts:23:75",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-30-m-43afe-addresses-and-personal-info-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-30-m-43afe-addresses-and-personal-info-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-30-m-43afe-addresses-and-personal-info-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-account.spec.ts::TC-31 order history page shows table or no-orders message",
+      "file": "storefront-account.spec.ts",
+      "title": "TC-31 order history page shows table or no-orders message",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-account.spec.ts:46:39",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-31-o-92df6--table-or-no-orders-message-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-31-o-92df6--table-or-no-orders-message-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-31-o-92df6--table-or-no-orders-message-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-account.spec.ts::TC-32 order detail page shows product names and order status",
+      "file": "storefront-account.spec.ts",
+      "title": "TC-32 order detail page shows product names and order status",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Proceed to Checkout/i })\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Proceed to Checkout/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-account.spec.ts:82:66",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-32-o-f7b46-duct-names-and-order-status-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-32-o-f7b46-duct-names-and-order-status-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-32-o-f7b46-duct-names-and-order-status-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-account.spec.ts::TC-35 updating first name shows success message",
+      "file": "storefront-account.spec.ts",
+      "title": "TC-35 updating first name shows success message",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.alert-success, .notification-success, [class*=\"success\"]').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-success, .notification-success, [class*=\"success\"]').first()\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.alert-success, .notification-success, [class*=\"success\"]').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-success, .notification-success, [class*=\"success\"]').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-account.spec.ts:252:28",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-35-u-049a3--name-shows-success-message-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-35-u-049a3--name-shows-success-message-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-account-TC-35-u-049a3--name-shows-success-message-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-auth.spec.ts::TC-41 registration with new email creates account and shows customer name in header",
+      "file": "storefront-auth.spec.ts",
+      "title": "TC-41 registration with new email creates account and shows customer name in header",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/\\/registration/\u001b[39m\nReceived string:      \u001b[31m\"http://localhost:8083\u001b[7m/registration\u001b[27m\"\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: not \u001b[32m/\\/registration/\u001b[39m\nReceived string:      \u001b[31m\"http://localhost:8083\u001b[7m/registration\u001b[27m\"\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-auth.spec.ts:103:19",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-41-regi-8c6b9-ows-customer-name-in-header-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-41-regi-8c6b9-ows-customer-name-in-header-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-41-regi-8c6b9-ows-customer-name-in-header-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-auth.spec.ts::TC-42 registering with an existing email shows inline error",
+      "file": "storefront-auth.spec.ts",
+      "title": "TC-42 registering with an existing email shows inline error",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.alert-danger, .notification-error, [class*=\"error\"]').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-danger, .notification-error, [class*=\"error\"]').first()\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.alert-danger, .notification-error, [class*=\"error\"]').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.alert-danger, .notification-error, [class*=\"error\"]').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-auth.spec.ts:143:26",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-42-regi-d6733-ng-email-shows-inline-error-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-42-regi-d6733-ng-email-shows-inline-error-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-42-regi-d6733-ng-email-shows-inline-error-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-auth.spec.ts::TC-43 password recovery with unknown email shows confirmation message",
+      "file": "storefront-auth.spec.ts",
+      "title": "TC-43 password recovery with unknown email shows confirmation message",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /email/i })\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /email/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-auth.spec.ts:151:20",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-43-pass-4609c--shows-confirmation-message-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-43-pass-4609c--shows-confirmation-message-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-auth-TC-43-pass-4609c--shows-confirmation-message-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-brands.spec.ts::TC-45 brands listing page shows at least two brands with product counts",
+      "file": "storefront-brands.spec.ts",
+      "title": "TC-45 brands listing page shows at least two brands with product counts",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m0\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m0\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-brands.spec.ts:16:22",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-brands-TC-45-br-38af3--brands-with-product-counts-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-brands-TC-45-br-38af3--brands-with-product-counts-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-brands-TC-45-br-38af3--brands-with-product-counts-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-cart.spec.ts::TC-21 cart page shows item, quantity 1, price, total and checkout button",
+      "file": "storefront-cart.spec.ts",
+      "title": "TC-21 cart page shows item, quantity 1, price, total and checkout button",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.cart-item, [class*=\"cart-item\"]').first().locator('input[name=\"qty\"], input[class*=\"qty\"]').first()\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.cart-item, [class*=\"cart-item\"]').first().locator('input[name=\"qty\"], input[class*=\"qty\"]').first()\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.cart-item, [class*=\"cart-item\"]').first().locator('input[name=\"qty\"], input[class*=\"qty\"]').first()\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.cart-item, [class*=\"cart-item\"]').first().locator('input[name=\"qty\"], input[class*=\"qty\"]').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-cart.spec.ts:102:31",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-cart-TC-21-cart-3d020-e-total-and-checkout-button-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-cart-TC-21-cart-3d020-e-total-and-checkout-button-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-cart-TC-21-cart-3d020-e-total-and-checkout-button-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-cart.spec.ts::TC-22 changing cart quantity from 1 to 2 doubles the line item subtotal",
+      "file": "storefront-cart.spec.ts",
+      "title": "TC-22 changing cart quantity from 1 to 2 doubles the line item subtotal",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item, [class*=\"cart-item\"]').first().locator('input[name=\"qty\"], input[class*=\"qty\"]').first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-item, [class*=\"cart-item\"]').first().locator('input[name=\"qty\"], input[class*=\"qty\"]').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-cart.spec.ts:140:23",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-cart-TC-22-chan-d1a07-bles-the-line-item-subtotal-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-cart-TC-22-chan-d1a07-bles-the-line-item-subtotal-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-cart-TC-22-chan-d1a07-bles-the-line-item-subtotal-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-category.spec.ts::TC-04 clicking Men sub-category navigates to men category",
+      "file": "storefront-category.spec.ts",
+      "title": "TC-04 clicking Men sub-category navigates to men category",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.breadcrumb, nav[aria-label=\"breadcrumb\"]')\nTimeout: 5000ms\n\u001b[32m- Expected substring  -  1\u001b[39m\n\u001b[31m+ Received string     + 16\u001b[39m\n\n\u001b[32m- Men\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m          \u001b[49m\u001b[39m\n\u001b[31m+                           Home\u001b[39m\n\u001b[31m+ \u001b[43m                      \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m          \u001b[49m\u001b[39m\n\u001b[31m+                           Clothes\u001b[39m\n\u001b[31m+ \u001b[43m                      \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m          \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\u001b[31m+\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.breadcrumb, nav[aria-label=\"breadcrumb\"]')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <nav data-depth=\"2\" class=\"breadcrumb\">\u2026</nav>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m              \u001b[22m\n\u001b[2m          \u001b[22m\n\u001b[2m                          Home\u001b[22m\n\u001b[2m                      \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m              \u001b[22m\n\u001b[2m          \u001b[22m\n\u001b[2m                          Clothes\u001b[22m\n\u001b[2m                      \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.breadcrumb, nav[aria-label=\"breadcrumb\"]')\nTimeout: 5000ms\n\u001b[32m- Expected substring  -  1\u001b[39m\n\u001b[31m+ Received string     + 16\u001b[39m\n\n\u001b[32m- Men\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m    \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m          \u001b[49m\u001b[39m\n\u001b[31m+                           Home\u001b[39m\n\u001b[31m+ \u001b[43m                      \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m          \u001b[49m\u001b[39m\n\u001b[31m+                           Clothes\u001b[39m\n\u001b[31m+ \u001b[43m                      \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m        \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m          \u001b[49m\u001b[39m\n\u001b[31m+ \u001b[43m  \u001b[49m\u001b[39m\n\u001b[31m+\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.breadcrumb, nav[aria-label=\"breadcrumb\"]')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <nav data-depth=\"2\" class=\"breadcrumb\">\u2026</nav>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m              \u001b[22m\n\u001b[2m          \u001b[22m\n\u001b[2m                          Home\u001b[22m\n\u001b[2m                      \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m              \u001b[22m\n\u001b[2m          \u001b[22m\n\u001b[2m                          Clothes\u001b[22m\n\u001b[2m                      \u001b[22m\n\u001b[2m        \u001b[22m\n\u001b[2m          \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\"\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-category.spec.ts:43:28",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-04--c118e-y-navigates-to-men-category-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-04--c118e-y-navigates-to-men-category-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-04--c118e-y-navigates-to-men-category-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-category.spec.ts::TC-05 Black colour filter narrows product list",
+      "file": "storefront-category.spec.ts",
+      "title": "TC-05 Black colour filter narrows product list",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.active-search-filters a, [class*=\"active_filter\"] a, .filter-block a').first()\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.active-search-filters a, [class*=\"active_filter\"] a, .filter-block a').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <a class=\"js-search-link\" href=\"http://localhost:8083/3-clothes\">\u2026</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.active-search-filters a, [class*=\"active_filter\"] a, .filter-block a').first()\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.active-search-filters a, [class*=\"active_filter\"] a, .filter-block a').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <a class=\"js-search-link\" href=\"http://localhost:8083/3-clothes\">\u2026</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-category.spec.ts:75:30",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-05--c278a-filter-narrows-product-list-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-05--c278a-filter-narrows-product-list-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-05--c278a-filter-narrows-product-list-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-category.spec.ts::TC-06 removing Black colour filter restores full product list",
+      "file": "storefront-category.spec.ts",
+      "title": "TC-06 removing Black colour filter restores full product list",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.active-search-filters a, .filter-block .close, [class*=\"active_filter\"] a').first()\u001b[22m\n\u001b[2m    - locator resolved to <a class=\"js-search-link\" href=\"http://localhost:8083/3-clothes\">\u2026</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    29 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.active-search-filters a, .filter-block .close, [class*=\"active_filter\"] a').first()\u001b[22m\n\u001b[2m    - locator resolved to <a class=\"js-search-link\" href=\"http://localhost:8083/3-clothes\">\u2026</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    29 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-category.spec.ts:92:26",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-06--b7087--restores-full-product-list-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-06--b7087--restores-full-product-list-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-06--b7087--restores-full-product-list-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-category.spec.ts::TC-07 sort by price low to high reorders products by ascending price",
+      "file": "storefront-category.spec.ts",
+      "title": "TC-07 sort by price low to high reorders products by ascending price",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('select[id*=\"sort\"], .products-sort-order select').first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('select[id*=\"sort\"], .products-sort-order select').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-category.spec.ts:121:20",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-07--d9122-products-by-ascending-price-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-07--d9122-products-by-ascending-price-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-category-TC-07--d9122-products-by-ascending-price-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-checkout.spec.ts::TC-26 full checkout flow for logged-in user reaches order confirmation",
+      "file": "storefront-checkout.spec.ts",
+      "title": "TC-26 full checkout flow for logged-in user reaches order confirmation",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Proceed to Checkout/i })\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Proceed to Checkout/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-checkout.spec.ts:52:21",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-checkout-TC-26--d0483--reaches-order-confirmation-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-checkout-TC-26--d0483--reaches-order-confirmation-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-checkout-TC-26--d0483--reaches-order-confirmation-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-checkout.spec.ts::TC-28 checkout address step pre-populates for logged-in customer",
+      "file": "storefront-checkout.spec.ts",
+      "title": "TC-28 checkout address step pre-populates for logged-in customer",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Proceed to Checkout/i })\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: /Proceed to Checkout/i })\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-checkout.spec.ts:170:21",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-checkout-TC-28--7d161-ates-for-logged-in-customer-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-checkout-TC-28--7d161-ates-for-logged-in-customer-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-checkout-TC-28--7d161-ates-for-logged-in-customer-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-product.spec.ts::TC-09 hummingbird t-shirt product detail shows variants, price and description",
+      "file": "storefront-product.spec.ts",
+      "title": "TC-09 hummingbird t-shirt product detail shows variants, price and description",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m0\u001b[39m",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m0\u001b[39m\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-product.spec.ts:25:23",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-product-TC-09-h-38215-iants-price-and-description-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-product-TC-09-h-38215-iants-price-and-description-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-product-TC-09-h-38215-iants-price-and-description-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-product.spec.ts::TC-15 prices drop page shows discounted products with original and reduced prices",
+      "file": "storefront-product.spec.ts",
+      "title": "TC-15 prices drop page shows discounted products with original and reduced prices",
+      "status": "failed",
+      "failure_kind": "assertion",
+      "is_oracle_rejection": true,
+      "alignment_confidence": "low",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article.product-miniature, article[class*=\"product\"]').first().locator('.current-price, .price[itemprop=\"price\"]').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('article.product-miniature, article[class*=\"product\"]').first().locator('.current-price, .price[itemprop=\"price\"]').first()\u001b[22m\n",
+      "error_stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article.product-miniature, article[class*=\"product\"]').first().locator('.current-price, .price[itemprop=\"price\"]').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('article.product-miniature, article[class*=\"product\"]').first().locator('.current-price, .price[itemprop=\"price\"]').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-product.spec.ts:182:33",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-product-TC-15-p-1b36e-original-and-reduced-prices-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-product-TC-15-p-1b36e-original-and-reduced-prices-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-product-TC-15-p-1b36e-original-and-reduced-prices-chromium/trace.zip"
+      ]
+    },
+    {
+      "test_key": "storefront-search.spec.ts::TC-19 search results sorted by name A to Z reorders products alphabetically",
+      "file": "storefront-search.spec.ts",
+      "title": "TC-19 search results sorted by name A to Z reorders products alphabetically",
+      "status": "failed",
+      "failure_kind": "timeout",
+      "is_oracle_rejection": false,
+      "alignment_confidence": "none",
+      "matched_literals": [],
+      "matched_expectation_words": [],
+      "activated_in_test": false,
+      "error_message": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('select[id*=\"sort\"], .products-sort-order select').first()\u001b[22m\n",
+      "error_stack": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('select[id*=\"sort\"], .products-sort-order select').first()\u001b[22m\n\n    at /Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/generation/workspace/__wtp_eval/storefront-search.spec.ts:65:20",
+      "attachments": [
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-search-TC-19-se-98599-ers-products-alphabetically-chromium/test-failed-1.png",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-search-TC-19-se-98599-ers-products-alphabetically-chromium/error-context.md",
+        "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order/artifacts/storefront-search-TC-19-se-98599-ers-products-alphabetically-chromium/trace.zip"
+      ]
+    }
+  ],
+  "run_dir": "/Users/stephenhe/Projects/general-agent-eval/results/wtp_relaxed/playwright-agents/prestashop/bugs/seller_refund_order"
+}
