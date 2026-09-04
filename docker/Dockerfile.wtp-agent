@@ -1,0 +1,40 @@
+# Generation container for the WebTestPilot baseline evaluation.
+#
+# Purpose: make benchmark leakage structurally impossible rather than merely audited. Only the
+# sanitized workspace is mounted at run time, so the benchmark's bug scripts, specifications and
+# ground truth are absent from the agent's filesystem entirely.
+#
+# The Playwright base image supplies Node plus every OS library the browsers need, so the
+# workspace's own `npm install` + `npx playwright install chromium` works unprivileged inside.
+FROM mcr.microsoft.com/playwright:v1.62.1-noble
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends python3 python3-pip python3-venv git ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# The Claude Code CLI the agent SDK drives.
+RUN npm install -g @anthropic-ai/claude-code
+
+# Harness dependencies only. No benchmark material is ever installed or copied.
+RUN python3 -m venv /opt/harness \
+ && /opt/harness/bin/pip install --no-cache-dir \
+      "claude-agent-sdk==0.2.82" "jinja2==3.1.6" "pydantic==2.13.4" "pydantic-settings==2.14.1" \
+      "typing-extensions" "anyio" "mcp==1.27.1"
+
+# Only the generation half of the harness. The `webtestpilot` package is deliberately excluded:
+# it encodes the evaluation's own mechanics, which the agent under test must not be able to read.
+COPY src/general_agent_eval/__init__.py            /app/src/general_agent_eval/__init__.py
+COPY src/general_agent_eval/general_agents/        /app/src/general_agent_eval/general_agents/
+COPY src/general_agent_eval/prompts/               /app/src/general_agent_eval/prompts/
+
+ENV PYTHONPATH=/app/src \
+    PATH=/opt/harness/bin:$PATH
+
+# pwuser ships with the Playwright image and owns /ms-playwright.
+USER pwuser
+WORKDIR /workspace
