@@ -1,5 +1,5 @@
-{%- set tracker_file = "UI_FEATURES.json" if mode == "feature-extraction" else ("UI_GRAPH.json" if (coverage_model == "graph" or mode == "graph-test-gen") else "UI_COVERAGE.md") -%}
-{%- set test_output_dir = "rq6-graph-agent" if mode == "graph-test-gen" else "rq6-agent" -%}
+{%- set tracker_file = "UI_FEATURES.json" if mode in ("feature-extraction", "feature-test-gen") else ("UI_GRAPH.json" if (coverage_model == "graph" or mode == "graph-test-gen") else "UI_COVERAGE.md") -%}
+{%- set test_output_dir = "rq6-graph-agent" if mode == "graph-test-gen" else ("rq6-feature-agent" if mode == "feature-test-gen" else "rq6-agent") -%}
 {%- if mode == "discovery" -%}
 Explore the provided repository and its running application to produce a complete inventory of every page, route, and significant user flow.
 
@@ -273,11 +273,58 @@ No running instance has been set up for you. Install dependencies and start the 
 
 Check the existing `playwright.config.ts` (or `playwright.config.js`) at the repository root. If it exists, use it as-is, updating `baseURL` to `{{ service_base_url or 'http://localhost:3000' }}` if not already set. If no config exists, create a minimal one. Write all agent-generated specs inside a subdirectory named `{{ test_output_dir }}/` — place it within the project's existing test directory if one exists (e.g. `tests/{{ test_output_dir }}/`, `e2e/{{ test_output_dir }}/`), or at the repository root as `{{ test_output_dir }}/` if no test directory exists. Do NOT place test files outside the `{{ test_output_dir }}/` subdirectory. Use `.spec.ts` extensions.
 
-Validate all tests with `npx playwright test` in headless mode. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
+Validate all tests with `npx playwright test {{ test_output_dir }}/` in headless mode, scoping the run to your own generated specs rather than the repository's pre-existing test suites. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
 
 Do NOT modify production code under any circumstances. Do NOT leave behind failing, flaky, incomplete, or placeholder tests.
 
 In the final response, summarize: nodes tested vs skipped, spec files created, any graph inaccuracies discovered (actions/transitions that didn't match reality), and validation results.
+{%- elif mode == "feature-test-gen" -%}
+Read the existing `UI_FEATURES.json` at the repository root. This file is your test plan: it lists the application's user-facing features, the behaviorally distinct scenarios of each feature, and the interaction paths (step sequences over the UI state model) that exercise each scenario. Also read `UI_GRAPH.json`, which the feature inventory was derived from — it supplies the concrete `route` of each state and the element identifiers behind each action and transition. You do NOT need to discover the app's UI surface yourself.
+
+**How to turn the feature inventory into tests:**
+
+For each **feature**:
+- Create one spec file for it (see naming below) with a top-level `test.describe('<feature name>')`.
+
+For each **scenario** of that feature:
+- Write one Playwright test named after the scenario.
+- Turn `preconditions` into test setup: authentication, required seed data, prior navigation, or feature state. Prefer a `beforeEach` when several scenarios in the same feature share preconditions.
+- Drive the UI by walking the scenario's `paths[].steps` in order: for each step, resolve its `state` to that node's `route` in `UI_GRAPH.json`, perform the step's `action`, then follow the step's `transition` and confirm arrival at the next step's state before continuing.
+- End the test by asserting the scenario's `expected_outcome` as an explicit, observable assertion — visible text, element state, row count, URL, or error message. A test that only navigates without asserting the outcome does not count as covering the scenario.
+- If a scenario lists multiple paths that reach the outcome through materially different routes (e.g. sidebar navigation vs. direct URL), add one test per such path, named `<scenario name> (via <short path label>)`. Skip near-duplicate paths that exercise the same elements.
+
+**Test organization:**
+- Name files: `{{ test_output_dir }}/<feature-id-slug>.spec.ts`, where the slug is the feature's `id` without the `feat:` prefix.
+- Within each spec, order tests as the scenarios are ordered in the feature: happy paths first, then error and edge cases.
+
+**Progress tracking:**
+- After a scenario's test compiles and passes, add to that scenario object in `UI_FEATURES.json`: `"status": "tested"` and `"test_file": "<path to spec>"`.
+- If you deliberately skip a scenario, set `"status": "skipped"` and add a `"notes"` field with the reason.
+- Maintain `metadata.tested_scenarios` and `metadata.skipped_scenarios` counts, updating them after each modification.
+- After each write, validate: `python3 -c "import json; json.load(open('UI_FEATURES.json'))"`
+
+**Rules:**
+- Prefer breadth first: get at least one passing test for every feature before deepening coverage on any single feature.
+- Use the element identifiers from `UI_GRAPH.json` actions and edge `trigger` fields as Playwright locators. Prefer `page.getByTestId()`, `page.getByRole()`, `page.getByLabel()`, `page.getByText()` over brittle CSS selectors.
+- Derive test data from the scenario's `preconditions` and `expected_outcome`. Where they are underspecified, choose realistic values and keep each test self-contained: create the data it needs and do not depend on another test having run.
+- If a scenario's path does not work against the live app, record the discrepancy in that scenario's `notes` field but do not change the inventory's features, scenarios, or paths.
+- Do NOT re-discover the app. Do NOT add, remove, or restructure features, scenarios, or paths. Only add `status`, `test_file`, and `notes` fields. Do NOT modify `UI_GRAPH.json`.
+- The task is NOT complete while any scenario lacks a `"tested"` or `"skipped"` status — continue until every scenario of every feature is resolved.
+{%- if service_base_url %}
+
+A live instance of this application is already running and reachable at {{ service_base_url }}. The application has already been built and started for you; do not build, start, stop, or reconfigure it.
+{%- else %}
+
+No running instance has been set up for you. Install dependencies and start the development server yourself before writing tests (e.g. `npm ci && npm run dev`, or build and serve with `npm run build && npx serve dist`).
+{%- endif %}
+
+Check the existing `playwright.config.ts` (or `playwright.config.js`) at the repository root. If it exists, use it as-is, updating `baseURL` to `{{ service_base_url or 'http://localhost:3000' }}` if not already set. If no config exists, create a minimal one. Write all agent-generated specs inside a subdirectory named `{{ test_output_dir }}/` — place it within the project's existing test directory if one exists (e.g. `tests/{{ test_output_dir }}/`, `e2e/{{ test_output_dir }}/`), or at the repository root as `{{ test_output_dir }}/` if no test directory exists. Do NOT place test files outside the `{{ test_output_dir }}/` subdirectory. Use `.spec.ts` extensions.
+
+Validate all tests with `npx playwright test {{ test_output_dir }}/` in headless mode, scoping the run to your own generated specs rather than the repository's pre-existing test suites. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
+
+Do NOT modify production code under any circumstances. Do NOT leave behind failing, flaky, incomplete, or placeholder tests.
+
+In the final response, summarize: features covered, scenarios tested vs skipped, spec files created, any inventory inaccuracies discovered (paths or preconditions that didn't match reality), and validation results.
 {%- else -%}
 Inspect the provided repository and generate Playwright E2E tests that thoroughly exercise the application's UI pages and user flows.
 {%- if mode == "project-aware" %}
@@ -412,7 +459,9 @@ No running instance has been set up for you. Install dependencies and start the 
 
 Check the existing `playwright.config.ts` (or `playwright.config.js`) at the repository root. If it exists, use it as-is, updating `baseURL` to `{{ service_base_url or 'http://localhost:3000' }}` if not already set. If no config exists, create a minimal one. Write all agent-generated specs inside a subdirectory named `rq6-agent/` — place it within the project's existing test directory if one exists (e.g. `tests/rq6-agent/`, `e2e/rq6-agent/`), or at the repository root as `rq6-agent/` if no test directory exists. Do NOT place test files outside the `rq6-agent/` subdirectory. Use `.spec.ts` or `.spec.js` extensions. When selecting elements prefer `page.getByRole()`, `page.getByLabel()`, `page.getByTestId()`, `page.getByText()`, and ARIA roles over brittle CSS class or positional selectors. Use `npm ci` and `npx playwright install chromium` (or the browser the project uses) as needed to provision Playwright if it is not already present.
 
-Validate all tests with `npx playwright test` in headless mode. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
+Validate all tests with `npx playwright test {{ test_output_dir }}/` in headless mode, scoping the run to your own generated specs rather than the repository's pre-existing test suites. If failures occur, iteratively diagnose and repair the tests. If a test is consistently flaky or cannot be made to pass reliably, remove it rather than completing the task with a broken test.
+
+Each generated test must verify the meaningful behavioral postcondition of the user flow it exercises. When a flow creates, updates, deletes, or otherwise changes application state or data, assert the resulting data or state itself — the specific values, counts, list membership, ordering, or content that the flow was supposed to produce. Do not rely solely on page-load, element-visibility, URL, or navigation assertions for such flows: those confirm that the UI responded, not that the application did the right thing. Where a flow's effect is a change relative to a prior state, capture the relevant state before the action and assert the expected difference after it.
 
 Prioritize correctness, broad flow coverage, and successful integration with the project's existing toolchain. Generate as many meaningful, non-redundant tests as possible while preserving correctness and maintainability. Cover happy paths, edge cases, form validation, navigation, error states, and important page interactions.
 
@@ -422,7 +471,7 @@ Do NOT modify production code under any circumstances. Only add or modify test f
 Do NOT restore, reuse, or copy any `.bak` files found in the repository. Those are backups of pre-existing tests and must be ignored entirely. Write all test files from scratch based on your own exploration of the running application.
 {%- endif %}
 
-Do NOT leave behind failing, flaky, incomplete, or placeholder tests. After writing tests, run `npx playwright test`. If failures occur, diagnose and repair them. Remove any test that cannot be made to pass reliably.
+Do NOT leave behind failing, flaky, incomplete, or placeholder tests. After writing tests, run `npx playwright test {{ test_output_dir }}/`. If failures occur, diagnose and repair them. Remove any test that cannot be made to pass reliably.
 
 In the final response, concisely summarize the pages and flows tested, the spec files added or modified, the validation commands run, and any assumptions or limitations.
 {%- endif %}

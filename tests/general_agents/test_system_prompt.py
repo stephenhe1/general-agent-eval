@@ -304,3 +304,59 @@ def test_graph_test_gen_mode_is_valid_cli_choice() -> None:
     )
     assert args.mode == "graph-test-gen"
     assert args.coverage_model == "graph"
+
+
+# ---------------------------------------------------------------------------
+# Feature-test-gen mode
+# ---------------------------------------------------------------------------
+
+def test_js_system_template_feature_test_gen_mode() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_SYSTEM_TEMPLATE,
+        _js_context(None, mode="feature-test-gen", coverage_model="graph"),
+    )
+    assert "test generation agent" in rendered
+    assert "UI_FEATURES.json" in rendered
+    assert "UI_GRAPH.json" in rendered
+    assert "npx playwright test" in rendered
+    assert "Do NOT modify production code" in rendered
+
+
+def test_js_user_template_feature_test_gen_reads_existing_features() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_USER_TEMPLATE,
+        _js_context(None, mode="feature-test-gen", coverage_model="graph"),
+    )
+    assert "Read the existing `UI_FEATURES.json`" in rendered
+    assert "UI_GRAPH.json" in rendered
+    assert "scenarios" in rendered
+    assert "preconditions" in rendered
+    assert "expected_outcome" in rendered
+    assert '"tested"' in rendered
+    assert "rq6-feature-agent/" in rendered
+    assert "rq6-graph-agent/" not in rendered
+    assert "rq6-agent/" not in rendered
+    assert "scan the repository" not in rendered
+    assert "UI_COVERAGE.md" not in rendered
+
+
+def test_js_user_template_feature_test_gen_uses_live_service_url() -> None:
+    rendered = claude_code.render_template(
+        claude_code.DEFAULT_USER_TEMPLATE,
+        _js_context(
+            None,
+            mode="feature-test-gen",
+            coverage_model="graph",
+            service_base_url="http://localhost:3025",
+        ),
+    )
+    assert "http://localhost:3025" in rendered
+    assert "already running" in rendered
+
+
+def test_feature_test_gen_mode_is_valid_cli_choice() -> None:
+    args = build_parser().parse_args(
+        ["--input-dir", ".", "--mode", "feature-test-gen", "--coverage-model", "graph"]
+    )
+    assert args.mode == "feature-test-gen"
+    assert args.coverage_model == "graph"

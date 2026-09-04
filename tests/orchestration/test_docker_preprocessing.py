@@ -953,6 +953,21 @@ def test_mode_baseline_and_clear_tests_passes() -> None:
     cli.validate_mode_options(args)  # should not raise
 
 
+def test_mode_feature_test_gen_requires_graph_coverage_model() -> None:
+    args = argparse.Namespace(
+        mode="feature-test-gen", clear_tests=False, coverage_model="flat"
+    )
+    with pytest.raises(DockerRunError, match="requires --coverage-model graph"):
+        cli.validate_mode_options(args)
+
+
+def test_mode_feature_test_gen_with_graph_coverage_model_passes() -> None:
+    args = argparse.Namespace(
+        mode="feature-test-gen", clear_tests=False, coverage_model="graph"
+    )
+    cli.validate_mode_options(args)  # should not raise
+
+
 def test_preprocess_project_aware_skips_clearing(tmp_path: Path) -> None:
     staged_repo = tmp_path / "repo"
     staged_repo.mkdir()

@@ -88,6 +88,12 @@ def validate_mode_options(args: argparse.Namespace) -> None:
             "--mode graph-test-gen requires --coverage-model graph "
             "(it reads the UI_GRAPH.json produced by a prior discovery run)"
         )
+    if args.mode == "feature-test-gen" and getattr(args, "coverage_model", "flat") != "graph":
+        raise DockerRunError(
+            "--mode feature-test-gen requires --coverage-model graph "
+            "(it reads the UI_FEATURES.json produced by a prior "
+            "feature-extraction run, plus its source UI_GRAPH.json)"
+        )
 
 
 def validate_agent_options(args: argparse.Namespace) -> None:
@@ -410,7 +416,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--mode",
-        choices=("baseline", "project-aware", "discovery", "feature-extraction", "graph-test-gen"),
+        choices=(
+            "baseline",
+            "project-aware",
+            "discovery",
+            "feature-extraction",
+            "graph-test-gen",
+            "feature-test-gen",
+        ),
         default="baseline",
         help=(
             "Evaluation mode. 'baseline' removes existing tests (requires "
@@ -420,7 +433,9 @@ def build_parser() -> argparse.ArgumentParser:
             "writing any tests. 'feature-extraction' reads an existing "
             "UI_GRAPH.json and extracts features, scenarios, and paths. "
             "'graph-test-gen' reads an existing UI_GRAPH.json and generates "
-            "Playwright tests guided by the state model."
+            "Playwright tests guided by the state model. 'feature-test-gen' "
+            "reads an existing UI_FEATURES.json and generates one Playwright "
+            "test per extracted scenario."
         ),
     )
     parser.add_argument(
