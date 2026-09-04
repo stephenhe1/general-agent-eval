@@ -1,0 +1,1103 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Mermaid.js Dev Server",
+    "base_url": "http://localhost:9066",
+    "description": "Development server for the Mermaid.js diagram library. Serves static diagram demo pages, interactive dev sandboxes, and the Dev Explorer SPA for editing/profiling .mmd files.",
+    "total_states": 42,
+    "explored": 42,
+    "skipped": 0,
+    "verified_live": [
+      "/",
+      "/c4context.html",
+      "/classchart.html",
+      "/dataflowchart.html",
+      "/er.html",
+      "/er-multiline.html",
+      "/error.html",
+      "/eventmodeling.html",
+      "/flowchart-elk.html",
+      "/flowchart.html",
+      "/flowchart_expanded_node_shapes.html",
+      "/gantt.html",
+      "/git.html",
+      "/info.html",
+      "/ishikawa.html",
+      "/journey.html",
+      "/mindmap.html",
+      "/packet.html",
+      "/pie.html",
+      "/quadrantchart.html",
+      "/radar.html",
+      "/railroad.html",
+      "/requirements.html",
+      "/sankey.html",
+      "/sequence.html",
+      "/state.html",
+      "/timeline.html",
+      "/treeView.html",
+      "/treemap.html",
+      "/venn.html",
+      "/wardley.html",
+      "/xychart.html",
+      "/zenuml.html",
+      "/block.html",
+      "/architecture.html",
+      "/dev/example.html",
+      "/dev/architecture-randomize.html",
+      "/dev/"
+    ],
+    "notes": "No auth gates. Dev Explorer SPA requires cypress/platform/dev-diagrams dir to exist for file browsing (otherwise API returns 400). All demo pages return HTTP 200."
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Mermaid Quick Test Page — index of all diagram types",
+      "section": "navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Click link 'C4 Context' [href='./c4context.html']",
+        "Click link 'Class diagrams' [href='./classchart.html']",
+        "Click link 'Data flow charts' [href='./dataflowchart.html']",
+        "Click link 'Entity Relation diagram' [href='./er.html']",
+        "Click link 'Flow charts' [href='./flowchart.html']",
+        "Click link 'Flow charts ELK' [href='./flowchart-elk.html']",
+        "Click link 'Flowchart - expanded node shapes' [href='./flowchart_expanded_node_shapes.html']",
+        "Click link 'Gantt' [href='./gantt.html']",
+        "Click link 'Git' [href='./git.html']",
+        "Click link 'Info' [href='./info.html']",
+        "Click link 'Journey' [href='./journey.html']",
+        "Click link 'Mindmap' [href='./mindmap.html']",
+        "Click link 'Ishikawa' [href='./ishikawa.html']",
+        "Click link 'Pie' [href='./pie.html']",
+        "Click link 'Quadrant charts' [href='./quadrantchart.html']",
+        "Click link 'XY charts' [href='./xychart.html']",
+        "Click link 'Requirements' [href='./requirements.html']",
+        "Click link 'Sequence' [href='./sequence.html']",
+        "Click link 'State' [href='./state.html']",
+        "Click link 'Timeline' [href='./timeline.html']",
+        "Click link 'ZenUML' [href='./zenuml.html']",
+        "Click link 'Sankey' [href='./sankey.html']",
+        "Click link 'Packet' [href='./packet.html']",
+        "Click link 'Layered Blocks' [href='./block.html']",
+        "Click link 'Architecture' [href='./architecture.html']",
+        "Click link 'Event Modeling' [href='./eventmodeling.html']",
+        "Click link 'Radar' [href='./radar.html']",
+        "Click link 'Venn diagram' [href='./venn.html']",
+        "Click link 'TreeView' [href='./treeView.html']",
+        "Click link 'development page' [href='./dev/example.html']",
+        "Click link 'submit a pull request (PR)' [href='https://github.com/mermaid-js/mermaid/pulls']"
+      ],
+      "notes": "Hub page. Links to every demo page and the interactive dev example."
+    },
+    {
+      "id": "/flowchart.html",
+      "route": "/flowchart.html",
+      "label": "Flowchart — multiple graph/flowchart diagram examples",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Static page with many flowchart/graph comparisons rendered as SVG."
+    },
+    {
+      "id": "/flowchart-elk.html",
+      "route": "/flowchart-elk.html",
+      "label": "Flowchart ELK — ELK-layout flowchart examples",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Uses flowchart-elk renderer (ELK layout engine)."
+    },
+    {
+      "id": "/flowchart_expanded_node_shapes.html",
+      "route": "/flowchart_expanded_node_shapes.html",
+      "label": "Flowchart Expanded Node Shapes — new shape syntax demos",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Demos expanded/new node shape syntax for flowchart diagrams."
+    },
+    {
+      "id": "/gantt.html",
+      "route": "/gantt.html",
+      "label": "Gantt — Gantt chart diagram demos",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Multiple Gantt chart examples with different date formats and features."
+    },
+    {
+      "id": "/sequence.html",
+      "route": "/sequence.html",
+      "label": "Sequence — sequence diagram demos",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Sequence diagrams with participants, links, loops, and actor styling."
+    },
+    {
+      "id": "/classchart.html",
+      "route": "/classchart.html",
+      "label": "Class diagrams — UML class diagram demos",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Multiple UML class diagram examples."
+    },
+    {
+      "id": "/git.html",
+      "route": "/git.html",
+      "label": "Git Graphs — git history visualization demos",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Git flow diagrams: LR and TB orientations, branches, merges, tags."
+    },
+    {
+      "id": "/state.html",
+      "route": "/state.html",
+      "label": "State diagrams — stateDiagram demos",
+      "section": "core-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "State machine diagrams, v1 and v2 syntax, composite states."
+    },
+    {
+      "id": "/er.html",
+      "route": "/er.html",
+      "label": "ER diagram — Entity Relationship diagram demos",
+      "section": "entity-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "ER diagrams with various cardinality notations and themes."
+    },
+    {
+      "id": "/er-multiline.html",
+      "route": "/er-multiline.html",
+      "label": "ER multiline — ER diagrams with multiline labels",
+      "section": "entity-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Loads Tailwind, Font Awesome, MDI fonts. ER variant with multiline text."
+    },
+    {
+      "id": "/c4context.html",
+      "route": "/c4context.html",
+      "label": "C4 Context — C4 architecture context diagram demos",
+      "section": "entity-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "C4 context diagrams with System, Person, SystemDb, Boundary components."
+    },
+    {
+      "id": "/requirements.html",
+      "route": "/requirements.html",
+      "label": "Requirements — requirements diagram demos",
+      "section": "entity-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Requirements diagrams showing requirements, tests, and relationships."
+    },
+    {
+      "id": "/dataflowchart.html",
+      "route": "/dataflowchart.html",
+      "label": "Data Flow — data flow chart demos",
+      "section": "entity-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Data flow chart diagrams."
+    },
+    {
+      "id": "/mindmap.html",
+      "route": "/mindmap.html",
+      "label": "Mindmap — mindmap diagram demos",
+      "section": "specialty-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Mindmap diagrams with circles, rounded-rect, and square node shapes."
+    },
+    {
+      "id": "/timeline.html",
+      "route": "/timeline.html",
+      "label": "Timeline — timeline diagram demos",
+      "section": "specialty-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Timeline diagrams including vertical TD orientation."
+    },
+    {
+      "id": "/journey.html",
+      "route": "/journey.html",
+      "label": "Journey — user journey diagram demos",
+      "section": "specialty-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "User journey diagrams with tasks and actor sections."
+    },
+    {
+      "id": "/architecture.html",
+      "route": "/architecture.html",
+      "label": "Architecture — architecture-beta diagram demos",
+      "section": "specialty-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "architecture-beta diagrams with groups, services, and cloud icons."
+    },
+    {
+      "id": "/block.html",
+      "route": "/block.html",
+      "label": "Layered Blocks — block diagram demos",
+      "section": "specialty-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Block diagram (block syntax) demos."
+    },
+    {
+      "id": "/zenuml.html",
+      "route": "/zenuml.html",
+      "label": "ZenUML — ZenUML sequence diagram demos",
+      "section": "specialty-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "ZenUML sequence diagrams with async messages, try/catch, conditionals."
+    },
+    {
+      "id": "/pie.html",
+      "route": "/pie.html",
+      "label": "Pie charts — pie chart demos",
+      "section": "data-charts",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Pie chart demos with textPosition, colors, and outerStroke config."
+    },
+    {
+      "id": "/sankey.html",
+      "route": "/sankey.html",
+      "label": "Sankey — sankey diagram demos",
+      "section": "data-charts",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Sankey flow diagrams with Apple-style rendering and label positioning."
+    },
+    {
+      "id": "/quadrantchart.html",
+      "route": "/quadrantchart.html",
+      "label": "Quadrant charts — quadrant chart demos",
+      "section": "data-charts",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Four-quadrant charts with labeled points and axes."
+    },
+    {
+      "id": "/xychart.html",
+      "route": "/xychart.html",
+      "label": "XY charts — XY chart demos (bar, line)",
+      "section": "data-charts",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "XY chart demos with bar and line chart types."
+    },
+    {
+      "id": "/packet.html",
+      "route": "/packet.html",
+      "label": "Packet — packet diagram demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Network packet diagrams showing protocol field layouts."
+    },
+    {
+      "id": "/radar.html",
+      "route": "/radar.html",
+      "label": "Radar — radar chart demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Radar/spider chart diagrams."
+    },
+    {
+      "id": "/venn.html",
+      "route": "/venn.html",
+      "label": "Venn diagram — venn diagram demos (light/dark)",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Venn diagrams in light and dark theme samples."
+    },
+    {
+      "id": "/treeView.html",
+      "route": "/treeView.html",
+      "label": "TreeView — tree view diagram demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "TreeView diagrams using Montserrat font with max-width layout."
+    },
+    {
+      "id": "/wardley.html",
+      "route": "/wardley.html",
+      "label": "Wardley Maps — Wardley mapping diagram demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Wardley Maps with components, evolution axis, and notes."
+    },
+    {
+      "id": "/treemap.html",
+      "route": "/treemap.html",
+      "label": "Treemap — treemap diagram demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Treemap diagrams using Montserrat font."
+    },
+    {
+      "id": "/railroad.html",
+      "route": "/railroad.html",
+      "label": "Railroad — railroad diagram demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Railroad / syntax diagram examples."
+    },
+    {
+      "id": "/ishikawa.html",
+      "route": "/ishikawa.html",
+      "label": "Ishikawa — fishbone/cause-effect diagram demos",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Ishikawa (fishbone) cause-and-effect diagrams."
+    },
+    {
+      "id": "/info.html",
+      "route": "/info.html",
+      "label": "Info — mermaid info diagram (version display)",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Renders 'info' diagram type showing library version."
+    },
+    {
+      "id": "/error.html",
+      "route": "/error.html",
+      "label": "Error demo — diagrams rendered in error conditions",
+      "section": "advanced-diagrams",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Scroll page to view diagrams",
+        "Browser back navigation"
+      ],
+      "notes": "Tests error rendering and graceful fallback for malformed diagrams."
+    },
+    {
+      "id": "/eventmodeling.html",
+      "route": "/eventmodeling.html",
+      "label": "Event Modeling — interactive dev page for event modeling",
+      "section": "dev-interactive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-interactive",
+      "actions": [
+        "Type in textarea#code to update live preview",
+        "View rendered static info diagram",
+        "Browser back navigation"
+      ],
+      "notes": "Dev-style page: fixed left textarea + live right panel; SSE live-reload."
+    },
+    {
+      "id": "/dev/example.html",
+      "route": "/dev/example.html",
+      "label": "Dev Example — interactive mermaid playground page",
+      "section": "dev-interactive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-interactive",
+      "actions": [
+        "Type in textarea#code to update dynamic diagram in #dynamicDiagram",
+        "View static pre-rendered graph diagram",
+        "View info diagram",
+        "Code persisted to localStorage by pathname"
+      ],
+      "notes": "Two-column: static diagram + textarea editor with live preview below."
+    },
+    {
+      "id": "/dev/architecture-randomize.html",
+      "route": "/dev/architecture-randomize.html",
+      "label": "Architecture Randomize — tests architecture layout randomization",
+      "section": "dev-interactive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:minimal",
+      "actions": [
+        "Reload page to observe randomize:true layout variation",
+        "Browser back navigation"
+      ],
+      "notes": "Two architecture diagrams: one deterministic, one with randomize:true."
+    },
+    {
+      "id": "/dev#explorer-mode",
+      "route": "/dev/",
+      "label": "Dev Explorer — file browser for .mmd diagram files",
+      "section": "dev-explorer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-explorer",
+      "actions": [
+        "Click folder card to navigate into directory",
+        "Click file card to open diagram in viewer",
+        "Click 'New diagram' button [sl-button variant=primary] to open create dialog",
+        "Click 'Up' button [sl-button] to navigate to parent directory",
+        "Click breadcrumb segment to jump to ancestor directory",
+        "Click root breadcrumb-item to go back to root"
+      ],
+      "notes": "SPA (Lit). Uses /dev/api/files. URL param: ?path=<dir>."
+    },
+    {
+      "id": "/dev#new-diagram-dialog",
+      "route": "/dev/",
+      "label": "Dev Explorer — New Diagram modal dialog",
+      "section": "dev-explorer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-explorer",
+      "actions": [
+        "Type file name in sl-input [label='File name']",
+        "Click 'Create' button [sl-button slot=footer variant=primary] to POST /dev/api/file",
+        "Click 'Cancel' button [sl-button slot=footer variant=default] to close dialog",
+        "Press Enter in sl-input to submit",
+        "Click dialog close icon [sl-request-close] to dismiss"
+      ],
+      "notes": "sl-dialog overlay. Creates .mmd file via POST /dev/api/file then opens viewer."
+    },
+    {
+      "id": "/dev#viewer-diagram-tab",
+      "route": "/dev/?file=<path>",
+      "label": "Dev Explorer Viewer — Diagram tab (rendered SVG + console)",
+      "section": "dev-explorer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-explorer",
+      "actions": [
+        "Select Theme from sl-select [options: default,dark,forest,neutral,base,redux,redux-dark,redux-color]",
+        "Select Layout from sl-select [options: dagre,elk,domus,hola,swimlane]",
+        "Select Look from sl-select [options: classic,handDrawn,neo]",
+        "Select Log level from sl-select [options: trace,debug,info,warn,error,fatal]",
+        "Toggle 'Max width' checkbox",
+        "Toggle 'Ignore cross-lane edges' checkbox",
+        "Toggle 'Optimize ranks by crossings' checkbox",
+        "Click 'Back' button [sl-button variant=default] to return to file explorer",
+        "Click 'Prev' button [sl-button] to view previous sibling .mmd file",
+        "Click 'Next' button [sl-button] to view next sibling .mmd file",
+        "Click tab 'Diagram' [sl-tab panel=diagram] (current tab)",
+        "Click tab 'Code' [sl-tab panel=code] to switch to code editor",
+        "Click tab 'Profile' [sl-tab panel=profile] to switch to profiler",
+        "Drag sl-split-panel divider to resize diagram/console panels",
+        "Filter console output (info/warn/error checkboxes in dev-console-panel)",
+        "Clear console logs [sl-button in dev-console-panel]",
+        "Filter console by text [sl-input filterText in dev-console-panel]"
+      ],
+      "notes": "Split panel: left=rendered SVG, right=console panel. URL: ?file=<path>."
+    },
+    {
+      "id": "/dev#viewer-code-tab",
+      "route": "/dev/?file=<path>",
+      "label": "Dev Explorer Viewer — Code tab (CodeMirror editor + save)",
+      "section": "dev-explorer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-explorer",
+      "actions": [
+        "Edit mermaid source in CodeMirror editor (dev-code-editor with syntax highlighting)",
+        "Click 'Save' button [sl-button variant=primary] to PUT /dev/api/file",
+        "Click 'Save sizes' button [sl-button variant=default] to POST /dev/api/sizes (swimlane only)",
+        "Press Ctrl+S / Cmd+S to save via keybinding",
+        "Click tab 'Diagram' [sl-tab panel=diagram] to switch to diagram view",
+        "Click tab 'Profile' [sl-tab panel=profile] to switch to profiler",
+        "Click 'Back' button [sl-button variant=default] to return to file explorer",
+        "Click 'Prev'/'Next' buttons to navigate sibling files"
+      ],
+      "notes": "CodeMirror editor with mermaid syntax highlighting. Persists via PUT."
+    },
+    {
+      "id": "/dev#viewer-profile-tab",
+      "route": "/dev/?file=<path>",
+      "label": "Dev Explorer Viewer — Profile tab (performance benchmark)",
+      "section": "dev-explorer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dev-explorer",
+      "actions": [
+        "Select Scope [sl-select options: 'This diagram','Folder (N)']",
+        "Toggle layout checkboxes [sl-checkbox: dagre,elk,domus,hola,swimlane]",
+        "Set Iterations [number input min=1 max=50]",
+        "Click 'Run profile' button [sl-button variant=primary] to start benchmark",
+        "Click 'Stop' button [sl-button variant=default] to cancel in-progress run",
+        "Click 'Copy JSON' button [sl-button variant=default] to copy results to clipboard",
+        "Click tab 'Diagram' [sl-tab panel=diagram] to switch back",
+        "Click tab 'Code' [sl-tab panel=code] to switch to code editor",
+        "Click 'Back' button [sl-button variant=default] to return to file explorer"
+      ],
+      "notes": "Profiler benchmarks renders across layouts. Requires dev build profiling support."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/c4context.html",
+      "trigger": "link 'C4 Context' [href='./c4context.html']"
+    },
+    {
+      "from": "/",
+      "to": "/classchart.html",
+      "trigger": "link 'Class diagrams' [href='./classchart.html']"
+    },
+    {
+      "from": "/",
+      "to": "/dataflowchart.html",
+      "trigger": "link 'Data flow charts' [href='./dataflowchart.html']"
+    },
+    {
+      "from": "/",
+      "to": "/er.html",
+      "trigger": "link 'Entity Relation diagram' [href='./er.html']"
+    },
+    {
+      "from": "/",
+      "to": "/flowchart.html",
+      "trigger": "link 'Flow charts' [href='./flowchart.html']"
+    },
+    {
+      "from": "/",
+      "to": "/flowchart-elk.html",
+      "trigger": "link 'Flow charts ELK' [href='./flowchart-elk.html']"
+    },
+    {
+      "from": "/",
+      "to": "/flowchart_expanded_node_shapes.html",
+      "trigger": "link 'Flowchart - expanded node shapes' [href='./flowchart_expanded_node_shapes.html']"
+    },
+    {
+      "from": "/",
+      "to": "/gantt.html",
+      "trigger": "link 'Gantt' [href='./gantt.html']"
+    },
+    {
+      "from": "/",
+      "to": "/git.html",
+      "trigger": "link 'Git' [href='./git.html']"
+    },
+    {
+      "from": "/",
+      "to": "/info.html",
+      "trigger": "link 'Info' [href='./info.html']"
+    },
+    {
+      "from": "/",
+      "to": "/journey.html",
+      "trigger": "link 'Journey' [href='./journey.html']"
+    },
+    {
+      "from": "/",
+      "to": "/mindmap.html",
+      "trigger": "link 'Mindmap' [href='./mindmap.html']"
+    },
+    {
+      "from": "/",
+      "to": "/ishikawa.html",
+      "trigger": "link 'Ishikawa' [href='./ishikawa.html']"
+    },
+    {
+      "from": "/",
+      "to": "/pie.html",
+      "trigger": "link 'Pie' [href='./pie.html']"
+    },
+    {
+      "from": "/",
+      "to": "/quadrantchart.html",
+      "trigger": "link 'Quadrant charts' [href='./quadrantchart.html']"
+    },
+    {
+      "from": "/",
+      "to": "/xychart.html",
+      "trigger": "link 'XY charts' [href='./xychart.html']"
+    },
+    {
+      "from": "/",
+      "to": "/requirements.html",
+      "trigger": "link 'Requirements' [href='./requirements.html']"
+    },
+    {
+      "from": "/",
+      "to": "/sequence.html",
+      "trigger": "link 'Sequence' [href='./sequence.html']"
+    },
+    {
+      "from": "/",
+      "to": "/state.html",
+      "trigger": "link 'State' [href='./state.html']"
+    },
+    {
+      "from": "/",
+      "to": "/timeline.html",
+      "trigger": "link 'Timeline' [href='./timeline.html']"
+    },
+    {
+      "from": "/",
+      "to": "/zenuml.html",
+      "trigger": "link 'ZenUML' [href='./zenuml.html']"
+    },
+    {
+      "from": "/",
+      "to": "/sankey.html",
+      "trigger": "link 'Sankey' [href='./sankey.html']"
+    },
+    {
+      "from": "/",
+      "to": "/packet.html",
+      "trigger": "link 'Packet' [href='./packet.html']"
+    },
+    {
+      "from": "/",
+      "to": "/block.html",
+      "trigger": "link 'Layered Blocks' [href='./block.html']"
+    },
+    {
+      "from": "/",
+      "to": "/architecture.html",
+      "trigger": "link 'Architecture' [href='./architecture.html']"
+    },
+    {
+      "from": "/",
+      "to": "/eventmodeling.html",
+      "trigger": "link 'Event Modeling' [href='./eventmodeling.html']"
+    },
+    {
+      "from": "/",
+      "to": "/radar.html",
+      "trigger": "link 'Radar' [href='./radar.html']"
+    },
+    {
+      "from": "/",
+      "to": "/venn.html",
+      "trigger": "link 'Venn diagram' [href='./venn.html']"
+    },
+    {
+      "from": "/",
+      "to": "/treeView.html",
+      "trigger": "link 'TreeView' [href='./treeView.html']"
+    },
+    {
+      "from": "/",
+      "to": "/dev/example.html",
+      "trigger": "link 'development page' [href='./dev/example.html']"
+    },
+    {
+      "from": "/dev#explorer-mode",
+      "to": "/dev#new-diagram-dialog",
+      "trigger": "button 'New diagram' [sl-button variant=primary, sl-icon name=file-earmark-plus]"
+    },
+    {
+      "from": "/dev#new-diagram-dialog",
+      "to": "/dev#explorer-mode",
+      "trigger": "button 'Cancel' [sl-button slot=footer variant=default]"
+    },
+    {
+      "from": "/dev#new-diagram-dialog",
+      "to": "/dev#viewer-diagram-tab",
+      "trigger": "button 'Create' [sl-button slot=footer variant=primary] on successful POST /dev/api/file"
+    },
+    {
+      "from": "/dev#new-diagram-dialog",
+      "to": "/dev#explorer-mode",
+      "trigger": "sl-request-close event (click outside or ESC key)"
+    },
+    {
+      "from": "/dev#explorer-mode",
+      "to": "/dev#viewer-diagram-tab",
+      "trigger": "button card-file [class=card card-file] click on .mmd file entry"
+    },
+    {
+      "from": "/dev#explorer-mode",
+      "to": "/dev#explorer-mode",
+      "trigger": "button card-folder [class=card card-folder] click to navigate into subdirectory"
+    },
+    {
+      "from": "/dev#explorer-mode",
+      "to": "/dev#explorer-mode",
+      "trigger": "button 'Up' [sl-button] to navigate to parent directory",
+      "guard": "path is not empty (not already at root)"
+    },
+    {
+      "from": "/dev#explorer-mode",
+      "to": "/dev#explorer-mode",
+      "trigger": "sl-breadcrumb-item click to jump to ancestor path"
+    },
+    {
+      "from": "/dev#viewer-diagram-tab",
+      "to": "/dev#explorer-mode",
+      "trigger": "button 'Back' [sl-button variant=default, sl-icon name=arrow-left]"
+    },
+    {
+      "from": "/dev#viewer-diagram-tab",
+      "to": "/dev#viewer-diagram-tab",
+      "trigger": "button 'Prev' [sl-button title='Previous diagram in folder']",
+      "guard": "siblingIndex > 0"
+    },
+    {
+      "from": "/dev#viewer-diagram-tab",
+      "to": "/dev#viewer-diagram-tab",
+      "trigger": "button 'Next' [sl-button title='Next diagram in folder']",
+      "guard": "siblingIndex < siblings.length - 1"
+    },
+    {
+      "from": "/dev#viewer-diagram-tab",
+      "to": "/dev#viewer-code-tab",
+      "trigger": "tab 'Code' [sl-tab slot=nav panel=code, sl-icon name=file-earmark-code]"
+    },
+    {
+      "from": "/dev#viewer-diagram-tab",
+      "to": "/dev#viewer-profile-tab",
+      "trigger": "tab 'Profile' [sl-tab slot=nav panel=profile, sl-icon name=speedometer2]"
+    },
+    {
+      "from": "/dev#viewer-code-tab",
+      "to": "/dev#viewer-diagram-tab",
+      "trigger": "tab 'Diagram' [sl-tab slot=nav panel=diagram, sl-icon name=diagram-3]"
+    },
+    {
+      "from": "/dev#viewer-code-tab",
+      "to": "/dev#viewer-profile-tab",
+      "trigger": "tab 'Profile' [sl-tab slot=nav panel=profile, sl-icon name=speedometer2]"
+    },
+    {
+      "from": "/dev#viewer-code-tab",
+      "to": "/dev#explorer-mode",
+      "trigger": "button 'Back' [sl-button variant=default, sl-icon name=arrow-left]"
+    },
+    {
+      "from": "/dev#viewer-profile-tab",
+      "to": "/dev#viewer-diagram-tab",
+      "trigger": "tab 'Diagram' [sl-tab slot=nav panel=diagram, sl-icon name=diagram-3]"
+    },
+    {
+      "from": "/dev#viewer-profile-tab",
+      "to": "/dev#viewer-code-tab",
+      "trigger": "tab 'Code' [sl-tab slot=nav panel=code, sl-icon name=file-earmark-code]"
+    },
+    {
+      "from": "/dev#viewer-profile-tab",
+      "to": "/dev#explorer-mode",
+      "trigger": "button 'Back' [sl-button variant=default, sl-icon name=arrow-left]"
+    },
+    {
+      "from": "/flowchart.html",
+      "to": "/",
+      "trigger": "browser back button"
+    },
+    {
+      "from": "/gantt.html",
+      "to": "/",
+      "trigger": "browser back button"
+    },
+    {
+      "from": "/sequence.html",
+      "to": "/",
+      "trigger": "browser back button"
+    },
+    {
+      "from": "/classchart.html",
+      "to": "/",
+      "trigger": "browser back button"
+    },
+    {
+      "from": "/git.html",
+      "to": "/",
+      "trigger": "browser back button"
+    },
+    {
+      "from": "/er.html",
+      "to": "/",
+      "trigger": "browser back button"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Public – all pages unauthenticated, no login gate",
+        "node_ids": [
+          "/",
+          "/flowchart.html",
+          "/flowchart-elk.html",
+          "/flowchart_expanded_node_shapes.html",
+          "/gantt.html",
+          "/sequence.html",
+          "/classchart.html",
+          "/git.html",
+          "/state.html",
+          "/er.html",
+          "/er-multiline.html",
+          "/c4context.html",
+          "/requirements.html",
+          "/dataflowchart.html",
+          "/mindmap.html",
+          "/timeline.html",
+          "/journey.html",
+          "/architecture.html",
+          "/block.html",
+          "/zenuml.html",
+          "/pie.html",
+          "/sankey.html",
+          "/quadrantchart.html",
+          "/xychart.html",
+          "/packet.html",
+          "/radar.html",
+          "/venn.html",
+          "/treeView.html",
+          "/wardley.html",
+          "/treemap.html",
+          "/railroad.html",
+          "/ishikawa.html",
+          "/info.html",
+          "/error.html",
+          "/eventmodeling.html",
+          "/dev/example.html",
+          "/dev/architecture-randomize.html",
+          "/dev#explorer-mode",
+          "/dev#new-diagram-dialog",
+          "/dev#viewer-diagram-tab",
+          "/dev#viewer-code-tab",
+          "/dev#viewer-profile-tab"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:minimal",
+        "label": "Static HTML page with no persistent navigation bar",
+        "node_ids": [
+          "/",
+          "/flowchart.html",
+          "/flowchart-elk.html",
+          "/flowchart_expanded_node_shapes.html",
+          "/gantt.html",
+          "/sequence.html",
+          "/classchart.html",
+          "/git.html",
+          "/state.html",
+          "/er.html",
+          "/er-multiline.html",
+          "/c4context.html",
+          "/requirements.html",
+          "/dataflowchart.html",
+          "/mindmap.html",
+          "/timeline.html",
+          "/journey.html",
+          "/architecture.html",
+          "/block.html",
+          "/zenuml.html",
+          "/pie.html",
+          "/sankey.html",
+          "/quadrantchart.html",
+          "/xychart.html",
+          "/packet.html",
+          "/radar.html",
+          "/venn.html",
+          "/treeView.html",
+          "/wardley.html",
+          "/treemap.html",
+          "/railroad.html",
+          "/ishikawa.html",
+          "/info.html",
+          "/error.html",
+          "/dev/architecture-randomize.html"
+        ]
+      },
+      {
+        "id": "layout:dev-interactive",
+        "label": "Dev interactive pages: fixed textarea + live right panel",
+        "node_ids": [
+          "/dev/example.html",
+          "/eventmodeling.html"
+        ]
+      },
+      {
+        "id": "layout:dev-explorer",
+        "label": "Dev Explorer SPA shell: dark Shoelace UI, header + content area",
+        "node_ids": [
+          "/dev#explorer-mode",
+          "/dev#new-diagram-dialog",
+          "/dev#viewer-diagram-tab",
+          "/dev#viewer-code-tab",
+          "/dev#viewer-profile-tab"
+        ]
+      }
+    ]
+  }
+}

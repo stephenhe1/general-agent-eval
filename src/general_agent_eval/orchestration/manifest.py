@@ -173,7 +173,9 @@ def sanitized_manifest(
             "max_budget_usd": args.max_budget_usd,
             "reset_git": args.reset_git,
             "clear_tests": args.clear_tests,
-            "inject_rest_assured": args.inject_rest_assured,
+            "mode": getattr(args, "mode", "baseline"),
+            "coverage_model": getattr(args, "coverage_model", "flat"),
+            "workload": getattr(args, "workload", "javascript"),
             "agent_env_keys": [
                 parse_key_value_key(value, option_name="--env") for value in args.env
             ],

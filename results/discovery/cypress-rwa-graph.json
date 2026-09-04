@@ -1,0 +1,861 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Cypress Real World App (RWA)",
+    "base_url": "http://localhost:3000",
+    "api_url": "http://localhost:3001",
+    "framework": "React 18 + React Router 5 + MUI + XState",
+    "auth_modes": ["local", "Auth0", "Okta", "AWS Cognito", "Google (optional env flags)"],
+    "seed_credentials": { "username": "Heath93", "password": "s3cret" },
+    "total_states": 29,
+    "explored": 29,
+    "skipped": 0,
+    "verified_live": [
+      "/signin",
+      "/signup",
+      "/",
+      "/bankaccounts",
+      "/notifications",
+      "/user/settings",
+      "/transaction/new",
+      "/transaction/:transactionId"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "/signin",
+      "route": "/signin",
+      "label": "Sign In form — username, password, remember me",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:public",
+      "actions": [
+        "Fill username field [data-test=signin-username]",
+        "Fill password field [data-test=signin-password]",
+        "Toggle remember me checkbox [data-test=signin-remember-me]",
+        "Submit Sign In button [data-test=signin-submit]",
+        "Click 'Sign Up' link [data-test=signup]"
+      ],
+      "notes": "Default landing for unauthenticated users; error alert on bad creds"
+    },
+    {
+      "id": "/signin#error",
+      "route": "/signin",
+      "label": "Sign In form with error message shown",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:public",
+      "actions": [
+        "Fill username field [data-test=signin-username]",
+        "Fill password field [data-test=signin-password]",
+        "Toggle remember me checkbox [data-test=signin-remember-me]",
+        "Submit Sign In button [data-test=signin-submit]",
+        "Click 'Sign Up' link [data-test=signup]",
+        "Dismiss error alert [data-test=signin-error]"
+      ],
+      "notes": "Auth error message visible [data-test=signin-error] after failed login"
+    },
+    {
+      "id": "/signup",
+      "route": "/signup",
+      "label": "Sign Up form — first name, last name, username, password, confirm",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:public",
+      "actions": [
+        "Fill first name [data-test=signup-first-name]",
+        "Fill last name [data-test=signup-last-name]",
+        "Fill username [data-test=signup-username]",
+        "Fill password [data-test=signup-password]",
+        "Fill confirm password [data-test=signup-confirmPassword]",
+        "Submit Sign Up button [data-test=signup-submit]",
+        "Click 'Have an account? Sign In' link [href=/signin]"
+      ],
+      "notes": "Inline validation per field; submit disabled until all valid"
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Transaction feed: Everyone (public) — all public transactions",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click date range filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click amount range filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click transaction item to view detail [data-test=transaction-item-{id}]",
+        "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Toggle side nav [data-test=sidenav-toggle]"
+      ],
+      "notes": "Default route after login; shares layout with /public"
+    },
+    {
+      "id": "/public",
+      "route": "/public",
+      "label": "Transaction feed: Everyone (public) — explicit /public path",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click date range filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click amount range filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click transaction item to view detail [data-test=transaction-item-{id}]",
+        "Click 'New' button in top nav [data-test=nav-top-new-transaction]"
+      ],
+      "notes": "Same component as /; routed by /(public)? pattern"
+    },
+    {
+      "id": "/contacts",
+      "route": "/contacts",
+      "label": "Transaction feed: Friends — transactions with contacts",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click date range filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click amount range filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click transaction item to view detail [data-test=transaction-item-{id}]",
+        "Click 'New' button in top nav [data-test=nav-top-new-transaction]"
+      ],
+      "notes": "Shows transactions with user's contacts only"
+    },
+    {
+      "id": "/personal",
+      "route": "/personal",
+      "label": "Transaction feed: Mine — current user's own transactions",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click date range filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click amount range filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click transaction item to view detail [data-test=transaction-item-{id}]",
+        "Click 'New' button in top nav [data-test=nav-top-new-transaction]"
+      ],
+      "notes": "Shows only current user's payment/request transactions"
+    },
+    {
+      "id": "/#date-filter-open",
+      "route": "/",
+      "label": "Transaction feed with date range popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Select date range on calendar [data-test=transaction-list-filter-date-range]",
+        "Close date range popover (click outside)",
+        "Close drawer on mobile [data-test=date-range-filter-drawer-close]",
+        "Clear date filter [data-test=transaction-list-filter-date-clear-button]"
+      ],
+      "notes": "Popover on desktop; bottom Drawer on xs breakpoint. Applies to all 3 feeds"
+    },
+    {
+      "id": "/#amount-filter-open",
+      "route": "/",
+      "label": "Transaction feed with amount range popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Drag amount range slider [data-test=transaction-list-filter-amount-range-slider]",
+        "Clear amount filter [data-test=transaction-list-filter-amount-clear-button]",
+        "Close amount range popover (click outside)",
+        "Close drawer on mobile [data-test=amount-range-filter-drawer-close]"
+      ],
+      "notes": "Popover on desktop; bottom Drawer on xs breakpoint. Applies to all 3 feeds"
+    },
+    {
+      "id": "/transaction/:transactionId",
+      "route": "/transaction/:transactionId",
+      "label": "Transaction detail — view sender/receiver, amount, description, comments, likes",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Like transaction [data-test=transaction-like-button-{id}]",
+        "Submit comment via CommentForm [data-test=transaction-comment-input-{transactionId}]",
+        "Navigate back via browser or sidebar"
+      ],
+      "notes": "Like button disabled if current user already liked"
+    },
+    {
+      "id": "/transaction/:transactionId#pending-request",
+      "route": "/transaction/:transactionId",
+      "label": "Transaction detail — pending payment request (receiver can Accept or Reject)",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Accept Request button [data-test=transaction-accept-request-{id}]",
+        "Reject Request button [data-test=transaction-reject-request-{id}]",
+        "Like transaction [data-test=transaction-like-button-{id}]",
+        "Submit comment via CommentForm [data-test=transaction-comment-input-{transactionId}]"
+      ],
+      "notes": "Accept/Reject buttons only visible when receiverIsCurrentUser && status=pending"
+    },
+    {
+      "id": "/transaction/new",
+      "route": "/transaction/new",
+      "label": "Create transaction: Step 1 — search and select a recipient",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Search users by name [data-test=user-list-search-input]",
+        "Select a user from list [data-test=user-list-item-{id}]",
+        "Navigate via top nav or sidebar"
+      ],
+      "notes": "3-step stepper; step 1 = Select Contact. XState machine governs steps"
+    },
+    {
+      "id": "/transaction/new#step-two",
+      "route": "/transaction/new",
+      "label": "Create transaction: Step 2 — enter amount, note, and choose Pay or Request",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Fill amount field [data-test=transaction-create-amount-input]",
+        "Fill description/note [data-test=transaction-create-description-input]",
+        "Submit as Request [data-test=transaction-create-submit-request]",
+        "Submit as Payment [data-test=transaction-create-submit-payment]"
+      ],
+      "notes": "Reached after selecting recipient in step 1. Both buttons submit the same form"
+    },
+    {
+      "id": "/transaction/new#step-three",
+      "route": "/transaction/new",
+      "label": "Create transaction: Step 3 — confirmation of submitted transaction",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Return To Transactions' [data-test=new-transaction-return-to-transactions]",
+        "Click 'Create Another Transaction' [data-test=new-transaction-create-another-transaction]"
+      ],
+      "notes": "Shows receiver avatar, transaction type (paid/requested), amount, description"
+    },
+    {
+      "id": "/user/settings",
+      "route": "/user/settings",
+      "label": "User settings — edit profile: first name, last name, email, phone, privacy level",
+      "section": "User",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Edit first name [data-test=user-settings-firstName-input]",
+        "Edit last name [data-test=user-settings-lastName-input]",
+        "Edit email [data-test=user-settings-email-input]",
+        "Edit phone number [data-test=user-settings-phoneNumber-input]",
+        "Submit Save button [data-test=user-settings-submit]",
+        "Navigate via sidebar"
+      ],
+      "notes": "Illustration + inline form; Save triggers UPDATE auth machine event"
+    },
+    {
+      "id": "/notifications",
+      "route": "/notifications",
+      "label": "Notifications list — all unread notifications",
+      "section": "Notifications",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Dismiss/mark as read each notification [data-test=notification-mark-read-{id}]",
+        "Navigate via sidebar"
+      ],
+      "notes": "Notification types: comment, like, payment requested, payment received"
+    },
+    {
+      "id": "/bankaccounts",
+      "route": "/bankaccounts",
+      "label": "Bank accounts list — view all linked bank accounts",
+      "section": "Bank Accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create' button [data-test=bankaccount-new]",
+        "Delete bank account [data-test=bankaccount-delete]",
+        "Navigate via sidebar"
+      ],
+      "notes": "Lists user's bank accounts with delete option per item"
+    },
+    {
+      "id": "/bankaccounts/new",
+      "route": "/bankaccounts/new",
+      "label": "Create bank account — enter bank name, routing number, account number",
+      "section": "Bank Accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Fill bank name [data-test=bankaccount-bankName-input]",
+        "Fill routing number [data-test=bankaccount-routingNumber-input]",
+        "Fill account number [data-test=bankaccount-accountNumber-input]",
+        "Submit Save button [data-test=bankaccount-submit]"
+      ],
+      "notes": "On submit redirects to /bankaccounts. Min 5 chars bank name, 9-digit routing"
+    },
+    {
+      "id": "/#onboarding-step-one",
+      "route": "/",
+      "label": "Onboarding dialog Step 1 — 'Get Started with Real World App' welcome",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Next' button [data-test=user-onboarding-next]",
+        "Click 'Logout' button [data-test=user-onboarding-logout]"
+      ],
+      "notes": "Modal shown on first login when user has no bank accounts; blocks background"
+    },
+    {
+      "id": "/#onboarding-step-two",
+      "route": "/",
+      "label": "Onboarding dialog Step 2 — 'Create Bank Account' form",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Fill bank name [data-test=bankaccount-bankName-input]",
+        "Fill routing number [data-test=bankaccount-routingNumber-input]",
+        "Fill account number [data-test=bankaccount-accountNumber-input]",
+        "Submit Save button [data-test=bankaccount-submit]",
+        "Click 'Logout' button [data-test=user-onboarding-logout]"
+      ],
+      "notes": "Step 2 of onboarding dialog; uses BankAccountForm with onboarding=true"
+    },
+    {
+      "id": "/#onboarding-step-three",
+      "route": "/",
+      "label": "Onboarding dialog Step 3 — 'Finished / You're all set!'",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Done' button [data-test=user-onboarding-next]",
+        "Click 'Logout' button [data-test=user-onboarding-logout]"
+      ],
+      "notes": "Final onboarding step; 'Done' dismisses dialog. Button text changes to 'Done'"
+    },
+    {
+      "id": "/#sidenav-open",
+      "route": "/",
+      "label": "Main layout with side navigation drawer expanded",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Home' nav item [data-test=sidenav-home]",
+        "Click 'My Account' nav item [data-test=sidenav-user-settings]",
+        "Click 'Bank Accounts' nav item [data-test=sidenav-bankaccounts]",
+        "Click 'Notifications' nav item [data-test=sidenav-notifications]",
+        "Click 'Logout' [data-test=sidenav-signout]",
+        "Toggle drawer closed [data-test=sidenav-toggle]",
+        "Close mobile drawer via backdrop"
+      ],
+      "notes": "Shows user avatar, full name, @username, account balance when expanded"
+    },
+    {
+      "id": "/#sidenav-collapsed",
+      "route": "/",
+      "label": "Main layout with side navigation drawer collapsed (icon-only)",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Toggle drawer open [data-test=sidenav-toggle]"
+      ],
+      "notes": "Drawer collapses to icon-width on desktop; hidden on mobile (temporary variant)"
+    },
+    {
+      "id": "/transaction/:transactionId#loading",
+      "route": "/transaction/:transactionId",
+      "label": "Transaction detail — loading state",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [],
+      "notes": "XState 'idle' state shows 'Loading...' text before success state"
+    },
+    {
+      "id": "/signin#redirect",
+      "route": "/signin",
+      "label": "Catch-all redirect: any unauthenticated URL → /signin",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:public",
+      "actions": [
+        "Fill username field [data-test=signin-username]",
+        "Fill password field [data-test=signin-password]",
+        "Submit Sign In button [data-test=signin-submit]"
+      ],
+      "notes": "React Router catch-all <Redirect to /signin> for all non-auth routes"
+    },
+    {
+      "id": "/bankaccounts#empty-list",
+      "route": "/bankaccounts",
+      "label": "Bank accounts list — empty state (no bank accounts)",
+      "section": "Bank Accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create' button [data-test=bankaccount-new]"
+      ],
+      "notes": "EmptyList component shown when bankAccountsState results is empty"
+    },
+    {
+      "id": "/notifications#empty-list",
+      "route": "/notifications",
+      "label": "Notifications list — empty state (no notifications)",
+      "section": "Notifications",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [],
+      "notes": "EmptyList component shown when no notifications exist for user"
+    },
+    {
+      "id": "/#transactions-empty",
+      "route": "/",
+      "label": "Transaction feed — empty state (no transactions)",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+        "Click 'Create A Transaction' inline button [data-test=transaction-list-empty-create-transaction-button]"
+      ],
+      "notes": "EmptyList + SVG illustration. 'Create A Transaction' button on public+contacts feeds"
+    },
+    {
+      "id": "/graphql-playground",
+      "route": "/graphql-playground",
+      "label": "GraphQL Playground — API explorer (backend route, dev only)",
+      "section": "Developer",
+      "status": "explored",
+      "auth_required": true,
+      "layout": null,
+      "actions": [
+        "Execute GraphQL queries against the API"
+      ],
+      "notes": "Express route at /graphql-playground; not a frontend React route"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/signin",
+      "to": "/",
+      "trigger": "button \"Sign In\" [data-test=signin-submit]",
+      "guard": "valid username and password"
+    },
+    {
+      "from": "/signin",
+      "to": "/signin#error",
+      "trigger": "button \"Sign In\" [data-test=signin-submit]",
+      "guard": "invalid credentials"
+    },
+    {
+      "from": "/signin#error",
+      "to": "/signin",
+      "trigger": "auto: dismiss error alert; user edits form"
+    },
+    {
+      "from": "/signin",
+      "to": "/signup",
+      "trigger": "link \"Don't have an account? Sign Up\" [data-test=signup]"
+    },
+    {
+      "from": "/signup",
+      "to": "/signin",
+      "trigger": "link \"Have an account? Sign In\" [href=/signin]"
+    },
+    {
+      "from": "/signup",
+      "to": "/signin",
+      "trigger": "button \"Sign Up\" [data-test=signup-submit]",
+      "guard": "successful registration → redirect to /signin"
+    },
+    {
+      "from": "/signin#redirect",
+      "to": "/signin",
+      "trigger": "auto: redirect on unauthenticated access to any protected route"
+    },
+    {
+      "from": "/",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=sidenav-signout]"
+    },
+    {
+      "from": "/user/settings",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=sidenav-signout]"
+    },
+    {
+      "from": "/notifications",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=sidenav-signout]"
+    },
+    {
+      "from": "/",
+      "to": "/contacts",
+      "trigger": "tab \"Friends\" [data-test=nav-contacts-tab]"
+    },
+    {
+      "from": "/",
+      "to": "/personal",
+      "trigger": "tab \"Mine\" [data-test=nav-personal-tab]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/",
+      "trigger": "tab \"Everyone\" [data-test=nav-public-tab]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/personal",
+      "trigger": "tab \"Mine\" [data-test=nav-personal-tab]"
+    },
+    {
+      "from": "/personal",
+      "to": "/",
+      "trigger": "tab \"Everyone\" [data-test=nav-public-tab]"
+    },
+    {
+      "from": "/personal",
+      "to": "/contacts",
+      "trigger": "tab \"Friends\" [data-test=nav-contacts-tab]"
+    },
+    {
+      "from": "/",
+      "to": "/transaction/:transactionId",
+      "trigger": "list item click [data-test=transaction-item-{id}]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/transaction/:transactionId",
+      "trigger": "list item click [data-test=transaction-item-{id}]"
+    },
+    {
+      "from": "/personal",
+      "to": "/transaction/:transactionId",
+      "trigger": "list item click [data-test=transaction-item-{id}]"
+    },
+    {
+      "from": "/",
+      "to": "/#date-filter-open",
+      "trigger": "chip \"Date: ALL\" [data-test=transaction-list-filter-date-range-button]"
+    },
+    {
+      "from": "/#date-filter-open",
+      "to": "/",
+      "trigger": "click outside popover or backdrop close"
+    },
+    {
+      "from": "/#date-filter-open",
+      "to": "/",
+      "trigger": "calendar range selection [data-test=transaction-list-filter-date-range]",
+      "guard": "range selected → auto closes popover and applies filter"
+    },
+    {
+      "from": "/",
+      "to": "/#amount-filter-open",
+      "trigger": "chip \"Amount: ...\" [data-test=transaction-list-filter-amount-range-button]"
+    },
+    {
+      "from": "/#amount-filter-open",
+      "to": "/",
+      "trigger": "click outside popover or backdrop close"
+    },
+    {
+      "from": "/",
+      "to": "/transaction/new",
+      "trigger": "button \"$ New\" [data-test=nav-top-new-transaction]"
+    },
+    {
+      "from": "/contacts",
+      "to": "/transaction/new",
+      "trigger": "button \"$ New\" [data-test=nav-top-new-transaction]"
+    },
+    {
+      "from": "/personal",
+      "to": "/transaction/new",
+      "trigger": "button \"$ New\" [data-test=nav-top-new-transaction]"
+    },
+    {
+      "from": "/transaction/new",
+      "to": "/transaction/new#step-two",
+      "trigger": "user list item click [data-test=user-list-item-{id}]",
+      "guard": "XState CREATE_TRANSACTION machine: SET_USERS event transitions to stepTwo"
+    },
+    {
+      "from": "/transaction/new#step-two",
+      "to": "/transaction/new#step-three",
+      "trigger": "button \"Request\" [data-test=transaction-create-submit-request] OR button \"Pay\" [data-test=transaction-create-submit-payment]",
+      "guard": "valid amount and description"
+    },
+    {
+      "from": "/transaction/new#step-three",
+      "to": "/",
+      "trigger": "button \"Return To Transactions\" [data-test=new-transaction-return-to-transactions]"
+    },
+    {
+      "from": "/transaction/new#step-three",
+      "to": "/transaction/new",
+      "trigger": "button \"Create Another Transaction\" [data-test=new-transaction-create-another-transaction]"
+    },
+    {
+      "from": "/transaction/:transactionId#loading",
+      "to": "/transaction/:transactionId",
+      "trigger": "auto: XState idle → success on data load"
+    },
+    {
+      "from": "/transaction/:transactionId",
+      "to": "/transaction/:transactionId#pending-request",
+      "trigger": "auto: conditional render when receiverIsCurrentUser && status=pending"
+    },
+    {
+      "from": "/transaction/:transactionId#pending-request",
+      "to": "/transaction/:transactionId",
+      "trigger": "button \"Accept Request\" [data-test=transaction-accept-request-{id}] or button \"Reject Request\" [data-test=transaction-reject-request-{id}]"
+    },
+    {
+      "from": "/user/settings",
+      "to": "/user/settings",
+      "trigger": "button \"Save\" [data-test=user-settings-submit]",
+      "guard": "triggers UPDATE auth machine event → profile refreshed in place"
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/bankaccounts/new",
+      "trigger": "button \"Create\" [data-test=bankaccount-new]"
+    },
+    {
+      "from": "/bankaccounts/new",
+      "to": "/bankaccounts",
+      "trigger": "button \"Save\" [data-test=bankaccount-submit]",
+      "guard": "valid bank details → redirect to /bankaccounts"
+    },
+    {
+      "from": "/#onboarding-step-one",
+      "to": "/#onboarding-step-two",
+      "trigger": "button \"Next\" [data-test=user-onboarding-next]"
+    },
+    {
+      "from": "/#onboarding-step-two",
+      "to": "/#onboarding-step-three",
+      "trigger": "button \"Save\" [data-test=bankaccount-submit]",
+      "guard": "valid bank account form"
+    },
+    {
+      "from": "/#onboarding-step-three",
+      "to": "/",
+      "trigger": "button \"Done\" [data-test=user-onboarding-next]"
+    },
+    {
+      "from": "/#onboarding-step-one",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=user-onboarding-logout]"
+    },
+    {
+      "from": "/#onboarding-step-two",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=user-onboarding-logout]"
+    },
+    {
+      "from": "/#onboarding-step-three",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=user-onboarding-logout]"
+    },
+    {
+      "from": "/",
+      "to": "/#sidenav-open",
+      "trigger": "icon button [data-test=sidenav-toggle]"
+    },
+    {
+      "from": "/#sidenav-open",
+      "to": "/#sidenav-collapsed",
+      "trigger": "icon button [data-test=sidenav-toggle]"
+    },
+    {
+      "from": "/#sidenav-open",
+      "to": "/",
+      "trigger": "link \"Home\" [data-test=sidenav-home]"
+    },
+    {
+      "from": "/#sidenav-open",
+      "to": "/user/settings",
+      "trigger": "link \"My Account\" [data-test=sidenav-user-settings]"
+    },
+    {
+      "from": "/#sidenav-open",
+      "to": "/bankaccounts",
+      "trigger": "link \"Bank Accounts\" [data-test=sidenav-bankaccounts]"
+    },
+    {
+      "from": "/#sidenav-open",
+      "to": "/notifications",
+      "trigger": "link \"Notifications\" [data-test=sidenav-notifications]"
+    },
+    {
+      "from": "/user/settings",
+      "to": "/",
+      "trigger": "link \"Home\" [data-test=sidenav-home]"
+    },
+    {
+      "from": "/notifications",
+      "to": "/",
+      "trigger": "link \"Home\" [data-test=sidenav-home]"
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/",
+      "trigger": "link \"Home\" [data-test=sidenav-home]"
+    },
+    {
+      "from": "/",
+      "to": "/notifications",
+      "trigger": "icon button [data-test=nav-top-notifications-link]"
+    },
+    {
+      "from": "/user/settings",
+      "to": "/notifications",
+      "trigger": "icon button [data-test=nav-top-notifications-link]"
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/notifications",
+      "trigger": "icon button [data-test=nav-top-notifications-link]"
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/bankaccounts#empty-list",
+      "trigger": "auto: conditional render when bankaccounts results is empty"
+    },
+    {
+      "from": "/notifications",
+      "to": "/notifications#empty-list",
+      "trigger": "auto: conditional render when notifications results is empty"
+    },
+    {
+      "from": "/",
+      "to": "/#transactions-empty",
+      "trigger": "auto: conditional render when transaction list has no results"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Public zone — accessible without authentication",
+        "node_ids": ["/signin", "/signin#error", "/signup", "/signin#redirect"]
+      },
+      {
+        "id": "zone:private",
+        "label": "Private zone — requires authenticated session",
+        "node_ids": [
+          "/",
+          "/public",
+          "/contacts",
+          "/personal",
+          "/#date-filter-open",
+          "/#amount-filter-open",
+          "/#transactions-empty",
+          "/transaction/:transactionId",
+          "/transaction/:transactionId#pending-request",
+          "/transaction/:transactionId#loading",
+          "/transaction/new",
+          "/transaction/new#step-two",
+          "/transaction/new#step-three",
+          "/user/settings",
+          "/notifications",
+          "/notifications#empty-list",
+          "/bankaccounts",
+          "/bankaccounts#empty-list",
+          "/bankaccounts/new",
+          "/#onboarding-step-one",
+          "/#onboarding-step-two",
+          "/#onboarding-step-three",
+          "/#sidenav-open",
+          "/#sidenav-collapsed",
+          "/graphql-playground"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:public",
+        "label": "Public layout — full-page centered form, no nav, with footer",
+        "node_ids": ["/signin", "/signin#error", "/signup", "/signin#redirect"]
+      },
+      {
+        "id": "layout:main",
+        "label": "Main authenticated layout — AppBar (NavBar) + collapsible NavDrawer",
+        "node_ids": [
+          "/",
+          "/public",
+          "/contacts",
+          "/personal",
+          "/#date-filter-open",
+          "/#amount-filter-open",
+          "/#transactions-empty",
+          "/transaction/:transactionId",
+          "/transaction/:transactionId#pending-request",
+          "/transaction/:transactionId#loading",
+          "/transaction/new",
+          "/transaction/new#step-two",
+          "/transaction/new#step-three",
+          "/user/settings",
+          "/notifications",
+          "/notifications#empty-list",
+          "/bankaccounts",
+          "/bankaccounts#empty-list",
+          "/bankaccounts/new",
+          "/#onboarding-step-one",
+          "/#onboarding-step-two",
+          "/#onboarding-step-three",
+          "/#sidenav-open",
+          "/#sidenav-collapsed"
+        ]
+      }
+    ]
+  }
+}

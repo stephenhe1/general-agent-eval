@@ -9,29 +9,35 @@ import sys
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-from general_agent_eval.preprocessing.java_test_clearing import (
-    SOURCE_SET_NAMES,
-    TEST_FILE_PATTERN,
-    TEST_ROOT_DIR_NAMES,
-    TEST_SUPPORT_DIR_NAMES,
-)
-
-# Build/config files an agent may legitimately touch to wire up test dependencies.
-# Flagged separately from production code so the report stays honest either way.
 BUILD_FILE_NAMES = frozenset(
     {
-        "pom.xml",
-        "build.gradle",
-        "build.gradle.kts",
-        "settings.gradle",
-        "settings.gradle.kts",
-        "gradle.properties",
-        "build.xml",
-        "ivy.xml",
+        "package.json",
+        "package-lock.json",
+        "yarn.lock",
+        "pnpm-lock.yaml",
+        "playwright.config.ts",
+        "playwright.config.js",
+        "playwright.config.mts",
+        "playwright.config.mjs",
     }
 )
-BUILD_FILE_SUFFIXES = (".gradle", ".gradle.kts")
-TEST_PATH_PART_NAMES = SOURCE_SET_NAMES | TEST_ROOT_DIR_NAMES | TEST_SUPPORT_DIR_NAMES
+TEST_FILE_PATTERN = re.compile(
+    r".*\.(?:test|spec|cy)\.(?:js|jsx|ts|tsx|mjs|cjs)$"
+)
+TEST_PATH_PART_NAMES = frozenset(
+    {
+        "__tests__",
+        "__mocks__",
+        "cypress",
+        "e2e",
+        "test",
+        "tests",
+        "spec",
+        "specs",
+        "playwright",
+        "rq6-agent",
+    }
+)
 
 
 class RecoverError(RuntimeError):
@@ -78,19 +84,17 @@ def load_manifest(run_dir: Path) -> dict[str, Any]:
         raise RecoverError(f"manifest.json is invalid JSON: {manifest_path}") from exc
 
 
-def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None, Path | None, Path | None]:
+def resolve_artifacts(run_dir: Path) -> tuple[Path, Path | None, Path | None]:
     """Locate run artifacts relative to run_dir so a moved run dir still resolves."""
     output_dir = run_dir / "output"
     git_diff_patch = output_dir / "git_diff.patch"
     if not git_diff_patch.is_file():
         raise RecoverError(f"run dir is missing the agent patch: {git_diff_patch}")
     cleared_tests = output_dir / "cleared_tests.json"
-    injection_patch = output_dir / "dependency_injection.patch"
     clearing_patch = output_dir / "test_clearing.patch"
     return (
         git_diff_patch,
         cleared_tests if cleared_tests.is_file() else None,
-        injection_patch if injection_patch.is_file() else None,
         clearing_patch if clearing_patch.is_file() else None,
     )
 
@@ -155,10 +159,7 @@ def is_test_path(path: str) -> bool:
 
 
 def is_build_path(path: str) -> bool:
-    name = PurePosixPath(path).name
-    if name in BUILD_FILE_NAMES:
-        return True
-    return any(name.endswith(suffix) for suffix in BUILD_FILE_SUFFIXES)
+    return PurePosixPath(path).name in BUILD_FILE_NAMES
 
 
 def classify_path(path: str) -> str:
@@ -318,7 +319,6 @@ def build_recovery_manifest(
     collisions: list[dict[str, Any]],
     apply_result: dict[str, Any],
     clearing_result: dict[str, Any],
-    injection_result: dict[str, Any],
     caveats: list[str],
 ) -> dict[str, Any]:
     non_test = sorted(p for p in touched if classify_path(p) != "test")
@@ -332,7 +332,6 @@ def build_recovery_manifest(
         "base_source": "local-clone",
         "collision_policy": "agent-wins",
         "test_clearing": clearing_result,
-        "dependency_injection": injection_result,
         "apply_status": apply_result["status"],
         "rejected_files": apply_result["rejected_files"],
         "apply_error": apply_result["stderr"],
@@ -367,9 +366,7 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         raise RecoverError(f"--repo is not a directory: {repo}")
 
     manifest = load_manifest(run_dir)
-    git_diff_patch, cleared_tests_path, injection_patch_path, clearing_patch_path = (
-        resolve_artifacts(run_dir)
-    )
+    git_diff_patch, cleared_tests_path, clearing_patch_path = resolve_artifacts(run_dir)
     commit_info = resolve_commit(manifest, args.commit)
     caveats = collect_caveats(manifest)
 
@@ -385,7 +382,7 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
 
     # Replay the recorded test deletions first so the clone matches the testless
     # baseline the agent diffed against; otherwise original tests the agent never
-    # recreated (e.g. UI suites) silently survive into the recovery.
+    # recreated silently survive into the recovery.
     clearing_result = replay_patch(
         repo_dir,
         clearing_patch_path,
@@ -398,17 +395,6 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
             f"test_clearing.patch was not replayed ({clearing_result['reason']}): "
             "original test files the agent did not recreate may survive in the "
             "recovered repo (see recovery_manifest.json test_clearing)."
-        )
-
-    # Replay the injected build-file change next; the agent patch lands on top.
-    injection_result = replay_patch(
-        repo_dir, injection_patch_path, "dependency_injection.patch"
-    )
-    if injection_patch_path is not None and not injection_result["applied"]:
-        caveats.append(
-            "dependency_injection.patch did not apply: the recovered repo lacks the "
-            "injected RestAssured dependency, so the agent's RestAssured tests may not "
-            "compile (see recovery_manifest.json dependency_injection)."
         )
 
     summary = parse_apply_summary(
@@ -441,7 +427,6 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
         collisions=collisions,
         apply_result=apply_result,
         clearing_result=clearing_result,
-        injection_result=injection_result,
         caveats=caveats,
     )
     write_recovery_manifest(
@@ -506,15 +491,14 @@ def main(argv: list[str] | None = None) -> int:
         f"apply={manifest['apply_status']}",
         flush=True,
     )
-    for replay_name in ("test_clearing", "dependency_injection"):
-        replay = manifest[replay_name]
-        if replay.get("applied") or replay.get("reason") != f"no {replay_name}.patch":
-            print(
-                "[recover] "
-                f"{replay_name} applied={replay.get('applied')} "
-                f"{replay.get('reason', '')}".rstrip(),
-                flush=True,
-            )
+    clearing = manifest["test_clearing"]
+    if clearing.get("applied") or clearing.get("reason") != "no test_clearing.patch":
+        print(
+            "[recover] "
+            f"test_clearing applied={clearing.get('applied')} "
+            f"{clearing.get('reason', '')}".rstrip(),
+            flush=True,
+        )
     counts = manifest["counts"]
     print(
         "[recover] "

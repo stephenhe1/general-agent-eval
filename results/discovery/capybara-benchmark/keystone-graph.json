@@ -1,0 +1,796 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Keystone Admin UI (auth example)",
+    "base_url": "http://localhost:3014",
+    "total_states": 23,
+    "explored": 23,
+    "skipped": 0,
+    "verified_live": [
+      "/signin",
+      "/init",
+      "/",
+      "/users",
+      "/users/create",
+      "/no-access",
+      "/users/cmsclagmg00008o10mxzi8exh"
+    ],
+    "notes": "Keystone 6 Admin UI with auth package; single User list; SQLite db. Auth example at /examples/auth. Non-admins are redirected to /signin rather than /no-access (auth pageMiddleware always redirects on denied access)."
+  },
+  "nodes": [
+    {
+      "id": "/signin",
+      "route": "/signin",
+      "label": "Sign-in page – logo, Name field, Password field, Sign in button",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill 'Name' text field [label='Name']",
+        "Fill 'Password' password field [name='password']",
+        "Submit 'Sign in' button [role=button, text='Sign in']"
+      ],
+      "notes": "Redirects to / on success. Shows error notice on invalid credentials."
+    },
+    {
+      "id": "/init",
+      "route": "/init",
+      "label": "Init page – empty state after first user created (form not shown)",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [],
+      "notes": "Server responds with 302 empty Location; browser stays at /init. No form rendered once users exist."
+    },
+    {
+      "id": "/init#first-user-form",
+      "route": "/init",
+      "label": "Init page – 'Create your first user' form shown (no users in DB)",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Fill 'Name' text field [label='Name']",
+        "Fill 'Password' group – click 'Set password' then fill New/Confirm inputs",
+        "Submit 'Get started' button [role=button, text='Get started']"
+      ],
+      "notes": "Only reachable when DB has zero users (initFirstItem condition). Not reachable in seeded state."
+    },
+    {
+      "id": "/no-access",
+      "route": "/no-access",
+      "label": "No access page – shield icon, 'No access' heading, explanatory text",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:none",
+      "actions": [],
+      "notes": "Reachable by admins via direct URL. Non-admins redirected to /signin by auth pageMiddleware."
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Dashboard – 'Dashboard' heading, Users list card with item count and Add button",
+      "section": "Dashboard",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Users' card link [role=link heading, text='Users']",
+        "Click 'add' button on Users card [role=button, aria-label='add']",
+        "Click 'Dashboard' nav link [role=link, text='Dashboard', aria-current='page']",
+        "Click 'Users' nav link [role=link, text='Users']",
+        "Click 'Sign out' button [role=button, text='Sign out']",
+        "Click 'Developer resources' menu trigger [role=button, aria-label='Developer resources']"
+      ],
+      "notes": "Home page. Shows one card per list (only Users in auth example). Unauthenticated → /signin."
+    },
+    {
+      "id": "/#developer-resources-menu",
+      "route": "/",
+      "label": "Dashboard with developer resources menu open",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'API explorer' menu item [role=menuitem, text='API explorer'] → /api/graphql",
+        "Click 'GitHub repository' menu item [role=menuitem, text='GitHub repository'] → external",
+        "Click 'Documentation' menu item [role=menuitem, text='Documentation'] → external",
+        "Click 'Community' menu item [role=menuitem, text='Community'] → opens WelcomeDialog",
+        "Dismiss menu by pressing Escape or clicking outside"
+      ],
+      "notes": "Only shown in NODE_ENV != 'production'. Menu anchored in nav footer."
+    },
+    {
+      "id": "/#welcome-dialog",
+      "route": "/",
+      "label": "Dashboard with Welcome/newsletter subscription dialog open",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Fill 'Email' text field [label='Email']",
+        "Toggle 'Keystone news' checkbox [role=checkbox, text='Keystone news']",
+        "Toggle 'Thinkmill news' checkbox [role=checkbox, text='Thinkmill news']",
+        "Click 'Subscribe' button [role=button, text='Subscribe']",
+        "Click 'Cancel' button [role=button, text='Cancel']"
+      ],
+      "notes": "Opened from 'Community' item in Developer Resources menu. Newsletter subscription dialog."
+    },
+    {
+      "id": "/users",
+      "route": "/users",
+      "label": "Users list – table with name/isAdmin columns, search, filter, column picker, New User button",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'New User' button [role=button, text='New User'] → /users/create",
+        "Type in search field [role=searchbox, placeholder='Search…']",
+        "Click 'Filter' button [role=button, text='Filter', aria-label contains 'Filter']",
+        "Click 'Columns' button [role=button, text='Columns']",
+        "Click column header to sort (e.g. 'Name' [role=columnheader, text='Name'])",
+        "Check row checkbox to select item [role=checkbox in row]",
+        "Click row item link to navigate to item page",
+        "Click pagination 'Next page' / 'Previous page' [role=button]",
+        "Click 'Dashboard' nav link [role=link, text='Dashboard']",
+        "Click 'Users' nav link [role=link, text='Users', aria-current='page']",
+        "Click 'Sign out' button [role=button, text='Sign out']",
+        "Click 'Developer resources' menu trigger [role=button, aria-label='Developer resources']"
+      ],
+      "notes": "List view for User list. Sort via column header click. Search is live."
+    },
+    {
+      "id": "/users#columns-menu",
+      "route": "/users",
+      "label": "Users list with column selector dropdown open",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Toggle column visibility: 'Name' [role=menuitemcheckbox, text='Name']",
+        "Toggle column visibility: 'Is Admin' [role=menuitemcheckbox, text='Is Admin']",
+        "Dismiss menu by pressing Escape or clicking outside"
+      ],
+      "notes": "Multi-select menu. Columns: name, isAdmin (from User list initialColumns config)."
+    },
+    {
+      "id": "/users#filter-add-dialog",
+      "route": "/users",
+      "label": "Users list with 'Add filter' popover open – field picker step",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Select filter field from picker [role=listbox or combobox] e.g. 'Is Admin'",
+        "Dismiss by pressing Escape or clicking outside"
+      ],
+      "notes": "Step 1 of 2: pick which field to filter. Only filterable fields shown."
+    },
+    {
+      "id": "/users#filter-add-dialog#value",
+      "route": "/users",
+      "label": "Users list with 'Add filter' popover – value/type input step",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Select filter type (e.g. 'is', 'is not') [role=listbox/picker]",
+        "Input filter value",
+        "Click 'Apply' / submit button to add filter [role=button]",
+        "Click 'Cancel' to dismiss [role=button, text='Cancel']"
+      ],
+      "notes": "Step 2 of 2: pick filter type and value. Appears after selecting field in step 1."
+    },
+    {
+      "id": "/users#filter-edit-popover",
+      "route": "/users",
+      "label": "Users list with inline filter-edit popover open on an active filter tag",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Edit filter value in form",
+        "Click 'Apply' submit button [role=button]",
+        "Click 'Cancel' button [role=button, text='Cancel']"
+      ],
+      "notes": "Clicking an active filter tag that has editable value opens this popover."
+    },
+    {
+      "id": "/users#items-selected",
+      "route": "/users",
+      "label": "Users list with ≥1 rows selected – ActionBar visible at bottom",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Delete' action item in ActionBar [role=button, text='Delete']",
+        "Click clear selection button [aria-label='Clear selection'] in ActionBar",
+        "Toggle additional checkboxes to add/remove items from selection",
+        "Click 'Select all' checkbox in table header [role=checkbox in thead]"
+      ],
+      "notes": "Selection triggers ActionBar overlay. Delete is the default action for Users list."
+    },
+    {
+      "id": "/users#delete-confirm-dialog",
+      "route": "/users",
+      "label": "Users list with bulk-delete AlertDialog open",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Yes, delete' primary action button [role=button, text='Yes, delete']",
+        "Click 'Cancel' button [role=button, text='Cancel']"
+      ],
+      "notes": "AlertDialog: 'Are you sure you want to delete {count} {user|users}?'"
+    },
+    {
+      "id": "/users#action-error-dialog",
+      "route": "/users",
+      "label": "Users list with action error details Dialog open",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click dismiss / close button to close dialog [role=button, aria-label='Dismiss']",
+        "Click item link to go to item page [role=link in dialog]"
+      ],
+      "notes": "Shown when bulk action partially fails. Contains per-item error details."
+    },
+    {
+      "id": "/users/create",
+      "route": "/users/create",
+      "label": "Create User form – Name, Password group, Create button",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Fill 'Name' text field [label='Name']",
+        "Click 'Set password' button in Password group [role=button, text='Set password']",
+        "Click 'Users' breadcrumb link [role=link, text='Users'] → /users",
+        "Click 'Create' submit button [role=button, text='Create']",
+        "Click 'Dashboard' nav link [role=link, text='Dashboard']",
+        "Click 'Users' nav link [role=link, text='Users']",
+        "Click 'Sign out' button [role=button, text='Sign out']"
+      ],
+      "notes": "Submitting creates user and navigates to /users/:id. 'Set password' button expands password inputs."
+    },
+    {
+      "id": "/users/create#password-expanded",
+      "route": "/users/create",
+      "label": "Create User form with password fields visible (New / Confirm inputs shown)",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Fill 'New' password input [placeholder='New']",
+        "Fill 'Confirm' password input [placeholder='Confirm']",
+        "Toggle password visibility icon [role=button, aria-label contains 'show/hide']",
+        "Click 'Create' submit button [role=button, text='Create']",
+        "Click 'Users' breadcrumb link [role=link, text='Users'] → /users"
+      ],
+      "notes": "Password group expands to New + Confirm inputs after 'Set password' click."
+    },
+    {
+      "id": "/users/:id",
+      "route": "/users/:id",
+      "label": "User item page – Name (read/edit), Is Admin checkbox, Password group, Save (disabled), Reset (disabled)",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Users' breadcrumb link [role=link, text='Users'] → /users",
+        "Click 'Set password' / 'Change password' button in Password group",
+        "Click 'Delete' button [role=button, text='Delete']",
+        "Edit 'Name' text field [label='Name'] (admin only)",
+        "Toggle 'Is Admin' checkbox [label='Is Admin']",
+        "Click 'Save' button [role=button, text='Save'] – disabled until changes",
+        "Click 'Reset' button [role=button, text='Reset'] – disabled until changes",
+        "Click 'Dashboard' nav link [role=link, text='Dashboard']",
+        "Click 'Users' nav link [role=link, text='Users', aria-current='true']",
+        "Click 'Sign out' button [role=button, text='Sign out']"
+      ],
+      "notes": "Save/Reset disabled until a field is edited. Delete visible for admins only (hideDelete check)."
+    },
+    {
+      "id": "/users/:id#unsaved-changes",
+      "route": "/users/:id",
+      "label": "User item page with pending edits – Save and Reset buttons enabled",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Save' button [role=button, text='Save'] – enabled",
+        "Click 'Reset' button [role=button, text='Reset'] – enabled",
+        "Click 'Delete' button [role=button, text='Delete']",
+        "Click 'Users' breadcrumb link [role=link, text='Users']"
+      ],
+      "notes": "Save/Reset become enabled when any field is changed from its persisted value."
+    },
+    {
+      "id": "/users/:id#delete-confirm-dialog",
+      "route": "/users/:id",
+      "label": "User item page with delete AlertDialog open",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Yes, delete' [role=button, text='Yes, delete'] – confirms deletion → navigates to /users",
+        "Click 'Cancel' [role=button, text='Cancel'] – dismisses dialog"
+      ],
+      "notes": "AlertDialog: 'Are you sure you want to delete <strong>itemLabel</strong>?'"
+    },
+    {
+      "id": "/users/:id#reset-confirm-dialog",
+      "route": "/users/:id",
+      "label": "User item page with reset-changes AlertDialog open",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Yes, reset' [role=button, text='Yes, reset'] – discards edits",
+        "Click 'Cancel' [role=button, text='Cancel'] – dismisses dialog"
+      ],
+      "notes": "AlertDialog: 'Are you sure? Any unsaved changes will be lost and cannot be recovered.'"
+    },
+    {
+      "id": "/users/:id#error-details-dialog",
+      "route": "/users/:id",
+      "label": "User item page with error-details Dialog open (save or delete failed)",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Dismiss error dialog [role=button, aria-label='Dismiss' or clicking outside]"
+      ],
+      "notes": "Shown via toast 'Details' action button after save/delete error. Contains stack trace."
+    },
+    {
+      "id": "/users/:id#not-found",
+      "route": "/users/:id",
+      "label": "User item page – 'Not found' state when ID does not exist",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:admin",
+      "actions": [
+        "Click 'Users' breadcrumb link [role=link, text='Users'] → /users"
+      ],
+      "notes": "Renders ItemPage with 'Not found' heading when GraphQL returns null for the given ID."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/signin",
+      "to": "/",
+      "trigger": "button 'Sign in' [role=button, text='Sign in']",
+      "guard": "Valid admin credentials (name + password match)"
+    },
+    {
+      "from": "/signin",
+      "to": "/init#first-user-form",
+      "trigger": "auto: redirect when no users exist in DB",
+      "guard": "initFirstItem enabled AND user count = 0"
+    },
+    {
+      "from": "/init#first-user-form",
+      "to": "/",
+      "trigger": "button 'Get started' [role=button, text='Get started']",
+      "guard": "Form valid (name + password provided)"
+    },
+    {
+      "from": "/init",
+      "to": "/",
+      "trigger": "auto: redirect (302 empty Location stays at /init, then client loads / on next request)",
+      "guard": "Users already exist in DB"
+    },
+    {
+      "from": "/",
+      "to": "/users",
+      "trigger": "link 'Users' heading in list card [role=link in h3]",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/users/create",
+      "trigger": "button 'add' [role=button, aria-label='add'] on Users card",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/#developer-resources-menu",
+      "trigger": "button 'Developer resources' [role=button, aria-label='Developer resources'] in nav footer",
+      "guard": "NODE_ENV !== 'production'"
+    },
+    {
+      "from": "/#developer-resources-menu",
+      "to": "/",
+      "trigger": "Escape key or click outside menu",
+      "guard": null
+    },
+    {
+      "from": "/#developer-resources-menu",
+      "to": "/#welcome-dialog",
+      "trigger": "menuitem 'Community' [role=menuitem, text='Community']",
+      "guard": null
+    },
+    {
+      "from": "/#welcome-dialog",
+      "to": "/",
+      "trigger": "button 'Cancel' [role=button, text='Cancel'] or button 'Subscribe' [role=button, text='Subscribe']",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/users/create",
+      "trigger": "button 'New User' [role=button, text='New User']",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/users/:id",
+      "trigger": "link in table row [role=link, text=user name]",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/users#columns-menu",
+      "trigger": "button 'Columns' [role=button, text='Columns']",
+      "guard": "List is not empty (button is disabled when empty)"
+    },
+    {
+      "from": "/users#columns-menu",
+      "to": "/users",
+      "trigger": "Escape key or click outside menu",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/users#filter-add-dialog",
+      "trigger": "button 'Filter' [aria-label contains 'Filter', text includes 'Filter']",
+      "guard": "List is not empty (filter button is disabled when empty)"
+    },
+    {
+      "from": "/users#filter-add-dialog",
+      "to": "/users#filter-add-dialog#value",
+      "trigger": "Select field from picker/listbox (e.g. 'Is Admin')",
+      "guard": null
+    },
+    {
+      "from": "/users#filter-add-dialog#value",
+      "to": "/users",
+      "trigger": "button 'Apply' or submit filter form",
+      "guard": null
+    },
+    {
+      "from": "/users#filter-add-dialog",
+      "to": "/users",
+      "trigger": "button 'Cancel' or Escape",
+      "guard": null
+    },
+    {
+      "from": "/users#filter-add-dialog#value",
+      "to": "/users",
+      "trigger": "button 'Cancel' [role=button, text='Cancel']",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/users#filter-edit-popover",
+      "trigger": "click active filter tag [role=button in filter tags area]",
+      "guard": "An active filter with editable value exists on the list"
+    },
+    {
+      "from": "/users#filter-edit-popover",
+      "to": "/users",
+      "trigger": "button 'Apply' or 'Cancel' or Escape",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/users#items-selected",
+      "trigger": "checkbox in table row [role=checkbox]",
+      "guard": null
+    },
+    {
+      "from": "/users#items-selected",
+      "to": "/users",
+      "trigger": "button 'Clear selection' [role=button, aria-label='Clear selection'] in ActionBar",
+      "guard": null
+    },
+    {
+      "from": "/users#items-selected",
+      "to": "/users#delete-confirm-dialog",
+      "trigger": "item 'Delete' in ActionBar [role=menuitem or button, text='Delete']",
+      "guard": null
+    },
+    {
+      "from": "/users#delete-confirm-dialog",
+      "to": "/users",
+      "trigger": "button 'Yes, delete' [role=button, text='Yes, delete'] or button 'Cancel' [role=button, text='Cancel']",
+      "guard": null
+    },
+    {
+      "from": "/users#delete-confirm-dialog",
+      "to": "/users#action-error-dialog",
+      "trigger": "auto: on delete failure, toast action 'Details' button triggers error dialog",
+      "guard": "GraphQL mutation error occurs during bulk delete"
+    },
+    {
+      "from": "/users#action-error-dialog",
+      "to": "/users",
+      "trigger": "dismiss dialog [role=button, aria-label='Dismiss'] or click outside",
+      "guard": null
+    },
+    {
+      "from": "/users/create",
+      "to": "/users/:id",
+      "trigger": "button 'Create' [role=button, text='Create']",
+      "guard": "Form valid: name provided, password set and matching"
+    },
+    {
+      "from": "/users/create",
+      "to": "/users/create#password-expanded",
+      "trigger": "button 'Set password' [role=button, text='Set password'] in Password group",
+      "guard": null
+    },
+    {
+      "from": "/users/create#password-expanded",
+      "to": "/users/create",
+      "trigger": "press Escape when New + Confirm inputs are both empty",
+      "guard": null
+    },
+    {
+      "from": "/users/create",
+      "to": "/users",
+      "trigger": "link 'Users' breadcrumb [role=link, text='Users']",
+      "guard": null
+    },
+    {
+      "from": "/users/create#password-expanded",
+      "to": "/users",
+      "trigger": "link 'Users' breadcrumb [role=link, text='Users']",
+      "guard": null
+    },
+    {
+      "from": "/users/:id",
+      "to": "/users/:id#unsaved-changes",
+      "trigger": "Edit any field (e.g. toggle 'Is Admin' checkbox, edit 'Name' field)",
+      "guard": null
+    },
+    {
+      "from": "/users/:id#unsaved-changes",
+      "to": "/users/:id",
+      "trigger": "button 'Save' [role=button, text='Save'] – successfully saves changes",
+      "guard": null
+    },
+    {
+      "from": "/users/:id#unsaved-changes",
+      "to": "/users/:id#reset-confirm-dialog",
+      "trigger": "button 'Reset' [role=button, text='Reset']",
+      "guard": "hasChanges is true"
+    },
+    {
+      "from": "/users/:id#reset-confirm-dialog",
+      "to": "/users/:id",
+      "trigger": "button 'Yes, reset' [role=button, text='Yes, reset'] or button 'Cancel' [role=button, text='Cancel']",
+      "guard": null
+    },
+    {
+      "from": "/users/:id",
+      "to": "/users/:id#delete-confirm-dialog",
+      "trigger": "button 'Delete' [role=button, text='Delete']",
+      "guard": "Admin user (hideDelete returns false for admins)"
+    },
+    {
+      "from": "/users/:id#unsaved-changes",
+      "to": "/users/:id#delete-confirm-dialog",
+      "trigger": "button 'Delete' [role=button, text='Delete']",
+      "guard": "Admin user"
+    },
+    {
+      "from": "/users/:id#delete-confirm-dialog",
+      "to": "/users",
+      "trigger": "button 'Yes, delete' [role=button, text='Yes, delete']",
+      "guard": null
+    },
+    {
+      "from": "/users/:id#delete-confirm-dialog",
+      "to": "/users/:id",
+      "trigger": "button 'Cancel' [role=button, text='Cancel']",
+      "guard": null
+    },
+    {
+      "from": "/users/:id#delete-confirm-dialog",
+      "to": "/users/:id#error-details-dialog",
+      "trigger": "auto: toast 'Details' action button after delete failure",
+      "guard": "GraphQL mutation error during delete"
+    },
+    {
+      "from": "/users/:id#unsaved-changes",
+      "to": "/users/:id#error-details-dialog",
+      "trigger": "auto: toast 'Details' action button after save failure",
+      "guard": "GraphQL mutation error during update"
+    },
+    {
+      "from": "/users/:id#error-details-dialog",
+      "to": "/users/:id",
+      "trigger": "dismiss dialog [role=button, aria-label='Dismiss'] or click outside",
+      "guard": null
+    },
+    {
+      "from": "/users/:id",
+      "to": "/users",
+      "trigger": "link 'Users' breadcrumb [role=link, text='Users']",
+      "guard": null
+    },
+    {
+      "from": "/users/:id#unsaved-changes",
+      "to": "/users",
+      "trigger": "link 'Users' breadcrumb [role=link, text='Users']",
+      "guard": null
+    },
+    {
+      "from": "/users/:id#not-found",
+      "to": "/users",
+      "trigger": "link 'Users' breadcrumb [role=link, text='Users']",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/signin",
+      "trigger": "auto: redirect on unauthenticated or expired session",
+      "guard": "No valid session cookie"
+    },
+    {
+      "from": "/users",
+      "to": "/signin",
+      "trigger": "auto: redirect on unauthenticated access",
+      "guard": "No valid session cookie"
+    },
+    {
+      "from": "/users/create",
+      "to": "/signin",
+      "trigger": "auto: redirect on unauthenticated access",
+      "guard": "No valid session cookie"
+    },
+    {
+      "from": "/users/:id",
+      "to": "/signin",
+      "trigger": "auto: redirect on unauthenticated access",
+      "guard": "No valid session cookie"
+    },
+    {
+      "from": "/",
+      "to": "/signin",
+      "trigger": "button 'Sign out' [role=button, text='Sign out'] in nav footer",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/signin",
+      "trigger": "button 'Sign out' [role=button, text='Sign out'] in nav footer",
+      "guard": null
+    },
+    {
+      "from": "/users/:id",
+      "to": "/signin",
+      "trigger": "button 'Sign out' [role=button, text='Sign out'] in nav footer",
+      "guard": null
+    },
+    {
+      "from": "/users",
+      "to": "/",
+      "trigger": "link 'Dashboard' [role=link, text='Dashboard'] in sidebar nav",
+      "guard": null
+    },
+    {
+      "from": "/users/create",
+      "to": "/users",
+      "trigger": "link 'Users' [role=link, text='Users'] in sidebar nav",
+      "guard": null
+    },
+    {
+      "from": "/users/:id",
+      "to": "/",
+      "trigger": "link 'Dashboard' [role=link, text='Dashboard'] in sidebar nav",
+      "guard": null
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Public pages – no session required",
+        "node_ids": ["/signin", "/init", "/init#first-user-form"]
+      },
+      {
+        "id": "zone:admin",
+        "label": "Admin-only pages – requires isAdmin=true session",
+        "node_ids": [
+          "/",
+          "/#developer-resources-menu",
+          "/#welcome-dialog",
+          "/users",
+          "/users#columns-menu",
+          "/users#filter-add-dialog",
+          "/users#filter-add-dialog#value",
+          "/users#filter-edit-popover",
+          "/users#items-selected",
+          "/users#delete-confirm-dialog",
+          "/users#action-error-dialog",
+          "/users/create",
+          "/users/create#password-expanded",
+          "/users/:id",
+          "/users/:id#unsaved-changes",
+          "/users/:id#delete-confirm-dialog",
+          "/users/:id#reset-confirm-dialog",
+          "/users/:id#error-details-dialog",
+          "/users/:id#not-found"
+        ]
+      },
+      {
+        "id": "zone:no-access",
+        "label": "No-access page – rendered when isAccessAllowed=false but no pageMiddleware redirect",
+        "node_ids": ["/no-access"]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:auth",
+        "label": "Auth layout – centered form, logo at top, no sidebar navigation",
+        "node_ids": ["/signin", "/init", "/init#first-user-form"]
+      },
+      {
+        "id": "layout:admin",
+        "label": "Admin layout – left sidebar nav (Dashboard + list links + sign-out + dev menu), main content area",
+        "node_ids": [
+          "/",
+          "/#developer-resources-menu",
+          "/#welcome-dialog",
+          "/users",
+          "/users#columns-menu",
+          "/users#filter-add-dialog",
+          "/users#filter-add-dialog#value",
+          "/users#filter-edit-popover",
+          "/users#items-selected",
+          "/users#delete-confirm-dialog",
+          "/users#action-error-dialog",
+          "/users/create",
+          "/users/create#password-expanded",
+          "/users/:id",
+          "/users/:id#unsaved-changes",
+          "/users/:id#delete-confirm-dialog",
+          "/users/:id#reset-confirm-dialog",
+          "/users/:id#error-details-dialog",
+          "/users/:id#not-found"
+        ]
+      },
+      {
+        "id": "layout:none",
+        "label": "Standalone error page – no layout wrapper",
+        "node_ids": ["/no-access"]
+      }
+    ]
+  }
+}

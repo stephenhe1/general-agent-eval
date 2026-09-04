@@ -1,0 +1,1276 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Epic Notes",
+    "base_url": "http://localhost:3002",
+    "framework": "React Router v7 (Remix-style) + Express + Prisma + SQLite",
+    "total_states": 45,
+    "explored": 41,
+    "skipped": 4,
+    "verified_live": [
+      "/",
+      "/login",
+      "/signup",
+      "/forgot-password",
+      "/verify",
+      "/users",
+      "/users/kody",
+      "/users/kody/notes",
+      "/users/kody/notes/d27a197e",
+      "/users/kody/notes/d27a197e/edit",
+      "/users/kody/notes/new",
+      "/settings/profile",
+      "/settings/profile/photo",
+      "/settings/profile/two-factor",
+      "/settings/profile/two-factor/disable",
+      "/settings/profile/change-email",
+      "/settings/profile/connections",
+      "/settings/profile/passkeys",
+      "/settings/profile/password",
+      "/admin/cache",
+      "/resources/healthcheck"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Home: Epic Stack marketing page with logo grid",
+      "section": "Marketing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'epic notes' logo link [href='/']",
+        "Click 'Log In' button [href='/login'] (unauthenticated only)",
+        "Search users via SearchBar [action='/users']",
+        "Click tech logo tooltip (external link to each tech's site)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Landing page; shows stack tech logos with tooltips"
+    },
+    {
+      "id": "/about",
+      "route": "/about",
+      "label": "About page (placeholder)",
+      "section": "Marketing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'epic notes' logo link [href='/']",
+        "Click 'Log In' button [href='/login'] (unauthenticated only)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Stub: renders '<div>About page</div>'"
+    },
+    {
+      "id": "/privacy",
+      "route": "/privacy",
+      "label": "Privacy Policy (placeholder)",
+      "section": "Marketing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'epic notes' logo link [href='/']",
+        "Click 'Log In' button [href='/login'] (unauthenticated only)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Stub: renders '<div>Privacy</div>'"
+    },
+    {
+      "id": "/tos",
+      "route": "/tos",
+      "label": "Terms of Service (placeholder)",
+      "section": "Marketing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'epic notes' logo link [href='/']",
+        "Click 'Log In' button [href='/login'] (unauthenticated only)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Stub: renders '<div>Terms of service</div>'"
+    },
+    {
+      "id": "/support",
+      "route": "/support",
+      "label": "Support page (placeholder)",
+      "section": "Marketing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'epic notes' logo link [href='/']",
+        "Click 'Log In' button [href='/login'] (unauthenticated only)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Stub: renders '<div>Support</div>'"
+    },
+    {
+      "id": "/login",
+      "route": "/login",
+      "label": "Login: username/password form, passkey button, GitHub OAuth",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit login form [form#login-form]",
+        "Click 'Forgot password?' link [href='/forgot-password']",
+        "Click 'Login with a passkey' button [id=passkey-login-button]",
+        "Submit 'Login with GitHub' form [action='/auth/github']",
+        "Click 'Create an account' link [href='/signup']",
+        "Toggle 'Remember me' checkbox [id=login-form-remember]",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires anonymous (redirects to / if logged in); only GitHub OAuth provider"
+    },
+    {
+      "id": "/signup",
+      "route": "/signup",
+      "label": "Sign up: email entry to start account creation",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit email form [form#signup-form button 'Submit']",
+        "Submit 'Sign up with GitHub' form [action='/auth/github']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Sends verification email; requires anonymous session"
+    },
+    {
+      "id": "/forgot-password",
+      "route": "/forgot-password",
+      "label": "Forgot Password: username or email entry",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit 'Recover password' form [form#forgot-password-form]",
+        "Click 'Back to Login' link [href='/login']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Sends reset email; does NOT require anonymous (any user can reach it)"
+    },
+    {
+      "id": "/verify#email",
+      "route": "/verify",
+      "label": "Verify OTP: 'Check your email' heading for email-based flows",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit OTP code [form#verify-form button 'Submit']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Used for type=onboarding, reset-password, change-email; 6-digit OTP field"
+    },
+    {
+      "id": "/verify#2fa",
+      "route": "/verify",
+      "label": "Verify OTP: 'Check your 2FA app' heading for 2FA login challenge",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit 2FA TOTP code [form#verify-form button 'Submit']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Shown when type=2fa query param; different heading from email flow"
+    },
+    {
+      "id": "/onboarding",
+      "route": "/onboarding",
+      "label": "Onboarding: username/name/password form for new email-verified users",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit 'Create an account' form [form#onboarding-form]",
+        "Toggle 'Agree to ToS/Privacy' checkbox",
+        "Toggle 'Remember me' checkbox",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires onboarding email in session; redirects to /signup without it"
+    },
+    {
+      "id": "/onboarding/:provider",
+      "route": "/onboarding/:provider",
+      "label": "OAuth Onboarding: username/name form for new OAuth-connected users",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit 'Create an account' form [form#onboarding-provider-form]",
+        "Toggle 'Agree to ToS/Privacy' checkbox",
+        "Toggle 'Remember me' checkbox",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Used after GitHub OAuth for new users; may show pre-filled profile image"
+    },
+    {
+      "id": "/reset-password",
+      "route": "/reset-password",
+      "label": "Reset Password: new password + confirm form",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Submit 'Reset password' form [form#reset-password]",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires resetPasswordUsername in verify session; else redirects to /login"
+    },
+    {
+      "id": "/users",
+      "route": "/users",
+      "label": "Users search/list: grid of user cards with avatar and name",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Search users [SearchBar form action='/users' name='search']",
+        "Click user card [link aria-label='{name} profile']",
+        "Click 'epic notes' logo link [href='/']",
+        "Click 'Log In' button [href='/login'] (unauthenticated)",
+        "Open UserDropdown (authenticated)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Search bar auto-submits on type; empty search redirects to /users"
+    },
+    {
+      "id": "/users/:username",
+      "route": "/users/:username",
+      "label": "User profile: avatar, name, join date, notes/edit links",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click '{name}'s notes' button [link to='/users/:username/notes']",
+        "Click 'epic notes' logo link [href='/']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Non-owner view: only shows notes button; no edit/logout visible"
+    },
+    {
+      "id": "/users/:username#own",
+      "route": "/users/:username",
+      "label": "Own user profile: avatar + logout + My notes + Edit profile buttons",
+      "section": "Users",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:root",
+      "actions": [
+        "Submit 'Logout' form [action='/logout' method=POST]",
+        "Click 'My notes' button [link to='/users/:username/notes']",
+        "Click 'Edit profile' button [link to='/settings/profile']",
+        "Open UserDropdown [aria-label='User menu']",
+        "Click 'epic notes' logo link [href='/']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Shown when loggedInUser.id === profile user.id"
+    },
+    {
+      "id": "/users/:username/notes",
+      "route": "/users/:username/notes",
+      "label": "Notes layout: left sidebar with note list; right panel shows 'Select a note'",
+      "section": "Notes",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:notes",
+      "actions": [
+        "Click owner name/avatar link [to='/users/:username']",
+        "Click 'New Note' nav link [to='new'] (owner only)",
+        "Click note title nav link [to='/:noteId']",
+        "Click 'epic notes' logo link [href='/']",
+        "Open UserDropdown (authenticated)",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Sidebar always visible; 'New Note' item shown only to note owner"
+    },
+    {
+      "id": "/users/:username/notes/new",
+      "route": "/users/:username/notes/new",
+      "label": "New note editor: title, content, image upload fields",
+      "section": "Notes",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:notes",
+      "actions": [
+        "Submit note form [form#note-editor button 'Submit']",
+        "Click 'Reset' button [button variant=destructive]",
+        "Click '+ Image' button [form.insert button]",
+        "Remove image [button 'Remove image {n}']",
+        "Upload image file [input type=file aria-label='Image']",
+        "Click note title in sidebar to navigate away"
+      ],
+      "notes": "Requires auth; no note.id hidden input (creates new note)"
+    },
+    {
+      "id": "/users/:username/notes/:noteId",
+      "route": "/users/:username/notes/:noteId",
+      "label": "View note: title, content text, image gallery (visitor view)",
+      "section": "Notes",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:notes",
+      "actions": [
+        "Click note image link [a href=getNoteImgSrc(objectKey)]",
+        "Click owner name/avatar link (back to notes sidebar)",
+        "Click note in sidebar to switch notes",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Non-owner/non-admin: no toolbar shown at bottom"
+    },
+    {
+      "id": "/users/:username/notes/:noteId#owner",
+      "route": "/users/:username/notes/:noteId",
+      "label": "View note (owner/admin): shows floating Edit + Delete toolbar",
+      "section": "Notes",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:notes",
+      "actions": [
+        "Click 'Edit' button [link to='edit']",
+        "Submit delete form [form#delete-note button name=intent value='delete-note']",
+        "Click note image link [a href=getNoteImgSrc]",
+        "Click owner name in sidebar",
+        "Click note in sidebar to switch notes",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Owner sees Edit+Delete; admin (any role) sees Delete only"
+    },
+    {
+      "id": "/users/:username/notes/:noteId/edit",
+      "route": "/users/:username/notes/:noteId/edit",
+      "label": "Edit note: pre-filled title, content, existing images + add/remove",
+      "section": "Notes",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:notes",
+      "actions": [
+        "Submit note form [form#note-editor button 'Submit']",
+        "Click 'Reset' button [button variant=destructive]",
+        "Click '+ Image' button [form.insert button]",
+        "Remove image [button 'Remove image {n}']",
+        "Upload new image file [input type=file aria-label='Image']",
+        "Click note in sidebar to navigate away"
+      ],
+      "notes": "Only note owner can edit; 404 if not owner"
+    },
+    {
+      "id": "/settings/profile",
+      "route": "/settings/profile",
+      "label": "Profile settings: edit username/name, links to sub-settings",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Click camera icon to change photo [link to='photo']",
+        "Submit 'Save changes' form [form#edit-profile]",
+        "Click 'Change email from {email}' link [to='change-email']",
+        "Click '2FA is enabled/Enable 2FA' link [to='two-factor']",
+        "Click 'Change Password / Create a Password' link [to='password' or 'password/create']",
+        "Click 'Manage connections' link [to='connections']",
+        "Click 'Manage passkeys' link [to='passkeys']",
+        "Click 'Download your data' link [href='/resources/download-user-data' download]",
+        "Submit 'Sign out of other sessions' form (if multiple sessions)",
+        "Submit 'Delete all your data' form [button name=intent value='delete-data']"
+      ],
+      "notes": "Breadcrumb shows: Profile > Edit Profile"
+    },
+    {
+      "id": "/settings/profile#delete-confirm",
+      "route": "/settings/profile",
+      "label": "Profile settings: 'Delete all your data' in double-check 'Are you sure?' state",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Are you sure?' (confirm delete) [button variant=destructive intent='delete-data']",
+        "All other actions from /settings/profile still available"
+      ],
+      "notes": "useDoubleCheck hook; button changes to destructive 'Are you sure?'"
+    },
+    {
+      "id": "/settings/profile#sign-out-confirm",
+      "route": "/settings/profile",
+      "label": "Profile settings: 'Sign out of other sessions' in double-check state",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Are you sure?' (confirm sign-out) [button variant=destructive intent='sign-out-of-sessions']",
+        "All other actions from /settings/profile still available"
+      ],
+      "notes": "Only shown when >1 active sessions; useDoubleCheck"
+    },
+    {
+      "id": "/settings/profile/photo",
+      "route": "/settings/profile/photo",
+      "label": "Change profile photo: current avatar + file input",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Click 'Change' label to open file picker [label for=photoFile]",
+        "Submit 'Delete' button (double-check, if photo exists) [button intent='delete']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Breadcrumb: Profile > Edit Profile > Photo"
+    },
+    {
+      "id": "/settings/profile/photo#file-selected",
+      "route": "/settings/profile/photo",
+      "label": "Change profile photo: new image preview with Save/Reset buttons visible",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Save Photo' button [button name=intent value='submit']",
+        "Click 'Reset' button (clears preview) [button form.reset]",
+        "Click 'Change' label to pick different file [label for=photoFile]"
+      ],
+      "notes": "CSS peer-valid/peer-invalid controls Save/Reset visibility"
+    },
+    {
+      "id": "/settings/profile/photo#delete-confirm",
+      "route": "/settings/profile/photo",
+      "label": "Change profile photo: Delete button in 'Are you sure?' double-check state",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Are you sure?' delete [button variant=destructive intent='delete']",
+        "Click 'Change' label to cancel and pick new photo [label for=photoFile]"
+      ],
+      "notes": "Only visible when user has a photo; useDoubleCheck"
+    },
+    {
+      "id": "/settings/profile/change-email",
+      "route": "/settings/profile/change-email",
+      "label": "Change email: new email input, shows old email address",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Send Confirmation' form [form#change-email-form]",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires requireRecentVerification; breadcrumb: ... > Change Email"
+    },
+    {
+      "id": "/settings/profile/two-factor#disabled",
+      "route": "/settings/profile/two-factor",
+      "label": "2FA settings: 2FA not enabled, shows 'Enable 2FA' button",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Enable 2FA' form [enable2FAFetcher.Form name=intent value='enable']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Breadcrumb: ... > 2FA; enables by redirecting to /two-factor/verify"
+    },
+    {
+      "id": "/settings/profile/two-factor#enabled",
+      "route": "/settings/profile/two-factor",
+      "label": "2FA settings: 2FA enabled, shows checkmark + 'Disable 2FA' link",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Click 'Disable 2FA' link [to='disable']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Shown when twoFAVerificationType verification exists for user"
+    },
+    {
+      "id": "/settings/profile/two-factor/verify",
+      "route": "/settings/profile/two-factor/verify",
+      "label": "Setup 2FA: QR code image + OTP URI + code input field",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Submit' (verify code) [form#verify-form button name=intent value='verify']",
+        "Submit 'Cancel' (delete pending 2FA) [form#verify-form button name=intent value='cancel']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires pending 2fa-verify verification; breadcrumb: ... > 2FA > Verify"
+    },
+    {
+      "id": "/settings/profile/two-factor/disable",
+      "route": "/settings/profile/two-factor/disable",
+      "label": "Disable 2FA: confirmation page with destructive disable button",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Disable 2FA' button (first click) [button name=intent value='disable']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires requireRecentVerification; breadcrumb: ... > 2FA > Disable"
+    },
+    {
+      "id": "/settings/profile/two-factor/disable#confirm",
+      "route": "/settings/profile/two-factor/disable",
+      "label": "Disable 2FA: 'Are you sure?' double-check state",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Are you sure?' (confirm disable) [button variant=destructive name=intent value='disable']"
+      ],
+      "notes": "useDoubleCheck; on confirm, deletes 2fa verification and redirects"
+    },
+    {
+      "id": "/settings/profile/password",
+      "route": "/settings/profile/password",
+      "label": "Change password: current password + new password + confirm",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Change Password' form [form#password-change-form]",
+        "Click 'Cancel' button [link to='..']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Requires existing password; redirects to /password/create if none"
+    },
+    {
+      "id": "/settings/profile/password/create",
+      "route": "/settings/profile/password/create",
+      "label": "Create password: new password + confirm for password-less OAuth users",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Create Password' form [form#password-create-form]",
+        "Click 'Cancel' button [link to='..']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Redirects to /password if password already exists"
+    },
+    {
+      "id": "/settings/profile/connections",
+      "route": "/settings/profile/connections",
+      "label": "Manage connections: list of OAuth connections with delete option",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit delete connection form [button name=intent value='delete-connection']",
+        "Connect new provider via ProviderConnectionForm [action='/auth/github']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Breadcrumb: ... > Connections; delete disabled if it would leave no auth method"
+    },
+    {
+      "id": "/settings/profile/passkeys",
+      "route": "/settings/profile/passkeys",
+      "label": "Manage passkeys: list of passkeys with delete, register new button",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:settings-profile",
+      "actions": [
+        "Submit 'Register new passkey' form [button 'Register new passkey']",
+        "Delete passkey [Form method=POST button name=intent value='delete']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Breadcrumb: ... > Passkeys; WebAuthn API called client-side"
+    },
+    {
+      "id": "/admin/cache",
+      "route": "/admin/cache",
+      "label": "Cache admin: search + list LRU and SQLite cache keys with delete",
+      "section": "Admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:root",
+      "actions": [
+        "Search cache keys [form method=GET input name='query']",
+        "Set limit [input name='limit']",
+        "Select instance [select name='instance']",
+        "Click cache key link to view value [link reloadDocument to='/admin/cache/{type}/{key}']",
+        "Delete cache key [fetcher.Form button 'Delete' / 'You sure?']",
+        "Open UserDropdown [aria-label='User menu']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Role 'admin' required; shows LRU and SQLite sections; double-check on delete"
+    },
+    {
+      "id": "/admin/cache/lru/:cacheKey",
+      "route": "/admin/cache/lru/:cacheKey",
+      "label": "LRU cache entry viewer: JSON data for one cache key",
+      "section": "Admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:root",
+      "actions": [
+        "Navigate back via browser back button"
+      ],
+      "notes": "Resource route; returns JSON (no HTML layout); admin role required"
+    },
+    {
+      "id": "/admin/cache/sqlite/:cacheKey",
+      "route": "/admin/cache/sqlite/:cacheKey",
+      "label": "SQLite cache entry viewer: JSON data for one cache key",
+      "section": "Admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:root",
+      "actions": [
+        "Navigate back via browser back button"
+      ],
+      "notes": "Resource route; returns JSON (no HTML layout); admin role required"
+    },
+    {
+      "id": "/$",
+      "route": "/*",
+      "label": "404 Not Found: 'We can't find this page' with back-to-home link",
+      "section": "Error",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:root",
+      "actions": [
+        "Click 'Back to home' link [href='/']",
+        "Toggle theme [form#theme-switch]"
+      ],
+      "notes": "Catchall splat route; loader throws 404; shows current pathname"
+    },
+    {
+      "id": "/logout",
+      "route": "/logout",
+      "label": "Logout action (no UI)",
+      "section": "Authentication",
+      "status": "skipped",
+      "auth_required": true,
+      "layout": null,
+      "actions": [
+        "POST to /logout destroys session and redirects to /"
+      ],
+      "notes": "Action-only route; GET redirects to /; no UI rendered"
+    },
+    {
+      "id": "/auth/:provider",
+      "route": "/auth/:provider",
+      "label": "OAuth initiation (no UI)",
+      "section": "Authentication",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": null,
+      "actions": [
+        "POST initiates OAuth redirect to GitHub"
+      ],
+      "notes": "Action-only; GET redirects to /login; provider=github currently"
+    },
+    {
+      "id": "/auth/:provider/callback",
+      "route": "/auth/:provider/callback",
+      "label": "OAuth callback handler (no UI)",
+      "section": "Authentication",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": null,
+      "actions": [
+        "GET processes OAuth code; redirects to / or /onboarding/:provider"
+      ],
+      "notes": "Action-only; no rendered component; handles new vs returning OAuth users"
+    },
+    {
+      "id": "/resources/download-user-data",
+      "route": "/resources/download-user-data",
+      "label": "Download user data (JSON file, no UI)",
+      "section": "Resources",
+      "status": "skipped",
+      "auth_required": true,
+      "layout": null,
+      "actions": [
+        "GET streams JSON file download with all user data"
+      ],
+      "notes": "Resource route; returns file download, not HTML"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/login",
+      "trigger": "link 'Log In' [href='/login']",
+      "guard": "user not authenticated"
+    },
+    {
+      "from": "/",
+      "to": "/users",
+      "trigger": "SearchBar form submit [action='/users' method=GET]",
+      "guard": null
+    },
+    {
+      "from": "/login",
+      "to": "/",
+      "trigger": "auto: redirect on successful login",
+      "guard": "valid credentials submitted"
+    },
+    {
+      "from": "/login",
+      "to": "/verify#2fa",
+      "trigger": "auto: redirect when user has 2FA enabled",
+      "guard": "user has 2FA verification record"
+    },
+    {
+      "from": "/login",
+      "to": "/signup",
+      "trigger": "link 'Create an account' [href='/signup']",
+      "guard": null
+    },
+    {
+      "from": "/login",
+      "to": "/forgot-password",
+      "trigger": "link 'Forgot password?' [href='/forgot-password']",
+      "guard": null
+    },
+    {
+      "from": "/login",
+      "to": "/auth/:provider",
+      "trigger": "button 'Login with GitHub' [form action='/auth/github' method=POST]",
+      "guard": null
+    },
+    {
+      "from": "/signup",
+      "to": "/verify#email",
+      "trigger": "auto: redirect after submitting valid email",
+      "guard": "valid unique email submitted"
+    },
+    {
+      "from": "/signup",
+      "to": "/auth/:provider",
+      "trigger": "button 'Sign up with GitHub' [form action='/auth/github' method=POST]",
+      "guard": null
+    },
+    {
+      "from": "/forgot-password",
+      "to": "/verify#email",
+      "trigger": "auto: redirect after submitting valid username/email",
+      "guard": "user with that username/email exists"
+    },
+    {
+      "from": "/forgot-password",
+      "to": "/login",
+      "trigger": "link 'Back to Login' [href='/login']",
+      "guard": null
+    },
+    {
+      "from": "/verify#email",
+      "to": "/onboarding",
+      "trigger": "auto: redirect after valid OTP for type=onboarding",
+      "guard": "type=onboarding, valid 6-digit code"
+    },
+    {
+      "from": "/verify#email",
+      "to": "/reset-password",
+      "trigger": "auto: redirect after valid OTP for type=reset-password",
+      "guard": "type=reset-password, valid 6-digit code"
+    },
+    {
+      "from": "/verify#email",
+      "to": "/settings/profile/change-email",
+      "trigger": "auto: redirect after valid OTP for type=change-email",
+      "guard": "type=change-email, valid 6-digit code"
+    },
+    {
+      "from": "/verify#2fa",
+      "to": "/",
+      "trigger": "auto: redirect after valid TOTP for type=2fa",
+      "guard": "type=2fa, valid TOTP code"
+    },
+    {
+      "from": "/onboarding",
+      "to": "/",
+      "trigger": "auto: redirect after successful account creation",
+      "guard": "all required fields valid, username unique"
+    },
+    {
+      "from": "/onboarding/:provider",
+      "to": "/",
+      "trigger": "auto: redirect after successful OAuth account creation",
+      "guard": "all required fields valid, username unique"
+    },
+    {
+      "from": "/reset-password",
+      "to": "/login",
+      "trigger": "auto: redirect after successful password reset",
+      "guard": "valid password submitted"
+    },
+    {
+      "from": "/auth/:provider",
+      "to": "/auth/:provider/callback",
+      "trigger": "auto: OAuth redirect flow via GitHub",
+      "guard": null
+    },
+    {
+      "from": "/auth/:provider/callback",
+      "to": "/",
+      "trigger": "auto: redirect for existing connected user",
+      "guard": "OAuth user already has account"
+    },
+    {
+      "from": "/auth/:provider/callback",
+      "to": "/onboarding/:provider",
+      "trigger": "auto: redirect for new OAuth user needing to complete profile",
+      "guard": "OAuth user has no existing account"
+    },
+    {
+      "from": "/users",
+      "to": "/users/:username",
+      "trigger": "link user card [aria-label='{name} profile']",
+      "guard": null
+    },
+    {
+      "from": "/users/:username",
+      "to": "/users/:username/notes",
+      "trigger": "button '{name}'s notes' [link to='/users/:username/notes']",
+      "guard": null
+    },
+    {
+      "from": "/users/:username#own",
+      "to": "/users/:username/notes",
+      "trigger": "button 'My notes' [link to='notes']",
+      "guard": "user is profile owner"
+    },
+    {
+      "from": "/users/:username#own",
+      "to": "/settings/profile",
+      "trigger": "button 'Edit profile' [link to='/settings/profile']",
+      "guard": "user is profile owner"
+    },
+    {
+      "from": "/users/:username#own",
+      "to": "/",
+      "trigger": "button 'Logout' [form action='/logout' method=POST]",
+      "guard": "user is profile owner"
+    },
+    {
+      "from": "/users/:username/notes",
+      "to": "/users/:username/notes/new",
+      "trigger": "nav link 'New Note' [to='new'] in sidebar",
+      "guard": "user is note owner"
+    },
+    {
+      "from": "/users/:username/notes",
+      "to": "/users/:username/notes/:noteId",
+      "trigger": "nav link with note title [to=':noteId'] in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/users/:username/notes/:noteId#owner",
+      "to": "/users/:username/notes/:noteId/edit",
+      "trigger": "button 'Edit' [link to='edit']",
+      "guard": "user is note owner"
+    },
+    {
+      "from": "/users/:username/notes/:noteId#owner",
+      "to": "/users/:username/notes",
+      "trigger": "auto: redirect after successful note deletion",
+      "guard": "DELETE intent submitted, user has delete permission"
+    },
+    {
+      "from": "/users/:username/notes/:noteId/edit",
+      "to": "/users/:username/notes/:noteId",
+      "trigger": "auto: redirect after successful note update",
+      "guard": "valid form submitted"
+    },
+    {
+      "from": "/users/:username/notes/new",
+      "to": "/users/:username/notes/:noteId",
+      "trigger": "auto: redirect to new note after creation",
+      "guard": "valid form submitted"
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/photo",
+      "trigger": "link camera icon [link to='photo' aria-label='Change profile photo']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/change-email",
+      "trigger": "link 'Change email from {email}' [to='change-email']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/two-factor#disabled",
+      "trigger": "link 'Enable 2FA' [to='two-factor']",
+      "guard": "2FA not currently enabled"
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/two-factor#enabled",
+      "trigger": "link '2FA is enabled' [to='two-factor']",
+      "guard": "2FA currently enabled"
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/password",
+      "trigger": "link 'Change Password' [to='password']",
+      "guard": "user has a password"
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/password/create",
+      "trigger": "link 'Create a Password' [to='password/create']",
+      "guard": "user has no password (OAuth-only)"
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/connections",
+      "trigger": "link 'Manage connections' [to='connections']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile/passkeys",
+      "trigger": "link 'Manage passkeys' [to='passkeys']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile#delete-confirm",
+      "trigger": "button 'Delete all your data' [first click, name=intent value='delete-data']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile#delete-confirm",
+      "to": "/settings/profile",
+      "trigger": "auto: doubleCheck resets when mouse leaves button",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile#delete-confirm",
+      "to": "/",
+      "trigger": "button 'Are you sure?' [second click, variant=destructive intent='delete-data']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/settings/profile#sign-out-confirm",
+      "trigger": "button 'Sign out of N other sessions' [first click]",
+      "guard": "user has >1 active sessions"
+    },
+    {
+      "from": "/settings/profile/photo",
+      "to": "/settings/profile/photo#file-selected",
+      "trigger": "input type=file change event (file chosen) [label for=photoFile]",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/photo#file-selected",
+      "to": "/settings/profile",
+      "trigger": "auto: redirect after photo saved [button name=intent value='submit']",
+      "guard": "file selected and valid size"
+    },
+    {
+      "from": "/settings/profile/photo#file-selected",
+      "to": "/settings/profile/photo",
+      "trigger": "button 'Reset' [form.reset.getButtonProps]",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/photo",
+      "to": "/settings/profile/photo#delete-confirm",
+      "trigger": "button 'Delete' [first click, name=intent value='delete']",
+      "guard": "user has existing profile photo"
+    },
+    {
+      "from": "/settings/profile/photo#delete-confirm",
+      "to": "/settings/profile",
+      "trigger": "auto: redirect after photo deleted [button 'Are you sure?' intent='delete']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/two-factor#disabled",
+      "to": "/settings/profile/two-factor/verify",
+      "trigger": "auto: redirect after POST intent='enable' [enable2FAFetcher.Form]",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/two-factor#enabled",
+      "to": "/settings/profile/two-factor/disable",
+      "trigger": "link 'Disable 2FA' [to='disable']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/two-factor/verify",
+      "to": "/settings/profile/two-factor#enabled",
+      "trigger": "auto: redirect after verifying TOTP code [button name=intent value='verify']",
+      "guard": "valid TOTP code entered"
+    },
+    {
+      "from": "/settings/profile/two-factor/verify",
+      "to": "/settings/profile/two-factor#disabled",
+      "trigger": "button 'Cancel' [name=intent value='cancel']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/two-factor/disable",
+      "to": "/settings/profile/two-factor/disable#confirm",
+      "trigger": "button 'Disable 2FA' [first click, name=intent value='disable']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/two-factor/disable#confirm",
+      "to": "/settings/profile/two-factor#disabled",
+      "trigger": "button 'Are you sure?' [second click, variant=destructive]",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/change-email",
+      "to": "/verify#email",
+      "trigger": "auto: redirect after submitting valid new email",
+      "guard": "new email not already taken"
+    },
+    {
+      "from": "/settings/profile/password",
+      "to": "/settings/profile",
+      "trigger": "auto: redirect after successful password change",
+      "guard": "valid new password submitted"
+    },
+    {
+      "from": "/settings/profile/password",
+      "to": "/settings/profile",
+      "trigger": "link 'Cancel' [to='..']",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile/password/create",
+      "to": "/settings/profile",
+      "trigger": "auto: redirect after successful password creation",
+      "guard": "valid password submitted"
+    },
+    {
+      "from": "/settings/profile/password/create",
+      "to": "/settings/profile",
+      "trigger": "link 'Cancel' [to='..']",
+      "guard": null
+    },
+    {
+      "from": "/admin/cache",
+      "to": "/admin/cache/lru/:cacheKey",
+      "trigger": "link with cacheKey text [reloadDocument to='/admin/cache/lru/{encodedKey}']",
+      "guard": "cache key is of type lru"
+    },
+    {
+      "from": "/admin/cache",
+      "to": "/admin/cache/sqlite/:cacheKey",
+      "trigger": "link with cacheKey text [reloadDocument to='/admin/cache/sqlite/{encodedKey}']",
+      "guard": "cache key is of type sqlite"
+    },
+    {
+      "from": "/users/:username/notes",
+      "to": "/",
+      "trigger": "link 'epic notes' logo [href='/'] in header",
+      "guard": null
+    },
+    {
+      "from": "/settings/profile",
+      "to": "/users/:username",
+      "trigger": "link 'Profile' in breadcrumb [to='/users/{username}']",
+      "guard": null
+    },
+    {
+      "from": "/admin/cache",
+      "to": "/users/:username#own",
+      "trigger": "UserDropdown link 'Profile' [to='/users/{username}']",
+      "guard": "user authenticated"
+    },
+    {
+      "from": "/users/:username/notes/:noteId",
+      "to": "/users/:username#own",
+      "trigger": "link 'epic notes' logo [href='/'] then navigate to profile via UserDropdown",
+      "guard": null
+    },
+    {
+      "from": "/",
+      "to": "/users/:username#own",
+      "trigger": "UserDropdown link 'Profile' [to='/users/{username}']",
+      "guard": "user authenticated"
+    },
+    {
+      "from": "/users/:username/notes/:noteId",
+      "to": "/users/:username",
+      "trigger": "link owner name/avatar [to='/users/{username}'] in notes sidebar header",
+      "guard": null
+    },
+    {
+      "from": "/$",
+      "to": "/",
+      "trigger": "link 'Back to home' [href='/']",
+      "guard": null
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Public pages accessible without authentication",
+        "node_ids": [
+          "/",
+          "/about",
+          "/privacy",
+          "/tos",
+          "/support",
+          "/login",
+          "/signup",
+          "/forgot-password",
+          "/verify#email",
+          "/verify#2fa",
+          "/onboarding",
+          "/onboarding/:provider",
+          "/reset-password",
+          "/users",
+          "/users/:username",
+          "/users/:username/notes",
+          "/users/:username/notes/:noteId",
+          "/$",
+          "/auth/:provider",
+          "/auth/:provider/callback"
+        ]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Pages requiring a valid user session",
+        "node_ids": [
+          "/users/:username#own",
+          "/users/:username/notes/new",
+          "/users/:username/notes/:noteId#owner",
+          "/users/:username/notes/:noteId/edit",
+          "/settings/profile",
+          "/settings/profile#delete-confirm",
+          "/settings/profile#sign-out-confirm",
+          "/settings/profile/photo",
+          "/settings/profile/photo#file-selected",
+          "/settings/profile/photo#delete-confirm",
+          "/settings/profile/change-email",
+          "/settings/profile/two-factor#disabled",
+          "/settings/profile/two-factor#enabled",
+          "/settings/profile/two-factor/verify",
+          "/settings/profile/two-factor/disable",
+          "/settings/profile/two-factor/disable#confirm",
+          "/settings/profile/password",
+          "/settings/profile/password/create",
+          "/settings/profile/connections",
+          "/settings/profile/passkeys",
+          "/logout",
+          "/resources/download-user-data"
+        ]
+      },
+      {
+        "id": "zone:admin",
+        "label": "Pages requiring the 'admin' role",
+        "node_ids": [
+          "/admin/cache",
+          "/admin/cache/lru/:cacheKey",
+          "/admin/cache/sqlite/:cacheKey"
+        ]
+      },
+      {
+        "id": "zone:recent-verified",
+        "label": "Pages requiring recent OTP verification (within session)",
+        "node_ids": [
+          "/settings/profile/change-email",
+          "/settings/profile/two-factor/disable"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:root",
+        "label": "Root layout: header (logo + search + user nav) + footer (logo + theme toggle)",
+        "node_ids": [
+          "/",
+          "/about",
+          "/privacy",
+          "/tos",
+          "/support",
+          "/login",
+          "/signup",
+          "/forgot-password",
+          "/verify#email",
+          "/verify#2fa",
+          "/onboarding",
+          "/onboarding/:provider",
+          "/reset-password",
+          "/users",
+          "/users/:username",
+          "/users/:username#own",
+          "/admin/cache",
+          "/admin/cache/lru/:cacheKey",
+          "/admin/cache/sqlite/:cacheKey",
+          "/$"
+        ]
+      },
+      {
+        "id": "layout:notes",
+        "label": "Notes layout: two-column (sidebar note list + main content area)",
+        "node_ids": [
+          "/users/:username/notes",
+          "/users/:username/notes/new",
+          "/users/:username/notes/:noteId",
+          "/users/:username/notes/:noteId#owner",
+          "/users/:username/notes/:noteId/edit"
+        ]
+      },
+      {
+        "id": "layout:settings-profile",
+        "label": "Settings profile layout: breadcrumb nav + content panel",
+        "node_ids": [
+          "/settings/profile",
+          "/settings/profile#delete-confirm",
+          "/settings/profile#sign-out-confirm",
+          "/settings/profile/photo",
+          "/settings/profile/photo#file-selected",
+          "/settings/profile/photo#delete-confirm",
+          "/settings/profile/change-email",
+          "/settings/profile/two-factor#disabled",
+          "/settings/profile/two-factor#enabled",
+          "/settings/profile/two-factor/verify",
+          "/settings/profile/two-factor/disable",
+          "/settings/profile/two-factor/disable#confirm",
+          "/settings/profile/password",
+          "/settings/profile/password/create",
+          "/settings/profile/connections",
+          "/settings/profile/passkeys"
+        ]
+      }
+    ]
+  }
+}

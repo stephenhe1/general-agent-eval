@@ -25,8 +25,8 @@ PROJECT_ROOT = (
 ).resolve()
 PROMPTS_DIR = PACKAGE_DIR / "prompts"
 
-DEFAULT_SYSTEM_TEMPLATE = PROMPTS_DIR / "system_prompt.jinja2"
-DEFAULT_USER_TEMPLATE = PROMPTS_DIR / "user_prompt.jinja2"
+DEFAULT_SYSTEM_TEMPLATE = PROMPTS_DIR / "system_prompt_js_ui.jinja2"
+DEFAULT_USER_TEMPLATE = PROMPTS_DIR / "user_prompt_js_ui.jinja2"
 PERMISSION_MODES = (
     "default",
     "acceptEdits",
@@ -44,15 +44,15 @@ DISALLOWED_TOOLS = ("WebSearch", "WebFetch")
 
 # Base context keys that --prompt-var must not clobber.
 RESERVED_PROMPT_VARS = frozenset(
-    {"input_dir", "input_dir_name", "repo_root", "script_dir", "model"}
+    {"input_dir", "input_dir_name", "repo_root", "script_dir", "model", "mode", "coverage_model"}
 )
 # Service keys are always defined (empty by default) so templates can guard them with
 # {% if service_base_url %} under StrictUndefined even when no --service is in play.
 SERVICE_CONTEXT_DEFAULTS = {
     "service_id": "",
     "service_base_url": "",
-    "rest_assured": "",
-    "test_module": "",
+    "mode": "",
+    "coverage_model": "",
 }
 
 
@@ -238,7 +238,7 @@ def build_claude_options_kwargs(
         "permission_mode": args.permission_mode,
         "effort": args.effort,
         "disallowed_tools": list(DISALLOWED_TOOLS),
-        "setting_sources": [],
+        "setting_sources": ["user"],
         "system_prompt": system_prompt,
         "tools": {"type": "preset", "preset": "claude_code"},
     }
@@ -375,16 +375,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="Directory Claude Code should use as its working directory.",
     )
     parser.add_argument(
+        "--workload",
+        choices=("javascript",),
+        default="javascript",
+        help=(
+            "Target workload ecosystem. Selects the default Playwright UI-test "
+            "prompt templates when --system-template / --user-template are not "
+            "supplied. Defaults to javascript."
+        ),
+    )
+    parser.add_argument(
         "--system-template",
         type=Path,
-        default=DEFAULT_SYSTEM_TEMPLATE,
-        help="Jinja2 template for system prompt additions.",
+        default=None,
+        help=(
+            "Jinja2 template for system prompt additions. Defaults to the "
+            "packaged Java or JavaScript template selected by --workload."
+        ),
     )
     parser.add_argument(
         "--user-template",
         type=Path,
-        default=DEFAULT_USER_TEMPLATE,
-        help="Jinja2 template for the user prompt.",
+        default=None,
+        help=(
+            "Jinja2 template for the user prompt. Defaults to the packaged "
+            "Java or JavaScript template selected by --workload."
+        ),
     )
     parser.add_argument(
         "--system-prompt-config",
@@ -519,6 +535,38 @@ def build_parser() -> argparse.ArgumentParser:
             "to the current repo HEAD or superproject-pinned submodule commit."
         ),
     )
+    parser.add_argument(
+        "--clear-tests",
+        action="store_true",
+        help=(
+            "Remove existing JavaScript test files and directories from --input-dir "
+            "before running Claude. Runs after --reset-git if both are specified."
+        ),
+    )
+    parser.add_argument(
+        "--mode",
+        choices=("baseline", "project-aware", "discovery", "feature-extraction", "graph-test-gen"),
+        default="baseline",
+        help=(
+            "Evaluation mode injected into prompt templates. 'baseline' clears tests "
+            "and writes from scratch. 'project-aware' keeps existing tests visible. "
+            "'discovery' only produces UI_COVERAGE.md without writing tests. "
+            "'feature-extraction' reads an existing UI_GRAPH.json and extracts "
+            "features, scenarios, and interaction paths into UI_FEATURES.json. "
+            "'graph-test-gen' reads an existing UI_GRAPH.json and generates "
+            "Playwright tests guided by the state model."
+        ),
+    )
+    parser.add_argument(
+        "--coverage-model",
+        choices=("flat", "graph"),
+        default="flat",
+        help=(
+            "Coverage tracker format. 'flat' produces a markdown checklist "
+            "(UI_COVERAGE.md); 'graph' produces a JSON page-transition graph "
+            "(UI_GRAPH.json) with typed nodes and navigation edges."
+        ),
+    )
     return parser
 
 
@@ -529,16 +577,22 @@ def prepare_run(args: argparse.Namespace) -> tuple[Path, str, object]:
     if not input_dir.is_dir():
         raise HarnessError(f"--input-dir is not a directory: {args.input_dir}")
 
+    effective_system = args.system_template or DEFAULT_SYSTEM_TEMPLATE
+    effective_user = args.user_template or DEFAULT_USER_TEMPLATE
+
+    prompt_vars = parse_prompt_vars(args.prompt_var)
+    prompt_vars["mode"] = args.mode
+    prompt_vars["coverage_model"] = args.coverage_model
     context = build_template_context(
         input_dir=input_dir,
         model=args.model,
-        prompt_vars=parse_prompt_vars(args.prompt_var),
+        prompt_vars=prompt_vars,
     )
-    rendered_user_prompt = render_template(args.user_template, context)
+    rendered_user_prompt = render_template(effective_user, context)
     if not rendered_user_prompt.strip():
         raise HarnessError("Rendered user prompt is empty")
 
-    rendered_system_prompt = render_template(args.system_template, context)
+    rendered_system_prompt = render_template(effective_system, context)
     system_prompt = build_system_prompt(
         args.system_prompt_config, rendered_system_prompt
     )
@@ -564,6 +618,20 @@ def main(argv: list[str] | None = None) -> int:
                 raise HarnessError(f"Failed to reset Git state: {exc}") from exc
             print(
                 "[git-reset] " f"repo={result.repo_root} commit={result.pinned_commit}",
+                flush=True,
+            )
+        if args.clear_tests:
+            from general_agent_eval.preprocessing.js_test_clearing import (
+                ClearingError,
+                clear_js_tests,
+            )
+
+            try:
+                clear_result = clear_js_tests(input_dir)
+            except ClearingError as exc:
+                raise HarnessError(f"Failed to clear tests: {exc}") from exc
+            print(
+                f"[test-clearing] removed={len(clear_result.removed)}",
                 flush=True,
             )
         return asyncio.run(

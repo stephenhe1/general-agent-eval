@@ -1,0 +1,77 @@
+{
+ "T1 create a todo": [
+  "rq6-agent-todomvc-Bulk-act-04dd6-ecked-uncompletes-all-todos-chromium",
+  "rq6-agent-todomvc-Bulk-act-2062a-own-when-no-completed-todos-chromium",
+  "rq6-agent-todomvc-Bulk-act-3748a-heckbox-completes-all-todos-chromium",
+  "rq6-agent-todomvc-Bulk-act-48e60-ems-preserving-active-count-chromium",
+  "rq6-agent-todomvc-Bulk-act-f4e55-todos-and-keeps-active-ones-chromium",
+  "rq6-agent-todomvc-Empty-st-4b310-ar-when-first-todo-is-added-chromium",
+  "rq6-agent-todomvc-Empty-st-a69d0-r-when-last-todo-is-deleted-chromium",
+  "rq6-agent-todomvc-Filters--0844c-d-filter-hides-active-todos-chromium",
+  "rq6-agent-todomvc-Filters--1ba98--count-regardless-of-filter-chromium",
+  "rq6-agent-todomvc-Filters--58fc0-mpleted-shows-correct-items-chromium",
+  "rq6-agent-todomvc-Filters--6b148-ilter-hides-completed-todos-chromium",
+  "rq6-agent-todomvc-Filters--8fe10--active-shows-correct-items-chromium",
+  "rq6-agent-todomvc-Filters--a9185-hows-only-uncompleted-todos-chromium",
+  "rq6-agent-todomvc-Filters--b2513--shows-only-completed-todos-chromium",
+  "rq6-agent-todomvc-Filters--b2d8e-ter-link-has-selected-class-chromium",
+  "rq6-agent-todomvc-Filters-All-filter-shows-all-todos-chromium",
+  "rq6-agent-todomvc-Footer-c-140aa-em-left-for-one-active-todo-chromium",
+  "rq6-agent-todomvc-Footer-c-ec81d-eted-count-with-mixed-todos-chromium",
+  "rq6-agent-todomvc-New-todo-40032-e-input-does-not-add-a-todo-chromium",
+  "rq6-agent-todomvc-New-todo-80ff0--todo-when-Enter-is-pressed-chromium",
+  "rq6-agent-todomvc-New-todo-aa890-cleared-after-adding-a-todo-chromium",
+  "rq6-agent-todomvc-New-todo-e2daf-d-to-the-list-newest-first--chromium",
+  "rq6-agent-todomvc-New-todo-input-can-add-multiple-todos-chromium",
+  "rq6-agent-todomvc-Persiste-619a7-s-persist-after-page-reload-chromium",
+  "rq6-agent-todomvc-Persiste-b561a-state-persists-after-reload-chromium",
+  "rq6-agent-todomvc-Persiste-bce21--text-persists-after-reload-chromium",
+  "rq6-agent-todomvc-Todo-ite-5eea1-dit-mode-when-text-is-valid-chromium",
+  "rq6-agent-todomvc-Todo-ite-6230c-todo-label-enters-edit-mode-chromium",
+  "rq6-agent-todomvc-Todo-ite-6d0f9-blurring-saves-the-new-text-chromium",
+  "rq6-agent-todomvc-Todo-ite-74a7c-box-marks-todo-as-completed-chromium",
+  "rq6-agent-todomvc-Todo-ite-77af6-d-blurring-deletes-the-item-chromium",
+  "rq6-agent-todomvc-Todo-ite-7c41c-gain-unmarks-completed-todo-chromium",
+  "rq6-agent-todomvc-Todo-ite-86853-elete-button-removes-a-todo-chromium",
+  "rq6-agent-todomvc-Todo-ite-92157-ng-Enter-saves-the-new-text-chromium",
+  "rq6-agent-todomvc-Todo-ite-9feb7--only-todo-hides-the-footer-chromium"
+ ],
+ "T2 edit a todo's text": [
+  "rq6-agent-todomvc-Persiste-bce21--text-persists-after-reload-chromium",
+  "rq6-agent-todomvc-Todo-ite-5eea1-dit-mode-when-text-is-valid-chromium",
+  "rq6-agent-todomvc-Todo-ite-6d0f9-blurring-saves-the-new-text-chromium",
+  "rq6-agent-todomvc-Todo-ite-77af6-d-blurring-deletes-the-item-chromium",
+  "rq6-agent-todomvc-Todo-ite-92157-ng-Enter-saves-the-new-text-chromium"
+ ],
+ "T3 toggle one todo": [
+  "rq6-agent-todomvc-Bulk-act-48e60-ems-preserving-active-count-chromium",
+  "rq6-agent-todomvc-Bulk-act-f4e55-todos-and-keeps-active-ones-chromium",
+  "rq6-agent-todomvc-Filters--0844c-d-filter-hides-active-todos-chromium",
+  "rq6-agent-todomvc-Filters--1ba98--count-regardless-of-filter-chromium",
+  "rq6-agent-todomvc-Filters--58fc0-mpleted-shows-correct-items-chromium",
+  "rq6-agent-todomvc-Filters--6b148-ilter-hides-completed-todos-chromium",
+  "rq6-agent-todomvc-Filters--8fe10--active-shows-correct-items-chromium",
+  "rq6-agent-todomvc-Filters--a9185-hows-only-uncompleted-todos-chromium",
+  "rq6-agent-todomvc-Filters--b2513--shows-only-completed-todos-chromium",
+  "rq6-agent-todomvc-Filters--b2d8e-ter-link-has-selected-class-chromium",
+  "rq6-agent-todomvc-Filters-All-filter-shows-all-todos-chromium",
+  "rq6-agent-todomvc-Footer-c-ec81d-eted-count-with-mixed-todos-chromium",
+  "rq6-agent-todomvc-Persiste-619a7-s-persist-after-page-reload-chromium",
+  "rq6-agent-todomvc-Persiste-b561a-state-persists-after-reload-chromium",
+  "rq6-agent-todomvc-Todo-ite-74a7c-box-marks-todo-as-completed-chromium",
+  "rq6-agent-todomvc-Todo-ite-7c41c-gain-unmarks-completed-todo-chromium"
+ ],
+ "T4 delete a todo": [
+  "rq6-agent-todomvc-Empty-st-a69d0-r-when-last-todo-is-deleted-chromium",
+  "rq6-agent-todomvc-Todo-ite-86853-elete-button-removes-a-todo-chromium",
+  "rq6-agent-todomvc-Todo-ite-9feb7--only-todo-hides-the-footer-chromium"
+ ],
+ "T5 toggle all todos": [
+  "rq6-agent-todomvc-Bulk-act-04dd6-ecked-uncompletes-all-todos-chromium",
+  "rq6-agent-todomvc-Bulk-act-3748a-heckbox-completes-all-todos-chromium"
+ ],
+ "T6 clear completed": [
+  "rq6-agent-todomvc-Bulk-act-48e60-ems-preserving-active-count-chromium",
+  "rq6-agent-todomvc-Bulk-act-f4e55-todos-and-keeps-active-ones-chromium"
+ ]
+}

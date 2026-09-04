@@ -1,0 +1,1076 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Cypress Real World App (RWA)",
+    "base_url": "http://localhost:3013",
+    "total_states": 27,
+    "explored": 27,
+    "skipped": 0,
+    "verified_live": [
+      "/signin",
+      "/signup",
+      "/",
+      "/contacts",
+      "/personal",
+      "/#date-filter",
+      "/#amount-filter",
+      "/transaction/new#step-1",
+      "/transaction/new#step-2",
+      "/transaction/new#step-3",
+      "/transaction/:transactionId",
+      "/user/settings",
+      "/bankaccounts",
+      "/bankaccounts/new",
+      "/notifications",
+      "/#onboarding-step-1",
+      "/#onboarding-step-2",
+      "/#onboarding-step-3"
+    ],
+    "notes": "React SPA, React Router v5, MUI v5, XState v4. Frontend port 3013, backend port 3003 (detect-port shifted from 3001). Creds: Heath93/s3cret. MUI TextField puts data-test on wrapper div; use '[data-test=X] input' to target the actual input. Signup redirects to /signin (no auto-login). Onboarding shown after login when user has no bank accounts."
+  },
+  "nodes": [
+    {
+      "id": "/signin",
+      "route": "/signin",
+      "label": "Sign In page – username/password form",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Type username [data-test=signin-username] input",
+        "Type password [data-test=signin-password] input",
+        "Toggle Remember Me checkbox [data-test=signin-remember-me]",
+        "Submit Sign In form button [data-test=signin-submit]",
+        "Click \"Don't have an account? Sign Up\" link [data-test=signup]"
+      ],
+      "notes": "Redirect target for all unauthenticated protected-route visits"
+    },
+    {
+      "id": "/signup",
+      "route": "/signup",
+      "label": "Sign Up page – new user registration form",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:auth",
+      "actions": [
+        "Type First Name [data-test=signup-first-name] input",
+        "Type Last Name [data-test=signup-last-name] input",
+        "Type Username [data-test=signup-username] input",
+        "Type Password [data-test=signup-password] input",
+        "Type Confirm Password [data-test=signup-confirmPassword] input",
+        "Submit Sign Up form button [data-test=signup-submit]",
+        "Click \"Have an account? Sign In\" link [href=/signin]"
+      ],
+      "notes": "After successful signup → redirects to /signin (no auto-login)"
+    },
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Home – Everyone (public) transactions tab, list loaded",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click transaction row [data-test^=transaction-item-]",
+        "Click Date filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click Amount filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Scroll to load more transactions (infinite scroll)",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]",
+        "Toggle sidenav drawer [data-test=sidenav-toggle]"
+      ],
+      "notes": "Default landing after login. 10 items per page, infinite scroll."
+    },
+    {
+      "id": "/#empty",
+      "route": "/",
+      "label": "Home – Everyone tab, empty transaction list",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create A Transaction' button [data-test=transaction-list-empty-create-transaction-button]",
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click Date filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click Amount filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shown when no public transactions (new user) or filters return 0 results"
+    },
+    {
+      "id": "/contacts",
+      "route": "/contacts",
+      "label": "Transactions – Friends/Contacts tab, list loaded",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click transaction row [data-test^=transaction-item-]",
+        "Click Date filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click Amount filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Scroll to load more transactions (infinite scroll)",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shows transactions with contacts only."
+    },
+    {
+      "id": "/contacts#empty",
+      "route": "/contacts",
+      "label": "Friends tab – empty transaction list",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create A Transaction' button [data-test=transaction-list-empty-create-transaction-button]",
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click Date filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click Amount filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shown when user has no contacts or filters return 0 contact transactions"
+    },
+    {
+      "id": "/personal",
+      "route": "/personal",
+      "label": "Transactions – Mine/Personal tab, list loaded",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click transaction row [data-test^=transaction-item-]",
+        "Click Date filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click Amount filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Scroll to load more transactions (infinite scroll)",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shows only current user's own transactions."
+    },
+    {
+      "id": "/personal#empty",
+      "route": "/personal",
+      "label": "Personal tab – empty transaction list",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create A Transaction' button [data-test=transaction-list-empty-create-transaction-button]",
+        "Click 'Everyone' tab [data-test=nav-public-tab]",
+        "Click 'Friends' tab [data-test=nav-contacts-tab]",
+        "Click 'Mine' tab [data-test=nav-personal-tab]",
+        "Click Date filter chip [data-test=transaction-list-filter-date-range-button]",
+        "Click Amount filter chip [data-test=transaction-list-filter-amount-range-button]",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shown when user has made no personal transactions or filters return 0"
+    },
+    {
+      "id": "/#date-filter",
+      "route": "/",
+      "label": "Home – date range filter popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Select date range on calendar [data-test=transaction-list-filter-date-range]",
+        "Close popover (click outside backdrop)",
+        "Clear date filter [data-test=transaction-list-filter-date-clear-button]",
+        "Close drawer (xs) button [data-test=date-range-filter-drawer-close]"
+      ],
+      "notes": "Popover on sm+ screens; bottom Drawer on xs. Clear button visible only after range selected."
+    },
+    {
+      "id": "/#amount-filter",
+      "route": "/",
+      "label": "Home – amount range filter popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Drag amount range slider [data-test=transaction-list-filter-amount-range-slider]",
+        "Clear amount filter [data-test=transaction-list-filter-amount-clear-button]",
+        "Close popover (click outside)",
+        "Close drawer (xs) button [data-test=amount-range-filter-drawer-close]"
+      ],
+      "notes": "Popover on sm+; bottom Drawer on xs. Shows $0-$100 range slider."
+    },
+    {
+      "id": "/contacts#date-filter",
+      "route": "/contacts",
+      "label": "Friends list – date range filter popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Select date range on calendar [data-test=transaction-list-filter-date-range]",
+        "Close popover (click outside backdrop)",
+        "Clear date filter [data-test=transaction-list-filter-date-clear-button]",
+        "Close drawer (xs) button [data-test=date-range-filter-drawer-close]"
+      ],
+      "notes": "Same popover/drawer pattern as home date filter"
+    },
+    {
+      "id": "/contacts#amount-filter",
+      "route": "/contacts",
+      "label": "Friends list – amount range filter popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Drag amount range slider [data-test=transaction-list-filter-amount-range-slider]",
+        "Clear amount filter [data-test=transaction-list-filter-amount-clear-button]",
+        "Close popover (click outside)",
+        "Close drawer (xs) button [data-test=amount-range-filter-drawer-close]"
+      ],
+      "notes": "Same popover/drawer pattern as home amount filter"
+    },
+    {
+      "id": "/personal#date-filter",
+      "route": "/personal",
+      "label": "Personal list – date range filter popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Select date range on calendar [data-test=transaction-list-filter-date-range]",
+        "Close popover (click outside backdrop)",
+        "Clear date filter [data-test=transaction-list-filter-date-clear-button]",
+        "Close drawer (xs) button [data-test=date-range-filter-drawer-close]"
+      ],
+      "notes": "Same popover/drawer pattern as home date filter"
+    },
+    {
+      "id": "/personal#amount-filter",
+      "route": "/personal",
+      "label": "Personal list – amount range filter popover/drawer open",
+      "section": "Transactions",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Drag amount range slider [data-test=transaction-list-filter-amount-range-slider]",
+        "Clear amount filter [data-test=transaction-list-filter-amount-clear-button]",
+        "Close popover (click outside)",
+        "Close drawer (xs) button [data-test=amount-range-filter-drawer-close]"
+      ],
+      "notes": "Same popover/drawer pattern as home amount filter"
+    },
+    {
+      "id": "/transaction/new#step-1",
+      "route": "/transaction/new",
+      "label": "New Transaction – Step 1: Select Contact",
+      "section": "New Transaction",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Search users by name/username [data-test=user-list-search-input]",
+        "Click a user from the list [data-test^=user-list-item-]",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Step 1 of 3. User list excludes self. Search debounced 200ms. Seed has 7 users visible."
+    },
+    {
+      "id": "/transaction/new#step-2",
+      "route": "/transaction/new",
+      "label": "New Transaction – Step 2: Enter Amount & Note",
+      "section": "New Transaction",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Type amount [data-test=transaction-create-amount-input] input",
+        "Type description/note [data-test=transaction-create-description-input] input",
+        "Submit as Request button [data-test=transaction-create-submit-request]",
+        "Submit as Payment button [data-test=transaction-create-submit-payment]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Step 2 of 3. Shows receiver avatar + name. Pay/Request disabled until amount & note valid."
+    },
+    {
+      "id": "/transaction/new#step-3",
+      "route": "/transaction/new",
+      "label": "New Transaction – Step 3: Confirmation",
+      "section": "New Transaction",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Return To Transactions' [data-test=new-transaction-return-to-transactions]",
+        "Click 'Create Another Transaction' [data-test=new-transaction-create-another-transaction]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Step 3 of 3. Shows receiver name, transaction amount/type/description."
+    },
+    {
+      "id": "/transaction/:transactionId",
+      "route": "/transaction/:transactionId",
+      "label": "Transaction Detail – completed or non-pending transaction",
+      "section": "Transaction Detail",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Like transaction icon button [data-test^=transaction-like-button-]",
+        "Type comment in field [data-test^=transaction-comment-input-] (press Enter to submit)",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Like button disabled if already liked by current user. CommentForm submits on Enter."
+    },
+    {
+      "id": "/transaction/:transactionId#pending-request",
+      "route": "/transaction/:transactionId",
+      "label": "Transaction Detail – pending payment request (receiver = current user)",
+      "section": "Transaction Detail",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Accept Request button [data-test^=transaction-accept-request-]",
+        "Reject Request button [data-test^=transaction-reject-request-]",
+        "Like transaction icon button [data-test^=transaction-like-button-]",
+        "Type comment in field [data-test^=transaction-comment-input-] (press Enter to submit)",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Accept/Reject only when requestStatus=pending AND current user is receiver"
+    },
+    {
+      "id": "/user/settings",
+      "route": "/user/settings",
+      "label": "User Settings – editable profile form",
+      "section": "User Settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Edit First Name [data-test=user-settings-firstName-input] input",
+        "Edit Last Name [data-test=user-settings-lastName-input] input",
+        "Edit Email [data-test=user-settings-email-input] input",
+        "Edit Phone Number [data-test=user-settings-phoneNumber-input] input",
+        "Save settings button [data-test=user-settings-submit]",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Form pre-filled with current user data. Save disabled until form is valid."
+    },
+    {
+      "id": "/notifications",
+      "route": "/notifications",
+      "label": "Notifications list – with unread notifications",
+      "section": "Notifications",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Dismiss/Mark as Read button [data-test^=notification-mark-read-]",
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "8 notifications in seed data. Dismiss button on desktop; icon button on xs."
+    },
+    {
+      "id": "/notifications#empty",
+      "route": "/notifications",
+      "label": "Notifications list – empty (all dismissed)",
+      "section": "Notifications",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'New' button [data-test=nav-top-new-transaction]",
+        "Click notifications icon [data-test=nav-top-notifications-link]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shows 'No Notifications' empty list with Reminders illustration. No Dismiss button."
+    },
+    {
+      "id": "/bankaccounts",
+      "route": "/bankaccounts",
+      "label": "Bank Accounts list – with accounts",
+      "section": "Bank Accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Create' button [data-test=bankaccount-new]",
+        "Delete bank account button [data-test=bankaccount-delete]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click My Account in sidenav [data-test=sidenav-user-settings]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Notifications in sidenav [data-test=sidenav-notifications]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Shows bankaccount-list items. Deleted accounts show '(Deleted)' label, no Delete button."
+    },
+    {
+      "id": "/bankaccounts/new",
+      "route": "/bankaccounts/new",
+      "label": "Create Bank Account form",
+      "section": "Bank Accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Type Bank Name [data-test=bankaccount-bankName-input] input",
+        "Type Routing Number [data-test=bankaccount-routingNumber-input] input",
+        "Type Account Number [data-test=bankaccount-accountNumber-input] input",
+        "Save/Submit button [data-test=bankaccount-submit]",
+        "Click Home in sidenav [data-test=sidenav-home]",
+        "Click Bank Accounts in sidenav [data-test=sidenav-bankaccounts]",
+        "Click Logout in sidenav [data-test=sidenav-signout]"
+      ],
+      "notes": "Save disabled until bankName≥5 chars, routing=9 digits, account=9-12 digits."
+    },
+    {
+      "id": "/#onboarding-step-1",
+      "route": "/",
+      "label": "Onboarding Dialog – Step 1: Get Started",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click Next button [data-test=user-onboarding-next]",
+        "Click Logout button [data-test=user-onboarding-logout]"
+      ],
+      "notes": "Shown to new users (no bank account). Dialog title: 'Get Started with Real World App'"
+    },
+    {
+      "id": "/#onboarding-step-2",
+      "route": "/",
+      "label": "Onboarding Dialog – Step 2: Create Bank Account",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Type Bank Name [data-test=bankaccount-bankName-input] input",
+        "Type Routing Number [data-test=bankaccount-routingNumber-input] input",
+        "Type Account Number [data-test=bankaccount-accountNumber-input] input",
+        "Save bank account button [data-test=bankaccount-submit]",
+        "Click Logout button [data-test=user-onboarding-logout]"
+      ],
+      "notes": "Inline BankAccountForm inside dialog. Save auto-advances to step 3."
+    },
+    {
+      "id": "/#onboarding-step-3",
+      "route": "/",
+      "label": "Onboarding Dialog – Step 3: Finished",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click Done button [data-test=user-onboarding-next]",
+        "Click Logout button [data-test=user-onboarding-logout]"
+      ],
+      "notes": "Shows 'You're all set!' message. Done dismisses dialog, returns to home."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/signin",
+      "to": "/signup",
+      "trigger": "link \"Don't have an account? Sign Up\" [data-test=signup]",
+      "guard": ""
+    },
+    {
+      "from": "/signup",
+      "to": "/signin",
+      "trigger": "link \"Have an account? Sign In\" [href=/signin]",
+      "guard": ""
+    },
+    {
+      "from": "/signin",
+      "to": "/",
+      "trigger": "button \"Sign In\" [data-test=signin-submit]",
+      "guard": "valid credentials; user has bank account (skips onboarding)"
+    },
+    {
+      "from": "/signin",
+      "to": "/#onboarding-step-1",
+      "trigger": "button \"Sign In\" [data-test=signin-submit]",
+      "guard": "valid credentials; user has no bank account"
+    },
+    {
+      "from": "/",
+      "to": "/signin",
+      "trigger": "auto: redirect on unauthorized or session expired",
+      "guard": "user not authenticated"
+    },
+    {
+      "from": "/signup",
+      "to": "/signin",
+      "trigger": "auto: redirect after successful registration",
+      "guard": "signup succeeds (performSignup calls history.push('/signin'))"
+    },
+    {
+      "from": "/",
+      "to": "/contacts",
+      "trigger": "tab \"Friends\" [data-test=nav-contacts-tab]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/personal",
+      "trigger": "tab \"Mine\" [data-test=nav-personal-tab]",
+      "guard": ""
+    },
+    {
+      "from": "/contacts",
+      "to": "/",
+      "trigger": "tab \"Everyone\" [data-test=nav-public-tab]",
+      "guard": ""
+    },
+    {
+      "from": "/contacts",
+      "to": "/personal",
+      "trigger": "tab \"Mine\" [data-test=nav-personal-tab]",
+      "guard": ""
+    },
+    {
+      "from": "/personal",
+      "to": "/",
+      "trigger": "tab \"Everyone\" [data-test=nav-public-tab]",
+      "guard": ""
+    },
+    {
+      "from": "/personal",
+      "to": "/contacts",
+      "trigger": "tab \"Friends\" [data-test=nav-contacts-tab]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/#date-filter",
+      "trigger": "chip \"Date: ALL\" [data-test=transaction-list-filter-date-range-button]",
+      "guard": ""
+    },
+    {
+      "from": "/#date-filter",
+      "to": "/",
+      "trigger": "click outside popover / press Escape",
+      "guard": ""
+    },
+    {
+      "from": "/#date-filter",
+      "to": "/",
+      "trigger": "select date range on calendar [data-test=transaction-list-filter-date-range]",
+      "guard": "range start and end both selected"
+    },
+    {
+      "from": "/",
+      "to": "/#amount-filter",
+      "trigger": "chip \"Amount: $0 - $100\" [data-test=transaction-list-filter-amount-range-button]",
+      "guard": ""
+    },
+    {
+      "from": "/#amount-filter",
+      "to": "/",
+      "trigger": "click outside popover / press Escape",
+      "guard": ""
+    },
+    {
+      "from": "/contacts",
+      "to": "/contacts#date-filter",
+      "trigger": "chip \"Date: ALL\" [data-test=transaction-list-filter-date-range-button]",
+      "guard": ""
+    },
+    {
+      "from": "/contacts#date-filter",
+      "to": "/contacts",
+      "trigger": "click outside popover or select date range",
+      "guard": ""
+    },
+    {
+      "from": "/contacts",
+      "to": "/contacts#amount-filter",
+      "trigger": "chip \"Amount:\" [data-test=transaction-list-filter-amount-range-button]",
+      "guard": ""
+    },
+    {
+      "from": "/contacts#amount-filter",
+      "to": "/contacts",
+      "trigger": "click outside popover / press Escape",
+      "guard": ""
+    },
+    {
+      "from": "/personal",
+      "to": "/personal#date-filter",
+      "trigger": "chip \"Date: ALL\" [data-test=transaction-list-filter-date-range-button]",
+      "guard": ""
+    },
+    {
+      "from": "/personal#date-filter",
+      "to": "/personal",
+      "trigger": "click outside popover or select date range",
+      "guard": ""
+    },
+    {
+      "from": "/personal",
+      "to": "/personal#amount-filter",
+      "trigger": "chip \"Amount:\" [data-test=transaction-list-filter-amount-range-button]",
+      "guard": ""
+    },
+    {
+      "from": "/personal#amount-filter",
+      "to": "/personal",
+      "trigger": "click outside popover / press Escape",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/#empty",
+      "trigger": "auto: transition when transaction list returns 0 results (filter or no data)",
+      "guard": "active filters yield 0 results OR no public transactions exist"
+    },
+    {
+      "from": "/contacts",
+      "to": "/contacts#empty",
+      "trigger": "auto: transition when contacts transaction list returns 0 results",
+      "guard": "active filters yield 0 results OR user has no contacts"
+    },
+    {
+      "from": "/personal",
+      "to": "/personal#empty",
+      "trigger": "auto: transition when personal transaction list returns 0 results",
+      "guard": "active filters yield 0 results OR user has no personal transactions"
+    },
+    {
+      "from": "/#empty",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"Create A Transaction\" [data-test=transaction-list-empty-create-transaction-button]",
+      "guard": ""
+    },
+    {
+      "from": "/contacts#empty",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"Create A Transaction\" [data-test=transaction-list-empty-create-transaction-button]",
+      "guard": ""
+    },
+    {
+      "from": "/personal#empty",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"Create A Transaction\" [data-test=transaction-list-empty-create-transaction-button]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/transaction/:transactionId",
+      "trigger": "list item [data-test^=transaction-item-] (click any transaction row)",
+      "guard": ""
+    },
+    {
+      "from": "/contacts",
+      "to": "/transaction/:transactionId",
+      "trigger": "list item [data-test^=transaction-item-] (click any transaction row)",
+      "guard": ""
+    },
+    {
+      "from": "/personal",
+      "to": "/transaction/:transactionId",
+      "trigger": "list item [data-test^=transaction-item-] (click any transaction row)",
+      "guard": ""
+    },
+    {
+      "from": "/notifications",
+      "to": "/",
+      "trigger": "link \"Home\" in sidenav [data-test=sidenav-home]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/:transactionId",
+      "to": "/transaction/:transactionId#pending-request",
+      "trigger": "auto: state determined by transaction.requestStatus=pending and receiver=currentUser",
+      "guard": "transaction is pending request AND current user is receiver"
+    },
+    {
+      "from": "/transaction/:transactionId#pending-request",
+      "to": "/transaction/:transactionId",
+      "trigger": "button \"Accept Request\" [data-test^=transaction-accept-request-]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/:transactionId#pending-request",
+      "to": "/transaction/:transactionId",
+      "trigger": "button \"Reject Request\" [data-test^=transaction-reject-request-]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"New\" [data-test=nav-top-new-transaction]",
+      "guard": ""
+    },
+    {
+      "from": "/contacts",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"New\" [data-test=nav-top-new-transaction]",
+      "guard": ""
+    },
+    {
+      "from": "/personal",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"New\" [data-test=nav-top-new-transaction]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/new#step-1",
+      "to": "/transaction/new#step-2",
+      "trigger": "list item [data-test^=user-list-item-] (click a user from results)",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/new#step-2",
+      "to": "/transaction/new#step-3",
+      "trigger": "button \"Pay\" [data-test=transaction-create-submit-payment]",
+      "guard": "amount and description both valid"
+    },
+    {
+      "from": "/transaction/new#step-2",
+      "to": "/transaction/new#step-3",
+      "trigger": "button \"Request\" [data-test=transaction-create-submit-request]",
+      "guard": "amount and description both valid"
+    },
+    {
+      "from": "/transaction/new#step-3",
+      "to": "/",
+      "trigger": "button \"Return To Transactions\" [data-test=new-transaction-return-to-transactions]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/new#step-3",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"Create Another Transaction\" [data-test=new-transaction-create-another-transaction]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/user/settings",
+      "trigger": "link \"My Account\" in sidenav [data-test=sidenav-user-settings]",
+      "guard": ""
+    },
+    {
+      "from": "/notifications",
+      "to": "/user/settings",
+      "trigger": "link \"My Account\" in sidenav [data-test=sidenav-user-settings]",
+      "guard": ""
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/user/settings",
+      "trigger": "link \"My Account\" in sidenav [data-test=sidenav-user-settings]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/:transactionId",
+      "to": "/user/settings",
+      "trigger": "link \"My Account\" in sidenav [data-test=sidenav-user-settings]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/notifications",
+      "trigger": "icon button notifications [data-test=nav-top-notifications-link]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/notifications",
+      "trigger": "link \"Notifications\" in sidenav [data-test=sidenav-notifications]",
+      "guard": ""
+    },
+    {
+      "from": "/user/settings",
+      "to": "/notifications",
+      "trigger": "link \"Notifications\" in sidenav [data-test=sidenav-notifications]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/:transactionId",
+      "to": "/notifications",
+      "trigger": "icon button notifications [data-test=nav-top-notifications-link]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/new#step-1",
+      "to": "/notifications",
+      "trigger": "icon button notifications [data-test=nav-top-notifications-link]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/bankaccounts",
+      "trigger": "link \"Bank Accounts\" in sidenav [data-test=sidenav-bankaccounts]",
+      "guard": ""
+    },
+    {
+      "from": "/user/settings",
+      "to": "/bankaccounts",
+      "trigger": "link \"Bank Accounts\" in sidenav [data-test=sidenav-bankaccounts]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/:transactionId",
+      "to": "/bankaccounts",
+      "trigger": "link \"Bank Accounts\" in sidenav [data-test=sidenav-bankaccounts]",
+      "guard": ""
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/bankaccounts/new",
+      "trigger": "button \"Create\" [data-test=bankaccount-new]",
+      "guard": ""
+    },
+    {
+      "from": "/bankaccounts/new",
+      "to": "/bankaccounts",
+      "trigger": "button \"Save\" [data-test=bankaccount-submit]",
+      "guard": "valid bank account details entered"
+    },
+    {
+      "from": "/notifications",
+      "to": "/bankaccounts",
+      "trigger": "link \"Bank Accounts\" in sidenav [data-test=sidenav-bankaccounts]",
+      "guard": ""
+    },
+    {
+      "from": "/",
+      "to": "/signin",
+      "trigger": "list item \"Logout\" in sidenav [data-test=sidenav-signout]",
+      "guard": ""
+    },
+    {
+      "from": "/user/settings",
+      "to": "/signin",
+      "trigger": "list item \"Logout\" in sidenav [data-test=sidenav-signout]",
+      "guard": ""
+    },
+    {
+      "from": "/notifications",
+      "to": "/signin",
+      "trigger": "list item \"Logout\" in sidenav [data-test=sidenav-signout]",
+      "guard": ""
+    },
+    {
+      "from": "/transaction/:transactionId",
+      "to": "/signin",
+      "trigger": "list item \"Logout\" in sidenav [data-test=sidenav-signout]",
+      "guard": ""
+    },
+    {
+      "from": "/bankaccounts",
+      "to": "/signin",
+      "trigger": "list item \"Logout\" in sidenav [data-test=sidenav-signout]",
+      "guard": ""
+    },
+    {
+      "from": "/#onboarding-step-1",
+      "to": "/#onboarding-step-2",
+      "trigger": "button \"Next\" [data-test=user-onboarding-next]",
+      "guard": "user has no bank account"
+    },
+    {
+      "from": "/#onboarding-step-2",
+      "to": "/#onboarding-step-3",
+      "trigger": "button \"Save\" [data-test=bankaccount-submit]",
+      "guard": "valid bank account details entered"
+    },
+    {
+      "from": "/#onboarding-step-3",
+      "to": "/",
+      "trigger": "button \"Done\" [data-test=user-onboarding-next]",
+      "guard": ""
+    },
+    {
+      "from": "/#onboarding-step-1",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=user-onboarding-logout]",
+      "guard": ""
+    },
+    {
+      "from": "/#onboarding-step-2",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=user-onboarding-logout]",
+      "guard": ""
+    },
+    {
+      "from": "/#onboarding-step-3",
+      "to": "/signin",
+      "trigger": "button \"Logout\" [data-test=user-onboarding-logout]",
+      "guard": ""
+    },
+    {
+      "from": "/notifications",
+      "to": "/notifications#empty",
+      "trigger": "auto: transition when all notifications dismissed",
+      "guard": "all notifications marked as read / dismissed"
+    },
+    {
+      "from": "/notifications#empty",
+      "to": "/",
+      "trigger": "link \"Home\" in sidenav [data-test=sidenav-home]",
+      "guard": ""
+    },
+    {
+      "from": "/notifications#empty",
+      "to": "/transaction/new#step-1",
+      "trigger": "button \"New\" [data-test=nav-top-new-transaction]",
+      "guard": ""
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Publicly accessible – no login required",
+        "node_ids": ["/signin", "/signup"]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Requires active session – redirects to /signin if unauthenticated",
+        "node_ids": [
+          "/",
+          "/#empty",
+          "/contacts",
+          "/contacts#empty",
+          "/personal",
+          "/personal#empty",
+          "/#date-filter",
+          "/#amount-filter",
+          "/contacts#date-filter",
+          "/contacts#amount-filter",
+          "/personal#date-filter",
+          "/personal#amount-filter",
+          "/transaction/new#step-1",
+          "/transaction/new#step-2",
+          "/transaction/new#step-3",
+          "/transaction/:transactionId",
+          "/transaction/:transactionId#pending-request",
+          "/user/settings",
+          "/notifications",
+          "/notifications#empty",
+          "/bankaccounts",
+          "/bankaccounts/new",
+          "/#onboarding-step-1",
+          "/#onboarding-step-2",
+          "/#onboarding-step-3"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:auth",
+        "label": "Auth layout – centered form, RWA logo, footer, no navigation",
+        "node_ids": ["/signin", "/signup"]
+      },
+      {
+        "id": "layout:main",
+        "label": "Main layout – NavBar (top: New Txn & Notifications), NavDrawer (left: Home, My Account, Bank Accounts, Notifications, Logout), Footer",
+        "node_ids": [
+          "/",
+          "/#empty",
+          "/contacts",
+          "/contacts#empty",
+          "/personal",
+          "/personal#empty",
+          "/#date-filter",
+          "/#amount-filter",
+          "/contacts#date-filter",
+          "/contacts#amount-filter",
+          "/personal#date-filter",
+          "/personal#amount-filter",
+          "/transaction/new#step-1",
+          "/transaction/new#step-2",
+          "/transaction/new#step-3",
+          "/transaction/:transactionId",
+          "/transaction/:transactionId#pending-request",
+          "/user/settings",
+          "/notifications",
+          "/notifications#empty",
+          "/bankaccounts",
+          "/bankaccounts/new",
+          "/#onboarding-step-1",
+          "/#onboarding-step-2",
+          "/#onboarding-step-3"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,2307 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Super Productivity",
+    "base_url": "http://localhost:3017",
+    "total_states": 101,
+    "explored": 101,
+    "skipped": 0,
+    "verified_live": [
+      "/tag/TODAY/tasks",
+      "/tag/TODAY/history",
+      "/tag/TODAY/metrics",
+      "/tag/TODAY/daily-summary",
+      "/planner",
+      "/schedule",
+      "/boards",
+      "/config",
+      "/search",
+      "/habits",
+      "/archived-projects",
+      "/scheduled-list",
+      "/donate",
+      "/contrast-test",
+      "/project/INBOX_PROJECT/tasks"
+    ],
+    "notes": "Angular SPA. No auth gate \u2014 all routes publicly accessible. Tag TODAY (id='TODAY') and project INBOX_PROJECT (id='INBOX_PROJECT') are built-in defaults. Focus overlay blocks all other routes while active. Onboarding appears on first run only (overlay, not a route)."
+  },
+  "nodes": [
+    {
+      "id": "/tag/:id/tasks",
+      "route": "/tag/:id/tasks",
+      "label": "Tag task view \u2013 work view with today/overdue/backlog task lists",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Add task [add-task-bar input]",
+        "Start/stop time tracking [play-button]",
+        "Open Focus Mode [focus-button]",
+        "Open task detail [click task row]",
+        "Mark task done [task checkbox]",
+        "Reorder tasks [drag-drop]",
+        "Open work context menu [button 'more_vert' in header]",
+        "Open Notes panel [button 'comment' in header]",
+        "Open Issue panel [button 'webhook' in header]",
+        "Open Task View Customizer [button 'tune' in header]",
+        "Toggle backlog visibility [split divider]",
+        "Finish Day [button 'Finish Day']",
+        "Navigate to History [work context menu 'History']",
+        "Navigate to Metrics [work context menu 'Metrics']",
+        "Navigate to Daily Summary [finish-day-btn]"
+      ],
+      "notes": "Main work view. Default landing route (Today tag). Guard: ValidTagIdGuard, FocusOverlayOpenGuard."
+    },
+    {
+      "id": "/project/:id/tasks",
+      "route": "/project/:id/tasks",
+      "label": "Project task view \u2013 work view with project task list + backlog",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Add task [add-task-bar input]",
+        "Start/stop time tracking [play-button]",
+        "Open Focus Mode [focus-button]",
+        "Open task detail [click task row]",
+        "Mark task done [task checkbox]",
+        "Reorder tasks [drag-drop]",
+        "Toggle backlog [split divider]",
+        "Open work context menu [button 'more_vert' in header]",
+        "Open Notes panel [button 'comment' in header]",
+        "Open Issue panel [button 'webhook' in header]",
+        "Restore archived project [button 'Restore' in archived notice]",
+        "Navigate to History [work context menu 'History']",
+        "Navigate to Metrics [work context menu 'Metrics']",
+        "Finish Day [button 'Finish Day']"
+      ],
+      "notes": "Project work view. Shows archived notice banner when project is archived. Guard: ValidProjectIdGuard."
+    },
+    {
+      "id": "/tag/:id/history",
+      "route": "/tag/:id/history",
+      "label": "History / Worklog \u2013 year/month/week breakdown of worked tasks",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Expand/collapse month [button with month-toggle class]",
+        "Export month worklog [mat-mini-fab 'call_made']",
+        "Export week worklog [mat-mini-fab 'call_made']",
+        "Navigate to daily summary for day [link on day row]",
+        "Open worklog export dialog [export button]"
+      ],
+      "notes": "Also reachable as /tag/:id/worklog and /tag/:id/quick-history (legacy redirects)."
+    },
+    {
+      "id": "/project/:id/history",
+      "route": "/project/:id/history",
+      "label": "Project History / Worklog \u2013 year/month/week breakdown",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Expand/collapse month [button with month-toggle class]",
+        "Export month worklog [mat-mini-fab 'call_made']",
+        "Export week worklog [mat-mini-fab 'call_made']",
+        "Navigate to daily summary for day [link on day row]",
+        "Open worklog export dialog [export button]"
+      ],
+      "notes": "Same component as tag history. Also at /project/:id/worklog (legacy redirect)."
+    },
+    {
+      "id": "/tag/:id/daily-summary",
+      "route": "/tag/:id/daily-summary",
+      "label": "Daily Summary \u2013 review tasks, evaluate day, plan tomorrow",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit work start time [inline-input type='time']",
+        "Edit work end time [inline-input type='time']",
+        "Switch to Review Tasks tab [tab '1. Review Tasks']",
+        "Switch to Evaluate Day tab [tab '2. Evaluate Day']",
+        "Switch to Plan Tomorrow tab [tab '3. Plan Tomorrow']",
+        "Mark all undone tasks as done [button]",
+        "Move undone tasks to tomorrow [button]",
+        "Finish day and navigate back [button 'Back to work']"
+      ],
+      "notes": "Shows today's summary. Tab 3 only shown if isForToday=true."
+    },
+    {
+      "id": "/tag/:id/daily-summary/:dayStr",
+      "route": "/tag/:id/daily-summary/:dayStr",
+      "label": "Daily Summary for specific date",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit work start time [inline-input type='time']",
+        "Edit work end time [inline-input type='time']",
+        "Switch to Review Tasks tab [tab '1. Review Tasks']",
+        "Switch to Evaluate Day tab [tab '2. Evaluate Day']"
+      ],
+      "notes": "Historical daily summary. No 'Plan Tomorrow' tab since not today."
+    },
+    {
+      "id": "/project/:id/daily-summary",
+      "route": "/project/:id/daily-summary",
+      "label": "Project Daily Summary \u2013 review project tasks for today",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Switch to Review Tasks tab [tab '1. Review Tasks']",
+        "Switch to Evaluate Day tab [tab '2. Evaluate Day']",
+        "Finish day [button 'Back to work']"
+      ],
+      "notes": "Same component as tag daily summary but in project context."
+    },
+    {
+      "id": "/tag/:id/metrics",
+      "route": "/tag/:id/metrics",
+      "label": "Metrics \u2013 productivity stats, activity heatmap, focus sessions",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "View activity heatmap [activity-heatmap component]",
+        "View productivity breakdown chart [lazy-chart]",
+        "View focus session trends [lazy-chart]",
+        "Open Focus Session Edit dialog [button in metrics]",
+        "Open Productivity Breakdown dialog [button]",
+        "Share productivity stats [share-button]"
+      ],
+      "notes": "Only available for TODAY tag and projects (guard in work-context-menu)."
+    },
+    {
+      "id": "/project/:id/metrics",
+      "route": "/project/:id/metrics",
+      "label": "Project Metrics \u2013 productivity stats for a project",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "View activity heatmap",
+        "View productivity breakdown chart",
+        "Open Focus Session Edit dialog",
+        "Open Productivity Breakdown dialog",
+        "Share productivity stats [share-button]"
+      ],
+      "notes": "Same component as tag metrics but scoped to project data."
+    },
+    {
+      "id": "/config",
+      "route": "/config",
+      "label": "Settings page with 6 tabs: General, Tasks, Time & Tracking, Productivity, Plugins, Sync & Backup",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Select General tab [tab icon='settings']",
+        "Select Tasks tab [tab icon='task']",
+        "Select Time & Tracking tab [tab icon='timer']",
+        "Select Productivity tab [tab icon='trending_up']",
+        "Select Plugins tab [tab icon='extension']",
+        "Select Sync & Backup tab [tab icon='cloud_sync']",
+        "Set up sync [button 'Set Up Sync']",
+        "Trigger sync now [button 'Sync Now']",
+        "Open Sync Config dialog [button 'Configure']",
+        "View app logs [link 'Logs']",
+        "Copy version to clipboard [link version string]"
+      ],
+      "notes": "Tab index selectable via ?tab=N query param. Section expanded via ?section=key."
+    },
+    {
+      "id": "/config#tab-general",
+      "route": "/config",
+      "label": "Settings \u2013 General tab: language, app features, misc, keyboard shortcuts",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Select theme [theme-selector component]",
+        "Expand Language section [config-section 'language']",
+        "Expand App Features section [config-section 'appFeatures']",
+        "Expand Misc Settings section [config-section 'misc']",
+        "Expand Task Widget section [config-section 'taskWidget']",
+        "Expand Keyboard Shortcuts section [config-section 'keyboard']",
+        "Expand Clipboard Images section [config-section 'clipboard']",
+        "Save section form [button 'Save' in section]"
+      ],
+      "notes": "Default tab (index=0). Theme selector at top, then collapsible sections."
+    },
+    {
+      "id": "/config#tab-tasks",
+      "route": "/config",
+      "label": "Settings \u2013 Tasks tab: task settings, short syntax, sound",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Expand Tasks Settings section [config-section 'tasks']",
+        "Expand Short Syntax section [config-section 'shortSyntax']",
+        "Configure sounds [config-sound-form component]"
+      ],
+      "notes": "Tab index=1."
+    },
+    {
+      "id": "/config#tab-time-tracking",
+      "route": "/config",
+      "label": "Settings \u2013 Time & Tracking tab: time tracking, idle, schedule, reminders",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Expand Time Tracking section [config-section 'timeTracking']",
+        "Expand Idle Settings section [config-section 'idle']",
+        "Expand Schedule section [config-section 'schedule']",
+        "Expand Reminder section [config-section 'reminder']",
+        "Save section form [button 'Save' in section]"
+      ],
+      "notes": "Tab index=2."
+    },
+    {
+      "id": "/config#tab-productivity",
+      "route": "/config",
+      "label": "Settings \u2013 Productivity tab: focus mode, take-a-break, evaluation",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Expand Focus Mode section [config-section 'focusMode']",
+        "Expand Take A Break section [config-section 'takeABreak']",
+        "Expand Evaluation section [config-section 'evaluation']",
+        "Save section form [button 'Save' in section]"
+      ],
+      "notes": "Tab index=3. CSS class 'tour-productivityHelper'."
+    },
+    {
+      "id": "/config#tab-plugins",
+      "route": "/config",
+      "label": "Settings \u2013 Plugins tab: plugin management, plugin shortcuts",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Browse/enable/disable plugins [plugin-management component]",
+        "Open plugin config dialog [button in plugin list]",
+        "Expand Keyboard Shortcuts for plugins section"
+      ],
+      "notes": "Tab index=4."
+    },
+    {
+      "id": "/config#tab-sync-backup",
+      "route": "/config",
+      "label": "Settings \u2013 Sync & Backup tab: sync provider, import/export",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Set up sync [button 'Set Up Sync' - when no provider]",
+        "Sync now [button 'Sync Now']",
+        "Open Sync Config dialog [button 'Configure']",
+        "Expand Import/Export section [config-section IMEX]",
+        "Import data from file [file-imex component]",
+        "Export data [file-imex component]",
+        "Import from URL [button 'Import from URL']",
+        "Configure auto-backup (Electron/Android only)"
+      ],
+      "notes": "Tab index=5. Sync status pill shown when provider configured."
+    },
+    {
+      "id": "/search",
+      "route": "/search",
+      "label": "Search \u2013 search all tasks including archived",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Type search query [input mat-form-field search]",
+        "Toggle include completed [mat-checkbox 'Include Completed']",
+        "Clear search [button mat-icon-button 'clear']",
+        "Navigate to task [click search result row]",
+        "Navigate to subtask parent [click result with parentTitle]"
+      ],
+      "notes": "Feature-flagged: only shows in nav when isSearchEnabled=true."
+    },
+    {
+      "id": "/scheduled-list",
+      "route": "/scheduled-list",
+      "label": "Scheduled List \u2013 all repeated tasks and time-scheduled tasks",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit task repeat config [click repeat text/icon on task]",
+        "Edit repeatable task title [task-title inline edit]",
+        "View scheduled tasks list [section below repeating tasks]"
+      ],
+      "notes": "Shows repeat configs and tasks with dueWithTime."
+    },
+    {
+      "id": "/planner",
+      "route": "/planner",
+      "label": "Planner \u2013 drag tasks onto calendar days",
+      "section": "Planning",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Navigate calendar days [planner-calendar-nav on mobile]",
+        "Drag task to a day [drag-drop cdkDropList]",
+        "Schedule task via dialog [button or right-click on task]",
+        "Add task inline on a day [add-task-inline component]",
+        "View overdue tasks [planner-day-overdue component]",
+        "View deadline tasks [planner-deadline-task component]"
+      ],
+      "notes": "Feature-flagged: isPlannerEnabled. Mobile shows date nav at top."
+    },
+    {
+      "id": "/schedule",
+      "route": "/schedule",
+      "label": "Schedule \u2013 calendar view of tasks with time (week or month)",
+      "section": "Planning",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Switch to week view [button icon='view_week']",
+        "Switch to month view [button icon='calendar_month']",
+        "Navigate to previous period [button icon='chevron_left']",
+        "Navigate to next period [button icon='chevron_right']",
+        "Filter calendar providers [button icon='event_note']",
+        "Toggle calendar provider visibility [menu item in calFilterMenu]",
+        "Click event to open schedule-day-panel [schedule event]"
+      ],
+      "notes": "Feature-flagged: isSchedulerEnabled."
+    },
+    {
+      "id": "/schedule#week-view",
+      "route": "/schedule",
+      "label": "Schedule \u2013 Week view showing 7 days",
+      "section": "Planning",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click day column to open schedule-day-panel [schedule-week day column]",
+        "Navigate to previous week [button icon='chevron_left']",
+        "Navigate to next week [button icon='chevron_right']",
+        "Switch to month view [button icon='calendar_month']"
+      ],
+      "notes": "Default view for /schedule."
+    },
+    {
+      "id": "/schedule#month-view",
+      "route": "/schedule",
+      "label": "Schedule \u2013 Month view showing calendar grid",
+      "section": "Planning",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Click day cell to open schedule-day-panel [schedule-month day cell]",
+        "Navigate to previous month [button icon='chevron_left']",
+        "Navigate to next month [button icon='chevron_right']",
+        "Switch to week view [button icon='view_week']"
+      ],
+      "notes": "Activated by clicking month view button."
+    },
+    {
+      "id": "/boards",
+      "route": "/boards",
+      "label": "Boards \u2013 Kanban-style boards as tabs",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Select board tab [mat-tab for each board]",
+        "Drag to reorder board tabs [cdkDrag on tab label]",
+        "Right-click board tab [context menu with edit/duplicate/delete]",
+        "Edit board [context menu item 'Edit']",
+        "Duplicate board [context menu item 'Duplicate']",
+        "Delete board [context menu item 'Delete']",
+        "Switch to Add New Board tab [mat-tab icon='add_circle']",
+        "Open board edit dialog [editBoard() action]"
+      ],
+      "notes": "Feature-flagged: isBoardsEnabled."
+    },
+    {
+      "id": "/boards#add-new-board",
+      "route": "/boards",
+      "label": "Boards \u2013 Add New Board tab with inline board-edit form",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Fill board configuration form [board-edit component]",
+        "Save new board [button in board-edit form]",
+        "Cancel [switch to another tab]"
+      ],
+      "notes": "Inline form shown in mat-tab with add_circle icon."
+    },
+    {
+      "id": "/habits",
+      "route": "/habits",
+      "label": "Habits \u2013 habit tracker with simple counters",
+      "section": "Productivity",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Increment habit counter [habit-tracker counter button]",
+        "View habit history/streak [habit-tracker component]",
+        "View disabled counters [disabledSimpleCounters section]"
+      ],
+      "notes": "Feature-flagged: isHabitsEnabled."
+    },
+    {
+      "id": "/archived-projects",
+      "route": "/archived-projects",
+      "label": "Archived Projects \u2013 list of archived/completed projects",
+      "section": "Project Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Search projects [input mat-form-field search]",
+        "Clear search [button mat-icon-button 'close']",
+        "Navigate to project [link routerLink '/project/:id/tasks']",
+        "Unarchive project [button mat-icon-button 'unarchive']",
+        "Reopen completed project [button mat-icon-button 'replay']"
+      ],
+      "notes": "Shows both archived and completed (isDone) projects."
+    },
+    {
+      "id": "/donate",
+      "route": "/donate",
+      "label": "Donate \u2013 GitHub Sponsors link",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Open GitHub Sponsors link [button mat-raised-button 'Support Development']"
+      ],
+      "notes": "Feature-flagged: isDonatePageEnabled. Hidden on iOS native per App Store rules."
+    },
+    {
+      "id": "/contrast-test",
+      "route": "/contrast-test",
+      "label": "Contrast Test \u2013 developer page for theme contrast testing",
+      "section": "Developer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "View contrast swatches [contrast-test component UI]"
+      ],
+      "notes": "No FocusOverlayOpenGuard. Dev/testing utility page."
+    },
+    {
+      "id": "/plugins/:pluginId/index",
+      "route": "/plugins/:pluginId/index",
+      "label": "Plugin Index \u2013 full-page plugin UI embedding",
+      "section": "Plugins",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Interact with plugin UI [plugin-index component iframe/content]"
+      ],
+      "notes": "Renders plugin's full-page UI via PluginIndexComponent."
+    },
+    {
+      "id": "/active",
+      "route": "/active",
+      "label": "Active work context redirect \u2013 auto-redirects to current tag/project",
+      "section": "Navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [],
+      "notes": "Guard: ActiveWorkContextGuard. Immediately redirects; no visible UI."
+    },
+    {
+      "id": "global#onboarding",
+      "route": "(overlay)",
+      "label": "Onboarding \u2013 first-run preset selection overlay",
+      "section": "Onboarding",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:onboarding-overlay",
+      "actions": [
+        "Select Personal/Work/Custom preset [preset-card button]",
+        "Set up sync before starting [button 'Set up sync']"
+      ],
+      "notes": "Shown only on first run (isShowOnboardingPresets=true). Covers entire app."
+    },
+    {
+      "id": "global#add-task-bar",
+      "route": "(overlay)",
+      "label": "Global Add Task Bar \u2013 floating input bar for adding tasks",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Type task title with short-syntax [input add-task-bar]",
+        "Assign to project/tag via autocomplete [add-task-bar autocomplete]",
+        "Submit task [Enter key or submit button]",
+        "Close bar [click backdrop or Escape]"
+      ],
+      "notes": "Shown when layoutService.isShowAddTaskBar()=true. Covers page with backdrop."
+    },
+    {
+      "id": "focus-mode#main",
+      "route": "(focus-mode overlay)",
+      "label": "Focus Mode \u2013 main session view with Pomodoro/Flowtime timer",
+      "section": "Focus Mode",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:focus-mode-overlay",
+      "actions": [
+        "Select Pomodoro timer mode [button]",
+        "Select Flowtime timer mode [button]",
+        "Start focus session [start button]",
+        "Pause session [pause button]",
+        "End session [end button]",
+        "Skip break [skip break button]",
+        "Select task to focus on [focus-mode-task-selector]",
+        "Open Pomodoro settings dialog [button]",
+        "Open Flowtime settings dialog [button]",
+        "Close focus overlay [button 'close' at top]"
+      ],
+      "notes": "FocusScreen.Main. Guard FocusOverlayOpenGuard blocks other routes while active."
+    },
+    {
+      "id": "focus-mode#countdown",
+      "route": "(focus-mode overlay)",
+      "label": "Focus Mode \u2013 5-second countdown before session starts",
+      "section": "Focus Mode",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:focus-mode-overlay",
+      "actions": [
+        "Wait for countdown [auto-transitions to session]",
+        "Close focus overlay [button 'close']"
+      ],
+      "notes": "Shown during 5-second prep. Animated rocket launch."
+    },
+    {
+      "id": "focus-mode#break",
+      "route": "(focus-mode overlay)",
+      "label": "Focus Mode \u2013 Break timer between Pomodoro cycles",
+      "section": "Focus Mode",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:focus-mode-overlay",
+      "actions": [
+        "Skip break [button 'skip']",
+        "Close focus overlay [button 'close']"
+      ],
+      "notes": "FocusScreen.Break. Shown between pomodoro work sessions."
+    },
+    {
+      "id": "focus-mode#session-done",
+      "route": "(focus-mode overlay)",
+      "label": "Focus Mode \u2013 Session complete screen with stats",
+      "section": "Focus Mode",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:focus-mode-overlay",
+      "actions": [
+        "Start new session [button]",
+        "Close focus overlay [button 'close']",
+        "View session stats [focus-mode-session-done component]"
+      ],
+      "notes": "FocusScreen.SessionDone. Shown when Pomodoro work session completes."
+    },
+    {
+      "id": "/tag/:id/tasks#right-panel-task-detail",
+      "route": "/tag/:id/tasks",
+      "label": "Work view + Task Detail right panel open",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit task title [task-title inline]",
+        "Set time estimate [task-detail-item 'hourglass_empty']",
+        "Set deadline [task-detail-item 'flag']",
+        "Add subtask [button 'Add Sub Task']",
+        "Add reminder [task-detail-item 'alarm']",
+        "Edit tags [task-detail-item tags section]",
+        "Manage attachments [task-detail-item 'attach_file']",
+        "Add attachment [button 'Add Attachment']",
+        "Link/unlink issue [task-detail-item issue section]",
+        "Open fullscreen markdown notes [button 'expand']",
+        "Set repeat config [task-detail-item 'repeat']",
+        "Move to project [task-detail-item 'folder']",
+        "Close panel [click elsewhere or toggle button]"
+      ],
+      "notes": "panelContent='TASK'. Task selected in task list shows right panel."
+    },
+    {
+      "id": "/project/:id/tasks#right-panel-task-detail",
+      "route": "/project/:id/tasks",
+      "label": "Project work view + Task Detail right panel open",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Edit task title [task-title inline]",
+        "Set time estimate [task-detail-item 'hourglass_empty']",
+        "Set deadline [task-detail-item 'flag']",
+        "Add subtask [button 'Add Sub Task']",
+        "Add reminder [task-detail-item 'alarm']",
+        "Edit tags [task-detail-item tags section]",
+        "Manage attachments [task-detail-item 'attach_file']",
+        "Open fullscreen markdown notes",
+        "Close panel [toggle button in header]"
+      ],
+      "notes": "Same panel content as tag context."
+    },
+    {
+      "id": "/tag/:id/tasks#right-panel-notes",
+      "route": "/tag/:id/tasks",
+      "label": "Work view + Notes right panel open",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Add note [button 'Add Note' id='add-note-btn']",
+        "Edit note [note component inline]",
+        "Delete note [note component delete action]",
+        "Reorder notes [drag-drop cdkDropList]",
+        "Drop image to create note [drag image file onto notes]",
+        "Close notes panel [toggle button 'comment' in header]"
+      ],
+      "notes": "panelContent='NOTES'. Feature-flagged: isProjectNotesEnabled."
+    },
+    {
+      "id": "/tag/:id/tasks#right-panel-issues",
+      "route": "/tag/:id/tasks",
+      "label": "Work view + Issue Panel right panel open",
+      "section": "Issue Integration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Select issue provider tab [mat-tab with provider icon]",
+        "Drag issue tab to reorder [cdkDrag on tab]",
+        "Long-press tab to edit provider [longPress event]",
+        "Open Edit Issue Provider dialog [context action on tab]",
+        "Import issue as task [issue-provider-tab action]",
+        "Filter issues [issue-provider-tab filter]",
+        "Close issue panel [toggle button 'webhook' in header]"
+      ],
+      "notes": "panelContent='ISSUE_PANEL'. Multiple provider tabs (Jira, GitLab, etc.)."
+    },
+    {
+      "id": "/schedule#right-panel-schedule-day",
+      "route": "/schedule",
+      "label": "Schedule + Schedule Day Panel open (right panel)",
+      "section": "Planning",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "View tasks for selected day [schedule-day-panel]",
+        "Add task to day [button in schedule-day-panel]",
+        "Close day panel [toggle or click elsewhere]"
+      ],
+      "notes": "panelContent='SCHEDULE_DAY_PANEL'. Opened by clicking calendar event."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-task-detail",
+      "route": "/tag/:id/tasks",
+      "label": "Task Detail Dialog (mobile/overlay variant)",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit task title [task-title inline]",
+        "Set time estimate [task-detail-item]",
+        "Set deadline",
+        "Manage subtasks",
+        "Add/manage reminders",
+        "Edit tags",
+        "Add attachments",
+        "Edit notes [fullscreen markdown]",
+        "Close dialog [mat-dialog close button]"
+      ],
+      "notes": "dialog-task-detail-panel wraps task-detail-panel. Used on mobile or from search."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-time-estimate",
+      "route": "/tag/:id/tasks",
+      "label": "Time Estimate Dialog \u2013 set/edit time estimate for a task",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Adjust time estimate [duration slider/input]",
+        "Log time for other days [button]",
+        "Submit [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from task detail panel or task hover controls."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-deadline",
+      "route": "/tag/:id/tasks",
+      "label": "Deadline Dialog \u2013 set task deadline with date/time picker",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Set deadline date [date picker]",
+        "Set deadline time [time input]",
+        "Quick set: Today [button]",
+        "Quick set: Tomorrow [button]",
+        "Quick set: Next week [button]",
+        "Quick set: Next month [button]",
+        "Configure reminder [reminder config]",
+        "Save deadline [button 'Save']",
+        "Remove deadline [button 'Remove']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from task detail panel deadline field."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-view-reminders",
+      "route": "/tag/:id/tasks",
+      "label": "View Task Reminders Dialog \u2013 shows due/deadline reminders popup",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Snooze reminder (10 min) [split-button main action]",
+        "More snooze options [split-button menu]",
+        "Dismiss reminder [button]",
+        "Navigate to task [click task row]",
+        "Mark task done [button in task row]"
+      ],
+      "notes": "Triggered automatically when task reminder fires."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-add-time-other-day",
+      "route": "/tag/:id/tasks",
+      "label": "Add Time for Other Day Dialog \u2013 retroactively log time on past days",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select date [date picker]",
+        "Enter time amount [duration input]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Accessible from time estimate dialog."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-view-archived-task",
+      "route": "/tag/:id/tasks",
+      "label": "View Archived Task Dialog \u2013 read-only view of archived task",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "View task info [task-detail-panel read-only]",
+        "Close dialog [button 'Close']"
+      ],
+      "notes": "Opened from search results when task is archived."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-edit-attachment",
+      "route": "/tag/:id/tasks",
+      "label": "Edit Task Attachment Dialog \u2013 edit attachment title/URL",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit attachment title [input]",
+        "Edit attachment URL [input]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']",
+        "Delete attachment [button 'Delete']"
+      ],
+      "notes": "Opened from task-attachment-list in task detail panel."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-repeat-cfg",
+      "route": "/tag/:id/tasks",
+      "label": "Edit Task Repeat Config Dialog \u2013 configure repeating task schedule",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Expand heatmap [collapsible 'bar_chart']",
+        "Set start date [button 'Today / date' opens schedule dialog]",
+        "Configure recurrence frequency [formly-form essentialFormFields]",
+        "Select weekdays [weekday checkboxes]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Add mode or Edit mode. Also accessible from /scheduled-list."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-edit-tags",
+      "route": "/tag/:id/tasks",
+      "label": "Edit Tags for Task Dialog \u2013 add/remove tags on a task",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Toggle tag [tag-toggle-menu-list item]",
+        "Create new tag [button 'Create Tag']",
+        "Close dialog [button 'Close']"
+      ],
+      "notes": "Opened from task detail panel tags section."
+    },
+    {
+      "id": "/tag/:id/tasks#dialog-select-date-time",
+      "route": "/tag/:id/tasks",
+      "label": "Select Date/Time Dialog \u2013 general date+time picker",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Pick date [date picker]",
+        "Pick time [time input]",
+        "Confirm [button 'OK']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Used for scheduling tasks from repeat config dialog."
+    },
+    {
+      "id": "global#dialog-create-project",
+      "route": "(modal)",
+      "label": "Create Project Dialog \u2013 create a new project with name/icon/color",
+      "section": "Project Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter project title [input]",
+        "Choose icon [icon-input]",
+        "Choose color [color-input]",
+        "Select theme [theme options]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from sidebar 'add' button next to Projects section."
+    },
+    {
+      "id": "global#dialog-project-complete",
+      "route": "(modal)",
+      "label": "Project Complete Dialog \u2013 confirm project completion with stats",
+      "section": "Project Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Resolve remaining tasks [dialog-complete-resolve-tasks]",
+        "Confirm completion [button 'Complete']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from work-context-menu 'Complete Project'."
+    },
+    {
+      "id": "global#dialog-context-settings",
+      "route": "(modal)",
+      "label": "Work Context Settings Dialog \u2013 edit project/tag settings (title, icon, theme)",
+      "section": "Project Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit title/icon/theme [formly-form]",
+        "Enable/disable backlog [toggle]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from work-context-menu 'Settings'."
+    },
+    {
+      "id": "global#dialog-create-tag",
+      "route": "(modal)",
+      "label": "Create Tag Dialog \u2013 create a new tag with name/color",
+      "section": "Tag Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter tag name [input]",
+        "Choose tag color [color picker]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from sidebar 'add' button next to Tags section."
+    },
+    {
+      "id": "global#dialog-idle",
+      "route": "(modal)",
+      "label": "Idle Dialog \u2013 what were you doing during idle period?",
+      "section": "Time Tracking",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select BREAK mode [mat-button-toggle 'Break']",
+        "Select TASK mode [mat-button-toggle 'Task']",
+        "Select SPLIT mode [mat-button-toggle 'Split']",
+        "Pick task [select-task component]",
+        "Confirm [button 'OK']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Triggered automatically after idle period. isTaskDataLoadedIfNeeded guard."
+    },
+    {
+      "id": "global#dialog-tracking-reminder",
+      "route": "(modal)",
+      "label": "Tracking Reminder Dialog \u2013 track untracked time to a task",
+      "section": "Time Tracking",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select task to track to [select-task]",
+        "Track time [button 'Track']",
+        "Create and track [button 'Create & Track']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Periodic popup when untracked time builds up."
+    },
+    {
+      "id": "global#dialog-finish-day-before-close",
+      "route": "(modal)",
+      "label": "Finish Day Before Close Dialog \u2013 shown on Electron window close",
+      "section": "Day Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Don't quit [button 'Don't Quit']",
+        "Just quit [button 'Quit']",
+        "Finish day and quit [button 'Finish Day' e2e='finishDayBtn']"
+      ],
+      "notes": "Electron-only. Shown when closing app with unfinished tasks."
+    },
+    {
+      "id": "/config#dialog-sync-cfg",
+      "route": "/config",
+      "label": "Sync Config Dialog \u2013 configure sync provider and settings",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select sync provider [dropdown/radio]",
+        "Enter provider credentials [form fields per provider]",
+        "Enable/disable encryption [toggle]",
+        "Open Enable Encryption dialog [button]",
+        "Open Change Encryption Password dialog [button]",
+        "Test connection [button 'Test']",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from Settings Sync tab 'Set Up Sync' or 'Configure' buttons."
+    },
+    {
+      "id": "/config#dialog-enable-encryption",
+      "route": "/config",
+      "label": "Enable Encryption Dialog \u2013 set encryption password for sync",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter password [input]",
+        "Confirm password [input]",
+        "Enable [button 'Enable']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Nested dialog from Sync Config Dialog."
+    },
+    {
+      "id": "/config#dialog-change-encryption-password",
+      "route": "/config",
+      "label": "Change Encryption Password Dialog",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter current password [input]",
+        "Enter new password [input]",
+        "Change [button 'Change']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Nested dialog from Sync Config Dialog."
+    },
+    {
+      "id": "/config#dialog-sync-conflict",
+      "route": "/config",
+      "label": "Sync Conflict Dialog \u2013 resolve data conflict between local and remote",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Use local data [button 'Use Local']",
+        "Use remote data [button 'Use Remote']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Appears automatically when sync detects a conflict."
+    },
+    {
+      "id": "/config#dialog-restore-point",
+      "route": "/config",
+      "label": "Restore Point Dialog \u2013 restore from a sync backup point",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select restore point [list of restore points]",
+        "Restore [button 'Restore']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Part of the sync/IMEX feature."
+    },
+    {
+      "id": "/config#dialog-get-auth-code",
+      "route": "/config",
+      "label": "Get and Enter Auth Code Dialog \u2013 OAuth flow for sync provider",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Open provider OAuth URL [button/link]",
+        "Paste auth code [input]",
+        "Confirm [button 'Confirm']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Used for Dropbox, WebDAV OAuth flows."
+    },
+    {
+      "id": "/config#dialog-import-from-url",
+      "route": "/config",
+      "label": "Import from URL Dialog \u2013 import SuperProductivity data from a URL",
+      "section": "Data Import/Export",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter import URL [input]",
+        "Import [button 'Import']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from Settings Sync & Backup tab IMEX section."
+    },
+    {
+      "id": "/config#dialog-worklog-export",
+      "route": "(modal)",
+      "label": "Worklog Export Dialog \u2013 export worklog data in various formats",
+      "section": "Data Import/Export",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select export format [dropdown/radio: CSV, JSON, Markdown]",
+        "Configure date range [date pickers]",
+        "Preview export [textarea]",
+        "Copy to clipboard [button 'Copy']",
+        "Download file [button 'Download']",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from History view export button."
+    },
+    {
+      "id": "/config#dialog-logs",
+      "route": "/config",
+      "label": "Logs Dialog \u2013 view application log history",
+      "section": "Developer",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "View log entries [log list]",
+        "Copy logs [button]",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from Settings footer 'Logs' link."
+    },
+    {
+      "id": "/config#dialog-clipboard-images",
+      "route": "/config",
+      "label": "Clipboard Images Manager Dialog \u2013 manage cached clipboard images",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "View stored images [image list]",
+        "Delete image [button 'Delete']",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from General settings Clipboard Images section."
+    },
+    {
+      "id": "global#dialog-simple-counter-edit",
+      "route": "(modal)",
+      "label": "Edit Simple Counter Dialog \u2013 edit counter value/session",
+      "section": "Productivity",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit counter value [input]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from simple counter button long press."
+    },
+    {
+      "id": "global#dialog-simple-counter-settings",
+      "route": "(modal)",
+      "label": "Simple Counter Settings Dialog \u2013 configure a simple counter/habit",
+      "section": "Productivity",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit counter title [input]",
+        "Configure counter type [select]",
+        "Configure icon [icon-input]",
+        "Enable/disable counter [toggle]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Accessible from habit tracker or header counter button."
+    },
+    {
+      "id": "global#dialog-edit-issue-provider",
+      "route": "(modal)",
+      "label": "Edit Issue Provider Dialog \u2013 configure Jira, GitLab, GitHub, etc.",
+      "section": "Issue Integration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Toggle provider enabled [mat-slide-toggle]",
+        "Enter provider URL [input]",
+        "Enter API token [input]",
+        "Configure provider-specific settings [formly-form]",
+        "Submit [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from issue panel tab long-press or setup overview."
+    },
+    {
+      "id": "global#dialog-board-edit",
+      "route": "(modal)",
+      "label": "Board Edit Dialog \u2013 configure a Kanban board (columns, filters)",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit board title [input]",
+        "Configure board columns [board-edit form]",
+        "Set column filters [column config]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from Boards page context menu 'Edit'."
+    },
+    {
+      "id": "global#dialog-planner-schedule-task",
+      "route": "(modal)",
+      "label": "Schedule Task Dialog (Planner) \u2013 schedule task to a day with time",
+      "section": "Planning",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select date [date picker]",
+        "Set reminder time [time input]",
+        "Save [button 'Save']",
+        "Remove schedule [button 'Remove']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from planner task or add-task-inline on a day."
+    },
+    {
+      "id": "global#dialog-pomodoro-settings",
+      "route": "(modal)",
+      "label": "Pomodoro Settings Dialog \u2013 work/break duration, cycles count",
+      "section": "Focus Mode",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Set work duration [duration input]",
+        "Set short break duration [duration input]",
+        "Set long break duration [duration input]",
+        "Set cycles before long break [number input]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from Focus Mode main screen settings button."
+    },
+    {
+      "id": "global#dialog-flowtime-settings",
+      "route": "(modal)",
+      "label": "Flowtime Settings Dialog \u2013 configure flowtime break ratios",
+      "section": "Focus Mode",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Configure break ratio [input]",
+        "Set minimum break time [input]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from Focus Mode main screen when Flowtime mode selected."
+    },
+    {
+      "id": "global#dialog-focus-session-edit",
+      "route": "(modal)",
+      "label": "Focus Session Edit Dialog \u2013 edit focus session data in metrics",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit session start/end times",
+        "Edit session notes",
+        "Save [button 'Save']",
+        "Delete session [button 'Delete']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from Metrics page focus session list."
+    },
+    {
+      "id": "global#dialog-productivity-breakdown",
+      "route": "(modal)",
+      "label": "Productivity Breakdown Dialog \u2013 detailed productivity stats",
+      "section": "Reporting",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "View breakdown chart [lazy-chart]",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from Metrics page."
+    },
+    {
+      "id": "global#dialog-user-profile-management",
+      "route": "(modal)",
+      "label": "User Profile Management Dialog \u2013 create/switch/rename profiles",
+      "section": "User Profiles",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Create new profile [input + button 'Create']",
+        "Switch to profile [profile-item button]",
+        "Edit profile name [button 'edit' on profile row]",
+        "Delete profile [button 'delete' on profile row]",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from user-profile-button in header. Feature-flagged: isEnableUserProfiles."
+    },
+    {
+      "id": "global#dialog-fullscreen-markdown",
+      "route": "(modal)",
+      "label": "Fullscreen Markdown Dialog \u2013 full-screen editor for task notes",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Edit markdown content [textarea]",
+        "View markdown shortcuts [button 'help']",
+        "Save and close [button 'Save']",
+        "Discard and close [button 'Cancel']"
+      ],
+      "notes": "Opened from task detail panel notes section expand button."
+    },
+    {
+      "id": "global#dialog-markdown-shortcuts",
+      "route": "(modal)",
+      "label": "Markdown Shortcuts Dialog \u2013 reference for markdown syntax",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "View keyboard shortcuts [shortcut reference list]",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from Fullscreen Markdown Dialog help button."
+    },
+    {
+      "id": "global#dialog-share",
+      "route": "(modal)",
+      "label": "Share Dialog \u2013 share content (tasks as markdown, stats)",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Copy to clipboard [button 'Copy']",
+        "Share via native share [button 'Share' on supported devices]",
+        "Close [button 'Close']"
+      ],
+      "notes": "Opened from share-button components in Metrics, work-context-menu."
+    },
+    {
+      "id": "global#dialog-confirm",
+      "route": "(modal)",
+      "label": "Generic Confirm Dialog \u2013 yes/no confirmation",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Confirm [button 'OK' or custom okTxt]",
+        "Cancel [button 'Cancel' or custom cancelTxt]"
+      ],
+      "notes": "Reused for delete confirmations, experimental feature warnings, etc."
+    },
+    {
+      "id": "global#dialog-gitlab-submit-worklog",
+      "route": "(modal)",
+      "label": "GitLab Submit Worklog Dialog \u2013 submit time to GitLab issue",
+      "section": "Issue Integration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select issue [issue picker]",
+        "Enter time spent [duration input]",
+        "Add comment [textarea]",
+        "Submit [button 'Submit']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "GitLab-specific dialog for worklog submission."
+    },
+    {
+      "id": "global#dialog-jira-transition",
+      "route": "(modal)",
+      "label": "Jira Transition Dialog \u2013 move Jira issue to a different status",
+      "section": "Issue Integration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select transition [list of available transitions]",
+        "Confirm [button 'Confirm']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Jira-specific. Opened when completing a Jira-linked task."
+    },
+    {
+      "id": "global#dialog-openproject-transition",
+      "route": "(modal)",
+      "label": "OpenProject Transition Dialog \u2013 change OpenProject work package status",
+      "section": "Issue Integration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select status [dropdown]",
+        "Confirm [button 'Confirm']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "OpenProject-specific dialog."
+    },
+    {
+      "id": "global#dialog-please-rate",
+      "route": "(modal)",
+      "label": "Please Rate Dialog \u2013 app rating/feedback prompt",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Rate app [link 'Rate' opens store/review URL]",
+        "Give feedback [button 'Give Feedback' shows feedback form]",
+        "Dismiss [button 'Close']"
+      ],
+      "notes": "Periodically shown after extended app use. Has main and feedback sub-views."
+    },
+    {
+      "id": "global#dialog-track-time-issue",
+      "route": "(modal)",
+      "label": "Track Time to Issue Dialog \u2013 log time spent on an issue",
+      "section": "Issue Integration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Select task [task selector]",
+        "Enter time amount [duration input]",
+        "Track [button 'Track']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Issue-provider shared dialog for tracking time to issue providers."
+    },
+    {
+      "id": "global#dialog-add-note",
+      "route": "(modal)",
+      "label": "Add Note Dialog \u2013 create a new note in current work context",
+      "section": "Task Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter note content [textarea]",
+        "Save [button 'Save']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from notes panel 'Add Note' button."
+    },
+    {
+      "id": "/config#dialog-confirm-url-import",
+      "route": "/config",
+      "label": "Confirm URL Import Dialog \u2013 confirm before importing from URL",
+      "section": "Data Import/Export",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Confirm import [button 'Import']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Shown after entering URL in Import from URL dialog."
+    },
+    {
+      "id": "/config#dialog-enter-encryption-password",
+      "route": "/config",
+      "label": "Enter Encryption Password Dialog \u2013 decrypt synced data",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter password [input]",
+        "Decrypt [button 'Decrypt']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Shown when sync data is encrypted and password is needed."
+    },
+    {
+      "id": "/config#dialog-handle-decrypt-error",
+      "route": "/config",
+      "label": "Handle Decrypt Error Dialog \u2013 options when decryption fails",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Retry with different password [button]",
+        "Disable encryption [button]",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Shown when decryption of sync data fails."
+    },
+    {
+      "id": "/config#dialog-import-encryption-warning",
+      "route": "/config",
+      "label": "Import Encryption Warning Dialog \u2013 warning before importing encrypted data",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Proceed with import [button 'OK']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Shown when importing data that was encrypted."
+    },
+    {
+      "id": "global#dialog-legacy-migration",
+      "route": "(modal)",
+      "label": "Legacy Migration Dialog \u2013 migrate from old data format",
+      "section": "Data Import/Export",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Start migration [button 'Migrate']",
+        "Skip [button 'Skip']"
+      ],
+      "notes": "Appears once on first load after upgrading from legacy version."
+    },
+    {
+      "id": "global#dialog-server-migration-confirm",
+      "route": "(modal)",
+      "label": "Server Migration Confirm Dialog \u2013 confirm SuperSync server data migration",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Confirm migration [button 'Confirm']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "SuperSync server-specific migration dialog."
+    },
+    {
+      "id": "global#dialog-sync-import-conflict",
+      "route": "(modal)",
+      "label": "Sync Import Conflict Dialog \u2013 resolve op-log import conflict",
+      "section": "Sync",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Use local version [button 'Keep Local']",
+        "Use remote version [button 'Use Remote']",
+        "Merge [button 'Merge']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Op-log level conflict dialog (different from dialog-sync-conflict)."
+    },
+    {
+      "id": "global#dialog-prompt",
+      "route": "(modal)",
+      "label": "Generic Prompt Dialog \u2013 single text input prompt",
+      "section": "Utilities",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Enter text [input]",
+        "Confirm [button 'OK']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Reusable dialog for simple text input (e.g., bug report URL entry)."
+    },
+    {
+      "id": "global#dialog-unsplash-picker",
+      "route": "(modal)",
+      "label": "Unsplash Background Picker Dialog \u2013 search and select background image",
+      "section": "Settings",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Search photos [input search query]",
+        "Select photo [click image in grid]",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Opened from theme settings when selecting a background image."
+    },
+    {
+      "id": "global#dialog-disable-profiles-confirmation",
+      "route": "(modal)",
+      "label": "Disable Profiles Confirmation Dialog \u2013 confirm disabling user profiles feature",
+      "section": "User Profiles",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Confirm disable [button 'Confirm']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Shown when disabling user profiles with multiple existing profiles."
+    },
+    {
+      "id": "global#dialog-archive-compression",
+      "route": "(modal)",
+      "label": "Archive Compression Dialog \u2013 compress task archive",
+      "section": "Data Import/Export",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:dialog",
+      "actions": [
+        "Compress archive [button 'Compress']",
+        "Cancel [button 'Cancel']"
+      ],
+      "notes": "Accessible from settings or archive management."
+    },
+    {
+      "id": "/tag/:id/tasks#task-view-customizer",
+      "route": "/tag/:id/tasks",
+      "label": "Work view + Task View Customizer dropdown open (sort/group/filter)",
+      "section": "Task Views",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Sort tasks by field [customizer Sort sub-menu]",
+        "Group tasks by field [customizer Group By sub-menu]",
+        "Filter tasks [customizer Filter By sub-menu]",
+        "Apply preset [customizer Presets]",
+        "Reset to defaults [customizer Reset]",
+        "Close customizer [click outside or Escape]"
+      ],
+      "notes": "mat-menu dropdown from filter_list button in page-title. Changes task list sort/group/filter."
+    },
+    {
+      "id": "/tag/:id/tasks#right-panel-plugin",
+      "route": "/tag/:id/tasks",
+      "label": "Work view + Plugin side panel open",
+      "section": "Plugins",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:app-shell",
+      "actions": [
+        "Interact with plugin UI [plugin-panel-container]",
+        "Switch active plugin [plugin side panel buttons]",
+        "Close plugin panel [toggle plugin button in header]"
+      ],
+      "notes": "panelContent='PLUGIN'. Shown when a plugin registers a side panel."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/planner",
+      "trigger": "link 'Planner' in sidebar nav [id='planner']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/schedule",
+      "trigger": "link 'Schedule' in sidebar nav [id='schedule']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/boards",
+      "trigger": "link 'Boards' in sidebar nav [id='boards']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/habits",
+      "trigger": "link 'Habits' in sidebar nav [id='habits']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/config",
+      "trigger": "link 'Settings' in sidebar nav [id='settings']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/search",
+      "trigger": "link 'Search' in sidebar nav [id='search']",
+      "guard": "isSearchEnabled feature flag"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/scheduled-list",
+      "trigger": "link 'Scheduled List' in sidebar nav [id='scheduled-list']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/donate",
+      "trigger": "link 'Donate' in sidebar nav [id='donate']",
+      "guard": "isDonatePageEnabled && !IS_IOS_NATIVE"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/history",
+      "trigger": "button 'History' in work-context-menu"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/metrics",
+      "trigger": "button 'Metrics' in work-context-menu",
+      "guard": "contextId === TODAY_TAG.id or isForProject"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/daily-summary",
+      "trigger": "button 'Finish Day' [finish-day-btn component]"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#right-panel-task-detail",
+      "trigger": "click on task row in task list"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#right-panel-notes",
+      "trigger": "button 'comment' toggle notes panel [class='e2e-toggle-notes-btn']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#right-panel-issues",
+      "trigger": "button 'webhook' toggle issue panel [class='e2e-toggle-issue-provider-panel']"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "focus-mode#main",
+      "trigger": "button Focus Mode [focus-button component]"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "global#add-task-bar",
+      "trigger": "button 'add' in header [class='tour-addBtn'] or mobile FAB"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#dialog-time-estimate",
+      "trigger": "button 'hourglass' or time estimate in task hover controls"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#dialog-deadline",
+      "trigger": "button 'flag' deadline in task detail panel"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#dialog-repeat-cfg",
+      "trigger": "button 'repeat' in task detail panel"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#dialog-edit-tags",
+      "trigger": "button 'label' tags in task detail panel"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-task-detail",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'close' panel or clicking outside panel"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-task-detail",
+      "to": "/tag/:id/tasks#dialog-time-estimate",
+      "trigger": "button 'edit' on time estimate task-detail-item"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-task-detail",
+      "to": "/tag/:id/tasks#dialog-deadline",
+      "trigger": "button 'edit' on deadline task-detail-item"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-task-detail",
+      "to": "/tag/:id/tasks#dialog-edit-attachment",
+      "trigger": "button 'edit' on attachment in task-attachment-list"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-task-detail",
+      "to": "global#dialog-fullscreen-markdown",
+      "trigger": "button 'expand' in notes section of task detail"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-notes",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'comment' to toggle off notes panel"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-issues",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'webhook' to toggle off issue panel"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-issues",
+      "to": "global#dialog-edit-issue-provider",
+      "trigger": "long-press on issue provider tab"
+    },
+    {
+      "from": "focus-mode#main",
+      "to": "focus-mode#countdown",
+      "trigger": "button 'Start' to begin focus session"
+    },
+    {
+      "from": "focus-mode#countdown",
+      "to": "focus-mode#main",
+      "trigger": "auto: countdown completes (5 seconds)"
+    },
+    {
+      "from": "focus-mode#main",
+      "to": "focus-mode#break",
+      "trigger": "auto: Pomodoro work session ends"
+    },
+    {
+      "from": "focus-mode#break",
+      "to": "focus-mode#main",
+      "trigger": "button 'Skip Break' or auto: break timer ends"
+    },
+    {
+      "from": "focus-mode#main",
+      "to": "focus-mode#session-done",
+      "trigger": "auto: all Pomodoro cycles complete"
+    },
+    {
+      "from": "focus-mode#session-done",
+      "to": "focus-mode#main",
+      "trigger": "button 'Start New Session'"
+    },
+    {
+      "from": "focus-mode#main",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'close' at top of focus overlay"
+    },
+    {
+      "from": "focus-mode#main",
+      "to": "global#dialog-pomodoro-settings",
+      "trigger": "button settings icon in focus mode (Pomodoro mode)"
+    },
+    {
+      "from": "focus-mode#main",
+      "to": "global#dialog-flowtime-settings",
+      "trigger": "button settings icon in focus mode (Flowtime mode)"
+    },
+    {
+      "from": "/project/:id/tasks",
+      "to": "/project/:id/history",
+      "trigger": "button 'History' in work-context-menu"
+    },
+    {
+      "from": "/project/:id/tasks",
+      "to": "/project/:id/metrics",
+      "trigger": "button 'Metrics' in work-context-menu"
+    },
+    {
+      "from": "/project/:id/tasks",
+      "to": "/project/:id/daily-summary",
+      "trigger": "button 'Finish Day' [finish-day-btn component]"
+    },
+    {
+      "from": "/project/:id/tasks",
+      "to": "/project/:id/tasks#right-panel-task-detail",
+      "trigger": "click on task row in task list"
+    },
+    {
+      "from": "/project/:id/tasks",
+      "to": "global#dialog-context-settings",
+      "trigger": "button 'Settings' in work-context-menu"
+    },
+    {
+      "from": "/project/:id/tasks",
+      "to": "global#dialog-project-complete",
+      "trigger": "button 'Complete Project' in work-context-menu [class='e2e-complete-project']"
+    },
+    {
+      "from": "/planner",
+      "to": "/tag/:id/tasks",
+      "trigger": "link 'Today' in sidebar nav [id='main-TODAY']"
+    },
+    {
+      "from": "/planner",
+      "to": "global#dialog-planner-schedule-task",
+      "trigger": "button schedule task in planner-task component"
+    },
+    {
+      "from": "/schedule",
+      "to": "/schedule#week-view",
+      "trigger": "button icon='view_week' [aria-label='View Week']"
+    },
+    {
+      "from": "/schedule",
+      "to": "/schedule#month-view",
+      "trigger": "button icon='calendar_month' [aria-label='View Month']"
+    },
+    {
+      "from": "/schedule#week-view",
+      "to": "/schedule#right-panel-schedule-day",
+      "trigger": "click on schedule event or day column"
+    },
+    {
+      "from": "/schedule#month-view",
+      "to": "/schedule#right-panel-schedule-day",
+      "trigger": "click on day cell in month calendar"
+    },
+    {
+      "from": "/boards",
+      "to": "/boards#add-new-board",
+      "trigger": "mat-tab icon='add_circle' (last tab)"
+    },
+    {
+      "from": "/boards",
+      "to": "global#dialog-board-edit",
+      "trigger": "context menu item 'Edit' on board tab"
+    },
+    {
+      "from": "/config",
+      "to": "/config#tab-general",
+      "trigger": "tab icon='settings' [aria-label='General']"
+    },
+    {
+      "from": "/config",
+      "to": "/config#tab-tasks",
+      "trigger": "tab icon='task' [aria-label='Tasks']"
+    },
+    {
+      "from": "/config",
+      "to": "/config#tab-time-tracking",
+      "trigger": "tab icon='timer' [aria-label='Time & Tracking']"
+    },
+    {
+      "from": "/config",
+      "to": "/config#tab-productivity",
+      "trigger": "tab icon='trending_up' [aria-label='Productivity']"
+    },
+    {
+      "from": "/config",
+      "to": "/config#tab-plugins",
+      "trigger": "tab icon='extension' [aria-label='Plugins']"
+    },
+    {
+      "from": "/config",
+      "to": "/config#tab-sync-backup",
+      "trigger": "tab icon='cloud_sync' [aria-label='Sync & Backup']"
+    },
+    {
+      "from": "/config#tab-sync-backup",
+      "to": "/config#dialog-sync-cfg",
+      "trigger": "button 'Set Up Sync' or 'Configure' in Sync summary"
+    },
+    {
+      "from": "/config",
+      "to": "/config#dialog-logs",
+      "trigger": "link 'Logs' in version footer"
+    },
+    {
+      "from": "/config#tab-general",
+      "to": "/config#dialog-clipboard-images",
+      "trigger": "button 'Manage' in Clipboard Images config-section"
+    },
+    {
+      "from": "/config#dialog-sync-cfg",
+      "to": "/config#dialog-enable-encryption",
+      "trigger": "button 'Enable Encryption' in sync config"
+    },
+    {
+      "from": "/config#dialog-sync-cfg",
+      "to": "/config#dialog-change-encryption-password",
+      "trigger": "button 'Change Password' in sync config"
+    },
+    {
+      "from": "/config#dialog-sync-cfg",
+      "to": "/config#dialog-get-auth-code",
+      "trigger": "button 'Authenticate' for OAuth providers"
+    },
+    {
+      "from": "/tag/:id/history",
+      "to": "/tag/:id/daily-summary/:dayStr",
+      "trigger": "click on day row in worklog week section"
+    },
+    {
+      "from": "/tag/:id/history",
+      "to": "/config#dialog-worklog-export",
+      "trigger": "button mat-mini-fab 'call_made' (export) next to month/week"
+    },
+    {
+      "from": "/tag/:id/daily-summary",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'Back to work' after finishing day"
+    },
+    {
+      "from": "/archived-projects",
+      "to": "/project/:id/tasks",
+      "trigger": "link project title [routerLink '/project/:id/tasks']"
+    },
+    {
+      "from": "/scheduled-list",
+      "to": "/tag/:id/tasks#dialog-repeat-cfg",
+      "trigger": "click repeat text/icon on task card"
+    },
+    {
+      "from": "global#add-task-bar",
+      "to": "/tag/:id/tasks",
+      "trigger": "button backdrop click or Escape key"
+    },
+    {
+      "from": "global#onboarding",
+      "to": "/tag/:id/tasks",
+      "trigger": "auto: preset selected and app loads"
+    },
+    {
+      "from": "/tag/:id/tasks#dialog-time-estimate",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'Save' or 'Cancel' in time estimate dialog"
+    },
+    {
+      "from": "/tag/:id/tasks#dialog-deadline",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'Save' or 'Cancel' in deadline dialog"
+    },
+    {
+      "from": "/tag/:id/tasks#dialog-repeat-cfg",
+      "to": "/tag/:id/tasks#dialog-select-date-time",
+      "trigger": "button planned start date in repeat cfg dialog"
+    },
+    {
+      "from": "global#dialog-idle",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'Confirm' or 'Cancel' in idle dialog"
+    },
+    {
+      "from": "global#dialog-tracking-reminder",
+      "to": "/tag/:id/tasks",
+      "trigger": "button 'Track' or 'Cancel'"
+    },
+    {
+      "from": "global#dialog-finish-day-before-close",
+      "to": "/tag/:id/daily-summary",
+      "trigger": "button 'Finish Day' [e2e='finishDayBtn']",
+      "guard": "Electron only"
+    },
+    {
+      "from": "global#dialog-fullscreen-markdown",
+      "to": "global#dialog-markdown-shortcuts",
+      "trigger": "button 'help' / keyboard shortcuts icon in fullscreen editor"
+    },
+    {
+      "from": "global#dialog-markdown-shortcuts",
+      "to": "global#dialog-fullscreen-markdown",
+      "trigger": "button 'Close' in markdown shortcuts dialog"
+    },
+    {
+      "from": "/tag/:id/metrics",
+      "to": "global#dialog-focus-session-edit",
+      "trigger": "click on focus session row in metrics"
+    },
+    {
+      "from": "/tag/:id/metrics",
+      "to": "global#dialog-productivity-breakdown",
+      "trigger": "button 'Productivity Breakdown' in metrics"
+    },
+    {
+      "from": "/config#tab-plugins",
+      "to": "/plugins/:pluginId/index",
+      "trigger": "button 'Open Full Page' in plugin management"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-notes",
+      "to": "global#dialog-add-note",
+      "trigger": "button 'Add Note' [id='add-note-btn'] in notes panel"
+    },
+    {
+      "from": "global#dialog-add-note",
+      "to": "/tag/:id/tasks#right-panel-notes",
+      "trigger": "button 'Save' or 'Cancel' in add note dialog"
+    },
+    {
+      "from": "/config#tab-general",
+      "to": "global#dialog-unsplash-picker",
+      "trigger": "button 'Pick from Unsplash' in theme background settings"
+    },
+    {
+      "from": "/config#dialog-import-from-url",
+      "to": "/config#dialog-confirm-url-import",
+      "trigger": "button 'Import' after entering URL"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#task-view-customizer",
+      "trigger": "button 'filter_list' in page-title [class='task-filter-btn']"
+    },
+    {
+      "from": "/tag/:id/tasks#task-view-customizer",
+      "to": "/tag/:id/tasks",
+      "trigger": "click outside customizer menu or Escape key"
+    },
+    {
+      "from": "/tag/:id/tasks",
+      "to": "/tag/:id/tasks#right-panel-plugin",
+      "trigger": "button plugin icon in header plugin-side-panel-btns"
+    },
+    {
+      "from": "/tag/:id/tasks#right-panel-plugin",
+      "to": "/tag/:id/tasks",
+      "trigger": "button plugin icon again to toggle off"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "No authentication required \u2014 all routes are publicly accessible",
+        "node_ids": [
+          "/tag/:id/tasks",
+          "/project/:id/tasks",
+          "/tag/:id/history",
+          "/project/:id/history",
+          "/tag/:id/daily-summary",
+          "/tag/:id/daily-summary/:dayStr",
+          "/project/:id/daily-summary",
+          "/tag/:id/metrics",
+          "/project/:id/metrics",
+          "/config",
+          "/search",
+          "/scheduled-list",
+          "/planner",
+          "/schedule",
+          "/boards",
+          "/habits",
+          "/archived-projects",
+          "/donate",
+          "/contrast-test",
+          "/plugins/:pluginId/index",
+          "/active"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:app-shell",
+        "label": "Main app shell: sidebar nav + header + right panel + router outlet",
+        "node_ids": [
+          "/tag/:id/tasks",
+          "/project/:id/tasks",
+          "/tag/:id/history",
+          "/project/:id/history",
+          "/tag/:id/daily-summary",
+          "/tag/:id/daily-summary/:dayStr",
+          "/project/:id/daily-summary",
+          "/tag/:id/metrics",
+          "/project/:id/metrics",
+          "/config",
+          "/config#tab-general",
+          "/config#tab-tasks",
+          "/config#tab-time-tracking",
+          "/config#tab-productivity",
+          "/config#tab-plugins",
+          "/config#tab-sync-backup",
+          "/search",
+          "/scheduled-list",
+          "/planner",
+          "/schedule",
+          "/schedule#week-view",
+          "/schedule#month-view",
+          "/boards",
+          "/boards#add-new-board",
+          "/habits",
+          "/archived-projects",
+          "/donate",
+          "/contrast-test",
+          "/plugins/:pluginId/index",
+          "/active",
+          "/tag/:id/tasks#right-panel-task-detail",
+          "/project/:id/tasks#right-panel-task-detail",
+          "/tag/:id/tasks#right-panel-notes",
+          "/tag/:id/tasks#right-panel-issues",
+          "/schedule#right-panel-schedule-day",
+          "/tag/:id/tasks#task-view-customizer",
+          "/tag/:id/tasks#right-panel-plugin"
+        ]
+      },
+      {
+        "id": "layout:focus-mode-overlay",
+        "label": "Full-screen focus mode overlay (blocks all app-shell routes)",
+        "node_ids": [
+          "focus-mode#main",
+          "focus-mode#countdown",
+          "focus-mode#break",
+          "focus-mode#session-done"
+        ]
+      },
+      {
+        "id": "layout:dialog",
+        "label": "Angular Material dialog overlays",
+        "node_ids": [
+          "/tag/:id/tasks#dialog-task-detail",
+          "/tag/:id/tasks#dialog-time-estimate",
+          "/tag/:id/tasks#dialog-deadline",
+          "/tag/:id/tasks#dialog-view-reminders",
+          "/tag/:id/tasks#dialog-add-time-other-day",
+          "/tag/:id/tasks#dialog-view-archived-task",
+          "/tag/:id/tasks#dialog-edit-attachment",
+          "/tag/:id/tasks#dialog-repeat-cfg",
+          "/tag/:id/tasks#dialog-edit-tags",
+          "/tag/:id/tasks#dialog-select-date-time",
+          "global#dialog-create-project",
+          "global#dialog-project-complete",
+          "global#dialog-context-settings",
+          "global#dialog-create-tag",
+          "global#dialog-idle",
+          "global#dialog-tracking-reminder",
+          "global#dialog-finish-day-before-close",
+          "/config#dialog-sync-cfg",
+          "/config#dialog-enable-encryption",
+          "/config#dialog-change-encryption-password",
+          "/config#dialog-sync-conflict",
+          "/config#dialog-restore-point",
+          "/config#dialog-get-auth-code",
+          "/config#dialog-import-from-url",
+          "/config#dialog-worklog-export",
+          "/config#dialog-logs",
+          "/config#dialog-clipboard-images",
+          "global#dialog-simple-counter-edit",
+          "global#dialog-simple-counter-settings",
+          "global#dialog-edit-issue-provider",
+          "global#dialog-board-edit",
+          "global#dialog-planner-schedule-task",
+          "global#dialog-pomodoro-settings",
+          "global#dialog-flowtime-settings",
+          "global#dialog-focus-session-edit",
+          "global#dialog-productivity-breakdown",
+          "global#dialog-user-profile-management",
+          "global#dialog-fullscreen-markdown",
+          "global#dialog-markdown-shortcuts",
+          "global#dialog-share",
+          "global#dialog-confirm",
+          "global#dialog-gitlab-submit-worklog",
+          "global#dialog-jira-transition",
+          "global#dialog-openproject-transition",
+          "global#dialog-please-rate",
+          "global#dialog-track-time-issue",
+          "global#dialog-add-note",
+          "/config#dialog-confirm-url-import",
+          "/config#dialog-enter-encryption-password",
+          "/config#dialog-handle-decrypt-error",
+          "/config#dialog-import-encryption-warning",
+          "global#dialog-legacy-migration",
+          "global#dialog-server-migration-confirm",
+          "global#dialog-sync-import-conflict",
+          "global#dialog-prompt",
+          "global#dialog-unsplash-picker",
+          "global#dialog-disable-profiles-confirmation",
+          "global#dialog-archive-compression"
+        ]
+      },
+      {
+        "id": "layout:onboarding-overlay",
+        "label": "First-run onboarding overlay (covers entire app)",
+        "node_ids": [
+          "global#onboarding"
+        ]
+      }
+    ]
+  }
+}

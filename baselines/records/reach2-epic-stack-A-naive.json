@@ -1,0 +1,19 @@
+{
+ "subject": "epic-stack",
+ "arm": "A-naive",
+ "suite_filter": "",
+ "tests_considered": 59,
+ "reach": 4,
+ "items": 8,
+ "per_item": {
+  "ES-01 create a note": 4,
+  "ES-02 edit a note": 1,
+  "ES-03 delete a note": 1,
+  "ES-04 add an image": 0,
+  "ES-05 change alt text": 0,
+  "ES-06 remove an image": 0,
+  "ES-07 update profile": 1,
+  "ES-10 change password": 0
+ },
+ "witness": "accepted mutation, ordered after the driving action"
+}

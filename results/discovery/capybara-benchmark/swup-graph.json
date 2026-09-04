@@ -1,0 +1,1078 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Swup Test Fixtures",
+    "description": "Static HTML fixture pages for the Swup page-transition library, served at http://localhost:8274",
+    "total_states": 35,
+    "explored": 35,
+    "skipped": 0,
+    "verified_live": [
+      "/page-1.html",
+      "/containers-1.html",
+      "/scrolling-1.html",
+      "/alpinejs/page-1.html",
+      "/rapid-navigation/page-1.html",
+      "/plugins/body-class-plugin/page-1.html",
+      "/nested/nested-1.html",
+      "/history.html"
+    ],
+    "notes": "redirect-2.html is a server-side 301 redirect → redirect-3.html (no distinct UI state). No authentication required on any page."
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Root directory listing of all fixture files",
+      "section": "index",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:directory",
+      "actions": [
+        "Click folder link 'alpinejs/' to browse alpinejs fixtures",
+        "Click folder link 'nested/' to browse nested fixtures",
+        "Click folder link 'plugins/' to browse plugin fixtures",
+        "Click folder link 'rapid-navigation/' to browse rapid-nav fixtures",
+        "Click folder link 'assets/' to browse assets",
+        "Click folder link 'dist/' to browse dist",
+        "Click file link 'animation-complex.html'",
+        "Click file link 'animation-duration.html'",
+        "Click file link 'animation-keyframes.html'",
+        "Click file link 'animation-native.html'",
+        "Click file link 'animation-none.html'",
+        "Click file link 'animation-partial.html'",
+        "Click file link 'containers-1.html'",
+        "Click file link 'containers-2.html'",
+        "Click file link 'containers-missing.html'",
+        "Click file link 'history.html'",
+        "Click file link 'ignore-visits.html'",
+        "Click file link 'instance.html'",
+        "Click file link 'link-resolution.html'",
+        "Click file link 'link-selector.html'",
+        "Click file link 'page-1.html'",
+        "Click file link 'page-2.html'",
+        "Click file link 'page-3.html'",
+        "Click file link 'persist-1.html'",
+        "Click file link 'persist-2.html'",
+        "Click file link 'redirect-1.html'",
+        "Click file link 'redirect-2.html'",
+        "Click file link 'redirect-3.html'",
+        "Click file link 'scrolling-1.html'",
+        "Click file link 'scrolling-2.html'"
+      ],
+      "notes": "Server-generated directory index. Not a swup page; no Swup instance."
+    },
+    {
+      "id": "/page-1.html",
+      "route": "/page-1.html",
+      "label": "Page 1 — basic swup transitions demo",
+      "section": "basic-pages",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Page 1 [data-testid=link-to-page-1]",
+        "Navigate to Page 2 [data-testid=link-to-page-2]",
+        "Navigate to Page 3 [data-testid=link-to-page-3]",
+        "Navigate to Page 2 with custom swup animation [data-swup-animation=link]",
+        "Navigate to Page 2 via animated list item 1 [data-swup-animation=list]",
+        "Navigate to Page 3 via animated list item 2 [data-swup-animation=list]"
+      ],
+      "notes": "Uses default swup transition. data-swup-animation attr on link and list."
+    },
+    {
+      "id": "/page-2.html",
+      "route": "/page-2.html",
+      "label": "Page 2 — basic swup transitions demo",
+      "section": "basic-pages",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Page 1 [link 'Page 1' in nav]",
+        "Navigate to Page 2 [link 'Page 2' in nav]",
+        "Navigate to Page 3 [link 'Page 3' in nav]"
+      ],
+      "notes": "Hub page; destination for many other fixture pages."
+    },
+    {
+      "id": "/page-3.html",
+      "route": "/page-3.html",
+      "label": "Page 3 — basic swup transitions demo",
+      "section": "basic-pages",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Page 1 [link 'Page 1' in nav]",
+        "Navigate to Page 2 [link 'Page 2' in nav]",
+        "Navigate to Page 3 [link 'Page 3' in nav]"
+      ],
+      "notes": "Used as history push/replace target in history.html."
+    },
+    {
+      "id": "/animation-duration.html",
+      "route": "/animation-duration.html",
+      "label": "Animation Duration — CSS opacity transition 0.4s",
+      "section": "animation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Animation Duration [link '/animation-duration.html']",
+        "Navigate to Animation Complex [link '/animation-complex.html']",
+        "Navigate to Animation Keyframes [link '/animation-keyframes.html']",
+        "Navigate to Animation Native [link '/animation-native.html']",
+        "Navigate to Animation None [link '/animation-none.html']",
+        "Navigate to Animation Partial [link '/animation-partial.html']"
+      ],
+      "notes": "swup default; CSS transition: 0.4s opacity on .transition-custom."
+    },
+    {
+      "id": "/animation-complex.html",
+      "route": "/animation-complex.html",
+      "label": "Animation Complex — multi-property CSS transition with delays",
+      "section": "animation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Animation Duration [link '/animation-duration.html']",
+        "Navigate to Animation Complex [link '/animation-complex.html']",
+        "Navigate to Animation Keyframes [link '/animation-keyframes.html']",
+        "Navigate to Animation Native [link '/animation-native.html']",
+        "Navigate to Animation None [link '/animation-none.html']",
+        "Navigate to Animation Partial [link '/animation-partial.html']"
+      ],
+      "notes": "opacity 100ms 200ms + transform 400ms 200ms transitions."
+    },
+    {
+      "id": "/animation-keyframes.html",
+      "route": "/animation-keyframes.html",
+      "label": "Animation Keyframes — CSS @keyframes-based animation",
+      "section": "animation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Animation Duration [link '/animation-duration.html']",
+        "Navigate to Animation Complex [link '/animation-complex.html']",
+        "Navigate to Animation Keyframes [link '/animation-keyframes.html']",
+        "Navigate to Animation Native [link '/animation-native.html']",
+        "Navigate to Animation None [link '/animation-none.html']",
+        "Navigate to Animation Partial [link '/animation-partial.html']"
+      ],
+      "notes": "@keyframes page-animation; 400ms 300ms ease-in-out with opacity+translateY."
+    },
+    {
+      "id": "/animation-native.html",
+      "route": "/animation-native.html",
+      "label": "Animation Native — View Transition API (native:true)",
+      "section": "animation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Animation Duration [link '/animation-duration.html']",
+        "Navigate to Animation Complex [link '/animation-complex.html']",
+        "Navigate to Animation Keyframes [link '/animation-keyframes.html']",
+        "Navigate to Animation Native [link '/animation-native.html']",
+        "Navigate to Animation None [link '/animation-none.html']",
+        "Navigate to Animation Partial [link '/animation-partial.html']"
+      ],
+      "notes": "Swup init: { native: true }. Uses view-transition-name: main."
+    },
+    {
+      "id": "/animation-none.html",
+      "route": "/animation-none.html",
+      "label": "Animation None — transition:none CSS",
+      "section": "animation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Animation Duration [link '/animation-duration.html']",
+        "Navigate to Animation Complex [link '/animation-complex.html']",
+        "Navigate to Animation Keyframes [link '/animation-keyframes.html']",
+        "Navigate to Animation Native [link '/animation-native.html']",
+        "Navigate to Animation None [link '/animation-none.html']",
+        "Navigate to Animation Partial [link '/animation-partial.html']"
+      ],
+      "notes": ".transition-none { transition: none; } on #swup container."
+    },
+    {
+      "id": "/animation-partial.html",
+      "route": "/animation-partial.html",
+      "label": "Animation Partial — separate aside with no-transition class",
+      "section": "animation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Animation Duration [link '/animation-duration.html']",
+        "Navigate to Animation Complex [link '/animation-complex.html']",
+        "Navigate to Animation Keyframes [link '/animation-keyframes.html']",
+        "Navigate to Animation Native [link '/animation-native.html']",
+        "Navigate to Animation None [link '/animation-none.html']",
+        "Navigate to Animation Partial [link '/animation-partial.html']"
+      ],
+      "notes": "aside.transition-none outside #swup; tests partial animation skip."
+    },
+    {
+      "id": "/containers-1.html",
+      "route": "/containers-1.html",
+      "label": "Containers 1 — dual container swap (#main + #aside)",
+      "section": "containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:multi-container",
+      "actions": [
+        "Navigate to Containers 1 [link '/containers-1.html' in nav]",
+        "Navigate to Containers 2 [link '/containers-2.html' in nav]"
+      ],
+      "notes": "Swup init: { containers: ['#main','#aside'] }. Heading 1 in aside."
+    },
+    {
+      "id": "/containers-2.html",
+      "route": "/containers-2.html",
+      "label": "Containers 2 — dual container destination",
+      "section": "containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:multi-container",
+      "actions": [
+        "Navigate to Containers 1 [link '/containers-1.html' in nav]",
+        "Navigate to Containers 2 [link '/containers-2.html' in nav]"
+      ],
+      "notes": "Destination page for containers test; no Swup init script."
+    },
+    {
+      "id": "/containers-missing.html",
+      "route": "/containers-missing.html",
+      "label": "Containers Missing — #aside element absent",
+      "section": "containers",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:multi-container",
+      "actions": [
+        "Navigate to Containers 1 [link '/containers-1.html' in nav]",
+        "Navigate to Containers 2 [link '/containers-2.html' in nav]"
+      ],
+      "notes": "aside has no id; tests swup behavior when a container is missing."
+    },
+    {
+      "id": "/history.html",
+      "route": "/history.html",
+      "label": "History — push vs replace history entries",
+      "section": "history",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Page 2 [link '/page-2.html' in nav]",
+        "Navigate to Page 3 (history push) [data-testid=create-link]",
+        "Navigate to Page 3 (history replace) [data-testid=update-link, data-swup-history=replace]"
+      ],
+      "notes": "Two links to page-3: one pushes, one replaces browser history."
+    },
+    {
+      "id": "/ignore-visits.html",
+      "route": "/ignore-visits.html",
+      "label": "Ignore Visits — various data-no-swup patterns",
+      "section": "ignore-visits",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Page 2 normally [data-testid=ignore-none]",
+        "Navigate to Page 2 with element-level ignore [data-testid=ignore-element, data-no-swup]",
+        "Navigate to Page 2 with parent-level ignore [data-testid=ignore-parent, parent has data-no-swup]",
+        "Navigate to Page 2 from ignored path start [data-testid=ignore-path-start]",
+        "Navigate to Page 2 with hash from ignored path [data-testid=ignore-path-end, href=/page-2.html#hash]"
+      ],
+      "notes": "Tests all data-no-swup patterns: element, parent, path-based."
+    },
+    {
+      "id": "/instance.html",
+      "route": "/instance.html",
+      "label": "Instance — empty body; Swup init before DOM ready",
+      "section": "instance",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:empty",
+      "actions": [],
+      "notes": "Blank page; tests Swup instantiation timing before DOM is ready."
+    },
+    {
+      "id": "/link-resolution.html",
+      "route": "/link-resolution.html",
+      "label": "Link Resolution — absolute, relative, self, external links",
+      "section": "link-handling",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate via absolute URL [data-testid=nav-link-abs, href=/page-2.html]",
+        "Navigate via relative URL [data-testid=nav-link-rel, href=./../page-2.html]",
+        "Navigate to self via relative [data-testid=nav-link-self, href=./link-resolution.html]",
+        "Navigate to external site [data-testid=nav-link-ext, href=https://example.net]"
+      ],
+      "notes": "Tests all link resolution modes; external link bypasses swup."
+    },
+    {
+      "id": "/link-selector.html",
+      "route": "/link-selector.html",
+      "label": "Link Selector — SVG links and image map areas",
+      "section": "link-handling",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Page 1 [link '/page-1.html' in nav]",
+        "Navigate to Page 2 [link '/page-2.html' in nav]",
+        "Navigate to Page 3 [link '/page-3.html' in nav]",
+        "Navigate via SVG anchor [svg <a xlink:href=/page-2.html> text 'SVG link to page']",
+        "Navigate via image map area [<area href=/page-2.html alt='Map link to page'>]"
+      ],
+      "notes": "Tests SVG <a> and <area> elements as swup-intercepted links."
+    },
+    {
+      "id": "/persist-1.html",
+      "route": "/persist-1.html",
+      "label": "Persist 1 — element persistence across transitions",
+      "section": "persistence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Persist 1 [link '/persist-1.html' in nav]",
+        "Navigate to Persist 2 [link '/persist-2.html' in nav]"
+      ],
+      "notes": "data-swup-persist='paragraph' on <p>; unpersisted <p> also present."
+    },
+    {
+      "id": "/persist-2.html",
+      "route": "/persist-2.html",
+      "label": "Persist 2 — element persistence destination",
+      "section": "persistence",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Persist 1 [link '/persist-1.html' in nav]",
+        "Navigate to Persist 2 [link '/persist-2.html' in nav]"
+      ],
+      "notes": "Same persist structure; persisted paragraph retains DOM identity."
+    },
+    {
+      "id": "/redirect-1.html",
+      "route": "/redirect-1.html",
+      "label": "Redirect 1 — entry page with link to server-redirect target",
+      "section": "redirects",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Redirect 1 [link '/redirect-1.html' in nav]",
+        "Navigate to Redirect 2 (triggers server redirect) [link '/redirect-2.html' in nav]",
+        "Navigate to Redirect 3 [link '/redirect-3.html' in nav]"
+      ],
+      "notes": "Clicking redirect-2 link triggers 301 → redirect-3. No testid on container."
+    },
+    {
+      "id": "/redirect-3.html",
+      "route": "/redirect-3.html",
+      "label": "Redirect 3 — final destination after server redirect",
+      "section": "redirects",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Redirect 1 [link '/redirect-1.html' in nav]",
+        "Navigate to Redirect 2 (triggers server redirect) [link '/redirect-2.html' in nav]",
+        "Navigate to Redirect 3 [link '/redirect-3.html' in nav]"
+      ],
+      "notes": "Both direct navigation and server redirect from /redirect-2.html land here."
+    },
+    {
+      "id": "/scrolling-1.html",
+      "route": "/scrolling-1.html",
+      "label": "Scrolling 1 — anchor targets and scroll behavior tests",
+      "section": "scrolling",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Scrolling 2 [data-testid=link-to-page]",
+        "Scroll to #anchor within page [data-testid=link-to-anchor]",
+        "Scroll to top [data-testid=link-to-top, href=#top]",
+        "Navigate to self with anchor [data-testid=link-to-self-anchor, href=/scrolling-1.html#anchor]",
+        "Navigate to Scrolling 2 at anchor [data-testid=link-to-page-anchor]",
+        "Scroll to anchor by id [data-testid=link-to-anchor-by-id]",
+        "Scroll to anchor by name [data-testid=link-to-anchor-by-name]",
+        "Scroll to URL-encoded anchor [data-testid=link-to-anchor-encoded]",
+        "Scroll to unencoded anchor [data-testid=link-to-anchor-unencoded]",
+        "Scroll to anchor with colons [data-testid=link-to-anchor-with-colon]",
+        "Scroll to anchor with unicode [data-testid=link-to-anchor-with-unicode]"
+      ],
+      "notes": "7 distinct anchor element types; 1000px margins create real scroll distance."
+    },
+    {
+      "id": "/scrolling-2.html",
+      "route": "/scrolling-2.html",
+      "label": "Scrolling 2 — destination page with single anchor",
+      "section": "scrolling",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-swup",
+      "actions": [
+        "Navigate to Page 1 [link '/page-1.html' in nav]",
+        "Navigate to Page 2 [link '/page-2.html' in nav]"
+      ],
+      "notes": "No Swup script at all. Contains <div id='anchor'> for anchor-scroll tests."
+    },
+    {
+      "id": "/alpinejs/page-1.html",
+      "route": "/alpinejs/page-1.html",
+      "label": "AlpineJS Page 1 — Alpine.js + Swup integration",
+      "section": "alpinejs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard-alpine",
+      "actions": [
+        "Navigate to AlpineJS Page 1 [data-testid=link-to-page-1]",
+        "Navigate to AlpineJS Page 2 [data-testid=link-to-page-2]",
+        "Navigate to Page 2 with custom animation [link 'Custom animation', data-swup-animation=custom]"
+      ],
+      "notes": "Alpine x-data tracks swup:link:click and swup:any events via .window listeners."
+    },
+    {
+      "id": "/alpinejs/page-2.html",
+      "route": "/alpinejs/page-2.html",
+      "label": "AlpineJS Page 2 — Alpine.js integration destination",
+      "section": "alpinejs",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard-alpine",
+      "actions": [
+        "Navigate to AlpineJS Page 1 [link '/alpinejs/page-1.html' in nav]",
+        "Navigate to AlpineJS Page 2 [link '/alpinejs/page-2.html' in nav]"
+      ],
+      "notes": "Alpine component in header reacts to swup events via x-on:swup:* listeners."
+    },
+    {
+      "id": "/nested/nested-1.html",
+      "route": "/nested/nested-1.html",
+      "label": "Nested Page 1 — uses <base href='/'>",
+      "section": "nested",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Nested 1 [link 'nested/nested-1.html', relative to base href=/]",
+        "Navigate to Nested 2 [data-testid=nav-link-sub, link 'nested/nested-2.html']"
+      ],
+      "notes": "base href='/' makes relative hrefs resolve from root. No Swup init script."
+    },
+    {
+      "id": "/nested/nested-2.html",
+      "route": "/nested/nested-2.html",
+      "label": "Nested Page 2 — uses <base href='/'>",
+      "section": "nested",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Nested 1 [link 'nested/nested-1.html', relative to base href=/]",
+        "Navigate to Nested 2 [data-testid=nav-link-sub, link 'nested/nested-2.html']"
+      ],
+      "notes": "base href='/' tests nested path resolution. No Swup init script."
+    },
+    {
+      "id": "/plugins/body-class-plugin/page-1.html",
+      "route": "/plugins/body-class-plugin/page-1.html",
+      "label": "Body Class Plugin 1 — body.body-1",
+      "section": "plugins-body-class",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-nav",
+      "actions": [],
+      "notes": "SwupBodyClassPlugin swaps body class on transition. No nav links in page."
+    },
+    {
+      "id": "/plugins/body-class-plugin/page-2.html",
+      "route": "/plugins/body-class-plugin/page-2.html",
+      "label": "Body Class Plugin 2 — body.body-2",
+      "section": "plugins-body-class",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-nav",
+      "actions": [],
+      "notes": "Destination page; body class changes from body-1 to body-2 on arrival."
+    },
+    {
+      "id": "/plugins/scroll-plugin/page-1.html",
+      "route": "/plugins/scroll-plugin/page-1.html",
+      "label": "Scroll Plugin 1 — SwupScrollPlugin with friction/acceleration",
+      "section": "plugins-scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-nav",
+      "actions": [
+        "Navigate to Scroll Plugin Page 2 [data-testid=link-to-page]",
+        "Scroll to self anchor [data-testid=link-to-self-anchor]",
+        "Navigate to Page 2 at anchor [data-testid=link-to-page-anchor]",
+        "Scroll to #anchor [data-testid=link-to-anchor]",
+        "Scroll to anchor by id [data-testid=link-to-anchor-by-id]",
+        "Scroll to anchor by name [data-testid=link-to-anchor-by-name]",
+        "Scroll to encoded anchor [data-testid=link-to-anchor-encoded]",
+        "Scroll to unencoded anchor [data-testid=link-to-anchor-unencoded]",
+        "Scroll to anchor with colon [data-testid=link-to-anchor-with-colon]",
+        "Scroll to unicode anchor [data-testid=link-to-anchor-with-unicode]"
+      ],
+      "notes": "SwupScrollPlugin({ scrollFriction:0.1, scrollAcceleration:0.2 }). No header nav."
+    },
+    {
+      "id": "/plugins/scroll-plugin/page-2.html",
+      "route": "/plugins/scroll-plugin/page-2.html",
+      "label": "Scroll Plugin 2 — scroll destination page with anchor",
+      "section": "plugins-scroll",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:no-swup",
+      "actions": [],
+      "notes": "No Swup script. Contains <div id='anchor'> for scroll plugin anchor tests."
+    },
+    {
+      "id": "/rapid-navigation/page-1.html",
+      "route": "/rapid-navigation/page-1.html",
+      "label": "Rapid Navigation Page 1 — slow 600ms transitions, cache:false",
+      "section": "rapid-navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Rapid Nav Page 1 [data-testid=link-to-page-1]",
+        "Navigate to Rapid Nav Page 2 [data-testid=link-to-page-2]",
+        "Navigate to Rapid Nav Page 3 [data-testid=link-to-page-3]"
+      ],
+      "notes": "600ms transition; cache:false; tracks visit hooks in window.data.received[]."
+    },
+    {
+      "id": "/rapid-navigation/page-2.html",
+      "route": "/rapid-navigation/page-2.html",
+      "label": "Rapid Navigation Page 2",
+      "section": "rapid-navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Rapid Nav Page 1 [data-testid=link-to-page-1]",
+        "Navigate to Rapid Nav Page 2 [data-testid=link-to-page-2]",
+        "Navigate to Rapid Nav Page 3 [data-testid=link-to-page-3]"
+      ],
+      "notes": "No Swup init script (destination page; Swup UMD loaded in head only)."
+    },
+    {
+      "id": "/rapid-navigation/page-3.html",
+      "route": "/rapid-navigation/page-3.html",
+      "label": "Rapid Navigation Page 3",
+      "section": "rapid-navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standard",
+      "actions": [
+        "Navigate to Rapid Nav Page 1 [data-testid=link-to-page-1]",
+        "Navigate to Rapid Nav Page 2 [data-testid=link-to-page-2]",
+        "Navigate to Rapid Nav Page 3 [data-testid=link-to-page-3]"
+      ],
+      "notes": "No Swup init script (destination page)."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/page-1.html",
+      "trigger": "link 'page-1.html' [file link in directory listing]"
+    },
+    {
+      "from": "/",
+      "to": "/page-2.html",
+      "trigger": "link 'page-2.html' [file link in directory listing]"
+    },
+    {
+      "from": "/",
+      "to": "/page-3.html",
+      "trigger": "link 'page-3.html' [file link in directory listing]"
+    },
+    {
+      "from": "/",
+      "to": "/animation-duration.html",
+      "trigger": "link 'animation-duration.html' [file link in directory listing]"
+    },
+    {
+      "from": "/",
+      "to": "/containers-1.html",
+      "trigger": "link 'containers-1.html' [file link in directory listing]"
+    },
+    {
+      "from": "/",
+      "to": "/history.html",
+      "trigger": "link 'history.html' [file link in directory listing]"
+    },
+    {
+      "from": "/",
+      "to": "/scrolling-1.html",
+      "trigger": "link 'scrolling-1.html' [file link in directory listing]"
+    },
+    {
+      "from": "/page-1.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Page 2' [data-testid=link-to-page-2]"
+    },
+    {
+      "from": "/page-1.html",
+      "to": "/page-3.html",
+      "trigger": "link 'Page 3' [data-testid=link-to-page-3]"
+    },
+    {
+      "from": "/page-1.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Custom animation' [data-swup-animation=link, href=/page-2.html]"
+    },
+    {
+      "from": "/page-1.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Custom animation' in list item 1 [data-swup-animation=list]"
+    },
+    {
+      "from": "/page-1.html",
+      "to": "/page-3.html",
+      "trigger": "link 'Custom animation' in list item 2 [data-swup-animation=list]"
+    },
+    {
+      "from": "/page-2.html",
+      "to": "/page-1.html",
+      "trigger": "link 'Page 1' in nav"
+    },
+    {
+      "from": "/page-2.html",
+      "to": "/page-3.html",
+      "trigger": "link 'Page 3' in nav"
+    },
+    {
+      "from": "/page-3.html",
+      "to": "/page-1.html",
+      "trigger": "link 'Page 1' in nav"
+    },
+    {
+      "from": "/page-3.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Page 2' in nav"
+    },
+    {
+      "from": "/animation-duration.html",
+      "to": "/animation-complex.html",
+      "trigger": "link 'Animation complex' in nav"
+    },
+    {
+      "from": "/animation-duration.html",
+      "to": "/animation-keyframes.html",
+      "trigger": "link 'Animation keyframes' in nav"
+    },
+    {
+      "from": "/animation-duration.html",
+      "to": "/animation-native.html",
+      "trigger": "link 'Animation native' in nav"
+    },
+    {
+      "from": "/animation-duration.html",
+      "to": "/animation-none.html",
+      "trigger": "link 'Animation none' in nav"
+    },
+    {
+      "from": "/animation-duration.html",
+      "to": "/animation-partial.html",
+      "trigger": "link 'Animation partial' in nav"
+    },
+    {
+      "from": "/animation-complex.html",
+      "to": "/animation-duration.html",
+      "trigger": "link 'Animation duration' in nav"
+    },
+    {
+      "from": "/animation-complex.html",
+      "to": "/animation-keyframes.html",
+      "trigger": "link 'Animation keyframes' in nav"
+    },
+    {
+      "from": "/animation-complex.html",
+      "to": "/animation-native.html",
+      "trigger": "link 'Animation native' in nav"
+    },
+    {
+      "from": "/animation-none.html",
+      "to": "/animation-duration.html",
+      "trigger": "link 'Animation duration' in nav"
+    },
+    {
+      "from": "/animation-none.html",
+      "to": "/animation-partial.html",
+      "trigger": "link 'Animation partial' in nav"
+    },
+    {
+      "from": "/animation-native.html",
+      "to": "/animation-duration.html",
+      "trigger": "link 'Animation duration' in nav"
+    },
+    {
+      "from": "/animation-partial.html",
+      "to": "/animation-duration.html",
+      "trigger": "link 'Animation duration' in nav"
+    },
+    {
+      "from": "/animation-keyframes.html",
+      "to": "/animation-duration.html",
+      "trigger": "link 'Animation duration' in nav"
+    },
+    {
+      "from": "/containers-1.html",
+      "to": "/containers-2.html",
+      "trigger": "link 'Containers 2' [link '/containers-2.html' in nav]"
+    },
+    {
+      "from": "/containers-2.html",
+      "to": "/containers-1.html",
+      "trigger": "link 'Containers 1' [link '/containers-1.html' in nav]"
+    },
+    {
+      "from": "/containers-missing.html",
+      "to": "/containers-1.html",
+      "trigger": "link 'Containers 1' [link '/containers-1.html' in nav]"
+    },
+    {
+      "from": "/containers-missing.html",
+      "to": "/containers-2.html",
+      "trigger": "link 'Containers 2' [link '/containers-2.html' in nav]"
+    },
+    {
+      "from": "/history.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Page 2' [link '/page-2.html' in nav]"
+    },
+    {
+      "from": "/history.html",
+      "to": "/page-3.html",
+      "trigger": "link 'Page 3: create' [data-testid=create-link, pushState]"
+    },
+    {
+      "from": "/history.html",
+      "to": "/page-3.html",
+      "trigger": "link 'Page 3: update' [data-testid=update-link, data-swup-history=replace]"
+    },
+    {
+      "from": "/ignore-visits.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Page 2 normal' [data-testid=ignore-none]"
+    },
+    {
+      "from": "/ignore-visits.html",
+      "to": "/page-2.html",
+      "trigger": "link with data-no-swup [data-testid=ignore-element]; bypasses swup",
+      "guard": "data-no-swup on element causes full page navigation, not swup transition"
+    },
+    {
+      "from": "/ignore-visits.html",
+      "to": "/page-2.html",
+      "trigger": "link inside parent with data-no-swup [data-testid=ignore-parent]; bypasses swup",
+      "guard": "data-no-swup on ancestor element causes full page navigation"
+    },
+    {
+      "from": "/ignore-visits.html",
+      "to": "/page-2.html",
+      "trigger": "link ignored by path [data-testid=ignore-path-start]",
+      "guard": "path configured as ignored in swup; full page navigation"
+    },
+    {
+      "from": "/ignore-visits.html",
+      "to": "/page-2.html",
+      "trigger": "link with hash to ignored path [data-testid=ignore-path-end, href=/page-2.html#hash]",
+      "guard": "hash on ignored path; full page navigation"
+    },
+    {
+      "from": "/link-resolution.html",
+      "to": "/page-2.html",
+      "trigger": "absolute link to Page 2 [data-testid=nav-link-abs]"
+    },
+    {
+      "from": "/link-resolution.html",
+      "to": "/page-2.html",
+      "trigger": "relative link to Page 2 [data-testid=nav-link-rel, href=./../page-2.html]"
+    },
+    {
+      "from": "/link-resolution.html",
+      "to": "/link-resolution.html",
+      "trigger": "relative self link [data-testid=nav-link-self, href=./link-resolution.html]"
+    },
+    {
+      "from": "/link-selector.html",
+      "to": "/page-1.html",
+      "trigger": "link 'Page 1' in nav"
+    },
+    {
+      "from": "/link-selector.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Page 2' in nav"
+    },
+    {
+      "from": "/link-selector.html",
+      "to": "/page-2.html",
+      "trigger": "SVG anchor [svg <a xlink:href=/page-2.html>, text 'SVG link to page']"
+    },
+    {
+      "from": "/link-selector.html",
+      "to": "/page-2.html",
+      "trigger": "image map area [<area href=/page-2.html alt='Map link to page'>]"
+    },
+    {
+      "from": "/persist-1.html",
+      "to": "/persist-2.html",
+      "trigger": "link 'Persist 2' [link '/persist-2.html' in nav]"
+    },
+    {
+      "from": "/persist-2.html",
+      "to": "/persist-1.html",
+      "trigger": "link 'Persist 1' [link '/persist-1.html' in nav]"
+    },
+    {
+      "from": "/redirect-1.html",
+      "to": "/redirect-3.html",
+      "trigger": "link '/redirect-2.html' in nav",
+      "guard": "server 301 redirect: /redirect-2.html → /redirect-3.html"
+    },
+    {
+      "from": "/redirect-1.html",
+      "to": "/redirect-3.html",
+      "trigger": "link '/redirect-3.html' in nav"
+    },
+    {
+      "from": "/redirect-3.html",
+      "to": "/redirect-1.html",
+      "trigger": "link '/redirect-1.html' in nav"
+    },
+    {
+      "from": "/redirect-3.html",
+      "to": "/redirect-3.html",
+      "trigger": "link '/redirect-2.html' in nav",
+      "guard": "server 301 redirect: /redirect-2.html → /redirect-3.html (self-navigation)"
+    },
+    {
+      "from": "/scrolling-1.html",
+      "to": "/scrolling-2.html",
+      "trigger": "link 'Link to page' [data-testid=link-to-page, href=/scrolling-2.html]"
+    },
+    {
+      "from": "/scrolling-1.html",
+      "to": "/scrolling-2.html",
+      "trigger": "link 'Link to page with anchor' [data-testid=link-to-page-anchor, href=/scrolling-2.html#anchor]"
+    },
+    {
+      "from": "/scrolling-1.html",
+      "to": "/scrolling-1.html",
+      "trigger": "link 'Link to self with anchor' [data-testid=link-to-self-anchor, href=/scrolling-1.html#anchor]"
+    },
+    {
+      "from": "/scrolling-2.html",
+      "to": "/page-1.html",
+      "trigger": "link 'Page 1' in nav"
+    },
+    {
+      "from": "/scrolling-2.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Page 2' in nav"
+    },
+    {
+      "from": "/alpinejs/page-1.html",
+      "to": "/alpinejs/page-2.html",
+      "trigger": "link 'Page 2' [data-testid=link-to-page-2]"
+    },
+    {
+      "from": "/alpinejs/page-1.html",
+      "to": "/page-2.html",
+      "trigger": "link 'Custom animation' [data-swup-animation=custom, href=/page-2.html]"
+    },
+    {
+      "from": "/alpinejs/page-2.html",
+      "to": "/alpinejs/page-1.html",
+      "trigger": "link 'Page 1' [link '/alpinejs/page-1.html' in nav]"
+    },
+    {
+      "from": "/nested/nested-1.html",
+      "to": "/nested/nested-2.html",
+      "trigger": "link 'nested/nested-2.html' [data-testid=nav-link-sub, resolved via base href=/]"
+    },
+    {
+      "from": "/nested/nested-2.html",
+      "to": "/nested/nested-1.html",
+      "trigger": "link 'nested/nested-1.html' [resolved via base href=/]"
+    },
+    {
+      "from": "/plugins/scroll-plugin/page-1.html",
+      "to": "/plugins/scroll-plugin/page-2.html",
+      "trigger": "link 'Link to page' [data-testid=link-to-page]"
+    },
+    {
+      "from": "/plugins/scroll-plugin/page-1.html",
+      "to": "/plugins/scroll-plugin/page-2.html",
+      "trigger": "link 'Link to page with anchor' [data-testid=link-to-page-anchor]"
+    },
+    {
+      "from": "/rapid-navigation/page-1.html",
+      "to": "/rapid-navigation/page-2.html",
+      "trigger": "link 'Page 2' [data-testid=link-to-page-2]"
+    },
+    {
+      "from": "/rapid-navigation/page-1.html",
+      "to": "/rapid-navigation/page-3.html",
+      "trigger": "link 'Page 3' [data-testid=link-to-page-3]"
+    },
+    {
+      "from": "/rapid-navigation/page-2.html",
+      "to": "/rapid-navigation/page-1.html",
+      "trigger": "link 'Page 1' [data-testid=link-to-page-1]"
+    },
+    {
+      "from": "/rapid-navigation/page-2.html",
+      "to": "/rapid-navigation/page-3.html",
+      "trigger": "link 'Page 3' [data-testid=link-to-page-3]"
+    },
+    {
+      "from": "/rapid-navigation/page-3.html",
+      "to": "/rapid-navigation/page-1.html",
+      "trigger": "link 'Page 1' [data-testid=link-to-page-1]"
+    },
+    {
+      "from": "/rapid-navigation/page-3.html",
+      "to": "/rapid-navigation/page-2.html",
+      "trigger": "link 'Page 2' [data-testid=link-to-page-2]"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "All pages are publicly accessible; no authentication required",
+        "node_ids": [
+          "/",
+          "/page-1.html",
+          "/page-2.html",
+          "/page-3.html",
+          "/animation-duration.html",
+          "/animation-complex.html",
+          "/animation-keyframes.html",
+          "/animation-native.html",
+          "/animation-none.html",
+          "/animation-partial.html",
+          "/containers-1.html",
+          "/containers-2.html",
+          "/containers-missing.html",
+          "/history.html",
+          "/ignore-visits.html",
+          "/instance.html",
+          "/link-resolution.html",
+          "/link-selector.html",
+          "/persist-1.html",
+          "/persist-2.html",
+          "/redirect-1.html",
+          "/redirect-3.html",
+          "/scrolling-1.html",
+          "/scrolling-2.html",
+          "/alpinejs/page-1.html",
+          "/alpinejs/page-2.html",
+          "/nested/nested-1.html",
+          "/nested/nested-2.html",
+          "/plugins/body-class-plugin/page-1.html",
+          "/plugins/body-class-plugin/page-2.html",
+          "/plugins/scroll-plugin/page-1.html",
+          "/plugins/scroll-plugin/page-2.html",
+          "/rapid-navigation/page-1.html",
+          "/rapid-navigation/page-2.html",
+          "/rapid-navigation/page-3.html"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:directory",
+        "label": "Server-generated directory index; no Swup instance",
+        "node_ids": ["/"]
+      },
+      {
+        "id": "layout:standard",
+        "label": "Header nav + main#swup.wrapper.transition-default; Swup UMD loaded",
+        "node_ids": [
+          "/page-1.html",
+          "/page-2.html",
+          "/page-3.html",
+          "/animation-duration.html",
+          "/animation-complex.html",
+          "/animation-keyframes.html",
+          "/animation-native.html",
+          "/animation-none.html",
+          "/animation-partial.html",
+          "/history.html",
+          "/ignore-visits.html",
+          "/link-resolution.html",
+          "/link-selector.html",
+          "/persist-1.html",
+          "/persist-2.html",
+          "/redirect-1.html",
+          "/redirect-3.html",
+          "/nested/nested-1.html",
+          "/nested/nested-2.html",
+          "/rapid-navigation/page-1.html",
+          "/rapid-navigation/page-2.html",
+          "/rapid-navigation/page-3.html"
+        ]
+      },
+      {
+        "id": "layout:standard-alpine",
+        "label": "Header nav + main#swup + Alpine.js component tracking swup events",
+        "node_ids": [
+          "/alpinejs/page-1.html",
+          "/alpinejs/page-2.html"
+        ]
+      },
+      {
+        "id": "layout:multi-container",
+        "label": "Dual containers: main#main + aside#aside; swup { containers: ['#main','#aside'] }",
+        "node_ids": [
+          "/containers-1.html",
+          "/containers-2.html",
+          "/containers-missing.html"
+        ]
+      },
+      {
+        "id": "layout:no-nav",
+        "label": "main#swup only; no header nav; driven by test scripts, not user links",
+        "node_ids": [
+          "/plugins/body-class-plugin/page-1.html",
+          "/plugins/body-class-plugin/page-2.html",
+          "/plugins/scroll-plugin/page-1.html"
+        ]
+      },
+      {
+        "id": "layout:no-swup",
+        "label": "No Swup script at all; plain HTML destination page",
+        "node_ids": [
+          "/scrolling-2.html",
+          "/plugins/scroll-plugin/page-2.html"
+        ]
+      },
+      {
+        "id": "layout:empty",
+        "label": "Empty body; tests Swup instantiation before DOM ready",
+        "node_ids": ["/instance.html"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1305 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "app_name": "Cypress Real World App (RWA)",
+    "source_graph": "UI_GRAPH.json",
+    "total_features": 14,
+    "total_scenarios": 31,
+    "total_paths": 51
+  },
+  "features": [
+    {
+      "id": "feat:sign-in",
+      "name": "Sign In",
+      "description": "Authenticate with username and password to access the app.",
+      "section": "Authentication",
+      "related_nodes": ["/signin", "/signin#error", "/signin#redirect"],
+      "scenarios": [
+        {
+          "id": "scen:sign-in-success",
+          "name": "Successful sign-in with valid credentials",
+          "preconditions": [
+            "User has a registered account",
+            "User is unauthenticated (on /signin)"
+          ],
+          "expected_outcome": "User is authenticated and redirected to the transaction feed at /",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/signin",
+                  "action": "Fill username field [data-test=signin-username]",
+                  "transition": null
+                },
+                {
+                  "state": "/signin",
+                  "action": "Fill password field [data-test=signin-password]",
+                  "transition": null
+                },
+                {
+                  "state": "/signin",
+                  "action": "Submit Sign In button [data-test=signin-submit]",
+                  "transition": "button \"Sign In\" [data-test=signin-submit]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sign-in-invalid-credentials",
+          "name": "Failed sign-in with invalid credentials",
+          "preconditions": [
+            "User is unauthenticated (on /signin)",
+            "Credentials entered do not match any account"
+          ],
+          "expected_outcome": "Error alert [data-test=signin-error] is displayed; user remains on /signin",
+          "paths": [
+            {
+              "id": "path:2",
+              "steps": [
+                {
+                  "state": "/signin",
+                  "action": "Fill username field [data-test=signin-username]",
+                  "transition": null
+                },
+                {
+                  "state": "/signin",
+                  "action": "Fill password field [data-test=signin-password]",
+                  "transition": null
+                },
+                {
+                  "state": "/signin",
+                  "action": "Submit Sign In button [data-test=signin-submit]",
+                  "transition": "button \"Sign In\" [data-test=signin-submit]"
+                }
+              ]
+            },
+            {
+              "id": "path:3",
+              "steps": [
+                {
+                  "state": "/signin#error",
+                  "action": "Dismiss error alert [data-test=signin-error]",
+                  "transition": "auto: dismiss error alert; user edits form"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sign-in-unauthenticated-redirect",
+          "name": "Redirected to sign-in when accessing a protected route without authentication",
+          "preconditions": [
+            "User is unauthenticated",
+            "User navigates directly to any protected route"
+          ],
+          "expected_outcome": "React Router catch-all redirects user to /signin; after signing in they can proceed",
+          "paths": [
+            {
+              "id": "path:4",
+              "steps": [
+                {
+                  "state": "/signin#redirect",
+                  "action": "Fill username field [data-test=signin-username]",
+                  "transition": "auto: redirect on unauthenticated access to any protected route"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:sign-up",
+      "name": "Sign Up",
+      "description": "Register a new account with first name, last name, username, and password.",
+      "section": "Authentication",
+      "related_nodes": ["/signup", "/signin"],
+      "scenarios": [
+        {
+          "id": "scen:sign-up-new-account",
+          "name": "Register a new account successfully",
+          "preconditions": [
+            "User does not have an existing account",
+            "Chosen username is not already taken"
+          ],
+          "expected_outcome": "Account is created and user is redirected to /signin to log in",
+          "paths": [
+            {
+              "id": "path:5",
+              "steps": [
+                {
+                  "state": "/signin",
+                  "action": "Click 'Sign Up' link [data-test=signup]",
+                  "transition": "link \"Don't have an account? Sign Up\" [data-test=signup]"
+                },
+                {
+                  "state": "/signup",
+                  "action": "Fill first name [data-test=signup-first-name]",
+                  "transition": null
+                },
+                {
+                  "state": "/signup",
+                  "action": "Fill last name [data-test=signup-last-name]",
+                  "transition": null
+                },
+                {
+                  "state": "/signup",
+                  "action": "Fill username [data-test=signup-username]",
+                  "transition": null
+                },
+                {
+                  "state": "/signup",
+                  "action": "Fill password [data-test=signup-password]",
+                  "transition": null
+                },
+                {
+                  "state": "/signup",
+                  "action": "Fill confirm password [data-test=signup-confirmPassword]",
+                  "transition": null
+                },
+                {
+                  "state": "/signup",
+                  "action": "Submit Sign Up button [data-test=signup-submit]",
+                  "transition": "button \"Sign Up\" [data-test=signup-submit]"
+                }
+              ]
+            },
+            {
+              "id": "path:6",
+              "steps": [
+                {
+                  "state": "/signup",
+                  "action": "Click 'Have an account? Sign In' link [href=/signin]",
+                  "transition": "link \"Have an account? Sign In\" [href=/signin]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:sign-out",
+      "name": "Sign Out",
+      "description": "End the authenticated session and return to /signin.",
+      "section": "Authentication",
+      "related_nodes": ["/", "/user/settings", "/notifications", "/#sidenav-open"],
+      "scenarios": [
+        {
+          "id": "scen:sign-out-from-app",
+          "name": "Sign out from any authenticated page",
+          "preconditions": [
+            "User is authenticated",
+            "User is on a page that exposes the Logout button in the side navigation"
+          ],
+          "expected_outcome": "Session is terminated and user is redirected to /signin",
+          "paths": [
+            {
+              "id": "path:7",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Toggle side nav [data-test=sidenav-toggle]",
+                  "transition": "icon button [data-test=sidenav-toggle]"
+                },
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Click 'Logout' [data-test=sidenav-signout]",
+                  "transition": "button \"Logout\" [data-test=sidenav-signout]"
+                }
+              ]
+            },
+            {
+              "id": "path:8",
+              "steps": [
+                {
+                  "state": "/user/settings",
+                  "action": "Navigate via sidebar",
+                  "transition": "button \"Logout\" [data-test=sidenav-signout]"
+                }
+              ]
+            },
+            {
+              "id": "path:9",
+              "steps": [
+                {
+                  "state": "/notifications",
+                  "action": "Navigate via sidebar",
+                  "transition": "button \"Logout\" [data-test=sidenav-signout]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:browse-transaction-feed",
+      "name": "Browse Transaction Feed",
+      "description": "View transactions in three filtered tabs: Everyone (public), Friends, and Mine.",
+      "section": "Transactions",
+      "related_nodes": ["/", "/public", "/contacts", "/personal", "/#transactions-empty"],
+      "scenarios": [
+        {
+          "id": "scen:view-public-feed",
+          "name": "View all public transactions (Everyone tab)",
+          "preconditions": [
+            "User is authenticated",
+            "At least one public transaction exists"
+          ],
+          "expected_outcome": "Transaction feed at / or /public shows all public transactions",
+          "paths": [
+            {
+              "id": "path:10",
+              "steps": [
+                {
+                  "state": "/contacts",
+                  "action": "Click 'Everyone' tab [data-test=nav-public-tab]",
+                  "transition": "tab \"Everyone\" [data-test=nav-public-tab]"
+                }
+              ]
+            },
+            {
+              "id": "path:11",
+              "steps": [
+                {
+                  "state": "/personal",
+                  "action": "Click 'Everyone' tab [data-test=nav-public-tab]",
+                  "transition": "tab \"Everyone\" [data-test=nav-public-tab]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-friends-feed",
+          "name": "View transactions with contacts (Friends tab)",
+          "preconditions": [
+            "User is authenticated",
+            "User has contacts with shared transactions"
+          ],
+          "expected_outcome": "Transaction feed at /contacts shows only transactions involving the user's contacts",
+          "paths": [
+            {
+              "id": "path:12",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click 'Friends' tab [data-test=nav-contacts-tab]",
+                  "transition": "tab \"Friends\" [data-test=nav-contacts-tab]"
+                }
+              ]
+            },
+            {
+              "id": "path:13",
+              "steps": [
+                {
+                  "state": "/personal",
+                  "action": "Click 'Friends' tab [data-test=nav-contacts-tab]",
+                  "transition": "tab \"Friends\" [data-test=nav-contacts-tab]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-personal-feed",
+          "name": "View own transactions (Mine tab)",
+          "preconditions": [
+            "User is authenticated",
+            "User has at least one transaction as sender or receiver"
+          ],
+          "expected_outcome": "Transaction feed at /personal shows only the current user's transactions",
+          "paths": [
+            {
+              "id": "path:14",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click 'Mine' tab [data-test=nav-personal-tab]",
+                  "transition": "tab \"Mine\" [data-test=nav-personal-tab]"
+                }
+              ]
+            },
+            {
+              "id": "path:15",
+              "steps": [
+                {
+                  "state": "/contacts",
+                  "action": "Click 'Mine' tab [data-test=nav-personal-tab]",
+                  "transition": "tab \"Mine\" [data-test=nav-personal-tab]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:empty-transaction-feed",
+          "name": "Transaction feed shows empty state with create prompt",
+          "preconditions": [
+            "User is authenticated",
+            "No transactions exist for the selected feed tab"
+          ],
+          "expected_outcome": "Empty list illustration is shown with an inline 'Create A Transaction' button on public and contacts feeds",
+          "paths": [
+            {
+              "id": "path:16",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+                  "transition": "auto: conditional render when transaction list has no results"
+                }
+              ]
+            },
+            {
+              "id": "path:17",
+              "steps": [
+                {
+                  "state": "/#transactions-empty",
+                  "action": "Click 'Create A Transaction' inline button [data-test=transaction-list-empty-create-transaction-button]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:filter-transactions",
+      "name": "Filter Transactions",
+      "description": "Narrow the transaction feed by date range or amount range using popover/drawer controls.",
+      "section": "Transactions",
+      "related_nodes": ["/#date-filter-open", "/#amount-filter-open", "/", "/contacts", "/personal"],
+      "scenarios": [
+        {
+          "id": "scen:apply-date-range-filter",
+          "name": "Apply a date range filter to the transaction feed",
+          "preconditions": [
+            "User is authenticated",
+            "User is on a transaction feed page (/, /contacts, or /personal)"
+          ],
+          "expected_outcome": "Feed is filtered to show only transactions within the selected date range; chip label updates",
+          "paths": [
+            {
+              "id": "path:18",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click date range filter chip [data-test=transaction-list-filter-date-range-button]",
+                  "transition": "chip \"Date: ALL\" [data-test=transaction-list-filter-date-range-button]"
+                },
+                {
+                  "state": "/#date-filter-open",
+                  "action": "Select date range on calendar [data-test=transaction-list-filter-date-range]",
+                  "transition": "calendar range selection [data-test=transaction-list-filter-date-range]"
+                }
+              ]
+            },
+            {
+              "id": "path:19",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click date range filter chip [data-test=transaction-list-filter-date-range-button]",
+                  "transition": "chip \"Date: ALL\" [data-test=transaction-list-filter-date-range-button]"
+                },
+                {
+                  "state": "/#date-filter-open",
+                  "action": "Close date range popover (click outside)",
+                  "transition": "click outside popover or backdrop close"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:apply-amount-range-filter",
+          "name": "Apply an amount range filter to the transaction feed",
+          "preconditions": [
+            "User is authenticated",
+            "User is on a transaction feed page (/, /contacts, or /personal)"
+          ],
+          "expected_outcome": "Feed is filtered to show only transactions within the selected amount range; chip label updates",
+          "paths": [
+            {
+              "id": "path:20",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click amount range filter chip [data-test=transaction-list-filter-amount-range-button]",
+                  "transition": "chip \"Amount: ...\" [data-test=transaction-list-filter-amount-range-button]"
+                },
+                {
+                  "state": "/#amount-filter-open",
+                  "action": "Drag amount range slider [data-test=transaction-list-filter-amount-range-slider]",
+                  "transition": "click outside popover or backdrop close"
+                }
+              ]
+            },
+            {
+              "id": "path:21",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click amount range filter chip [data-test=transaction-list-filter-amount-range-button]",
+                  "transition": "chip \"Amount: ...\" [data-test=transaction-list-filter-amount-range-button]"
+                },
+                {
+                  "state": "/#amount-filter-open",
+                  "action": "Close amount range popover (click outside)",
+                  "transition": "click outside popover or backdrop close"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:view-transaction-detail",
+      "name": "View Transaction Detail",
+      "description": "Open a transaction to see sender, receiver, amount, description, comments, and likes.",
+      "section": "Transactions",
+      "related_nodes": [
+        "/transaction/:transactionId",
+        "/transaction/:transactionId#loading",
+        "/transaction/:transactionId#pending-request"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:view-completed-transaction",
+          "name": "View a completed transaction's full detail",
+          "preconditions": [
+            "User is authenticated",
+            "Transaction exists and is in a completed or charged state"
+          ],
+          "expected_outcome": "Detail page shows sender avatar, receiver avatar, amount, description, comment thread, and like count",
+          "paths": [
+            {
+              "id": "path:22",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click transaction item to view detail [data-test=transaction-item-{id}]",
+                  "transition": "list item click [data-test=transaction-item-{id}]"
+                },
+                {
+                  "state": "/transaction/:transactionId#loading",
+                  "action": "Navigate back via browser or sidebar",
+                  "transition": "auto: XState idle → success on data load"
+                },
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Navigate back via browser or sidebar",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:23",
+              "steps": [
+                {
+                  "state": "/contacts",
+                  "action": "Click transaction item to view detail [data-test=transaction-item-{id}]",
+                  "transition": "list item click [data-test=transaction-item-{id}]"
+                },
+                {
+                  "state": "/transaction/:transactionId#loading",
+                  "action": "Navigate back via browser or sidebar",
+                  "transition": "auto: XState idle → success on data load"
+                },
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Navigate back via browser or sidebar",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:24",
+              "steps": [
+                {
+                  "state": "/personal",
+                  "action": "Click transaction item to view detail [data-test=transaction-item-{id}]",
+                  "transition": "list item click [data-test=transaction-item-{id}]"
+                },
+                {
+                  "state": "/transaction/:transactionId#loading",
+                  "action": "Navigate back via browser or sidebar",
+                  "transition": "auto: XState idle → success on data load"
+                },
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Navigate back via browser or sidebar",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:like-transaction",
+          "name": "Like a transaction",
+          "preconditions": [
+            "User is authenticated",
+            "User is on a transaction detail page",
+            "User has not already liked the transaction"
+          ],
+          "expected_outcome": "Like count increments; like button becomes disabled for the current user",
+          "paths": [
+            {
+              "id": "path:25",
+              "steps": [
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Like transaction [data-test=transaction-like-button-{id}]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:comment-on-transaction",
+          "name": "Add a comment to a transaction",
+          "preconditions": [
+            "User is authenticated",
+            "User is on a transaction detail page"
+          ],
+          "expected_outcome": "Comment appears in the comment thread below the transaction detail",
+          "paths": [
+            {
+              "id": "path:26",
+              "steps": [
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Submit comment via CommentForm [data-test=transaction-comment-input-{transactionId}]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:respond-to-payment-request",
+      "name": "Respond to a Payment Request",
+      "description": "Accept or reject an incoming pending payment request as the receiver.",
+      "section": "Transactions",
+      "related_nodes": [
+        "/transaction/:transactionId#pending-request",
+        "/transaction/:transactionId"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:accept-payment-request",
+          "name": "Accept a pending payment request",
+          "preconditions": [
+            "User is authenticated",
+            "Current user is the receiver of the transaction",
+            "Transaction status is 'pending' (a payment request)"
+          ],
+          "expected_outcome": "Request is accepted; transaction status updates to charged; Accept/Reject buttons disappear",
+          "paths": [
+            {
+              "id": "path:27",
+              "steps": [
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Like transaction [data-test=transaction-like-button-{id}]",
+                  "transition": "auto: conditional render when receiverIsCurrentUser && status=pending"
+                },
+                {
+                  "state": "/transaction/:transactionId#pending-request",
+                  "action": "Accept Request button [data-test=transaction-accept-request-{id}]",
+                  "transition": "button \"Accept Request\" [data-test=transaction-accept-request-{id}] or button \"Reject Request\" [data-test=transaction-reject-request-{id}]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:reject-payment-request",
+          "name": "Reject a pending payment request",
+          "preconditions": [
+            "User is authenticated",
+            "Current user is the receiver of the transaction",
+            "Transaction status is 'pending' (a payment request)"
+          ],
+          "expected_outcome": "Request is rejected; transaction status updates; Accept/Reject buttons disappear",
+          "paths": [
+            {
+              "id": "path:28",
+              "steps": [
+                {
+                  "state": "/transaction/:transactionId",
+                  "action": "Like transaction [data-test=transaction-like-button-{id}]",
+                  "transition": "auto: conditional render when receiverIsCurrentUser && status=pending"
+                },
+                {
+                  "state": "/transaction/:transactionId#pending-request",
+                  "action": "Reject Request button [data-test=transaction-reject-request-{id}]",
+                  "transition": "button \"Accept Request\" [data-test=transaction-accept-request-{id}] or button \"Reject Request\" [data-test=transaction-reject-request-{id}]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:create-transaction",
+      "name": "Create a Transaction",
+      "description": "Send a payment or request money from another user via a 3-step stepper flow.",
+      "section": "Transactions",
+      "related_nodes": [
+        "/transaction/new",
+        "/transaction/new#step-two",
+        "/transaction/new#step-three"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:create-payment",
+          "name": "Pay another user",
+          "preconditions": [
+            "User is authenticated",
+            "User has a linked bank account",
+            "Recipient user exists in the system"
+          ],
+          "expected_outcome": "Payment transaction is created; Step 3 shows confirmation with receiver avatar, 'paid' label, amount, and description",
+          "paths": [
+            {
+              "id": "path:29",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+                  "transition": "button \"$ New\" [data-test=nav-top-new-transaction]"
+                },
+                {
+                  "state": "/transaction/new",
+                  "action": "Search users by name [data-test=user-list-search-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/transaction/new",
+                  "action": "Select a user from list [data-test=user-list-item-{id}]",
+                  "transition": "user list item click [data-test=user-list-item-{id}]"
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Fill amount field [data-test=transaction-create-amount-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Fill description/note [data-test=transaction-create-description-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Submit as Payment [data-test=transaction-create-submit-payment]",
+                  "transition": "button \"Request\" [data-test=transaction-create-submit-request] OR button \"Pay\" [data-test=transaction-create-submit-payment]"
+                },
+                {
+                  "state": "/transaction/new#step-three",
+                  "action": "Click 'Return To Transactions' [data-test=new-transaction-return-to-transactions]",
+                  "transition": "button \"Return To Transactions\" [data-test=new-transaction-return-to-transactions]"
+                }
+              ]
+            },
+            {
+              "id": "path:30",
+              "steps": [
+                {
+                  "state": "/contacts",
+                  "action": "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+                  "transition": "button \"$ New\" [data-test=nav-top-new-transaction]"
+                },
+                {
+                  "state": "/transaction/new",
+                  "action": "Select a user from list [data-test=user-list-item-{id}]",
+                  "transition": "user list item click [data-test=user-list-item-{id}]"
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Submit as Payment [data-test=transaction-create-submit-payment]",
+                  "transition": "button \"Request\" [data-test=transaction-create-submit-request] OR button \"Pay\" [data-test=transaction-create-submit-payment]"
+                },
+                {
+                  "state": "/transaction/new#step-three",
+                  "action": "Click 'Return To Transactions' [data-test=new-transaction-return-to-transactions]",
+                  "transition": "button \"Return To Transactions\" [data-test=new-transaction-return-to-transactions]"
+                }
+              ]
+            },
+            {
+              "id": "path:31",
+              "steps": [
+                {
+                  "state": "/personal",
+                  "action": "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+                  "transition": "button \"$ New\" [data-test=nav-top-new-transaction]"
+                },
+                {
+                  "state": "/transaction/new",
+                  "action": "Select a user from list [data-test=user-list-item-{id}]",
+                  "transition": "user list item click [data-test=user-list-item-{id}]"
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Submit as Payment [data-test=transaction-create-submit-payment]",
+                  "transition": "button \"Request\" [data-test=transaction-create-submit-request] OR button \"Pay\" [data-test=transaction-create-submit-payment]"
+                },
+                {
+                  "state": "/transaction/new#step-three",
+                  "action": "Click 'Return To Transactions' [data-test=new-transaction-return-to-transactions]",
+                  "transition": "button \"Return To Transactions\" [data-test=new-transaction-return-to-transactions]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:create-request",
+          "name": "Request money from another user",
+          "preconditions": [
+            "User is authenticated",
+            "Recipient user exists in the system"
+          ],
+          "expected_outcome": "Request transaction is created with 'pending' status; Step 3 shows confirmation with 'requested' label",
+          "paths": [
+            {
+              "id": "path:32",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click 'New' button in top nav [data-test=nav-top-new-transaction]",
+                  "transition": "button \"$ New\" [data-test=nav-top-new-transaction]"
+                },
+                {
+                  "state": "/transaction/new",
+                  "action": "Select a user from list [data-test=user-list-item-{id}]",
+                  "transition": "user list item click [data-test=user-list-item-{id}]"
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Fill amount field [data-test=transaction-create-amount-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Fill description/note [data-test=transaction-create-description-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/transaction/new#step-two",
+                  "action": "Submit as Request [data-test=transaction-create-submit-request]",
+                  "transition": "button \"Request\" [data-test=transaction-create-submit-request] OR button \"Pay\" [data-test=transaction-create-submit-payment]"
+                },
+                {
+                  "state": "/transaction/new#step-three",
+                  "action": "Click 'Return To Transactions' [data-test=new-transaction-return-to-transactions]",
+                  "transition": "button \"Return To Transactions\" [data-test=new-transaction-return-to-transactions]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:create-another-transaction",
+          "name": "Create another transaction immediately after completing one",
+          "preconditions": [
+            "User is authenticated",
+            "User has just completed creating a transaction (on Step 3 confirmation)"
+          ],
+          "expected_outcome": "XState machine resets to step 1; user can select a new recipient and start a fresh transaction",
+          "paths": [
+            {
+              "id": "path:33",
+              "steps": [
+                {
+                  "state": "/transaction/new#step-three",
+                  "action": "Click 'Create Another Transaction' [data-test=new-transaction-create-another-transaction]",
+                  "transition": "button \"Create Another Transaction\" [data-test=new-transaction-create-another-transaction]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:edit-profile",
+      "name": "Edit User Profile",
+      "description": "Update first name, last name, email, phone number, and privacy level in user settings.",
+      "section": "User",
+      "related_nodes": ["/user/settings"],
+      "scenarios": [
+        {
+          "id": "scen:update-profile-success",
+          "name": "Save updated profile information",
+          "preconditions": [
+            "User is authenticated",
+            "User navigates to /user/settings"
+          ],
+          "expected_outcome": "Profile is saved in place; auth machine UPDATE event refreshes the user context; page remains at /user/settings",
+          "paths": [
+            {
+              "id": "path:34",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Toggle side nav [data-test=sidenav-toggle]",
+                  "transition": "icon button [data-test=sidenav-toggle]"
+                },
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Click 'My Account' nav item [data-test=sidenav-user-settings]",
+                  "transition": "link \"My Account\" [data-test=sidenav-user-settings]"
+                },
+                {
+                  "state": "/user/settings",
+                  "action": "Edit first name [data-test=user-settings-firstName-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/user/settings",
+                  "action": "Submit Save button [data-test=user-settings-submit]",
+                  "transition": "button \"Save\" [data-test=user-settings-submit]"
+                }
+              ]
+            },
+            {
+              "id": "path:35",
+              "steps": [
+                {
+                  "state": "/user/settings",
+                  "action": "Edit email [data-test=user-settings-email-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/user/settings",
+                  "action": "Submit Save button [data-test=user-settings-submit]",
+                  "transition": "button \"Save\" [data-test=user-settings-submit]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:view-notifications",
+      "name": "View and Dismiss Notifications",
+      "description": "Read and mark-as-read notifications for comments, likes, and payment events.",
+      "section": "Notifications",
+      "related_nodes": ["/notifications", "/notifications#empty-list"],
+      "scenarios": [
+        {
+          "id": "scen:dismiss-notifications",
+          "name": "Read and dismiss one or more notifications",
+          "preconditions": [
+            "User is authenticated",
+            "User has at least one unread notification"
+          ],
+          "expected_outcome": "Notification is marked as read and removed from the unread list",
+          "paths": [
+            {
+              "id": "path:36",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Click notifications icon [data-test=nav-top-notifications-link]",
+                  "transition": "icon button [data-test=nav-top-notifications-link]"
+                },
+                {
+                  "state": "/notifications",
+                  "action": "Dismiss/mark as read each notification [data-test=notification-mark-read-{id}]",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:37",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Toggle side nav [data-test=sidenav-toggle]",
+                  "transition": "icon button [data-test=sidenav-toggle]"
+                },
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Click 'Notifications' nav item [data-test=sidenav-notifications]",
+                  "transition": "link \"Notifications\" [data-test=sidenav-notifications]"
+                },
+                {
+                  "state": "/notifications",
+                  "action": "Dismiss/mark as read each notification [data-test=notification-mark-read-{id}]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:empty-notifications",
+          "name": "Notifications page shows empty state",
+          "preconditions": [
+            "User is authenticated",
+            "User has no notifications"
+          ],
+          "expected_outcome": "EmptyList component is rendered on the notifications page; no action items are shown",
+          "paths": [
+            {
+              "id": "path:38",
+              "steps": [
+                {
+                  "state": "/notifications",
+                  "action": "Navigate via sidebar",
+                  "transition": "auto: conditional render when notifications results is empty"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:manage-bank-accounts",
+      "name": "Manage Bank Accounts",
+      "description": "View, add, and delete linked bank accounts from the bank accounts list page.",
+      "section": "Bank Accounts",
+      "related_nodes": ["/bankaccounts", "/bankaccounts/new", "/bankaccounts#empty-list"],
+      "scenarios": [
+        {
+          "id": "scen:view-bank-accounts",
+          "name": "View list of linked bank accounts",
+          "preconditions": [
+            "User is authenticated",
+            "User has at least one linked bank account"
+          ],
+          "expected_outcome": "List of bank accounts is displayed, each with a delete button",
+          "paths": [
+            {
+              "id": "path:39",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Toggle side nav [data-test=sidenav-toggle]",
+                  "transition": "icon button [data-test=sidenav-toggle]"
+                },
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Click 'Bank Accounts' nav item [data-test=sidenav-bankaccounts]",
+                  "transition": "link \"Bank Accounts\" [data-test=sidenav-bankaccounts]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:create-bank-account",
+          "name": "Add a new bank account",
+          "preconditions": [
+            "User is authenticated",
+            "User is on /bankaccounts"
+          ],
+          "expected_outcome": "Bank account is saved with valid name (≥5 chars), 9-digit routing number, and account number; redirected back to /bankaccounts",
+          "paths": [
+            {
+              "id": "path:40",
+              "steps": [
+                {
+                  "state": "/bankaccounts",
+                  "action": "Click 'Create' button [data-test=bankaccount-new]",
+                  "transition": "button \"Create\" [data-test=bankaccount-new]"
+                },
+                {
+                  "state": "/bankaccounts/new",
+                  "action": "Fill bank name [data-test=bankaccount-bankName-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/bankaccounts/new",
+                  "action": "Fill routing number [data-test=bankaccount-routingNumber-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/bankaccounts/new",
+                  "action": "Fill account number [data-test=bankaccount-accountNumber-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/bankaccounts/new",
+                  "action": "Submit Save button [data-test=bankaccount-submit]",
+                  "transition": "button \"Save\" [data-test=bankaccount-submit]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:delete-bank-account",
+          "name": "Delete a linked bank account",
+          "preconditions": [
+            "User is authenticated",
+            "User has at least one linked bank account"
+          ],
+          "expected_outcome": "Bank account is removed from the list. NOTE: No graph edge exists for the delete action — transition is in-place.",
+          "paths": [
+            {
+              "id": "path:41",
+              "steps": [
+                {
+                  "state": "/bankaccounts",
+                  "action": "Delete bank account [data-test=bankaccount-delete]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:empty-bank-accounts",
+          "name": "Bank accounts page shows empty state",
+          "preconditions": [
+            "User is authenticated",
+            "User has no linked bank accounts"
+          ],
+          "expected_outcome": "EmptyList component renders with a 'Create' button as the only call to action",
+          "paths": [
+            {
+              "id": "path:42",
+              "steps": [
+                {
+                  "state": "/bankaccounts",
+                  "action": "Click 'Create' button [data-test=bankaccount-new]",
+                  "transition": "auto: conditional render when bankaccounts results is empty"
+                },
+                {
+                  "state": "/bankaccounts#empty-list",
+                  "action": "Click 'Create' button [data-test=bankaccount-new]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:onboarding",
+      "name": "First-Time Onboarding",
+      "description": "Guide new users through a 3-step modal: welcome → create bank account → finished.",
+      "section": "Onboarding",
+      "related_nodes": [
+        "/#onboarding-step-one",
+        "/#onboarding-step-two",
+        "/#onboarding-step-three"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:complete-onboarding",
+          "name": "Complete the full onboarding flow and create a bank account",
+          "preconditions": [
+            "User is authenticated for the first time",
+            "User has no linked bank accounts",
+            "Onboarding modal is triggered automatically on login"
+          ],
+          "expected_outcome": "Bank account is created; onboarding modal is dismissed; user lands on transaction feed",
+          "paths": [
+            {
+              "id": "path:43",
+              "steps": [
+                {
+                  "state": "/#onboarding-step-one",
+                  "action": "Click 'Next' button [data-test=user-onboarding-next]",
+                  "transition": "button \"Next\" [data-test=user-onboarding-next]"
+                },
+                {
+                  "state": "/#onboarding-step-two",
+                  "action": "Fill bank name [data-test=bankaccount-bankName-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/#onboarding-step-two",
+                  "action": "Fill routing number [data-test=bankaccount-routingNumber-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/#onboarding-step-two",
+                  "action": "Fill account number [data-test=bankaccount-accountNumber-input]",
+                  "transition": null
+                },
+                {
+                  "state": "/#onboarding-step-two",
+                  "action": "Submit Save button [data-test=bankaccount-submit]",
+                  "transition": "button \"Save\" [data-test=bankaccount-submit]"
+                },
+                {
+                  "state": "/#onboarding-step-three",
+                  "action": "Click 'Done' button [data-test=user-onboarding-next]",
+                  "transition": "button \"Done\" [data-test=user-onboarding-next]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:logout-during-onboarding",
+          "name": "Log out while the onboarding modal is open",
+          "preconditions": [
+            "User is authenticated",
+            "Onboarding modal is currently displayed (any step)"
+          ],
+          "expected_outcome": "Session ends; user is redirected to /signin; onboarding modal is closed",
+          "paths": [
+            {
+              "id": "path:44",
+              "steps": [
+                {
+                  "state": "/#onboarding-step-one",
+                  "action": "Click 'Logout' button [data-test=user-onboarding-logout]",
+                  "transition": "button \"Logout\" [data-test=user-onboarding-logout]"
+                }
+              ]
+            },
+            {
+              "id": "path:45",
+              "steps": [
+                {
+                  "state": "/#onboarding-step-two",
+                  "action": "Click 'Logout' button [data-test=user-onboarding-logout]",
+                  "transition": "button \"Logout\" [data-test=user-onboarding-logout]"
+                }
+              ]
+            },
+            {
+              "id": "path:46",
+              "steps": [
+                {
+                  "state": "/#onboarding-step-three",
+                  "action": "Click 'Logout' button [data-test=user-onboarding-logout]",
+                  "transition": "button \"Logout\" [data-test=user-onboarding-logout]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:navigate-app",
+      "name": "Navigate the Application",
+      "description": "Use the collapsible side navigation drawer to move between main sections of the app.",
+      "section": "Navigation",
+      "related_nodes": ["/#sidenav-open", "/#sidenav-collapsed", "/"],
+      "scenarios": [
+        {
+          "id": "scen:expand-sidenav-and-navigate",
+          "name": "Open the side nav and navigate to a section",
+          "preconditions": [
+            "User is authenticated",
+            "Side navigation is in collapsed or icon-only state"
+          ],
+          "expected_outcome": "Side nav expands showing user avatar, full name, @username, and balance; clicking a nav item navigates to the target section",
+          "paths": [
+            {
+              "id": "path:47",
+              "steps": [
+                {
+                  "state": "/",
+                  "action": "Toggle side nav [data-test=sidenav-toggle]",
+                  "transition": "icon button [data-test=sidenav-toggle]"
+                },
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Click 'Bank Accounts' nav item [data-test=sidenav-bankaccounts]",
+                  "transition": "link \"Bank Accounts\" [data-test=sidenav-bankaccounts]"
+                }
+              ]
+            },
+            {
+              "id": "path:48",
+              "steps": [
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Click 'Home' nav item [data-test=sidenav-home]",
+                  "transition": "link \"Home\" [data-test=sidenav-home]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:collapse-sidenav",
+          "name": "Collapse the side nav to icon-only mode",
+          "preconditions": [
+            "User is authenticated",
+            "Side navigation is currently expanded (desktop viewport)"
+          ],
+          "expected_outcome": "Nav drawer collapses to icon-width; labels are hidden; toggle button is still visible",
+          "paths": [
+            {
+              "id": "path:49",
+              "steps": [
+                {
+                  "state": "/#sidenav-open",
+                  "action": "Toggle drawer closed [data-test=sidenav-toggle]",
+                  "transition": "icon button [data-test=sidenav-toggle]"
+                }
+              ]
+            },
+            {
+              "id": "path:50",
+              "steps": [
+                {
+                  "state": "/#sidenav-collapsed",
+                  "action": "Toggle drawer open [data-test=sidenav-toggle]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:graphql-playground",
+      "name": "GraphQL API Playground",
+      "description": "Execute GraphQL queries against the backend API via the dev-only Express playground route.",
+      "section": "Developer",
+      "related_nodes": ["/graphql-playground"],
+      "scenarios": [
+        {
+          "id": "scen:execute-graphql-query",
+          "name": "Execute a GraphQL query or mutation in the playground",
+          "preconditions": [
+            "User is authenticated (session required per auth_zones)",
+            "Application is running in a local/development environment",
+            "User navigates directly to /graphql-playground"
+          ],
+          "expected_outcome": "GraphQL Playground UI is displayed; queries can be composed and executed against the API",
+          "paths": [
+            {
+              "id": "path:51",
+              "steps": [
+                {
+                  "state": "/graphql-playground",
+                  "action": "Execute GraphQL queries against the API",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

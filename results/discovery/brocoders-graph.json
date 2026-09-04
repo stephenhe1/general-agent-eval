@@ -1,0 +1,626 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Extensive React Boilerplate (Next.js 16 Admin Panel)",
+    "base_url": "http://localhost:3002",
+    "total_states": 16,
+    "explored": 16,
+    "skipped": 0,
+    "verified_live": [
+      "/{language}",
+      "/{language}/sign-in",
+      "/{language}/sign-up",
+      "/{language}/forgot-password",
+      "/{language}/privacy-policy",
+      "/{language}/profile",
+      "/{language}/admin-panel",
+      "/{language}/admin-panel/users",
+      "/{language}/admin-panel/users/create",
+      "/{language}/password-change",
+      "/{language}/confirm-email",
+      "/{language}/confirm-new-email",
+      "/{language}/admin-panel/users/edit/[id]"
+    ],
+    "notes": "All routes use a /{language}/ prefix (en|ar|es|fr|hi|uk|zh). App bar and sidebar are shared across all states. Social auth (Google, Facebook) is enabled per .env.local. IS_SIGN_UP_ENABLED=true."
+  },
+  "nodes": [
+    {
+      "id": "/{language}",
+      "route": "/{language}",
+      "label": "Home page with app description and Privacy Policy link",
+      "section": "Public",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Privacy Policy' link [data-testid=home-title sibling]",
+        "Click brand link in app-bar to reload home",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]",
+        "Open sidebar on mobile [SidebarTrigger aria-label='open navigation menu']",
+        "Click 'Sign In' in sidebar footer [when unauthenticated]",
+        "Click 'Sign Up' in sidebar footer [when unauthenticated, IS_SIGN_UP_ENABLED]",
+        "Click 'Profile' in sidebar user menu [when authenticated]",
+        "Click 'Logout' in sidebar user menu [when authenticated]",
+        "Click 'Users' sidebar link [when authenticated as admin]"
+      ],
+      "notes": "Public page. Shows title [data-testid=home-title] and description with docs link."
+    },
+    {
+      "id": "/{language}/sign-in",
+      "route": "/{language}/sign-in",
+      "label": "Sign In form with email, password, social auth options",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter email [data-testid=email]",
+        "Enter password [data-testid=password]",
+        "Submit sign-in form [data-testid=sign-in-submit]",
+        "Click 'Forgot Password' link [data-testid=forgot-password]",
+        "Click 'Create Account' button [data-testid=create-account]",
+        "Click 'Sign in with Google' [GoogleAuth button, if enabled]",
+        "Click 'Sign in with Facebook' [FacebookAuth button, if enabled]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredGuest: redirects to /{language} if already authenticated. Supports ?returnTo param."
+    },
+    {
+      "id": "/{language}/sign-up",
+      "route": "/{language}/sign-up",
+      "label": "Sign Up form with name, email, password, policy checkbox",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter first name [data-testid=first-name]",
+        "Enter last name [data-testid=last-name]",
+        "Enter email [data-testid=email]",
+        "Enter password [data-testid=password]",
+        "Check privacy policy checkbox [data-testid=privacy]",
+        "Click Privacy Policy link in checkbox label",
+        "Submit sign-up form [data-testid=sign-up-submit]",
+        "Click 'Already have an account?' / login button [data-testid=login]",
+        "Click 'Sign in with Google' [GoogleAuth button, if enabled]",
+        "Click 'Sign in with Facebook' [FacebookAuth button, if enabled]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredGuest. IS_SIGN_UP_ENABLED must be true to reach this page via UI."
+    },
+    {
+      "id": "/{language}/forgot-password",
+      "route": "/{language}/forgot-password",
+      "label": "Forgot Password form; sends reset email",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter email [data-testid=email]",
+        "Submit forgot-password form [data-testid=send-email]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredGuest. On success shows success snackbar (stays on page)."
+    },
+    {
+      "id": "/{language}/password-change",
+      "route": "/{language}/password-change?hash=...&expires=...",
+      "label": "Set new password form (from email reset link); shows expiry alert if expired",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Enter new password [data-testid=password]",
+        "Enter password confirmation [data-testid=password-confirmation]",
+        "Submit password change [data-testid=set-password]",
+        "View expired-link alert if token expired [data-testid=reset-link-expired-alert]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredGuest. Requires ?hash=... and ?expires=... query params. On success redirects to /sign-in."
+    },
+    {
+      "id": "/{language}/confirm-email",
+      "route": "/{language}/confirm-email?hash=...",
+      "label": "Email confirmation handler — spinner while confirming, then redirects",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "No user actions — auto-processes ?hash= param on mount"
+      ],
+      "notes": "Shows spinner. On success redirects to /profile; on failure redirects to /."
+    },
+    {
+      "id": "/{language}/confirm-new-email",
+      "route": "/{language}/confirm-new-email?hash=...",
+      "label": "New email confirmation handler — spinner while confirming, then redirects",
+      "section": "Authentication",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "No user actions — auto-processes ?hash= param on mount"
+      ],
+      "notes": "Shows spinner. On success: if auth -> /profile, else /. On failure -> /."
+    },
+    {
+      "id": "/{language}/privacy-policy",
+      "route": "/{language}/privacy-policy",
+      "label": "Full privacy policy document (server-rendered, i18n)",
+      "section": "Legal",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Click external email link [boilerplates@brocoders.com]",
+        "Click external website link [bcboilerplates.com]",
+        "Click external GitHub discussions links",
+        "Click external Discord link",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "Public, server-rendered. No user-actionable in-app controls. data-testid=privacy-policy-title."
+    },
+    {
+      "id": "/{language}/profile",
+      "route": "/{language}/profile",
+      "label": "View own profile: avatar, name, email, edit button",
+      "section": "User Profile",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "View user avatar [data-testid=user-icon]",
+        "View user name [data-testid=user-name]",
+        "View user email [data-testid=user-email]",
+        "Click 'Edit Profile' button [data-testid=edit-profile]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]",
+        "Click 'Home' sidebar link",
+        "Click 'Users' sidebar link [admin only]",
+        "Click 'Profile' in profile dropdown [data-testid=user-profile]",
+        "Click 'Logout' [data-testid=logout-menu-item]"
+      ],
+      "notes": "withPageRequiredAuth (any role). Redirects to /sign-in?returnTo=... if unauthenticated."
+    },
+    {
+      "id": "/{language}/profile/edit",
+      "route": "/{language}/profile/edit",
+      "label": "Edit profile: basic info form + change-email form + change-password form",
+      "section": "User Profile",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Upload/change avatar photo [data-testid=photo]",
+        "Edit first name [data-testid=first-name]",
+        "Edit last name [data-testid=last-name]",
+        "Save basic info [data-testid=save-profile]",
+        "Cancel basic info edit [data-testid=cancel-edit-profile]",
+        "Enter new email [data-testid=email]",
+        "Confirm new email [data-testid=email-confirmation]",
+        "Save email change [data-testid=save-email]",
+        "Cancel email change [data-testid=cancel-edit-email]",
+        "Enter old password [data-testid=old-password]",
+        "Enter new password [data-testid=new-password]",
+        "Confirm new password [data-testid=password-confirmation]",
+        "Save password change [data-testid=save-password]",
+        "Cancel password change [data-testid=cancel-edit-password]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredAuth. Email/password forms only visible for provider=EMAIL users. Has leave-page guard."
+    },
+    {
+      "id": "/{language}/admin-panel",
+      "route": "/{language}/admin-panel",
+      "label": "Admin dashboard home with title and description",
+      "section": "Admin Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Click 'Users' sidebar link [admin nav]",
+        "Click 'Home' sidebar link",
+        "Click 'Profile' in profile dropdown [data-testid=user-profile]",
+        "Click 'Logout' [data-testid=logout-menu-item]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredAuth roles=[ADMIN]. Non-admins redirect to /{language}."
+    },
+    {
+      "id": "/{language}/admin-panel/users",
+      "route": "/{language}/admin-panel/users",
+      "label": "Virtualized user list table with sort, filter button, create button, per-row edit/delete",
+      "section": "Admin Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Sort by ID column [button in TableHead 'ID']",
+        "Sort by Email column [button in TableHead 'Email']",
+        "Open filter popover [button 'Filter' data-testid=roles sibling]",
+        "Click 'Create' / Add User button [Link href=/admin-panel/users/create]",
+        "Click 'Edit' button for a user row [Link href=/admin-panel/users/edit/{id}]",
+        "Open row actions dropdown [button aria-label='more actions']",
+        "Click 'Delete' from row actions dropdown [DropdownMenuItem 'Delete']",
+        "Scroll to load more users [infinite scroll via TableVirtuoso]",
+        "Click 'Home' sidebar link",
+        "Click 'Profile' in profile dropdown [data-testid=user-profile]",
+        "Click 'Logout' [data-testid=logout-menu-item]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredAuth roles=[ADMIN]. Supports ?filter= and ?sort= search params."
+    },
+    {
+      "id": "/{language}/admin-panel/users#filter-popover",
+      "route": "/{language}/admin-panel/users",
+      "label": "Users list with Filter popover open — role multi-select + apply button",
+      "section": "Admin Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Select roles in multi-select [data-testid=roles]",
+        "Apply filter [button 'Apply' in popover form]",
+        "Close popover by clicking outside [Popover onOpenChange]"
+      ],
+      "notes": "Popover state over /admin-panel/users. Applying updates ?filter= search param."
+    },
+    {
+      "id": "/{language}/admin-panel/users#delete-confirm-dialog",
+      "route": "/{language}/admin-panel/users",
+      "label": "Delete User confirmation AlertDialog over users list",
+      "section": "Admin Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Confirm delete [AlertDialogAction button 'Yes']",
+        "Cancel delete [AlertDialogCancel button 'No']"
+      ],
+      "notes": "AlertDialog triggered by 'Delete' row action. Uses ConfirmDialogProvider globally."
+    },
+    {
+      "id": "/{language}/admin-panel/users/create",
+      "route": "/{language}/admin-panel/users/create",
+      "label": "Create new user form: email, password, name, role, avatar",
+      "section": "Admin Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Upload avatar photo [data-testid=photo]",
+        "Enter email [data-testid=new-user-email]",
+        "Enter password [data-testid=new-user-password]",
+        "Enter password confirmation [data-testid=new-user-password-confirmation]",
+        "Enter first name [data-testid=first-name]",
+        "Enter last name [data-testid=last-name]",
+        "Select role [data-testid=role]",
+        "Submit create user form [button 'Save']",
+        "Cancel and go back [Link href=/admin-panel/users]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredAuth (no role restriction on HOC, but reachable only via admin UI). Has leave-page guard."
+    },
+    {
+      "id": "/{language}/admin-panel/users/edit/[id]",
+      "route": "/{language}/admin-panel/users/edit/[id]",
+      "label": "Edit user: info form (avatar, email, name, role) + change-password form",
+      "section": "Admin Panel",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:main",
+      "actions": [
+        "Upload avatar photo [data-testid=photo]",
+        "Edit email [data-testid=email]",
+        "Edit first name [data-testid=first-name]",
+        "Edit last name [data-testid=last-name]",
+        "Select role [data-testid=role]",
+        "Submit user info form [button 'Save']",
+        "Cancel user info edit [Link href=/admin-panel/users]",
+        "Enter new password for user [FormTextInput name=password]",
+        "Enter password confirmation [FormTextInput name=passwordConfirmation]",
+        "Submit password change form [button 'Save']",
+        "Cancel password change [Link href=/admin-panel/users]",
+        "Toggle theme [ThemeSwitchButton in app-bar]",
+        "Change language [LanguageSwitcher select in app-bar]"
+      ],
+      "notes": "withPageRequiredAuth. Two independent forms on the same page. Has leave-page guard."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/{language}",
+      "to": "/{language}/privacy-policy",
+      "trigger": "link 'Privacy Policy' at bottom of home content"
+    },
+    {
+      "from": "/{language}",
+      "to": "/{language}/sign-in",
+      "trigger": "link 'Sign In' in sidebar footer",
+      "guard": "user is not authenticated"
+    },
+    {
+      "from": "/{language}",
+      "to": "/{language}/sign-up",
+      "trigger": "link 'Sign Up' in sidebar footer",
+      "guard": "user is not authenticated AND IS_SIGN_UP_ENABLED=true"
+    },
+    {
+      "from": "/{language}",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "link 'Users' in sidebar nav",
+      "guard": "user role is ADMIN"
+    },
+    {
+      "from": "/{language}",
+      "to": "/{language}/profile",
+      "trigger": "DropdownMenuItem 'Profile' [data-testid=user-profile] in sidebar user menu",
+      "guard": "user is authenticated"
+    },
+    {
+      "from": "/{language}/sign-in",
+      "to": "/{language}/forgot-password",
+      "trigger": "link 'Forgot Password' [data-testid=forgot-password]"
+    },
+    {
+      "from": "/{language}/sign-in",
+      "to": "/{language}/sign-up",
+      "trigger": "button 'Create Account' [data-testid=create-account]",
+      "guard": "IS_SIGN_UP_ENABLED=true"
+    },
+    {
+      "from": "/{language}/sign-in",
+      "to": "/{language}",
+      "trigger": "auto: redirect on successful login (or already authenticated)",
+      "guard": "returnTo param absent; falls back to /{language}"
+    },
+    {
+      "from": "/{language}/sign-up",
+      "to": "/{language}/sign-in",
+      "trigger": "button 'Already have an account?' [data-testid=login]"
+    },
+    {
+      "from": "/{language}/sign-up",
+      "to": "/{language}/privacy-policy",
+      "trigger": "link 'Privacy Policy' inside policy checkbox label"
+    },
+    {
+      "from": "/{language}/sign-up",
+      "to": "/{language}",
+      "trigger": "auto: redirect on successful sign-up + login"
+    },
+    {
+      "from": "/{language}/forgot-password",
+      "to": "/{language}/forgot-password",
+      "trigger": "submit form [data-testid=send-email] — success: stays on page with toast"
+    },
+    {
+      "from": "/{language}/password-change",
+      "to": "/{language}/sign-in",
+      "trigger": "auto: redirect after successful password reset"
+    },
+    {
+      "from": "/{language}/confirm-email",
+      "to": "/{language}/profile",
+      "trigger": "auto: redirect on successful email confirmation (HTTP 204)"
+    },
+    {
+      "from": "/{language}/confirm-email",
+      "to": "/{language}",
+      "trigger": "auto: redirect on failed email confirmation"
+    },
+    {
+      "from": "/{language}/confirm-new-email",
+      "to": "/{language}/profile",
+      "trigger": "auto: redirect on success when user is authenticated"
+    },
+    {
+      "from": "/{language}/confirm-new-email",
+      "to": "/{language}",
+      "trigger": "auto: redirect on success (unauthenticated) or failure"
+    },
+    {
+      "from": "/{language}/profile",
+      "to": "/{language}/profile/edit",
+      "trigger": "button 'Edit Profile' [data-testid=edit-profile]"
+    },
+    {
+      "from": "/{language}/profile",
+      "to": "/{language}",
+      "trigger": "link 'Home' in sidebar nav"
+    },
+    {
+      "from": "/{language}/profile",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "link 'Users' in sidebar nav",
+      "guard": "user role is ADMIN"
+    },
+    {
+      "from": "/{language}/profile",
+      "to": "/{language}/sign-in",
+      "trigger": "DropdownMenuItem 'Logout' [data-testid=logout-menu-item] — triggers logOut()"
+    },
+    {
+      "from": "/{language}/profile/edit",
+      "to": "/{language}/profile",
+      "trigger": "button 'Cancel' [data-testid=cancel-edit-profile] OR [data-testid=cancel-edit-email] OR [data-testid=cancel-edit-password]"
+    },
+    {
+      "from": "/{language}/profile/edit",
+      "to": "/{language}",
+      "trigger": "link 'Home' in sidebar nav"
+    },
+    {
+      "from": "/{language}/admin-panel",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "link 'Users' in sidebar nav"
+    },
+    {
+      "from": "/{language}/admin-panel",
+      "to": "/{language}",
+      "trigger": "link 'Home' in sidebar nav"
+    },
+    {
+      "from": "/{language}/admin-panel/users",
+      "to": "/{language}/admin-panel/users/create",
+      "trigger": "button 'Create' [Link href=/admin-panel/users/create, bg-success style]"
+    },
+    {
+      "from": "/{language}/admin-panel/users",
+      "to": "/{language}/admin-panel/users/edit/[id]",
+      "trigger": "button 'Edit' [Link href=/admin-panel/users/edit/{id}] in each row"
+    },
+    {
+      "from": "/{language}/admin-panel/users",
+      "to": "/{language}/admin-panel/users#filter-popover",
+      "trigger": "button 'Filter' [PopoverTrigger in UserFilter]"
+    },
+    {
+      "from": "/{language}/admin-panel/users#filter-popover",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "button 'Apply' inside filter popover form"
+    },
+    {
+      "from": "/{language}/admin-panel/users#filter-popover",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "click outside popover [Popover onOpenChange]"
+    },
+    {
+      "from": "/{language}/admin-panel/users",
+      "to": "/{language}/admin-panel/users#delete-confirm-dialog",
+      "trigger": "DropdownMenuItem 'Delete' [variant=destructive] in row actions menu",
+      "guard": "user.id !== authUser.id (cannot self-delete)"
+    },
+    {
+      "from": "/{language}/admin-panel/users#delete-confirm-dialog",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "AlertDialogAction 'Yes' (confirms deletion) OR AlertDialogCancel 'No'"
+    },
+    {
+      "from": "/{language}/admin-panel/users",
+      "to": "/{language}",
+      "trigger": "link 'Home' in sidebar nav"
+    },
+    {
+      "from": "/{language}/admin-panel/users/create",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "button 'Cancel' [Link href=/admin-panel/users] OR auto-redirect on successful create"
+    },
+    {
+      "from": "/{language}/admin-panel/users/edit/[id]",
+      "to": "/{language}/admin-panel/users",
+      "trigger": "button 'Cancel' [Link href=/admin-panel/users] in either form"
+    },
+    {
+      "from": "/{language}/admin-panel/users/edit/[id]",
+      "to": "/{language}",
+      "trigger": "link 'Home' in sidebar nav"
+    },
+    {
+      "from": "/{language}/admin-panel/users/create",
+      "to": "/{language}",
+      "trigger": "link 'Home' in sidebar nav"
+    },
+    {
+      "from": "/{language}/profile/edit",
+      "to": "/{language}/sign-in",
+      "trigger": "auto: redirect if unauthenticated [withPageRequiredAuth guard]"
+    },
+    {
+      "from": "/{language}/admin-panel/users",
+      "to": "/{language}/sign-in",
+      "trigger": "auto: redirect on 401 or if unauthenticated [withPageRequiredAuth guard]"
+    },
+    {
+      "from": "/{language}/profile",
+      "to": "/{language}/sign-in",
+      "trigger": "auto: redirect if unauthenticated [withPageRequiredAuth guard]"
+    },
+    {
+      "from": "/{language}/admin-panel",
+      "to": "/{language}",
+      "trigger": "auto: redirect if authenticated but not ADMIN role [withPageRequiredAuth guard]"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Publicly accessible pages (no auth required)",
+        "node_ids": [
+          "/{language}",
+          "/{language}/privacy-policy",
+          "/{language}/confirm-email",
+          "/{language}/confirm-new-email"
+        ]
+      },
+      {
+        "id": "zone:guest-only",
+        "label": "Pages only accessible when NOT authenticated (withPageRequiredGuest)",
+        "node_ids": [
+          "/{language}/sign-in",
+          "/{language}/sign-up",
+          "/{language}/forgot-password",
+          "/{language}/password-change"
+        ]
+      },
+      {
+        "id": "zone:authenticated",
+        "label": "Pages requiring authentication (any role)",
+        "node_ids": [
+          "/{language}/profile",
+          "/{language}/profile/edit"
+        ]
+      },
+      {
+        "id": "zone:admin",
+        "label": "Pages requiring ADMIN role",
+        "node_ids": [
+          "/{language}/admin-panel",
+          "/{language}/admin-panel/users",
+          "/{language}/admin-panel/users#filter-popover",
+          "/{language}/admin-panel/users#delete-confirm-dialog",
+          "/{language}/admin-panel/users/create",
+          "/{language}/admin-panel/users/edit/[id]"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:main",
+        "label": "Shared shell: sticky app-bar (brand link, theme toggle, language switcher, mobile sidebar trigger) + collapsible sidebar (nav links, user profile dropdown) + SidebarInset content area",
+        "node_ids": [
+          "/{language}",
+          "/{language}/sign-in",
+          "/{language}/sign-up",
+          "/{language}/forgot-password",
+          "/{language}/password-change",
+          "/{language}/confirm-email",
+          "/{language}/confirm-new-email",
+          "/{language}/privacy-policy",
+          "/{language}/profile",
+          "/{language}/profile/edit",
+          "/{language}/admin-panel",
+          "/{language}/admin-panel/users",
+          "/{language}/admin-panel/users#filter-popover",
+          "/{language}/admin-panel/users#delete-confirm-dialog",
+          "/{language}/admin-panel/users/create",
+          "/{language}/admin-panel/users/edit/[id]"
+        ]
+      }
+    ]
+  }
+}

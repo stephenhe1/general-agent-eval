@@ -1,0 +1,2539 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Actual Budget",
+    "total_states": 108,
+    "explored": 108,
+    "skipped": 0,
+    "verified_live": [
+      "/login", "/bootstrap", "/budget", "/settings", "/accounts",
+      "/reports", "/schedules", "/payees", "/rules", "/tags",
+      "/bank-sync", "/user-directory", "/user-access",
+      "/reports/net-worth", "/reports/cash-flow", "/config-server",
+      "/change-password", "/gocardless/link"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "/bootstrap",
+      "route": "/bootstrap",
+      "label": "Server setup — create first password or try demo",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [
+        "Set password via ConfirmPasswordForm",
+        "Try Demo button [bare button]",
+        "Submit password [primary button 'OK']"
+      ],
+      "notes": "Shown when server has never been bootstrapped"
+    },
+    {
+      "id": "/login",
+      "route": "/login",
+      "label": "Sign in to Actual instance (password, OpenID, or header)",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [
+        "Enter password and click 'Sign in' [primary button]",
+        "Sign in with OpenID [primary button]",
+        "Select login method [bare button 'Select the login method']",
+        "Review OpenID configuration [bare button]"
+      ],
+      "notes": "Supports password, openid, and header auth methods"
+    },
+    {
+      "id": "/login#openid-review",
+      "route": "/login",
+      "label": "Login — OpenID configuration review sub-state",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [
+        "Submit OpenID config [button 'OK']",
+        "Cancel OpenID review [bare button 'Cancel']"
+      ],
+      "notes": "Visible only during first-login OpenID review flow"
+    },
+    {
+      "id": "/openid-cb",
+      "route": "/openid-cb",
+      "label": "OpenID OAuth callback handler",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [],
+      "notes": "Processes OAuth response; auto-redirects to / on success"
+    },
+    {
+      "id": "/error",
+      "route": "/error",
+      "label": "Auth/setup error page",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [],
+      "notes": "Shown when bootstrap or login produces an unrecoverable error"
+    },
+    {
+      "id": "/config-server",
+      "route": "/config-server",
+      "label": "Configure server URL or local server port",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [
+        "Enter server URL and click 'OK' [primary button]",
+        "Use current domain [bare button]",
+        "Don't use a server [bare button]",
+        "Use an external server [bare button] (Electron, no current URL)",
+        "Start/Save internal server [primary button] (Electron)",
+        "Cancel [bare button] (when URL already set)"
+      ],
+      "notes": "Two sub-views: internal (Electron) and external server config"
+    },
+    {
+      "id": "/change-password",
+      "route": "/change-password",
+      "label": "Change server password",
+      "section": "management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:management",
+      "actions": [
+        "Enter new password (two fields) and submit [primary button 'OK']"
+      ],
+      "notes": "Signs existing sessions out; requires current session auth"
+    },
+    {
+      "id": "/#welcome",
+      "route": "/",
+      "label": "Welcome screen — first-time user, no budget files yet",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [
+        "Import my budget [button]",
+        "View demo [button]",
+        "Start fresh [primary button]"
+      ],
+      "notes": "Shown when authenticated but no budget files exist"
+    },
+    {
+      "id": "/#file-list",
+      "route": "/",
+      "label": "Budget file selection — list of local and remote budgets",
+      "section": "management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:management",
+      "actions": [
+        "Select a budget file [list item click]",
+        "Import file [bare button]",
+        "Create new file [primary button]",
+        "Open file menu (delete/duplicate) [button 'Menu' aria-label]",
+        "Refresh file list [button aria-label='Refresh'] (online only)",
+        "Open files settings [button aria-label='Settings'] (Electron only)",
+        "Create test file [primary button] (dev only)"
+      ],
+      "notes": "Each file shows sync state, owner (multiuser), and encryption icon"
+    },
+    {
+      "id": "/user-directory#management",
+      "route": "/user-directory",
+      "label": "User Directory in management context (admin only)",
+      "section": "management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:management",
+      "actions": [
+        "Edit user [row action]",
+        "Back to file list [button 'Back to file list']"
+      ],
+      "notes": "Accessible from management app when multiuser mode is enabled"
+    },
+    {
+      "id": "/#file-list#modal:import",
+      "route": "/",
+      "label": "Import modal — choose import format",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": [
+        "Import from YNAB4 [button]",
+        "Import from YNAB5 / nYNAB [button]",
+        "Import from Actual [button]",
+        "Close modal [×]"
+      ],
+      "notes": "Opens sub-modals for each import format"
+    },
+    {
+      "id": "/#file-list#modal:import-ynab4",
+      "route": "/",
+      "label": "Import YNAB4 budget file",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": ["Select YNAB4 file [file picker]", "Close modal [×]"],
+      "notes": "Accepts .zip exported from YNAB 4"
+    },
+    {
+      "id": "/#file-list#modal:import-ynab5",
+      "route": "/",
+      "label": "Import YNAB5 / nYNAB budget file",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": ["Select YNAB5 JSON file [file picker]", "Close modal [×]"],
+      "notes": "Accepts JSON exported from YNAB 5 (nYNAB)"
+    },
+    {
+      "id": "/#file-list#modal:import-actual",
+      "route": "/",
+      "label": "Import Actual budget file (.zip)",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": ["Select Actual .zip file [file picker]", "Close modal [×]"],
+      "notes": "Re-imports a previously exported Actual budget"
+    },
+    {
+      "id": "/#file-list#modal:delete-budget",
+      "route": "/",
+      "label": "Confirm delete budget file",
+      "section": "management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:management",
+      "actions": [
+        "Confirm delete [primary button 'Delete']",
+        "Cancel [bare button]"
+      ],
+      "notes": "Triggered from file list three-dot menu"
+    },
+    {
+      "id": "/#file-list#modal:duplicate-budget",
+      "route": "/",
+      "label": "Duplicate budget file",
+      "section": "management",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:management",
+      "actions": [
+        "Confirm duplicate [primary button 'Duplicate']",
+        "Cancel [bare button]"
+      ],
+      "notes": "Local files only; not available for remote-only files"
+    },
+    {
+      "id": "/#file-list#modal:files-settings",
+      "route": "/",
+      "label": "Files settings modal (Electron only)",
+      "section": "management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:management",
+      "actions": ["Change documents directory [button]", "Close modal [×]"],
+      "notes": "Only shown in Electron app via Settings icon in file list header"
+    },
+    {
+      "id": "/budget",
+      "route": "/budget",
+      "label": "Budget page — envelope or tracking view for current month",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Navigate months with < > arrows [MonthPicker]",
+        "Click category budget cell to edit amount",
+        "Click category balance to open balance menu",
+        "Add new category group [button 'Add Group']",
+        "Add new category within a group [button '+']",
+        "Toggle summary collapsed/expanded [budget summary header]",
+        "Open budget page menu [button '...'] (mobile)",
+        "Open month actions menu [month header click]",
+        "Filter transactions [search]"
+      ],
+      "notes": "budgetType pref determines envelope vs tracking rendering"
+    },
+    {
+      "id": "/budget#tracking",
+      "route": "/budget",
+      "label": "Budget page — tracking budget type variant",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Navigate months with < > arrows",
+        "Click category budget cell to edit",
+        "Click category balance to open tracking balance menu",
+        "Open tracking budget summary [balance header]",
+        "Toggle summary collapsed/expanded"
+      ],
+      "notes": "Same URL as envelope budget; distinct via budgetType preference"
+    },
+    {
+      "id": "/budget#modal:new-category",
+      "route": "/budget",
+      "label": "New Category modal",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter category name [input]",
+        "Submit [primary button 'Add']",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:new-category-group",
+      "route": "/budget",
+      "label": "New Category Group modal",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter group name [input]",
+        "Toggle income group [checkbox]",
+        "Submit [primary button 'Add']",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:goal-templates",
+      "route": "/budget",
+      "label": "Goal Templates editor (experimental feature)",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit template text [input]",
+        "Save template [button]",
+        "Close modal [×]"
+      ],
+      "notes": "Requires goalTemplatesEnabled feature flag"
+    },
+    {
+      "id": "/budget#modal:category-automations-edit",
+      "route": "/budget",
+      "label": "Budget Automations edit modal",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add automation rule [button]",
+        "Remove automation [button]",
+        "Save [primary button]",
+        "Close modal [×]"
+      ],
+      "notes": "Requires goalTemplatesUIEnabled feature flag"
+    },
+    {
+      "id": "/budget#modal:envelope-budget-summary",
+      "route": "/budget",
+      "label": "Envelope Budget Summary modal — monthly totals overview",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Click 'To Budget' value to open to-budget menu",
+        "Close modal [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:tracking-budget-summary",
+      "route": "/budget",
+      "label": "Tracking Budget Summary modal",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Close modal [×]"],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:envelope-budget-menu",
+      "route": "/budget",
+      "label": "Envelope budget cell menu — fill, copy, reset options",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Budget remaining from last month",
+        "Set budgeted to last month",
+        "Set budgeted to average",
+        "Copy last month budget",
+        "Reset budget to zero",
+        "Close [dismiss]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:tracking-budget-menu",
+      "route": "/budget",
+      "label": "Tracking budget cell menu",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Budget from last month", "Average", "Close [dismiss]"],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:envelope-balance-menu",
+      "route": "/budget",
+      "label": "Envelope balance cell menu — transfer, cover, rollover",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Transfer to another category [button]",
+        "Cover overspending [button]",
+        "Toggle rollover [button]",
+        "Close [dismiss]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:tracking-balance-menu",
+      "route": "/budget",
+      "label": "Tracking balance cell menu",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Close [dismiss]"],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:cover",
+      "route": "/budget",
+      "label": "Cover overspending modal — pull from another category",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select source category [autocomplete]",
+        "Confirm cover [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:transfer",
+      "route": "/budget",
+      "label": "Transfer between categories modal",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter amount [input]",
+        "Select destination category [autocomplete]",
+        "Transfer [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:hold-buffer",
+      "route": "/budget",
+      "label": "Hold Buffer modal — set aside amount for future",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter amount to hold [input]",
+        "Confirm [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": "Envelope budget only"
+    },
+    {
+      "id": "/budget#modal:category-menu",
+      "route": "/budget",
+      "label": "Category row context menu (mobile)",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Rename category",
+        "Delete category",
+        "Toggle hidden",
+        "Add goal template",
+        "Close [dismiss]"
+      ],
+      "notes": "Mobile-only modal; desktop uses inline editing"
+    },
+    {
+      "id": "/budget#modal:category-group-menu",
+      "route": "/budget",
+      "label": "Category Group context menu (mobile)",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Rename group",
+        "Delete group",
+        "Toggle hidden",
+        "Add new category",
+        "Close [dismiss]"
+      ],
+      "notes": "Mobile-only modal"
+    },
+    {
+      "id": "/budget#modal:notes",
+      "route": "/budget",
+      "label": "Notes modal for a category or category group",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit notes text [textarea]",
+        "Save [primary button]",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:budget-page-menu",
+      "route": "/budget",
+      "label": "Budget page menu (mobile) — month navigation options",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Cover overspending",
+        "Transfer category funds",
+        "Hold for next month",
+        "Reset next month's budget",
+        "Close [dismiss]"
+      ],
+      "notes": "Mobile only, shown via '...' button on budget page"
+    },
+    {
+      "id": "/budget#modal:envelope-budget-month-menu",
+      "route": "/budget",
+      "label": "Envelope budget month header menu",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Budget all remaining",
+        "Copy last month budget",
+        "Reset all budgets",
+        "Hold buffer",
+        "Close [dismiss]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:tracking-budget-month-menu",
+      "route": "/budget",
+      "label": "Tracking budget month header menu",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Budget all remaining",
+        "Copy last month budgets",
+        "Close [dismiss]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/budget#modal:keyboard-shortcuts",
+      "route": "/budget",
+      "label": "Keyboard shortcuts help modal",
+      "section": "finance-app",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Close [×]"],
+      "notes": "Accessible from any finance page via ? hotkey"
+    },
+    {
+      "id": "/accounts",
+      "route": "/accounts",
+      "label": "All accounts — unified transaction list with net balance",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Search transactions [input 'Search transactions...']",
+        "Add account via sidebar [button 'Add account']",
+        "Import transactions [button 'Import']",
+        "Filter transactions [button 'Filter']",
+        "Sort transactions [menu 'Sort']",
+        "Toggle split rows [button]",
+        "Export transactions [menu item 'Export']",
+        "Toggle net worth chart [menu item]",
+        "Toggle cleared view [menu item]",
+        "Toggle reconciled view [menu item]"
+      ],
+      "notes": "Wide: Account component; narrow: AccountsPage component"
+    },
+    {
+      "id": "/accounts/:id",
+      "route": "/accounts/:id",
+      "label": "Individual account — transactions and balance for one account",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Search transactions [input]",
+        "Add transaction [button '+']",
+        "Import transactions [button 'Import']",
+        "Filter transactions [button 'Filter']",
+        "Sort transactions [menu 'Sort']",
+        "Sync account [button 'Sync'] (synced accounts only)",
+        "Reconcile [button 'Reconcile']",
+        "Close/reopen account [menu item]",
+        "Link/unlink sync account [menu item]",
+        "Export transactions [menu item 'Export']"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/accounts/:id#reconcile",
+      "route": "/accounts/:id",
+      "label": "Account reconciliation mode — enter statement balance",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter cleared balance [input]",
+        "Finish reconciling [primary button]",
+        "Cancel reconciliation [button]",
+        "Toggle cleared status on transactions [checkbox]"
+      ],
+      "notes": "Activated via 'Reconcile' button on account header"
+    },
+    {
+      "id": "/accounts#modal:import-transactions",
+      "route": "/accounts/:id",
+      "label": "Import Transactions modal — CSV, QFX/OFX, or QIF upload",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select file [file picker]",
+        "Map CSV columns [field selectors]",
+        "Set date format [selector]",
+        "Toggle duplicate detection [checkbox]",
+        "Import [primary button]",
+        "Close [×]"
+      ],
+      "notes": "Multi-step: file select → column mapping → import confirmation"
+    },
+    {
+      "id": "/accounts#modal:add-account",
+      "route": "/accounts",
+      "label": "Add Account modal — choose bank sync or local account",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add linked account (GoCardless/SimpleFin/etc.) [button]",
+        "Add local account [button]",
+        "Close [×]"
+      ],
+      "notes": "Triggered from sidebar 'Add account' or account list"
+    },
+    {
+      "id": "/accounts#modal:add-local-account",
+      "route": "/accounts",
+      "label": "Create Local Account modal — name, type, balance",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter account name [input]",
+        "Select account type [select]",
+        "Enter off-budget toggle [checkbox]",
+        "Enter opening balance [input]",
+        "Create [primary button]",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/accounts#modal:close-account",
+      "route": "/accounts/:id",
+      "label": "Close Account modal — confirm and transfer remaining balance",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select transfer account [autocomplete]",
+        "Close account [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/accounts#modal:account-menu",
+      "route": "/accounts/:id",
+      "label": "Account menu modal (mobile) — link, unlink, close options",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit account name",
+        "Link bank sync account",
+        "Unlink bank sync account",
+        "Close account",
+        "Reopen account",
+        "Close [dismiss]"
+      ],
+      "notes": "Mobile-only; desktop uses inline header menu"
+    },
+    {
+      "id": "/accounts#modal:schedule-link",
+      "route": "/accounts/:id",
+      "label": "Link transaction to existing schedule",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select schedule to link [list]",
+        "Link [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/accounts#modal:convert-to-schedule",
+      "route": "/accounts/:id",
+      "label": "Convert transaction to recurring schedule",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Review schedule details",
+        "Confirm [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/accounts#modal:scheduled-transaction-menu",
+      "route": "/accounts/:id",
+      "label": "Scheduled transaction action menu",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Post transaction now",
+        "Post as of today",
+        "Skip next occurrence",
+        "Edit schedule",
+        "Close [dismiss]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/accounts#modal:notes",
+      "route": "/accounts/:id",
+      "label": "Notes modal for an account",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Edit notes [textarea]", "Save [primary button]", "Close [×]"],
+      "notes": null
+    },
+    {
+      "id": "/accounts#modal:confirm-transaction-edit",
+      "route": "/accounts/:id",
+      "label": "Confirm edit of split or recurring transaction",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit this transaction only",
+        "Edit all future occurrences",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/transactions/:transactionId",
+      "route": "/transactions/:transactionId",
+      "label": "Transaction edit page (mobile only)",
+      "section": "accounts",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit date, payee, category, amount [fields]",
+        "Add split [button]",
+        "Delete transaction [button 'Delete']",
+        "Save [primary button]",
+        "Back [mobile back button]"
+      ],
+      "notes": "Wide viewport redirects to /budget; mobile-only route"
+    },
+    {
+      "id": "/reports",
+      "route": "/reports",
+      "label": "Reports root — redirects to first dashboard",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [],
+      "notes": "Auto-redirects; no user-visible UI unless no dashboards exist"
+    },
+    {
+      "id": "/reports/:dashboardId",
+      "route": "/reports/:dashboardId",
+      "label": "Reports Dashboard — customizable widget grid",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add widget [button '+' or 'Add widget']",
+        "Select dashboard [DashboardSelector dropdown]",
+        "Create new dashboard [button]",
+        "Rename/delete dashboard [header menu]",
+        "Drag to reorder widgets [drag handle]",
+        "Resize widget [resize handle]",
+        "Click widget to open full report",
+        "Copy widget to another dashboard [widget context menu]",
+        "Remove widget from dashboard [widget context menu]"
+      ],
+      "notes": "Dashboards are user-created; at least one always exists"
+    },
+    {
+      "id": "/reports/:dashboardId#modal:copy-widget-to-dashboard",
+      "route": "/reports/:dashboardId",
+      "label": "Copy widget to dashboard modal",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select target dashboard [list]",
+        "Copy [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/net-worth",
+      "route": "/reports/net-worth",
+      "label": "Net Worth report — assets vs liabilities over time",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select date range [DateRange selector]",
+        "Select accounts [AccountSelector]",
+        "Save report [button 'Save']",
+        "Save as new [button 'Save as...']",
+        "Delete saved report [button 'Delete']",
+        "Add to dashboard [button 'Add to dashboard']"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/crossover",
+      "route": "/reports/crossover",
+      "label": "Crossover report — income vs expenses intersection",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select date range [DateRange selector]",
+        "Save / Save as / Delete [report toolbar buttons]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/cash-flow",
+      "route": "/reports/cash-flow",
+      "label": "Cash Flow report — income and expense bars over time",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select date range [DateRange selector]",
+        "Filter accounts [AccountSelector]",
+        "Toggle income/expense view [ModeButton]",
+        "Save / Save as / Delete [report toolbar buttons]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/custom",
+      "route": "/reports/custom",
+      "label": "Custom Report — fully configurable chart with sidebar",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select graph type [ChooseGraph selector]",
+        "Select categories [CategorySelector]",
+        "Select date range [DateRange]",
+        "Select group-by dimension [ReportSidebar]",
+        "Toggle split by category/payee/account [ReportSidebar]",
+        "Save / Save as [SaveReport button]",
+        "Add to dashboard"
+      ],
+      "notes": "Most configurable report; formula mode needs feature flag"
+    },
+    {
+      "id": "/reports/spending",
+      "route": "/reports/spending",
+      "label": "Spending report — spending by category",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select date range",
+        "Select categories",
+        "Toggle average view [ModeButton]",
+        "Save / Save as / Delete"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/summary",
+      "route": "/reports/summary",
+      "label": "Summary report — income and expense totals",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select date range",
+        "Select categories / accounts",
+        "Save / Save as / Delete"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/calendar",
+      "route": "/reports/calendar",
+      "label": "Calendar report — daily transaction view by month",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Navigate months",
+        "Select categories",
+        "Save / Save as / Delete"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/reports/formula",
+      "route": "/reports/formula",
+      "label": "Formula report — Excel-style formula evaluation (experimental)",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter formula expression [input]",
+        "Evaluate [button]",
+        "Save / Save as / Delete"
+      ],
+      "notes": "Requires formulaMode feature flag"
+    },
+    {
+      "id": "/reports/age-of-money",
+      "route": "/reports/age-of-money",
+      "label": "Age of Money report (feature flag required)",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Select date range", "Save / Save as / Delete"],
+      "notes": "Requires ageOfMoneyReport feature flag to be enabled"
+    },
+    {
+      "id": "/reports/balance-forecast",
+      "route": "/reports/balance-forecast",
+      "label": "Balance Forecast report (feature flag required)",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select accounts",
+        "Adjust forecast parameters",
+        "Save / Save as / Delete"
+      ],
+      "notes": "Requires balanceForecastReport feature flag"
+    },
+    {
+      "id": "/reports/budget-analysis",
+      "route": "/reports/budget-analysis",
+      "label": "Budget Analysis report (feature flag required)",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Select date range", "Select categories", "Save / Save as"],
+      "notes": "Requires budgetAnalysisReport feature flag"
+    },
+    {
+      "id": "/reports/sankey",
+      "route": "/reports/sankey",
+      "label": "Sankey diagram report (feature flag required)",
+      "section": "reports",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Select date range", "Select accounts", "Save / Save as"],
+      "notes": "Requires sankeyReport feature flag"
+    },
+    {
+      "id": "/schedules",
+      "route": "/schedules",
+      "label": "Schedules list — recurring transaction rules",
+      "section": "schedules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Search schedules [input]",
+        "Add schedule [button 'Add schedule']",
+        "Discover schedules [button 'Find schedules']",
+        "Change upcoming length [button 'Upcoming length']",
+        "Edit schedule [row button]",
+        "Post transaction now [row action]",
+        "Post as of today [row action]",
+        "Skip next occurrence [row action]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/schedules#modal:schedule-edit",
+      "route": "/schedules",
+      "label": "Schedule edit modal — date, payee, amount, recurrence",
+      "section": "schedules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Set payee [autocomplete]",
+        "Set account [select]",
+        "Set amount [input]",
+        "Set recurrence rule [frequency/day selector]",
+        "Toggle auto-post [checkbox]",
+        "Save [primary button]",
+        "Delete schedule [button 'Delete']",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/schedules#modal:schedules-discover",
+      "route": "/schedules",
+      "label": "Discover schedules modal — detect recurring transactions",
+      "section": "schedules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select detected schedules to create [checkboxes]",
+        "Create schedules [primary button]",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/schedules#modal:schedules-upcoming-length",
+      "route": "/schedules",
+      "label": "Upcoming schedules length preference modal",
+      "section": "schedules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select preset or custom days [radio/input]",
+        "Save [primary button]",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/schedules#modal:schedule-posts-offline",
+      "route": "/schedules",
+      "label": "Schedule posts offline notification modal",
+      "section": "schedules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Dismiss [primary button]", "Close [×]"],
+      "notes": "Shown when posting a scheduled transaction while offline"
+    },
+    {
+      "id": "/schedules/:id",
+      "route": "/schedules/:id",
+      "label": "Schedule detail / edit page (mobile only)",
+      "section": "schedules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit schedule fields [form fields]",
+        "Save [primary button]",
+        "Back [mobile back button]"
+      ],
+      "notes": "Wide viewport unsupported; redirects to /budget on wide"
+    },
+    {
+      "id": "/payees",
+      "route": "/payees",
+      "label": "Manage Payees — list, merge, and clean up payees",
+      "section": "payees",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Search payees [input]",
+        "Select payees [checkboxes]",
+        "Merge selected payees [button 'Merge']",
+        "Delete selected payees [button 'Delete']",
+        "Manage rules for payee [button or row action]",
+        "Merge unused payees [button 'Cleanup payees']",
+        "View payee category learning [button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/payees#modal:confirm-payees-merge",
+      "route": "/payees",
+      "label": "Confirm payees merge modal",
+      "section": "payees",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Confirm merge [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/payees#modal:merge-unused-payees",
+      "route": "/payees",
+      "label": "Merge unused payees modal",
+      "section": "payees",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Confirm merge [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/payees#modal:payee-category-learning",
+      "route": "/payees",
+      "label": "Category learning settings for payee auto-categorization",
+      "section": "payees",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Toggle auto-categorization for each payee [checkboxes]",
+        "Save [primary button]",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/payees/:id",
+      "route": "/payees/:id",
+      "label": "Payee edit page (mobile only)",
+      "section": "payees",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit payee name [input]",
+        "Save [primary button]",
+        "Back [mobile back button]"
+      ],
+      "notes": "Wide viewport not supported; mobile only"
+    },
+    {
+      "id": "/rules",
+      "route": "/rules",
+      "label": "Manage Rules — auto-categorization and field assignment rules",
+      "section": "rules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Search rules [input]",
+        "Add rule [button 'Add rule']",
+        "Edit rule [row click or Edit button]",
+        "Delete rule [row delete button]",
+        "Select and bulk-delete rules [checkboxes + Delete button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/rules#modal:edit-rule",
+      "route": "/rules",
+      "label": "Edit Rule modal — conditions and actions for a rule",
+      "section": "rules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add condition [button '+']",
+        "Set condition field/op/value [selectors]",
+        "Add action [button '+']",
+        "Set action field/value [selectors]",
+        "Toggle 'run actions' order [selector]",
+        "Save [primary button]",
+        "Close [×]"
+      ],
+      "notes": "Also accessible from accounts page via transaction context menu"
+    },
+    {
+      "id": "/rules/:id",
+      "route": "/rules/:id",
+      "label": "Rule edit page (mobile only)",
+      "section": "rules",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit rule conditions and actions",
+        "Save [primary button]",
+        "Delete [button 'Delete']",
+        "Back [mobile back button]"
+      ],
+      "notes": "Wide viewport not supported; mobile only"
+    },
+    {
+      "id": "/bank-sync",
+      "route": "/bank-sync",
+      "label": "Bank Sync management — linked accounts and providers",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Link account to bank [button 'Link account']",
+        "Edit sync settings for account [button 'Edit']",
+        "Setup GoCardless [BuiltInProviders button]",
+        "Setup SimpleFin [BuiltInProviders button]",
+        "Setup PluggyAi [BuiltInProviders button]",
+        "Setup Akahu [BuiltInProviders button]",
+        "Setup EnableBanking [BuiltInProviders button] (feature flag)"
+      ],
+      "notes": "Server must be online; lists all accounts by sync source"
+    },
+    {
+      "id": "/bank-sync#modal:gocardless-init",
+      "route": "/bank-sync",
+      "label": "GoCardless initialisation modal — enter API credentials",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter Secret ID and Secret Key [inputs]",
+        "Save [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/bank-sync#modal:gocardless-external-msg",
+      "route": "/bank-sync",
+      "label": "GoCardless external auth message modal",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Continue (waits for callback)", "Close [×]"],
+      "notes": "Polls for OAuth completion; closed on callback"
+    },
+    {
+      "id": "/bank-sync#modal:simplefin-init",
+      "route": "/bank-sync",
+      "label": "SimpleFin initialisation modal — setup access token",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter SimpleFin access token [input]",
+        "Save [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/bank-sync#modal:pluggyai-init",
+      "route": "/bank-sync",
+      "label": "PluggyAi initialisation modal",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter API credentials [inputs]",
+        "Save [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/bank-sync#modal:akahu-init",
+      "route": "/bank-sync",
+      "label": "Akahu initialisation modal (NZ banks)",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter App Token and User Token [inputs]",
+        "Save [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": "Requires akahuBankSync feature flag"
+    },
+    {
+      "id": "/bank-sync#modal:enablebanking-init",
+      "route": "/bank-sync",
+      "label": "EnableBanking initialisation modal (EU banks)",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Begin authorization [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": "Requires enableBanking feature flag; redirects to OAuth"
+    },
+    {
+      "id": "/bank-sync#modal:enablebanking-external-msg",
+      "route": "/bank-sync",
+      "label": "EnableBanking external auth message modal",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": ["Continue (awaiting OAuth callback)", "Close [×]"],
+      "notes": null
+    },
+    {
+      "id": "/bank-sync#modal:select-linked-accounts",
+      "route": "/bank-sync",
+      "label": "Select linked accounts modal — map bank accounts to Actual",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Map each bank account to Actual account [select per row]",
+        "Create new account for unmapped [checkbox]",
+        "Link [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/bank-sync#modal:synced-account-edit",
+      "route": "/bank-sync",
+      "label": "Edit synced account settings modal",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit sync date range [inputs]",
+        "Unlink account [button 'Unlink']",
+        "Save [primary button]",
+        "Close [×]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/bank-sync/account/:accountId/edit",
+      "route": "/bank-sync/account/:accountId/edit",
+      "label": "Mobile bank sync account edit page",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit sync settings [form fields]",
+        "Save [primary button]",
+        "Back [mobile back button]"
+      ],
+      "notes": "Wide viewport redirects to /bank-sync; mobile only"
+    },
+    {
+      "id": "/tags",
+      "route": "/tags",
+      "label": "Manage Tags — create and manage transaction tags",
+      "section": "tags",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add tag [input + Enter or '+' button]",
+        "Edit tag name [row inline edit]",
+        "Delete tag [row delete button]",
+        "Select and bulk delete [checkboxes + Delete button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/settings",
+      "route": "/settings",
+      "label": "Settings page — app preferences, encryption, budget type, etc.",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Change theme [ThemeSettings selector]",
+        "Change date/number format [FormatSettings]",
+        "Change language [LanguageSettings]",
+        "Toggle OpenID / change password auth [AuthSettings]",
+        "Enable/fix encryption [EncryptionSettings]",
+        "Switch budget type (envelope/tracking) [BudgetTypeSettings]",
+        "Load backup [Backups — Electron only]",
+        "Export budget [ExportBudget button]",
+        "Toggle update notifications [checkbox]",
+        "Reset local cache [advanced]",
+        "Reset sync [advanced]",
+        "Repair transactions [advanced]",
+        "Toggle experimental features [AdvancedToggle]",
+        "Close budget / switch file [button — mobile only]"
+      ],
+      "notes": "Single scrollable page; advanced section is collapsible"
+    },
+    {
+      "id": "/settings#modal:create-encryption-key",
+      "route": "/settings",
+      "label": "Create encryption key modal",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter encryption password [input]",
+        "Confirm [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/settings#modal:fix-encryption-key",
+      "route": "/settings",
+      "label": "Fix encryption key modal — re-enter key when mismatched",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter key password [input]",
+        "Fix [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/settings#modal:load-backup",
+      "route": "/settings",
+      "label": "Load Backup modal — restore from local backup (Electron)",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select backup from list [list]",
+        "Load selected backup [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": "Only available in Electron; shows list of daily backups"
+    },
+    {
+      "id": "/settings#modal:enable-openid",
+      "route": "/settings",
+      "label": "Enable OpenID authentication modal",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Configure OpenID provider fields [OpenIdForm]",
+        "Enable [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": "Requires server to be online; admin action"
+    },
+    {
+      "id": "/settings#modal:enable-password-auth",
+      "route": "/settings",
+      "label": "Enable password authentication modal",
+      "section": "settings",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Enter new password [inputs]",
+        "Enable password auth [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": "Shown when switching away from OpenID back to password"
+    },
+    {
+      "id": "/gocardless/link",
+      "route": "/gocardless/link",
+      "label": "GoCardless OAuth callback page (desktop only)",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [],
+      "notes": "Calls window.close(); narrow viewport not supported"
+    },
+    {
+      "id": "/enablebanking/auth_callback",
+      "route": "/enablebanking/auth_callback",
+      "label": "EnableBanking OAuth callback — processes auth code",
+      "section": "bank-sync",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [],
+      "notes": "Shows success/error; no user actions; auto-completes auth"
+    },
+    {
+      "id": "/categories/:id",
+      "route": "/categories/:id",
+      "label": "Category transactions page (mobile only)",
+      "section": "budget",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "View and filter transactions for category",
+        "Add transaction [button '+']",
+        "Back [mobile back button]"
+      ],
+      "notes": "Mobile only; accessible from mobile budget category row"
+    },
+    {
+      "id": "/user-directory",
+      "route": "/user-directory",
+      "label": "User Directory — admin list of server users",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add user [button 'Add user']",
+        "Edit user [row action or edit icon]",
+        "Delete user [row action]"
+      ],
+      "notes": "Admin-only; visible when multiuser mode is enabled"
+    },
+    {
+      "id": "/user-directory#modal:edit-user",
+      "route": "/user-directory",
+      "label": "Edit user modal — update display name and role",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Edit display name [input]",
+        "Change role [select]",
+        "Save [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/user-access",
+      "route": "/user-access",
+      "label": "User Access — manage per-budget user permissions",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Add user access [button 'Add user']",
+        "Edit user access [row action]",
+        "Remove user access [row action]",
+        "Transfer ownership [button 'Transfer ownership']"
+      ],
+      "notes": "Requires ADMINISTRATOR + owner of budget; multiuser only"
+    },
+    {
+      "id": "/user-access#modal:edit-access",
+      "route": "/user-access",
+      "label": "Edit user access modal — set permission level",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select user [autocomplete]",
+        "Select permission level [select]",
+        "Save [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    },
+    {
+      "id": "/user-access#modal:transfer-ownership",
+      "route": "/user-access",
+      "label": "Transfer budget ownership modal",
+      "section": "admin",
+      "status": "explored",
+      "auth_required": true,
+      "layout": "layout:finance",
+      "actions": [
+        "Select new owner [select]",
+        "Confirm transfer [primary button]",
+        "Cancel [bare button]"
+      ],
+      "notes": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "/bootstrap",
+      "to": "/login",
+      "trigger": "button 'OK' (submit password form)",
+      "guard": "password valid"
+    },
+    {
+      "from": "/bootstrap",
+      "to": "/budget",
+      "trigger": "button 'Try Demo'",
+      "guard": null
+    },
+    {
+      "from": "/login",
+      "to": "/#file-list",
+      "trigger": "button 'Sign in' [primary]",
+      "guard": "valid password or header auth"
+    },
+    {
+      "from": "/login",
+      "to": "/#welcome",
+      "trigger": "auto: redirect after successful login when no files exist",
+      "guard": "no budget files on server"
+    },
+    {
+      "from": "/login",
+      "to": "/login#openid-review",
+      "trigger": "button 'Review OpenID configuration'",
+      "guard": "first OpenID login flow"
+    },
+    {
+      "from": "/login#openid-review",
+      "to": "/login",
+      "trigger": "button 'Cancel'",
+      "guard": null
+    },
+    {
+      "from": "/login",
+      "to": "/openid-cb",
+      "trigger": "auto: redirect via OAuth provider for OpenID",
+      "guard": "OpenID auth method"
+    },
+    {
+      "from": "/openid-cb",
+      "to": "/#file-list",
+      "trigger": "auto: redirect on successful OAuth callback",
+      "guard": null
+    },
+    {
+      "from": "/config-server",
+      "to": "/login",
+      "trigger": "button 'OK' (server URL set successfully)",
+      "guard": "valid server URL"
+    },
+    {
+      "from": "/config-server",
+      "to": "/#welcome",
+      "trigger": "button 'Don't use a server'",
+      "guard": null
+    },
+    {
+      "from": "/#welcome",
+      "to": "/budget",
+      "trigger": "button 'Start fresh'",
+      "guard": null
+    },
+    {
+      "from": "/#welcome",
+      "to": "/budget",
+      "trigger": "button 'View demo'",
+      "guard": null
+    },
+    {
+      "from": "/#welcome",
+      "to": "/#file-list#modal:import",
+      "trigger": "button 'Import my budget'",
+      "guard": null
+    },
+    {
+      "from": "/#file-list",
+      "to": "/budget",
+      "trigger": "list item click [GridListItem] on a local/synced file",
+      "guard": null
+    },
+    {
+      "from": "/#file-list",
+      "to": "/#file-list#modal:import",
+      "trigger": "button 'Import file'",
+      "guard": null
+    },
+    {
+      "from": "/#file-list",
+      "to": "/#file-list#modal:delete-budget",
+      "trigger": "menu item 'Delete' in file three-dot menu",
+      "guard": null
+    },
+    {
+      "from": "/#file-list",
+      "to": "/#file-list#modal:duplicate-budget",
+      "trigger": "menu item 'Duplicate' in file three-dot menu",
+      "guard": "local file only"
+    },
+    {
+      "from": "/#file-list",
+      "to": "/config-server",
+      "trigger": "link 'Change server' or ServerURL component button",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import",
+      "to": "/#file-list#modal:import-ynab4",
+      "trigger": "button 'Import from YNAB4'",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import",
+      "to": "/#file-list#modal:import-ynab5",
+      "trigger": "button 'Import from YNAB5 / nYNAB'",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import",
+      "to": "/#file-list#modal:import-actual",
+      "trigger": "button 'Import from Actual'",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import",
+      "to": "/#file-list",
+      "trigger": "button '×' (close modal)",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import-ynab4",
+      "to": "/#file-list",
+      "trigger": "button '×' (close modal)",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import-ynab5",
+      "to": "/#file-list",
+      "trigger": "button '×' (close modal)",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:import-actual",
+      "to": "/#file-list",
+      "trigger": "button '×' (close modal)",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:delete-budget",
+      "to": "/#file-list",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/#file-list#modal:duplicate-budget",
+      "to": "/#file-list",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/accounts",
+      "trigger": "link 'Accounts' in sidebar [Item component]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/reports",
+      "trigger": "link 'Reports' in sidebar [Item component]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/schedules",
+      "trigger": "link 'Schedules' in sidebar [Item component]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/settings",
+      "trigger": "link 'Settings' in sidebar [SecondaryItem]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/payees",
+      "trigger": "link 'Payees' in sidebar [SecondaryItem]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/rules",
+      "trigger": "link 'Rules' in sidebar [SecondaryItem]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/bank-sync",
+      "trigger": "link 'Bank Sync' in sidebar [SecondaryItem]",
+      "guard": "server connected"
+    },
+    {
+      "from": "/budget",
+      "to": "/tags",
+      "trigger": "link 'Tags' in sidebar [SecondaryItem]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/accounts/:id",
+      "trigger": "link [account name] in sidebar Accounts list",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:new-category",
+      "trigger": "button '+' within a category group row",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:new-category-group",
+      "trigger": "button 'Add Group' [bare button below category list]",
+      "guard": null
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:goal-templates",
+      "trigger": "budget page menu item 'Goal templates'",
+      "guard": "goalTemplatesEnabled feature flag"
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:envelope-budget-summary",
+      "trigger": "click 'To Budget' header balance [envelope mode]",
+      "guard": "envelope budget type"
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:tracking-budget-summary",
+      "trigger": "click budget summary header [tracking mode]",
+      "guard": "tracking budget type"
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:envelope-budget-menu",
+      "trigger": "click budget cell amount [envelope mode]",
+      "guard": "envelope budget type"
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:tracking-budget-menu",
+      "trigger": "click budget cell amount [tracking mode]",
+      "guard": "tracking budget type"
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:envelope-balance-menu",
+      "trigger": "click category balance cell [envelope mode]",
+      "guard": "envelope budget type"
+    },
+    {
+      "from": "/budget",
+      "to": "/budget#modal:tracking-balance-menu",
+      "trigger": "click category balance cell [tracking mode]",
+      "guard": "tracking budget type"
+    },
+    {
+      "from": "/budget#modal:envelope-balance-menu",
+      "to": "/budget#modal:transfer",
+      "trigger": "button 'Transfer to another category'",
+      "guard": null
+    },
+    {
+      "from": "/budget#modal:envelope-balance-menu",
+      "to": "/budget#modal:cover",
+      "trigger": "button 'Cover overspending'",
+      "guard": "category has overspending"
+    },
+    {
+      "from": "/budget#modal:envelope-budget-summary",
+      "to": "/budget#modal:hold-buffer",
+      "trigger": "button 'Hold for next month'",
+      "guard": null
+    },
+    {
+      "from": "/budget#modal:new-category",
+      "to": "/budget",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/budget#modal:new-category-group",
+      "to": "/budget",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/budget#modal:cover",
+      "to": "/budget",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/budget#modal:transfer",
+      "to": "/budget",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/budget#modal:hold-buffer",
+      "to": "/budget",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/accounts",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar [Item component]",
+      "guard": null
+    },
+    {
+      "from": "/accounts",
+      "to": "/reports",
+      "trigger": "link 'Reports' in sidebar [Item component]",
+      "guard": null
+    },
+    {
+      "from": "/accounts",
+      "to": "/settings",
+      "trigger": "link 'Settings' in sidebar [SecondaryItem]",
+      "guard": null
+    },
+    {
+      "from": "/accounts",
+      "to": "/accounts/:id",
+      "trigger": "link [account name] in sidebar Accounts list",
+      "guard": null
+    },
+    {
+      "from": "/accounts",
+      "to": "/accounts#modal:add-account",
+      "trigger": "button 'Add account' [sidebar SecondaryButtons]",
+      "guard": null
+    },
+    {
+      "from": "/accounts",
+      "to": "/accounts#modal:import-transactions",
+      "trigger": "button 'Import' in account header toolbar",
+      "guard": null
+    },
+    {
+      "from": "/accounts/:id",
+      "to": "/accounts/:id#reconcile",
+      "trigger": "button 'Reconcile' in account header",
+      "guard": null
+    },
+    {
+      "from": "/accounts/:id#reconcile",
+      "to": "/accounts/:id",
+      "trigger": "button 'Cancel reconciliation'",
+      "guard": null
+    },
+    {
+      "from": "/accounts/:id",
+      "to": "/accounts#modal:close-account",
+      "trigger": "menu item 'Close account' in account header menu",
+      "guard": null
+    },
+    {
+      "from": "/accounts/:id",
+      "to": "/accounts#modal:import-transactions",
+      "trigger": "button 'Import' in account header toolbar",
+      "guard": null
+    },
+    {
+      "from": "/accounts/:id",
+      "to": "/rules#modal:edit-rule",
+      "trigger": "context menu item 'Create rule' on transaction",
+      "guard": null
+    },
+    {
+      "from": "/accounts#modal:add-account",
+      "to": "/accounts#modal:add-local-account",
+      "trigger": "button 'Create local account'",
+      "guard": null
+    },
+    {
+      "from": "/accounts#modal:add-account",
+      "to": "/bank-sync#modal:gocardless-init",
+      "trigger": "button 'Link bank account (GoCardless)'",
+      "guard": "GoCardless provider available"
+    },
+    {
+      "from": "/accounts#modal:add-account",
+      "to": "/accounts",
+      "trigger": "button '×' (close modal)",
+      "guard": null
+    },
+    {
+      "from": "/accounts#modal:close-account",
+      "to": "/accounts/:id",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/accounts#modal:import-transactions",
+      "to": "/accounts/:id",
+      "trigger": "button '×' (close modal) or after import completes",
+      "guard": null
+    },
+    {
+      "from": "/schedules",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar [Item component]",
+      "guard": null
+    },
+    {
+      "from": "/schedules",
+      "to": "/schedules#modal:schedule-edit",
+      "trigger": "button 'Add schedule' or row edit button",
+      "guard": null
+    },
+    {
+      "from": "/schedules",
+      "to": "/schedules#modal:schedules-discover",
+      "trigger": "button 'Find schedules'",
+      "guard": null
+    },
+    {
+      "from": "/schedules",
+      "to": "/schedules#modal:schedules-upcoming-length",
+      "trigger": "button 'Upcoming length'",
+      "guard": null
+    },
+    {
+      "from": "/schedules#modal:schedule-edit",
+      "to": "/schedules",
+      "trigger": "button '×' or 'Cancel'",
+      "guard": null
+    },
+    {
+      "from": "/schedules#modal:schedules-discover",
+      "to": "/schedules",
+      "trigger": "button '×' or after creating schedules",
+      "guard": null
+    },
+    {
+      "from": "/schedules#modal:schedules-upcoming-length",
+      "to": "/schedules",
+      "trigger": "button '×' or after saving",
+      "guard": null
+    },
+    {
+      "from": "/payees",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/payees",
+      "to": "/payees#modal:confirm-payees-merge",
+      "trigger": "button 'Merge' after selecting payees",
+      "guard": "2+ payees selected"
+    },
+    {
+      "from": "/payees",
+      "to": "/payees#modal:merge-unused-payees",
+      "trigger": "button 'Cleanup payees'",
+      "guard": null
+    },
+    {
+      "from": "/payees",
+      "to": "/payees#modal:payee-category-learning",
+      "trigger": "button 'Learn categories' or learning icon",
+      "guard": null
+    },
+    {
+      "from": "/payees",
+      "to": "/rules",
+      "trigger": "link or button to manage rules for payee",
+      "guard": null
+    },
+    {
+      "from": "/payees#modal:confirm-payees-merge",
+      "to": "/payees",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/payees#modal:merge-unused-payees",
+      "to": "/payees",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/rules",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/rules",
+      "to": "/rules#modal:edit-rule",
+      "trigger": "button 'Add rule' or row edit button",
+      "guard": null
+    },
+    {
+      "from": "/rules#modal:edit-rule",
+      "to": "/rules",
+      "trigger": "button '×' or 'Cancel'",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync",
+      "to": "/bank-sync#modal:gocardless-init",
+      "trigger": "button 'Setup GoCardless'",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync",
+      "to": "/bank-sync#modal:simplefin-init",
+      "trigger": "button 'Setup SimpleFin'",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync",
+      "to": "/bank-sync#modal:synced-account-edit",
+      "trigger": "button 'Edit' on account row",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync",
+      "to": "/accounts#modal:add-account",
+      "trigger": "button 'Link account' in accounts list",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync#modal:gocardless-init",
+      "to": "/bank-sync#modal:gocardless-external-msg",
+      "trigger": "auto: after credentials saved, begins OAuth flow",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync#modal:gocardless-external-msg",
+      "to": "/bank-sync#modal:select-linked-accounts",
+      "trigger": "auto: after OAuth callback completes",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync#modal:select-linked-accounts",
+      "to": "/bank-sync",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/bank-sync#modal:synced-account-edit",
+      "to": "/bank-sync",
+      "trigger": "button '×' or after saving",
+      "guard": null
+    },
+    {
+      "from": "/tags",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/settings",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/settings",
+      "to": "/#file-list",
+      "trigger": "button 'Switch file' (mobile) or close budget action",
+      "guard": null
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#modal:create-encryption-key",
+      "trigger": "button 'Enable encryption'",
+      "guard": "encryption not yet enabled"
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#modal:fix-encryption-key",
+      "trigger": "button 'Fix encryption key'",
+      "guard": "encryption enabled but key mismatch"
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#modal:load-backup",
+      "trigger": "button 'Load backup' [Backups section]",
+      "guard": "Electron only"
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#modal:enable-openid",
+      "trigger": "button 'Start using OpenID' [AuthSettings]",
+      "guard": "server online, loginMethod=password"
+    },
+    {
+      "from": "/settings",
+      "to": "/settings#modal:enable-password-auth",
+      "trigger": "button 'Disable OpenID' [AuthSettings]",
+      "guard": "loginMethod=openid"
+    },
+    {
+      "from": "/settings",
+      "to": "/config-server",
+      "trigger": "button 'Change server' [ServerURL component]",
+      "guard": null
+    },
+    {
+      "from": "/settings#modal:create-encryption-key",
+      "to": "/settings",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/settings#modal:fix-encryption-key",
+      "to": "/settings",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/settings#modal:load-backup",
+      "to": "/settings",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/settings#modal:enable-openid",
+      "to": "/settings",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/settings#modal:enable-password-auth",
+      "to": "/settings",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/reports/:dashboardId",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/reports/:dashboardId",
+      "to": "/reports/net-worth",
+      "trigger": "click Net Worth widget or sidebar nav item",
+      "guard": null
+    },
+    {
+      "from": "/reports/:dashboardId",
+      "to": "/reports/cash-flow",
+      "trigger": "click Cash Flow widget or nav item",
+      "guard": null
+    },
+    {
+      "from": "/reports/:dashboardId",
+      "to": "/reports/custom",
+      "trigger": "click Custom Report widget or nav item",
+      "guard": null
+    },
+    {
+      "from": "/reports/:dashboardId",
+      "to": "/reports/:dashboardId#modal:copy-widget-to-dashboard",
+      "trigger": "widget context menu item 'Copy to dashboard'",
+      "guard": null
+    },
+    {
+      "from": "/reports/:dashboardId#modal:copy-widget-to-dashboard",
+      "to": "/reports/:dashboardId",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/reports/net-worth",
+      "to": "/reports/:dashboardId",
+      "trigger": "link 'Reports' in sidebar or back navigation",
+      "guard": null
+    },
+    {
+      "from": "/reports/cash-flow",
+      "to": "/reports/:dashboardId",
+      "trigger": "link 'Reports' in sidebar or back navigation",
+      "guard": null
+    },
+    {
+      "from": "/user-directory",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar or back button",
+      "guard": null
+    },
+    {
+      "from": "/user-directory",
+      "to": "/user-directory#modal:edit-user",
+      "trigger": "row edit button or 'Add user' button",
+      "guard": null
+    },
+    {
+      "from": "/user-directory#modal:edit-user",
+      "to": "/user-directory",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/user-access",
+      "to": "/budget",
+      "trigger": "link 'Budget' in sidebar",
+      "guard": null
+    },
+    {
+      "from": "/user-access",
+      "to": "/user-access#modal:edit-access",
+      "trigger": "button 'Add user' or row edit button",
+      "guard": null
+    },
+    {
+      "from": "/user-access",
+      "to": "/user-access#modal:transfer-ownership",
+      "trigger": "button 'Transfer ownership'",
+      "guard": "current user is budget owner"
+    },
+    {
+      "from": "/user-access#modal:edit-access",
+      "to": "/user-access",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/user-access#modal:transfer-ownership",
+      "to": "/user-access",
+      "trigger": "button 'Cancel' or '×'",
+      "guard": null
+    },
+    {
+      "from": "/sidebar",
+      "to": "/budget",
+      "trigger": "link 'Budget' [Item with SvgWallet icon]",
+      "guard": null
+    },
+    {
+      "from": "/sidebar",
+      "to": "/reports",
+      "trigger": "link 'Reports' [Item with SvgReports icon]",
+      "guard": null
+    },
+    {
+      "from": "/sidebar",
+      "to": "/schedules",
+      "trigger": "link 'Schedules' [Item with SvgCalendar3 icon]",
+      "guard": null
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:management",
+        "label": "Management app — no budget open; server setup and auth",
+        "node_ids": [
+          "/bootstrap", "/login", "/login#openid-review", "/openid-cb",
+          "/error", "/config-server", "/change-password",
+          "/#welcome", "/#file-list", "/user-directory#management",
+          "/#file-list#modal:import", "/#file-list#modal:import-ynab4",
+          "/#file-list#modal:import-ynab5", "/#file-list#modal:import-actual",
+          "/#file-list#modal:delete-budget", "/#file-list#modal:duplicate-budget",
+          "/#file-list#modal:files-settings"
+        ]
+      },
+      {
+        "id": "zone:finance-app",
+        "label": "Finance app — budget open; full budget and account management",
+        "node_ids": [
+          "/budget", "/budget#tracking",
+          "/budget#modal:new-category", "/budget#modal:new-category-group",
+          "/budget#modal:goal-templates", "/budget#modal:category-automations-edit",
+          "/budget#modal:envelope-budget-summary", "/budget#modal:tracking-budget-summary",
+          "/budget#modal:envelope-budget-menu", "/budget#modal:tracking-budget-menu",
+          "/budget#modal:envelope-balance-menu", "/budget#modal:tracking-balance-menu",
+          "/budget#modal:cover", "/budget#modal:transfer", "/budget#modal:hold-buffer",
+          "/budget#modal:category-menu", "/budget#modal:category-group-menu",
+          "/budget#modal:notes", "/budget#modal:budget-page-menu",
+          "/budget#modal:envelope-budget-month-menu", "/budget#modal:tracking-budget-month-menu",
+          "/budget#modal:keyboard-shortcuts",
+          "/accounts", "/accounts/:id", "/accounts/:id#reconcile",
+          "/transactions/:transactionId",
+          "/accounts#modal:import-transactions", "/accounts#modal:add-account",
+          "/accounts#modal:add-local-account", "/accounts#modal:close-account",
+          "/accounts#modal:account-menu", "/accounts#modal:schedule-link",
+          "/accounts#modal:convert-to-schedule", "/accounts#modal:scheduled-transaction-menu",
+          "/accounts#modal:notes", "/accounts#modal:confirm-transaction-edit",
+          "/reports", "/reports/:dashboardId", "/reports/:dashboardId#modal:copy-widget-to-dashboard",
+          "/reports/net-worth", "/reports/crossover", "/reports/cash-flow",
+          "/reports/custom", "/reports/spending", "/reports/summary",
+          "/reports/calendar", "/reports/formula",
+          "/reports/age-of-money", "/reports/balance-forecast",
+          "/reports/budget-analysis", "/reports/sankey",
+          "/schedules", "/schedules#modal:schedule-edit",
+          "/schedules#modal:schedules-discover", "/schedules#modal:schedules-upcoming-length",
+          "/schedules#modal:schedule-posts-offline", "/schedules/:id",
+          "/payees", "/payees#modal:confirm-payees-merge",
+          "/payees#modal:merge-unused-payees", "/payees#modal:payee-category-learning",
+          "/payees/:id",
+          "/rules", "/rules#modal:edit-rule", "/rules/:id",
+          "/bank-sync", "/bank-sync#modal:gocardless-init",
+          "/bank-sync#modal:gocardless-external-msg", "/bank-sync#modal:simplefin-init",
+          "/bank-sync#modal:pluggyai-init", "/bank-sync#modal:akahu-init",
+          "/bank-sync#modal:enablebanking-init", "/bank-sync#modal:enablebanking-external-msg",
+          "/bank-sync#modal:select-linked-accounts", "/bank-sync#modal:synced-account-edit",
+          "/bank-sync/account/:accountId/edit",
+          "/tags",
+          "/settings", "/settings#modal:create-encryption-key",
+          "/settings#modal:fix-encryption-key", "/settings#modal:load-backup",
+          "/settings#modal:enable-openid", "/settings#modal:enable-password-auth",
+          "/gocardless/link", "/enablebanking/auth_callback",
+          "/categories/:id"
+        ]
+      },
+      {
+        "id": "zone:admin-only",
+        "label": "Admin-only routes — require ADMINISTRATOR permission (multiuser)",
+        "node_ids": [
+          "/user-directory", "/user-directory#modal:edit-user",
+          "/user-directory#management",
+          "/user-access", "/user-access#modal:edit-access",
+          "/user-access#modal:transfer-ownership"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:management",
+        "label": "Management layout — centered card on gradient background",
+        "node_ids": [
+          "/bootstrap", "/login", "/login#openid-review", "/openid-cb",
+          "/error", "/config-server", "/change-password",
+          "/#welcome", "/#file-list", "/user-directory#management",
+          "/#file-list#modal:import", "/#file-list#modal:import-ynab4",
+          "/#file-list#modal:import-ynab5", "/#file-list#modal:import-actual",
+          "/#file-list#modal:delete-budget", "/#file-list#modal:duplicate-budget",
+          "/#file-list#modal:files-settings"
+        ]
+      },
+      {
+        "id": "layout:finance",
+        "label": "Finance layout — resizable sidebar + scrollable main content area",
+        "node_ids": [
+          "/budget", "/budget#tracking",
+          "/accounts", "/accounts/:id", "/accounts/:id#reconcile",
+          "/reports/:dashboardId", "/reports/net-worth", "/reports/cash-flow",
+          "/reports/custom", "/reports/spending", "/reports/summary",
+          "/reports/calendar", "/reports/formula",
+          "/schedules", "/payees", "/rules",
+          "/bank-sync", "/tags", "/settings",
+          "/user-directory", "/user-access"
+        ]
+      }
+    ]
+  }
+}

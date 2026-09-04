@@ -1,0 +1,218 @@
+{
+ "root": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A1-repo",
+ "removed_count": 42,
+ "removed": [
+  {
+   "path": "packages/ui/ui-components/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/ui/ui-components/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/ui/ui-components/src/Dhancha/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/tooling/storybook/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/tooling/test-utils/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/tooling/e2e-tests/playwright",
+   "kind": "directory",
+   "rule": "playwright test directory"
+  },
+  {
+   "path": "packages/tooling/browser-entry/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/tooling/custom-scripts/scripts/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/tooling/custom-scripts/lib/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/database/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/context/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/app/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/app/src/components/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/app/src/pages/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/command-handlers/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/omni-search/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/initialize-services/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/service-core/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/editor/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/core/editor/src/components/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/logger/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/poor-mans-di/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/fuzzysearch/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/baby-fs/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/banger-editor/src/pm-utils/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/banger-editor/src/common/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/banger-editor/src/link/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/banger-editor/src/selection-menu/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/banger-editor/src/link-menu/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/browser-utils/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/browser-utils/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/mini-js-utils/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/js-lib/color-scheme-manager/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/platform/service-platform/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/platform/service-platform/src/router/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/types/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/constants/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/root-emitter/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/base-utils/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/ws-path/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/commands/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "packages/shared/translations/src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  }
+ ],
+ "preserved_suspicious_count": 0,
+ "preserved_suspicious": []
+}

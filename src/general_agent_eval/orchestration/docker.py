@@ -27,8 +27,11 @@ AGENT_DOCKERFILES = {
     "claude-code": DOCKER_DIR / "Dockerfile.claude-code",
     "codex": DOCKER_DIR / "Dockerfile.codex",
 }
-JAVA_DOCKERFILE = DOCKER_DIR / "Dockerfile.java"
-GENOME_NEXUS_DOCKERFILE = DOCKER_DIR / "Dockerfile.genome-nexus"
+JAVASCRIPT_DOCKERFILE = DOCKER_DIR / "Dockerfile.javascript"
+
+WORKLOAD_DOCKERFILES: dict[str, Path] = {
+    "javascript": JAVASCRIPT_DOCKERFILE,
+}
 
 IMAGE_PREFIX = "general-agent-eval"
 BASE_IMAGE = f"{IMAGE_PREFIX}-base:latest"
@@ -99,13 +102,16 @@ def _require_source_checkout() -> None:
 
 
 def layered_stack(
-    *, agent: str, service: dict[str, Any] | None
+    *, agent: str, workload: str = "javascript", service: dict[str, Any] | None = None
 ) -> tuple[BuildLayer, ...]:
-    """The default runtime stack: base -> agent -> java, plus the genome-nexus
-    overlay when that service is selected. The Java workload is assumed for now;
-    when other target ecosystems are added, their workload layers slot in here."""
+    """The default runtime stack: base -> agent -> javascript."""
     if agent not in AGENT_DOCKERFILES:
         raise DockerRunError(f"no runtime layer is defined for agent '{agent}'")
+    if workload not in WORKLOAD_DOCKERFILES:
+        raise DockerRunError(
+            f"no workload layer is defined for '{workload}'; "
+            f"available: {sorted(WORKLOAD_DOCKERFILES)}"
+        )
     uid, gid = _build_uid_gid()
     base = BuildLayer(
         name="base",
@@ -123,31 +129,21 @@ def layered_stack(
         context=DOCKER_DIR,
         build_args=(("BASE_IMAGE", base.image),),
     )
-    java_layer = BuildLayer(
-        name="java",
-        dockerfile=JAVA_DOCKERFILE,
-        image=_stack_tag(agent, "java"),
+    workload_layer = BuildLayer(
+        name=workload,
+        dockerfile=WORKLOAD_DOCKERFILES[workload],
+        image=_stack_tag(agent, workload),
         context=DOCKER_DIR,
         build_args=(("BASE_IMAGE", agent_layer.image),),
     )
-    layers = [base, agent_layer, java_layer]
-    if service is not None and service.get("id") == "genome-nexus":
-        layers.append(
-            BuildLayer(
-                name="genome-nexus",
-                dockerfile=GENOME_NEXUS_DOCKERFILE,
-                image=_stack_tag(agent, "java", "genome-nexus"),
-                context=DOCKER_DIR,
-                build_args=(("BASE_IMAGE", java_layer.image),),
-            )
-        )
-    return tuple(layers)
+    return (base, agent_layer, workload_layer)
 
 
 def resolve_image_plan(
     args: argparse.Namespace,
     *,
     agent: str,
+    workload: str = "javascript",
     service: dict[str, Any] | None = None,
 ) -> ImagePlan:
     """Resolve what to run and what to build first.
@@ -185,7 +181,7 @@ def resolve_image_plan(
         # A pre-built image (registry, or an earlier build); skip the build entirely.
         return ImagePlan(image=image, layers=())
 
-    stack = layered_stack(agent=agent, service=service)
+    stack = layered_stack(agent=agent, workload=workload, service=service)
     final_image = stack[-1].image
     if args.skip_build:
         # Skipping the build only needs the tag, not the Dockerfiles -- but the tag

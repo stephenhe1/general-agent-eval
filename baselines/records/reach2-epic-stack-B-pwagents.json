@@ -1,0 +1,19 @@
+{
+ "subject": "epic-stack",
+ "arm": "B-pwagents",
+ "suite_filter": "tests",
+ "tests_considered": 51,
+ "reach": 3,
+ "items": 8,
+ "per_item": {
+  "ES-01 create a note": 6,
+  "ES-02 edit a note": 2,
+  "ES-03 delete a note": 2,
+  "ES-04 add an image": 0,
+  "ES-05 change alt text": 0,
+  "ES-06 remove an image": 0,
+  "ES-07 update profile": 0,
+  "ES-10 change password": 0
+ },
+ "witness": "accepted mutation, ordered after the driving action"
+}

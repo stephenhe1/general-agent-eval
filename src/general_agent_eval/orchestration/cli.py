@@ -72,6 +72,24 @@ def validate_agent_values(args: argparse.Namespace) -> None:
             )
 
 
+def validate_mode_options(args: argparse.Namespace) -> None:
+    if args.mode == "project-aware" and args.clear_tests:
+        raise DockerRunError(
+            "--mode project-aware and --clear-tests are mutually exclusive; "
+            "project-aware mode keeps existing tests visible to the agent"
+        )
+    if args.mode == "feature-extraction" and getattr(args, "coverage_model", "flat") != "graph":
+        raise DockerRunError(
+            "--mode feature-extraction requires --coverage-model graph "
+            "(it reads the UI_GRAPH.json produced by a prior discovery run)"
+        )
+    if args.mode == "graph-test-gen" and getattr(args, "coverage_model", "flat") != "graph":
+        raise DockerRunError(
+            "--mode graph-test-gen requires --coverage-model graph "
+            "(it reads the UI_GRAPH.json produced by a prior discovery run)"
+        )
+
+
 def validate_agent_options(args: argparse.Namespace) -> None:
     """Reject agent-specific options supplied for an agent that ignores them, so a
     flag like --max-budget-usd is never accepted then silently dropped. The parser
@@ -118,6 +136,10 @@ def resolve_agent_defaults(args: argparse.Namespace) -> None:
         args.effort = DEFAULT_EFFORT
     if args.sandbox is None:
         args.sandbox = DEFAULT_SANDBOX
+    if not hasattr(args, "workload") or args.workload is None:
+        args.workload = "javascript"
+    if not hasattr(args, "mode") or args.mode is None:
+        args.mode = "baseline"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -382,18 +404,42 @@ def build_parser() -> argparse.ArgumentParser:
         "--clear-tests",
         action="store_true",
         help=(
-            "Remove Java test directories/files before the agent runs; strongly "
+            "Remove existing JS test files before the agent runs; strongly "
             "recommended for isolated test construction analysis."
         ),
     )
     parser.add_argument(
-        "--inject-rest-assured",
-        action="store_true",
+        "--mode",
+        choices=("baseline", "project-aware", "discovery", "feature-extraction", "graph-test-gen"),
+        default="baseline",
         help=(
-            "Inject RestAssured as a test dependency before the agent runs, using "
-            "the matched service's rest_assured config from the manifest. Requires "
-            "--service. Runs after --clear-tests; the POM edit lands in the testless "
-            "baseline, so it stays out of the agent's diff."
+            "Evaluation mode. 'baseline' removes existing tests (requires "
+            "--clear-tests). 'project-aware' keeps all existing tests, "
+            "fixtures, and helpers visible so the agent can learn from them. "
+            "'discovery' explores the app and produces UI_COVERAGE.md without "
+            "writing any tests. 'feature-extraction' reads an existing "
+            "UI_GRAPH.json and extracts features, scenarios, and paths. "
+            "'graph-test-gen' reads an existing UI_GRAPH.json and generates "
+            "Playwright tests guided by the state model."
+        ),
+    )
+    parser.add_argument(
+        "--coverage-model",
+        choices=("flat", "graph"),
+        default="flat",
+        help=(
+            "Coverage tracker format. 'flat' produces a markdown checklist "
+            "(UI_COVERAGE.md); 'graph' produces a JSON page-transition graph "
+            "(UI_GRAPH.json) with typed nodes and navigation edges."
+        ),
+    )
+    parser.add_argument(
+        "--workload",
+        choices=("javascript",),
+        default="javascript",
+        help=(
+            "Target workload ecosystem. Selects Dockerfile.javascript and the "
+            "Playwright UI-test prompt templates. Defaults to javascript."
         ),
     )
     return parser

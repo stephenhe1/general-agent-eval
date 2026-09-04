@@ -1,0 +1,22 @@
+{
+ "subject": "cypress-realworld-app",
+ "arm": "B-pwagents",
+ "suite_filter": "tests",
+ "tests_considered": 46,
+ "reach": 7,
+ "items": 11,
+ "per_item": {
+  "R01 create a transaction": 4,
+  "R02 update a transaction": 0,
+  "R03 comment on a transaction": 0,
+  "R04 like a transaction": 0,
+  "R05 create a bank account": 3,
+  "R06 delete a bank account": 1,
+  "R07 sign up a user": 5,
+  "R08 update my profile": 1,
+  "R09 dismiss a notification": 1,
+  "R10 log in": 37,
+  "R11 log out": 0
+ },
+ "witness": "accepted mutation, ordered after the driving action"
+}

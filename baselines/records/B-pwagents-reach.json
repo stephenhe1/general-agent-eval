@@ -1,0 +1,69 @@
+{
+ "T1 create a todo": [
+  "tests-todomvc-TC-002-Add-a-single-todo-item-chromium",
+  "tests-todomvc-TC-003-Add-multiple-todo-items-chromium",
+  "tests-todomvc-TC-004-Item-counter-grammar-\u2014-singular-chromium",
+  "tests-todomvc-TC-005-Item--a2386-grammar-\u2014-plural-known-bug--chromium",
+  "tests-todomvc-TC-006-Complete-a-single-todo-item-chromium",
+  "tests-todomvc-TC-007-Uncheck-a-completed-todo-item-chromium",
+  "tests-todomvc-TC-008-Toggle-all-\u2014-mark-all-complete-chromium",
+  "tests-todomvc-TC-009-Toggle-all-\u2014-unmark-all-complete-chromium",
+  "tests-todomvc-TC-010-Toggl-acac2-reflects-partial-completion-chromium",
+  "tests-todomvc-TC-011-Delete-a-todo-item-via-destroy-button-chromium",
+  "tests-todomvc-TC-012-Edit-a-todo-item-\u2014-save-with-Enter-chromium",
+  "tests-todomvc-TC-013-Edit-a-todo-item-\u2014-save-on-blur-Tab--chromium",
+  "tests-todomvc-TC-014-Edit--4a281-t-mode-saves-current-value--chromium",
+  "tests-todomvc-TC-015-Edit--92796-re-filled-with-current-text-chromium",
+  "tests-todomvc-TC-016-Edit--487fc--empty-string-item-remains--chromium",
+  "tests-todomvc-TC-017-Filter-\u2014-Active-chromium",
+  "tests-todomvc-TC-018-Filter-\u2014-Completed-chromium",
+  "tests-todomvc-TC-019-Filter-\u2014-All-chromium",
+  "tests-todomvc-TC-020-Filter-\u2014-direct-navigation-via-URL-chromium",
+  "tests-todomvc-TC-021-Clear-e5175-only-when-completions-exist-chromium",
+  "tests-todomvc-TC-022-Clear-aa18c-emoves-only-completed-items-chromium",
+  "tests-todomvc-TC-023-White-c1554-y-input-\u2014-not-added-as-todo-chromium",
+  "tests-todomvc-TC-025-Persistence-after-page-reload-chromium",
+  "tests-todomvc-TC-026-Persi-64f7c-Storage-cleared-resets-list-chromium",
+  "tests-todomvc-TC-027-Toggle-all-label-text-and-accessibility-chromium",
+  "tests-todomvc-TC-028-Destroy-button-\u2014-present-for-each-item-chromium",
+  "tests-todomvc-TC-029-Count-c0017--to-zero-when-all-completed-chromium",
+  "tests-todomvc-TC-030-Footer-hidden-when-all-items-deleted-chromium",
+  "tests-todomvc-TC-031-Data-attributes-present-on-key-elements-chromium",
+  "tests-todomvc-TC-032-New-todo-input-cleared-after-submission-chromium",
+  "tests-todomvc-TC-033-Filter-persists-across-reload-chromium",
+  "tests-todomvc-TC-034-Add-todo-item-with-special-characters-chromium",
+  "tests-todomvc-TC-035-Multiple-todos-\u2014-order-preserved-chromium"
+ ],
+ "T2 edit a todo's text": [
+  "tests-todomvc-TC-012-Edit-a-todo-item-\u2014-save-with-Enter-chromium",
+  "tests-todomvc-TC-013-Edit-a-todo-item-\u2014-save-on-blur-Tab--chromium",
+  "tests-todomvc-TC-014-Edit--4a281-t-mode-saves-current-value--chromium",
+  "tests-todomvc-TC-016-Edit--487fc--empty-string-item-remains--chromium"
+ ],
+ "T3 toggle one todo": [
+  "tests-todomvc-TC-006-Complete-a-single-todo-item-chromium",
+  "tests-todomvc-TC-007-Uncheck-a-completed-todo-item-chromium",
+  "tests-todomvc-TC-010-Toggl-acac2-reflects-partial-completion-chromium",
+  "tests-todomvc-TC-017-Filter-\u2014-Active-chromium",
+  "tests-todomvc-TC-018-Filter-\u2014-Completed-chromium",
+  "tests-todomvc-TC-019-Filter-\u2014-All-chromium",
+  "tests-todomvc-TC-020-Filter-\u2014-direct-navigation-via-URL-chromium",
+  "tests-todomvc-TC-021-Clear-e5175-only-when-completions-exist-chromium",
+  "tests-todomvc-TC-022-Clear-aa18c-emoves-only-completed-items-chromium",
+  "tests-todomvc-TC-025-Persistence-after-page-reload-chromium",
+  "tests-todomvc-TC-029-Count-c0017--to-zero-when-all-completed-chromium",
+  "tests-todomvc-TC-033-Filter-persists-across-reload-chromium"
+ ],
+ "T4 delete a todo": [
+  "tests-todomvc-TC-011-Delete-a-todo-item-via-destroy-button-chromium",
+  "tests-todomvc-TC-030-Footer-hidden-when-all-items-deleted-chromium"
+ ],
+ "T5 toggle all todos": [
+  "tests-todomvc-TC-008-Toggle-all-\u2014-mark-all-complete-chromium",
+  "tests-todomvc-TC-009-Toggle-all-\u2014-unmark-all-complete-chromium",
+  "tests-todomvc-TC-010-Toggl-acac2-reflects-partial-completion-chromium"
+ ],
+ "T6 clear completed": [
+  "tests-todomvc-TC-022-Clear-aa18c-emoves-only-completed-items-chromium"
+ ]
+}

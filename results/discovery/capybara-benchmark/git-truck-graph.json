@@ -1,0 +1,638 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Git Truck",
+    "base_url": "http://localhost:3024",
+    "total_states": 15,
+    "explored": 15,
+    "skipped": 0,
+    "verified_live": [
+      "/browse",
+      "/browse?path=<parent-dir>",
+      "/view?path=...&branch=...&zoomPath=...&start=0&end=...",
+      "/ui",
+      "/clear-cache",
+      "/.well-known/test",
+      "/api/progress?path=...&branch=..."
+    ],
+    "notes": "No auth gates. App is a local-server Git visualisation tool. All routes are public."
+  },
+  "nodes": [
+    {
+      "id": "/browse",
+      "route": "/browse",
+      "label": "Repository browser — lists folders/repos for a given filesystem path",
+      "section": "Browse",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:browse",
+      "actions": [
+        "Type in 'Path' input to change browse directory [input#path]",
+        "Type in 'Search' input to filter list [input#search]",
+        "Toggle 'Include directories' checkbox [input#include-dirs]",
+        "Sort by name button [button 'Sort by name']",
+        "Sort by last-changed button [button 'Sort by last changed']",
+        "Click 'Previous page' link [link 'Previous page']",
+        "Click 'Next page' link [link 'Next page']",
+        "Change 'Per page' select [select 'Per page']",
+        "Click repository entry to open visualization [link aria-disabled=false]",
+        "Click directory entry to navigate into it [link to /browse?path=...]",
+        "Click breadcrumb segment to navigate up [link 'Browse <name> directory']",
+        "Click 'Clear cache' button [button.btn--danger 'Clear cache']",
+        "Click 'Git Truck' header link to github [link 'Git Truck']"
+      ],
+      "notes": "Redirects to /view when given path is itself a valid git repo"
+    },
+    {
+      "id": "/browse#error",
+      "route": "/browse",
+      "label": "Browse page with path error (not found / permission denied / not a folder)",
+      "section": "Browse",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:browse",
+      "actions": [
+        "Type in 'Path' input to change directory [input#path]",
+        "Type in 'Search' input to filter list [input#search]",
+        "Click 'Clear cache' button [button.btn--danger 'Clear cache']"
+      ],
+      "notes": "Shows inline error output beneath path input; directory list is empty"
+    },
+    {
+      "id": "/view#loading",
+      "route": "/view",
+      "label": "Repo view — loading/analysis in progress (truck animation + progress bar)",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-loading",
+      "actions": [
+        "Click 'Abort' button to cancel analysis [button.btn--danger 'Abort']",
+        "Click 'Go back' link (shown when status=Aborted or CommitHistoryProcessed) [link 'Go back']"
+      ],
+      "notes": "SSR-rendered Suspense fallback; ClientOnly chart not shown; polls /api/progress"
+    },
+    {
+      "id": "/view",
+      "route": "/view",
+      "label": "Repo view — full visualization loaded, both panels visible, no selection",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Click file/folder node in chart to select it [svg chart node]",
+        "Click breadcrumb repo-name to reset zoom [button 'Reset zoom to repository root']",
+        "Click breadcrumb folder segment to zoom in [button 'Zoom to <folder> directory']",
+        "Click breadcrumb browse segment to navigate to /browse [link 'Browse <dir> directory']",
+        "Click 'Hide left panel' button [button title='Hide left panel']",
+        "Click 'Hide right panel' button [button title='Hide right panel']",
+        "Select Layout via IconDropdown [aria-label='Select layout']",
+        "Select Node Size via IconDropdown [aria-label='Select size metric']",
+        "Select Node Color via IconDropdown [aria-label='Select color metric']",
+        "Collapse/expand 'Visualization options' panel [CollapsibleHeader 'Visualization options']",
+        "Collapse/expand 'Legend' panel [CollapsibleHeader 'Legend']",
+        "Collapse/expand 'Actions' right panel [CollapsibleHeader 'Actions']",
+        "Collapse/expand 'Details' right panel [CollapsibleHeader 'Details']",
+        "Collapse/expand 'Commits' right panel [CollapsibleHeader 'Commits']",
+        "Focus search input [button/input 'Search within <repo>']",
+        "Click 'Refresh analysis' button [button title='Refresh analysis']",
+        "Click 'Hidden files' button [button title='Hidden files']",
+        "Click 'Group contributors' button (compact) [button title='Group contributors']",
+        "Click 'Settings' button [button title='Settings']",
+        "Click 'Enter fullscreen' button [button title='Enter fullscreen']",
+        "Select branch via RevisionSelect [select title='Change branch']",
+        "Toggle 'Include co-authors' in Timeline dropdown [DropdownMenu.Item 'Include co-authors']",
+        "Toggle 'Use log scale' in Timeline dropdown [DropdownMenu.Item 'Use log scale']",
+        "Drag Timeline start/end handles to change time range [button role=slider 'Drag to adjust interval']",
+        "Click time-range preset buttons (Last 24h, Last 7 days, etc.) [TimeRangePresetButtons]",
+        "Change time unit (TimeUnitForm) [TimeUnitForm select]",
+        "Click metric cards in Details panel to switch active metric [MetricButton]",
+        "Show more commits in Commits panel [button 'Show more']",
+        "Click 'Panel options' dropdown button on Legend panel [button aria-label='Panel options']",
+        "Click 'Shuffle colors' in panel dropdown [DropdownMenu.Item 'Shuffle colors']",
+        "Click 'Toggle description' on metric panel header [button title='Toggle description']",
+        "Click 'Git Truck' logo link to GitHub [link 'Git Truck']"
+      ],
+      "notes": "Main view; left+right panels expanded; no object selected; zoomed to repo root"
+    },
+    {
+      "id": "/view#left-collapsed",
+      "route": "/view",
+      "label": "Repo view — left panel hidden, chart area expanded",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Click 'Show left panel' button [button title='Show left panel']",
+        "Click file/folder node in chart to select it [svg chart node]",
+        "Focus search input [button title='Search within <repo>']",
+        "Click 'Refresh analysis' button [button title='Refresh analysis']",
+        "Click 'Hidden files' button [button title='Hidden files']",
+        "Click 'Group contributors' button [button title='Group contributors']",
+        "Click 'Settings' button [button title='Settings']",
+        "Click 'Enter fullscreen' button [button title='Enter fullscreen']",
+        "Click 'Hide right panel' button [button title='Hide right panel']",
+        "Drag Timeline handles [button role=slider]"
+      ],
+      "notes": "Left side-panel hidden via toggleLeft dispatch; chart extends left"
+    },
+    {
+      "id": "/view#right-collapsed",
+      "route": "/view",
+      "label": "Repo view — right panel hidden, chart area expanded",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Click 'Show Right panel' button [button title='Show Right panel']",
+        "Click file/folder node in chart to select it [svg chart node]",
+        "Click 'Hide left panel' button [button title='Hide left panel']",
+        "Focus search input [button title='Search within <repo>']",
+        "Click 'Refresh analysis' button [button title='Refresh analysis']",
+        "Click 'Hidden files' button [button title='Hidden files']",
+        "Click 'Settings' button [button title='Settings']",
+        "Click 'Enter fullscreen' button [button title='Enter fullscreen']",
+        "Drag Timeline handles [button role=slider]"
+      ],
+      "notes": "Right side-panel hidden via toggleRight dispatch; chart extends right"
+    },
+    {
+      "id": "/view#both-collapsed",
+      "route": "/view",
+      "label": "Repo view — both panels hidden, maximum chart area",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Click 'Show left panel' button [button title='Show left panel']",
+        "Click 'Show Right panel' button [button title='Show Right panel']",
+        "Click file/folder node in chart to select it [svg chart node]",
+        "Focus search input [button title='Search within <repo>']",
+        "Click 'Refresh analysis' button [button title='Refresh analysis']",
+        "Click 'Hidden files' button [button title='Hidden files']",
+        "Click 'Settings' button [button title='Settings']",
+        "Click 'Enter fullscreen' button [button title='Enter fullscreen']",
+        "Drag Timeline handles [button role=slider]"
+      ],
+      "notes": "Both side panels hidden; only chart + timeline visible"
+    },
+    {
+      "id": "/view#object-selected",
+      "route": "/view",
+      "label": "Repo view — a file or folder node selected in the visualization",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Click elsewhere to deselect object [svg chart area]",
+        "Click 'Open' to open file in default app [button 'Open' in Actions panel]",
+        "Click 'Browse' to open folder in system explorer [button 'Browse' in Actions panel]",
+        "Click 'Hide' to hide selected file [button 'Hide' in Actions panel]",
+        "Click 'Hide *.<ext>' to hide all files of that extension [button 'Hide *.<ext>' in Actions panel]",
+        "Click 'Zoom in' to zoom chart into selected directory [link 'Zoom in']",
+        "Click 'Zoom out' to reset zoom [button 'Zoom out']",
+        "Click metric card in Details panel to switch active metric [MetricButton]",
+        "Click 'Show more' commits button [button 'Show more']",
+        "Click contributor color dot to change color [LegendDot contributorColorToChange]",
+        "Click breadcrumb ClickedObjectButton [ClickedObjectButton]",
+        "Click 'Group contributors' button [button title='Group contributors']",
+        "Click 'Settings' button [button title='Settings']",
+        "Click 'Hidden files' button [button title='Hidden files']",
+        "Click 'Hide left panel' button [button title='Hide left panel']",
+        "Click 'Hide right panel' button [button title='Hide right panel']",
+        "Drag Timeline handles [button role=slider]"
+      ],
+      "notes": "Interaction panel shows Open/Browse/Hide/Zoom; Details panel shows per-object metrics"
+    },
+    {
+      "id": "/view#zoomed",
+      "route": "/view",
+      "label": "Repo view — zoomed into a subdirectory (zoomPath != repo root)",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Click file/folder node in chart to select it [svg chart node]",
+        "Click breadcrumb subfolder segment to zoom out one level [button]",
+        "Click breadcrumb repo-name to reset zoom [button 'Reset zoom to repository root']",
+        "Click 'Zoom out' button to go to parent [button 'Zoom out' in Actions panel]",
+        "Click 'Hide left panel' button [button title='Hide left panel']",
+        "Click 'Hide right panel' button [button title='Hide right panel']",
+        "Focus search input [button title='Search within <folder>']",
+        "Click 'Settings' button [button title='Settings']",
+        "Click 'Hidden files' button [button title='Hidden files']",
+        "Drag Timeline handles [button role=slider]"
+      ],
+      "notes": "Chart shows only files under zoomPath; breadcrumb shows zoom trail"
+    },
+    {
+      "id": "/view#settings-modal",
+      "route": "/view",
+      "label": "Settings modal open — visual preferences overlay",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Toggle 'Link size and color option' checkbox [CheckboxWithLabel 'Link size and color option']",
+        "Toggle 'Transitions' checkbox [CheckboxWithLabel 'Transitions']",
+        "Toggle 'Labels' checkbox [CheckboxWithLabel 'Labels']",
+        "Toggle 'Show files with no activity' checkbox [CheckboxWithLabel 'Show files with no activity']",
+        "Toggle 'Flatten file tree' checkbox [CheckboxWithLabel 'Flatten file tree']",
+        "Toggle 'Show only search matches' checkbox [CheckboxWithLabel 'Show only search matches']",
+        "Change 'Pixel render cut-off' number input [input type=number 'Pixel render cut-off']",
+        "Click 'Clear cache' button [button.btn--danger 'Clear cache']",
+        "Click modal close button / press Escape [button Modal close]"
+      ],
+      "notes": "Headless-UI dialog; settings stored in context (OptionsContext)"
+    },
+    {
+      "id": "/view#hide-files-modal",
+      "route": "/view",
+      "label": "Hide files modal open — manage hidden file patterns",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Type glob/path pattern in 'Path or glob' input [input name=hide]",
+        "Click 'Hide' to add pattern [button 'Hide']",
+        "Click trash icon to remove a pattern [button title='Unhide <pattern>']",
+        "Click 'Reset' to clear all patterns [button.btn--danger 'Reset']",
+        "Click modal close button / press Escape [button Modal close]"
+      ],
+      "notes": "Changes submitted to server on modal close if patterns changed"
+    },
+    {
+      "id": "/view#group-contributors-modal",
+      "route": "/view",
+      "label": "Group contributors modal — merge contributor identities into groups",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Filter ungrouped contributors list [input type=search placeholder='Filter...']",
+        "Toggle contributor checkbox to select [CheckboxWithLabel per row]",
+        "Click 'Select all' to select all visible contributors [button 'Select all']",
+        "Click 'Clear' to deselect all selected [button 'Clear']",
+        "Click 'Create new group' to group selected contributors [button 'Create new group']",
+        "Click 'Auto group (<N>)' to auto-group by inferred aliases [button 'Auto group']",
+        "Change primary alias via group select [select in group card]",
+        "Click 'Add contributor' to add selected to existing group [button 'Add contributor']",
+        "Click 'Ungroup' icon to dissolve a group [button aria-label='Ungroup']",
+        "Click individual alias entry to remove from group [button title='Remove <email>']",
+        "Click 'Ungroup all' button to dissolve all groups [button.btn--danger 'Ungroup all']",
+        "Click modal close button / press Escape [button Modal close]"
+      ],
+      "notes": "Changes submitted to server on modal close if groups changed; can be opened from Legend or MetricsInspection"
+    },
+    {
+      "id": "/view#search-active",
+      "route": "/view",
+      "label": "Search overlay open — live file/folder search with results dropdown",
+      "section": "View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:view-main",
+      "actions": [
+        "Type in search field to filter results [input type=search]",
+        "Click result item to select object and close search [button result]",
+        "Press ArrowDown/ArrowUp to navigate results [keyboard]",
+        "Press Escape to close search [keyboard]",
+        "Click outside search area to close [pointer outside]",
+        "Submit form (Enter) to close search [form onSubmit]"
+      ],
+      "notes": "Ctrl/Cmd+F opens search; shows live count; highlights matching nodes"
+    },
+    {
+      "id": "/ui",
+      "route": "/ui",
+      "label": "UI component showcase — internal design-system demo page",
+      "section": "Dev",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standalone",
+      "actions": [
+        "Interact with button variant demos [various button elements]",
+        "Interact with disabled button demos [disabled button elements]",
+        "Type in input/select demos [input, select elements]",
+        "Change RevisionSelect demo select [RevisionSelect]",
+        "Drag range slider (round handle demo) [Slider round]",
+        "Drag range slider (square handle demo) [Slider square]",
+        "Interact with IconRadioGroup demos [IconRadioGroup]",
+        "Hover button to show tooltip demo [button 'Hover me']",
+        "Change threshold slider for dark-color test [input type=range]"
+      ],
+      "notes": "Not linked from main navigation; development reference page only"
+    },
+    {
+      "id": "#error-boundary",
+      "route": "any",
+      "label": "Global error boundary — crash or server-not-running state",
+      "section": "Error",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:standalone",
+      "actions": [
+        "Click 'Retry' to reload current page [link 'Retry']",
+        "Click 'Go back' to navigate to parent [link 'Go back']",
+        "Click 'Clear cache' to clear and reload [button.btn--danger 'Clear cache']",
+        "Click 'Report issue' to open GitHub issue [link 'Report issue']",
+        "Expand 'Error' collapsible to see stack trace [CollapsibleHeader 'Error']"
+      ],
+      "notes": "Shows parked truck if server offline; crashed truck for runtime errors"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/browse",
+      "to": "/browse",
+      "trigger": "auto: redirect — missing path param defaults to CLI arg path"
+    },
+    {
+      "from": "/browse",
+      "to": "/view#loading",
+      "trigger": "link to repository entry [link aria-disabled=false, href='/view?path=...']"
+    },
+    {
+      "from": "/browse",
+      "to": "/browse",
+      "trigger": "link to directory entry [link href='/browse?path=...']"
+    },
+    {
+      "from": "/browse",
+      "to": "/browse",
+      "trigger": "link 'Browse <segment> directory' in Breadcrumb [link title='Browse <name> directory']"
+    },
+    {
+      "from": "/browse",
+      "to": "/browse#error",
+      "trigger": "auto: path does not exist or access denied"
+    },
+    {
+      "from": "/browse#error",
+      "to": "/browse",
+      "trigger": "type valid path in 'Path' input [input#path] and press Enter or blur"
+    },
+    {
+      "from": "/browse",
+      "to": "/view#loading",
+      "trigger": "auto: redirect when path is itself a valid git repository"
+    },
+    {
+      "from": "/view#loading",
+      "to": "/view",
+      "trigger": "auto: dataPromise resolves successfully"
+    },
+    {
+      "from": "/view#loading",
+      "to": "/browse",
+      "trigger": "button 'Abort' [button.btn--danger 'Abort'] or link 'Go back' after abort"
+    },
+    {
+      "from": "/view#loading",
+      "to": "#error-boundary",
+      "trigger": "auto: analysis throws unhandled error"
+    },
+    {
+      "from": "/view",
+      "to": "/browse",
+      "trigger": "link 'Browse <parentDir> directory' in Breadcrumb [link title='Browse <name> directory']"
+    },
+    {
+      "from": "/view",
+      "to": "/view#object-selected",
+      "trigger": "click file or folder node in chart visualization [svg chart node]"
+    },
+    {
+      "from": "/view",
+      "to": "/view#zoomed",
+      "trigger": "click folder node twice / click 'Zoom in' link [link 'Zoom in']"
+    },
+    {
+      "from": "/view",
+      "to": "/view#left-collapsed",
+      "trigger": "button 'Hide left panel' [button title='Hide left panel']",
+      "guard": "screen width >= large breakpoint"
+    },
+    {
+      "from": "/view",
+      "to": "/view#right-collapsed",
+      "trigger": "button 'Hide right panel' [button title='Hide right panel']",
+      "guard": "screen width >= large breakpoint"
+    },
+    {
+      "from": "/view#left-collapsed",
+      "to": "/view",
+      "trigger": "button 'Show left panel' [button title='Show left panel']"
+    },
+    {
+      "from": "/view#left-collapsed",
+      "to": "/view#both-collapsed",
+      "trigger": "button 'Hide right panel' [button title='Hide right panel']"
+    },
+    {
+      "from": "/view#right-collapsed",
+      "to": "/view",
+      "trigger": "button 'Show Right panel' [button title='Show Right panel']"
+    },
+    {
+      "from": "/view#right-collapsed",
+      "to": "/view#both-collapsed",
+      "trigger": "button 'Hide left panel' [button title='Hide left panel']"
+    },
+    {
+      "from": "/view#both-collapsed",
+      "to": "/view#left-collapsed",
+      "trigger": "button 'Show left panel' [button title='Show left panel']"
+    },
+    {
+      "from": "/view#both-collapsed",
+      "to": "/view#right-collapsed",
+      "trigger": "button 'Show Right panel' [button title='Show Right panel']"
+    },
+    {
+      "from": "/view",
+      "to": "/view#settings-modal",
+      "trigger": "button 'Settings' [button title='Settings']"
+    },
+    {
+      "from": "/view#settings-modal",
+      "to": "/view",
+      "trigger": "button close modal / press Escape"
+    },
+    {
+      "from": "/view",
+      "to": "/view#hide-files-modal",
+      "trigger": "button 'Hidden files' [button title='Hidden files']"
+    },
+    {
+      "from": "/view#hide-files-modal",
+      "to": "/view",
+      "trigger": "button close modal / press Escape"
+    },
+    {
+      "from": "/view",
+      "to": "/view#group-contributors-modal",
+      "trigger": "button 'Group contributors' compact [button title='Group contributors']"
+    },
+    {
+      "from": "/view#object-selected",
+      "to": "/view#group-contributors-modal",
+      "trigger": "click metric card then 'group-contributors' panel option [DropdownMenu.Item 'Group contributors']"
+    },
+    {
+      "from": "/view#group-contributors-modal",
+      "to": "/view",
+      "trigger": "button close modal / press Escape"
+    },
+    {
+      "from": "/view",
+      "to": "/view#search-active",
+      "trigger": "focus search input [input type=search placeholder='Search within <repo>'] or press Ctrl/Cmd+F"
+    },
+    {
+      "from": "/view#search-active",
+      "to": "/view#object-selected",
+      "trigger": "click search result button [button result item]"
+    },
+    {
+      "from": "/view#search-active",
+      "to": "/view",
+      "trigger": "press Escape or click outside search area"
+    },
+    {
+      "from": "/view#object-selected",
+      "to": "/view",
+      "trigger": "click elsewhere in chart to deselect [svg chart background]"
+    },
+    {
+      "from": "/view#object-selected",
+      "to": "/view#zoomed",
+      "trigger": "link 'Zoom in' in Actions panel [link 'Zoom in']"
+    },
+    {
+      "from": "/view#object-selected",
+      "to": "/view#settings-modal",
+      "trigger": "button 'Settings' [button title='Settings']"
+    },
+    {
+      "from": "/view#object-selected",
+      "to": "/view#hide-files-modal",
+      "trigger": "button 'Hidden files' [button title='Hidden files']"
+    },
+    {
+      "from": "/view#zoomed",
+      "to": "/view",
+      "trigger": "button breadcrumb repo-name [button 'Reset zoom to repository root']"
+    },
+    {
+      "from": "/view#zoomed",
+      "to": "/view#object-selected",
+      "trigger": "click file or folder node in chart [svg chart node]"
+    },
+    {
+      "from": "/view#zoomed",
+      "to": "/view#settings-modal",
+      "trigger": "button 'Settings' [button title='Settings']"
+    },
+    {
+      "from": "/view#zoomed",
+      "to": "/view#hide-files-modal",
+      "trigger": "button 'Hidden files' [button title='Hidden files']"
+    },
+    {
+      "from": "/view",
+      "to": "#error-boundary",
+      "trigger": "auto: unhandled error in route loader or action"
+    },
+    {
+      "from": "/browse",
+      "to": "#error-boundary",
+      "trigger": "auto: unhandled error in route loader"
+    },
+    {
+      "from": "#error-boundary",
+      "to": "/view",
+      "trigger": "link 'Retry' (reload) [link reloadDocument 'Retry']"
+    },
+    {
+      "from": "#error-boundary",
+      "to": "/browse",
+      "trigger": "link 'Go back' [link 'Go back']"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "All routes are public — no authentication required",
+        "node_ids": [
+          "/browse",
+          "/browse#error",
+          "/view#loading",
+          "/view",
+          "/view#left-collapsed",
+          "/view#right-collapsed",
+          "/view#both-collapsed",
+          "/view#object-selected",
+          "/view#zoomed",
+          "/view#settings-modal",
+          "/view#hide-files-modal",
+          "/view#group-contributors-modal",
+          "/view#search-active",
+          "/ui",
+          "#error-boundary"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:browse",
+        "label": "Browse layout — sidebar with Git Truck info + main card with directory listing",
+        "node_ids": [
+          "/browse",
+          "/browse#error"
+        ]
+      },
+      {
+        "id": "layout:view-loading",
+        "label": "View loading shell — full-screen centered loading indicator",
+        "node_ids": [
+          "/view#loading"
+        ]
+      },
+      {
+        "id": "layout:view-main",
+        "label": "View main shell — responsive 3-column grid: left panel, chart+timeline, right panel",
+        "node_ids": [
+          "/view",
+          "/view#left-collapsed",
+          "/view#right-collapsed",
+          "/view#both-collapsed",
+          "/view#object-selected",
+          "/view#zoomed",
+          "/view#settings-modal",
+          "/view#hide-files-modal",
+          "/view#group-contributors-modal",
+          "/view#search-active"
+        ]
+      },
+      {
+        "id": "layout:standalone",
+        "label": "Standalone pages — no shared app shell",
+        "node_ids": [
+          "/ui",
+          "#error-boundary"
+        ]
+      }
+    ]
+  }
+}

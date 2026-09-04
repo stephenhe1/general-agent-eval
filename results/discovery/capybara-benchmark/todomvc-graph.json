@@ -1,0 +1,518 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "React TypeScript TodoMVC 2022",
+    "base_url": "http://localhost:3025",
+    "framework": "React 18 + React Router v6 + Recoil",
+    "total_states": 12,
+    "explored": 12,
+    "skipped": 0,
+    "verified_live": ["/", "/active", "/completed", "/*", "/#has-todos", "/#has-completed", "/#todo-item-editing"]
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "TodoMVC — empty (no todos exist)",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type in new-todo input [data-testid=new-todo-input-text]",
+        "Press Enter to add first todo [data-testid=new-todo-input-text]"
+      ],
+      "notes": "AppState.todoList is empty; TodoList and UnderBar not rendered"
+    },
+    {
+      "id": "/#has-todos",
+      "route": "/",
+      "label": "TodoMVC — All filter, todos present, none completed",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type and press Enter to add todo [data-testid=new-todo-input-text]",
+        "Click toggle-all checkbox [data-testid=toggle-all-btn]",
+        "Click todo checkbox [data-testid=todo-item-complete-check]",
+        "Double-click todo label to edit [data-testid=todo-body-text]",
+        "Click destroy button [data-testid=delete-todo-btn]",
+        "Click All filter link [data-cy=all-filter]",
+        "Click Active filter link [data-cy=active-filter]",
+        "Click Completed filter link [data-cy=completed-filter]"
+      ],
+      "notes": "All filter selected; UnderBar shows item count; no Clear Completed btn"
+    },
+    {
+      "id": "/#has-completed",
+      "route": "/",
+      "label": "TodoMVC — All filter, some todos completed",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type and press Enter to add todo [data-testid=new-todo-input-text]",
+        "Click toggle-all checkbox [data-testid=toggle-all-btn]",
+        "Click todo checkbox to toggle [data-testid=todo-item-complete-check]",
+        "Double-click todo label to edit [data-testid=todo-body-text]",
+        "Click destroy button [data-testid=delete-todo-btn]",
+        "Click Clear Completed button [data-cy=clear-completed-button]",
+        "Click All filter link [data-cy=all-filter]",
+        "Click Active filter link [data-cy=active-filter]",
+        "Click Completed filter link [data-cy=completed-filter]"
+      ],
+      "notes": "Clear Completed button visible because completed>0"
+    },
+    {
+      "id": "/#todo-item-editing",
+      "route": "/",
+      "label": "TodoMVC — All filter, one todo item in edit mode",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type in edit input [data-testid=todo-edit-input]",
+        "Press Enter to commit edit [data-testid=todo-edit-input]",
+        "Press Escape to cancel edit [data-testid=todo-edit-input]",
+        "Blur (click away) to commit edit [data-testid=todo-edit-input]",
+        "Clear input value and blur to delete item [data-testid=todo-edit-input]"
+      ],
+      "notes": "li.editing class set; edit input focused; triggered by dblclick on label"
+    },
+    {
+      "id": "/active#has-active",
+      "route": "/active",
+      "label": "Active filter — uncompleted todos visible",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type and press Enter to add todo [data-testid=new-todo-input-text]",
+        "Click toggle-all checkbox [data-testid=toggle-all-btn]",
+        "Click todo checkbox to complete [data-testid=todo-item-complete-check]",
+        "Double-click todo label to edit [data-testid=todo-body-text]",
+        "Click destroy button [data-testid=delete-todo-btn]",
+        "Click All filter link [data-cy=all-filter]",
+        "Click Active filter link [data-cy=active-filter]",
+        "Click Completed filter link [data-cy=completed-filter]"
+      ],
+      "notes": "Active filter selected; only uncompleted todos shown in list"
+    },
+    {
+      "id": "/active#no-active",
+      "route": "/active",
+      "label": "Active filter — no active todos (all completed)",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type and press Enter to add todo [data-testid=new-todo-input-text]",
+        "Click toggle-all checkbox [data-testid=toggle-all-btn]",
+        "Click Clear Completed button [data-cy=clear-completed-button]",
+        "Click All filter link [data-cy=all-filter]",
+        "Click Active filter link [data-cy=active-filter]",
+        "Click Completed filter link [data-cy=completed-filter]"
+      ],
+      "notes": "List is empty; footer shows 0 items left + Clear Completed btn"
+    },
+    {
+      "id": "/active#todo-item-editing",
+      "route": "/active",
+      "label": "Active filter — one todo item in edit mode",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type in edit input [data-testid=todo-edit-input]",
+        "Press Enter to commit edit [data-testid=todo-edit-input]",
+        "Press Escape to cancel edit [data-testid=todo-edit-input]",
+        "Blur (click away) to commit edit [data-testid=todo-edit-input]",
+        "Clear input value and blur to delete item [data-testid=todo-edit-input]"
+      ],
+      "notes": "Same editing sub-state as on / route but scoped to Active filter"
+    },
+    {
+      "id": "/completed#has-completed",
+      "route": "/completed",
+      "label": "Completed filter — completed todos visible",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type and press Enter to add todo [data-testid=new-todo-input-text]",
+        "Click toggle-all checkbox [data-testid=toggle-all-btn]",
+        "Click todo checkbox to uncomplete [data-testid=todo-item-complete-check]",
+        "Double-click todo label to edit [data-testid=todo-body-text]",
+        "Click destroy button [data-testid=delete-todo-btn]",
+        "Click Clear Completed button [data-cy=clear-completed-button]",
+        "Click All filter link [data-cy=all-filter]",
+        "Click Active filter link [data-cy=active-filter]",
+        "Click Completed filter link [data-cy=completed-filter]"
+      ],
+      "notes": "Completed filter selected; only completed todos shown; Clear Completed visible"
+    },
+    {
+      "id": "/completed#no-completed",
+      "route": "/completed",
+      "label": "Completed filter — no completed todos",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type and press Enter to add todo [data-testid=new-todo-input-text]",
+        "Click toggle-all checkbox [data-testid=toggle-all-btn]",
+        "Click All filter link [data-cy=all-filter]",
+        "Click Active filter link [data-cy=active-filter]",
+        "Click Completed filter link [data-cy=completed-filter]"
+      ],
+      "notes": "List empty; no Clear Completed; footer shows active count"
+    },
+    {
+      "id": "/completed#todo-item-editing",
+      "route": "/completed",
+      "label": "Completed filter — one todo item in edit mode",
+      "section": "Todo App",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:todomvc-shell",
+      "actions": [
+        "Type in edit input [data-testid=todo-edit-input]",
+        "Press Enter to commit edit [data-testid=todo-edit-input]",
+        "Press Escape to cancel edit [data-testid=todo-edit-input]",
+        "Blur (click away) to commit edit [data-testid=todo-edit-input]",
+        "Clear input value and blur to delete item [data-testid=todo-edit-input]"
+      ],
+      "notes": "Same editing sub-state as on / route but scoped to Completed filter"
+    },
+    {
+      "id": "/*",
+      "route": "*",
+      "label": "404 Not Found page",
+      "section": "Error",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:none",
+      "actions": [
+        "Navigate browser back button (browser-native)"
+      ],
+      "notes": "Rendered by catch-all Route; shows 'Page Not Found' [data-cy=not-found-page]"
+    },
+    {
+      "id": "/(error-boundary)",
+      "route": "*",
+      "label": "Error boundary fallback — unhandled React render error",
+      "section": "Error",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:none",
+      "actions": [
+        "Navigate browser back/refresh (browser-native)"
+      ],
+      "notes": "Shows 'Something Error Ooccurring 😞'; triggered by unhandled render error"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/#has-todos",
+      "trigger": "input [data-testid=new-todo-input-text] keypress Enter (non-empty value)",
+      "guard": "Input value must be non-empty after trim"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/#has-todos",
+      "trigger": "input [data-testid=new-todo-input-text] keypress Enter",
+      "guard": "Input value non-empty; adds new active todo to list"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/#has-completed",
+      "trigger": "checkbox [data-testid=todo-item-complete-check] click (marks todo complete)",
+      "guard": "At least one todo toggled to completed"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/#has-completed",
+      "trigger": "checkbox [data-testid=toggle-all-btn] click (marks all complete)",
+      "guard": "At least one active todo exists"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/",
+      "trigger": "button [data-testid=delete-todo-btn] click",
+      "guard": "Only one todo in list"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/#todo-item-editing",
+      "trigger": "label [data-testid=todo-body-text] dblclick",
+      "guard": null
+    },
+    {
+      "from": "/#has-completed",
+      "to": "/#has-todos",
+      "trigger": "button [data-cy=clear-completed-button] click",
+      "guard": "At least one active todo remains"
+    },
+    {
+      "from": "/#has-completed",
+      "to": "/",
+      "trigger": "button [data-cy=clear-completed-button] click",
+      "guard": "No active todos remain after clearing"
+    },
+    {
+      "from": "/#has-completed",
+      "to": "/#has-todos",
+      "trigger": "checkbox [data-testid=todo-item-complete-check] click (uncompletes)",
+      "guard": "Uncompleting last completed todo"
+    },
+    {
+      "from": "/#has-completed",
+      "to": "/#todo-item-editing",
+      "trigger": "label [data-testid=todo-body-text] dblclick",
+      "guard": null
+    },
+    {
+      "from": "/#todo-item-editing",
+      "to": "/#has-todos",
+      "trigger": "input [data-testid=todo-edit-input] keydown Enter (non-empty value)",
+      "guard": "Edit input value non-empty"
+    },
+    {
+      "from": "/#todo-item-editing",
+      "to": "/#has-todos",
+      "trigger": "input [data-testid=todo-edit-input] keydown Escape",
+      "guard": "Edit input value non-empty"
+    },
+    {
+      "from": "/#todo-item-editing",
+      "to": "/#has-todos",
+      "trigger": "input [data-testid=todo-edit-input] blur",
+      "guard": "Edit input value non-empty after trim"
+    },
+    {
+      "from": "/#todo-item-editing",
+      "to": "/#has-todos",
+      "trigger": "input [data-testid=todo-edit-input] blur with empty value (deletes item)",
+      "guard": "More than one todo remains"
+    },
+    {
+      "from": "/#todo-item-editing",
+      "to": "/",
+      "trigger": "input [data-testid=todo-edit-input] blur with empty value (deletes last item)",
+      "guard": "Only one todo in list"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/active#has-active",
+      "trigger": "link [data-cy=active-filter] click",
+      "guard": "At least one active todo exists"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/active#no-active",
+      "trigger": "link [data-cy=active-filter] click",
+      "guard": "No active todos (all completed)"
+    },
+    {
+      "from": "/#has-todos",
+      "to": "/completed#no-completed",
+      "trigger": "link [data-cy=completed-filter] click",
+      "guard": "No completed todos"
+    },
+    {
+      "from": "/#has-completed",
+      "to": "/active#has-active",
+      "trigger": "link [data-cy=active-filter] click",
+      "guard": "At least one active todo"
+    },
+    {
+      "from": "/#has-completed",
+      "to": "/completed#has-completed",
+      "trigger": "link [data-cy=completed-filter] click",
+      "guard": "At least one completed todo"
+    },
+    {
+      "from": "/active#has-active",
+      "to": "/#has-todos",
+      "trigger": "link [data-cy=all-filter] click",
+      "guard": null
+    },
+    {
+      "from": "/active#has-active",
+      "to": "/completed#has-completed",
+      "trigger": "link [data-cy=completed-filter] click",
+      "guard": "At least one completed todo exists in full list"
+    },
+    {
+      "from": "/active#has-active",
+      "to": "/completed#no-completed",
+      "trigger": "link [data-cy=completed-filter] click",
+      "guard": "No completed todos in full list"
+    },
+    {
+      "from": "/active#has-active",
+      "to": "/active#no-active",
+      "trigger": "checkbox [data-testid=todo-item-complete-check] click (completes last active)",
+      "guard": "Completing the last remaining active todo"
+    },
+    {
+      "from": "/active#has-active",
+      "to": "/active#todo-item-editing",
+      "trigger": "label [data-testid=todo-body-text] dblclick",
+      "guard": null
+    },
+    {
+      "from": "/active#no-active",
+      "to": "/#has-completed",
+      "trigger": "link [data-cy=all-filter] click",
+      "guard": null
+    },
+    {
+      "from": "/active#no-active",
+      "to": "/completed#has-completed",
+      "trigger": "link [data-cy=completed-filter] click",
+      "guard": null
+    },
+    {
+      "from": "/active#no-active",
+      "to": "/active#has-active",
+      "trigger": "input [data-testid=new-todo-input-text] keypress Enter",
+      "guard": "Adding a new (active) todo"
+    },
+    {
+      "from": "/active#no-active",
+      "to": "/",
+      "trigger": "button [data-cy=clear-completed-button] click",
+      "guard": "Clears all todos; list becomes empty"
+    },
+    {
+      "from": "/active#todo-item-editing",
+      "to": "/active#has-active",
+      "trigger": "input [data-testid=todo-edit-input] keydown Enter",
+      "guard": "Non-empty value"
+    },
+    {
+      "from": "/active#todo-item-editing",
+      "to": "/active#has-active",
+      "trigger": "input [data-testid=todo-edit-input] blur",
+      "guard": "Non-empty value"
+    },
+    {
+      "from": "/completed#has-completed",
+      "to": "/#has-completed",
+      "trigger": "link [data-cy=all-filter] click",
+      "guard": null
+    },
+    {
+      "from": "/completed#has-completed",
+      "to": "/active#has-active",
+      "trigger": "link [data-cy=active-filter] click",
+      "guard": "At least one active todo in full list"
+    },
+    {
+      "from": "/completed#has-completed",
+      "to": "/completed#no-completed",
+      "trigger": "button [data-cy=clear-completed-button] click",
+      "guard": "Active todos still remain"
+    },
+    {
+      "from": "/completed#has-completed",
+      "to": "/completed#no-completed",
+      "trigger": "checkbox [data-testid=todo-item-complete-check] click (uncompletes last)",
+      "guard": "Uncompleting last completed todo"
+    },
+    {
+      "from": "/completed#has-completed",
+      "to": "/completed#todo-item-editing",
+      "trigger": "label [data-testid=todo-body-text] dblclick",
+      "guard": null
+    },
+    {
+      "from": "/completed#no-completed",
+      "to": "/#has-todos",
+      "trigger": "link [data-cy=all-filter] click",
+      "guard": null
+    },
+    {
+      "from": "/completed#no-completed",
+      "to": "/active#has-active",
+      "trigger": "link [data-cy=active-filter] click",
+      "guard": null
+    },
+    {
+      "from": "/completed#todo-item-editing",
+      "to": "/completed#has-completed",
+      "trigger": "input [data-testid=todo-edit-input] keydown Enter",
+      "guard": "Non-empty value"
+    },
+    {
+      "from": "/completed#todo-item-editing",
+      "to": "/completed#has-completed",
+      "trigger": "input [data-testid=todo-edit-input] blur",
+      "guard": "Non-empty value"
+    },
+    {
+      "from": "/",
+      "to": "/*",
+      "trigger": "auto: navigate to any unmatched path",
+      "guard": "URL does not match /, /active, /completed"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "Fully public — no authentication required",
+        "node_ids": [
+          "/",
+          "/#has-todos",
+          "/#has-completed",
+          "/#todo-item-editing",
+          "/active#has-active",
+          "/active#no-active",
+          "/active#todo-item-editing",
+          "/completed#has-completed",
+          "/completed#no-completed",
+          "/completed#todo-item-editing",
+          "/*",
+          "/(error-boundary)"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:todomvc-shell",
+        "label": "TodoMVC shell: h1 header, new-todo input, optional list+footer, copyright",
+        "node_ids": [
+          "/",
+          "/#has-todos",
+          "/#has-completed",
+          "/#todo-item-editing",
+          "/active#has-active",
+          "/active#no-active",
+          "/active#todo-item-editing",
+          "/completed#has-completed",
+          "/completed#no-completed",
+          "/completed#todo-item-editing"
+        ]
+      },
+      {
+        "id": "layout:none",
+        "label": "No shared shell — standalone full-page states",
+        "node_ids": [
+          "/*",
+          "/(error-boundary)"
+        ]
+      }
+    ]
+  }
+}

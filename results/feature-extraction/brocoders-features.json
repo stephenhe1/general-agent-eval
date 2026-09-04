@@ -1,0 +1,1276 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "app_name": "Extensive React Boilerplate (Next.js 16 Admin Panel)",
+    "source_graph": "UI_GRAPH.json",
+    "total_features": 19,
+    "total_scenarios": 39,
+    "total_paths": 43
+  },
+  "features": [
+    {
+      "id": "feat:browse-home",
+      "name": "Browse Application Home",
+      "description": "View the public landing page with app description and navigate to key sections from the sidebar.",
+      "section": "Public",
+      "related_nodes": ["/{language}"],
+      "scenarios": [
+        {
+          "id": "scen:browse-home-guest",
+          "name": "Guest user views home page with sign-in and sign-up navigation",
+          "preconditions": ["User is not authenticated"],
+          "expected_outcome": "Home page shows app title and description; sidebar footer displays Sign In and Sign Up links.",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:browse-home-authenticated",
+          "name": "Authenticated user views home with profile and logout navigation",
+          "preconditions": ["User is authenticated (any role)"],
+          "expected_outcome": "Home page sidebar shows Profile and Logout menu items; Sign In/Sign Up links are hidden.",
+          "paths": [
+            {
+              "id": "path:2",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "Click 'Home' sidebar link",
+                  "transition": "link 'Home' in sidebar nav"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:3",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Home' sidebar link",
+                  "transition": "link 'Home' in sidebar nav"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:sign-in",
+      "name": "Sign In",
+      "description": "Authenticate with email/password or social auth (Google, Facebook) to access protected areas.",
+      "section": "Authentication",
+      "related_nodes": ["/{language}/sign-in", "/{language}"],
+      "scenarios": [
+        {
+          "id": "scen:sign-in-email-success",
+          "name": "Sign in with email and password — successful login",
+          "preconditions": [
+            "User is not authenticated",
+            "Valid registered email and password available"
+          ],
+          "expected_outcome": "User is authenticated and auto-redirected to the home page (/{language}).",
+          "paths": [
+            {
+              "id": "path:4",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click 'Sign In' in sidebar footer [when unauthenticated]",
+                  "transition": "link 'Sign In' in sidebar footer"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Submit sign-in form [data-testid=sign-in-submit]",
+                  "transition": "auto: redirect on successful login (or already authenticated)"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sign-in-social-auth",
+          "name": "Sign in with Google or Facebook social auth",
+          "preconditions": [
+            "User is not authenticated",
+            "Social auth is enabled via .env.local (GOOGLE_CLIENT_ID / FACEBOOK_APP_ID)"
+          ],
+          "expected_outcome": "OAuth provider flow initiated. Post-OAuth redirect is not explicitly modeled in the graph.",
+          "paths": [
+            {
+              "id": "path:5",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click 'Sign In' in sidebar footer [when unauthenticated]",
+                  "transition": "link 'Sign In' in sidebar footer"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Click 'Sign in with Google' [GoogleAuth button, if enabled]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sign-in-already-authenticated",
+          "name": "Access sign-in page while already authenticated — auto-redirect to home",
+          "preconditions": [
+            "User is already authenticated",
+            "withPageRequiredGuest guard is active on /{language}/sign-in"
+          ],
+          "expected_outcome": "User is immediately redirected to /{language} home without seeing the sign-in form.",
+          "paths": [
+            {
+              "id": "path:6",
+              "steps": [
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": "auto: redirect on successful login (or already authenticated)"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:sign-up",
+      "name": "Sign Up",
+      "description": "Register a new user account with name, email, password, and privacy policy acceptance.",
+      "section": "Authentication",
+      "related_nodes": ["/{language}/sign-up", "/{language}/sign-in", "/{language}"],
+      "scenarios": [
+        {
+          "id": "scen:sign-up-success",
+          "name": "Register a new account and auto-login",
+          "preconditions": [
+            "User is not authenticated",
+            "IS_SIGN_UP_ENABLED=true",
+            "Valid first name, last name, email, password, and policy checkbox checked"
+          ],
+          "expected_outcome": "New account created, user auto-logged-in, and redirected to home page.",
+          "paths": [
+            {
+              "id": "path:7",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click 'Sign Up' in sidebar footer [when unauthenticated, IS_SIGN_UP_ENABLED]",
+                  "transition": "link 'Sign Up' in sidebar footer"
+                },
+                {
+                  "state": "/{language}/sign-up",
+                  "action": "Submit sign-up form [data-testid=sign-up-submit]",
+                  "transition": "auto: redirect on successful sign-up + login"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:8",
+              "steps": [
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Click 'Create Account' button [data-testid=create-account]",
+                  "transition": "button 'Create Account' [data-testid=create-account]"
+                },
+                {
+                  "state": "/{language}/sign-up",
+                  "action": "Submit sign-up form [data-testid=sign-up-submit]",
+                  "transition": "auto: redirect on successful sign-up + login"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sign-up-navigate-to-login",
+          "name": "Navigate from sign-up page back to sign-in",
+          "preconditions": ["User is not authenticated", "User is on the sign-up page"],
+          "expected_outcome": "User is taken to the sign-in page.",
+          "paths": [
+            {
+              "id": "path:9",
+              "steps": [
+                {
+                  "state": "/{language}/sign-up",
+                  "action": "Click 'Already have an account?' / login button [data-testid=login]",
+                  "transition": "button 'Already have an account?' [data-testid=login]"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sign-up-view-privacy-policy",
+          "name": "Open Privacy Policy from the sign-up form's policy checkbox",
+          "preconditions": ["User is not authenticated", "User is on the sign-up page"],
+          "expected_outcome": "User is navigated to the full Privacy Policy page.",
+          "paths": [
+            {
+              "id": "path:10",
+              "steps": [
+                {
+                  "state": "/{language}/sign-up",
+                  "action": "Click Privacy Policy link in checkbox label",
+                  "transition": "link 'Privacy Policy' inside policy checkbox label"
+                },
+                {
+                  "state": "/{language}/privacy-policy",
+                  "action": "Click external email link [boilerplates@brocoders.com]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:request-password-reset",
+      "name": "Request Password Reset Email",
+      "description": "Submit an email address to receive a password reset link via email.",
+      "section": "Authentication",
+      "related_nodes": ["/{language}/forgot-password", "/{language}/sign-in"],
+      "scenarios": [
+        {
+          "id": "scen:forgot-password-submit",
+          "name": "Submit email to request a reset link — success shows toast",
+          "preconditions": [
+            "User is not authenticated",
+            "Valid registered email address provided"
+          ],
+          "expected_outcome": "Success snackbar/toast appears; user remains on the forgot-password page.",
+          "paths": [
+            {
+              "id": "path:11",
+              "steps": [
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Click 'Forgot Password' link [data-testid=forgot-password]",
+                  "transition": "link 'Forgot Password' [data-testid=forgot-password]"
+                },
+                {
+                  "state": "/{language}/forgot-password",
+                  "action": "Submit forgot-password form [data-testid=send-email]",
+                  "transition": "submit form [data-testid=send-email] — success: stays on page with toast"
+                },
+                {
+                  "state": "/{language}/forgot-password",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:reset-password",
+      "name": "Reset Password via Email Link",
+      "description": "Set a new password using the reset link from email; requires valid ?hash and ?expires query params.",
+      "section": "Authentication",
+      "related_nodes": ["/{language}/password-change", "/{language}/sign-in"],
+      "scenarios": [
+        {
+          "id": "scen:reset-password-success",
+          "name": "Set new password with a valid, unexpired reset link",
+          "preconditions": [
+            "User has a valid password reset link with ?hash and ?expires params",
+            "Token has not expired"
+          ],
+          "expected_outcome": "New password saved; user redirected to the sign-in page.",
+          "paths": [
+            {
+              "id": "path:12",
+              "steps": [
+                {
+                  "state": "/{language}/password-change",
+                  "action": "Submit password change [data-testid=set-password]",
+                  "transition": "auto: redirect after successful password reset"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:reset-password-expired",
+          "name": "Attempt password reset with an expired link",
+          "preconditions": ["User accesses password-change URL with an expired token (?expires in the past)"],
+          "expected_outcome": "Expired-link alert [data-testid=reset-link-expired-alert] shown; no password change is possible.",
+          "paths": [
+            {
+              "id": "path:13",
+              "steps": [
+                {
+                  "state": "/{language}/password-change",
+                  "action": "View expired-link alert if token expired [data-testid=reset-link-expired-alert]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:confirm-email",
+      "name": "Confirm Email Address",
+      "description": "Verify a newly registered email by following a confirmation link; page auto-processes on mount.",
+      "section": "Authentication",
+      "related_nodes": ["/{language}/confirm-email", "/{language}/profile", "/{language}"],
+      "scenarios": [
+        {
+          "id": "scen:confirm-email-success",
+          "name": "Valid confirmation hash — email confirmed, redirected to profile",
+          "preconditions": ["User accesses /{language}/confirm-email with a valid ?hash param"],
+          "expected_outcome": "Email confirmed (HTTP 204); user redirected to /{language}/profile.",
+          "paths": [
+            {
+              "id": "path:14",
+              "steps": [
+                {
+                  "state": "/{language}/confirm-email",
+                  "action": "No user actions — auto-processes ?hash= param on mount",
+                  "transition": "auto: redirect on successful email confirmation (HTTP 204)"
+                },
+                {
+                  "state": "/{language}/profile",
+                  "action": "View user name [data-testid=user-name]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:confirm-email-failure",
+          "name": "Invalid or already-used hash — confirmation fails, redirected to home",
+          "preconditions": ["User accesses confirm-email URL with an invalid or already-consumed hash param"],
+          "expected_outcome": "Confirmation fails; user redirected to /{language} home page.",
+          "paths": [
+            {
+              "id": "path:15",
+              "steps": [
+                {
+                  "state": "/{language}/confirm-email",
+                  "action": "No user actions — auto-processes ?hash= param on mount",
+                  "transition": "auto: redirect on failed email confirmation"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:confirm-new-email",
+      "name": "Confirm New Email Address Change",
+      "description": "Verify an email change request by following the confirmation link sent to the new address.",
+      "section": "Authentication",
+      "related_nodes": ["/{language}/confirm-new-email", "/{language}/profile", "/{language}"],
+      "scenarios": [
+        {
+          "id": "scen:confirm-new-email-authenticated-success",
+          "name": "Authenticated user confirms email change — redirected to profile",
+          "preconditions": [
+            "User is authenticated",
+            "Valid ?hash param present in URL"
+          ],
+          "expected_outcome": "Email change confirmed; user redirected to /{language}/profile.",
+          "paths": [
+            {
+              "id": "path:16",
+              "steps": [
+                {
+                  "state": "/{language}/confirm-new-email",
+                  "action": "No user actions — auto-processes ?hash= param on mount",
+                  "transition": "auto: redirect on success when user is authenticated"
+                },
+                {
+                  "state": "/{language}/profile",
+                  "action": "View user email [data-testid=user-email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:confirm-new-email-unauthenticated-or-failure",
+          "name": "Unauthenticated confirmation or failure — redirected to home",
+          "preconditions": ["User is not authenticated OR ?hash param is invalid/expired"],
+          "expected_outcome": "User redirected to /{language} home page.",
+          "paths": [
+            {
+              "id": "path:17",
+              "steps": [
+                {
+                  "state": "/{language}/confirm-new-email",
+                  "action": "No user actions — auto-processes ?hash= param on mount",
+                  "transition": "auto: redirect on success (unauthenticated) or failure"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:view-privacy-policy",
+      "name": "View Privacy Policy",
+      "description": "Read the full privacy policy document and access external support links (email, website, GitHub, Discord).",
+      "section": "Legal",
+      "related_nodes": ["/{language}/privacy-policy"],
+      "scenarios": [
+        {
+          "id": "scen:view-privacy-policy-from-home",
+          "name": "Navigate to Privacy Policy from the home page",
+          "preconditions": ["User is on the home page (authenticated or guest)"],
+          "expected_outcome": "Privacy Policy page displayed with full policy text and external links.",
+          "paths": [
+            {
+              "id": "path:18",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click 'Privacy Policy' link [data-testid=home-title sibling]",
+                  "transition": "link 'Privacy Policy' at bottom of home content"
+                },
+                {
+                  "state": "/{language}/privacy-policy",
+                  "action": "Click external email link [boilerplates@brocoders.com]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-privacy-policy-from-sign-up",
+          "name": "Navigate to Privacy Policy from the sign-up form's policy checkbox label",
+          "preconditions": ["User is not authenticated", "User is on the sign-up page"],
+          "expected_outcome": "Privacy Policy page displayed.",
+          "paths": [
+            {
+              "id": "path:19",
+              "steps": [
+                {
+                  "state": "/{language}/sign-up",
+                  "action": "Click Privacy Policy link in checkbox label",
+                  "transition": "link 'Privacy Policy' inside policy checkbox label"
+                },
+                {
+                  "state": "/{language}/privacy-policy",
+                  "action": "Click external website link [bcboilerplates.com]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:view-profile",
+      "name": "View Own Profile",
+      "description": "View the authenticated user's avatar, name, and email on the profile page.",
+      "section": "User Profile",
+      "related_nodes": ["/{language}/profile"],
+      "scenarios": [
+        {
+          "id": "scen:view-profile-authenticated",
+          "name": "Authenticated user navigates to and views their profile",
+          "preconditions": ["User is authenticated (any role)"],
+          "expected_outcome": "Profile page displays user avatar [data-testid=user-icon], name [data-testid=user-name], email [data-testid=user-email], and Edit Profile button.",
+          "paths": [
+            {
+              "id": "path:20",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click 'Profile' in sidebar user menu [when authenticated]",
+                  "transition": "DropdownMenuItem 'Profile' [data-testid=user-profile] in sidebar user menu"
+                },
+                {
+                  "state": "/{language}/profile",
+                  "action": "View user name [data-testid=user-name]",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:21",
+              "steps": [
+                {
+                  "state": "/{language}/confirm-email",
+                  "action": "No user actions — auto-processes ?hash= param on mount",
+                  "transition": "auto: redirect on successful email confirmation (HTTP 204)"
+                },
+                {
+                  "state": "/{language}/profile",
+                  "action": "View user avatar [data-testid=user-icon]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-profile-unauthenticated-redirect",
+          "name": "Unauthenticated access to profile is redirected to sign-in",
+          "preconditions": [
+            "User is not authenticated",
+            "User attempts to access /{language}/profile directly"
+          ],
+          "expected_outcome": "User is redirected to /{language}/sign-in with a ?returnTo parameter.",
+          "paths": [
+            {
+              "id": "path:22",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "View user avatar [data-testid=user-icon]",
+                  "transition": "auto: redirect if unauthenticated [withPageRequiredAuth guard]"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:edit-profile",
+      "name": "Edit Profile Information",
+      "description": "Update avatar or name, change email address, or change password from the profile edit page. Email/password forms visible only for email-provider accounts. No post-save redirect edge is present in the graph.",
+      "section": "User Profile",
+      "related_nodes": ["/{language}/profile", "/{language}/profile/edit"],
+      "scenarios": [
+        {
+          "id": "scen:edit-profile-basic-info",
+          "name": "Edit name or avatar and save basic profile info",
+          "preconditions": ["User is authenticated"],
+          "expected_outcome": "Profile info (avatar/name) updated. Graph does not model a post-save redirect; success is an in-page outcome.",
+          "paths": [
+            {
+              "id": "path:23",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "Click 'Edit Profile' button [data-testid=edit-profile]",
+                  "transition": "button 'Edit Profile' [data-testid=edit-profile]"
+                },
+                {
+                  "state": "/{language}/profile/edit",
+                  "action": "Save basic info [data-testid=save-profile]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-profile-cancel",
+          "name": "Open profile edit page then cancel to return to profile view",
+          "preconditions": ["User is authenticated"],
+          "expected_outcome": "User returned to the profile view page without any changes saved.",
+          "paths": [
+            {
+              "id": "path:24",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "Click 'Edit Profile' button [data-testid=edit-profile]",
+                  "transition": "button 'Edit Profile' [data-testid=edit-profile]"
+                },
+                {
+                  "state": "/{language}/profile/edit",
+                  "action": "Cancel basic info edit [data-testid=cancel-edit-profile]",
+                  "transition": "button 'Cancel' [data-testid=cancel-edit-profile] OR [data-testid=cancel-edit-email] OR [data-testid=cancel-edit-password]"
+                },
+                {
+                  "state": "/{language}/profile",
+                  "action": "View user name [data-testid=user-name]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-profile-change-email",
+          "name": "Request an email address change (email-provider accounts only)",
+          "preconditions": [
+            "User is authenticated",
+            "User account uses email/password provider (not social)"
+          ],
+          "expected_outcome": "Confirmation email sent to new address; change pending until confirmed via /{language}/confirm-new-email.",
+          "paths": [
+            {
+              "id": "path:25",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "Click 'Edit Profile' button [data-testid=edit-profile]",
+                  "transition": "button 'Edit Profile' [data-testid=edit-profile]"
+                },
+                {
+                  "state": "/{language}/profile/edit",
+                  "action": "Save email change [data-testid=save-email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-profile-change-password",
+          "name": "Change account password (email-provider accounts only)",
+          "preconditions": [
+            "User is authenticated",
+            "User account uses email/password provider (not social)"
+          ],
+          "expected_outcome": "Password changed successfully. Graph does not model a post-save redirect.",
+          "paths": [
+            {
+              "id": "path:26",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "Click 'Edit Profile' button [data-testid=edit-profile]",
+                  "transition": "button 'Edit Profile' [data-testid=edit-profile]"
+                },
+                {
+                  "state": "/{language}/profile/edit",
+                  "action": "Save password change [data-testid=save-password]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:sign-out",
+      "name": "Sign Out",
+      "description": "Log out of the current session via the sidebar user menu; redirects to sign-in. Graph models logout edge only from /{language}/profile.",
+      "section": "User Profile",
+      "related_nodes": ["/{language}/profile", "/{language}/sign-in"],
+      "scenarios": [
+        {
+          "id": "scen:sign-out-from-profile",
+          "name": "Sign out using the Logout menu item on the profile page",
+          "preconditions": ["User is authenticated", "User is on the /{language}/profile page"],
+          "expected_outcome": "Session terminated via logOut(); user redirected to /{language}/sign-in.",
+          "paths": [
+            {
+              "id": "path:27",
+              "steps": [
+                {
+                  "state": "/{language}/profile",
+                  "action": "Click 'Logout' [data-testid=logout-menu-item]",
+                  "transition": "DropdownMenuItem 'Logout' [data-testid=logout-menu-item] — triggers logOut()"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:admin-dashboard",
+      "name": "Access Admin Dashboard",
+      "description": "View the admin panel home page. Restricted to ADMIN role. No graph edge navigates inbound to this node — it is reached by direct URL only.",
+      "section": "Admin Panel",
+      "related_nodes": ["/{language}/admin-panel"],
+      "scenarios": [
+        {
+          "id": "scen:admin-dashboard-access",
+          "name": "ADMIN user views the admin dashboard and navigates to Users",
+          "preconditions": [
+            "User is authenticated",
+            "User has ADMIN role"
+          ],
+          "expected_outcome": "Admin panel home page shows title and description; Users sidebar link visible.",
+          "paths": [
+            {
+              "id": "path:28",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel",
+                  "action": "Click 'Users' sidebar link [admin nav]",
+                  "transition": "link 'Users' in sidebar nav"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:admin-dashboard-non-admin-redirect",
+          "name": "Non-admin authenticated user accessing admin panel is redirected to home",
+          "preconditions": [
+            "User is authenticated",
+            "User does NOT have ADMIN role"
+          ],
+          "expected_outcome": "withPageRequiredAuth guard fires; user auto-redirected to /{language} home.",
+          "paths": [
+            {
+              "id": "path:29",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel",
+                  "action": "Toggle theme [ThemeSwitchButton in app-bar]",
+                  "transition": "auto: redirect if authenticated but not ADMIN role [withPageRequiredAuth guard]"
+                },
+                {
+                  "state": "/{language}",
+                  "action": "Click brand link in app-bar to reload home",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:browse-users",
+      "name": "Browse User List",
+      "description": "View, sort by ID or Email, and infinitely scroll through all users in the admin user table.",
+      "section": "Admin Panel",
+      "related_nodes": ["/{language}/admin-panel/users", "/{language}/admin-panel"],
+      "scenarios": [
+        {
+          "id": "scen:browse-users-view-list",
+          "name": "Admin views and sorts the user list",
+          "preconditions": ["User is authenticated as ADMIN"],
+          "expected_outcome": "Virtualized users table shown with sortable ID and Email columns; infinite scroll loads more users.",
+          "paths": [
+            {
+              "id": "path:30",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel",
+                  "action": "Click 'Users' sidebar link [admin nav]",
+                  "transition": "link 'Users' in sidebar nav"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by Email column [button in TableHead 'Email']",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:31",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Click 'Users' sidebar link [when authenticated as admin]",
+                  "transition": "link 'Users' in sidebar nav"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:browse-users-unauthenticated-redirect",
+          "name": "Unauthenticated access or expired session triggers redirect to sign-in",
+          "preconditions": ["User is not authenticated OR session has expired (401 response)"],
+          "expected_outcome": "User is redirected to /{language}/sign-in.",
+          "paths": [
+            {
+              "id": "path:32",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": "auto: redirect on 401 or if unauthenticated [withPageRequiredAuth guard]"
+                },
+                {
+                  "state": "/{language}/sign-in",
+                  "action": "Enter email [data-testid=email]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:filter-users",
+      "name": "Filter Users by Role",
+      "description": "Open the Filter popover on the user list, select one or more roles, and apply or dismiss the filter.",
+      "section": "Admin Panel",
+      "related_nodes": [
+        "/{language}/admin-panel/users",
+        "/{language}/admin-panel/users#filter-popover"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:filter-users-apply",
+          "name": "Select role(s) and apply filter to narrow the user list",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "User is on the Users list page"
+          ],
+          "expected_outcome": "User list filtered by selected role(s); ?filter= search param updated in URL.",
+          "paths": [
+            {
+              "id": "path:33",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Open filter popover [button 'Filter' data-testid=roles sibling]",
+                  "transition": "button 'Filter' [PopoverTrigger in UserFilter]"
+                },
+                {
+                  "state": "/{language}/admin-panel/users#filter-popover",
+                  "action": "Apply filter [button 'Apply' in popover form]",
+                  "transition": "button 'Apply' inside filter popover form"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:filter-users-dismiss",
+          "name": "Dismiss filter popover by clicking outside without applying",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "Filter popover is open"
+          ],
+          "expected_outcome": "Popover closed; user list unchanged; ?filter= search param unchanged.",
+          "paths": [
+            {
+              "id": "path:34",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Open filter popover [button 'Filter' data-testid=roles sibling]",
+                  "transition": "button 'Filter' [PopoverTrigger in UserFilter]"
+                },
+                {
+                  "state": "/{language}/admin-panel/users#filter-popover",
+                  "action": "Close popover by clicking outside [Popover onOpenChange]",
+                  "transition": "click outside popover [Popover onOpenChange]"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:create-user",
+      "name": "Create New User",
+      "description": "Admin fills and submits the create-user form (email, password, name, role, avatar) to add a new account.",
+      "section": "Admin Panel",
+      "related_nodes": [
+        "/{language}/admin-panel/users",
+        "/{language}/admin-panel/users/create"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:create-user-success",
+          "name": "Fill create-user form and successfully create a new account",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "Valid email, password, name, and role provided"
+          ],
+          "expected_outcome": "New user created; admin auto-redirected back to the Users list.",
+          "paths": [
+            {
+              "id": "path:35",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Create' / Add User button [Link href=/admin-panel/users/create]",
+                  "transition": "button 'Create' [Link href=/admin-panel/users/create, bg-success style]"
+                },
+                {
+                  "state": "/{language}/admin-panel/users/create",
+                  "action": "Submit create user form [button 'Save']",
+                  "transition": "button 'Cancel' [Link href=/admin-panel/users] OR auto-redirect on successful create"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:create-user-cancel",
+          "name": "Navigate to create-user form then cancel without creating",
+          "preconditions": ["User is authenticated as ADMIN"],
+          "expected_outcome": "No user created; admin returned to the Users list.",
+          "paths": [
+            {
+              "id": "path:36",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Create' / Add User button [Link href=/admin-panel/users/create]",
+                  "transition": "button 'Create' [Link href=/admin-panel/users/create, bg-success style]"
+                },
+                {
+                  "state": "/{language}/admin-panel/users/create",
+                  "action": "Cancel and go back [Link href=/admin-panel/users]",
+                  "transition": "button 'Cancel' [Link href=/admin-panel/users] OR auto-redirect on successful create"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:edit-user",
+      "name": "Edit Existing User",
+      "description": "Admin edits a user's profile info (avatar, email, name, role) or resets their password. Graph has no post-save success edge for either form.",
+      "section": "Admin Panel",
+      "related_nodes": [
+        "/{language}/admin-panel/users",
+        "/{language}/admin-panel/users/edit/[id]"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:edit-user-info",
+          "name": "Edit user's profile info and save",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "Target user exists in the system"
+          ],
+          "expected_outcome": "User info updated. Graph does not model a post-save redirect; success is an in-page outcome.",
+          "paths": [
+            {
+              "id": "path:37",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Edit' button for a user row [Link href=/admin-panel/users/edit/{id}]",
+                  "transition": "button 'Edit' [Link href=/admin-panel/users/edit/{id}] in each row"
+                },
+                {
+                  "state": "/{language}/admin-panel/users/edit/[id]",
+                  "action": "Submit user info form [button 'Save']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-user-change-password",
+          "name": "Reset a user's password from the admin edit page",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "Target user exists"
+          ],
+          "expected_outcome": "User's password updated. Graph does not model a post-save redirect; success is an in-page outcome.",
+          "paths": [
+            {
+              "id": "path:38",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Edit' button for a user row [Link href=/admin-panel/users/edit/{id}]",
+                  "transition": "button 'Edit' [Link href=/admin-panel/users/edit/{id}] in each row"
+                },
+                {
+                  "state": "/{language}/admin-panel/users/edit/[id]",
+                  "action": "Submit password change form [button 'Save']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-user-cancel",
+          "name": "Navigate to edit-user page then cancel to return to Users list",
+          "preconditions": ["User is authenticated as ADMIN"],
+          "expected_outcome": "Admin returned to Users list without saving any changes.",
+          "paths": [
+            {
+              "id": "path:39",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Edit' button for a user row [Link href=/admin-panel/users/edit/{id}]",
+                  "transition": "button 'Edit' [Link href=/admin-panel/users/edit/{id}] in each row"
+                },
+                {
+                  "state": "/{language}/admin-panel/users/edit/[id]",
+                  "action": "Cancel user info edit [Link href=/admin-panel/users]",
+                  "transition": "button 'Cancel' [Link href=/admin-panel/users] in either form"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:delete-user",
+      "name": "Delete User",
+      "description": "Admin deletes a user via the row-actions menu with an AlertDialog confirmation. Cannot delete own account (guard: user.id !== authUser.id).",
+      "section": "Admin Panel",
+      "related_nodes": [
+        "/{language}/admin-panel/users",
+        "/{language}/admin-panel/users#delete-confirm-dialog"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:delete-user-confirm",
+          "name": "Confirm deletion in the alert dialog — user is deleted",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "Target user is not the currently logged-in admin (cannot self-delete)"
+          ],
+          "expected_outcome": "User deleted from system; returned to Users list.",
+          "paths": [
+            {
+              "id": "path:40",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Delete' from row actions dropdown [DropdownMenuItem 'Delete']",
+                  "transition": "DropdownMenuItem 'Delete' [variant=destructive] in row actions menu"
+                },
+                {
+                  "state": "/{language}/admin-panel/users#delete-confirm-dialog",
+                  "action": "Confirm delete [AlertDialogAction button 'Yes']",
+                  "transition": "AlertDialogAction 'Yes' (confirms deletion) OR AlertDialogCancel 'No'"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:delete-user-cancel",
+          "name": "Open delete dialog then cancel — no deletion occurs",
+          "preconditions": [
+            "User is authenticated as ADMIN",
+            "Delete confirmation dialog is open"
+          ],
+          "expected_outcome": "Deletion cancelled; user remains in the Users list unchanged.",
+          "paths": [
+            {
+              "id": "path:41",
+              "steps": [
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Click 'Delete' from row actions dropdown [DropdownMenuItem 'Delete']",
+                  "transition": "DropdownMenuItem 'Delete' [variant=destructive] in row actions menu"
+                },
+                {
+                  "state": "/{language}/admin-panel/users#delete-confirm-dialog",
+                  "action": "Cancel delete [AlertDialogCancel button 'No']",
+                  "transition": "AlertDialogAction 'Yes' (confirms deletion) OR AlertDialogCancel 'No'"
+                },
+                {
+                  "state": "/{language}/admin-panel/users",
+                  "action": "Sort by ID column [button in TableHead 'ID']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:toggle-theme",
+      "name": "Toggle Application Theme",
+      "description": "Switch between light and dark visual themes via the ThemeSwitchButton in the app-bar, available on every page.",
+      "section": "Public",
+      "related_nodes": [
+        "/{language}",
+        "/{language}/sign-in",
+        "/{language}/sign-up",
+        "/{language}/forgot-password",
+        "/{language}/password-change",
+        "/{language}/privacy-policy",
+        "/{language}/profile",
+        "/{language}/profile/edit",
+        "/{language}/admin-panel",
+        "/{language}/admin-panel/users",
+        "/{language}/admin-panel/users/create",
+        "/{language}/admin-panel/users/edit/[id]"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:toggle-theme-global",
+          "name": "Toggle light/dark theme from any page",
+          "preconditions": ["Any page is loaded (no auth required)"],
+          "expected_outcome": "Application theme switches between light and dark; preference persists across navigation.",
+          "paths": [
+            {
+              "id": "path:42",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Toggle theme [ThemeSwitchButton in app-bar]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:change-language",
+      "name": "Change Display Language",
+      "description": "Switch the UI locale (en|ar|es|fr|hi|uk|zh) via LanguageSwitcher in the app-bar. No explicit graph edge models the navigation — URL prefix changes to /{new-language}/same-path.",
+      "section": "Public",
+      "related_nodes": [
+        "/{language}",
+        "/{language}/sign-in",
+        "/{language}/sign-up",
+        "/{language}/forgot-password",
+        "/{language}/password-change",
+        "/{language}/privacy-policy",
+        "/{language}/profile",
+        "/{language}/profile/edit",
+        "/{language}/admin-panel",
+        "/{language}/admin-panel/users",
+        "/{language}/admin-panel/users/create",
+        "/{language}/admin-panel/users/edit/[id]"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:change-language-global",
+          "name": "Switch UI language from any page",
+          "preconditions": ["Any page is loaded"],
+          "expected_outcome": "App re-renders with the selected locale; URL prefix changes to the new /{language}/ segment.",
+          "paths": [
+            {
+              "id": "path:43",
+              "steps": [
+                {
+                  "state": "/{language}",
+                  "action": "Change language [LanguageSwitcher select in app-bar]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

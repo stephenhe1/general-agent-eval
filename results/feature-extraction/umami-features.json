@@ -1,0 +1,2268 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "app_name": "Umami Analytics",
+    "source_graph": "UI_GRAPH.json",
+    "total_features": 38,
+    "total_scenarios": 68,
+    "total_paths": 75
+  },
+  "features": [
+    {
+      "id": "feat:sign-in",
+      "name": "Sign In",
+      "description": "Authenticate with username/password or SSO to access the analytics platform.",
+      "section": "auth",
+      "related_nodes": ["/login", "/sso", "/"],
+      "scenarios": [
+        {
+          "id": "scen:standard-login",
+          "name": "Standard username/password login",
+          "preconditions": [
+            "User is not authenticated",
+            "SSO mode is not enabled on the instance"
+          ],
+          "expected_outcome": "User is authenticated and redirected to /websites or last team context",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/login",
+                  "action": "Enter username field",
+                  "transition": null
+                },
+                {
+                  "state": "/login",
+                  "action": "Enter password field",
+                  "transition": null
+                },
+                {
+                  "state": "/login",
+                  "action": "Submit login form [data-testid=login-submit or button 'Sign in']",
+                  "transition": "button 'Sign in' [login-submit form submit]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:sso-login",
+          "name": "SSO authentication",
+          "preconditions": [
+            "SSO mode is enabled on the instance",
+            "User does not have an active auth token"
+          ],
+          "expected_outcome": "User is redirected to /sso which sets the token and redirects to the app",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/login",
+                  "action": "Enter username field",
+                  "transition": "auto: redirect when SSO configured and token absent"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:sign-out",
+      "name": "Sign Out",
+      "description": "End the authenticated session and return to the login page.",
+      "section": "auth",
+      "related_nodes": ["/logout", "/dashboard", "/websites", "/settings/preferences"],
+      "scenarios": [
+        {
+          "id": "scen:sign-out",
+          "name": "Log out from any authenticated page",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Session cleared, auth token removed, user redirected to /login",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/dashboard",
+                  "action": "Click 'Edit Dashboard' button in DashboardViewHeader",
+                  "transition": "button 'Logout' in UserButton [sidebar footer]"
+                }
+              ]
+            },
+            {
+              "id": "path:2",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": "button 'Logout' in UserButton [sidebar footer]"
+                }
+              ]
+            },
+            {
+              "id": "path:3",
+              "steps": [
+                {
+                  "state": "/settings/preferences",
+                  "action": "View current version [VersionSetting]",
+                  "transition": "button 'Logout' in UserButton [sidebar footer]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:view-public-share",
+      "name": "View Public Share",
+      "description": "View analytics data shared via a public share link without authentication. Sub-pages controlled by share parameters.",
+      "section": "share",
+      "related_nodes": [
+        "/share/[slug]",
+        "/share/[slug]/events",
+        "/share/[slug]/sessions",
+        "/share/[slug]/realtime",
+        "/share/[slug]/performance",
+        "/share/[slug]/compare",
+        "/share/[slug]/breakdown",
+        "/share/[slug]/goals",
+        "/share/[slug]/funnels",
+        "/share/[slug]/journeys",
+        "/share/[slug]/retention",
+        "/share/[slug]/utm",
+        "/share/[slug]/revenue",
+        "/share/[slug]/attribution"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:view-shared-overview",
+          "name": "View shared website overview",
+          "preconditions": [
+            "Valid share slug exists",
+            "No authentication required"
+          ],
+          "expected_outcome": "Public analytics overview page shown with date range and nav controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/share/[slug]",
+                  "action": "Select date range from share nav",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-shared-sub-report",
+          "name": "Navigate to a permitted shared sub-report",
+          "preconditions": [
+            "Valid share slug exists",
+            "Corresponding share.parameters flag is true for the target sub-page",
+            "No authentication required"
+          ],
+          "expected_outcome": "The enabled sub-report page renders within the share layout. Note: compare, breakdown, journeys, retention, attribution sub-pages have no edges in the graph from /share/[slug].",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/share/[slug]",
+                  "action": "Navigate to allowed share sub-pages via ShareNav",
+                  "transition": "link 'Events' in ShareNav sidebar"
+                },
+                {
+                  "state": "/share/[slug]/events",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:2",
+              "steps": [
+                {
+                  "state": "/share/[slug]",
+                  "action": "Navigate to allowed share sub-pages via ShareNav",
+                  "transition": "link 'Sessions' in ShareNav sidebar"
+                },
+                {
+                  "state": "/share/[slug]/sessions",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:3",
+              "steps": [
+                {
+                  "state": "/share/[slug]",
+                  "action": "Navigate to allowed share sub-pages via ShareNav",
+                  "transition": "link 'Realtime' in ShareNav sidebar"
+                },
+                {
+                  "state": "/share/[slug]/realtime",
+                  "action": "View live visitor activity",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:4",
+              "steps": [
+                {
+                  "state": "/share/[slug]",
+                  "action": "Navigate to allowed share sub-pages via ShareNav",
+                  "transition": "link 'Performance' in ShareNav sidebar"
+                },
+                {
+                  "state": "/share/[slug]/performance",
+                  "action": "Apply date range",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:personal-dashboard",
+      "name": "Personal Dashboard",
+      "description": "View and customize a personal widget board summarizing analytics across tracked websites.",
+      "section": "dashboard",
+      "related_nodes": ["/dashboard", "/dashboard/edit"],
+      "scenarios": [
+        {
+          "id": "scen:view-dashboard",
+          "name": "View personal analytics dashboard",
+          "preconditions": [
+            "User is authenticated",
+            "Not in a team context (teamId absent from URL)"
+          ],
+          "expected_outcome": "Dashboard displays widget board with date/segment controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": "link 'Dashboard' in SideNav"
+                },
+                {
+                  "state": "/dashboard",
+                  "action": "Apply date range via BoardControls",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-dashboard-layout",
+          "name": "Customise dashboard widget layout",
+          "preconditions": [
+            "User is authenticated",
+            "Not in a team context"
+          ],
+          "expected_outcome": "Widget layout saved and dashboard returns to view mode",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/dashboard",
+                  "action": "Click 'Edit Dashboard' button in DashboardViewHeader",
+                  "transition": "button 'Edit' in DashboardViewHeader"
+                },
+                {
+                  "state": "/dashboard/edit",
+                  "action": "Add widget via BoardEditBody component",
+                  "transition": null
+                },
+                {
+                  "state": "/dashboard/edit",
+                  "action": "Click 'Done' / save button in DashboardEditHeader",
+                  "transition": "button 'Done' or 'Cancel' in DashboardEditHeader"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:manage-boards",
+      "name": "Manage Analytics Boards",
+      "description": "Browse, create, and view analytics boards containing configurable widget layouts.",
+      "section": "boards",
+      "related_nodes": ["/boards", "/boards/[boardId]"],
+      "scenarios": [
+        {
+          "id": "scen:browse-board-list",
+          "name": "Browse the boards list",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "List of available boards displayed with search and action controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": "link 'Boards' in SideNav"
+                },
+                {
+                  "state": "/boards",
+                  "action": "Search/filter boards",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-board-analytics",
+          "name": "View a board's analytics widgets",
+          "preconditions": [
+            "User is authenticated",
+            "At least one board exists"
+          ],
+          "expected_outcome": "Board view shows configured widgets with date/segment controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/boards",
+                  "action": "Click board row to navigate to board view",
+                  "transition": "click board name link in BoardsDataTable row"
+                },
+                {
+                  "state": "/boards/[boardId]",
+                  "action": "Apply date range via BoardControls",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:edit-board",
+      "name": "Edit Board Layout and Design",
+      "description": "Modify a board's widget layout or configure its visual appearance and component selection.",
+      "section": "boards",
+      "related_nodes": ["/boards/[boardId]", "/boards/[boardId]/edit", "/boards/[boardId]/design"],
+      "scenarios": [
+        {
+          "id": "scen:edit-board-widgets",
+          "name": "Add, remove, or reorder board widgets",
+          "preconditions": [
+            "User is authenticated",
+            "Owner or manager role if in team context"
+          ],
+          "expected_outcome": "Updated widget layout saved and board returns to view mode",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/boards/[boardId]",
+                  "action": "Click 'Edit' button in BoardViewHeader",
+                  "transition": "button 'Edit' in BoardViewHeader"
+                },
+                {
+                  "state": "/boards/[boardId]/edit",
+                  "action": "Add widget/component to board",
+                  "transition": null
+                },
+                {
+                  "state": "/boards/[boardId]/edit",
+                  "action": "Click 'Save' in BoardEditHeader",
+                  "transition": "button 'Done' or 'Cancel' in BoardEditHeader"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:design-board-appearance",
+          "name": "Configure board visual appearance and component selection",
+          "preconditions": [
+            "User is authenticated",
+            "Owner or manager role if in team context"
+          ],
+          "expected_outcome": "Board design (layout rows/columns, component selection) saved",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/boards/[boardId]",
+                  "action": "Click 'Design' button in BoardViewHeader",
+                  "transition": "button 'Design' in BoardViewHeader"
+                },
+                {
+                  "state": "/boards/[boardId]/design",
+                  "action": "Select component from BoardComponentSelect",
+                  "transition": null
+                },
+                {
+                  "state": "/boards/[boardId]/design",
+                  "action": "Click 'Save' in BoardDesignHeader",
+                  "transition": "button 'Done' or 'Cancel' in BoardDesignHeader"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:share-board",
+      "name": "Share Board via Public Link",
+      "description": "Create and manage public share links for a board so it can be viewed without authentication.",
+      "section": "boards",
+      "related_nodes": ["/boards/[boardId]", "/boards/[boardId]#share-dialog"],
+      "scenarios": [
+        {
+          "id": "scen:create-board-share-link",
+          "name": "Create a new board share link",
+          "preconditions": [
+            "User is authenticated",
+            "Viewing a specific board"
+          ],
+          "expected_outcome": "New share link created and URL available to copy",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/boards/[boardId]",
+                  "action": "Click 'Share' button [BoardShareButton]",
+                  "transition": "button 'Share' [BoardShareButton]"
+                },
+                {
+                  "state": "/boards/[boardId]#share-dialog",
+                  "action": "Click 'Add' button to create new share [button 'Add']",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-board-share-links",
+          "name": "Copy or delete an existing board share link",
+          "preconditions": [
+            "User is authenticated",
+            "At least one share link exists for the board"
+          ],
+          "expected_outcome": "Share link copied to clipboard or deleted; dialog closed",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/boards/[boardId]",
+                  "action": "Click 'Share' button [BoardShareButton]",
+                  "transition": "button 'Share' [BoardShareButton]"
+                },
+                {
+                  "state": "/boards/[boardId]#share-dialog",
+                  "action": "Copy share link",
+                  "transition": null
+                },
+                {
+                  "state": "/boards/[boardId]#share-dialog",
+                  "action": "Close dialog",
+                  "transition": "close Modal dialog"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:manage-website-list",
+      "name": "Manage Websites List",
+      "description": "Browse, search, and add tracked websites. Entry point for all website-level analytics.",
+      "section": "websites",
+      "related_nodes": ["/websites"],
+      "scenarios": [
+        {
+          "id": "scen:view-website-list",
+          "name": "Browse and search tracked websites",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "List of tracked websites shown with search and pagination",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:add-website",
+          "name": "Add a new tracked website",
+          "preconditions": [
+            "User is authenticated",
+            "User is not view-only (owner/manager role)"
+          ],
+          "expected_outcome": "New website created. Note: graph has no edge from WebsiteAddButton to a creation node; creation occurs inline/modal not mapped.",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Click 'Add website' button [WebsiteAddButton] (hidden for view-only)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-overview",
+      "name": "Website Traffic Overview",
+      "description": "View aggregated traffic stats, charts, and dimension panels for a tracked website.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]", "/websites/[websiteId]#expanded-view-modal"],
+      "scenarios": [
+        {
+          "id": "scen:view-traffic-stats",
+          "name": "View website traffic statistics and charts",
+          "preconditions": [
+            "User is authenticated",
+            "Website exists"
+          ],
+          "expected_outcome": "Overview page shows metric cards, chart, pages/sources/environment/location panels",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Click website name/row to go to website analytics",
+                  "transition": "click website name link in WebsitesDataTable row"
+                },
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Apply date range via WebsiteControls",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:drill-down-dimension",
+          "name": "Expand a dimension metric into full-screen view",
+          "preconditions": [
+            "User is authenticated",
+            "Viewing website overview"
+          ],
+          "expected_outcome": "Full-screen modal shows paginated metrics table for the selected dimension",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Click 'More info' on metric panel to open ExpandedViewModal",
+                  "transition": "click metric row 'Show more' or expand icon (adds ?view=<dimension>)"
+                },
+                {
+                  "state": "/websites/[websiteId]#expanded-view-modal",
+                  "action": "Sort and paginate expanded metrics table",
+                  "transition": null
+                },
+                {
+                  "state": "/websites/[websiteId]#expanded-view-modal",
+                  "action": "Close modal [button X or click outside]",
+                  "transition": "button X to close modal or click outside"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-events",
+      "name": "Website Events Analysis",
+      "description": "Analyse custom events fired on a website across chart, activity log, and property pivot views.",
+      "section": "websites",
+      "related_nodes": [
+        "/websites/[websiteId]/events",
+        "/websites/[websiteId]/events#activity-tab",
+        "/websites/[websiteId]/events#properties-tab"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:view-events-chart",
+          "name": "View events chart with top-50 event breakdown",
+          "preconditions": [
+            "User is authenticated",
+            "Website has custom events tracked"
+          ],
+          "expected_outcome": "Events chart and metric cards rendered; top event names listed",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "tab 'Events' in WebsiteNav or WebsiteTabs"
+                },
+                {
+                  "state": "/websites/[websiteId]/events",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:browse-event-activity",
+          "name": "Browse raw event activity log",
+          "preconditions": [
+            "User is authenticated",
+            "Website has custom events tracked"
+          ],
+          "expected_outcome": "Paginated events data table with per-event filtering and session links",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/events",
+                  "action": "View EventsChart with top-50 events",
+                  "transition": "tab 'Activity' [role=tab]"
+                },
+                {
+                  "state": "/websites/[websiteId]/events#activity-tab",
+                  "action": "Filter by event name",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:analyze-event-properties",
+          "name": "Pivot and analyze event property data",
+          "preconditions": [
+            "User is authenticated",
+            "Events with custom properties have been tracked"
+          ],
+          "expected_outcome": "Pivot table and chart showing property values for a selected event",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/events",
+                  "action": "View MetricsTable of event names",
+                  "transition": "tab 'Properties' [role=tab]"
+                },
+                {
+                  "state": "/websites/[websiteId]/events#properties-tab",
+                  "action": "Select event name to pivot",
+                  "transition": null
+                },
+                {
+                  "state": "/websites/[websiteId]/events#properties-tab",
+                  "action": "Select property to analyze",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-sessions",
+      "name": "Website Sessions",
+      "description": "Browse session list, view session details in a quick-view modal, or open a full session profile page.",
+      "section": "websites",
+      "related_nodes": [
+        "/websites/[websiteId]/sessions",
+        "/websites/[websiteId]/sessions#properties-tab",
+        "/websites/[websiteId]/sessions#session-modal",
+        "/websites/[websiteId]/sessions/[sessionId]"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:browse-sessions",
+          "name": "Browse session activity list",
+          "preconditions": [
+            "User is authenticated",
+            "Website has recorded sessions"
+          ],
+          "expected_outcome": "Paginated sessions list with segment/date filters; properties pivot accessible via tab",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "tab 'Sessions' in WebsiteNav or WebsiteTabs"
+                },
+                {
+                  "state": "/websites/[websiteId]/sessions",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-session-quick-view",
+          "name": "Open session quick-view sheet modal",
+          "preconditions": [
+            "User is authenticated",
+            "Session exists in the sessions table"
+          ],
+          "expected_outcome": "Bottom-sheet modal shows session stats, activity, properties, and replay links",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/sessions",
+                  "action": "Click session row to open SessionModal",
+                  "transition": "click session row in SessionsDataTable"
+                },
+                {
+                  "state": "/websites/[websiteId]/sessions#session-modal",
+                  "action": "Switch SessionProfile tabs: activity/properties/replays",
+                  "transition": null
+                },
+                {
+                  "state": "/websites/[websiteId]/sessions#session-modal",
+                  "action": "Close modal [button X or click outside]",
+                  "transition": "button X to close sheet modal"
+                }
+              ]
+            },
+            {
+              "id": "path:2",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/events#activity-tab",
+                  "action": "Click session in table to open SessionModal",
+                  "transition": "click session ID link in EventsDataTable row"
+                },
+                {
+                  "state": "/websites/[websiteId]/sessions#session-modal",
+                  "action": "View session stats and info",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-session-full-profile",
+          "name": "View full session profile page",
+          "preconditions": [
+            "User is authenticated",
+            "Session ID is known"
+          ],
+          "expected_outcome": "Full session profile page with stats, activity, properties, and replay tabs",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/sessions",
+                  "action": "Click session row to open SessionModal",
+                  "transition": "link to full session detail (e.g., from session ID in modal or table)"
+                },
+                {
+                  "state": "/websites/[websiteId]/sessions/[sessionId]",
+                  "action": "Switch tabs: activity/properties/replays",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-realtime",
+      "name": "Website Realtime Monitoring",
+      "description": "Monitor live visitor activity including per-minute chart, event log, top paths, referrers, and world map.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/realtime"],
+      "scenarios": [
+        {
+          "id": "scen:monitor-live-traffic",
+          "name": "Monitor live website visitor activity",
+          "preconditions": [
+            "User is authenticated",
+            "Website is actively receiving traffic"
+          ],
+          "expected_outcome": "Realtime dashboard auto-refreshes every 5s showing live visitor count, chart, paths, and map",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "tab 'Realtime' in WebsiteNav or WebsiteTabs"
+                },
+                {
+                  "state": "/websites/[websiteId]/realtime",
+                  "action": "View RealtimeChart (per-minute traffic)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:session-replays",
+      "name": "Session Replay Viewer",
+      "description": "Browse, watch, and bookmark session recordings. Requires Business plan on cloud. Includes quick-view modal and full-screen player.",
+      "section": "websites",
+      "related_nodes": [
+        "/websites/[websiteId]/replays",
+        "/websites/[websiteId]/replays#replay-modal",
+        "/websites/[websiteId]/replays#saved-tab",
+        "/websites/[websiteId]/replays/[replayId]",
+        "/websites/[websiteId]/replays/[replayId]#save-form"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:browse-replay-list",
+          "name": "Browse available session recordings",
+          "preconditions": [
+            "User is authenticated",
+            "Business plan active (cloud) or replays feature enabled (self-hosted)",
+            "Website has recorded sessions"
+          ],
+          "expected_outcome": "Paginated list of replays with filter and segment controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Replays' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/replays",
+                  "action": "Apply date range filter via WebsiteControls",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:watch-replay-quick-view",
+          "name": "Watch a replay in the quick-view bottom sheet",
+          "preconditions": [
+            "User is authenticated",
+            "At least one replay exists"
+          ],
+          "expected_outcome": "Replay bottom-sheet modal plays recording inline; session info shown below player",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/replays",
+                  "action": "Open ReplayModal inline",
+                  "transition": "button Play icon in ReplaysTable row (adds ?replay=<replayId>)"
+                },
+                {
+                  "state": "/websites/[websiteId]/replays#replay-modal",
+                  "action": "Play/pause replay in ReplayPlayer",
+                  "transition": null
+                },
+                {
+                  "state": "/websites/[websiteId]/replays#replay-modal",
+                  "action": "Close modal [button X or click outside]",
+                  "transition": "button X close or click outside ReplayModal bottom sheet"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:watch-replay-full-screen",
+          "name": "Watch a replay in the full-screen player page",
+          "preconditions": [
+            "User is authenticated",
+            "At least one replay exists"
+          ],
+          "expected_outcome": "Full replay player page with rrweb player, scrub timeline, and session info",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/replays",
+                  "action": "Click replay row to navigate to /replays/[replayId]",
+                  "transition": "click replay row in ReplaysDataTable"
+                },
+                {
+                  "state": "/websites/[websiteId]/replays/[replayId]",
+                  "action": "Play/pause replay (ReplayPlayer rrweb player)",
+                  "transition": null
+                }
+              ]
+            },
+            {
+              "id": "path:2",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/replays#saved-tab",
+                  "action": "Click replay to navigate to /replays/[replayId]",
+                  "transition": "click replay row in ReplaysDataTable"
+                },
+                {
+                  "state": "/websites/[websiteId]/replays/[replayId]",
+                  "action": "Scrub timeline",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:save-replay-bookmark",
+          "name": "Save a replay with a bookmark name",
+          "preconditions": [
+            "User is authenticated",
+            "Replay has not been previously saved/bookmarked"
+          ],
+          "expected_outcome": "Replay bookmarked with a user-defined name; icon changes to filled bookmark",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/replays/[replayId]",
+                  "action": "Click 'Save' bookmark icon to open save-replay form",
+                  "transition": "button bookmark icon (outline) [Bookmark fill=none]"
+                },
+                {
+                  "state": "/websites/[websiteId]/replays/[replayId]#save-form",
+                  "action": "Enter replay name/note in ReplaySaveForm",
+                  "transition": null
+                },
+                {
+                  "state": "/websites/[websiteId]/replays/[replayId]#save-form",
+                  "action": "Click 'Save' to bookmark",
+                  "transition": "button 'Save' in ReplaySaveForm or button 'Cancel'"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-compare",
+      "name": "Period-over-Period Comparison",
+      "description": "Compare website metrics across two time periods with delta indicators on metric cards.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/compare"],
+      "scenarios": [
+        {
+          "id": "scen:compare-periods",
+          "name": "Compare current period against a previous period",
+          "preconditions": [
+            "User is authenticated",
+            "Website has historical data"
+          ],
+          "expected_outcome": "Side-by-side comparison tables with change indicators on metrics",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Compare' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/compare",
+                  "action": "Toggle compare mode (current vs previous period)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-performance",
+      "name": "Website Performance (Core Web Vitals)",
+      "description": "Analyse Core Web Vitals (LCP, FID, CLS, etc.) and page speed metrics per URL.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/performance"],
+      "scenarios": [
+        {
+          "id": "scen:view-core-web-vitals",
+          "name": "View Core Web Vitals for website pages",
+          "preconditions": [
+            "User is authenticated",
+            "Performance data has been collected"
+          ],
+          "expected_outcome": "CWV metrics shown per page URL with date/segment/URL filters",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Performance' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/performance",
+                  "action": "Filter by page URL",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-breakdown",
+      "name": "Dimension Breakdown Report",
+      "description": "Analyse any single dimension in a sortable, paginated table for deep-dive exploration.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/breakdown"],
+      "scenarios": [
+        {
+          "id": "scen:breakdown-by-dimension",
+          "name": "Break down traffic by a selected dimension",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Paginated breakdown table for the selected dimension with sort/filter controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Breakdown' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/breakdown",
+                  "action": "Select dimension from FieldSelectForm",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-goals",
+      "name": "Conversion Goals",
+      "description": "Track goal completion rates. Authenticated users can add, edit, and delete goals; share viewers can only read.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/goals"],
+      "scenarios": [
+        {
+          "id": "scen:view-goals-progress",
+          "name": "View goal completion progress",
+          "preconditions": [
+            "User is authenticated",
+            "At least one goal has been configured"
+          ],
+          "expected_outcome": "Goal completion charts and metrics shown per configured goal",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Goals' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/goals",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-goals",
+          "name": "Add, edit, or delete a conversion goal",
+          "preconditions": [
+            "User is authenticated",
+            "User has edit permission (not share/view-only context)"
+          ],
+          "expected_outcome": "Goal created, updated, or removed; list refreshes to reflect changes",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/goals",
+                  "action": "Click 'Add goal' button [GoalAddButton] (hidden on share pages)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-funnels",
+      "name": "Conversion Funnels",
+      "description": "Define and analyse multi-step conversion funnels showing drop-off at each step.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/funnels"],
+      "scenarios": [
+        {
+          "id": "scen:view-funnel-drop-off",
+          "name": "View funnel drop-off visualisation",
+          "preconditions": [
+            "User is authenticated",
+            "At least one funnel has been configured"
+          ],
+          "expected_outcome": "Funnel chart shows visitor count and drop-off percentage at each step",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Funnels' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/funnels",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-funnels",
+          "name": "Add, edit, or delete a funnel",
+          "preconditions": [
+            "User is authenticated",
+            "Not in share/view-only context"
+          ],
+          "expected_outcome": "Funnel created, updated, or removed; page refreshes with updated list",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/funnels",
+                  "action": "Click 'Add funnel' button [FunnelAddButton] (hidden on share pages)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-journeys",
+      "name": "User Journey Path Analysis",
+      "description": "Visualise the most common navigation paths users take through a website via a Sankey diagram.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/journeys"],
+      "scenarios": [
+        {
+          "id": "scen:analyze-user-paths",
+          "name": "Analyse navigation paths between pages",
+          "preconditions": [
+            "User is authenticated",
+            "Website has pageview data"
+          ],
+          "expected_outcome": "Sankey/journey chart shows common paths between start and end pages",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Journeys' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/journeys",
+                  "action": "Select start path",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-retention",
+      "name": "Cohort Retention Analysis",
+      "description": "View cohort retention rates over weekly or monthly periods via a retention heatmap grid.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/retention"],
+      "scenarios": [
+        {
+          "id": "scen:view-cohort-retention",
+          "name": "View visitor cohort retention heatmap",
+          "preconditions": [
+            "User is authenticated",
+            "Website has multi-visit session data"
+          ],
+          "expected_outcome": "Retention grid heatmap showing cohort return rates by period",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Retention' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/retention",
+                  "action": "Select cohort period (weekly/monthly)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-heatmaps",
+      "name": "Page Heatmaps",
+      "description": "View click and scroll heatmap overlays for specific page URLs. Requires Business plan (cloud) and replays feature.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/heatmaps"],
+      "scenarios": [
+        {
+          "id": "scen:view-page-heatmap",
+          "name": "View click or scroll heatmap for a page",
+          "preconditions": [
+            "User is authenticated",
+            "Business plan active (cloud) or replays/heatmaps feature enabled",
+            "Replay data exists for the target page URL"
+          ],
+          "expected_outcome": "Heatmap overlay rendered on the page, toggling between clicks and scroll modes",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Heatmaps' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/heatmaps",
+                  "action": "Enter URL path in search field",
+                  "transition": null
+                },
+                {
+                  "state": "/websites/[websiteId]/heatmaps",
+                  "action": "Toggle between 'Clicks' and 'Scroll' mode [FilterButtons]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-segments",
+      "name": "Audience Segment Management",
+      "description": "Create, edit, and delete reusable audience segments to filter analytics data.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/segments"],
+      "scenarios": [
+        {
+          "id": "scen:manage-audience-segments",
+          "name": "Create, edit, or delete an audience segment",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Segment list updated with new, modified, or removed segment",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Segments' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/segments",
+                  "action": "Click 'Add segment' [SegmentAddButton]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-cohorts",
+      "name": "Audience Cohort Management",
+      "description": "Create, edit, and delete saved audience cohorts for targeted analytics filtering.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/cohorts"],
+      "scenarios": [
+        {
+          "id": "scen:manage-cohorts",
+          "name": "Create, edit, or delete a cohort",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Cohort list updated with created, modified, or removed cohort",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Cohorts' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/cohorts",
+                  "action": "Click 'Add cohort' [CohortAddButton]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-utm",
+      "name": "UTM Campaign Analysis",
+      "description": "Analyse UTM source, medium, and campaign parameter breakdowns for marketing attribution.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/utm"],
+      "scenarios": [
+        {
+          "id": "scen:analyze-utm-campaigns",
+          "name": "View UTM parameter breakdown tables",
+          "preconditions": [
+            "User is authenticated",
+            "Website receives traffic with UTM parameters"
+          ],
+          "expected_outcome": "Tables for UTM source, medium, and campaign showing traffic volumes",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'UTM' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/utm",
+                  "action": "Apply date range filter",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-revenue",
+      "name": "E-commerce Revenue Analytics",
+      "description": "Track revenue events with multi-currency support, showing chart, metrics bar, and session-level revenue table.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/revenue"],
+      "scenarios": [
+        {
+          "id": "scen:view-revenue-analytics",
+          "name": "View revenue metrics and trends",
+          "preconditions": [
+            "User is authenticated",
+            "Website has revenue events tracked"
+          ],
+          "expected_outcome": "Revenue chart, metrics bar, and per-session revenue table rendered with currency filter",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Revenue' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/revenue",
+                  "action": "Filter by currency",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-attribution",
+      "name": "Marketing Channel Attribution",
+      "description": "Attribute conversions to marketing channels using configurable multi-touch attribution models.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/attribution"],
+      "scenarios": [
+        {
+          "id": "scen:view-attribution-models",
+          "name": "View attribution breakdown with a selected model",
+          "preconditions": [
+            "User is authenticated",
+            "Website has conversion and referral data"
+          ],
+          "expected_outcome": "Attribution breakdown table rendered for the selected attribution model",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Attribution' in WebsiteNav sidebar"
+                },
+                {
+                  "state": "/websites/[websiteId]/attribution",
+                  "action": "Select attribution model",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:website-settings",
+      "name": "Website Settings and Administration",
+      "description": "Edit website details, copy the tracking snippet, manage share links, and reset or delete website data.",
+      "section": "websites",
+      "related_nodes": ["/websites/[websiteId]/settings"],
+      "scenarios": [
+        {
+          "id": "scen:configure-website-details",
+          "name": "Edit website name, domain, and replay settings",
+          "preconditions": [
+            "User is authenticated",
+            "User has edit permission for the website"
+          ],
+          "expected_outcome": "Website name/domain or replay settings updated",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]",
+                  "action": "Navigate to sub-pages via WebsiteNav sidebar",
+                  "transition": "link 'Settings' icon or menu in website header area"
+                },
+                {
+                  "state": "/websites/[websiteId]/settings",
+                  "action": "Edit website name/domain [WebsiteEditForm]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:get-tracking-code",
+          "name": "Copy website tracking code snippet",
+          "preconditions": [
+            "User is authenticated",
+            "Viewing website settings"
+          ],
+          "expected_outcome": "Tracking script tag copied to clipboard for placement in website HTML",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/settings",
+                  "action": "Copy tracking code snippet [WebsiteTrackingCode]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-website-data",
+          "name": "Reset or delete website data",
+          "preconditions": [
+            "User is authenticated",
+            "User is the website owner or admin"
+          ],
+          "expected_outcome": "Website data reset (stats cleared) or website deleted and removed from list",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites/[websiteId]/settings",
+                  "action": "Reset website data [WebsiteResetForm]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:manage-links",
+      "name": "Manage Tracked Links",
+      "description": "Create, browse, and edit short/affiliate links; view per-link traffic analytics.",
+      "section": "links",
+      "related_nodes": ["/links", "/links/[linkId]", "/links/[linkId]/edit"],
+      "scenarios": [
+        {
+          "id": "scen:browse-links",
+          "name": "Browse and search tracked links",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "List of tracked links with search and add/edit/delete actions",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": "link 'Links' in SideNav"
+                },
+                {
+                  "state": "/links",
+                  "action": "Search links",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-link-analytics",
+          "name": "View traffic analytics for a specific link",
+          "preconditions": [
+            "User is authenticated",
+            "At least one tracked link exists"
+          ],
+          "expected_outcome": "Link analytics page shows metrics bar, traffic chart, and dimension panels",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/links",
+                  "action": "Click link row to navigate to link analytics",
+                  "transition": "click link name in LinksDataTable row"
+                },
+                {
+                  "state": "/links/[linkId]",
+                  "action": "Apply date range via LinkControls",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-link",
+          "name": "Edit a link's name or destination URL",
+          "preconditions": [
+            "User is authenticated",
+            "User has edit permission (not view-only)"
+          ],
+          "expected_outcome": "Link updated with new name/URL; returns to link analytics view",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/links/[linkId]",
+                  "action": "Click actions in LinkHeader (edit, share, delete)",
+                  "transition": "button 'Edit' in LinkHeader actions"
+                },
+                {
+                  "state": "/links/[linkId]/edit",
+                  "action": "Edit link name/URL in LinkEditForm",
+                  "transition": null
+                },
+                {
+                  "state": "/links/[linkId]/edit",
+                  "action": "Click 'Save'",
+                  "transition": "button 'Save' or 'Cancel' in LinkEditForm"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:manage-pixels",
+      "name": "Manage Tracking Pixels",
+      "description": "Create, browse, and edit tracking pixels; view per-pixel traffic analytics.",
+      "section": "pixels",
+      "related_nodes": ["/pixels", "/pixels/[pixelId]", "/pixels/[pixelId]/edit"],
+      "scenarios": [
+        {
+          "id": "scen:browse-pixels",
+          "name": "Browse and search tracking pixels",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "List of tracking pixels with search and add/edit/delete actions",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": "link 'Pixels' in SideNav"
+                },
+                {
+                  "state": "/pixels",
+                  "action": "Search pixels",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:view-pixel-analytics",
+          "name": "View traffic analytics for a specific pixel",
+          "preconditions": [
+            "User is authenticated",
+            "At least one tracking pixel exists"
+          ],
+          "expected_outcome": "Pixel analytics page shows metrics bar, traffic chart, and dimension panels",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/pixels",
+                  "action": "Click pixel row to navigate to pixel analytics",
+                  "transition": "click pixel name in PixelsDataTable row"
+                },
+                {
+                  "state": "/pixels/[pixelId]",
+                  "action": "Apply date range via PixelControls",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-pixel",
+          "name": "Edit a pixel's name",
+          "preconditions": [
+            "User is authenticated",
+            "User has edit permission (not view-only)"
+          ],
+          "expected_outcome": "Pixel name updated; returns to pixel analytics view",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/pixels/[pixelId]",
+                  "action": "Click actions in PixelHeader (edit, share, delete)",
+                  "transition": "button 'Edit' in PixelHeader actions"
+                },
+                {
+                  "state": "/pixels/[pixelId]/edit",
+                  "action": "Edit pixel name in PixelEditForm",
+                  "transition": null
+                },
+                {
+                  "state": "/pixels/[pixelId]/edit",
+                  "action": "Click 'Save'",
+                  "transition": "button 'Save' or 'Cancel' in PixelEditForm"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:manage-teams",
+      "name": "Manage Teams",
+      "description": "Create or join teams, enter a team context to access team-scoped data, or leave a team.",
+      "section": "teams",
+      "related_nodes": [
+        "/teams",
+        "/teams/[teamId]/websites",
+        "/teams/[teamId]/boards",
+        "/teams/[teamId]/links",
+        "/teams/[teamId]/pixels",
+        "/teams/[teamId]/settings/preferences"
+      ],
+      "scenarios": [
+        {
+          "id": "scen:create-or-join-team",
+          "name": "Create a new team or join an existing one",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Team created or joined; team appears in the teams list. Note: graph has no edge from TeamsAddButton/TeamsJoinButton to a target node; creation/join occurs via modal not mapped.",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/teams",
+                  "action": "Click 'Create team' button [TeamsAddButton]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:enter-team-context",
+          "name": "Enter a team context to view team-scoped analytics",
+          "preconditions": [
+            "User is authenticated",
+            "User is a member of at least one team"
+          ],
+          "expected_outcome": "App switches to team context; websites/boards/links/pixels scoped to selected team",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/teams",
+                  "action": "Click team row to enter team context",
+                  "transition": "click team name in TeamsDataTable row"
+                },
+                {
+                  "state": "/teams/[teamId]/websites",
+                  "action": "Search websites in team scope",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:leave-team",
+          "name": "Leave a team",
+          "preconditions": [
+            "User is authenticated",
+            "User is a non-owner member of a team"
+          ],
+          "expected_outcome": "User removed from the team; team no longer appears in their list",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/teams",
+                  "action": "Click 'Leave team' button [TeamLeaveButton] on team row",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:user-preferences",
+      "name": "Application Preferences",
+      "description": "Configure display preferences: theme, language, timezone, default date range, and view app version.",
+      "section": "settings",
+      "related_nodes": ["/settings/preferences"],
+      "scenarios": [
+        {
+          "id": "scen:configure-display-preferences",
+          "name": "Configure theme, language, timezone, and date range defaults",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Selected preferences applied immediately; persisted for future sessions",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Search websites",
+                  "transition": "UserButton menu -> Settings link"
+                },
+                {
+                  "state": "/settings/preferences",
+                  "action": "Change theme (light/dark/system) [ThemeSetting]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:user-profile",
+      "name": "User Profile Management",
+      "description": "View and edit profile information, and change the account password.",
+      "section": "settings",
+      "related_nodes": ["/settings/profile", "/settings/profile#change-password"],
+      "scenarios": [
+        {
+          "id": "scen:edit-profile-info",
+          "name": "View and edit profile details",
+          "preconditions": [
+            "User is authenticated"
+          ],
+          "expected_outcome": "Profile information (username/email) updated",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/settings/preferences",
+                  "action": "Change theme (light/dark/system) [ThemeSetting]",
+                  "transition": "link 'Profile' in SettingsNav"
+                },
+                {
+                  "state": "/settings/profile",
+                  "action": "Edit profile info in ProfileSettings",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:change-password",
+          "name": "Change account password",
+          "preconditions": [
+            "User is authenticated",
+            "User knows current password"
+          ],
+          "expected_outcome": "Password updated; modal dismissed and profile page shown",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/settings/profile",
+                  "action": "Click 'Change password' [PasswordChangeButton]",
+                  "transition": "button 'Change password' [PasswordChangeButton]"
+                },
+                {
+                  "state": "/settings/profile#change-password",
+                  "action": "Enter new password",
+                  "transition": null
+                },
+                {
+                  "state": "/settings/profile#change-password",
+                  "action": "Click 'Save' in PasswordEditForm",
+                  "transition": "button 'Save' or close modal in PasswordEditForm"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:team-settings",
+      "name": "Team Settings and Member Management",
+      "description": "Edit team name, view the access code, and manage team member roles from the settings area.",
+      "section": "settings",
+      "related_nodes": ["/settings/teams", "/settings/teams/[teamId]"],
+      "scenarios": [
+        {
+          "id": "scen:manage-team-info",
+          "name": "Edit team name and view access code",
+          "preconditions": [
+            "User is authenticated",
+            "User is owner or manager of the team"
+          ],
+          "expected_outcome": "Team name updated; access code visible for sharing with new members",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/settings/preferences",
+                  "action": "Change language [LanguageSetting]",
+                  "transition": "link 'Teams' in SettingsNav"
+                },
+                {
+                  "state": "/settings/teams",
+                  "action": "Click team row to navigate to team settings",
+                  "transition": "click team name in TeamsDataTable row"
+                },
+                {
+                  "state": "/settings/teams/[teamId]",
+                  "action": "Edit team name [TeamEditForm] (owner/manager only)",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-team-members",
+          "name": "Add, edit role, or remove team members",
+          "preconditions": [
+            "User is authenticated",
+            "User has owner or manager role in the team"
+          ],
+          "expected_outcome": "Member added, role updated, or member removed from team",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/settings/teams/[teamId]",
+                  "action": "Edit member role [TeamMemberEditButton]",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:settings-website-access",
+      "name": "Website Settings via Settings Navigation",
+      "description": "Access website settings for any owned website directly from the settings area.",
+      "section": "settings",
+      "related_nodes": ["/settings/websites", "/settings/websites/[websiteId]"],
+      "scenarios": [
+        {
+          "id": "scen:navigate-to-website-settings",
+          "name": "Access individual website settings from the settings nav",
+          "preconditions": [
+            "User is authenticated",
+            "User owns at least one website"
+          ],
+          "expected_outcome": "Website settings page shown with edit, tracking code, share, reset, and delete options. Note: graph has no edge from SettingsNav to /settings/websites; navigation assumed via SettingsNav but edge absent.",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/settings/websites",
+                  "action": "Click website name to navigate to website settings",
+                  "transition": "click website name in WebsitesDataTable row"
+                },
+                {
+                  "state": "/settings/websites/[websiteId]",
+                  "action": "Copy tracking code",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:admin-user-management",
+      "name": "Admin: User Management",
+      "description": "Admin-only area to view, add, edit, and delete all user accounts on the instance.",
+      "section": "admin",
+      "related_nodes": ["/admin/users", "/admin/users/[userId]"],
+      "scenarios": [
+        {
+          "id": "scen:browse-all-users",
+          "name": "Browse and search all users",
+          "preconditions": [
+            "User is authenticated",
+            "User has admin role (user.isAdmin)",
+            "Not in cloudMode"
+          ],
+          "expected_outcome": "Paginated user list shown with add, search, and delete controls",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/websites",
+                  "action": "Paginate through website list",
+                  "transition": "link 'Admin' in UserButton dropdown menu"
+                },
+                {
+                  "state": "/admin/users",
+                  "action": "Search users",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:edit-user",
+          "name": "Edit a user's details or role",
+          "preconditions": [
+            "User is authenticated",
+            "User has admin role",
+            "Target user exists"
+          ],
+          "expected_outcome": "User's username, password, or role updated",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/admin/users",
+                  "action": "Click user row to navigate to user detail",
+                  "transition": "click user row in UsersDataTable"
+                },
+                {
+                  "state": "/admin/users/[userId]",
+                  "action": "Switch to 'Details' tab (edit username, password, role)",
+                  "transition": null
+                },
+                {
+                  "state": "/admin/users/[userId]",
+                  "action": "Save user changes in UserEditForm",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:admin-website-management",
+      "name": "Admin: Website Management",
+      "description": "Admin-only area to browse all websites across all users and manage their settings.",
+      "section": "admin",
+      "related_nodes": ["/admin/websites", "/admin/websites/[websiteId]"],
+      "scenarios": [
+        {
+          "id": "scen:browse-all-websites-admin",
+          "name": "Browse all websites across all users",
+          "preconditions": [
+            "User is authenticated",
+            "User has admin role"
+          ],
+          "expected_outcome": "Paginated list of all websites with search capability",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/admin/users",
+                  "action": "Click user row to navigate to user detail",
+                  "transition": "link 'Websites' in AdminNav"
+                },
+                {
+                  "state": "/admin/websites",
+                  "action": "Search websites",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-website-admin",
+          "name": "Edit, reset, or delete any website as admin",
+          "preconditions": [
+            "User is authenticated",
+            "User has admin role"
+          ],
+          "expected_outcome": "Website settings (name, domain, share links, data) updated or website deleted",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/admin/websites",
+                  "action": "Click website row to navigate to admin website detail",
+                  "transition": "click website row in AdminWebsitesDataTable"
+                },
+                {
+                  "state": "/admin/websites/[websiteId]",
+                  "action": "Edit website name/domain",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:admin-team-management",
+      "name": "Admin: Team Management",
+      "description": "Admin-only area to browse all teams, manage members, and delete teams.",
+      "section": "admin",
+      "related_nodes": ["/admin/teams", "/admin/teams/[teamId]"],
+      "scenarios": [
+        {
+          "id": "scen:browse-all-teams-admin",
+          "name": "Browse all teams on the instance",
+          "preconditions": [
+            "User is authenticated",
+            "User has admin role"
+          ],
+          "expected_outcome": "Paginated list of all teams with search capability",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/admin/users",
+                  "action": "Paginate users list",
+                  "transition": "link 'Teams' in AdminNav"
+                },
+                {
+                  "state": "/admin/teams",
+                  "action": "Search teams",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scen:manage-team-admin",
+          "name": "Edit team or manage members as admin",
+          "preconditions": [
+            "User is authenticated",
+            "User has admin role"
+          ],
+          "expected_outcome": "Team name updated, member added/removed/role-changed, or team deleted",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/admin/teams",
+                  "action": "Click team row to navigate to admin team detail",
+                  "transition": "click team row in AdminTeamsDataTable"
+                },
+                {
+                  "state": "/admin/teams/[teamId]",
+                  "action": "Edit team name",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feat:developer-console",
+      "name": "Developer Test Console",
+      "description": "Developer tool to fire test events, pageviews, revenue data, and identify calls against a website tracking setup.",
+      "section": "dev",
+      "related_nodes": ["/console/[websiteId]"],
+      "scenarios": [
+        {
+          "id": "scen:test-tracking-events",
+          "name": "Fire test events and verify tracking script",
+          "preconditions": [
+            "User is authenticated",
+            "Valid websiteId provided in URL"
+          ],
+          "expected_outcome": "Test events fired via injected script; live WebsiteChart and EventsChart update to reflect them. Note: graph has no navigation edge leading to /console/[websiteId]; direct URL access assumed.",
+          "paths": [
+            {
+              "id": "path:1",
+              "steps": [
+                {
+                  "state": "/console/[websiteId]",
+                  "action": "Click 'Send event' button [id=send-event-button]",
+                  "transition": null
+                },
+                {
+                  "state": "/console/[websiteId]",
+                  "action": "View live WebsiteChart and EventsChart",
+                  "transition": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

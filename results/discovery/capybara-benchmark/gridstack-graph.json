@@ -1,0 +1,1136 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "GridStack.js Demo Suite",
+    "base_url": "http://localhost:3001",
+    "total_states": 41,
+    "explored": 37,
+    "skipped": 4,
+    "verified_live": [
+      "/demo/",
+      "/demo/anijs.html",
+      "/demo/column.html",
+      "/demo/two.html",
+      "/demo/serialization.html",
+      "/demo/nested.html",
+      "/demo/grid-lines.html",
+      "/demo/transform.html",
+      "/demo/sizeToContent.html",
+      "/demo/static.html",
+      "/demo/responsive.html",
+      "/demo/nested_advanced.html",
+      "/demo/nested_constraint.html",
+      "/demo/canvasJS.html",
+      "/demo/esmodule.html",
+      "/demo/float.html",
+      "/demo/knockout.html",
+      "/demo/cell-height.html",
+      "/demo/locked.html",
+      "/e2e/fixtures/gridstack-with-height.html",
+      "/demo/custom-engine.html"
+    ],
+    "notes": "Static file server (npx serve) at port 3001. No auth. No SPA router \u2014 each page is a standalone HTML file. React wrapper demo lives in /react/ (Vite dev server, not the primary app)."
+  },
+  "nodes": [
+    {
+      "id": "/",
+      "route": "/",
+      "label": "Repository root file browser",
+      "section": "Root",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:file-browser",
+      "actions": [
+        "Navigate to /demo/ folder link",
+        "Navigate to /react/ folder link",
+        "Navigate to /vue/ folder link",
+        "Navigate to /angular/ folder link",
+        "Navigate to /dist/ folder link",
+        "Navigate to /src/ folder link",
+        "Navigate to /e2e/ folder link",
+        "Navigate to /node_modules/ folder link"
+      ],
+      "notes": "serve's auto-generated directory listing of gridstack project root"
+    },
+    {
+      "id": "/demo/",
+      "route": "/demo/",
+      "label": "Demo index \u2014 list of all demo pages",
+      "section": "Demo Navigation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click link 'AniJS' \u2192 /demo/anijs.html",
+        "Click link 'Cell Height' \u2192 /demo/cell-height.html",
+        "Click link 'Column' \u2192 /demo/column.html",
+        "Click link 'CSS & attributes' \u2192 /demo/css_attributes.html",
+        "Click link 'Float grid' \u2192 /demo/float.html",
+        "Click link 'Grid Lines' \u2192 /demo/grid-lines.html",
+        "Click link 'Knockout.js' \u2192 /demo/knockout.html",
+        "Click link 'Lazy Load' \u2192 /demo/lazy_load.html",
+        "Click link 'Mobile touch' \u2192 /demo/mobile.html",
+        "Click link 'Nested grids' \u2192 /demo/nested.html",
+        "Click link 'Nested Advanced grids' \u2192 /demo/nested_advanced.html",
+        "Click link 'Nested Constraint grids' \u2192 /demo/nested_constraint.html",
+        "Click link 'ReactJS (Hooks) multiple' \u2192 /demo/react-hooks-controlled-multiple.html",
+        "Click link 'ReactJS (Hooks)' \u2192 /demo/react-hooks.html",
+        "Click link 'ReactJS' \u2192 /demo/react.html",
+        "Click link 'Responsive by column size' \u2192 /demo/responsive.html",
+        "Click link 'Responsive using breakpoints' \u2192 /demo/responsive_break.html",
+        "Click link 'Responsive using layout none' \u2192 /demo/responsive_none.html",
+        "Click link 'Right-To-Left (RTL)' \u2192 /demo/right-to-left(rtl).html",
+        "Click link 'Serialization' \u2192 /demo/serialization.html",
+        "Click link 'Size To Content' \u2192 /demo/sizeToContent.html",
+        "Click link 'Static' \u2192 /demo/static.html",
+        "Click link 'Title drag' \u2192 /demo/title_drag.html",
+        "Click link 'Transform' \u2192 /demo/transform.html",
+        "Click link 'Two grids' \u2192 /demo/two.html",
+        "Click link 'Two grids Vertical' \u2192 /demo/two_vertical.html",
+        "Click link 'Web Component' \u2192 /demo/web-comp.html",
+        "Click link 'Website demo 1' \u2192 /demo/web1.html",
+        "Click link 'Website demo 2' \u2192 /demo/web2.html",
+        "Click link 'Two grids (old jq)' \u2192 /demo/old_two-jq.html",
+        "Click link 'Nested grids (old jq)' \u2192 /demo/old_nested-jq.html"
+      ],
+      "notes": "29 demo links; also has external links to Angular/React/Vue GitHub repos"
+    },
+    {
+      "id": "/demo/anijs.html",
+      "route": "/demo/anijs.html",
+      "label": "AniJS animation demo \u2014 gridstack + CSS animations",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addWidget()]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Adds widgets with random 1-3 unit sizes; AniJS triggers swing animation on add"
+    },
+    {
+      "id": "/demo/cell-height.html",
+      "route": "/demo/cell-height.html",
+      "label": "Cell Height options demo \u2014 change row height dynamically",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'auto' [onClick=setOpt('auto')]",
+        "Click button 'initial' [onClick=setOpt('initial')]",
+        "Click button '100px' [onClick=setOpt(100)]",
+        "Click button \"'10vh'\" [onClick=setOpt('10vh')]",
+        "Click button \"'10%' of blue (broken)\" [onClick=setOpt('10%')]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "3 predefined grid items; current cellHeight value displayed alongside buttons"
+    },
+    {
+      "id": "/demo/column.html",
+      "route": "/demo/column.html",
+      "label": "Column demo \u2014 change column count and layout algorithm",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'list' [onClick=grid.removeAll().load(list)]",
+        "Click button 'case 1' [onClick=grid.removeAll().load(test1)]",
+        "Click button 'random' [onClick=random()]",
+        "Click button 'Add Widget' [onClick=addWidget()]",
+        "Click button '1' [onClick=column(1)]",
+        "Click button '2' [onClick=column(2)]",
+        "Click button '3' [onClick=column(3)]",
+        "Click button '4' [onClick=column(4)]",
+        "Click button '6' [onClick=column(6)]",
+        "Click button '8' [onClick=column(8)]",
+        "Click button '10' [onClick=column(10)]",
+        "Click button '12' [onClick=column(12)]",
+        "Select layout option from dropdown [onchange=setLayout(this.value)] \u2014 options: list, compact, move+scale, move, scale, none, custom",
+        "Click 'X' button inside widget to remove it",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Column count badge shown; layout dropdown with 7 relayout options; widgets removable"
+    },
+    {
+      "id": "/demo/css_attributes.html",
+      "route": "/demo/css_attributes.html",
+      "label": "CSS & attributes demo \u2014 CSS-driven widget dimension display",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addWidget()]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Uses CSS data-attributes to show gs-x, gs-y, gs-w, gs-h values in widget content"
+    },
+    {
+      "id": "/demo/float.html",
+      "route": "/demo/float.html",
+      "label": "Float grid demo \u2014 toggle float mode on/off",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addNewWidget()]",
+        "Click button 'Make Widget' [onClick=makeNewWidget()]",
+        "Click button 'float: true/false' toggle [onClick=toggleFloat(this)]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "5 initial items; toggleFloat button text reflects current float state"
+    },
+    {
+      "id": "/demo/grid-lines.html",
+      "route": "/demo/grid-lines.html",
+      "label": "Grid Lines demo \u2014 visual grid lines with custom color/opacity/thickness",
+      "section": "Visual/Styling",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Toggle checkbox 'Show lines' [id=toggle]",
+        "Change color via color picker [id=colorPicker]",
+        "Adjust opacity slider (0\u2013100%) [id=opacity]",
+        "Adjust thickness slider (1\u20138px) [id=thickness]",
+        "Adjust columns slider (2\u201324) [id=columns]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "9 fixed items A-I; badges show current opacity/thickness/column values; CSS vars updated live"
+    },
+    {
+      "id": "/demo/knockout.html",
+      "route": "/demo/knockout.html",
+      "label": "Knockout.js demo \u2014 reactive grid via KO observable array",
+      "section": "Framework Integrations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [data-bind=click: addNewWidget]",
+        "Click 'Delete me' button inside each widget [data-bind=click: $root.deleteWidget]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "4 initial widgets at fixed positions; Knockout.js data-bind integration"
+    },
+    {
+      "id": "/demo/lazy_load.html",
+      "route": "/demo/lazy_load.html",
+      "label": "Lazy Load demo \u2014 widgets render only when scrolled into view",
+      "section": "Advanced Features",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Scroll container to trigger lazy widget rendering"
+      ],
+      "notes": "6 numbered items (0-5); 300px scroll container; 200px cellHeight; renderCB + lazyLoad:true"
+    },
+    {
+      "id": "/demo/mobile.html",
+      "route": "/demo/mobile.html",
+      "label": "Mobile touch demo \u2014 3-column grid with touch support",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Touch-drag widget to reposition",
+        "Touch-resize widget via resize handle"
+      ],
+      "notes": "3 widgets in 3-column layout; demonstrates native touch events on mobile"
+    },
+    {
+      "id": "/demo/nested.html",
+      "route": "/demo/nested.html",
+      "label": "Nested grids demo \u2014 grids inside grids with full save/load",
+      "section": "Nested Grids",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addWidget()]",
+        "Click button 'Add Widget Grid1' [onClick=addNewWidget('.sub1')]",
+        "Click button 'Add Widget Grid2' [onClick=addNewWidget('.sub2')]",
+        "Click button 'Add Nested Grid' [onClick=addNested()]",
+        "Click radio 'static' [id=static, onClick=setStatic(true)]",
+        "Click radio 'editable' [id=edit, onClick=setStatic(false)]",
+        "Click button 'Save' [onClick=save()]",
+        "Click button 'Destroy' [onClick=destroy()]",
+        "Click button 'Create' [onClick=load()]",
+        "Click button 'Save list' [onClick=save(true, false)]",
+        "Click button 'Save no content' [onClick=save(false, false)]",
+        "Click button 'Clear' [onClick=destroy(false)]",
+        "Click button 'Load' [onClick=load(false)]",
+        "Drag widget between grids (drag-in from sidebar configured)",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Parent grid + 2 nested sub-grids; sidebar drag-in enabled via setupDragIn()"
+    },
+    {
+      "id": "/demo/nested_advanced.html",
+      "route": "/demo/nested_advanced.html",
+      "label": "Nested Advanced grids \u2014 dynamic sub-grid creation via drag",
+      "section": "Nested Grids",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addMainWidget()]",
+        "Click button 'Add W Grid0' [onClick=addNewWidget(0)]",
+        "Click button 'Add W Grid1' [onClick=addNewWidget(1)]",
+        "Click button 'Add W Grid2' [onClick=addNewWidget(2)]",
+        "Click button 'Save Full' [onClick=save()]",
+        "Click button 'Destroy' [onClick=destroy()]",
+        "Click button 'Re-create' [onClick=load()]",
+        "Click button 'Save layout' [onClick=save(true, false)]",
+        "Click button 'Save layout no content' [onClick=save(false, false)]",
+        "Click button 'Clear' [onClick=destroy(false)]",
+        "Click button 'Load' [onClick=load(false)]",
+        "Drag item over another to auto-create sub-grid (subGridDynamic:true)",
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Read/edit textarea output [id=saved]"
+      ],
+      "notes": "subGridDynamic:true auto-creates sub-grids on drag-over; textarea shows JSON output"
+    },
+    {
+      "id": "/demo/nested_constraint.html",
+      "route": "/demo/nested_constraint.html",
+      "label": "Nested Constraint grids \u2014 acceptWidgets constraint per sub-grid",
+      "section": "Nested Grids",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addNested()]",
+        "Click button 'Add Widget Grid1' [onClick=addNewWidget('.sub1')]",
+        "Click button 'Add Widget Grid2' [onClick=addNewWidget('.sub2')]",
+        "Click button 'Save' [onClick=save()]",
+        "Click button 'Destroy' [onClick=destroy()]",
+        "Click button 'Create' [onClick=load()]",
+        "Click button 'Save list' [onClick=save(true, false)]",
+        "Click button 'Save no content' [onClick=save(false, false)]",
+        "Click button 'Clear' [onClick=destroy(false)]",
+        "Click button 'Load' [onClick=load(false)]",
+        "Drag .sub class items into sub-grids (constrained)",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Sub-grids accept only .grid-stack-item.sub class; pink items indicate constrained widgets"
+    },
+    {
+      "id": "/demo/responsive.html",
+      "route": "/demo/responsive.html",
+      "label": "Responsive demo \u2014 column count responds to container width",
+      "section": "Responsive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Select layout from dropdown [onchange=grid.opts.columnOpts.layout = this.value] \u2014 options: moveScale, move, scale, list, compact, none",
+        "Click button 'Clear' [onClick=grid.removeAll()]",
+        "Click button 'Add Widget' [onClick=addWidget()]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Resize browser window to trigger responsive column changes"
+      ],
+      "notes": "Column count badge auto-updates; 100px column width; 6 initial items"
+    },
+    {
+      "id": "/demo/responsive_break.html",
+      "route": "/demo/responsive_break.html",
+      "label": "Responsive breakpoints demo \u2014 breakpoints at 700/850/950/1100px",
+      "section": "Responsive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Select layout from dropdown [onchange=grid.opts.columnOpts.layout = this.value] \u2014 options: moveScale, move, scale, list, compact, none",
+        "Click button 'Clear' [onClick=grid.removeAll()]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Resize browser window to trigger breakpoint column changes"
+      ],
+      "notes": "Breakpoints: 700px\u21921col, 850px\u21923col, 950px\u21926col, 1100px\u21928col; 6 items"
+    },
+    {
+      "id": "/demo/responsive_none.html",
+      "route": "/demo/responsive_none.html",
+      "label": "Responsive layout:none demo \u2014 fixed layout that stays put",
+      "section": "Responsive",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Resize browser window (layout stays fixed)"
+      ],
+      "notes": "3 items; 6 columns; 150px column width; layout:none means no relayout on resize"
+    },
+    {
+      "id": "/demo/right-to-left(rtl).html",
+      "route": "/demo/right-to-left(rtl).html",
+      "label": "RTL demo \u2014 right-to-left layout direction",
+      "section": "Visual/Styling",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addWidget()]",
+        "Drag widget to reposition (RTL direction)",
+        "Resize widget via resize handle"
+      ],
+      "notes": "3 initial items; RTL direction; resizable handles adapt to RTL"
+    },
+    {
+      "id": "/demo/serialization.html",
+      "route": "/demo/serialization.html",
+      "label": "Serialization demo \u2014 save/load grid state to/from JSON",
+      "section": "Serialization",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Save' [onclick=saveGrid()] \u2014 saves layout to textarea",
+        "Click button 'Load' [onclick=loadGrid()] \u2014 restores layout from textarea",
+        "Click button 'Save Full' [onclick=saveFullGrid()]",
+        "Click button 'Load Full' [onclick=loadFullGrid()]",
+        "Click button 'Clear' [onclick=clearGrid()]",
+        "Click 'Press me' button inside widget",
+        "Edit text in widget input fields",
+        "Edit contenteditable div inside widget",
+        "Click 'X' button inside widget to remove widget [onclick=removeWidget(this.parentElement...)]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Read textarea output [id=saved-data, readonly]"
+      ],
+      "notes": "5 initial widgets with mixed content (buttons, textarea, input, editable div)"
+    },
+    {
+      "id": "/demo/sizeToContent.html",
+      "route": "/demo/sizeToContent.html",
+      "label": "SizeToContent demo \u2014 widgets auto-resize to fit content height",
+      "section": "Advanced Features",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'clear' [onClick=clearGrid()]",
+        "Click button 'load' [onClick=load()]",
+        "Click button '8' columns [onClick=column(8)]",
+        "Click button '12' columns [onClick=column(12)]",
+        "Click button '25' cellHeight [onClick=cellHeight(25)]",
+        "Click button '3rem' cellHeight [onClick=cellHeight('3rem')]",
+        "Click button '50' cellHeight [onClick=cellHeight(50)]",
+        "Click button '75' cellHeight [onClick=cellHeight(75)]",
+        "Click button 'Add' widget [onClick=addWidget()]",
+        "Click button 'Make w:2' [onClick=makeWidget()]",
+        "Click 'more' button inside widget E [id=dynContent]",
+        "Click 'less' button inside widget E [id=dynContent]",
+        "Drag sidebar item into grid",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Two grids (grid1, grid2); sidebar draggable item; sizeToContent modes: auto/shrink/scroll"
+    },
+    {
+      "id": "/demo/static.html",
+      "route": "/demo/static.html",
+      "label": "Static vs editable demo \u2014 toggle between static/interactive modes",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Static' [onClick=grid.setStatic(true)]",
+        "Click button 'Editable' [id=float, onclick=grid.setStatic(false)]",
+        "Drag sidebar items into grid (when editable)",
+        "Drag widget to reposition (when editable)",
+        "Resize widget via resize handle (when editable)"
+      ],
+      "notes": "5 items with varied restrictions (locked, noMove, noResize); sidebar drag-in support"
+    },
+    {
+      "id": "/demo/static.html#editable",
+      "route": "/demo/static.html",
+      "label": "Static demo \u2014 editable mode (drag/resize enabled)",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Static' [onClick=grid.setStatic(true)]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Drag from sidebar to add new widget"
+      ],
+      "notes": "State after clicking 'Editable'; drag+resize enabled on all non-locked items"
+    },
+    {
+      "id": "/demo/title_drag.html",
+      "route": "/demo/title_drag.html",
+      "label": "Title drag demo \u2014 drag only via header, not content area",
+      "section": "Advanced Features",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget by .card-header area only",
+        "Resize widget via resize handle"
+      ],
+      "notes": "1 item with card-header; handle:'.card-header' option restricts drag to header"
+    },
+    {
+      "id": "/demo/transform.html",
+      "route": "/demo/transform.html",
+      "label": "Transform demo \u2014 grid in CSS-transformed (scaled/translated) parent",
+      "section": "Advanced Features",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addNewWidget()]",
+        "Click button 'Zoom in' [onClick=zoomIn()]",
+        "Click button 'Zoom out' [onClick=zoomOut()]",
+        "Click button 'Increase Scale X' [onClick=increaseScaleX()]",
+        "Click button 'Decrease Scale X' [onClick=decreaseScaleX()]",
+        "Click button 'Increase Scale Y' [onClick=increaseScaleY()]",
+        "Click button 'Decrease Scale Y' [onClick=decreaseScaleY()]",
+        "Drag widget to reposition (inside transformed container)",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Parent has translate(50px,100px) + scale; scale display updated live; 3 initial items"
+    },
+    {
+      "id": "/demo/two.html",
+      "route": "/demo/two.html",
+      "label": "Two grids demo \u2014 drag between two grids and a trash bin",
+      "section": "Multi-Grid",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click 'float: true' toggle button left grid [onClick=toggleFloat(this, 0)]",
+        "Click 'Compact' button left grid [onClick=compact(0)]",
+        "Click 'float: false' toggle button right grid [onClick=toggleFloat(this, 1)]",
+        "Click 'Compact' button right grid [onClick=compact(1)]",
+        "Drag widget from sidebar into left or right grid",
+        "Drag widget between left and right grids",
+        "Drag widget to trash [id=trash] to delete",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Sidebar with 5 draggable items (manual gs-id); left=floating, right=non-floating scroll"
+    },
+    {
+      "id": "/demo/two_vertical.html",
+      "route": "/demo/two_vertical.html",
+      "label": "Two vertical grids \u2014 stacked vertically with maxRow constraint",
+      "section": "Multi-Grid",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget from top grid to bottom grid (dragOut:true)",
+        "Drag widget from bottom grid to top grid",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Two vertically stacked grids; each has 2 items; maxRow frozen; acceptWidgets both"
+    },
+    {
+      "id": "/demo/web-comp.html",
+      "route": "/demo/web-comp.html",
+      "label": "Web Component demo \u2014 gridstack via LitElement web component",
+      "section": "Framework Integrations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget to reposition (inside web component)",
+        "Resize widget via resize handle"
+      ],
+      "notes": "2 items rendered via LitElement custom element; encapsulated shadow DOM"
+    },
+    {
+      "id": "/demo/web1.html",
+      "route": "/demo/web1.html",
+      "label": "Website demo 1 \u2014 11-item grid with renderCB and event logging",
+      "section": "Website Examples",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget labeled 'Drag me!' to reposition",
+        "Drag other widgets to reposition",
+        "Resize widget via resize handle",
+        "Observe event log in console (added/removed/change)"
+      ],
+      "notes": "11 items; 12-column layout; item 3 shows hand icon 'Drag me!'; renderCB for content"
+    },
+    {
+      "id": "/demo/web2.html",
+      "route": "/demo/web2.html",
+      "label": "Website demo 2 \u2014 sidebar + trash + locked items",
+      "section": "Website Examples",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag sidebar item (add-circle icon) into grid",
+        "Drag widget to trash [id=trash] to delete",
+        "Drag widget to reposition (non-locked items)",
+        "Resize widget via resize handle (non-noResize items)",
+        "Observe event log in console"
+      ],
+      "notes": "11 items; item 2=locked, item 3=noResize; trash bin sidebar; removable:'#trash'"
+    },
+    {
+      "id": "/demo/canvasJS.html",
+      "route": "/demo/canvasJS.html",
+      "label": "CanvasJS grid demo \u2014 grid containing CanvasJS charts",
+      "section": "Framework Integrations",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Interact with CanvasJS chart (hover, zoom per chart config)"
+      ],
+      "notes": "Not linked from demo/index.html; accessible directly; Revenue USD chart via CanvasJS"
+    },
+    {
+      "id": "/demo/esmodule.html",
+      "route": "/demo/esmodule.html",
+      "label": "ES Module loading demo \u2014 gridstack loaded via native ES module import",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Commented-out in demo/index.html; accessible directly; uses type=module script"
+    },
+    {
+      "id": "/demo/old_two-jq.html",
+      "route": "/demo/old_two-jq.html",
+      "label": "Old jQuery Two grids demo \u2014 legacy v5.1.1 jQuery-based implementation",
+      "section": "Legacy (jQuery v5)",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click float toggle button for each grid",
+        "Click 'Compact' button for each grid",
+        "Drag sidebar items into left/right grid",
+        "Drag widget to trash to delete",
+        "Drag widget between grids",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Uses gridstack v5.1.1 + jQuery; sidebar with 2 items; left=no float, right=float"
+    },
+    {
+      "id": "/demo/old_nested-jq.html",
+      "route": "/demo/old_nested-jq.html",
+      "label": "Old jQuery Nested grids \u2014 legacy v5.1.1 jQuery nested grid demo",
+      "section": "Legacy (jQuery v5)",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' (main)",
+        "Click button 'Add Widget Grid1'",
+        "Click button 'Add Widget Grid2'",
+        "Click button 'Save'",
+        "Click button 'Destroy'",
+        "Click button 'Load'",
+        "Click button 'Save list'",
+        "Click button 'Save no content'",
+        "Click button 'Clear'",
+        "Click button 'Load'",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "jQuery v5.1.1; nested sub-grids; sub1 allows dragOut, sub2 doesn't"
+    },
+    {
+      "id": "/react/index.html",
+      "route": "/react/index.html",
+      "label": "React wrapper Vite app entry point (requires Vite dev server)",
+      "section": "React Wrapper",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": "layout:vite-react-spa",
+      "actions": [
+        "Loads React SPA at /react/index.html but requires Vite dev server to bundle /src/main.tsx"
+      ],
+      "notes": "Static HTML shell only; Vite dev server needed for JS bundle; not fully functional via serve"
+    },
+    {
+      "id": "/react/",
+      "route": "/react/",
+      "label": "React wrapper demo \u2014 GridStack React component with nested subgrid",
+      "section": "React Wrapper",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:vite-react-spa",
+      "actions": [
+        "Click button 'Add Text (2\u00d72)'",
+        "Click button 'Add subgrid (12\u00d75)'",
+        "Click button 'Save layout (JSON)'",
+        "Click button 'Restore saved JSON' (disabled until Save clicked)",
+        "Click 'count: N' counter button inside Counter widget",
+        "Drag widget to reposition",
+        "Resize widget via resize handle",
+        "Drag sub-items within nested subgrid",
+        "Read live JSON snapshot in DebugPanel (auto-updates every 2s)"
+      ],
+      "notes": "Vite React SPA at localhost:5173 area; single GridPanel with Toolbar + DebugPanel"
+    },
+    {
+      "id": "/demo/react.html",
+      "route": "/demo/react.html",
+      "label": "ReactJS demo page (linked from index)",
+      "section": "Framework Integrations",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [],
+      "notes": "File not present in demo/ directory; linked from demo/index.html; returns 404"
+    },
+    {
+      "id": "/demo/react-hooks.html",
+      "route": "/demo/react-hooks.html",
+      "label": "ReactJS (Hooks) demo page (linked from index)",
+      "section": "Framework Integrations",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [],
+      "notes": "File not present in demo/ directory; linked from demo/index.html; returns 404"
+    },
+    {
+      "id": "/demo/react-hooks-controlled-multiple.html",
+      "route": "/demo/react-hooks-controlled-multiple.html",
+      "label": "ReactJS (Hooks) multiple controlled grids (linked from index)",
+      "section": "Framework Integrations",
+      "status": "skipped",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [],
+      "notes": "File not present in demo/ directory; linked from demo/index.html; returns 404"
+    },
+    {
+      "id": "/demo/locked.html",
+      "route": "/demo/locked.html",
+      "label": "Locked demo \u2014 locked/noMove/noResize widget constraints",
+      "section": "Basic Demos",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addNewWidget()]",
+        "Click button 'float: true' toggle [id=float, onclick=toggleFloat()]",
+        "Drag non-locked widgets to reposition",
+        "Resize non-locked widgets via resize handle"
+      ],
+      "notes": "Not linked from demo/index.html; contains locked+noMove+noResize widgets"
+    },
+    {
+      "id": "/e2e/fixtures/gridstack-with-height.html",
+      "route": "/e2e/fixtures/gridstack-with-height.html",
+      "label": "E2E test fixture \u2014 drag and drop test page with 3 items",
+      "section": "Test Fixtures",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Drag item-1 [id=item-1] to reposition (2\u00d72)",
+        "Drag item-2 [id=item-2] to reposition (2\u00d71)",
+        "Drag item-3 [id=item-3] to reposition (4\u00d71)",
+        "Observe console output [id=console-messages]"
+      ],
+      "notes": "E2E-only fixture; not linked from any demo page; console output panel for events"
+    },
+    {
+      "id": "/demo/custom-engine.html",
+      "route": "/demo/custom-engine.html",
+      "label": "Custom Engine demo \u2014 custom layout engine replacing default",
+      "section": "Advanced Features",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:plain-html",
+      "actions": [
+        "Click button 'Add Widget' [onClick=addNewWidget()]",
+        "Click button 'float: true' toggle [id=float, onclick=toggleFloat()]",
+        "Drag widget to reposition",
+        "Resize widget via resize handle"
+      ],
+      "notes": "Not linked from demo/index.html; demonstrates custom GridStack engine plugin"
+    }
+  ],
+  "edges": [
+    {
+      "from": "/",
+      "to": "/demo/",
+      "trigger": "link 'demo/' in root file browser"
+    },
+    {
+      "from": "/",
+      "to": "/react/",
+      "trigger": "link 'react/' in root file browser"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/anijs.html",
+      "trigger": "link 'AniJS'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/cell-height.html",
+      "trigger": "link 'Cell Height'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/column.html",
+      "trigger": "link 'Column'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/css_attributes.html",
+      "trigger": "link 'CSS & attributes'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/float.html",
+      "trigger": "link 'Float grid'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/grid-lines.html",
+      "trigger": "link 'Grid Lines'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/knockout.html",
+      "trigger": "link 'Knockout.js'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/lazy_load.html",
+      "trigger": "link 'Lazy Load'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/mobile.html",
+      "trigger": "link 'Mobile touch'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/nested.html",
+      "trigger": "link 'Nested grids'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/nested_advanced.html",
+      "trigger": "link 'Nested Advanced grids'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/nested_constraint.html",
+      "trigger": "link 'Nested Constraint grids'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/react.html",
+      "trigger": "link 'ReactJS'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/react-hooks.html",
+      "trigger": "link 'ReactJS (Hooks)'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/react-hooks-controlled-multiple.html",
+      "trigger": "link 'ReactJS (Hooks), multiple grid, controlled (NOT Ideal)'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/responsive.html",
+      "trigger": "link 'Responsive: by column size'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/responsive_break.html",
+      "trigger": "link 'Responsive: using breakpoints'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/responsive_none.html",
+      "trigger": "link \"Responsive: using layout:'none'\""
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/right-to-left(rtl).html",
+      "trigger": "link 'Right-To-Left (RTL)'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/serialization.html",
+      "trigger": "link 'Serialization'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/sizeToContent.html",
+      "trigger": "link 'Size To Content'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/static.html",
+      "trigger": "link 'Static'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/title_drag.html",
+      "trigger": "link 'Title drag'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/transform.html",
+      "trigger": "link 'Transform (scale+offset)'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/two.html",
+      "trigger": "link 'Two grids'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/two_vertical.html",
+      "trigger": "link 'Two grids Vertical'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/web-comp.html",
+      "trigger": "link 'Web Component'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/web1.html",
+      "trigger": "link 'Website demo 1'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/web2.html",
+      "trigger": "link 'Website demo 2'"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/old_two-jq.html",
+      "trigger": "link 'Two grids' in Old v5.1.1 Jquery Demos section"
+    },
+    {
+      "from": "/demo/",
+      "to": "/demo/old_nested-jq.html",
+      "trigger": "link 'Nested grids' in Old v5.1.1 Jquery Demos section"
+    },
+    {
+      "from": "/demo/static.html",
+      "to": "/demo/static.html#editable",
+      "trigger": "button 'Editable' [id=float, onclick=grid.setStatic(false)]"
+    },
+    {
+      "from": "/demo/static.html#editable",
+      "to": "/demo/static.html",
+      "trigger": "button 'Static' [onClick=grid.setStatic(true)]"
+    },
+    {
+      "from": "/demo/nested_advanced.html",
+      "to": "/demo/nested_advanced.html",
+      "trigger": "button 'Destroy' [onClick=destroy()] \u2014 removes all grids from DOM"
+    },
+    {
+      "from": "/demo/nested_advanced.html",
+      "to": "/demo/nested_advanced.html",
+      "trigger": "button 'Re-create' [onClick=load()] \u2014 reconstructs grids from saved JSON"
+    },
+    {
+      "from": "/demo/two.html",
+      "to": "/demo/two.html",
+      "trigger": "button 'float: true' toggle [onClick=toggleFloat(this, 0)] \u2014 changes grid behavior"
+    },
+    {
+      "from": "/demo/nested.html",
+      "to": "/demo/nested.html",
+      "trigger": "radio 'static' [onClick=setStatic(true)] \u2014 disables drag/resize"
+    },
+    {
+      "from": "/demo/nested.html",
+      "to": "/demo/nested.html",
+      "trigger": "radio 'editable' [onClick=setStatic(false)] \u2014 enables drag/resize"
+    },
+    {
+      "from": "/demo/column.html",
+      "to": "/demo/column.html",
+      "trigger": "dropdown layout option [onchange=setLayout()] \u2014 changes column relayout algorithm"
+    },
+    {
+      "from": "/demo/sizeToContent.html",
+      "to": "/demo/sizeToContent.html",
+      "trigger": "button 'more' inside widget E [onClick=more()] \u2014 expands dynamic content"
+    },
+    {
+      "from": "/demo/sizeToContent.html",
+      "to": "/demo/sizeToContent.html",
+      "trigger": "button 'less' inside widget E [onClick=less()] \u2014 shrinks dynamic content"
+    },
+    {
+      "from": "/demo/grid-lines.html",
+      "to": "/demo/grid-lines.html",
+      "trigger": "checkbox 'Show lines' [id=toggle] \u2014 toggles gs-show-grid-lines class on/off"
+    },
+    {
+      "from": "/demo/transform.html",
+      "to": "/demo/transform.html",
+      "trigger": "button 'Zoom in' [onClick=zoomIn()] \u2014 increases CSS scale"
+    },
+    {
+      "from": "/react/",
+      "to": "/react/",
+      "trigger": "button 'Save layout (JSON)' \u2014 saves grid state to component state"
+    },
+    {
+      "from": "/react/",
+      "to": "/react/",
+      "trigger": "button 'Restore saved JSON' [disabled until save clicked] \u2014 loads saved state into grid"
+    },
+    {
+      "from": "/demo/locked.html",
+      "to": "/demo/locked.html",
+      "trigger": "button 'float: true' toggle [id=float, onclick=toggleFloat()] \u2014 switches float mode"
+    },
+    {
+      "from": "/demo/custom-engine.html",
+      "to": "/demo/custom-engine.html",
+      "trigger": "button 'float: true' toggle [id=float, onclick=toggleFloat()] \u2014 switches float mode"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "All pages publicly accessible \u2014 no authentication required",
+        "node_ids": [
+          "/",
+          "/demo/",
+          "/demo/anijs.html",
+          "/demo/cell-height.html",
+          "/demo/column.html",
+          "/demo/css_attributes.html",
+          "/demo/float.html",
+          "/demo/grid-lines.html",
+          "/demo/knockout.html",
+          "/demo/lazy_load.html",
+          "/demo/mobile.html",
+          "/demo/nested.html",
+          "/demo/nested_advanced.html",
+          "/demo/nested_constraint.html",
+          "/demo/responsive.html",
+          "/demo/responsive_break.html",
+          "/demo/responsive_none.html",
+          "/demo/right-to-left(rtl).html",
+          "/demo/serialization.html",
+          "/demo/sizeToContent.html",
+          "/demo/static.html",
+          "/demo/static.html#editable",
+          "/demo/title_drag.html",
+          "/demo/transform.html",
+          "/demo/two.html",
+          "/demo/two_vertical.html",
+          "/demo/web-comp.html",
+          "/demo/web1.html",
+          "/demo/web2.html",
+          "/demo/canvasJS.html",
+          "/demo/esmodule.html",
+          "/demo/old_two-jq.html",
+          "/demo/old_nested-jq.html",
+          "/react/"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:plain-html",
+        "label": "Standalone HTML page with inline JS \u2014 no shared shell/nav",
+        "node_ids": [
+          "/demo/",
+          "/demo/anijs.html",
+          "/demo/cell-height.html",
+          "/demo/column.html",
+          "/demo/css_attributes.html",
+          "/demo/float.html",
+          "/demo/grid-lines.html",
+          "/demo/knockout.html",
+          "/demo/lazy_load.html",
+          "/demo/mobile.html",
+          "/demo/nested.html",
+          "/demo/nested_advanced.html",
+          "/demo/nested_constraint.html",
+          "/demo/responsive.html",
+          "/demo/responsive_break.html",
+          "/demo/responsive_none.html",
+          "/demo/right-to-left(rtl).html",
+          "/demo/serialization.html",
+          "/demo/sizeToContent.html",
+          "/demo/static.html",
+          "/demo/static.html#editable",
+          "/demo/title_drag.html",
+          "/demo/transform.html",
+          "/demo/two.html",
+          "/demo/two_vertical.html",
+          "/demo/web-comp.html",
+          "/demo/web1.html",
+          "/demo/web2.html",
+          "/demo/canvasJS.html",
+          "/demo/esmodule.html",
+          "/demo/old_two-jq.html",
+          "/demo/old_nested-jq.html"
+        ]
+      },
+      {
+        "id": "layout:vite-react-spa",
+        "label": "Vite + React SPA \u2014 requires dev server or build; single-page app",
+        "node_ids": [
+          "/react/",
+          "/react/index.html"
+        ]
+      },
+      {
+        "id": "layout:file-browser",
+        "label": "serve auto-generated directory listing",
+        "node_ids": [
+          "/"
+        ]
+      }
+    ]
+  }
+}

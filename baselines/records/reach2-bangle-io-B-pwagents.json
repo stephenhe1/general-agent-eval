@@ -1,0 +1,25 @@
+{
+ "subject": "bangle-io",
+ "arm": "B-pwagents",
+ "suite_filter": "tests-rq6-agent",
+ "tests_considered": 29,
+ "reach": 8,
+ "items": 14,
+ "per_item": {
+  "B01 create workspace": 27,
+  "B02 delete workspace": 0,
+  "B03 create note": 22,
+  "B04 edit note content": 0,
+  "B05 rename note": 1,
+  "B06 move note": 0,
+  "B07 clone note": 1,
+  "B08 delete note": 1,
+  "B09 create directory": 1,
+  "B10 daily note": 1,
+  "B11 star / unstar": 0,
+  "B12 toggle wide editor": 0,
+  "B13 toggle sidebar": 1,
+  "B14 switch theme": 0
+ },
+ "witness": "committing action, ordered, negative paths excluded"
+}

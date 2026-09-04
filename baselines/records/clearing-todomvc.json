@@ -1,0 +1,48 @@
+{
+ "root": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo",
+ "removed_count": 8,
+ "removed": [
+  {
+   "path": "cypress",
+   "kind": "directory",
+   "rule": "cypress test directory"
+  },
+  {
+   "path": "src/NotFound.test.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/ErrorBoundary.test.js",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/functions.test.ts",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/App.test.js",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/App/TodoList/index.test.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/App/TodoList/Item/index.test.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/App/NewTodoInput/index.test.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  }
+ ],
+ "preserved_suspicious_count": 0,
+ "preserved_suspicious": []
+}

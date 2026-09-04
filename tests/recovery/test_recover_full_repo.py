@@ -294,11 +294,11 @@ def test_resolve_commit_override_wins() -> None:
 
 
 def test_classify_path() -> None:
-    assert recover_full_repo.classify_path("src/test/java/example/FooTest.java") == "test"
-    assert recover_full_repo.classify_path("src/it/java/example/BarIT.java") == "test"
-    assert recover_full_repo.classify_path("pom.xml") == "build"
-    assert recover_full_repo.classify_path("service/build.gradle") == "build"
-    assert recover_full_repo.classify_path("src/main/java/example/App.java") == "production"
+    assert recover_full_repo.classify_path("e2e/login.spec.ts") == "test"
+    assert recover_full_repo.classify_path("src/Button.test.tsx") == "test"
+    assert recover_full_repo.classify_path("package.json") == "build"
+    assert recover_full_repo.classify_path("playwright.config.ts") == "build"
+    assert recover_full_repo.classify_path("src/App.tsx") == "production"
 
 
 def test_parse_apply_summary_and_numstat() -> None:
@@ -313,102 +313,6 @@ def test_parse_apply_summary_and_numstat() -> None:
         "3\t0\tsrc/test/java/A.java\n-\t-\tassets/logo.png\n"
     )
     assert paths == ["src/test/java/A.java", "assets/logo.png"]
-
-
-POM_WITH_DEPS = """<?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>demo</artifactId>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-</project>
-"""
-
-DEMO_SERVICE = {
-    "id": "demo",
-    "rest_assured": {
-        "target_pom": "pom.xml",
-        "group_id": "io.rest-assured",
-        "artifact_id": "rest-assured",
-        "version": "5.5.0",
-        "scope": "test",
-    },
-}
-
-
-def test_recover_replays_injected_dependency(tmp_path: Path) -> None:
-    if shutil.which("rsync") is None:
-        pytest.skip("rsync is required by Docker staging")
-
-    origin = tmp_path / "origin"
-    origin.mkdir()
-    write_file(origin / "pom.xml", POM_WITH_DEPS)
-    write_file(origin / "src/main/java/example/App.java", "class App {}\n")
-    write_file(origin / "src/test/java/example/AppTest.java", "class AppTest {}\n")
-    run(["git", "init"], cwd=origin)
-    configure_git(origin)
-    run(["git", "add", "--all"], cwd=origin)
-    run(["git", "commit", "-m", "initial"], cwd=origin)
-
-    run_dir = tmp_path / "run"
-    staged = run_dir / "input"
-    output_dir = run_dir / "output"
-    run_dir.mkdir()
-    output_dir.mkdir()
-
-    stage_input(origin, staged)
-    preprocessing = preprocess_staged_input(
-        args=argparse.Namespace(
-            reset_git=False, clear_tests=True, inject_rest_assured=True
-        ),
-        staged_input=staged,
-        output_dir=output_dir,
-        service=DEMO_SERVICE,
-    )
-    assert preprocessing["rest_assured_injection"]["status"] == "injected"
-
-    # Agent adds a RestAssured test against the (already injected) dependency.
-    write_file(
-        staged / "src/test/java/example/ApiIT.java",
-        "import io.restassured.RestAssured; class ApiIT {}\n",
-    )
-    collect_git_artifacts(staged, output_dir)
-    (run_dir / "manifest.json").write_text(
-        json.dumps({"input_dir": str(origin), "preprocessing": preprocessing}),
-        encoding="utf-8",
-    )
-
-    manifest = recover(tmp_path, origin, run_dir)
-    repo_dir = Path(manifest["repo_dir"])
-
-    assert manifest["apply_status"] == "clean"
-    assert manifest["dependency_injection"]["applied"] is True
-    # The injected dependency is present in the recovered (originally clean) POM.
-    assert "io.rest-assured" in (repo_dir / "pom.xml").read_text(encoding="utf-8")
-    # The agent's test is merged in.
-    assert (repo_dir / "src/test/java/example/ApiIT.java").exists()
-    # The POM edit was never attributed to the agent, so nothing non-test is flagged.
-    assert manifest["counts"]["non_test_touched"] == 0
-
-
-def test_recover_without_injection_reports_no_patch(tmp_path: Path) -> None:
-    origin, run_dir, _ = make_run(
-        tmp_path,
-        lambda staged: write_file(
-            staged / "src/test/java/example/GeneratedApiTest.java",
-            "class GeneratedApiTest {}\n",
-        ),
-    )
-    manifest = recover(tmp_path, origin, run_dir)
-
-    assert manifest["dependency_injection"]["applied"] is False
-    assert manifest["dependency_injection"]["reason"] == "no dependency_injection.patch"
 
 
 def test_resolve_commit_falls_back_to_top_level_baseline() -> None:

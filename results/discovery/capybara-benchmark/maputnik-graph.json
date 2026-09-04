@@ -1,0 +1,910 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "app_name": "Maputnik — MapLibre GL Style Editor",
+    "base_url": "http://localhost:3018/maputnik/",
+    "framework": "React (SPA — single route, all states via query params or UI)",
+    "total_states": 25,
+    "explored": 25,
+    "skipped": 0,
+    "verified_live": [
+      "/maputnik/",
+      "/maputnik/?modal=open",
+      "/maputnik/?modal=settings",
+      "/maputnik/?modal=sources",
+      "/maputnik/?modal=export",
+      "/maputnik/?modal=shortcuts",
+      "/maputnik/?view=inspect"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "/maputnik/",
+      "route": "/maputnik/",
+      "label": "Main editor — toolbar, layer list, map canvas, no layer selected",
+      "section": "Editor",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Open' [data-wd-key=nav:open]",
+        "button 'Save' [data-wd-key=nav:export]",
+        "button 'Code Editor' [data-wd-key=nav:code-editor]",
+        "button 'Data Sources' [data-wd-key=nav:sources]",
+        "button 'Style Settings' [data-wd-key=nav:settings]",
+        "button 'Global State' [data-wd-key=nav:global-state]",
+        "select 'View' (Map/Inspect/Color filters) [data-wd-key=maputnik-select]",
+        "select 'Language' [data-wd-key=maputnik-lang-select]",
+        "link 'Help' [data-wd-key=toolbar:link] (opens GitHub wiki externally)",
+        "button 'Add Layer' [data-wd-key=layer-list:add-layer]",
+        "button 'Expand' layer groups [data-wd-key=skip-target-layer-list]",
+        "Map canvas — pan (drag), zoom (scroll), geocoder search (top-left)",
+        "MapLibre NavigationControl — zoom in/out, compass reset",
+        "skip link 'Layers list' [data-wd-key=root:skip:layer-list]",
+        "skip link 'Layer editor' [data-wd-key=root:skip:layer-editor]",
+        "skip link 'Map view' [data-wd-key=root:skip:map-view]"
+      ],
+      "notes": "No layer selected; right panel is empty. Map defaults to empty style."
+    },
+    {
+      "id": "/maputnik/#layer-selected",
+      "route": "/maputnik/?layer=<hash>~<index>",
+      "label": "Main editor with layer selected — LayerEditor accordion visible",
+      "section": "Layer Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Open' [data-wd-key=nav:open]",
+        "button 'Save' [data-wd-key=nav:export]",
+        "button 'Code Editor' [data-wd-key=nav:code-editor]",
+        "button 'Data Sources' [data-wd-key=nav:sources]",
+        "button 'Style Settings' [data-wd-key=nav:settings]",
+        "button 'Global State' [data-wd-key=nav:global-state]",
+        "select 'View' [data-wd-key=maputnik-select]",
+        "select 'Language' [data-wd-key=maputnik-lang-select]",
+        "button 'Add Layer' [data-wd-key=layer-list:add-layer]",
+        "button 'Expand/Collapse' layers [data-wd-key=skip-target-layer-list]",
+        "layer list item click — select layer [data-wd-key=layer-list-item:<id>]",
+        "layer list item 'Delete' [data-wd-key=layer-list-item:<id>:delete]",
+        "layer list item 'Duplicate' [data-wd-key=layer-list-item:<id>:copy]",
+        "layer list item 'Toggle visibility' [data-wd-key=layer-list-item:<id>:toggle-visibility]",
+        "drag layer list item to reorder (DnD)",
+        "layer editor 'More menu' button [data-wd-key=skip-target-layer-editor]",
+        "layer editor menu: Delete [data-wd-key=menu-delete-layer]",
+        "layer editor menu: Duplicate [data-wd-key=menu-duplicate-layer]",
+        "layer editor menu: Hide/Show [data-wd-key=menu-hide-layer]",
+        "layer editor menu: Move layer up [data-wd-key=menu-move-layer-up]",
+        "layer editor menu: Move layer down [data-wd-key=menu-move-layer-down]",
+        "accordion: Layer group — ID, Type, Source, Source-layer, Min/Max zoom, Comment",
+        "accordion: Filter group — filter editor (combining op, conditions)",
+        "accordion: Paint/Layout properties — type-specific property fields",
+        "accordion: JSON Editor — raw JSON layer editor"
+      ],
+      "notes": "LayerEditor right panel shown. Accordion allows multiple groups expanded."
+    },
+    {
+      "id": "/maputnik/#code-editor",
+      "route": "/maputnik/?modal=codeEditor",
+      "label": "Code editor open — full-width JSON editor replaces layer list + layer editor",
+      "section": "Code Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Open' [data-wd-key=nav:open]",
+        "button 'Save' [data-wd-key=nav:export]",
+        "button 'Code Editor' (toggle off) [data-wd-key=nav:code-editor]",
+        "button 'Data Sources' [data-wd-key=nav:sources]",
+        "button 'Style Settings' [data-wd-key=nav:settings]",
+        "button 'Global State' [data-wd-key=nav:global-state]",
+        "button 'Click to close the editor' [aria-label=Close]",
+        "code editor — edit full style JSON (lintType=style)"
+      ],
+      "notes": "LayerList and LayerEditor are hidden; CodeEditor takes full left panel width."
+    },
+    {
+      "id": "/maputnik/#view-inspect",
+      "route": "/maputnik/?view=inspect",
+      "label": "Map in inspect mode — colored layers, feature property popup on hover",
+      "section": "Map Inspection",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Open' [data-wd-key=nav:open]",
+        "button 'Save' [data-wd-key=nav:export]",
+        "button 'Code Editor' [data-wd-key=nav:code-editor]",
+        "button 'Data Sources' [data-wd-key=nav:sources]",
+        "button 'Style Settings' [data-wd-key=nav:settings]",
+        "button 'Global State' [data-wd-key=nav:global-state]",
+        "select 'View' set to 'Inspect' [data-wd-key=maputnik-select]",
+        "button 'Add Layer' [data-wd-key=layer-list:add-layer]",
+        "hover map to show FeaturePropertyPopup [data-wd-key=feature-property-popup]",
+        "Map canvas — pan, zoom, geocoder search"
+      ],
+      "notes": "MapLibre GL only (disabled for OpenLayers renderer). Shows colored layer outlines."
+    },
+    {
+      "id": "/maputnik/#view-inspect-feature-popup",
+      "route": "/maputnik/?view=inspect (hover state)",
+      "label": "Inspect mode — FeaturePropertyPopup showing feature properties table",
+      "section": "Map Inspection",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "FeaturePropertyPopup: view $type, $id, feature properties [data-wd-key=feature-property-popup]",
+        "mouse move off feature to dismiss popup"
+      ],
+      "notes": "Popup appears on hover in inspect mode; read-only feature property table."
+    },
+    {
+      "id": "/maputnik/#layer-popup",
+      "route": "/maputnik/ (click feature in normal map mode)",
+      "label": "Layer selection popup — list of layers under cursor in normal map mode",
+      "section": "Map View",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "click layer label in popup to select layer [data-wd-key=feature-layer-popup]",
+        "click outside popup to dismiss"
+      ],
+      "notes": "Appears on feature click in normal (non-inspect) map mode. Shows layer list."
+    },
+    {
+      "id": "/maputnik/#view-filter-deuteranopia",
+      "route": "/maputnik/ (view=filter-deuteranopia)",
+      "label": "Map with deuteranopia color blindness filter applied",
+      "section": "Color Accessibility",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "select 'View' set to 'Deuteranopia filter' [data-wd-key=maputnik-select]",
+        "All standard editor actions available"
+      ],
+      "notes": "CSS filter applied to map container. Chrome/Firefox only."
+    },
+    {
+      "id": "/maputnik/#view-filter-protanopia",
+      "route": "/maputnik/ (view=filter-protanopia)",
+      "label": "Map with protanopia color blindness filter applied",
+      "section": "Color Accessibility",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "select 'View' set to 'Protanopia filter' [data-wd-key=maputnik-select]",
+        "All standard editor actions available"
+      ],
+      "notes": "CSS filter applied to map container. Chrome/Firefox only."
+    },
+    {
+      "id": "/maputnik/#view-filter-tritanopia",
+      "route": "/maputnik/ (view=filter-tritanopia)",
+      "label": "Map with tritanopia color blindness filter applied",
+      "section": "Color Accessibility",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "select 'View' set to 'Tritanopia filter' [data-wd-key=maputnik-select]",
+        "All standard editor actions available"
+      ],
+      "notes": "CSS filter applied to map container. Chrome/Firefox only."
+    },
+    {
+      "id": "/maputnik/#view-filter-achromatopsia",
+      "route": "/maputnik/ (view=filter-achromatopsia)",
+      "label": "Map with achromatopsia (full color blindness) filter applied",
+      "section": "Color Accessibility",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "select 'View' set to 'Achromatopsia filter' [data-wd-key=maputnik-select]",
+        "All standard editor actions available"
+      ],
+      "notes": "CSS filter applied to map container. Chrome/Firefox only."
+    },
+    {
+      "id": "/maputnik/#modal-open",
+      "route": "/maputnik/?modal=open",
+      "label": "Open Style modal — local file, URL, or gallery style",
+      "section": "Style Loading",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "dropzone click or drag-and-drop JSON file [data-wd-key=modal:open.dropzone]",
+        "file input (hidden, triggered by dropzone) [data-wd-key=modal:open.file.input]",
+        "input URL [data-wd-key=modal:open.url.input]",
+        "button 'Load from URL' [data-wd-key=modal:open.url.button]",
+        "gallery style button (one per public style) to load preset style",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "Three sections: local file upload, URL loader, and public style gallery."
+    },
+    {
+      "id": "/maputnik/#modal-open-loading",
+      "route": "/maputnik/?modal=open (while fetching URL)",
+      "label": "Loading Style modal — spinner with cancel while fetching style from URL",
+      "section": "Style Loading",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Cancel' to abort in-flight URL fetch"
+      ],
+      "notes": "ModalLoading shown over ModalOpen while style URL is being fetched."
+    },
+    {
+      "id": "/maputnik/#modal-export",
+      "route": "/maputnik/?modal=export",
+      "label": "Save Style modal — export JSON or HTML with API tokens",
+      "section": "Style Export",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "input 'MapTiler Access Token' field",
+        "input 'Thunderforest Access Token' field",
+        "input 'Stadia Access Token' field",
+        "input 'LocationIQ Access Token' field",
+        "button 'Save' — save/overwrite file (uses File System Access API if available)",
+        "button 'Save as' — save-file-picker dialog (if File System Access API available)",
+        "button 'Create HTML' — download standalone HTML map file",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "API tokens are stripped from export; fields allow user to configure them first."
+    },
+    {
+      "id": "/maputnik/#modal-sources",
+      "route": "/maputnik/?modal=sources",
+      "label": "Data Sources modal — manage active sources, add public or custom sources",
+      "section": "Sources Management",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "Active source: edit source properties (URL/tiles/data per type)",
+        "Active source: button 'Remove' source [aria-label=Remove '<id>' source]",
+        "Public source: button to add preset tileset",
+        "Add source: input 'Source ID' [data-wd-key=modal:sources.add.source_id]",
+        "Add source: select 'Source Type' [data-wd-key=modal:sources.add.source_type]",
+        "Add source: type-specific editor fields (URL, tiles, minzoom, maxzoom, scheme, data JSON, etc.)",
+        "Add source: button 'Add Source' [data-wd-key=modal:sources.add.add_source]",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "Source types: vector/TileJSON, vector/tiles, raster/TileJSON, raster/tiles, raster-dem, GeoJSON URL, GeoJSON JSON, PMTiles, image, video."
+    },
+    {
+      "id": "/maputnik/#modal-settings",
+      "route": "/maputnik/?modal=settings",
+      "label": "Style Settings modal — global style properties and API tokens",
+      "section": "Style Configuration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "input 'Name' [data-wd-key=modal:settings.name]",
+        "input 'Owner' [data-wd-key=modal:settings.owner]",
+        "JSON editor 'Sprite URL' [data-wd-key=modal:settings.sprite]",
+        "input 'Glyphs URL' [data-wd-key=modal:settings.glyphs]",
+        "input 'MapTiler Access Token' [data-wd-key=modal:settings.maputnik:openmaptiles_access_token]",
+        "input 'Thunderforest Access Token' [data-wd-key=modal:settings.maputnik:thunderforest_access_token]",
+        "input 'Stadia Access Token' [data-wd-key=modal:settings.maputnik:stadia_access_token]",
+        "input 'LocationIQ Access Token' [data-wd-key=modal:settings.maputnik:locationiq_access_token]",
+        "number array 'Center' [lng, lat]",
+        "number 'Zoom'",
+        "number 'Bearing'",
+        "number 'Pitch'",
+        "select 'Light anchor' (map|viewport)",
+        "color picker 'Light color'",
+        "number 'Light intensity'",
+        "number array 'Light position'",
+        "input 'Terrain source'",
+        "number 'Terrain exaggeration'",
+        "number 'Transition delay'",
+        "number 'Transition duration'",
+        "select 'Projection' [data-wd-key=modal:settings.projection]",
+        "select 'Renderer' (mlgljs|ol) [data-wd-key=modal:settings.maputnik:renderer]",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "Changing renderer to 'ol' (OpenLayers) disables Inspect mode."
+    },
+    {
+      "id": "/maputnik/#modal-shortcuts",
+      "route": "/maputnik/?modal=shortcuts",
+      "label": "Shortcuts modal — keyboard shortcut reference",
+      "section": "Help",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "modal X close button or click overlay to dismiss",
+        "Keyboard shortcut reference (read-only list)"
+      ],
+      "notes": "Also opened by pressing '?' key. Lists app shortcuts + map navigation keys."
+    },
+    {
+      "id": "/maputnik/#modal-debug",
+      "route": "/maputnik/?modal=debug",
+      "label": "Debug modal — renderer debug options and OSM link",
+      "section": "Developer Tools",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "checkbox 'showTileBoundaries' (mlgljs renderer)",
+        "checkbox 'showCollisionBoxes' (mlgljs renderer)",
+        "checkbox 'showOverdrawInspector' (mlgljs renderer)",
+        "checkbox 'debugToolbox' (OpenLayers renderer)",
+        "link 'Open in OSM' (external, current map view)",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "Opened with '!' key. Debug options differ by renderer (mlgljs vs ol)."
+    },
+    {
+      "id": "/maputnik/#modal-global-state",
+      "route": "/maputnik/?modal=globalState",
+      "label": "Global State Variables modal — manage style schema/state key-value pairs",
+      "section": "Style Configuration",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Add Variable' [data-wd-key=global-state-add-variable]",
+        "input 'Key' for each variable [data-wd-key=global-state-variable-key:<index>]",
+        "input 'Value' for each variable [data-wd-key=global-state-variable-value:<index>]",
+        "button 'Remove variable' per row [data-wd-key=global-state-remove-variable]",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "Manages MapLibre GL style schema `state`. Empty state shows doc link."
+    },
+    {
+      "id": "/maputnik/#modal-add-layer",
+      "route": "/maputnik/ (layer list Add Layer button)",
+      "label": "Add Layer modal — configure and add a new layer to the style",
+      "section": "Layer Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "input 'Layer ID' [data-wd-key=add-layer.layer-id]",
+        "select 'Layer Type' (fill/line/symbol/circle/heatmap/fill-extrusion/raster/hillshade/background/etc.) [data-wd-key=add-layer.layer-type]",
+        "select 'Source' (shown for non-background types) [data-wd-key=add-layer.layer-source-block]",
+        "select 'Source Layer' (shown for vector sources)",
+        "button 'Add Layer' [data-wd-key=add-layer]",
+        "modal X close button or click overlay to dismiss"
+      ],
+      "notes": "Accessed via 'Add Layer' button in layer list header."
+    },
+    {
+      "id": "/maputnik/#message-panel",
+      "route": "/maputnik/ (style has validation errors or undo/redo info)",
+      "label": "Bottom message panel — style validation errors or undo/redo info messages",
+      "section": "Validation",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "click error message 'switch to layer' button to navigate to offending layer",
+        "panel auto-disappears when errors cleared"
+      ],
+      "notes": "Shown at bottom when mapStyle has validation errors or after undo/redo."
+    },
+    {
+      "id": "/maputnik/#ol-renderer",
+      "route": "/maputnik/ (metadata.maputnik:renderer = 'ol')",
+      "label": "Main editor with OpenLayers renderer active",
+      "section": "Renderer Variant",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "button 'Open' [data-wd-key=nav:open]",
+        "button 'Save' [data-wd-key=nav:export]",
+        "button 'Code Editor' [data-wd-key=nav:code-editor]",
+        "button 'Data Sources' [data-wd-key=nav:sources]",
+        "button 'Style Settings' [data-wd-key=nav:settings]",
+        "button 'Global State' [data-wd-key=nav:global-state]",
+        "select 'View' — Inspect option disabled [data-wd-key=maputnik-select]",
+        "select 'Language' [data-wd-key=maputnik-lang-select]",
+        "button 'Add Layer' [data-wd-key=layer-list:add-layer]",
+        "OpenLayers map canvas — click features to show layer popup"
+      ],
+      "notes": "Inspect mode disabled. Set via Style Settings renderer selector."
+    },
+    {
+      "id": "/maputnik/#layer-editor-filter",
+      "route": "/maputnik/?layer=<hash>~<index> (filter accordion open)",
+      "label": "Layer editor — Filter accordion expanded with filter editor UI",
+      "section": "Layer Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "select combining operator (all/any/none)",
+        "button 'Add filter' to add condition row",
+        "filter row: select field, operator, value",
+        "button 'Convert to expression' to migrate to expression syntax",
+        "button 'X' to remove individual filter condition",
+        "switch to expression editor (button) for complex expressions"
+      ],
+      "notes": "FilterEditor inside Layer accordion. Supports legacy and expression filter syntax."
+    },
+    {
+      "id": "/maputnik/#layer-editor-zoom-property",
+      "route": "/maputnik/?layer=<hash>~<index> (property using zoom stops)",
+      "label": "Layer editor — property field in zoom-function mode showing stop table",
+      "section": "Layer Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "stop row: number input for zoom level",
+        "stop row: value input (type-specific: color, number, string, etc.)",
+        "button 'Add stop' (PiListPlusBold icon) to append a new stop row",
+        "button 'Delete stop' (X) per row to remove stop",
+        "number 'Base' — interpolation base for exponential stops",
+        "button 'Convert to expression' (TbMathFunction icon)",
+        "button 'Convert to data function' (MdInsertChart icon, if data-driven property)"
+      ],
+      "notes": "_ZoomProperty component. Activated via 'Convert to zoom function' button on a property."
+    },
+    {
+      "id": "/maputnik/#layer-editor-data-property",
+      "route": "/maputnik/?layer=<hash>~<index> (property using data-driven stops)",
+      "label": "Layer editor — property field in data-function mode showing data stops table",
+      "section": "Layer Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "input 'Property name' — the feature data property to drive the value",
+        "stop row: value input for feature property value (zoom + data pair)",
+        "stop row: output value input (type-specific)",
+        "button 'Add stop' to append a new stop row",
+        "button 'Delete stop' per row to remove stop",
+        "number 'Base' input for interpolation base",
+        "button 'Convert to expression' (TbMathFunction icon)"
+      ],
+      "notes": "_DataProperty component. Activated via 'Convert to data function' button on data-driven properties."
+    },
+    {
+      "id": "/maputnik/#layer-editor-expression-property",
+      "route": "/maputnik/?layer=<hash>~<index> (property using expression)",
+      "label": "Layer editor — property field in expression mode showing inline JSON expression editor",
+      "section": "Layer Editing",
+      "status": "explored",
+      "auth_required": false,
+      "layout": "layout:main",
+      "actions": [
+        "JSON expression editor field (CodeMirror, lintType=expression)",
+        "button 'Revert from expression' (MdUndo icon, if undoable)",
+        "button 'Delete expression' (MdDelete icon) to reset to default value"
+      ],
+      "notes": "_ExpressionProperty component. Activated via 'Convert to expression' button on a property."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-open",
+      "trigger": "button 'Open' [data-wd-key=nav:open] or key 'o'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-export",
+      "trigger": "button 'Save' [data-wd-key=nav:export] or key 'e'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#code-editor",
+      "trigger": "button 'Code Editor' [data-wd-key=nav:code-editor]"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-sources",
+      "trigger": "button 'Data Sources' [data-wd-key=nav:sources] or key 'd'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-settings",
+      "trigger": "button 'Style Settings' [data-wd-key=nav:settings] or key 's'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-global-state",
+      "trigger": "button 'Global State' [data-wd-key=nav:global-state] or key 'g'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-shortcuts",
+      "trigger": "key '?'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-debug",
+      "trigger": "key '!'"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#view-inspect",
+      "trigger": "select 'View' → option 'Inspect' [data-wd-key=maputnik-select] or key 'i'",
+      "guard": "renderer must be mlgljs (not OpenLayers)"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#view-filter-deuteranopia",
+      "trigger": "select 'View' → option 'Deuteranopia filter' [data-wd-key=maputnik-select]",
+      "guard": "browser must be Chrome or Firefox"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#view-filter-protanopia",
+      "trigger": "select 'View' → option 'Protanopia filter' [data-wd-key=maputnik-select]",
+      "guard": "browser must be Chrome or Firefox"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#view-filter-tritanopia",
+      "trigger": "select 'View' → option 'Tritanopia filter' [data-wd-key=maputnik-select]",
+      "guard": "browser must be Chrome or Firefox"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#view-filter-achromatopsia",
+      "trigger": "select 'View' → option 'Achromatopsia filter' [data-wd-key=maputnik-select]",
+      "guard": "browser must be Chrome or Firefox"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "click layer item in layer list [data-wd-key=layer-list-item:<id>]",
+      "guard": "at least one layer exists in the style"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#modal-add-layer",
+      "trigger": "button 'Add Layer' [data-wd-key=layer-list:add-layer]"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#layer-popup",
+      "trigger": "click on map feature in normal (non-inspect) mode",
+      "guard": "style has layers with data"
+    },
+    {
+      "from": "/maputnik/",
+      "to": "/maputnik/#ol-renderer",
+      "trigger": "auto: style metadata maputnik:renderer set to 'ol' (via Style Settings modal)"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#modal-open",
+      "trigger": "button 'Open' [data-wd-key=nav:open] or key 'o'"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#modal-export",
+      "trigger": "button 'Save' [data-wd-key=nav:export] or key 'e'"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#modal-sources",
+      "trigger": "button 'Data Sources' [data-wd-key=nav:sources] or key 'd'"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#code-editor",
+      "trigger": "button 'Code Editor' [data-wd-key=nav:code-editor]"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#modal-add-layer",
+      "trigger": "button 'Add Layer' [data-wd-key=layer-list:add-layer]"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#layer-editor-filter",
+      "trigger": "accordion header 'Filter' clicked to expand in LayerEditor"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#message-panel",
+      "trigger": "auto: style validation errors appear after layer edit"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/",
+      "trigger": "layer deleted (all layers removed) [data-wd-key=menu-delete-layer]"
+    },
+    {
+      "from": "/maputnik/#code-editor",
+      "to": "/maputnik/",
+      "trigger": "button 'Click to close the editor' [aria-label=Close]"
+    },
+    {
+      "from": "/maputnik/#code-editor",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "button 'Click to close the editor' [aria-label=Close]",
+      "guard": "style had layers before opening code editor"
+    },
+    {
+      "from": "/maputnik/#view-inspect",
+      "to": "/maputnik/",
+      "trigger": "select 'View' → option 'Map' [data-wd-key=maputnik-select] or key 'i'"
+    },
+    {
+      "from": "/maputnik/#view-inspect",
+      "to": "/maputnik/#view-inspect-feature-popup",
+      "trigger": "hover over map feature in inspect mode",
+      "guard": "style has layers with data"
+    },
+    {
+      "from": "/maputnik/#view-inspect",
+      "to": "/maputnik/#modal-open",
+      "trigger": "button 'Open' [data-wd-key=nav:open]"
+    },
+    {
+      "from": "/maputnik/#view-inspect",
+      "to": "/maputnik/#modal-settings",
+      "trigger": "button 'Style Settings' [data-wd-key=nav:settings]"
+    },
+    {
+      "from": "/maputnik/#view-inspect-feature-popup",
+      "to": "/maputnik/#view-inspect",
+      "trigger": "mouse move off feature — popup auto-dismissed"
+    },
+    {
+      "from": "/maputnik/#layer-popup",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "click layer label in layer popup [data-wd-key=feature-layer-popup]"
+    },
+    {
+      "from": "/maputnik/#layer-popup",
+      "to": "/maputnik/",
+      "trigger": "click outside popup to dismiss"
+    },
+    {
+      "from": "/maputnik/#view-filter-deuteranopia",
+      "to": "/maputnik/",
+      "trigger": "select 'View' → option 'Map' [data-wd-key=maputnik-select]"
+    },
+    {
+      "from": "/maputnik/#view-filter-protanopia",
+      "to": "/maputnik/",
+      "trigger": "select 'View' → option 'Map' [data-wd-key=maputnik-select]"
+    },
+    {
+      "from": "/maputnik/#view-filter-tritanopia",
+      "to": "/maputnik/",
+      "trigger": "select 'View' → option 'Map' [data-wd-key=maputnik-select]"
+    },
+    {
+      "from": "/maputnik/#view-filter-achromatopsia",
+      "to": "/maputnik/",
+      "trigger": "select 'View' → option 'Map' [data-wd-key=maputnik-select]"
+    },
+    {
+      "from": "/maputnik/#modal-open",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-open",
+      "to": "/maputnik/#modal-open-loading",
+      "trigger": "button 'Load from URL' [data-wd-key=modal:open.url.button] with valid URL entered"
+    },
+    {
+      "from": "/maputnik/#modal-open",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "successful file drop, file browse, or gallery style select — style loaded"
+    },
+    {
+      "from": "/maputnik/#modal-open-loading",
+      "to": "/maputnik/#modal-open",
+      "trigger": "button 'Cancel' to abort URL fetch"
+    },
+    {
+      "from": "/maputnik/#modal-open-loading",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "auto: URL fetch succeeds — style loaded and modal closes"
+    },
+    {
+      "from": "/maputnik/#modal-export",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-export",
+      "to": "/maputnik/",
+      "trigger": "button 'Save' or 'Save as' — triggers file save dialog, then modal closes on success"
+    },
+    {
+      "from": "/maputnik/#modal-sources",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-settings",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-settings",
+      "to": "/maputnik/#ol-renderer",
+      "trigger": "select 'Renderer' → option 'Open Layers (experimental)' [data-wd-key=modal:settings.maputnik:renderer]"
+    },
+    {
+      "from": "/maputnik/#modal-shortcuts",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-debug",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-global-state",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#modal-add-layer",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "button 'Add Layer' [data-wd-key=add-layer] with valid layer ID"
+    },
+    {
+      "from": "/maputnik/#modal-add-layer",
+      "to": "/maputnik/",
+      "trigger": "modal X close button, click outside modal, or Escape key"
+    },
+    {
+      "from": "/maputnik/#message-panel",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "click 'switch to layer' button in error message"
+    },
+    {
+      "from": "/maputnik/#message-panel",
+      "to": "/maputnik/",
+      "trigger": "auto: all errors cleared"
+    },
+    {
+      "from": "/maputnik/#ol-renderer",
+      "to": "/maputnik/",
+      "trigger": "select 'Renderer' → option 'MapLibreGL JS' [data-wd-key=modal:settings.maputnik:renderer]"
+    },
+    {
+      "from": "/maputnik/#ol-renderer",
+      "to": "/maputnik/#modal-debug",
+      "trigger": "key '!' (shows OpenLayers debugToolbox checkbox instead of mlgljs options)"
+    },
+    {
+      "from": "/maputnik/#layer-editor-filter",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "accordion header 'Filter' clicked to collapse"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#layer-editor-zoom-property",
+      "trigger": "button 'Convert property into a zoom function' (MdFunctions icon) on a property field",
+      "guard": "property field spec supports zoom expression parameters"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#layer-editor-data-property",
+      "trigger": "button 'Convert property to data function' (MdInsertChart icon) on a property field",
+      "guard": "property field spec has property-type=data-driven"
+    },
+    {
+      "from": "/maputnik/#layer-selected",
+      "to": "/maputnik/#layer-editor-expression-property",
+      "trigger": "button 'Convert to expression' (TbMathFunction icon) on a property field"
+    },
+    {
+      "from": "/maputnik/#layer-editor-zoom-property",
+      "to": "/maputnik/#layer-editor-expression-property",
+      "trigger": "button 'Convert to expression' on zoom-function property field"
+    },
+    {
+      "from": "/maputnik/#layer-editor-zoom-property",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "all stops deleted (reduces to single value) — auto-reverts to value mode"
+    },
+    {
+      "from": "/maputnik/#layer-editor-data-property",
+      "to": "/maputnik/#layer-editor-expression-property",
+      "trigger": "button 'Convert to expression' on data-function property field"
+    },
+    {
+      "from": "/maputnik/#layer-editor-data-property",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "all stops deleted — auto-reverts to value mode"
+    },
+    {
+      "from": "/maputnik/#layer-editor-expression-property",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "button 'Delete expression' (MdDelete icon) — resets to default value"
+    },
+    {
+      "from": "/maputnik/#layer-editor-expression-property",
+      "to": "/maputnik/#layer-selected",
+      "trigger": "button 'Revert from expression' (MdUndo icon)",
+      "guard": "expression was previously a get/literal expression (canUndo=true)"
+    }
+  ],
+  "groups": {
+    "auth_zones": [
+      {
+        "id": "zone:public",
+        "label": "No authentication required — all states are publicly accessible",
+        "node_ids": [
+          "/maputnik/",
+          "/maputnik/#layer-selected",
+          "/maputnik/#code-editor",
+          "/maputnik/#view-inspect",
+          "/maputnik/#view-inspect-feature-popup",
+          "/maputnik/#layer-popup",
+          "/maputnik/#view-filter-deuteranopia",
+          "/maputnik/#view-filter-protanopia",
+          "/maputnik/#view-filter-tritanopia",
+          "/maputnik/#view-filter-achromatopsia",
+          "/maputnik/#modal-open",
+          "/maputnik/#modal-open-loading",
+          "/maputnik/#modal-export",
+          "/maputnik/#modal-sources",
+          "/maputnik/#modal-settings",
+          "/maputnik/#modal-shortcuts",
+          "/maputnik/#modal-debug",
+          "/maputnik/#modal-global-state",
+          "/maputnik/#modal-add-layer",
+          "/maputnik/#message-panel",
+          "/maputnik/#ol-renderer",
+          "/maputnik/#layer-editor-filter",
+          "/maputnik/#layer-editor-zoom-property",
+          "/maputnik/#layer-editor-data-property",
+          "/maputnik/#layer-editor-expression-property"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "id": "layout:main",
+        "label": "Main app shell — toolbar top, layer-list left, map center, layer-editor right",
+        "node_ids": [
+          "/maputnik/",
+          "/maputnik/#layer-selected",
+          "/maputnik/#code-editor",
+          "/maputnik/#view-inspect",
+          "/maputnik/#view-inspect-feature-popup",
+          "/maputnik/#layer-popup",
+          "/maputnik/#view-filter-deuteranopia",
+          "/maputnik/#view-filter-protanopia",
+          "/maputnik/#view-filter-tritanopia",
+          "/maputnik/#view-filter-achromatopsia",
+          "/maputnik/#modal-open",
+          "/maputnik/#modal-open-loading",
+          "/maputnik/#modal-export",
+          "/maputnik/#modal-sources",
+          "/maputnik/#modal-settings",
+          "/maputnik/#modal-shortcuts",
+          "/maputnik/#modal-debug",
+          "/maputnik/#modal-global-state",
+          "/maputnik/#modal-add-layer",
+          "/maputnik/#message-panel",
+          "/maputnik/#ol-renderer",
+          "/maputnik/#layer-editor-filter",
+          "/maputnik/#layer-editor-zoom-property",
+          "/maputnik/#layer-editor-data-property",
+          "/maputnik/#layer-editor-expression-property"
+        ]
+      }
+    ]
+  }
+}

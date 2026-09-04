@@ -1,0 +1,48 @@
+{
+ "root": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A1-repo",
+ "removed_count": 8,
+ "removed": [
+  {
+   "path": "cypress",
+   "kind": "directory",
+   "rule": "cypress test directory"
+  },
+  {
+   "path": "src/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "src/utils/__tests__",
+   "kind": "directory",
+   "rule": "__tests__ test directory"
+  },
+  {
+   "path": "src/components/TransactionDateRangeFilter.cy.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/components/SignInForm.cy.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/components/AlertBar.cy.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/components/TransactionTitle.cy.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  },
+  {
+   "path": "src/containers/TransactionsContainer.cy.tsx",
+   "kind": "file",
+   "rule": "JS test filename (*.test/spec/cy.*)"
+  }
+ ],
+ "preserved_suspicious_count": 0,
+ "preserved_suspicious": []
+}

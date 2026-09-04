@@ -1,0 +1,25 @@
+{
+ "subject": "bangle-io",
+ "arm": "A-naive",
+ "suite_filter": "",
+ "tests_considered": 68,
+ "reach": 12,
+ "items": 14,
+ "per_item": {
+  "B01 create workspace": 59,
+  "B02 delete workspace": 1,
+  "B03 create note": 35,
+  "B04 edit note content": 0,
+  "B05 rename note": 2,
+  "B06 move note": 0,
+  "B07 clone note": 1,
+  "B08 delete note": 2,
+  "B09 create directory": 2,
+  "B10 daily note": 2,
+  "B11 star / unstar": 3,
+  "B12 toggle wide editor": 1,
+  "B13 toggle sidebar": 1,
+  "B14 switch theme": 2
+ },
+ "witness": "committing action, ordered, negative paths excluded"
+}
