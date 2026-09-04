@@ -83,6 +83,25 @@ label from its parent and reads `<arm>/results.json` there to drop non-passing t
 arm directory instead still produces a number, but with no pass-filtering and a mislabelled output
 file — verified 2026-09-04, when doing exactly that wrote `reach2-todomvc-todomvc.json`.
 
+## Trace archive
+
+The Playwright traces the reach numbers were computed from are too large for the repository and are
+distributed separately:
+
+    baseline-traces-2026-09-04.tar.gz
+    SHA-256  0467c47cce2498359d3b9c86dbd71f54832c68c21f983d5d0c7959804f6274c8
+    689 MB (712,253,993 bytes), 924 trace.zip files
+
+Verified on creation: `tar -tzf` lists cleanly with no errors, the archive holds exactly the 924
+`trace.zip` files found in the workspaces (0 missing, 0 extra), and an extracted trace is
+byte-identical to its source. Paths inside the archive are relative to the workspace root, so it
+unpacks alongside a `20260901/` tree.
+
+The archive pairs with baseline artifact commit `0f98705a3f4293d713ee6e51cb880e1757f328ae`
+(`baselines: commit the 281 generated specs and 15 execution reports`), which is the state of
+`generated-tests/`, `execution-reports/` and `MANIFEST.md` the traces correspond to. Not included in
+the archive: 57 PNG screenshots that sit beside the traces in `test-results/`.
+
 ## How reach is measured
 
 `reach2.py` reads ordered event streams from Playwright traces and asks, for each GT item,
