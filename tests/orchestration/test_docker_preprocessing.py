@@ -765,6 +765,8 @@ def test_clear_tests_sanitizes_history_and_preserves_patch_sequence(
     )
     assert clearing_manifest["removed_count"] == 1
     assert clearing_manifest["preserved_suspicious_count"] == 0
+    # root is recorded relative to the run dir (output_dir.parent), never absolute.
+    assert clearing_manifest["root"] == "staged"
     assert "src/test/java/example/AppTest.java" in (
         output_dir / "test_clearing.patch"
     ).read_text(encoding="utf-8")
