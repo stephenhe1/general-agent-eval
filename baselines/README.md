@@ -28,14 +28,43 @@ orchestration of both arms, the reach scorer, and the run records.
 co-located. `scoring/make_results.py` and `scoring/reach2.py` resolve `logs/` and `RESULTS.md`
 relative to the **current working directory**, so run them from the workspace root, not from here.
 
+## Generated tests and execution reports
+
+    generated-tests/<subject>/<arm>/<original relative path>    281 specs
+    execution-reports/<subject>/<arm>/results.json              15 reports
+
+All 281 generated specs are committed with their original relative paths, verified by per-file
+SHA-256 against the source workspaces: 281/281 copied, 0 missing, 0 corrupt. See
+[MANIFEST.md](MANIFEST.md) for the per-subject/arm table.
+
+### Correction to the arm B spec counts
+
+An earlier count of arm B looked only at each workspace's `tests/` directory and reported
+**1 / 8 / 49 / 10 / 38** (todomvc / keystone-blog / epic-stack / cypress-realworld-app / bangle-io).
+That undercounted keystone-blog, whose specs live in `specs/` and `tests/rq6-agent/`.
+
+Counting the entire workspace gives **1 / 23 / 98 / 21 / 84** — but that total includes copies the
+generator's subagents left in `.claude/worktrees/agent-*/`, and 90 of those 106 copies are
+byte-identical to a final spec. Both figures are therefore recorded, and they answer different
+questions:
+
+| | todomvc | keystone-blog | epic-stack | cypress-realworld-app | bangle-io | total |
+|---|---:|---:|---:|---:|---:|---:|
+| arm B, files present in the workspace | 1 | 23 | 98 | 21 | 84 | **227** |
+| arm B, final specs (worktree copies excluded) | 1 | 23 | 49 | 10 | 38 | **121** |
+| arm B, distinct file contents | 1 | 23 | 53 | 14 | 46 | **137** |
+
+Arm A was unaffected: A0 is 1 / 5 / 7 / 8 / 5 = 26 and A1 is 1 / 9 / 6 / 6 / 6 = 28, with no
+worktree copies. The **reach scores are unchanged** — `reach2.py` scores Playwright traces and
+pass-filters through `results.json`, never by counting spec files, so a miscount of specs could not
+and did not move them.
+
 ## What is deliberately not committed
 
-The per-subject arm workspaces (`<subject>/{A-naive,A1-repo,B-pwagents}/`) and their Playwright
-traces stay outside this repository: 3.7 GB, mostly `node_modules` and trace archives. The subjects
-themselves are the UI–Entity study's evaluation targets; the ground-truth inventories the reach
-numbers are scored against live with that study, not here. The
-generated specs live inside those workspaces — arm A writes to `rq6-agent/` (epic-stack A1 to
-`tests/e2e/rq6-agent/`), arm B to `tests/`.
+The per-subject arm workspaces themselves stay out: 3.7 GB, almost entirely `node_modules`, browser
+caches and trace archives. The Playwright traces are packaged separately (see *Trace archive*
+below). The subjects are the UI–Entity study's evaluation targets, and the ground-truth inventories
+the reach numbers are scored against live with that study, not here.
 
 The workspace root defaults to `/Users/stephenhe/Projects/baseline-runs/20260901` and is
 overridable:

@@ -1,0 +1,2591 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/node_modules/.bin/playwright",
+      "test",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive",
+        "testIgnore": [],
+        "testMatch": [
+          "/rq6-agent\\/auth\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "rq6-agent/auth.setup.ts",
+      "file": "rq6-agent/auth.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate as kody",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 321,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T12:02:09.136Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth.setup.ts-authenticate-as-kody-setup/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7c5dd992b48b96ad988-bcddffe214968cd38bde",
+          "file": "rq6-agent/auth.setup.ts",
+          "line": 10,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/admin.spec.ts",
+      "file": "rq6-agent/admin.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Admin Pages",
+          "file": "rq6-agent/admin.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "admin/cache page loads or redirects appropriately",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2017,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:09.733Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-admin-Admin-Page-0ae40--or-redirects-appropriately-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9d2e7b66b112c3605ff0-0517c18bc159fa1f9139",
+              "file": "rq6-agent/admin.spec.ts",
+              "line": 13,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/auth.spec.ts",
+      "file": "rq6-agent/auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication",
+          "file": "rq6-agent/auth.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "login page renders form fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2524,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:11.860Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authentication-login-page-renders-form-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-74dae180f07a5427bed2",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "login with valid credentials succeeds and redirects away from /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3554,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:14.397Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-bd68a-d-redirects-away-from-login-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-20634e843ea76322fa5b",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 20,
+              "column": 7
+            },
+            {
+              "title": "login with wrong password shows an error message",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4516,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:17.983Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-a69b9-word-shows-an-error-message-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-2a68ab3d8aa10f3b3b5f",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "login with empty credentials shows validation errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3365,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:22.516Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-f7092-als-shows-validation-errors-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-d50e7b78f912396bf474",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "signup page renders email form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2507,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:25.902Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authentication-signup-page-renders-email-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-f2a2eab15f92c0bc0cef",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "signup with invalid email shows validation error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3656,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:28.425Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-ea5cf-mail-shows-validation-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-21ae6d9629ed250e3894",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "forgot password page renders form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2507,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:32.098Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-0969a--password-page-renders-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-e49619652508a8317436",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 78,
+              "column": 7
+            },
+            {
+              "title": "logout flow: logged-in user can log out",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4901,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:34.616Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-27bfc--logged-in-user-can-log-out-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-14bee89d2e8683c18a4e",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 84,
+              "column": 7
+            },
+            {
+              "title": "authenticated user sees their username in navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3543,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:39.583Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-auth-Authenticat-f08ea-heir-username-in-navigation-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-64c7bab20598772e06be",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 101,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/marketing.spec.ts",
+      "file": "rq6-agent/marketing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Marketing / Public Pages",
+          "file": "rq6-agent/marketing.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "home page loads and shows Epic Stack branding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2033,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:43.160Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Market-1f268-d-shows-Epic-Stack-branding-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-ba82a52ce89902757e30",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "home page has navigation links including login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2026,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:45.224Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Market-aa7b2-ation-links-including-login-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-66726e285f194fac2fa6",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "about page loads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1990,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:47.282Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Marketing-Public-Pages-about-page-loads-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-860f06d978018111b5e5",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 28,
+              "column": 7
+            },
+            {
+              "title": "privacy policy page loads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:49.285Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Market-94221-s-privacy-policy-page-loads-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-975ea6dc9bbe11d703a5",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 38,
+              "column": 7
+            },
+            {
+              "title": "support page loads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1999,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:51.301Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Market-e1aa0-ic-Pages-support-page-loads-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-16030a8805ca571701c4",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "terms of service page loads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:53.310Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Market-7a36c-terms-of-service-page-loads-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-13003e26a6d7512a6577",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 55,
+              "column": 7
+            },
+            {
+              "title": "404 page shows for unknown routes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2001,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:55.325Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-marketing-Market-c4907-ge-shows-for-unknown-routes-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cba0b7c5bfb38c97223-6647839070ca169ace95",
+              "file": "rq6-agent/marketing.spec.ts",
+              "line": 63,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/navigation.spec.ts",
+      "file": "rq6-agent/navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Navigation and Layout - Public",
+          "file": "rq6-agent/navigation.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "header shows logo linking to home",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2027,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:57.340Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-3a21a--shows-logo-linking-to-home-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-cff5df4a140f9ae5df89",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 10,
+              "column": 7
+            },
+            {
+              "title": "header shows Login button when unauthenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2020,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:02:59.398Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-dcb33-button-when-unauthenticated-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-4afe4f1c5f71aeaa43ce",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 16,
+              "column": 7
+            },
+            {
+              "title": "html element has light or dark theme class",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2022,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:01.446Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-8e38b-s-light-or-dark-theme-class-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-37500b34a92b1b059b0a",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "navigating from home to login page works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2374,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:03.499Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-039d9-om-home-to-login-page-works-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-0d91984ed94c1d1b1fc5",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 27,
+              "column": 7
+            },
+            {
+              "title": "navigating from login to signup via Create an account link",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2336,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:05.897Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-aab0a--via-Create-an-account-link-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-6fa5f5c0a633a79f9c86",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 34,
+              "column": 7
+            },
+            {
+              "title": "navigating from login to forgot-password via link",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2339,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:08.252Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-aadef-to-forgot-password-via-link-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-29f7e8becf3e22c83451",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 41,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Navigation and Layout - Authenticated",
+          "file": "rq6-agent/navigation.spec.ts",
+          "line": 49,
+          "column": 6,
+          "specs": [
+            {
+              "title": "authenticated user sees their name in the nav area",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2021,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:10.604Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-6da99--their-name-in-the-nav-area-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-ffe2f771d5e12ba2dd01",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 56,
+              "column": 7
+            },
+            {
+              "title": "authenticated header does not show plain Login link",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2031,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:12.661Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-069e6-s-not-show-plain-Login-link-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-b3363e6d912c97114cde",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 62,
+              "column": 7
+            },
+            {
+              "title": "can navigate from notes page to individual note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2335,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:14.724Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-22433-tes-page-to-individual-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-1279ba89ede311fd1dff",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 71,
+              "column": 7
+            },
+            {
+              "title": "note detail page has link back to user profile/notes area",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2016,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:17.071Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-navigation-Navig-65a62--to-user-profile-notes-area-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-38176ff71c9ff1a7a29e",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 78,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/notes.spec.ts",
+      "file": "rq6-agent/notes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Notes Management",
+          "file": "rq6-agent/notes.spec.ts",
+          "line": 41,
+          "column": 6,
+          "specs": [
+            {
+              "title": "notes list page shows sidebar with note titles and New Note link",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2001,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:19.103Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-9acd4-te-titles-and-New-Note-link-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-f4ed5cedfd82e76cbbf2",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "notes list sidebar shows seeded note titles",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1994,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:21.114Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-f4c3b-ar-shows-seeded-note-titles-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-a5e1a320ddff3f462f14",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "note detail page shows title heading and content",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2009,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:23.120Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-3d8a0-s-title-heading-and-content-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-90cf83f130d74a0b77ed",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 64,
+              "column": 7
+            },
+            {
+              "title": "note detail page shows Edit link and Delete button for owner",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2017,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:25.145Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-20b20-and-Delete-button-for-owner-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-c02cb866b52bcedf5946",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 73,
+              "column": 7
+            },
+            {
+              "title": "create new note: navigates to created note and shows its title",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3006,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:27.175Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-4813d-ed-note-and-shows-its-title-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-9f97f9c87e75a703f52f",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 80,
+              "column": 7
+            },
+            {
+              "title": "create note then verify it appears in notes list sidebar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3392,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:30.203Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-95f7b-pears-in-notes-list-sidebar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-a6ecdd7faac814af1c47",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 97,
+              "column": 7
+            },
+            {
+              "title": "edit note: updated title is persisted and shown",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4303,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:33.616Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-d7556-itle-is-persisted-and-shown-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-65cb4825f80cf66de84e",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 113,
+              "column": 7
+            },
+            {
+              "title": "edit note form is pre-filled with current note title",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2329,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:37.955Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-1d724-led-with-current-note-title-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-3e8f0ec85f9f13b56fc7",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 141,
+              "column": 7
+            },
+            {
+              "title": "delete note: note is removed from the list after deletion",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4491,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:40.309Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-65d37-rom-the-list-after-deletion-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-2870c7eb34524b2c68fe",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 151,
+              "column": 7
+            },
+            {
+              "title": "new note form: empty title prevents submission",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4198,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:44.834Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-7e155-y-title-prevents-submission-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-046d02e78789c21a4af2",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "New Note link from sidebar navigates to note creation form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2346,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:49.053Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-ad2f0-gates-to-note-creation-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-d9646787e52d5f8af646",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 193,
+              "column": 7
+            },
+            {
+              "title": "clicking note title in sidebar navigates to that note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2336,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:51.414Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-notes-Notes-Mana-d221a-ebar-navigates-to-that-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "791943518249835b0d6b-a69612cfc6e8c0d87e4e",
+              "file": "rq6-agent/notes.spec.ts",
+              "line": 201,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/settings.spec.ts",
+      "file": "rq6-agent/settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Settings (requires auth)",
+          "file": "rq6-agent/settings.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "settings/profile page shows profile edit form with username field",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1977,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:53.770Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-4bb5d-it-form-with-username-field-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-8dee4653b652ded38db9",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 15,
+              "column": 7
+            },
+            {
+              "title": "settings/profile page pre-fills the current username as kody",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1991,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:55.758Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-fb068-he-current-username-as-kody-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-0511d8c8b415a231372b",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "settings/profile: update display name persists after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6780,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:03:57.763Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-68ccb-ay-name-persists-after-save-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-1f75441c370181abc581",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 28,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/password page shows change password form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:04.563Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-61760--shows-change-password-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-a782dc377a949e68e41b",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 64,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/password: wrong current password shows error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5331,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:06.580Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-be519-urrent-password-shows-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-8501853403cb9696fde7",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 73,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/photo page loads without error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2004,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:11.932Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-93926-to-page-loads-without-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-bc42c740744de6923133",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/change-email page shows email change form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2010,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:13.952Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-28d66-age-shows-email-change-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-4146e214b383fb02e02d",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 96,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/connections page loads without error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:15.974Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-02d19-ns-page-loads-without-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-9094bdf830ca1a2a15d5",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 102,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/two-factor page loads and shows 2FA options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2011,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:17.991Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-230f8-loads-and-shows-2FA-options-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-b0a52e7236bedf79be5a",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 109,
+              "column": 7
+            },
+            {
+              "title": "settings/profile/passkeys page loads without error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1998,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:20.013Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-dbad0-ys-page-loads-without-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-9425d972c8ccee5c0f1a",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 117,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Settings - unauthenticated redirect",
+          "file": "rq6-agent/settings.spec.ts",
+          "line": 126,
+          "column": 6,
+          "specs": [
+            {
+              "title": "unauthenticated access to settings redirects to login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:22.023Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-settings-Setting-b44b6-settings-redirects-to-login-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ce7ad08f4815409cd9c-3d0a9a51ddefdd4d7b0e",
+              "file": "rq6-agent/settings.spec.ts",
+              "line": 132,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/users.spec.ts",
+      "file": "rq6-agent/users.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "User Profiles",
+          "file": "rq6-agent/users.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "users list page shows user cards",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1997,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:24.045Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profi-fcc35--list-page-shows-user-cards-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-bca96645018273a6706a",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "users page has a search input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2000,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:26.057Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profiles-users-page-has-a-search-input-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-b5ce63f0a10156cd5b7f",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "users search filters results",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3336,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:28.073Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profiles-users-search-filters-results-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-e495218dd364e2396c58",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 23,
+              "column": 7
+            },
+            {
+              "title": "users search for non-existent user shows no results",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3344,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:31.422Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profi-77f4d-stent-user-shows-no-results-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-c514f336580f26fe3c84",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 46,
+              "column": 7
+            },
+            {
+              "title": "user profile page shows username",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2015,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:34.782Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profi-f7988-profile-page-shows-username-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-49a1b9ff8adabb1e8198",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "user profile page has link to notes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2328,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:36.808Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profi-337ad-file-page-has-link-to-notes-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-d7cc0b570f1eed2f223e",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 66,
+              "column": 7
+            },
+            {
+              "title": "user profile for non-existent user shows 404 or error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3002,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:39.150Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profi-425b3-ent-user-shows-404-or-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-a80f18dfc31c54d06775",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 76,
+              "column": 7
+            },
+            {
+              "title": "clicking on a user card from users list navigates to user profile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2333,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:04:42.163Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/epic-stack/A-naive/test-results/rq6-agent-users-User-Profi-39a42-t-navigates-to-user-profile-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0289cb553ece69da659e-2d98dbe7025e7f920f1d",
+              "file": "rq6-agent/users.spec.ts",
+              "line": 86,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-02T12:02:08.952Z",
+    "duration": 155687.58899999998,
+    "expected": 59,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

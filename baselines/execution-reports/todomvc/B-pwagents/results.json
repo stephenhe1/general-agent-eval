@@ -1,0 +1,1528 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/node_modules/.bin/playwright",
+      "test",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tests/seed.spec.ts",
+      "file": "tests/seed.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "seed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 132,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:53.690Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-seed-seed-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b6f1675abe9f236ea9a0-362118453e9b8d1d6e94",
+          "file": "tests/seed.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "tests/todomvc.spec.ts",
+      "file": "tests/todomvc.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC-001: Initial empty state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 193,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:53.935Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-001-Initial-empty-state-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-70238629a7a9cc70e2de",
+          "file": "tests/todomvc.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "TC-002: Add a single todo item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 212,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:54.137Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-002-Add-a-single-todo-item-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-5316fefa763abc46c946",
+          "file": "tests/todomvc.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "TC-003: Add multiple todo items",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 232,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:54.356Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-003-Add-multiple-todo-items-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-3976706fd0f657935a97",
+          "file": "tests/todomvc.spec.ts",
+          "line": 39,
+          "column": 5
+        },
+        {
+          "title": "TC-004: Item counter grammar — singular",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 207,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:54.596Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-004-Item-counter-grammar-—-singular-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-eed03364e5a81f9fcb24",
+          "file": "tests/todomvc.spec.ts",
+          "line": 56,
+          "column": 5
+        },
+        {
+          "title": "TC-005: Item counter grammar — plural (known bug)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:54.815Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-005-Item--a2386-grammar-—-plural-known-bug--chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-9417c8cd57fa4ae5506f",
+          "file": "tests/todomvc.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "TC-006: Complete a single todo item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 285,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:55.037Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-006-Complete-a-single-todo-item-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-19a20a67c38ef88a38ee",
+          "file": "tests/todomvc.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "TC-007: Uncheck a completed todo item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:55.331Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-007-Uncheck-a-completed-todo-item-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-4d82a00516a70acd6774",
+          "file": "tests/todomvc.spec.ts",
+          "line": 89,
+          "column": 5
+        },
+        {
+          "title": "TC-008: Toggle all — mark all complete",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 292,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:55.621Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-008-Toggle-all-—-mark-all-complete-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-e4ccf1fffd1cf7f885b8",
+          "file": "tests/todomvc.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "TC-009: Toggle all — unmark all complete",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 283,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:55.922Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-009-Toggle-all-—-unmark-all-complete-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-1be06e0718929317263c",
+          "file": "tests/todomvc.spec.ts",
+          "line": 122,
+          "column": 5
+        },
+        {
+          "title": "TC-010: Toggle-all state reflects partial completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:56.215Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-010-Toggl-acac2-reflects-partial-completion-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-ca5279dfee637a36d773",
+          "file": "tests/todomvc.spec.ts",
+          "line": 144,
+          "column": 5
+        },
+        {
+          "title": "TC-011: Delete a todo item via destroy button",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 292,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:56.505Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-011-Delete-a-todo-item-via-destroy-button-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-0b0e9042ffac7c94070b",
+          "file": "tests/todomvc.spec.ts",
+          "line": 163,
+          "column": 5
+        },
+        {
+          "title": "TC-012: Edit a todo item — save with Enter",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:56.804Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-012-Edit-a-todo-item-—-save-with-Enter-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-8959f39c8f14008e3023",
+          "file": "tests/todomvc.spec.ts",
+          "line": 178,
+          "column": 5
+        },
+        {
+          "title": "TC-013: Edit a todo item — save on blur (Tab)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 242,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:57.071Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-013-Edit-a-todo-item-—-save-on-blur-Tab--chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-c6ea16507bc78cf86099",
+          "file": "tests/todomvc.spec.ts",
+          "line": 193,
+          "column": 5
+        },
+        {
+          "title": "TC-014: Edit a todo item — Escape exits edit mode (saves current value)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:57.320Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-014-Edit--4a281-t-mode-saves-current-value--chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-3dd4ed077ff7f0b85fb2",
+          "file": "tests/todomvc.spec.ts",
+          "line": 208,
+          "column": 5
+        },
+        {
+          "title": "TC-015: Edit mode — input pre-filled with current text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 260,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:57.586Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-015-Edit--92796-re-filled-with-current-text-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-4e6f8fe6ff2f3778665e",
+          "file": "tests/todomvc.spec.ts",
+          "line": 224,
+          "column": 5
+        },
+        {
+          "title": "TC-016: Edit a todo item — save empty string (item remains)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:57.854Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-016-Edit--487fc--empty-string-item-remains--chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-c4db34b3367686846aa3",
+          "file": "tests/todomvc.spec.ts",
+          "line": 236,
+          "column": 5
+        },
+        {
+          "title": "TC-017: Filter — Active",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 268,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:58.120Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-017-Filter-—-Active-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-9545a1083a2327816871",
+          "file": "tests/todomvc.spec.ts",
+          "line": 253,
+          "column": 5
+        },
+        {
+          "title": "TC-018: Filter — Completed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 284,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:58.396Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-018-Filter-—-Completed-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-6b51c7279bc360718042",
+          "file": "tests/todomvc.spec.ts",
+          "line": 275,
+          "column": 5
+        },
+        {
+          "title": "TC-019: Filter — All",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 293,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:58.687Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-019-Filter-—-All-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-7ac37c899383ae72258f",
+          "file": "tests/todomvc.spec.ts",
+          "line": 296,
+          "column": 5
+        },
+        {
+          "title": "TC-020: Filter — direct navigation via URL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:58.988Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-020-Filter-—-direct-navigation-via-URL-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-7da3d769a20c07424296",
+          "file": "tests/todomvc.spec.ts",
+          "line": 317,
+          "column": 5
+        },
+        {
+          "title": "TC-021: Clear completed button — visible only when completions exist",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 265,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:59.365Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-021-Clear-e5175-only-when-completions-exist-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-8be5f66166bc289f73f0",
+          "file": "tests/todomvc.spec.ts",
+          "line": 338,
+          "column": 5
+        },
+        {
+          "title": "TC-022: Clear completed — removes only completed items",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 283,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:59.638Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-022-Clear-aa18c-emoves-only-completed-items-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-5c941c1043f827d8dde4",
+          "file": "tests/todomvc.spec.ts",
+          "line": 353,
+          "column": 5
+        },
+        {
+          "title": "TC-023: Whitespace-only input — not added as todo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 182,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:12:59.929Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-023-White-c1554-y-input-—-not-added-as-todo-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-42c25804cf7fa80b9e7a",
+          "file": "tests/todomvc.spec.ts",
+          "line": 374,
+          "column": 5
+        },
+        {
+          "title": "TC-024: Empty input — not added as todo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 203,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:00.118Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-024-Empty-input-—-not-added-as-todo-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-ed2b4c153a920b88f689",
+          "file": "tests/todomvc.spec.ts",
+          "line": 383,
+          "column": 5
+        },
+        {
+          "title": "TC-025: Persistence after page reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 345,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:00.327Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-025-Persistence-after-page-reload-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-3d9291c28d415520b48a",
+          "file": "tests/todomvc.spec.ts",
+          "line": 390,
+          "column": 5
+        },
+        {
+          "title": "TC-026: Persistence — localStorage cleared resets list",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 274,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:00.680Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-026-Persi-64f7c-Storage-cleared-resets-list-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-e384e840c122aaf0b20e",
+          "file": "tests/todomvc.spec.ts",
+          "line": 410,
+          "column": 5
+        },
+        {
+          "title": "TC-027: Toggle-all label text and accessibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 201,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:00.962Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-027-Toggle-all-label-text-and-accessibility-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-cc19aaa5af32a5fd43cb",
+          "file": "tests/todomvc.spec.ts",
+          "line": 423,
+          "column": 5
+        },
+        {
+          "title": "TC-028: Destroy button — present for each item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 226,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:01.170Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-028-Destroy-button-—-present-for-each-item-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-af4e25157d85dd282326",
+          "file": "tests/todomvc.spec.ts",
+          "line": 438,
+          "column": 5
+        },
+        {
+          "title": "TC-029: Counter decrements to zero when all completed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 293,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:01.404Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-029-Count-c0017--to-zero-when-all-completed-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-050d2a8ca8640c1eab2d",
+          "file": "tests/todomvc.spec.ts",
+          "line": 455,
+          "column": 5
+        },
+        {
+          "title": "TC-030: Footer hidden when all items deleted",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 258,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:01.704Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-030-Footer-hidden-when-all-items-deleted-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-ceb032731feff2c8523f",
+          "file": "tests/todomvc.spec.ts",
+          "line": 470,
+          "column": 5
+        },
+        {
+          "title": "TC-031: Data attributes present on key elements",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:01.970Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-031-Data-attributes-present-on-key-elements-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-f53d0bcb415619850d9d",
+          "file": "tests/todomvc.spec.ts",
+          "line": 482,
+          "column": 5
+        },
+        {
+          "title": "TC-032: New-todo input cleared after submission",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 200,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:02.237Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-032-New-todo-input-cleared-after-submission-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-2381a492f0939c6bd57e",
+          "file": "tests/todomvc.spec.ts",
+          "line": 521,
+          "column": 5
+        },
+        {
+          "title": "TC-033: Filter persists across reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 343,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:02.445Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-033-Filter-persists-across-reload-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-abbaa13cda24d70c82a0",
+          "file": "tests/todomvc.spec.ts",
+          "line": 528,
+          "column": 5
+        },
+        {
+          "title": "TC-034: Add todo item with special characters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 204,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:02.800Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-034-Add-todo-item-with-special-characters-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-9e9fdd7801f704f1e17a",
+          "file": "tests/todomvc.spec.ts",
+          "line": 547,
+          "column": 5
+        },
+        {
+          "title": "TC-035: Multiple todos — order preserved",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 242,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T03:13:03.012Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/B-pwagents/test-results/tests-todomvc-TC-035-Multiple-todos-—-order-preserved-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f2cb64e2fda65d4b540a-daec97ec588c93652b76",
+          "file": "tests/todomvc.spec.ts",
+          "line": 555,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-02T03:12:53.508Z",
+    "duration": 9801.72,
+    "expected": 36,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

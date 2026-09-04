@@ -1,0 +1,1674 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/node_modules/.bin/playwright",
+      "test",
+      "--workers=1",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo",
+        "testIgnore": [],
+        "testMatch": [
+          "rq6-agent/**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "rq6-agent/todomvc.spec.ts",
+      "file": "rq6-agent/todomvc.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Pages and Routes",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 54,
+          "column": 6,
+          "specs": [
+            {
+              "title": "/ renders main TodoMVC page with header and input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:37.783Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Pages-an-1cebb--page-with-header-and-input-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-e243b0d11a5233974751",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 55,
+              "column": 7
+            },
+            {
+              "title": "/active renders the active filter page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 334,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:38.086Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Pages-an-257ff-ders-the-active-filter-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-cbeeb87e51041a893a9d",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 65,
+              "column": 7
+            },
+            {
+              "title": "/completed renders the completed filter page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 289,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:38.432Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Pages-an-aa680-s-the-completed-filter-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-33e8a747007f9d4e84d4",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 80,
+              "column": 7
+            },
+            {
+              "title": "unknown route renders 404 Not Found page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 116,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:38.731Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Pages-an-0acd7--renders-404-Not-Found-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-7beeee22e6e6ad11274e",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 94,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Todo Creation",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 104,
+          "column": 6,
+          "specs": [
+            {
+              "title": "typing text and pressing Enter adds a todo to the list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:38.854Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Cre-dc4da-ter-adds-a-todo-to-the-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-cde583e087fbdfe0f147",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 105,
+              "column": 7
+            },
+            {
+              "title": "new todo is prepended (appears at the top of the list)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 213,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:39.064Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Cre-eb276-ars-at-the-top-of-the-list--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-5190f942c7bc2b36de8f",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 114,
+              "column": 7
+            },
+            {
+              "title": "adding a todo increments the item count in the footer",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 211,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:39.285Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Cre-65a90-he-item-count-in-the-footer-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-63f737e6d9abe4014ec4",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 124,
+              "column": 7
+            },
+            {
+              "title": "whitespace-only input does NOT create a todo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 171,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:39.504Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Cre-4cdde-nput-does-NOT-create-a-todo-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-1571620199859bb816fa",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "input field clears after a successful creation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:39.682Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Cre-e0a93-after-a-successful-creation-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-a28a15d7f7e85444143c",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "adding multiple todos creates all of them",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 215,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:39.893Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Cre-eebfb-e-todos-creates-all-of-them-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-a1d05bbee806c0dc338e",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 151,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Todo Deletion",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 167,
+          "column": 6,
+          "specs": [
+            {
+              "title": "clicking destroy button removes the todo from the list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 266,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:40.115Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Del-ebec5-oves-the-todo-from-the-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-0e05d6667701a21eac3b",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 168,
+              "column": 7
+            },
+            {
+              "title": "deleting a todo decrements the item count",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 259,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:40.389Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Del-5b926-o-decrements-the-item-count-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-b3f29813f66da3874326",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 185,
+              "column": 7
+            },
+            {
+              "title": "deleting the last todo hides the footer and list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 242,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:40.656Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Del-93cba-o-hides-the-footer-and-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-61594e2b41f33f941b34",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 199,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Todo Completion Toggle",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 215,
+          "column": 6,
+          "specs": [
+            {
+              "title": "clicking checkbox marks a todo as completed (gets completed CSS class)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 236,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:40.904Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Com-34068-d-gets-completed-CSS-class--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-42718b8d1d58df96b51d",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 216,
+              "column": 7
+            },
+            {
+              "title": "clicking checkbox again un-completes a todo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 231,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:41.147Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Com-52421-x-again-un-completes-a-todo-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-074a151a0bdd0a65ce01",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 229,
+              "column": 7
+            },
+            {
+              "title": "completing a todo decrements the remaining-count display",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 233,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:41.385Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Com-4c7d6-the-remaining-count-display-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-2b59cb9fb6cfb5da74f7",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 242,
+              "column": 7
+            },
+            {
+              "title": "completing all todos individually shows Clear completed button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 234,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:41.626Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Com-ecef3-hows-Clear-completed-button-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-66f3ab4a94a8624a0aff",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 252,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Toggle All",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 265,
+          "column": 6,
+          "specs": [
+            {
+              "title": "toggle-all marks all todos as complete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 263,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:41.868Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Toggle-A-8d7a3-marks-all-todos-as-complete-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-6a2bf7981d416f529708",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 266,
+              "column": 7
+            },
+            {
+              "title": "unchecking toggle-all marks all todos as incomplete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 252,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:42.138Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Toggle-A-9e586-rks-all-todos-as-incomplete-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-813d471c0e9c571ca923",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 282,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Todo Editing",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 302,
+          "column": 6,
+          "specs": [
+            {
+              "title": "single click on label enters edit mode",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 221,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:42.396Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Edi-adb0c-k-on-label-enters-edit-mode-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-4dd0860124cddd0f37df",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 303,
+              "column": 7
+            },
+            {
+              "title": "edit mode shows current text in the edit input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 208,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:42.625Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Edi-c11a1-rent-text-in-the-edit-input-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-bf4247178d75d59d2d6f",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 314,
+              "column": 7
+            },
+            {
+              "title": "typing new text + Enter saves and updates the label",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 260,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:42.840Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Edi-b9897-saves-and-updates-the-label-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-0c10f4dcf5c50cbe0c7a",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 322,
+              "column": 7
+            },
+            {
+              "title": "pressing Escape in edit mode closes edit without losing a valid value",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 249,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:43.107Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Edi-5346d-ithout-losing-a-valid-value-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-48a486e7da8e86775343",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 337,
+              "column": 7
+            },
+            {
+              "title": "blurring edit input with valid text saves the edit",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 257,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:43.365Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Edi-abfe9-h-valid-text-saves-the-edit-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-350d4136efbbd2c80268",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "blurring edit input with empty text deletes the todo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 244,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:43.631Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Todo-Edi-58966-empty-text-deletes-the-todo-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-380418095d0dca28efeb",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 365,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Footer and Filters",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 388,
+          "column": 6,
+          "specs": [
+            {
+              "title": "footer shows correct item count when todos exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 209,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:43.881Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-544e4-item-count-when-todos-exist-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-7885e26dddd7afffa662",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 389,
+              "column": 7
+            },
+            {
+              "title": "All filter link navigates to / and shows all todos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 289,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:44.097Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-89675-ates-to-and-shows-all-todos-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-8f40033892886c17778e",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 396,
+              "column": 7
+            },
+            {
+              "title": "Active filter link navigates to /active and hides completed todos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 258,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:44.394Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-b4660-e-and-hides-completed-todos-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-e9845418ce7a6732fd29",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 409,
+              "column": 7
+            },
+            {
+              "title": "Completed filter link navigates to /completed and hides active todos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 269,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:44.659Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-f2d22-eted-and-hides-active-todos-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-4f5535fca7b93985b979",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 422,
+              "column": 7
+            },
+            {
+              "title": "selected filter link has \"selected\" class",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:44.939Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-f6fda-ter-link-has-selected-class-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-85f4773083dd30fae958",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 435,
+              "column": 7
+            },
+            {
+              "title": "Clear completed button is hidden when no todos are completed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 210,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:45.150Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-fdc6e-when-no-todos-are-completed-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-bfc6391c28bcb6f1b5ba",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 444,
+              "column": 7
+            },
+            {
+              "title": "Clear completed button appears when at least one todo is completed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 209,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:45.367Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-f0522-least-one-todo-is-completed-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-24ade5430c730552ef1e",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 451,
+              "column": 7
+            },
+            {
+              "title": "Clear completed button removes all completed todos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 275,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:45.582Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-3ed54-removes-all-completed-todos-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-597ea5ddc63532ab96d5",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 458,
+              "column": 7
+            },
+            {
+              "title": "footer disappears when all todos are deleted",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 228,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:45.864Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Footer-a-e78ba--when-all-todos-are-deleted-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-dd75c4068b108c251df5",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 478,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Persistence",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 492,
+          "column": 6,
+          "specs": [
+            {
+              "title": "todos survive a page reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 253,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:46.104Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Persistence-todos-survive-a-page-reload-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-889a322a07a7e1682945",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 493,
+              "column": 7
+            },
+            {
+              "title": "completed state survives a page reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 264,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:46.368Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Persiste-2efee-tate-survives-a-page-reload-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-049f4e2d4ce2c2273135",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 505,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Empty State",
+          "file": "rq6-agent/todomvc.spec.ts",
+          "line": 523,
+          "column": 6,
+          "specs": [
+            {
+              "title": "fresh page has no todo items, no footer, no list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 167,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:46.640Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Empty-St-66bdc-odo-items-no-footer-no-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-0685f09477d2e4323d27",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 524,
+              "column": 7
+            },
+            {
+              "title": "header and input are always visible even with empty list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 169,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T15:59:46.814Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/todomvc/A1-repo/test-results/rq6-agent-todomvc-Empty-St-e8092-isible-even-with-empty-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "506b1544e7d40ebdcf6f-d294e41bfae31b9699ff",
+              "file": "rq6-agent/todomvc.spec.ts",
+              "line": 531,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-03T15:59:37.588Z",
+    "duration": 9449.237000000001,
+    "expected": 38,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

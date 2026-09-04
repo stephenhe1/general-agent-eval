@@ -1,0 +1,3034 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/node_modules/.bin/playwright",
+      "test",
+      "--workers=1",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/rq6-agent",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/rq6-agent",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "authors-create.spec.ts",
+      "file": "authors-create.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Author Create Page (/authors/create)",
+          "file": "authors-create.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create form loads with correct fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2378,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:01.738Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-c4184-m-loads-with-correct-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-855ae705ca1be34d70bf",
+              "file": "authors-create.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "submitting empty form shows validation errors for required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2706,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:04.224Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-bc36b--errors-for-required-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-6761a81cb1591f712382",
+              "file": "authors-create.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "happy path: create a new author and verify it appears in list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4422,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:06.949Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-8503b-d-verify-it-appears-in-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-a046713e4fb054321682",
+              "file": "authors-create.spec.ts",
+              "line": 38,
+              "column": 7
+            },
+            {
+              "title": "verified checkbox is checked by default",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2038,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:11.416Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-f0d12-ckbox-is-checked-by-default-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-c14481eaf1cdc8708810",
+              "file": "authors-create.spec.ts",
+              "line": 71,
+              "column": 7
+            },
+            {
+              "title": "creates author with verified=false when unchecked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2558,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:13.475Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-5b5b7-rified-false-when-unchecked-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-d9497dd041c7b1cced63",
+              "file": "authors-create.spec.ts",
+              "line": 76,
+              "column": 7
+            },
+            {
+              "title": "breadcrumb Authors link leads back to authors list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2511,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:16.056Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-3293d--leads-back-to-authors-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-03a44f96d55a34ee97ad",
+              "file": "authors-create.spec.ts",
+              "line": 101,
+              "column": 7
+            },
+            {
+              "title": "submitting duplicate email shows an error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3230,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:18.591Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-create-Author-Crea-0b156-licate-email-shows-an-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a97a064092bedab07466-ee6b4abf359fa63a1627",
+              "file": "authors-create.spec.ts",
+              "line": 110,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "authors-detail.spec.ts",
+      "file": "authors-detail.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Author Detail Page (/authors/[id])",
+          "file": "authors-detail.spec.ts",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "loads with correct field values for a seeded author",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4045,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:21.844Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-7df73--values-for-a-seeded-author-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-d72d34cb59ace582fbb2",
+              "file": "authors-detail.spec.ts",
+              "line": 20,
+              "column": 7
+            },
+            {
+              "title": "edit author name: Save persists the new value",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4603,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:25.920Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-a4f55-Save-persists-the-new-value-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-d8b8a85f0f0af923e301",
+              "file": "authors-detail.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "reset discards unsaved changes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2927,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:30.576Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-46d01-et-discards-unsaved-changes-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-2e27ad86e120f3169950",
+              "file": "authors-detail.spec.ts",
+              "line": 81,
+              "column": 7
+            },
+            {
+              "title": "delete author: confirmation dialog and removal from list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3303,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:33.537Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-b89be-ialog-and-removal-from-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-85c66d5ed2b6f1d496c8",
+              "file": "authors-detail.spec.ts",
+              "line": 113,
+              "column": 7
+            },
+            {
+              "title": "delete author: Cancel keeps the author",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3216,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:36.898Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-310e0-hor-Cancel-keeps-the-author-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-af2cf496fe0658483042",
+              "file": "authors-detail.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "Item ID field shows the author id and has copy button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4012,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:40.158Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-c1e49-thor-id-and-has-copy-button-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-c3cbc519417ee3b00570",
+              "file": "authors-detail.spec.ts",
+              "line": 166,
+              "column": 7
+            },
+            {
+              "title": "author detail shows existing posts relationship",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4061,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:44.203Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-detail-Author-Deta-de394-existing-posts-relationship-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dbdc82c95bce318a66a-3bd7722c734aef58d097",
+              "file": "authors-detail.spec.ts",
+              "line": 184,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "authors-list.spec.ts",
+      "file": "authors-list.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authors List Page (/authors)",
+          "file": "authors-list.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "displays the authors list with seeded data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2211,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:48.302Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--ef677-thors-list-with-seeded-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-286137b7d0671ded950d",
+              "file": "authors-list.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "shows table columns: Name, Email, Posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2122,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:50.538Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--646dd-le-columns-Name-Email-Posts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-be797caa62a7650b24cd",
+              "file": "authors-list.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "shows New author button linking to create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2308,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:52.682Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--01649-tton-linking-to-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-054f780926bd577abef3",
+              "file": "authors-list.spec.ts",
+              "line": 32,
+              "column": 7
+            },
+            {
+              "title": "search input filters authors by name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2222,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:55.021Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--46f18-put-filters-authors-by-name-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-3c5cd90a7730d3b0c659",
+              "file": "authors-list.spec.ts",
+              "line": 42,
+              "column": 7
+            },
+            {
+              "title": "search clears and shows all authors again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2258,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:57.269Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--5cf77-and-shows-all-authors-again-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-ceac7ff98e3c559614d0",
+              "file": "authors-list.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "filter by Name field narrows the list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2985,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:09:59.553Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--aa561-Name-field-narrows-the-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-3fab7592951e6765188f",
+              "file": "authors-list.spec.ts",
+              "line": 74,
+              "column": 7
+            },
+            {
+              "title": "Select All checkbox selects all rows and shows Delete action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2802,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:02.589Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--45a83-ows-and-shows-Delete-action-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-a58e62274ad52a7ed9d6",
+              "file": "authors-list.spec.ts",
+              "line": 97,
+              "column": 7
+            },
+            {
+              "title": "clicking a row navigates to author detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4031,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:05.447Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--1fe0f-gates-to-author-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-7c8386f09e3da4d393db",
+              "file": "authors-list.spec.ts",
+              "line": 111,
+              "column": 7
+            },
+            {
+              "title": "per-page selector changes the items per page option",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2219,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:09.514Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/authors-list-Authors-List--c06e5-s-the-items-per-page-option-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd016f0f4be580e3009d-cd8ab5271ae60fc17d39",
+              "file": "authors-list.spec.ts",
+              "line": 125,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "dashboard.spec.ts",
+      "file": "dashboard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Dashboard",
+          "file": "dashboard.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "loads and shows Authors and Posts list sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1963,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:11.762Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/dashboard-Dashboard-loads--0dc2e-ors-and-Posts-list-sections-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90cda532ab82d274b30b-ac615fbe54b38f77ef83",
+              "file": "dashboard.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "dashboard shows item counts for Authors and Posts sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1920,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:13.736Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/dashboard-Dashboard-dashbo-a4a07--Authors-and-Posts-sections-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90cda532ab82d274b30b-ff4815b8ff2e053616cb",
+              "file": "dashboard.spec.ts",
+              "line": 22,
+              "column": 7
+            },
+            {
+              "title": "clicking Authors sidebar link navigates to authors list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2361,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:15.667Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/dashboard-Dashboard-clicki-2f85d-k-navigates-to-authors-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90cda532ab82d274b30b-2623eb7a02aaa87f1177",
+              "file": "dashboard.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "clicking Posts sidebar link navigates to posts list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2398,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:18.040Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/dashboard-Dashboard-clicki-a834f-ink-navigates-to-posts-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90cda532ab82d274b30b-741c1a1b71a5845e1819",
+              "file": "dashboard.spec.ts",
+              "line": 51,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "navigation.spec.ts",
+      "file": "navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Navigation",
+          "file": "navigation.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "sidebar navigation links are present on every main page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7547,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:20.452Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-side-c6fb5--present-on-every-main-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-5d3f476701bee948b963",
+              "file": "navigation.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "Keystone logo navigates to dashboard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2321,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:28.048Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-Keystone-logo-navigates-to-dashboard-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-6ed758583fb44ea1a676",
+              "file": "navigation.spec.ts",
+              "line": 20,
+              "column": 7
+            },
+            {
+              "title": "Dashboard sidebar link navigates to /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2262,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:30.399Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-Dashboard-sidebar-link-navigates-to--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-30e597919ea0ea52f392",
+              "file": "navigation.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "Authors sidebar link navigates to /authors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2358,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:32.689Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-Auth-a3a81-r-link-navigates-to-authors-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-227585bf98a306f07bc9",
+              "file": "navigation.spec.ts",
+              "line": 42,
+              "column": 7
+            },
+            {
+              "title": "Posts sidebar link navigates to /posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2304,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:35.064Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-Posts-sidebar-link-navigates-to-posts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-3beaf321fec27a9719aa",
+              "file": "navigation.spec.ts",
+              "line": 53,
+              "column": 7
+            },
+            {
+              "title": "/no-access page shows access-denied message",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1935,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:37.380Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-no-a-19cb3-shows-access-denied-message-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-d6a5a3eeb2fe9b5b6a72",
+              "file": "navigation.spec.ts",
+              "line": 64,
+              "column": 7
+            },
+            {
+              "title": "authors list breadcrumb: clicking Authors navigates back to /authors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4110,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:39.326Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-auth-11258-s-navigates-back-to-authors-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-588ab8ca4ca7292d4349",
+              "file": "navigation.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "posts list breadcrumb: clicking Posts navigates back to /posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4148,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:43.471Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-post-43f88-sts-navigates-back-to-posts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-195ac26bf8792d57ad20",
+              "file": "navigation.spec.ts",
+              "line": 90,
+              "column": 7
+            },
+            {
+              "title": "create author breadcrumb shows Authors and Create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2097,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:47.655Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-crea-91e25-mb-shows-Authors-and-Create-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-8184bf9ac9b03ecd65d8",
+              "file": "navigation.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "create post breadcrumb shows Posts and Create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2129,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:49.769Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/navigation-Navigation-crea-0a9db-rumb-shows-Posts-and-Create-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5d2868f7d23420c27cca-60abf8e29c1ec0669415",
+              "file": "navigation.spec.ts",
+              "line": 115,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "posts-create.spec.ts",
+      "file": "posts-create.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Post Create Page (/posts/create)",
+          "file": "posts-create.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create form loads with correct fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2135,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:51.925Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-create-Post-Create-P-2a9b3-m-loads-with-correct-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9ad0c67396ae93b6951-33de0ffe64074e0ff60b",
+              "file": "posts-create.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "submitting with empty title shows required validation error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2678,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:54.077Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-create-Post-Create-P-ab170-s-required-validation-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9ad0c67396ae93b6951-964764389208e267fa05",
+              "file": "posts-create.spec.ts",
+              "line": 29,
+              "column": 7
+            },
+            {
+              "title": "happy path: create a post with title and draft status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4532,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:10:56.778Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-create-Post-Create-P-ca449-with-title-and-draft-status-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9ad0c67396ae93b6951-ceb0ca4821466225729a",
+              "file": "posts-create.spec.ts",
+              "line": 40,
+              "column": 7
+            },
+            {
+              "title": "create a post with Published status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4721,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:01.353Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-create-Post-Create-P-bc903--post-with-Published-status-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9ad0c67396ae93b6951-ac5891a83ff36819fd8c",
+              "file": "posts-create.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "breadcrumb Posts link navigates back to posts list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2544,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:06.119Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-create-Post-Create-P-588ea-avigates-back-to-posts-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9ad0c67396ae93b6951-b77d32ecaab304de0baa",
+              "file": "posts-create.spec.ts",
+              "line": 95,
+              "column": 7
+            },
+            {
+              "title": "Publish Date field has a Calendar button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2100,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:08.687Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-create-Post-Create-P-299c3-field-has-a-Calendar-button-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9ad0c67396ae93b6951-4ef8e2c2b80db3b280fb",
+              "file": "posts-create.spec.ts",
+              "line": 103,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "posts-detail.spec.ts",
+      "file": "posts-detail.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Post Detail Page (/posts/[id])",
+          "file": "posts-detail.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "loads with correct field values for a seeded post",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4131,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:10.813Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-93a1b-ld-values-for-a-seeded-post-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-cdd782f0d63a2352c604",
+              "file": "posts-detail.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "edit post title: Save persists the updated title",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8375,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:14.981Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-9039c--persists-the-updated-title-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-e452d4448dded6b67696",
+              "file": "posts-detail.spec.ts",
+              "line": 38,
+              "column": 7
+            },
+            {
+              "title": "reset discards unsaved changes to post",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4906,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:23.429Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-ef4f3-rds-unsaved-changes-to-post-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-464593bf5c274d9dcd04",
+              "file": "posts-detail.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "delete post: confirmation dialog and removal from list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5264,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:28.380Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-45349-ialog-and-removal-from-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-f428cf4fee45a1615d59",
+              "file": "posts-detail.spec.ts",
+              "line": 108,
+              "column": 7
+            },
+            {
+              "title": "delete post: Cancel keeps the post",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5058,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:33.703Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-34d59--post-Cancel-keeps-the-post-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-498e78992b72ca670a8c",
+              "file": "posts-detail.spec.ts",
+              "line": 135,
+              "column": 7
+            },
+            {
+              "title": "status can be changed to Published and saved",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6611,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:38.815Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-0b3f1-nged-to-Published-and-saved-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-3a580277bea1ffac1959",
+              "file": "posts-detail.spec.ts",
+              "line": 157,
+              "column": 7
+            },
+            {
+              "title": "Item ID field shows post id",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4237,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:45.487Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-7a694-Item-ID-field-shows-post-id-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-5640aa07eeef0ed9d160",
+              "file": "posts-detail.spec.ts",
+              "line": 186,
+              "column": 7
+            },
+            {
+              "title": "seeded post shows author and content",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4151,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:49.764Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-detail-Post-Detail-P-d23ba-st-shows-author-and-content-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a0829492b89d470e996f-52d00a440fee37013532",
+              "file": "posts-detail.spec.ts",
+              "line": 204,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "posts-list.spec.ts",
+      "file": "posts-list.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Posts List Page (/posts)",
+          "file": "posts-list.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "displays the posts list with seeded data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2174,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:53.959Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-a9142-posts-list-with-seeded-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-50593fdb3e6ab0c90240",
+              "file": "posts-list.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "shows table columns: Title, Status, Publish Date",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2320,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:56.154Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-dab41-s-Title-Status-Publish-Date-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-41546a061cf99588a16b",
+              "file": "posts-list.spec.ts",
+              "line": 28,
+              "column": 7
+            },
+            {
+              "title": "shows published and draft status for seeded posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2187,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:11:58.503Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-bdb5a-aft-status-for-seeded-posts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-60c650ed370a6a8e70f9",
+              "file": "posts-list.spec.ts",
+              "line": 34,
+              "column": 7
+            },
+            {
+              "title": "shows New post button linking to create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2312,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:00.714Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-8dc2c-tton-linking-to-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-5f31f5d77e1b0fb87079",
+              "file": "posts-list.spec.ts",
+              "line": 42,
+              "column": 7
+            },
+            {
+              "title": "search input filters posts by title",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2434,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:03.055Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-2968f-nput-filters-posts-by-title-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-216e207a99372c2ca616",
+              "file": "posts-list.spec.ts",
+              "line": 51,
+              "column": 7
+            },
+            {
+              "title": "search clears and restores filtered posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2352,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:05.510Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-5e733-and-restores-filtered-posts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-f427b97655b70fd5de06",
+              "file": "posts-list.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "Select All checkbox selects all posts and shows Delete action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2825,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:07.887Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-7e60d-sts-and-shows-Delete-action-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-c36a91a3018973249fef",
+              "file": "posts-list.spec.ts",
+              "line": 81,
+              "column": 7
+            },
+            {
+              "title": "clicking a post row navigates to post detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4241,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:10.754Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/posts-list-Posts-List-Page-67d9c-vigates-to-post-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b2f19be43752339c3f5-f1fba94d80742c3cdafc",
+              "file": "posts-list.spec.ts",
+              "line": 94,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tags.spec.ts",
+      "file": "tags.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tags List Page (/tags)",
+          "file": "tags.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "tags list page loads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2179,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:15.039Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tags-List-Page-tags-tags-list-page-loads-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-da5a5a5d219c947eb83e",
+              "file": "tags.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "tags list shows empty state or items",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2137,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:17.237Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tags-List-Page-tags-t-8de58--shows-empty-state-or-items-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-737016c29d15a710b4b6",
+              "file": "tags.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "New tag button navigates to create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2387,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:19.391Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tags-List-Page-tags-N-bff9d-on-navigates-to-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-60ea6406aee1941fc358",
+              "file": "tags.spec.ts",
+              "line": 34,
+              "column": 7
+            },
+            {
+              "title": "after creating a tag, the list shows the new tag",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4446,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:21.793Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tags-List-Page-tags-a-d44de--the-list-shows-the-new-tag-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-d06784aeb076307f3068",
+              "file": "tags.spec.ts",
+              "line": 44,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Tag Create Page (/tags/create)",
+          "file": "tags.spec.ts",
+          "line": 60,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create form loads with Name and Posts fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2169,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:26.275Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--a21a4--with-Name-and-Posts-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-d9e49db5fa6780066b54",
+              "file": "tags.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "happy path: create a tag and verify it appears in the list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4609,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:28.457Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--a56d4-rify-it-appears-in-the-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-49df9cb7f48c328bdc36",
+              "file": "tags.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "tag detail shows Save, Reset, Delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2482,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:33.104Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--e657c-s-Save-Reset-Delete-buttons-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-a367d97a07b822636139",
+              "file": "tags.spec.ts",
+              "line": 98,
+              "column": 7
+            },
+            {
+              "title": "edit tag name: Save persists the new value",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8116,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:35.602Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--d68b5-Save-persists-the-new-value-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-899310f0517c169fa08b",
+              "file": "tags.spec.ts",
+              "line": 107,
+              "column": 7
+            },
+            {
+              "title": "reset tag: discards unsaved name changes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4696,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:43.768Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--5e082-scards-unsaved-name-changes-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-b736b1558d79f63f6a69",
+              "file": "tags.spec.ts",
+              "line": 146,
+              "column": 7
+            },
+            {
+              "title": "delete tag: confirmation and removal from list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5160,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:48.498Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--bcf2a-ation-and-removal-from-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-cf19937f57db964b194e",
+              "file": "tags.spec.ts",
+              "line": 176,
+              "column": 7
+            },
+            {
+              "title": "delete tag: Cancel keeps the tag",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5103,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-03T17:12:53.706Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A1-repo/test-results/tags-Tag-Create-Page-tags--13248-te-tag-Cancel-keeps-the-tag-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "11922c0a18bf98ba476a-778828241bbba1b88242",
+              "file": "tags.spec.ts",
+              "line": 202,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-03T17:09:01.527Z",
+    "duration": 237484.90600000002,
+    "expected": 70,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,2093 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/node_modules/.bin/playwright",
+      "test",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents",
+        "testIgnore": [
+          ".claude/**",
+          "node_modules/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tests/auth-signin.spec.ts",
+      "file": "tests/auth-signin.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sign In",
+          "file": "tests/auth-signin.spec.ts",
+          "line": 41,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1.1 sign-in page renders all expected elements",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 380,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:24.529Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signin-Sign-In--796ee-nders-all-expected-elements-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3737293abc74f7e9d05a-d529b070bf1f7efa8faf",
+              "file": "tests/auth-signin.spec.ts",
+              "line": 45,
+              "column": 7
+            },
+            {
+              "title": "1.2 login with valid credentials navigates to home",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 591,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:25.020Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signin-Sign-In--d37a7-edentials-navigates-to-home-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3737293abc74f7e9d05a-49dc7517f081ad849337",
+              "file": "tests/auth-signin.spec.ts",
+              "line": 64,
+              "column": 7
+            },
+            {
+              "title": "1.3 wrong password shows error and stays on sign-in page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 532,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:25.626Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signin-Sign-In--ead3b-r-and-stays-on-sign-in-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3737293abc74f7e9d05a-dc68bfa5bd8f3c56d87b",
+              "file": "tests/auth-signin.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "1.4 non-existent username shows error and stays on sign-in page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 463,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:26.169Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signin-Sign-In--a5f83-r-and-stays-on-sign-in-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3737293abc74f7e9d05a-4738622b6ead8b0d6b4f",
+              "file": "tests/auth-signin.spec.ts",
+              "line": 105,
+              "column": 7
+            },
+            {
+              "title": "1.5 sign-up link is present and /signup route renders the registration form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 613,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:26.644Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signin-Sign-In--ff64e-nders-the-registration-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3737293abc74f7e9d05a-0219de8c7564d90b57f6",
+              "file": "tests/auth-signin.spec.ts",
+              "line": 124,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/auth-signup.spec.ts",
+      "file": "tests/auth-signup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sign Up",
+          "file": "tests/auth-signup.spec.ts",
+          "line": 63,
+          "column": 6,
+          "specs": [
+            {
+              "title": "2.1 sign-up page renders all form fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 379,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:27.270Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signup-Sign-Up--fbdfd-age-renders-all-form-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab3def07f8ac9e9eff-1b2383b9f4f5754358a3",
+              "file": "tests/auth-signup.spec.ts",
+              "line": 67,
+              "column": 7
+            },
+            {
+              "title": "2.2 successful registration redirects to sign-in page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 574,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:27.657Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signup-Sign-Up--0a0ba-n-redirects-to-sign-in-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab3def07f8ac9e9eff-84038ec0c92905b50afc",
+              "file": "tests/auth-signup.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "2.3 mismatched passwords disables submit and shows error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 771,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:28.242Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signup-Sign-Up--04f75-bles-submit-and-shows-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab3def07f8ac9e9eff-854840c805cb5b42b458",
+              "file": "tests/auth-signup.spec.ts",
+              "line": 108,
+              "column": 7
+            },
+            {
+              "title": "2.4 empty form submission shows validation errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 705,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:29.028Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-auth-signup-Sign-Up--d0922-ion-shows-validation-errors-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab3def07f8ac9e9eff-ff8b9682d04ba396eb1c",
+              "file": "tests/auth-signup.spec.ts",
+              "line": 143,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/bank-accounts.spec.ts",
+      "file": "tests/bank-accounts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Area 2: Bank Accounts",
+          "file": "tests/bank-accounts.spec.ts",
+          "line": 45,
+          "column": 6,
+          "specs": [
+            {
+              "title": "2.1 Bank accounts page displays existing accounts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1134,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:29.752Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-bank-accounts-Area-2-019c0--displays-existing-accounts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "53ef037c5e0b13cd395d-3e5d0280001c5ee82ecd",
+              "file": "tests/bank-accounts.spec.ts",
+              "line": 46,
+              "column": 7
+            },
+            {
+              "title": "2.2 Create a new bank account with valid bank name, routing number, and account number",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1233,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:30.912Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-bank-accounts-Area-2-a067a-g-number-and-account-number-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "53ef037c5e0b13cd395d-f7a178546241acd7a364",
+              "file": "tests/bank-accounts.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "2.3 Delete an existing bank account and verify it is marked deleted",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1675,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:32.173Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-bank-accounts-Area-2-cb325-verify-it-is-marked-deleted-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "53ef037c5e0b13cd395d-4b5fcbfaa65527ffaad2",
+              "file": "tests/bank-accounts.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "2.4 Save button is disabled and errors shown when bank account form fields are empty",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1364,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:33.896Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-bank-accounts-Area-2-0834a-count-form-fields-are-empty-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "53ef037c5e0b13cd395d-00c1360d5b61f32521a3",
+              "file": "tests/bank-accounts.spec.ts",
+              "line": 127,
+              "column": 7
+            },
+            {
+              "title": "2.5 Error shown when routing number has fewer than 9 digits",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1423,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:35.286Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-bank-accounts-Area-2-e97c9-ber-has-fewer-than-9-digits-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "53ef037c5e0b13cd395d-baf533d3e37809fc4bf8",
+              "file": "tests/bank-accounts.spec.ts",
+              "line": 152,
+              "column": 7
+            },
+            {
+              "title": "2.6 Error shown when account number has fewer than 9 digits",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1416,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:36.734Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-bank-accounts-Area-2-d4b8e-ber-has-fewer-than-9-digits-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "53ef037c5e0b13cd395d-1e6a44191d1a145ef9b1",
+              "file": "tests/bank-accounts.spec.ts",
+              "line": 176,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/dashboard.spec.ts",
+      "file": "tests/dashboard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Dashboard",
+          "file": "tests/dashboard.spec.ts",
+          "line": 47,
+          "column": 6,
+          "specs": [
+            {
+              "title": "3.1 dashboard shows sidenav, transaction tabs and transaction list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1090,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:38.180Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-dashboard-Dashboard--e7483-n-tabs-and-transaction-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "73305277a59b4d1960cc-b06952ca5d8347bd0e4f",
+              "file": "tests/dashboard.spec.ts",
+              "line": 51,
+              "column": 7
+            },
+            {
+              "title": "3.2 unauthenticated access to \"/\" redirects to sign-in",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 883,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:39.291Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-dashboard-Dashboard--e5eb0-ess-to-redirects-to-sign-in-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "73305277a59b4d1960cc-7c7ca2e42267734c63b5",
+              "file": "tests/dashboard.spec.ts",
+              "line": 77,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/new-transaction.spec.ts",
+      "file": "tests/new-transaction.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Area 1: New Transaction",
+          "file": "tests/new-transaction.spec.ts",
+          "line": 42,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1.1 Send payment — user search, amount, note, confirm",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1373,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:40.189Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-new-transaction-Area-e191d--search-amount-note-confirm-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8eec15d3e0a622490588-3d3bc0aab9f650437b53",
+              "file": "tests/new-transaction.spec.ts",
+              "line": 43,
+              "column": 7
+            },
+            {
+              "title": "1.2 Request payment — select user, fill amount and note, submit request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1338,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:41.598Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-new-transaction-Area-1356f-unt-and-note-submit-request-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8eec15d3e0a622490588-e73a2bf28fb7d1814acb",
+              "file": "tests/new-transaction.spec.ts",
+              "line": 102,
+              "column": 7
+            },
+            {
+              "title": "1.3 Use \"Create Another Transaction\" button to start a new transaction immediately",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1301,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:42.969Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-new-transaction-Area-9f804-new-transaction-immediately-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8eec15d3e0a622490588-a039b6447baca7ed0655",
+              "file": "tests/new-transaction.spec.ts",
+              "line": 134,
+              "column": 7
+            },
+            {
+              "title": "1.4 Pay/Request buttons remain disabled until both amount and description are filled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1224,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:44.301Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-new-transaction-Area-acea0--and-description-are-filled-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8eec15d3e0a622490588-8c5dee9d2da9a856756e",
+              "file": "tests/new-transaction.spec.ts",
+              "line": 154,
+              "column": 7
+            },
+            {
+              "title": "1.5 User search returns no results when no contacts match the query",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1662,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:45.556Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-new-transaction-Area-597b4-no-contacts-match-the-query-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8eec15d3e0a622490588-0a975fc2a6a150e4ce5b",
+              "file": "tests/new-transaction.spec.ts",
+              "line": 183,
+              "column": 7
+            },
+            {
+              "title": "1.6 Return to transactions list via the \"Return To Transactions\" button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1285,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:47.269Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-new-transaction-Area-7a937-turn-To-Transactions-button-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8eec15d3e0a622490588-fd5df55a9284a893b097",
+              "file": "tests/new-transaction.spec.ts",
+              "line": 199,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/notifications.spec.ts",
+      "file": "tests/notifications.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "4. Notifications",
+          "file": "tests/notifications.spec.ts",
+          "line": 104,
+          "column": 6,
+          "specs": [
+            {
+              "title": "4.1 Notifications page is accessible from the sidebar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 614,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:48.585Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-notifications-4-Noti-b3f4c-accessible-from-the-sidebar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "feeb06f7f894e048a5af-c0e3ecf9bf866b18f2af",
+              "file": "tests/notifications.spec.ts",
+              "line": 109,
+              "column": 7
+            },
+            {
+              "title": "4.2 Badge shows unread count and matches GET /notifications response",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 903,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:49.215Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-notifications-4-Noti-0d229--GET-notifications-response-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "feeb06f7f894e048a5af-74b5d7f30f463310a60a",
+              "file": "tests/notifications.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "4.3 Dismissing all notifications empties the list and resets the badge to 0",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2199,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:50.137Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-notifications-4-Noti-3269b-t-and-resets-the-badge-to-0-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "feeb06f7f894e048a5af-9053592f8146222ea52c",
+              "file": "tests/notifications.spec.ts",
+              "line": 137,
+              "column": 7
+            },
+            {
+              "title": "4.4 Notification count badge on the top navigation matches the number of notification list items",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 860,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:52.374Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-notifications-4-Noti-965fe--of-notification-list-items-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "feeb06f7f894e048a5af-4c712f72ad991328fda2",
+              "file": "tests/notifications.spec.ts",
+              "line": 181,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/seed.spec.ts",
+      "file": "tests/seed.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "seed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 457,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-02T12:07:53.250Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-seed-seed-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b6f1675abe9f236ea9a0-362118453e9b8d1d6e94",
+          "file": "tests/seed.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "tests/transaction-detail.spec.ts",
+      "file": "tests/transaction-detail.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Transaction Detail",
+          "file": "tests/transaction-detail.spec.ts",
+          "line": 64,
+          "column": 6,
+          "specs": [
+            {
+              "title": "5.1 clicking a transaction item opens the detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1620,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:53.717Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-detail-T-b57bd--item-opens-the-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34254f08ce221eb921d3-f8579c341b864121cc29",
+              "file": "tests/transaction-detail.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "5.2 detail page shows sender, receiver, action, and amount",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1650,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:55.353Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-detail-T-38d25--receiver-action-and-amount-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34254f08ce221eb921d3-0ba8cf750dd1fd5a5750",
+              "file": "tests/transaction-detail.spec.ts",
+              "line": 78,
+              "column": 7
+            },
+            {
+              "title": "5.3 like button and like count are visible on detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1611,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:57.019Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-detail-T-245aa--are-visible-on-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34254f08ce221eb921d3-cfe2b041249ddaf2fc3c",
+              "file": "tests/transaction-detail.spec.ts",
+              "line": 98,
+              "column": 7
+            },
+            {
+              "title": "5.4 comment input field is present on the detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1648,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:58.646Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-detail-T-4345f--present-on-the-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34254f08ce221eb921d3-001a0714f253eed42332",
+              "file": "tests/transaction-detail.spec.ts",
+              "line": 111,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/transaction-list.spec.ts",
+      "file": "tests/transaction-list.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Transaction List Tabs",
+          "file": "tests/transaction-list.spec.ts",
+          "line": 47,
+          "column": 6,
+          "specs": [
+            {
+              "title": "4.1 public tab is active by default and displays transactions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1117,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:00.314Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-list-Tra-890ec-t-and-displays-transactions-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "23c06a7a53fea34498d8-fcfa3741dd20871da7c1",
+              "file": "tests/transaction-list.spec.ts",
+              "line": 51,
+              "column": 7
+            },
+            {
+              "title": "4.2 contacts tab navigates to /contacts and shows a list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1148,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:01.447Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-list-Tra-c1401-o-contacts-and-shows-a-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "23c06a7a53fea34498d8-dc0de9fd3c59e78d7ecf",
+              "file": "tests/transaction-list.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "4.3 personal tab navigates to /personal and shows transactions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1141,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:02.612Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-list-Tra-64df8-onal-and-shows-transactions-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "23c06a7a53fea34498d8-b509262295f7cc775cdf",
+              "file": "tests/transaction-list.spec.ts",
+              "line": 81,
+              "column": 7
+            },
+            {
+              "title": "4.4 transaction list items display sender, receiver, and amount",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1088,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:03.768Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-list-Tra-596dd--sender-receiver-and-amount-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "23c06a7a53fea34498d8-7b7aa922b473e1222d3d",
+              "file": "tests/transaction-list.spec.ts",
+              "line": 96,
+              "column": 7
+            },
+            {
+              "title": "4.5 date range filter button opens the date filter panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1416,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:04.870Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-list-Tra-3a859-opens-the-date-filter-panel-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "23c06a7a53fea34498d8-bac80239a29a8088ed61",
+              "file": "tests/transaction-list.spec.ts",
+              "line": 116,
+              "column": 7
+            },
+            {
+              "title": "4.6 amount range filter button opens the amount filter panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1407,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:06.314Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-transaction-list-Tra-3705e-ens-the-amount-filter-panel-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "23c06a7a53fea34498d8-474597fcfd4a108cc7ed",
+              "file": "tests/transaction-list.spec.ts",
+              "line": 134,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/user-onboarding.spec.ts",
+      "file": "tests/user-onboarding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "User Onboarding",
+          "file": "tests/user-onboarding.spec.ts",
+          "line": 73,
+          "column": 6,
+          "specs": [
+            {
+              "title": "6.1 onboarding dialog appears for a new user",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1127,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:07.749Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-onboarding-User-d3757-alog-appears-for-a-new-user-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a00588006ab958a6b43-85225190520e968f6525",
+              "file": "tests/user-onboarding.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "6.2 clicking Next on welcome step shows bank account creation form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1694,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:08.897Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-onboarding-User-1d7e7--bank-account-creation-form-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a00588006ab958a6b43-ff6b7900289fe2a1f674",
+              "file": "tests/user-onboarding.spec.ts",
+              "line": 91,
+              "column": 7
+            },
+            {
+              "title": "6.3 completing bank account form advances to the final step",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2769,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:10.615Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-onboarding-User-07346--advances-to-the-final-step-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a00588006ab958a6b43-7643c5b7c0960cdfa111",
+              "file": "tests/user-onboarding.spec.ts",
+              "line": 110,
+              "column": 7
+            },
+            {
+              "title": "6.4 completing all onboarding steps dismisses the dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3861,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:13.411Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-onboarding-User-be15c--steps-dismisses-the-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8a00588006ab958a6b43-72994cf152d144fbc81b",
+              "file": "tests/user-onboarding.spec.ts",
+              "line": 133,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/user-settings.spec.ts",
+      "file": "tests/user-settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Area 3: User Settings",
+          "file": "tests/user-settings.spec.ts",
+          "line": 42,
+          "column": 6,
+          "specs": [
+            {
+              "title": "3.1 User settings page displays current profile values",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1117,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:17.311Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-settings-Area-3-123d3-lays-current-profile-values-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8d8b436663a91cc25de7-3a0e99254971e2925271",
+              "file": "tests/user-settings.spec.ts",
+              "line": 43,
+              "column": 7
+            },
+            {
+              "title": "3.2 Update first name, last name, email, and phone; verify changes persist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2385,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:18.442Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-settings-Area-3-8db9f-hone-verify-changes-persist-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8d8b436663a91cc25de7-4549c785487a88e18089",
+              "file": "tests/user-settings.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "3.3 Save button is disabled and error shown when first name is cleared",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1400,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:20.876Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-settings-Area-3-992e2--when-first-name-is-cleared-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8d8b436663a91cc25de7-5a0272fd66ed30ec1267",
+              "file": "tests/user-settings.spec.ts",
+              "line": 110,
+              "column": 7
+            },
+            {
+              "title": "3.4 Save button is disabled and error shown when email is not a valid format",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1406,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:22.295Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/B-pwagents/test-results/tests-user-settings-Area-3-6efcf-email-is-not-a-valid-format-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8d8b436663a91cc25de7-8d37521e0f26f0fa15f7",
+              "file": "tests/user-settings.spec.ts",
+              "line": 132,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-02T12:07:24.318Z",
+    "duration": 59492.488,
+    "expected": 46,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,2283 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/node_modules/.bin/playwright",
+      "test",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "rq6-agent/authors.spec.ts",
+      "file": "rq6-agent/authors.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authors – List View",
+          "file": "rq6-agent/authors.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "page loads with correct list data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2448,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:01:46.749Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--f5de8-oads-with-correct-list-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-d953a6baebd94a367e59",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "search filters rows in real time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2789,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:01:49.310Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--a9f48-h-filters-rows-in-real-time-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-ce9369ceced8cace6a33",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 37,
+              "column": 7
+            },
+            {
+              "title": "sort by name column changes URL",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2212,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:01:52.124Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--36944--by-name-column-changes-URL-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-fccfcca1e4f7a3eb68d8",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 65,
+              "column": 7
+            },
+            {
+              "title": "filter by name returns matching authors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2947,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:01:54.355Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--f6dd9-me-returns-matching-authors-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-6136cd89eec840332ee3",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 75,
+              "column": 7
+            },
+            {
+              "title": "column toggle shows/hides Id column",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2932,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:01:57.342Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--2d506-oggle-shows-hides-Id-column-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-eab978c1fddbef15bdc1",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 94,
+              "column": 7
+            },
+            {
+              "title": "bulk select all shows action bar with Delete and selected count",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2648,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:00.312Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--77e73-h-Delete-and-selected-count-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-720839372361e7f5a55a",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 113,
+              "column": 7
+            },
+            {
+              "title": "pagination – change page size",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2607,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:02.990Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--cb11f-gination-–-change-page-size-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-19293ad66aa9950ff463",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 131,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Authors – Create",
+          "file": "rq6-agent/authors.spec.ts",
+          "line": 154,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create page loads with correct form fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2058,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:05.625Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--f7109-ds-with-correct-form-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-dbdf2fc6214627e9e019",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 155,
+              "column": 7
+            },
+            {
+              "title": "required-field validation – empty submit stays on create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2595,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:07.700Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--35189-submit-stays-on-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-4c9f2dbe75040a43ded3",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 166,
+              "column": 7
+            },
+            {
+              "title": "create author saves correct data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2379,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:10.312Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--e4ec5-e-author-saves-correct-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-6f33e6e2415b1c554c3a",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 177,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Authors – Detail / Edit",
+          "file": "rq6-agent/authors.spec.ts",
+          "line": 216,
+          "column": 6,
+          "specs": [
+            {
+              "title": "detail page loads correct field values",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2114,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:12.707Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--9c5fc--loads-correct-field-values-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-f218af171c103312a31d",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 234,
+              "column": 7
+            },
+            {
+              "title": "edit name and save persists the change",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2276,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:14.840Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--d42b4-nd-save-persists-the-change-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-7371978cf002efe5aeb7",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 248,
+              "column": 7
+            },
+            {
+              "title": "Save, Reset, Delete buttons are visible on detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2091,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:17.134Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--92851--are-visible-on-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-ce6cdc6814b4e64be341",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 267,
+              "column": 7
+            },
+            {
+              "title": "delete author removes it from the database",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4789,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:19.244Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--10d4a-emoves-it-from-the-database-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-9e8697a3e944479687e4",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 277,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Authors – Bulk Delete",
+          "file": "rq6-agent/authors.spec.ts",
+          "line": 307,
+          "column": 6,
+          "specs": [
+            {
+              "title": "select filtered items and bulk-delete removes them",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5768,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:24.076Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-authors-Authors--60ff8-nd-bulk-delete-removes-them-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3138c2a44392fd0412cb-27b6477142e810a089ee",
+              "file": "rq6-agent/authors.spec.ts",
+              "line": 330,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/dashboard.spec.ts",
+      "file": "rq6-agent/dashboard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Dashboard",
+          "file": "rq6-agent/dashboard.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "dashboard page loads with list counts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2146,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:29.900Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-dashboard-Dashbo-0f8c9-page-loads-with-list-counts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "be0a40a14649674a1a5b-3fb9ffc8ff393774683a",
+              "file": "rq6-agent/dashboard.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "dashboard links navigate to list pages",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3765,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:32.056Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-dashboard-Dashbo-57cf0-inks-navigate-to-list-pages-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "be0a40a14649674a1a5b-cb2268fdba25200c5919",
+              "file": "rq6-agent/dashboard.spec.ts",
+              "line": 23,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/navigation.spec.ts",
+      "file": "rq6-agent/navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Navigation",
+          "file": "rq6-agent/navigation.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "sidebar Authors link navigates to authors list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2287,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:35.846Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-bcdaa-k-navigates-to-authors-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-2493e5c422d957e5d8df",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "sidebar Posts link navigates to posts list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2307,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:38.144Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-50004-ink-navigates-to-posts-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-afca44194ca83a2b833c",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "sidebar Dashboard link navigates back to dashboard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2162,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:40.463Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-8b56f-navigates-back-to-dashboard-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-6eeefd606c080cc3a839",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 22,
+              "column": 7
+            },
+            {
+              "title": "breadcrumb on authors list links back to dashboard via Keystone logo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2171,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:42.642Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-eb073-dashboard-via-Keystone-logo-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-c62b6d95bba6a153036a",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "breadcrumb on author detail links back to authors list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2326,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:44.832Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-c9ec4--links-back-to-authors-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-1c9e1f2ddb8944ad8197",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 40,
+              "column": 7
+            },
+            {
+              "title": "\"New author\" button on list page navigates to create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2332,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:47.175Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-84b97-ge-navigates-to-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-1db71b5d3bf0004c562f",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 60,
+              "column": 7
+            },
+            {
+              "title": "\"New post\" button on list page navigates to create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2343,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:49.529Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-681e2-ge-navigates-to-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-bdfaad26c5d59c51e9f9",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "\"New tag\" button on list page navigates to create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2581,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:51.900Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-navigation-Navig-4ba3d-ge-navigates-to-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c31051e3dafa17e7377e-c11704b1aaef097f6238",
+              "file": "rq6-agent/navigation.spec.ts",
+              "line": 79,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/posts.spec.ts",
+      "file": "rq6-agent/posts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Posts – List View",
+          "file": "rq6-agent/posts.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "page loads with correct list data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2168,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:54.501Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Li-9fac1-oads-with-correct-list-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-be6a880faa8502d5f5a6",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "search filters posts in real time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2857,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:56.687Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Li-04a11--filters-posts-in-real-time-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-3990200fe9a448a58c28",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 32,
+              "column": 7
+            },
+            {
+              "title": "sort by title column updates URL",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2299,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:02:59.568Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Li-64855-by-title-column-updates-URL-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-6fbdb379dbc7a2539fdd",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "filter by title returns matching posts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2979,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:01.887Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Li-847e8-itle-returns-matching-posts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-e77585866d98bc035a72",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 58,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Posts – Create",
+          "file": "rq6-agent/posts.spec.ts",
+          "line": 78,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create page loads with correct form fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2222,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:04.904Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Cr-b8ecd-ds-with-correct-form-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-40a4c3466654f80b8d5e",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 79,
+              "column": 7
+            },
+            {
+              "title": "required-field validation – empty submit stays on create page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2737,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:07.143Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Cr-5272f-submit-stays-on-create-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-9ff7a469ab3ea81f543e",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 92,
+              "column": 7
+            },
+            {
+              "title": "create post with title and status saves correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2666,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:09.903Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Cr-01ffa--and-status-saves-correctly-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-3caf9ffd86d84f5ad6fa",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 102,
+              "column": 7
+            },
+            {
+              "title": "create post with author relation saves the relation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2971,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:12.589Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-Cr-e55e9-relation-saves-the-relation-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-295ce4e1fb76dd30113e",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 136,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Posts – Detail / Edit",
+          "file": "rq6-agent/posts.spec.ts",
+          "line": 184,
+          "column": 6,
+          "specs": [
+            {
+              "title": "detail page loads correct field values",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2359,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:15.583Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-De-0e0d2--loads-correct-field-values-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-06e87d24cf4eacea7450",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "edit title and save persists the change",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2302,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:17.958Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-De-f0d59-nd-save-persists-the-change-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-d982db3ad80e7ab9b3c2",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 219,
+              "column": 7
+            },
+            {
+              "title": "edit status and save persists the change",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2376,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:20.278Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-De-c2b40-nd-save-persists-the-change-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-791888ad31969760705d",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 237,
+              "column": 7
+            },
+            {
+              "title": "Save, Reset, Delete buttons are visible on detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2181,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:22.673Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-De-31aae--are-visible-on-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-98e3326109ea9e0b14d9",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 254,
+              "column": 7
+            },
+            {
+              "title": "delete post removes it from the database",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4732,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:24.874Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Posts-–-De-d34dc-emoves-it-from-the-database-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-66991180c29b9c45f605",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 263,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Post – Seeded item detail",
+          "file": "rq6-agent/posts.spec.ts",
+          "line": 289,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Wuthering Heights post loads with correct data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2149,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:29.647Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-posts-Post-–-See-19e21-ost-loads-with-correct-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8c23842ec37d6f59bb5e-fcbba57da78ac682925f",
+              "file": "rq6-agent/posts.spec.ts",
+              "line": 290,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/tags.spec.ts",
+      "file": "rq6-agent/tags.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tags – List View",
+          "file": "rq6-agent/tags.spec.ts",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "page loads with correct list data",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 7148,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/0 Tag/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/0 Tag/)\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/0 Tag/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/0 Tag/)\u001b[22m\n\n    at /Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts:20:62",
+                        "location": {
+                          "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                          "column": 62,
+                          "line": 20
+                        },
+                        "snippet": "  18 |\n  19 |     await expect(page.getByRole('heading', { name: 'Tags' })).toBeVisible();\n> 20 |     await expect(page.getByText(new RegExp(`${count} Tag`))).toBeVisible();\n     |                                                              ^\n  21 |\n  22 |     await expect(page.getByRole('columnheader', { name: 'Name' })).toBeVisible();\n  23 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                            "column": 62,
+                            "line": 20
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/0 Tag/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/0 Tag/)\u001b[22m\n\n\n  18 |\n  19 |     await expect(page.getByRole('heading', { name: 'Tags' })).toBeVisible();\n> 20 |     await expect(page.getByText(new RegExp(`${count} Tag`))).toBeVisible();\n     |                                                              ^\n  21 |\n  22 |     await expect(page.getByRole('columnheader', { name: 'Name' })).toBeVisible();\n  23 |   });\n    at /Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts:20:62"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:31.819Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-29a0b-oads-with-correct-list-data-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-29a0b-oads-with-correct-list-data-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-29a0b-oads-with-correct-list-data-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                        "column": 62,
+                        "line": 20
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-84c5fcf7d0f0d63714b2",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "search filters tags in real time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2830,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:39.212Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-08f42-h-filters-tags-in-real-time-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-aa367de8f2e2bd61f01b",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "sort by name column updates URL",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 7366,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/sortBy=name/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3200/tags?column=name&column=posts\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html class=\"css-avfip1 kui-theme kui-scheme--auto\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3200/tags?column=name&column=posts\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/sortBy=name/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3200/tags?column=name&column=posts\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html class=\"css-avfip1 kui-theme kui-scheme--auto\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3200/tags?column=name&column=posts\"\u001b[22m\n\n    at /Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts:61:24",
+                        "location": {
+                          "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                          "column": 24,
+                          "line": 61
+                        },
+                        "snippet": "  59 |     await page.waitForLoadState('networkidle');\n  60 |\n> 61 |     await expect(page).toHaveURL(/sortBy=name/);\n     |                        ^\n  62 |   });\n  63 | });\n  64 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                            "column": 24,
+                            "line": 61
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/sortBy=name/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3200/tags?column=name&column=posts\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html class=\"css-avfip1 kui-theme kui-scheme--auto\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3200/tags?column=name&column=posts\"\u001b[22m\n\n\n  59 |     await page.waitForLoadState('networkidle');\n  60 |\n> 61 |     await expect(page).toHaveURL(/sortBy=name/);\n     |                        ^\n  62 |   });\n  63 | });\n  64 |\n    at /Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts:61:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:42.155Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-fe31b--by-name-column-updates-URL-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-fe31b--by-name-column-updates-URL-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-List-fe31b--by-name-column-updates-URL-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                        "column": 24,
+                        "line": 61
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-181a326a93aeef53e130",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 54,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Tags – Create",
+          "file": "rq6-agent/tags.spec.ts",
+          "line": 68,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create page loads with correct form fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2144,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:49.742Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Crea-799df-ds-with-correct-form-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-ea085f34fa5d750aff49",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 69,
+              "column": 7
+            },
+            {
+              "title": "create tag saves correct data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2160,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:52.001Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Create-create-tag-saves-correct-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-6906cb0927d4c6f982c4",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 79,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Tags – Detail / Edit",
+          "file": "rq6-agent/tags.spec.ts",
+          "line": 114,
+          "column": 6,
+          "specs": [
+            {
+              "title": "detail page loads correct field values",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2187,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:54.175Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Deta-f6a58--loads-correct-field-values-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-8456a637caaea39737ac",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 129,
+              "column": 7
+            },
+            {
+              "title": "edit tag name and save persists the change",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2254,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:56.381Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Deta-3c4a3-nd-save-persists-the-change-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-28325260f453fa2e47ef",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 142,
+              "column": 7
+            },
+            {
+              "title": "Save, Reset, Delete buttons are visible on detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2323,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:03:58.652Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Deta-75c04--are-visible-on-detail-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-227f5990c246df219a6a",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 160,
+              "column": 7
+            },
+            {
+              "title": "delete tag removes it from the database",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4682,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:04:00.994Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Deta-322fe-emoves-it-from-the-database-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-510796bbf01c3c961b59",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 169,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Tags – Post relation",
+          "file": "rq6-agent/tags.spec.ts",
+          "line": 195,
+          "column": 6,
+          "specs": [
+            {
+              "title": "create tag with post relation and verify via API",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 60097,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts",
+                            "column": 71,
+                            "line": 222
+                          },
+                          "message": "Error: locator.click: Test timeout of 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Create', exact: true })\u001b[22m\n\n\n  220 |       }\n  221 |\n> 222 |       await page.getByRole('button', { name: 'Create', exact: true }).click();\n      |                                                                       ^\n  223 |       await page.waitForLoadState('networkidle');\n  224 |\n  225 |       // Find the created tag\n    at /Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/rq6-agent/tags.spec.ts:222:71"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T05:04:05.708Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Post-097d4-relation-and-verify-via-API-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Post-097d4-relation-and-verify-via-API-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/keystone-blog/A-naive/test-results/rq6-agent-tags-Tags-–-Post-097d4-relation-and-verify-via-API-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "302b2972ee6d2f8e0e4d-99bae9a0034ac63b1247",
+              "file": "rq6-agent/tags.spec.ts",
+              "line": 196,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-02T05:01:46.549Z",
+    "duration": 199338.201,
+    "expected": 46,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

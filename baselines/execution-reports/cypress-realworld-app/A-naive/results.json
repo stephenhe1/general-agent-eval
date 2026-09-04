@@ -1,0 +1,1912 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/node_modules/.bin/playwright",
+      "test",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "rq6-agent/auth.spec.ts",
+      "file": "rq6-agent/auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication",
+          "file": "rq6-agent/auth.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "sign in with valid credentials redirects to home",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 602,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:05:59.217Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Authenticat-9ed07-edentials-redirects-to-home-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-4bda32745fb8ac1680d9",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "sign in with invalid credentials shows error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 481,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:05:59.934Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Authenticat-aa0b2-lid-credentials-shows-error-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-628332b9ce2b126948d6",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "unauthenticated access to / redirects to signin",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 380,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:00.426Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Authenticat-91b2d-cess-to-redirects-to-signin-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-082487100845929f6165",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 28,
+              "column": 7
+            },
+            {
+              "title": "sign out via sidebar logs out and redirects to signin",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 625,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:00.814Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Authenticat-64a65-out-and-redirects-to-signin-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-6ad84a1fa6616f3680e9",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 33,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Sign Up",
+          "file": "rq6-agent/auth.spec.ts",
+          "line": 41,
+          "column": 6,
+          "specs": [
+            {
+              "title": "sign up form - submit disabled when form is empty (initial load)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 369,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:01.454Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Sign-Up-sig-221b0-form-is-empty-initial-load--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-7cd3ec83ddf6a9561060",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 42,
+              "column": 7
+            },
+            {
+              "title": "sign up form - password mismatch keeps submit disabled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 468,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:01.831Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Sign-Up-sig-fed83-match-keeps-submit-disabled-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-b0076778c420ed38c95e",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "sign up with new user creates account and triggers onboarding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 721,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:02.308Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-auth-Sign-Up-sig-819ad-unt-and-triggers-onboarding-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4a9827682ad2d0b37301-e2a6e0d7816db1cb6573",
+              "file": "rq6-agent/auth.spec.ts",
+              "line": 67,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/bank-accounts.spec.ts",
+      "file": "rq6-agent/bank-accounts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Bank Accounts",
+          "file": "rq6-agent/bank-accounts.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "bank accounts page shows account list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 605,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:03.047Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-bank-accounts-Ba-19203-nts-page-shows-account-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1ec7812879f1b3426c85-a519cd7c356c5c272768",
+              "file": "rq6-agent/bank-accounts.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "create bank account adds it to the list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 729,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:03.665Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-bank-accounts-Ba-0ee09-account-adds-it-to-the-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1ec7812879f1b3426c85-9823194ec17732872967",
+              "file": "rq6-agent/bank-accounts.spec.ts",
+              "line": 19,
+              "column": 7
+            },
+            {
+              "title": "delete bank account soft-deletes (removes delete button, shows Deleted label)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2300,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:04.411Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-bank-accounts-Ba-30783-button-shows-Deleted-label--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1ec7812879f1b3426c85-aaead01f74d1f9d8e334",
+              "file": "rq6-agent/bank-accounts.spec.ts",
+              "line": 49,
+              "column": 7
+            },
+            {
+              "title": "bank account form fields accept valid input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 661,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:06.746Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-bank-accounts-Ba-16287-m-fields-accept-valid-input-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1ec7812879f1b3426c85-2ce5bcc8c1b24cd42951",
+              "file": "rq6-agent/bank-accounts.spec.ts",
+              "line": 85,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/create-transaction.spec.ts",
+      "file": "rq6-agent/create-transaction.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Create Transaction",
+          "file": "rq6-agent/create-transaction.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "transaction/new shows user search step",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 635,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:07.424Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-create-transacti-34ecb--new-shows-user-search-step-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "af2483b1f13a427ce5b8-8d676cc0203c43ae47c3",
+              "file": "rq6-agent/create-transaction.spec.ts",
+              "line": 27,
+              "column": 7
+            },
+            {
+              "title": "searching users filters the user list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1284,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:08.076Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-create-transacti-682c0-users-filters-the-user-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "af2483b1f13a427ce5b8-841b6da9c1f0c5fbe9bc",
+              "file": "rq6-agent/create-transaction.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "send payment - full 3-step flow creates transaction",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 734,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:09.399Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-create-transacti-10c18-ep-flow-creates-transaction-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "af2483b1f13a427ce5b8-23b491bed6faee0b8f3e",
+              "file": "rq6-agent/create-transaction.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "request payment - full 3-step flow creates request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 749,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:10.151Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-create-transacti-17b09-3-step-flow-creates-request-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "af2483b1f13a427ce5b8-d29e1c399eb46e68ab66",
+              "file": "rq6-agent/create-transaction.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "after creating transaction it appears in personal transactions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 834,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:10.918Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-create-transacti-01ad8-rs-in-personal-transactions-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "af2483b1f13a427ce5b8-7914a89dfa35916b51d0",
+              "file": "rq6-agent/create-transaction.spec.ts",
+              "line": 96,
+              "column": 7
+            },
+            {
+              "title": "create another transaction button returns to user search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 801,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:11.777Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-create-transacti-e1e20-tton-returns-to-user-search-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "af2483b1f13a427ce5b8-f48fcb2025abb0b45b4c",
+              "file": "rq6-agent/create-transaction.spec.ts",
+              "line": 121,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/notifications.spec.ts",
+      "file": "rq6-agent/notifications.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Notifications",
+          "file": "rq6-agent/notifications.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "notifications page is accessible from sidebar",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10626,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:12:68",
+                        "location": {
+                          "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                          "column": 68,
+                          "line": 12
+                        },
+                        "snippet": "  10 |     await page.locator('[data-test=\"sidenav-notifications\"]').click();\n  11 |     await page.waitForURL(/\\/notifications/, { timeout: 10000 });\n> 12 |     await expect(page.locator('[data-test=\"notifications-list\"]')).toBeVisible({ timeout: 10000 });\n     |                                                                    ^\n  13 |   });\n  14 |\n  15 |   test('notifications page is accessible from navbar link', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                            "column": 68,
+                            "line": 12
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n\n\n  10 |     await page.locator('[data-test=\"sidenav-notifications\"]').click();\n  11 |     await page.waitForURL(/\\/notifications/, { timeout: 10000 });\n> 12 |     await expect(page.locator('[data-test=\"notifications-list\"]')).toBeVisible({ timeout: 10000 });\n     |                                                                    ^\n  13 |   });\n  14 |\n  15 |   test('notifications page is accessible from navbar link', async ({ page }) => {\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:12:68"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:12.600Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-916cf--is-accessible-from-sidebar-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-916cf--is-accessible-from-sidebar-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-916cf--is-accessible-from-sidebar-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                        "column": 68,
+                        "line": 12
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "656869f638374c9aa759-28462fca974e1e2f97ca",
+              "file": "rq6-agent/notifications.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "notifications page is accessible from navbar link",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10667,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:18:68",
+                        "location": {
+                          "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                          "column": 68,
+                          "line": 18
+                        },
+                        "snippet": "  16 |     await page.locator('[data-test=\"nav-top-notifications-link\"]').click();\n  17 |     await page.waitForURL(/\\/notifications/, { timeout: 10000 });\n> 18 |     await expect(page.locator('[data-test=\"notifications-list\"]')).toBeVisible({ timeout: 10000 });\n     |                                                                    ^\n  19 |   });\n  20 |\n  21 |   test('notification count badge shows in navbar when there are unread notifications', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                            "column": 68,
+                            "line": 18
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n\n\n  16 |     await page.locator('[data-test=\"nav-top-notifications-link\"]').click();\n  17 |     await page.waitForURL(/\\/notifications/, { timeout: 10000 });\n> 18 |     await expect(page.locator('[data-test=\"notifications-list\"]')).toBeVisible({ timeout: 10000 });\n     |                                                                    ^\n  19 |   });\n  20 |\n  21 |   test('notification count badge shows in navbar when there are unread notifications', async ({ page }) => {\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:18:68"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:23.463Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-bad04-accessible-from-navbar-link-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-bad04-accessible-from-navbar-link-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-bad04-accessible-from-navbar-link-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                        "column": 68,
+                        "line": 18
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "656869f638374c9aa759-85171f84cb1990ae5113",
+              "file": "rq6-agent/notifications.spec.ts",
+              "line": 15,
+              "column": 7
+            },
+            {
+              "title": "notification count badge shows in navbar when there are unread notifications",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 606,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:30:21",
+                        "location": {
+                          "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                          "column": 21,
+                          "line": 30
+                        },
+                        "snippet": "  28 |       const badgeText = await badge.textContent();\n  29 |       const count = parseInt(badgeText ?? '0', 10);\n> 30 |       expect(count).toBeGreaterThan(0);\n     |                     ^\n  31 |     }\n  32 |     // If no badge, that's fine - all notifications may already be read\n  33 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                            "column": 21,
+                            "line": 30
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n  28 |       const badgeText = await badge.textContent();\n  29 |       const count = parseInt(badgeText ?? '0', 10);\n> 30 |       expect(count).toBeGreaterThan(0);\n     |                     ^\n  31 |     }\n  32 |     // If no badge, that's fine - all notifications may already be read\n  33 |   });\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:30:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:34.448Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-1c8df-re-are-unread-notifications-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-1c8df-re-are-unread-notifications-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-1c8df-re-are-unread-notifications-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                        "column": 21,
+                        "line": 30
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "656869f638374c9aa759-cdf465e38fb0cbd2037d",
+              "file": "rq6-agent/notifications.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "marking a notification as read removes it from unread list",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10882,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:37:68",
+                        "location": {
+                          "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                          "column": 68,
+                          "line": 37
+                        },
+                        "snippet": "  35 |   test('marking a notification as read removes it from unread list', async ({ page }) => {\n  36 |     await page.goto(`${BASE_URL}/notifications`);\n> 37 |     await expect(page.locator('[data-test=\"notifications-list\"]')).toBeVisible({ timeout: 10000 });\n     |                                                                    ^\n  38 |\n  39 |     // Check if there are any unread notifications to mark as read\n  40 |     const markReadButtons = page.locator('[data-test^=\"notification-mark-read-\"]');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                            "column": 68,
+                            "line": 37
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-test=\"notifications-list\"]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-test=\"notifications-list\"]')\u001b[22m\n\n\n  35 |   test('marking a notification as read removes it from unread list', async ({ page }) => {\n  36 |     await page.goto(`${BASE_URL}/notifications`);\n> 37 |     await expect(page.locator('[data-test=\"notifications-list\"]')).toBeVisible({ timeout: 10000 });\n     |                                                                    ^\n  38 |\n  39 |     // Check if there are any unread notifications to mark as read\n  40 |     const markReadButtons = page.locator('[data-test^=\"notification-mark-read-\"]');\n    at /Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts:37:68"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:35.344Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-556a4-removes-it-from-unread-list-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-556a4-removes-it-from-unread-list-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-notifications-No-556a4-removes-it-from-unread-list-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/rq6-agent/notifications.spec.ts",
+                        "column": 68,
+                        "line": 37
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "656869f638374c9aa759-e2a730190236d722902d",
+              "file": "rq6-agent/notifications.spec.ts",
+              "line": 35,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/onboarding.spec.ts",
+      "file": "rq6-agent/onboarding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "User Onboarding",
+          "file": "rq6-agent/onboarding.spec.ts",
+          "line": 30,
+          "column": 6,
+          "specs": [
+            {
+              "title": "new user sees onboarding dialog after signup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 743,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:46.524Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-onboarding-User--f1d27-oarding-dialog-after-signup-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84edff44f162a221126f-b13556ae66208827f015",
+              "file": "rq6-agent/onboarding.spec.ts",
+              "line": 36,
+              "column": 7
+            },
+            {
+              "title": "onboarding - complete bank account creation step",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1459,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:47.373Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-onboarding-User--b7f53--bank-account-creation-step-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84edff44f162a221126f-c9121fc2b8ddc79a752f",
+              "file": "rq6-agent/onboarding.spec.ts",
+              "line": 45,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/transaction-detail.spec.ts",
+      "file": "rq6-agent/transaction-detail.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Transaction Detail",
+          "file": "rq6-agent/transaction-detail.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "transaction detail page shows sender, receiver, and description",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 638,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:48.870Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transaction-deta-ef7f2-er-receiver-and-description-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fe8406a7bf7dfef4a0fe-b58106003782d2e28bbf",
+              "file": "rq6-agent/transaction-detail.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "liking a transaction increments the like count",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1655,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:49.524Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transaction-deta-d7506-n-increments-the-like-count-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fe8406a7bf7dfef4a0fe-f28bf8d9e1f17e227a77",
+              "file": "rq6-agent/transaction-detail.spec.ts",
+              "line": 35,
+              "column": 7
+            },
+            {
+              "title": "adding a comment to a transaction makes it appear",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 686,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:51.197Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transaction-deta-db264-transaction-makes-it-appear-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fe8406a7bf7dfef4a0fe-7f9ef8235f0638b3b5c5",
+              "file": "rq6-agent/transaction-detail.spec.ts",
+              "line": 89,
+              "column": 7
+            },
+            {
+              "title": "transaction detail URL matches clicked transaction",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 626,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:51.900Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transaction-deta-74ec8-matches-clicked-transaction-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fe8406a7bf7dfef4a0fe-1eabdeb226a1de0a87ac",
+              "file": "rq6-agent/transaction-detail.spec.ts",
+              "line": 117,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/transactions-feed.spec.ts",
+      "file": "rq6-agent/transactions-feed.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Transaction Feed",
+          "file": "rq6-agent/transactions-feed.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "public transactions tab shows transaction list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 599,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:52.544Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-ffcee--tab-shows-transaction-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-8c8e8cbf358f89773916",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "personal transactions tab shows personal list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 629,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:53.155Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-ca50b-ons-tab-shows-personal-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-aedaf7c5994d72ce930f",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "contacts transactions tab shows contacts list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 621,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:53.797Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-8f771-ons-tab-shows-contacts-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-33c661c65534d3268814",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 27,
+              "column": 7
+            },
+            {
+              "title": "transaction feed navigation tabs are all visible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 587,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:54.432Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-24ce7-gation-tabs-are-all-visible-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-80ab177454a664e4c81b",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "amount range filter chip opens popover with slider at desktop width",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 604,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:55.031Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-40108-ith-slider-at-desktop-width-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-4f5d9f023dba5cf9145f",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 40,
+              "column": 7
+            },
+            {
+              "title": "date range filter chip opens popover with calendar at desktop width",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 603,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:55.649Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-83a16-h-calendar-at-desktop-width-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-8ebc02bed5cb5462c0e5",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "clicking a transaction item navigates to transaction detail",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 618,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:56.266Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-transactions-fee-6554d-gates-to-transaction-detail-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fa34d4f2fa8219d50ef-9a2bb20f6964f323ac9e",
+              "file": "rq6-agent/transactions-feed.spec.ts",
+              "line": 62,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/user-settings.spec.ts",
+      "file": "rq6-agent/user-settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "User Settings",
+          "file": "rq6-agent/user-settings.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "user settings page is accessible from sidebar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 610,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:56.899Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-user-settings-Us-ce548--is-accessible-from-sidebar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c57dc583eafebe59c92e-a304700e28578e381e0f",
+              "file": "rq6-agent/user-settings.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "user settings form shows current user data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 851,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:57.524Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-user-settings-Us-4c4f8-orm-shows-current-user-data-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c57dc583eafebe59c92e-bae28da4dc86bb318171",
+              "file": "rq6-agent/user-settings.spec.ts",
+              "line": 15,
+              "column": 7
+            },
+            {
+              "title": "updating user profile first name persists the change",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4078,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:06:58.392Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-user-settings-Us-1f9fc-st-name-persists-the-change-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c57dc583eafebe59c92e-aaa321b1008499e7d291",
+              "file": "rq6-agent/user-settings.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "user balance is displayed in sidebar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 581,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:02.521Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-user-settings-Us-b5d7f-nce-is-displayed-in-sidebar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c57dc583eafebe59c92e-e83e6f430bfa6d7f87dd",
+              "file": "rq6-agent/user-settings.spec.ts",
+              "line": 65,
+              "column": 7
+            },
+            {
+              "title": "user full name is displayed in sidebar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 586,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:07:03.116Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/cypress-realworld-app/A-naive/test-results/rq6-agent-user-settings-Us-de894-ame-is-displayed-in-sidebar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c57dc583eafebe59c92e-3b9a16d12f98981038bd",
+              "file": "rq6-agent/user-settings.spec.ts",
+              "line": 72,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-02T12:05:59.011Z",
+    "duration": 64747.403000000006,
+    "expected": 35,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

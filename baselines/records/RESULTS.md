@@ -16,6 +16,16 @@ upper bound on coverage: it does not ask whether the test asserted the item's po
 The technique's column counts *predicted* functionalities from its catalog, not executed
 tests, and is quoted from its own record. The two columns are not the same measurement.
 
+Generated-test counts per arm (see `../MANIFEST.md`; these do not enter the reach computation,
+which scores traces and pass-filters through `results.json`):
+
+| arm | todomvc | keystone-blog | epic-stack | cypress-realworld-app | bangle-io |
+|---|---:|---:|---:|---:|---:|
+| A0 black-box | 1 | 5 | 7 | 8 | 5 |
+| A1 repo-informed | 1 | 9 | 6 | 6 | 6 |
+| B pw-agents, final | 1 | 23 | 49 | 10 | 38 |
+| B pw-agents, files incl. `.claude/worktrees/` copies | 1 | 23 | 98 | 21 | 84 |
+
 ## bangle-io
 
 | GT item | A1 | A0 | B |

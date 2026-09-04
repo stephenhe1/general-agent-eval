@@ -1,0 +1,3077 @@
+{
+  "config": {
+    "argv": [
+      "/Users/stephenhe/.local/share/fnm/node-versions/v25.9.0/installation/bin/node",
+      "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/node_modules/.bin/playwright",
+      "test",
+      "--trace=on",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/playwright.config.ts",
+    "rootDir": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "rq6-agent/01-pages.spec.ts",
+      "file": "rq6-agent/01-pages.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Welcome page",
+          "file": "rq6-agent/01-pages.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows \"Welcome to Bangle\" for new browser session at /welcome",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1025,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:55.984Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Welcome-6731f--browser-session-at-welcome-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-3d897bf35fb1bf1a39d9",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "shows \"Recent workspaces\" section and workspace link after workspace exists",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1401,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:57.126Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Welcome-942a9-link-after-workspace-exists-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-6b6d76a951e0730cd692",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "shows \"Create a workspace to get started\" prompt with no workspaces",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 852,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:58.552Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Welcome-53b41-d-prompt-with-no-workspaces-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-29b160f0f1a49c1d09e9",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 41,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Workspace Home page",
+          "file": "rq6-agent/01-pages.spec.ts",
+          "line": 49,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows workspace home with empty state after creation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1346,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:08:59.417Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Workspa-ade1f--empty-state-after-creation-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-0e957315227ae7451c77",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "shows recent notes after creating notes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1455,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:00.787Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Workspa-32528--notes-after-creating-notes-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-1d363e0267f790e5af26",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 67,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Note Editor page",
+          "file": "rq6-agent/01-pages.spec.ts",
+          "line": 89,
+          "column": 6,
+          "specs": [
+            {
+              "title": "opens note editor with ProseMirror editor",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1428,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:02.264Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Note-Ed-27c7e-tor-with-ProseMirror-editor-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-42334ea222664002d5c2",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 90,
+              "column": 7
+            },
+            {
+              "title": "sidebar shows \"Opened\" section with current note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1421,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:03.713Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Note-Ed-05aae-d-section-with-current-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-bb56138c5443e4413869",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 115,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Note Not Found page",
+          "file": "rq6-agent/01-pages.spec.ts",
+          "line": 128,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows note not found when navigating to nonexistent note path",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:05.156Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Note-No-d9045-ng-to-nonexistent-note-path-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-9645f5e199ccb0a136e6",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 129,
+              "column": 7
+            },
+            {
+              "title": "\"View All Notes\" button from note-not-found opens file list or navigates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2460,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:06.573Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Note-No-c997c-pens-file-list-or-navigates-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-9136fabb3a9458325de8",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 143,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Workspace Not Found page",
+          "file": "rq6-agent/01-pages.spec.ts",
+          "line": 172,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows workspace not found for nonexistent workspace",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 876,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:09.058Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Workspa-6fbc8-d-for-nonexistent-workspace-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-03e8840e870c12780df5",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 173,
+              "column": 7
+            },
+            {
+              "title": "\"Create Workspace\" from workspace-not-found opens create dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 941,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:09.946Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Workspa-6fa22-t-found-opens-create-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-22ae45eb36922223c7db",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 182,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Page Not Found page",
+          "file": "rq6-agent/01-pages.spec.ts",
+          "line": 194,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows page not found for unknown route",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 872,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:10.899Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Page-No-34ed8-not-found-for-unknown-route-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-76b51731c1c89fc7eae3",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 195,
+              "column": 7
+            },
+            {
+              "title": "\"Go to Welcome Screen\" from 404 navigates to welcome",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 909,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:11.784Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-01-pages-Page-No-82315-om-404-navigates-to-welcome-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7b845ca258272104f67-f7c4b46c8c11320af815",
+              "file": "rq6-agent/01-pages.spec.ts",
+              "line": 204,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/02-workspace.spec.ts",
+      "file": "rq6-agent/02-workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Create Workspace flow",
+          "file": "rq6-agent/02-workspace.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "creates a browser workspace via Create Workspace dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1180,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:12.707Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Cre-5d9d2-via-Create-Workspace-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-c45d4fe2bfa674bab553",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "Back button returns to type selection from name entry",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1196,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:13.906Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Cre-efeec-e-selection-from-name-entry-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-ed7a349562a97ea6f26c",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "Close button dismisses create workspace dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1304,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:15.118Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Cre-d1170-ses-create-workspace-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-0f749ee08aafb7da5bcf",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 64,
+              "column": 7
+            },
+            {
+              "title": "Native File System option can be selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1141,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:16.445Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Cre-4f80d-stem-option-can-be-selected-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-9a89a34f553ca867355e",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 80,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Workspace selector in sidebar",
+          "file": "rq6-agent/02-workspace.spec.ts",
+          "line": 99,
+          "column": 6,
+          "specs": [
+            {
+              "title": "clicking workspace name shows workspace list with New Workspace option",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1410,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:17.601Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Wor-98b17-t-with-New-Workspace-option-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-a6a0425a06bd841e0b3e",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 100,
+              "column": 7
+            },
+            {
+              "title": "workspace selector lists all created workspaces",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2782,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:19.030Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Wor-d46fc-ists-all-created-workspaces-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-cb859711b16be556c756",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 118,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Switch Workspace",
+          "file": "rq6-agent/02-workspace.spec.ts",
+          "line": 137,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Switch Workspace button opens workspace switcher dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1396,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:21.859Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Swi-41101-s-workspace-switcher-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-e63f237174a0c0323225",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 138,
+              "column": 7
+            },
+            {
+              "title": "switching workspace navigates to new workspace home",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2736,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:23.274Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Swi-99aa9-gates-to-new-workspace-home-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-a70e12160d6e5b4c0753",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 149,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Delete Workspace flow",
+          "file": "rq6-agent/02-workspace.spec.ts",
+          "line": 171,
+          "column": 6,
+          "specs": [
+            {
+              "title": "delete workspace shows confirm dialog then deletes workspace",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3888,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:26.048Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Del-29256-alog-then-deletes-workspace-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-e89eeb628b348107aaa7",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 172,
+              "column": 7
+            },
+            {
+              "title": "Cancel on delete workspace confirm does not delete workspace",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:29.980Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-Del-e3f51-m-does-not-delete-workspace-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-aa1a8ec3b89bf80966f0",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 205,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "New Workspace from app menu",
+          "file": "rq6-agent/02-workspace.spec.ts",
+          "line": 232,
+          "column": 6,
+          "specs": [
+            {
+              "title": "app menu New Workspace opens create dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1601,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:33.021Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-02-workspace-New-3cdc0-rkspace-opens-create-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90030ea13c4e4f67d50d-9ce64f6b7dc7589c88a6",
+              "file": "rq6-agent/02-workspace.spec.ts",
+              "line": 233,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/03-notes.spec.ts",
+      "file": "rq6-agent/03-notes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Create Note flows",
+          "file": "rq6-agent/03-notes.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "creates note via New Note button and dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1624,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:34.654Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Create--46986--New-Note-button-and-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-074240fd948b984a254a",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "creates untitled note via sidebar New File button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:36.304Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Create--19926-via-sidebar-New-File-button-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-1643b52bf2935ae44c22",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 38,
+              "column": 7
+            },
+            {
+              "title": "creates multiple untitled notes with incrementing names",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1465,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:37.721Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Create--10c93-tes-with-incrementing-names-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-f637d37832daa3ebd484",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 57,
+              "column": 7
+            },
+            {
+              "title": "note appears in workspace home Recent notes after creation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1419,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:39.211Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Create--11996-Recent-notes-after-creation-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-2ff3107e65c601621a36",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 79,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Rename Note",
+          "file": "rq6-agent/03-notes.spec.ts",
+          "line": 97,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renames note via sidebar context menu",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2156,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:40.653Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Rename--5d127-te-via-sidebar-context-menu-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-13f8b95eb592249ea647",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 98,
+              "column": 7
+            },
+            {
+              "title": "rename dialog is pre-filled with current note name (without extension)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1955,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:42.847Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Rename--0d246-ote-name-without-extension--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-d4e5b2e57fcdb461c22b",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 132,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Delete Note",
+          "file": "rq6-agent/03-notes.spec.ts",
+          "line": 151,
+          "column": 6,
+          "specs": [
+            {
+              "title": "deletes note via sidebar context menu with confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3647,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:44.832Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Delete--74d91-text-menu-with-confirmation-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-75efabe10747e23e8d78",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 152,
+              "column": 7
+            },
+            {
+              "title": "Cancel on delete confirmation does not delete the note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3130,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:48.522Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Delete--25a08-on-does-not-delete-the-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-287d0b453d6414c3ed9b",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 189,
+              "column": 7
+            },
+            {
+              "title": "deletes note via omni search Delete Note command",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3364,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:51.689Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Delete--3502c--search-Delete-Note-command-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-fc5b334aef9cd0f2e2de",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 217,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Move Note",
+          "file": "rq6-agent/03-notes.spec.ts",
+          "line": 244,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Move dialog shows \"No directories found\" when no directories exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1992,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:55.093Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Move-No-767d8-d-when-no-directories-exist-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-bf483fc6e1f37d2d41dd",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 245,
+              "column": 7
+            },
+            {
+              "title": "Move dialog shows directory options after creating a directory",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3003,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:09:57.115Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Move-No-fb0c1--after-creating-a-directory-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-01dba106b0e4a3af963a",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 259,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Clone Note",
+          "file": "rq6-agent/03-notes.spec.ts",
+          "line": 298,
+          "column": 6,
+          "specs": [
+            {
+              "title": "clone note creates a copy of the current note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1694,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:00.172Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-Clone-N-13b15--a-copy-of-the-current-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-c6b38f8602dd02748b9b",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 299,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "New Directory",
+          "file": "rq6-agent/03-notes.spec.ts",
+          "line": 331,
+          "column": 6,
+          "specs": [
+            {
+              "title": "creates a directory via All Commands palette",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2202,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:01.892Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-03-notes-New-Dir-0da39-ry-via-All-Commands-palette-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9e86c909da57a7bef4e6-a18cc5e1c7dd90495d71",
+              "file": "rq6-agent/03-notes.spec.ts",
+              "line": 332,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/04-editor.spec.ts",
+      "file": "rq6-agent/04-editor.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Editor content",
+          "file": "rq6-agent/04-editor.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "editor is editable and accepts typed text",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1432,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:04.127Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Editor-3d842-able-and-accepts-typed-text-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-939c261e9a3119697eff",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "editor shows placeholder when empty",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1396,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:05.580Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Editor-0bc27-hows-placeholder-when-empty-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-9dd607d39507c962fd5a",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "editor content persists after page reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3213,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:06.997Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Editor-e9b27--persists-after-page-reload-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-c01b078f395352ffcb86",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 38,
+              "column": 7
+            },
+            {
+              "title": "editor renders basic text formatting (bold, italic)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1935,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:10.251Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Editor-c8666-ext-formatting-bold-italic--chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-ac3d052bdf404b5125f5",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 57,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Star / Unstar note",
+          "file": "rq6-agent/04-editor.spec.ts",
+          "line": 74,
+          "column": 6,
+          "specs": [
+            {
+              "title": "star button toggles between star and unstar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1721,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:12.214Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Star-U-00797-les-between-star-and-unstar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-98931a9e0eddcf6b0719",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 75,
+              "column": 7
+            },
+            {
+              "title": "unstar restores star button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2059,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:13.960Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Star-U-cdf61-unstar-restores-star-button-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-d9b8bf8b8e1e17ea7138",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 92,
+              "column": 7
+            },
+            {
+              "title": "star persists after page reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2678,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:16.048Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Star-U-c40e9--persists-after-page-reload-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-28eb4c1380b09dc6f534",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 110,
+              "column": 7
+            },
+            {
+              "title": "Toggle Star for Current Note command also toggles star",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2385,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:18.767Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Star-U-64eb3-e-command-also-toggles-star-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-20b4193bc4282c5a10c2",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 129,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Toggle Max Width",
+          "file": "rq6-agent/04-editor.spec.ts",
+          "line": 145,
+          "column": 6,
+          "specs": [
+            {
+              "title": "toggle max width button exists in editor",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:21.188Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Toggle-45516-dth-button-exists-in-editor-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-9e06e5e7596ab435e4ff",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 146,
+              "column": 7
+            },
+            {
+              "title": "Toggle Wide Editor command changes editor width",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1954,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:22.607Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Toggle-a8b85-ommand-changes-editor-width-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-6c22b7c22783a88c7efd",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 153,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Breadcrumb navigation",
+          "file": "rq6-agent/04-editor.spec.ts",
+          "line": 169,
+          "column": 6,
+          "specs": [
+            {
+              "title": "breadcrumb shows home icon and note filename",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1413,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:24.588Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Breadc-47e7c-home-icon-and-note-filename-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-901b491e6952eb12911c",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 170,
+              "column": 7
+            },
+            {
+              "title": "clicking breadcrumb home navigates to workspace home",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1407,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:26.021Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Breadc-599e6-navigates-to-workspace-home-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-af24bebf31e444d3a660",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 185,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Open Daily Note",
+          "file": "rq6-agent/04-editor.spec.ts",
+          "line": 201,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Open Daily Note command creates a date-based note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1843,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:27.448Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Open-D-d0378-d-creates-a-date-based-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-011da3f9133a2b10d47f",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 202,
+              "column": 7
+            },
+            {
+              "title": "calling Open Daily Note twice navigates to same note",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2435,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:29.323Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-04-editor-Open-D-8c44e-wice-navigates-to-same-note-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0b6da1453c12ff33fbf3-7ea2b03d3b5140a48ce0",
+              "file": "rq6-agent/04-editor.spec.ts",
+              "line": 221,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rq6-agent/05-sidebar-nav.spec.ts",
+      "file": "rq6-agent/05-sidebar-nav.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sidebar toggle",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Toggle Sidebar button collapses and restores sidebar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2436,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:31.805Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-S-51446-lapses-and-restores-sidebar-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-7385ea0c89247233fd8e",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 9,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "App Actions menu (Bangle.io button)",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 36,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Bangle.io button opens app actions dropdown with expected items",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1739,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:34.274Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-A-89df6-ropdown-with-expected-items-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-67d5d6553f1015308218",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 37,
+              "column": 7
+            },
+            {
+              "title": "New Note from app actions opens create note dialog",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1776,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:36.037Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-A-0a1d3-ns-opens-create-note-dialog-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-c749bc6d82793707c5b0",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 59,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Omni Search",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 74,
+          "column": 6,
+          "specs": [
+            {
+              "title": "search button opens omni search with expected sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1968,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:37.846Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-O-d43c4-arch-with-expected-sections-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-93376b4f494a584128a5",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 75,
+              "column": 7
+            },
+            {
+              "title": "omni search filters results by typed text",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2116,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:39.843Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-O-2d6bb-lters-results-by-typed-text-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-888fdfc339c5b6b7bd36",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 100,
+              "column": 7
+            },
+            {
+              "title": "omni search shows notes in groups",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1778,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:41.990Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-O-11191-earch-shows-notes-in-groups-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-458603a275f67cf2e3d6",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 122,
+              "column": 7
+            },
+            {
+              "title": "Omni Search command from app actions opens search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2039,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:43.794Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-O-7689c-om-app-actions-opens-search-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-ce8a423cc20043f7583d",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 144,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "All Commands palette",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 158,
+          "column": 6,
+          "specs": [
+            {
+              "title": "All Commands shows full list of available commands",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1632,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:45.861Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-A-dc984--list-of-available-commands-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-91713541c02afdf018da",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 159,
+              "column": 7
+            },
+            {
+              "title": "All Commands filters by search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2021,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:47.520Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-A-01cc6--Commands-filters-by-search-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-201e778db1972f42b055",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 184,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Change Theme",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 202,
+          "column": 6,
+          "specs": [
+            {
+              "title": "theme dialog shows System, Light, Dark options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2094,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:49.570Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-C-e7b83-s-System-Light-Dark-options-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-d294f72a32a149f00c25",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 203,
+              "column": 7
+            },
+            {
+              "title": "selecting Dark theme changes html data-theme attribute",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2607,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:51.691Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-C-7e4ba-s-html-data-theme-attribute-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-0d863a1d1f92534820d8",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 222,
+              "column": 7
+            },
+            {
+              "title": "selecting Light theme sets light theme",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3649,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:54.328Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-C-990bb-ight-theme-sets-light-theme-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-c6e951fe274af32492f0",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 242,
+              "column": 7
+            },
+            {
+              "title": "Switch Theme command from All Commands works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2143,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:10:58.022Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-C-d1203-and-from-All-Commands-works-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-bdb47ec86315264b44d1",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 265,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "View All Files",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 279,
+          "column": 6,
+          "specs": [
+            {
+              "title": "View All Files command opens a sheet with all files listed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2717,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:11:00.206Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-V-c2c71-sheet-with-all-files-listed-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-9038a1fc4772a58d35c6",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 280,
+              "column": 7
+            },
+            {
+              "title": "All Files sheet shows all notes in workspace",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2507,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:11:02.963Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-V-dae7f-hows-all-notes-in-workspace-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-2fa214f37dd62de7bab5",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 302,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Focus Editor command",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 325,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Focus Editor command is available in omni search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2296,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:11:05.514Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-F-7109c-is-available-in-omni-search-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-4a10a84fffc9181e332c",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 326,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Go to Workspace Home command",
+          "file": "rq6-agent/05-sidebar-nav.spec.ts",
+          "line": 349,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Go to Workspace Home navigates from editor to ws-home",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1871,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-02T12:11:07.845Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/stephenhe/Projects/baseline-runs/20260901/bangle-io/A-naive/test-results/rq6-agent-05-sidebar-nav-G-7fe28-ates-from-editor-to-ws-home-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "384170e02a27b50f7946-2e0766405ffe24be978b",
+              "file": "rq6-agent/05-sidebar-nav.spec.ts",
+              "line": 350,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-02T12:08:55.763Z",
+    "duration": 134203.542,
+    "expected": 68,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
