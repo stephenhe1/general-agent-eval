@@ -23,7 +23,9 @@ whether a fault was genuinely on the page (it records `mutation_applied`), not t
 
 ## The honest detection result
 
-**31 active real defects, 1 caught — 3.2%.**
+**Among 31 faults verified to be active, the baseline tests detected 1 (3.2%).**
+
+This is the *fired-fault* result of the study, pooling verified activation evidence across the primary campaign and the relaxed re-runs. It is **not** a pure head-to-head number — see [what it does and does not pool](#what-the-number-does-and-does-not-pool).
 
 Reproduce it with `python tools/report_fired_only.py`, which writes
 `headtohead/export/08_active_faults.csv`. Verified 2026-09-04: the tool prints
@@ -73,13 +75,14 @@ reported as an oracle-strength measure, and why the active-fault view exists.
 
 ## Prerequisites
 
-**The implementation is not on this branch.** `baselines/webtestpilot/` holds the *records*; the
-evaluator (`src/general_agent_eval/webtestpilot/`), its tests and `tools/` are not committed here,
-and `general-agent-eval-wtp` is absent from this branch's `pyproject.toml` `[project.scripts]`.
-Every command below therefore needs a checkout that carries the evaluator. Verify with:
+Everything the runbook needs is on this branch: the evaluator
+(`src/general_agent_eval/webtestpilot/`, 15 files), its tests (`tests/webtestpilot/`, 82 passing)
+and `tools/` (8 scripts). `general-agent-eval-wtp` is declared in `pyproject.toml`
+`[project.scripts]`. Confirm the install before following anything below:
 
 ```bash
-general-agent-eval-wtp --help          # must list: {audit,generate,evaluate,pilot}
+general-agent-eval-wtp --help          # lists: {audit,generate,evaluate,pilot}
+python -m pytest tests/webtestpilot/ -q # 82 passed
 ```
 
 | Requirement | Detail |
