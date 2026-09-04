@@ -228,6 +228,52 @@ uv run general-agent-eval-docker-run \
 See `resources/scripts/services.json` for the `sample-js-app` example entry.
 `--inject-rest-assured` requires `--workload java` and is rejected otherwise.
 
+#### UI modes and how they chain
+
+`--mode` selects what the agent produces. Each mode writes an artifact at the
+repository root that later modes read, so they compose into a pipeline (all the
+graph-based modes require `--coverage-model graph`):
+
+| Mode | Reads | Writes | Tests? |
+| --- | --- | --- | --- |
+| `baseline` | repo (tests cleared) | `UI_GRAPH.json` / `UI_COVERAGE.md` | `rq6-agent/` |
+| `project-aware` | repo + existing tests | `UI_GRAPH.json` / `UI_COVERAGE.md` | `rq6-agent/` |
+| `discovery` | repo + live app | `UI_GRAPH.json` / `UI_COVERAGE.md` | no |
+| `feature-extraction` | `UI_GRAPH.json` | `UI_FEATURES.json` | no |
+| `graph-test-gen` | `UI_GRAPH.json` | status fields in `UI_GRAPH.json` | `rq6-graph-agent/` |
+| `feature-test-gen` | `UI_FEATURES.json` + `UI_GRAPH.json` | status fields in `UI_FEATURES.json` | `rq6-feature-agent/` |
+
+Two test-generation pipelines branch off a single discovery run:
+
+- **State-model-driven:** `discovery` → `graph-test-gen`. Tests are planned per
+  graph node and edge (visit state, exercise actions, verify transitions), and
+  node `status`/`test_file` fields track progress.
+- **Feature-driven:** `discovery` → `feature-extraction` → `feature-test-gen`.
+  Discovery's graph is first abstracted into features, behaviorally distinct
+  scenarios, and interaction paths; test generation then emits one spec per
+  feature and one test per scenario, asserting each scenario's stated
+  `expected_outcome`. Scenario `status`/`test_file`/`notes` fields track progress.
+
+Because each generator writes to its own subdirectory, the two pipelines can be
+run against the same repository and compared side by side.
+
+```bash
+# 1. discover the state model (writes UI_GRAPH.json)
+uv run general-agent-eval-claude-code --input-dir /path/to/js-frontend \
+  --workload javascript --mode discovery --coverage-model graph \
+  --model sonnet --prompt-var service_base_url=http://localhost:3000
+
+# 2. abstract it into features/scenarios/paths (writes UI_FEATURES.json)
+uv run general-agent-eval-claude-code --input-dir /path/to/js-frontend \
+  --workload javascript --mode feature-extraction --coverage-model graph \
+  --model sonnet
+
+# 3. generate one test per scenario (writes rq6-feature-agent/*.spec.ts)
+uv run general-agent-eval-claude-code --input-dir /path/to/js-frontend \
+  --workload javascript --mode feature-test-gen --coverage-model graph \
+  --model sonnet --prompt-var service_base_url=http://localhost:3000
+```
+
 ### Injecting RestAssured
 
 Add `--inject-rest-assured` (requires `--service`) to provision RestAssured as a
